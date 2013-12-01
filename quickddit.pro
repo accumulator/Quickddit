@@ -30,7 +30,8 @@ HEADERS += \
     src/searchmanager.h \
     src/subredditobject.h \
     src/subredditmodel.h \
-    src/subredditmanager.h
+    src/subredditmanager.h \
+    src/qmlutils.h
 
 SOURCES += main.cpp \
     src/linkobject.cpp \
@@ -49,7 +50,8 @@ SOURCES += main.cpp \
     src/searchmanager.cpp \
     src/subredditobject.cpp \
     src/subredditmodel.cpp \
-    src/subredditmanager.cpp
+    src/subredditmanager.cpp \
+    src/qmlutils.cpp
 
 # Qt-Json
 HEADERS += qt-json/json.h

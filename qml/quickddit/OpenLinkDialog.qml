@@ -29,10 +29,10 @@ ContextMenu {
             }
         }
         MenuItem {
-            text: "Copy link"
+            text: "Copy URL"
             onClicked: {
-                QMLUtils.copyToClipboard(link);
-                infoBanner.alert("Link copied to clipboard");
+                QMLUtils.copyToClipboard(url);
+                infoBanner.alert("URL copied to clipboard");
             }
         }
     }

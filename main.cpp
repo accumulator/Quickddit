@@ -4,6 +4,7 @@
 #include "qmlapplicationviewer.h"
 
 #include "src/appsettings.h"
+#include "src/qmlutils.h"
 #include "src/quickdditmanager.h"
 #include "src/linkmodel.h"
 #include "src/linkmanager.h"
@@ -35,6 +36,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     QmlApplicationViewer viewer;
     viewer.rootContext()->setContextProperty("APP_VERSION", APP_VERSION);
+
+    QMLUtils qmlUtils;
+    viewer.rootContext()->setContextProperty("QMLUtils", &qmlUtils);
+
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
     viewer.setMainQmlFile(QLatin1String("qml/quickddit/main.qml"));
     viewer.showExpanded();
