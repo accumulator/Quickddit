@@ -57,6 +57,11 @@ SOURCES += main.cpp \
 HEADERS += qt-json/json.h
 SOURCES += qt-json/json.cpp
 
+# Splash
+splash.files = splash/quickddit-splash-portrait.jpg splash/quickddit-splash-landscape.jpg
+splash.path = /opt/$${TARGET}/splash
+INSTALLS += splash
+
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
@@ -64,5 +69,5 @@ qtcAddDeployment()
 OTHER_FILES += \
     qtc_packaging/debian_harmattan/* \
     quickddit_harmattan.desktop \
-    README \
+    README.md \
     LICENSE
