@@ -11,21 +11,33 @@ Page {
             onClicked: pageStack.pop()
         }
         ToolIcon {
+            platformIconId: "toolbar-add"
+            enabled: signInWebView.contentsScale < 3
+            opacity: enabled ? 1 : 0.25
+            onClicked: signInWebView.contentsScale += 0.2
+        }
+        ToolIcon {
+            iconSource: "image://theme/icon-s-common-remove" + (appSettings.whiteTheme ? "" : "-inverse")
+            enabled: signInWebView.contentsScale > 0.8
+            opacity: enabled ? 1 : 0.25
+            onClicked: signInWebView.contentsScale -= 0.2
+        }
+        ToolIcon {
             platformIconId: "toolbar-refresh"
             onClicked: signInWebView.url = quickdditManager.generateAuthorizationUrl();
         }
     }
 
     Flickable {
-        id: websiteFlickable
+        id: webViewFlickable
         anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
         contentHeight: signInWebView.height
         contentWidth: signInWebView.width
 
         WebView {
             id: signInWebView
-            preferredHeight: websiteFlickable.height
-            preferredWidth: websiteFlickable.width
+            preferredHeight: webViewFlickable.height
+            preferredWidth: webViewFlickable.width
             onUrlChanged: {
                 if (url.toString().indexOf("code=") > 0) {
                     stop.trigger();
@@ -36,18 +48,11 @@ Page {
             onLoadStarted: pageHeader.busy = true;
             onLoadFailed: pageHeader.busy = false;
             onLoadFinished: pageHeader.busy = false;
+            onContentsSizeChanged: contentsScale = 1;
         }
-
-        // TODO: pinch zooming for WebView
-
-//        PinchArea {
-//            id: pinchArea
-//            anchors.fill: parent
-//            pinch.target: signInWebView
-//        }
     }
 
-    ScrollDecorator { flickableItem: websiteFlickable }
+    ScrollDecorator { flickableItem: webViewFlickable }
 
     PageHeader {
         id: pageHeader
