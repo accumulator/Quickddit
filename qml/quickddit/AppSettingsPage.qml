@@ -10,18 +10,6 @@ Page {
             platformIconId: "toolbar-back"
             onClicked: pageStack.pop()
         }
-        ToolButton {
-            text: quickdditManager.signedIn ? "Sign out" : "Sign in"
-            onClicked: {
-                if (quickdditManager.signedIn)
-                    quickdditManager.signOut();
-                else
-                    pageStack.push(Qt.resolvedUrl("SignInPage.qml"));
-            }
-        }
-        Item {
-            width: 80; height: 64
-        }
     }
 
     Flickable {
@@ -34,6 +22,8 @@ Page {
             anchors { left: parent.left; right: parent.right; top: parent.top; margins: constant.paddingMedium }
             height: childrenRect.height
             spacing: constant.paddingMedium
+
+            SectionHeader { title: "Display" }
 
             SettingButtonRow {
                 text: "Theme"
@@ -57,6 +47,30 @@ Page {
                     case 0: appSettings.fontSize = AppSettings.SmallFontSize; break;
                     case 1: appSettings.fontSize = AppSettings.MediumFontSize; break;
                     case 2: appSettings.fontSize = AppSettings.LargeFontSize; break;
+                    }
+                }
+            }
+
+            SectionHeader { title: "Account" }
+
+            Text {
+                anchors { left: parent.left; right: parent.right }
+                font.pixelSize: constant.fontSizeMedium
+                color: constant.colorLight
+                visible: quickdditManager.signedIn
+                horizontalAlignment: Text.AlignHCenter
+                text: "Signed in to Reddit"
+            }
+
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: quickdditManager.signedIn ? "Sign out" : "Sign in to Reddit"
+                onClicked: {
+                    if (quickdditManager.signedIn) {
+                        quickdditManager.signOut();
+                        infoBanner.alert("You have signed out from Reddit");
+                     } else {
+                        pageStack.push(Qt.resolvedUrl("SignInPage.qml"));
                     }
                 }
             }
