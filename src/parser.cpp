@@ -148,3 +148,39 @@ QList<SubredditObject> Parser::parseSubredditList(const QByteArray &json)
 
     return subredditList;
 }
+
+// Private
+QPair<QString, QString> parseImgurImageMap(const QVariantMap &imageMap)
+{
+    const QString imageUrl = imageMap.value("link").toString();
+    int insertThumbIndex = imageUrl.lastIndexOf('.');
+
+    QString largeThumbUrl = QString(imageUrl).insert(insertThumbIndex, 'h');
+    QString smallThumbUrl = QString(imageUrl).insert(insertThumbIndex, 'b');
+
+    return qMakePair(largeThumbUrl, smallThumbUrl);
+}
+
+QList< QPair<QString, QString> > Parser::parseImgurImages(const QByteArray &json)
+{
+    bool ok;
+    const QVariant root = QtJson::parse(json, ok);
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    QList< QPair<QString, QString> > imageAndThumbUrlList;
+
+    const QVariant data = root.toMap().value("data");
+
+    if (data.type() == QVariant::Map) {
+        imageAndThumbUrlList.append(parseImgurImageMap(data.toMap()));
+    } else if (data.type() == QVariant::List) {
+        foreach (const QVariant &imageJson, data.toList()) {
+            imageAndThumbUrlList.append(parseImgurImageMap(imageJson.toMap()));
+        }
+    } else {
+        qCritical("Parser::parseImgurImages(): Invalid JSON");
+    }
+
+    return imageAndThumbUrlList;
+}

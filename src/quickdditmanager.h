@@ -23,6 +23,11 @@ public:
     bool signedIn() const;
 
     /**
+     * Create a GET request to non-Reddit API
+     */
+    QNetworkReply *createGetRequest(const QUrl &url, const QByteArray &authHeader);
+
+    /**
      * Create a GET request to Reddit API
      * the signal networkReplyReceived() will be emitted with the QNetworkReply in the parameter
      * if this process failed, the QNetworkReply in the signal networkReplyReceived() will be 0

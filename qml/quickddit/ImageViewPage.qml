@@ -1,10 +1,12 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
+import Quickddit 1.0
 
 Page {
     id: imageViewPage
 
-    property alias imageUrl: imageItem.source
+    property string imageUrl
+    property string imgurUrl
 
     tools: ToolBarLayout {
 
@@ -26,15 +28,9 @@ Page {
     // to make the image outside of the page not visible during page transitions
     clip: true
 
-    states: State {
-        name: "hidden"
-        AnchorChanges { target: zoomSlider; anchors.right: undefined; anchors.left: imageViewPage.right }
-    }
-    transitions: Transition { AnchorAnimation { duration: 250; easing.type: Easing.InOutQuad } }
-
     Flickable {
         id: flickable
-        anchors.fill: parent
+        anchors { top: parent.top; left: parent.left; right: parent.right; bottom: thumbnailListView.top }
         contentWidth: imageContainer.width; contentHeight: imageContainer.height
         onHeightChanged: if (imageItem.status == Image.Ready) imageItem.fitToScreen()
 
@@ -54,13 +50,14 @@ Page {
                     prevScale = scale
                 }
 
-                asynchronous: true
                 anchors.centerIn: parent
+                asynchronous: true
                 smooth: !flickable.moving
                 cache: false
                 fillMode: Image.PreserveAspectFit
                 // pause the animation when app is in background
                 paused: imageViewPage.status != PageStatus.Active || !platformWindow.active
+                source: imgurManager.imageUrl
 
                 onScaleChanged: {
                     if ((width * scale) > flickable.width) {
@@ -90,6 +87,39 @@ Page {
                     easing.type: Easing.InOutQuad
                 }
             }
+        }
+
+        Loader {
+            id: busyIndicatorLoader
+            anchors.centerIn: parent
+            sourceComponent: {
+                if (imgurManager.busy)
+                    return busyIndicatorComponent;
+
+                switch (imageItem.status) {
+                case Image.Loading: return busyIndicatorComponent
+                case Image.Error: return failedLoading
+                default: return undefined
+                }
+            }
+
+            Component {
+                id: busyIndicatorComponent
+
+                BusyIndicator {
+                    running: true
+                    platformStyle: BusyIndicatorStyle { size: "large" }
+
+                    Text {
+                        anchors.centerIn: parent
+                        color: constant.colorLight
+                        font.pixelSize: constant.fontSizeSmall
+                        text: Math.round(imageItem.progress * 100) + "%"
+                    }
+                }
+            }
+
+            Component { id: failedLoading; Label { text: "Error loading image" } }
         }
 
         PinchArea {
@@ -124,71 +154,56 @@ Page {
                 from: imageItem.scale
             }
         }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: imageViewPage.state = (imageViewPage.state ? "" : "hidden")
-        }
-    }
-
-    Loader {
-        anchors.centerIn: parent
-        sourceComponent: {
-            switch (imageItem.status) {
-            case Image.Loading: return loadingIndicator
-            case Image.Error: return failedLoading
-            default: return undefined
-            }
-        }
-
-        Component {
-            id: loadingIndicator
-
-            BusyIndicator {
-                id: busyIndicator
-                running: true
-                platformStyle: BusyIndicatorStyle { size: "large" }
-
-                Text {
-                    anchors.centerIn: parent
-                    color: constant.colorLight
-                    font.pixelSize: constant.fontSizeSmall
-                    text: Math.round(imageItem.progress * 100) + "%"
-                }
-            }
-        }
-
-        Component { id: failedLoading; Label { text: "Error loading image" } }
     }
 
     ScrollDecorator { flickableItem: flickable }
 
-    Slider {
-        id: zoomSlider
-        anchors { verticalCenter: parent.verticalCenter; right: parent.right; rightMargin: constant.paddingMedium }
-        enabled: imageItem.status == Image.Ready
-        height: parent.height * 0.6
-        minimumValue: pinchArea.minScale
-        maximumValue: pinchArea.maxScale
-        stepSize: (maximumValue - minimumValue) / 20
-        orientation: Qt.Vertical
+    ListView {
+        id: thumbnailListView
+        anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
+        height: visible ? 150 : 0
+        visible: count > 0
+        model: imgurManager.thumbnailUrls
+        orientation: Qt.Horizontal
+        delegate: Item {
+            id: thumbnailDelegate
+            height: ListView.view.height
+            width: height
 
-        Behavior on opacity { NumberAnimation { duration: 150 } }
+            Image {
+                anchors.fill: parent
+                asynchronous: true
+                cache: true
+                smooth: !thumbnailDelegate.ListView.view.moving
+                fillMode: Image.PreserveAspectCrop
+                source: modelData
+            }
 
-        // When not pressed, bind slider value to image scale
-        Binding {
-            target: zoomSlider
-            property: "value"
-            value: imageItem.scale
-            when: !zoomSlider.presseds
+            Rectangle {
+                id: selectedIndicator
+                anchors { fill: parent; margins: selectedIndicator.border.width / 2 }
+                color: "transparent"
+                border.color: index == imgurManager.selectedIndex ? "steelblue" : "black"
+                border.width: 4
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: imgurManager.selectedIndex = index;
+            }
         }
+    }
 
-        // When pressed, bind image scale to slider value
-        Binding {
-            target: imageItem
-            property: "scale"
-            value: zoomSlider.value
-            when: zoomSlider.pressed
-        }
+    ImgurManager {
+        id: imgurManager
+        manager: quickdditManager
+        onError: infoBanner.alert(errorString);
+    }
+
+    Component.onCompleted: {
+        if (imgurUrl)
+            imgurManager.getImageUrl(imgurUrl);
+        else if (imageUrl)
+            imageItem.source = imageUrl;
     }
 }

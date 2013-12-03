@@ -29,6 +29,11 @@ void QuickdditManager::setSettings(AppSettings *settings)
     m_settings = settings;
 }
 
+QNetworkReply *QuickdditManager::createGetRequest(const QUrl &url, const QByteArray &authHeader)
+{
+    return m_netManager->createGetRequest(url, authHeader);
+}
+
 bool QuickdditManager::signedIn() const
 {
     return (!m_accessToken.isEmpty() && m_settings->hasRefreshToken());

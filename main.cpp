@@ -14,6 +14,7 @@
 #include "src/subredditmodel.h"
 #include "src/subredditmanager.h"
 #include "src/aboutsubredditmanager.h"
+#include "src/imgurmanager.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -33,6 +34,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<SubredditModel>();
     qmlRegisterType<SubredditManager>("Quickddit", 1, 0, "SubredditManager");
     qmlRegisterType<AboutSubredditManager>("Quickddit", 1, 0, "AboutSubredditManager");
+    qmlRegisterType<ImgurManager>("Quickddit", 1, 0, "ImgurManager");
 
     QmlApplicationViewer viewer;
     viewer.rootContext()->setContextProperty("APP_VERSION", APP_VERSION);

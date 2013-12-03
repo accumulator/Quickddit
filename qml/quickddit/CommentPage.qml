@@ -24,16 +24,22 @@ Page {
         ToolIcon {
             platformIconId: enabled ? "toolbar-gallery" : "toolbar-gallery-dimmed"
             enabled: {
-                // TODO: allow other image url that ends with ".jpg/png/gif"
-                // TODO: parse "imgur.com" domain to its image url
-                // TODO: parse Imgur album
                 if (!link) return false;
-                if (link.domain == "i.imgur.com")
+                if (link.domain == "i.imgur.com" || link.domain == "imgur.com")
+                    return true;
+                if (/^https?:\/\/.+\.(jpe?g|png|gif)/i.test(link.url))
                     return true;
                 else
                     return false;
             }
-            onClicked: pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: link.url});
+            onClicked: {
+                var p = {};
+                if (link.domain == "imgur.com")
+                    p.imgurUrl = link.url;
+                else
+                    p.imageUrl = link.url;
+                pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), p);
+            }
         }
         ToolIcon {
             platformIconId: "toolbar-view-menu"
