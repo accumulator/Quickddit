@@ -2,6 +2,7 @@
 
 #include <QtCore/QDateTime>
 #include <QtCore/QUrl>
+#include <QtGui/QTextDocument>
 #include <qt-json/json.h>
 
 #include "linkobject.h"
@@ -9,6 +10,16 @@
 #include "subredditobject.h"
 
 // TODO: Parse all "description" formatted in markdown to HTML(?) for display
+
+QString unescapeHtml(const QString &html)
+{
+    QTextDocument document;
+    document.setHtml(html);
+    QString unescaped = document.toPlainText();
+    unescaped.remove("<!-- SC_OFF -->").remove("<!-- SC_ON -->");
+    unescaped.remove("<div class=\"md\">").remove("</div>");
+    return unescaped;
+}
 
 QList<LinkObject> Parser::parseLinkList(const QByteArray &json)
 {
@@ -36,7 +47,7 @@ QList<LinkObject> Parser::parseLinkList(const QByteArray &json)
         QString thumbnail = linkMapJson.value("thumbnail").toString();
         if (thumbnail.startsWith("http"))
             link.setThumbnailUrl(QUrl(thumbnail));
-        link.setText(linkMapJson.value("selftext").toString());
+        link.setText(unescapeHtml(linkMapJson.value("selftext_html").toString()));
         link.setPermalink(linkMapJson.value("permalink").toString());
         link.setUrl(QUrl(linkMapJson.value("url").toString()));
         link.setDistinguished(linkMapJson.value("distinguished").toString());
@@ -66,7 +77,7 @@ QList<CommentObject> parseCommentListingJson(const QVariantMap &json, const QStr
         CommentObject comment;
         comment.setFullname(commentMap.value("name").toString());
         comment.setAuthor(commentMap.value("author").toString());
-        comment.setBody(commentMap.value("body").toString());
+        comment.setBody(unescapeHtml(commentMap.value("body_html").toString()));
         int upvotes = commentMap.value("ups").toInt();
         int downvotes = commentMap.value("downs").toInt();
         comment.setScore(upvotes - downvotes);
@@ -115,7 +126,7 @@ SubredditObject parseSubredditThing(const QVariantMap &subredditThing)
     subreddit.setUrl(data.value("url").toString());
     subreddit.setHeaderImageUrl(QUrl(data.value("header_img").toString()));
     subreddit.setShortDescription(data.value("public_description").toString());
-    subreddit.setLongDescription(data.value("description").toString());
+    subreddit.setLongDescription(unescapeHtml(data.value("description_html").toString()));
     subreddit.setSubscribers(data.value("subscribers").toInt());
     subreddit.setActiveUsers(data.value("accounts_active").toInt());
     subreddit.setNSFW(data.value("over18").toBool());

@@ -189,9 +189,14 @@ Page {
                     id: bodyText
                     anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
                     wrapMode: Text.Wrap
+                    textFormat: Text.RichText
                     font.pixelSize: constant.fontSizeDefault
                     color: constant.colorLight
                     text: link.text
+                    onLinkActivated: {
+                        infoBanner.alert("Launching web browser...");
+                        Qt.openUrlExternally(link);
+                    }
                 }
             }
 

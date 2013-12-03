@@ -82,9 +82,14 @@ Page {
                 id: longDescriptionText
                 anchors { left: parent.left; right: parent.right }
                 wrapMode: Text.Wrap
+                textFormat: Text.RichText
                 font.pixelSize: constant.fontSizeMedium
                 color: constant.colorLight
                 text: aboutSubredditManager.longDescription
+                onLinkActivated: {
+                    infoBanner.alert("Launching web browser...");
+                    Qt.openUrlExternally(link);
+                }
             }
         }
     }

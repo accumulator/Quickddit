@@ -105,6 +105,7 @@ Item {
                 font.pixelSize: constant.fontSizeDefault
                 color: constant.colorLight
                 wrapMode: Text.Wrap
+                textFormat: Text.RichText
                 text: model.body
             }
         }
