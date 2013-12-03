@@ -1,5 +1,15 @@
+quickddit (0.0.2) unstable; urgency=low
+  * Fix copy URL not working
+  * Add splash screen
+  * Improve settings UI
+  * Add zooming buttons in sign in page
+  * Add Imgur image and album preview
+  * Add support for rich text
+
+ -- Dickson <dicksonleong8@gmail.com>  Tue, 03 Dec 2013 22:29:36 +0800
+
 quickddit (0.0.1) unstable; urgency=low
 
   * Initial Release.
 
- -- unknown <>  Tue, 19 Nov 2013 12:51:53 +0800
+ -- Dickson <dicksonleong8@gmail.com>  Tue, 19 Nov 2013 12:51:53 +0800
