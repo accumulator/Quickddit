@@ -36,7 +36,7 @@ QtObject {
 
     // Quickddit specific
     property int commentRepliesIndentWidth: 20
-    property variant commentRepliesColor: ["blue", "salmon", "purple", "yellow",
-                                           "royalblue", "greenyellow", "indigo", "gold",
-                                           "red", "white"];
+    property variant commentRepliesColor: ["green", "orange", "purple", "yellow",
+                                           "royalblue", "pink", "indigo", "gold",
+                                           "red", colorLight];
 }

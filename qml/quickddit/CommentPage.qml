@@ -57,7 +57,7 @@ Page {
             }
 
             MenuItem {
-                text: "Comment Permalink"
+                text: "Permalink"
                 onClicked: globalDialogManager.createOpenLinkDialog(commentPage,
                                                                     "http://www.reddit.com" + link.permalink);
             }
@@ -66,10 +66,7 @@ Page {
 
     ListView {
         id: commentListView
-        anchors {
-            top: pageHeader.bottom; topMargin: constant.paddingMedium
-            left: parent.left; right: parent.right; bottom: parent.bottom
-        }
+        anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
         model: commentManager.model
         delegate: CommentDelegate {}
         // TODO: Fix header bug
@@ -206,8 +203,6 @@ Page {
                 color: constant.colorMid
             }
         }
-
-        EmptyContentLabel { visible: commentListView.count == 0 && !commentManager.busy }
     }
 
     ScrollDecorator { flickableItem: commentListView }
@@ -231,6 +226,7 @@ Page {
         id: dialogManager
 
         property Component __commentSortDialogComponent: null
+        property Component __commentDialogComponent: null
 
         function createCommentSortDialog() {
             if (!__commentSortDialogComponent)
@@ -243,6 +239,21 @@ Page {
             dialog.accepted.connect(function () {
                 commentManager.sort = dialog.selectedIndex;
                 commentManager.refresh();
+            })
+        }
+
+        function createCommentDialog(comment, index) {
+            if (!__commentDialogComponent)
+                __commentDialogComponent = Qt.createComponent("CommentDialog.qml");
+            var p = { comment: comment, linkPermalink: link.permalink }
+            var dialog = __commentDialogComponent.createObject(commentPage, p);
+            if (!dialog) {
+                console.log("Error creating dialog:" + __commentDialogComponent.errorString());
+                return;
+            }
+            dialog.positionToParent.connect(function() {
+                var parentIndex = commentManager.model.getParentIndex(index);
+                commentListView.positionViewAtIndex(parentIndex, ListView.Beginning);
             })
         }
     }

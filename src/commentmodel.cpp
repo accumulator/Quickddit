@@ -91,3 +91,15 @@ void CommentModel::clear()
     m_commentList.clear();
     endRemoveRows();
 }
+
+int CommentModel::getParentIndex(int index) const
+{
+    int parentDepth = m_commentList.at(index).depth() - 1;
+    for (int i = index; i >= 0; --i) {
+        if (m_commentList.at(i).depth() == parentDepth)
+            return i;
+    }
+
+    qWarning("CommentModel::getParentIndex(): Cannot find parent index");
+    return index;
+}

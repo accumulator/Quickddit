@@ -30,6 +30,8 @@ public:
     void append(const QList<CommentObject> &commentList);
     void clear();
 
+    Q_INVOKABLE int getParentIndex(int index) const;
+
 private:
     QList<CommentObject> m_commentList;
 };

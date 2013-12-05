@@ -109,5 +109,7 @@ Item {
                 text: model.body
             }
         }
+
+        onClicked: dialogManager.createCommentDialog(model, index);
     }
 }
