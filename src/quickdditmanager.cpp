@@ -1,17 +1,19 @@
 #include "quickdditmanager.h"
 
-#include <QtCore/QEventLoop>
 #include <QtNetwork/QNetworkReply>
 #include <qt-json/json.h>
 
 #include "networkmanager.h"
 #include "appsettings.h"
 
-// NOT FOR PUBLIC
-#define CLIENT_ID ""
-#define CLIENT_SECRET ""
-#define REDIRECT_URL ""
-#define OAUTH_SCOPE "read,mysubreddits"
+#if !defined(REDDIT_CLIENT_ID) || !defined(REDDIT_CLIENT_SECRET) || !defined(REDDIT_REDIRECT_URL)
+// fill these up with your own Reddit client id, secret and redirect url
+#define REDDIT_CLIENT_ID ""
+#define REDDIT_CLIENT_SECRET ""
+#define REDDIT_REDIRECT_URL ""
+#endif
+
+#define REDDIT_OAUTH_SCOPE "read,mysubreddits"
 
 QuickdditManager::QuickdditManager(QObject *parent) :
     QObject(parent), m_netManager(new NetworkManager(this)), m_settings(0),
@@ -78,9 +80,9 @@ QUrl QuickdditManager::generateAuthorizationUrl()
 {
     QUrl url("https://ssl.reddit.com/api/v1/authorize");
     url.addQueryItem("response_type", "code");
-    url.addQueryItem("client_id", CLIENT_ID);
-    url.addQueryItem("redirect_uri", REDIRECT_URL);
-    url.addQueryItem("scope", OAUTH_SCOPE);
+    url.addQueryItem("client_id", REDDIT_CLIENT_ID);
+    url.addQueryItem("redirect_uri", REDDIT_REDIRECT_URL);
+    url.addQueryItem("scope", REDDIT_OAUTH_SCOPE);
     url.addQueryItem("duration", "permanent");
     m_state = QString::number(qrand());
     url.addQueryItem("state", m_state);
@@ -114,11 +116,11 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
     QUrl accessTokenBody("http://dummy.com");
     accessTokenBody.addQueryItem("code", signedInUrl.queryItemValue("code"));
     accessTokenBody.addQueryItem("grant_type", "authorization_code");
-    accessTokenBody.addQueryItem("redirect_uri", REDIRECT_URL);
+    accessTokenBody.addQueryItem("redirect_uri", REDDIT_REDIRECT_URL);
 
     // generate basic auth header
     QByteArray authHeader = "Basic ";
-    authHeader += (QByteArray(CLIENT_ID) + ":" + QByteArray(CLIENT_SECRET)).toBase64();
+    authHeader += (QByteArray(REDDIT_CLIENT_ID) + ":" + QByteArray(REDDIT_CLIENT_SECRET)).toBase64();
 
     m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, accessTokenBody.encodedQuery(),
                                                          authHeader);
@@ -143,11 +145,11 @@ void QuickdditManager::refreshAccessToken()
     QUrl accessTokenBody("http://dummy.com");
     accessTokenBody.addQueryItem("refresh_token", refreshToken);
     accessTokenBody.addQueryItem("grant_type", "refresh_token");
-    accessTokenBody.addQueryItem("redirect_uri", REDIRECT_URL);
+    accessTokenBody.addQueryItem("redirect_uri", REDDIT_REDIRECT_URL);
 
     // generate basic auth header
     QByteArray authHeader = "Basic ";
-    authHeader += (QByteArray(CLIENT_ID) + ":" + QByteArray(CLIENT_SECRET)).toBase64();
+    authHeader += (QByteArray(REDDIT_CLIENT_ID) + ":" + QByteArray(REDDIT_CLIENT_SECRET)).toBase64();
 
     m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, accessTokenBody.encodedQuery(),
                                                          authHeader);

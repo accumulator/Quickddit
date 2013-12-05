@@ -1,17 +1,25 @@
 Quickddit
 =========
 
-Quickddit is a Reddit app for mobile phones, developed using Qt and Qt Quick.
+Quickddit is an unofficial Reddit app for mobile phones, developed using Qt and Qt Quick.
 
 As of now, Quickddit only available for MeeGo Harmattan (Qt 4.7.4), and I have planned to
 port to SailfishOS as well.
 
-Reddit API consumer key and secret
+Reddit API client id and secret
 ----------------------------------
 
-If you want to build Quickddit with OAuth support, remember to [get your own Reddit API consumer
-key and secret](https://github.com/reddit/reddit/wiki/OAuth2) and fill it up in src/quickdditmanager.cpp,
-line 11-13.
+If you want to build Quickddit with OAuth support, remember to [get your own Reddit API client
+id and secret](https://github.com/reddit/reddit/wiki/OAuth2) and fill it up in
+[src/quickdditmanager.cpp](src/quickdditmanager.cpp) or define `REDDIT_CLIENT_ID`,
+`REDDIT_CLIENT_SECRET` and `REDDIT_REDIRECT_URL` in project file.
+
+Optionally you can also define `IMGUR_CLIENT_ID` with your own Imgur API client id.
+
+Download
+--------
+The binary of Harmattan version available for download at
+[OpenRepos](https://openrepos.net/content/dicksonleong/quickddit).
 
 License
 -------
