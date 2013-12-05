@@ -114,6 +114,7 @@ Page {
                         anchors.centerIn: parent
                         color: constant.colorLight
                         font.pixelSize: constant.fontSizeSmall
+                        visible: !imgurManager.busy
                         text: Math.round(imageItem.progress * 100) + "%"
                     }
                 }
@@ -171,12 +172,20 @@ Page {
             width: height
 
             Image {
+                id: thumbnailImage
                 anchors.fill: parent
                 asynchronous: true
                 cache: true
                 smooth: !thumbnailDelegate.ListView.view.moving
                 fillMode: Image.PreserveAspectCrop
                 source: modelData
+            }
+
+            Loader {
+                anchors.centerIn: parent
+                sourceComponent: thumbnailImage.status == Image.Loading ? thumbnailBusy : undefined
+
+                Component { id: thumbnailBusy; BusyIndicator { running: true } }
             }
 
             Rectangle {
@@ -192,6 +201,8 @@ Page {
                 onClicked: imgurManager.selectedIndex = index;
             }
         }
+
+        onModelChanged: positionViewAtIndex(imgurManager.selectedIndex, ListView.Center);
     }
 
     ImgurManager {

@@ -34,6 +34,17 @@ public:
     int selectedIndex() const;
     void setSelectedIndex(int index);
 
+    /**
+     * Get the image url and thumbnail url for the imgurUrl
+     * Supported Imgur url formats:
+     * - http://imgur.com/xxxxx (image)
+     * - http://imgur.com/a/xxxxx (album)
+     * - http://imgur.com/a/xxxxx#n (album, n = image index in the album)
+     *
+     * Unsupported Imgur url formats:
+     * - http://imgur.com/gallery/xxxxx (because I don't know it is an album or image)
+     * - any other url format
+     */
     Q_INVOKABLE void getImageUrl(const QString &imgurUrl);
 
 signals:

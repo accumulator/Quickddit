@@ -32,12 +32,11 @@ void ImgurManager::setSelectedIndex(int index)
 {
     if (m_selectedIndex != index) {
         m_selectedIndex = index;
+        emit selectedIndexChanged();
 
         m_imageUrl.clear();
         emit imageUrlChanged();
-
         m_imageUrl = m_imageAndThumbUrlList.at(m_selectedIndex).first;
-        emit selectedIndexChanged();
         emit imageUrlChanged();
     }
 }
@@ -55,8 +54,15 @@ void ImgurManager::getImageUrl(const QString &imgurUrl)
     QString id = imgurUrl.mid(imgurUrl.indexOf("imgur.com/") + 10);
     if (id.startsWith("a/")) {
         id.remove(0, 2);
+        if (id.contains('#')) {
+            int hashIndex = id.indexOf('#');
+            m_selectedIndex = id.mid(hashIndex + 1).toInt();
+            id.remove(hashIndex, id.length() - hashIndex);
+        }
         requestUrl += "/album/" + id + "/images";
     } else if (!id.contains('/')) {
+        if (id.contains('#'))
+            id.remove(id.indexOf('#'), id.length() - id.indexOf('#'));
         requestUrl += "/image/" + id;
     } else {
         emit error("Unable to get Imgur ID from the url: " + imgurUrl);
@@ -81,13 +87,19 @@ void ImgurManager::onFinished()
         qDebug("Imgur Rate Limit: User: %d, Client: %d", userLimit, clientLimit);
 
         m_imageAndThumbUrlList = Parser::parseImgurImages(m_reply->readAll());
-        m_imageUrl = m_imageAndThumbUrlList.first().first;
+
         if (m_imageAndThumbUrlList.count() > 1) {
             QListIterator< QPair<QString,QString> > i(m_imageAndThumbUrlList);
             while (i.hasNext()) {
                 m_thumbnailUrls.append(i.next().second);
             }
+            if (m_selectedIndex >= m_imageAndThumbUrlList.count())
+                m_selectedIndex = 0;
+            m_imageUrl = m_imageAndThumbUrlList.at(m_selectedIndex).first;
+        } else {
+            m_imageUrl = m_imageAndThumbUrlList.first().first;
         }
+
         emit imageUrlChanged();
         emit thumbnailUrlsChanged();
     } else {
