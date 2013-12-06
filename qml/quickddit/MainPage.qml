@@ -119,6 +119,7 @@ Page {
         property Component __subredditDialogComponent: null
         property Component __searchDialogComponent: null
         property Component __sectionDialogComponent: null
+        property Component __linkDialogComponent: null
 
         function createSubredditDialog() {
             if (!__subredditDialogComponent)
@@ -173,6 +174,15 @@ Page {
                 linkManager.section =  dialog.selectedIndex;
                 linkManager.refresh(false);
             })
+        }
+
+        function createLinkDialog(link) {
+            if (!__linkDialogComponent)
+                __linkDialogComponent = Qt.createComponent("LinkDialog.qml");
+            var dialog = __linkDialogComponent.createObject(mainPage, {link: link});
+            if (!dialog) {
+                console.log("Error create dialog: " + __linkDialogComponent.errorString())
+            }
         }
     }
 }
