@@ -44,7 +44,7 @@ Page {
         anchors { top: parent.top; left: parent.left; right: parent.right }
         text: "Search Result: " + searchManager.query
         busy: searchManager.busy
-        onClicked: searchManager.positionViewAtBeginning()
+        onClicked: searchListView.positionViewAtBeginning()
     }
 
     SearchManager {

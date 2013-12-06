@@ -4,6 +4,7 @@
 
 #include "subredditmodel.h"
 #include "parser.h"
+#include "appsettings.h"
 
 SubredditManager::SubredditManager(QObject *parent) :
     AbstractManager(parent), m_model(new SubredditModel(this)), m_section(PopularSection), m_reply(0)
@@ -107,7 +108,7 @@ void SubredditManager::onNetworkReplyReceived(QNetworkReply *reply)
 void SubredditManager::onFinished()
 {
     if (m_reply->error() == QNetworkReply::NoError)
-        m_model->append(Parser::parseSubredditList(m_reply->readAll()));
+        m_model->append(Parser::parseSubredditList(m_reply->readAll(), manager()->settings()->showNSFW()));
     else
         emit error(m_reply->errorString());
 

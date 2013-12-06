@@ -4,6 +4,7 @@
 
 #include "linkmodel.h"
 #include "parser.h"
+#include "appsettings.h"
 
 SearchManager::SearchManager(QObject *parent) :
     AbstractManager(parent), m_model(new LinkModel(this)), m_reply(0)
@@ -71,7 +72,7 @@ void SearchManager::onNetworkReplyReceived(QNetworkReply *reply)
 void SearchManager::onFinished()
 {
     if (m_reply->error() == QNetworkReply::NoError)
-        m_model->append(Parser::parseLinkList(m_reply->readAll()));
+        m_model->append(Parser::parseLinkList(m_reply->readAll(), manager()->settings()->showNSFW()));
     else
         emit error(m_reply->errorString());
 

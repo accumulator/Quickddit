@@ -21,7 +21,7 @@ QString unescapeHtml(const QString &html)
     return unescaped;
 }
 
-QList<LinkObject> Parser::parseLinkList(const QByteArray &json)
+QList<LinkObject> Parser::parseLinkList(const QByteArray &json, bool showNSFW)
 {
     bool ok;
     const QVariant root = QtJson::parse(QString::fromUtf8(json), ok);
@@ -32,9 +32,12 @@ QList<LinkObject> Parser::parseLinkList(const QByteArray &json)
 
     QList<LinkObject> linkList;
     foreach (const QVariant &linkObjectJson, linkListJson) {
-        LinkObject link;
-
         const QVariantMap linkMapJson = linkObjectJson.toMap().value("data").toMap();
+
+        if (!showNSFW && linkMapJson.value("over_18").toBool())
+            continue;
+
+        LinkObject link;
         link.setFullname(linkMapJson.value("name").toString());
         link.setAuthor(linkMapJson.value("author").toString());
         link.setCreated(QDateTime::fromTime_t(linkMapJson.value("created_utc").toInt()));
@@ -143,7 +146,7 @@ SubredditObject Parser::parseSubreddit(const QByteArray &json)
     return parseSubredditThing(root.toMap());
 }
 
-QList<SubredditObject> Parser::parseSubredditList(const QByteArray &json)
+QList<SubredditObject> Parser::parseSubredditList(const QByteArray &json, bool showNSFW)
 {
     bool ok;
     const QVariant root = QtJson::parse(json, ok);
@@ -154,6 +157,9 @@ QList<SubredditObject> Parser::parseSubredditList(const QByteArray &json)
 
     QList<SubredditObject> subredditList;
     foreach (const QVariant &subredditJson, subredditListJson) {
+        if (!showNSFW && subredditJson.toMap().value("data").toMap().value("over18").toBool())
+            continue;
+
         subredditList.append(parseSubredditThing(subredditJson.toMap()));
     }
 

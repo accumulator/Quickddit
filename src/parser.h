@@ -11,12 +11,12 @@ class SubredditObject;
 
 namespace Parser
 {
-QList<LinkObject> parseLinkList(const QByteArray &json);
+QList<LinkObject> parseLinkList(const QByteArray &json, bool showNSFW);
 
 QList<CommentObject> parseCommentList(const QByteArray &json);
 
 SubredditObject parseSubreddit(const QByteArray &json);
-QList<SubredditObject> parseSubredditList(const QByteArray &json);
+QList<SubredditObject> parseSubredditList(const QByteArray &json, bool showNSFW);
 
 QList< QPair<QString, QString> > parseImgurImages(const QByteArray &json);
 }
