@@ -52,6 +52,10 @@ Page {
 
         MenuLayout {
             MenuItem {
+                text: "Share"
+                onClicked: QMLUtils.shareUrl(QMLUtils.getRedditShortUrl(link.fullname), link.title);
+            }
+            MenuItem {
                 text: "URL"
                 onClicked: globalDialogManager.createOpenLinkDialog(commentPage, link.url);
             }
@@ -59,7 +63,7 @@ Page {
             MenuItem {
                 text: "Permalink"
                 onClicked: globalDialogManager.createOpenLinkDialog(commentPage,
-                                                                    "http://www.reddit.com" + link.permalink);
+                                                                    QMLUtils.getRedditFullUrl(link.permalink));
             }
         }
     }

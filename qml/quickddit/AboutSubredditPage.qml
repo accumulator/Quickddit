@@ -87,8 +87,14 @@ Page {
                 color: constant.colorLight
                 text: aboutSubredditManager.longDescription
                 onLinkActivated: {
+                    var url = "";
+                    if (link.indexOf("http") == 0)
+                        url = link;
+                    else
+                        url = QMLUtils.getRedditFullUrl(link);
+
                     infoBanner.alert("Launching web browser...");
-                    Qt.openUrlExternally(link);
+                    Qt.openUrlExternally(url);
                 }
             }
         }

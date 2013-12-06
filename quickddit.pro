@@ -10,8 +10,15 @@ qml.source = qml/quickddit
 qml.target = qml
 DEPLOYMENTFOLDERS = qml
 
-# Speed up launching on MeeGo/Harmattan when using applauncherd daemon
-CONFIG += qdeclarative-boostable
+contains(MEEGO_EDITION, harmattan) {
+    CONFIG += shareuiinterface-maemo-meegotouch mdatauri qdeclarative-boostable
+    DEFINES += Q_OS_HARMATTAN
+
+    # Splash
+    splash.files = splash/quickddit-splash-portrait.jpg splash/quickddit-splash-landscape.jpg
+    splash.path = /opt/$${TARGET}/splash
+    INSTALLS += splash
+}
 
 HEADERS += \
     src/linkobject.h \
@@ -58,11 +65,6 @@ SOURCES += main.cpp \
 # Qt-Json
 HEADERS += qt-json/json.h
 SOURCES += qt-json/json.cpp
-
-# Splash
-splash.files = splash/quickddit-splash-portrait.jpg splash/quickddit-splash-landscape.jpg
-splash.path = /opt/$${TARGET}/splash
-INSTALLS += splash
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
