@@ -1,3 +1,14 @@
+quickddit (0.0.3) unstable; urgency=low
+  * Add comment dialog
+  * Add support for Imgur url with fragment
+  * Show loading indicator for thumbnails when loading an Imgur album
+  * Add a dialog when long press on posts
+  * Add share option for posts
+  * Fix unable to open url in subreddit about page
+  * Add NSFW filter
+
+ -- Dickson <dicksonleong8@gmail.com>  Sat, 07 Dec 2013 12:34:30 +0800
+
 quickddit (0.0.2) unstable; urgency=low
   * Fix copy URL not working
   * Add splash screen

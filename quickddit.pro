@@ -3,7 +3,7 @@ TARGET = quickddit
 
 QT *= network
 
-VERSION = 0.0.2
+VERSION = 0.0.3
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 qml.source = qml/quickddit
