@@ -23,7 +23,7 @@ The binary of Harmattan version available for download at
 
 License
 -------
-All files in this project (except for qt-json/*) is licensed under the GNU GPLv3+, unless otherwise stated.
+All files in this project are licensed under the GNU GPLv3+, unless otherwise stated.
 
     Quickddit - Reddit app for mobile phone
     Copyright (C) 2013  Dickson Leong
