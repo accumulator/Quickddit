@@ -34,7 +34,6 @@ HEADERS += \
     src/commentobject.h \
     src/commentmodel.h \
     src/commentmanager.h \
-    src/searchmanager.h \
     src/subredditobject.h \
     src/subredditmodel.h \
     src/subredditmanager.h \
@@ -55,7 +54,6 @@ SOURCES += main.cpp \
     src/commentobject.cpp \
     src/commentmodel.cpp \
     src/commentmanager.cpp \
-    src/searchmanager.cpp \
     src/subredditobject.cpp \
     src/subredditmodel.cpp \
     src/subredditmanager.cpp \

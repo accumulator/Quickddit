@@ -8,7 +8,6 @@
 #include "src/quickdditmanager.h"
 #include "src/linkmodel.h"
 #include "src/linkmanager.h"
-#include "src/searchmanager.h"
 #include "src/commentmodel.h"
 #include "src/commentmanager.h"
 #include "src/subredditmodel.h"
@@ -28,7 +27,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<QuickdditManager>("Quickddit", 1, 0, "QuickdditManager");
     qmlRegisterType<LinkModel>();
     qmlRegisterType<LinkManager>("Quickddit", 1, 0, "LinkManager");
-    qmlRegisterType<SearchManager>("Quickddit", 1, 0, "SearchManager");
     qmlRegisterType<CommentModel>();
     qmlRegisterType<CommentManager>("Quickddit", 1, 0, "CommentManager");
     qmlRegisterType<SubredditModel>();

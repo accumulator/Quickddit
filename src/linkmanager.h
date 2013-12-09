@@ -16,15 +16,17 @@ class LinkManager : public AbstractManager
     // Read-only title for display in page header
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
 
-    Q_PROPERTY(QString subreddit READ subreddit WRITE setSubreddit NOTIFY subredditChanged)
     Q_PROPERTY(Section section READ section WRITE setSection NOTIFY sectionChanged)
+    Q_PROPERTY(QString subreddit READ subreddit WRITE setSubreddit NOTIFY subredditChanged)
+    Q_PROPERTY(QString query READ query WRITE setQuery NOTIFY queryChanged)
 public:
     enum Section {
         HotSection,
         NewSection,
         RisingSection,
         ControversialSection,
-        TopSection
+        TopSection,
+        SearchSection
     };
 
     explicit LinkManager(QObject *parent = 0);
@@ -32,11 +34,14 @@ public:
     LinkModel *model() const;
     QString title() const;
 
+    Section section() const;
+    void setSection(Section section);
+
     QString subreddit() const;
     void setSubreddit(const QString &subreddit);
 
-    Section section() const;
-    void setSection(Section section);
+    QString query() const;
+    void setQuery(const QString &query);
 
     /**
      * Refresh for links
@@ -47,8 +52,9 @@ public:
 signals:
     void modelChanged();
     void titleChanged();
-    void subredditChanged();
     void sectionChanged();
+    void subredditChanged();
+    void queryChanged();
     void error(const QString &errorString);
 
 private slots:
@@ -58,8 +64,9 @@ private slots:
 private:
     LinkModel *m_model;
     QString m_title;
-    QString m_subreddit;
     Section m_section;
+    QString m_subreddit;
+    QString m_query;
     QNetworkReply *m_reply;
 
     static QString getSectionString(Section section);

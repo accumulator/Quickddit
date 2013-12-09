@@ -47,8 +47,9 @@ Page {
         onClicked: searchListView.positionViewAtBeginning()
     }
 
-    SearchManager {
+    LinkManager {
         id: searchManager
+        section: LinkManager.SearchSection
         manager: quickdditManager
         onError: infoBanner.alert(errorString);
     }

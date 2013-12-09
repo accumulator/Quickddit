@@ -20,6 +20,19 @@ QString LinkManager::title() const
     return m_title;
 }
 
+LinkManager::Section LinkManager::section() const
+{
+    return m_section;
+}
+
+void LinkManager::setSection(LinkManager::Section section)
+{
+    if (m_section != section) {
+        m_section = section;
+        emit sectionChanged();
+    }
+}
+
 QString LinkManager::subreddit() const
 {
     return m_subreddit;
@@ -33,16 +46,16 @@ void LinkManager::setSubreddit(const QString &subreddit)
     }
 }
 
-LinkManager::Section LinkManager::section() const
+QString LinkManager::query() const
 {
-    return m_section;
+    return m_query;
 }
 
-void LinkManager::setSection(LinkManager::Section section)
+void LinkManager::setQuery(const QString &query)
 {
-    if (m_section != section) {
-        m_section = section;
-        emit sectionChanged();
+    if (m_query != query) {
+        m_query = query;
+        emit queryChanged();
     }
 }
 
@@ -60,13 +73,19 @@ void LinkManager::refresh(bool refreshOlder)
         m_model->clear();
 
     QString relativeUrl = "/";
-    if (!m_subreddit.isEmpty())
-        relativeUrl += "r/" + m_subreddit + "/";
-    relativeUrl += getSectionString(m_section);
-
     QHash<QString,QString> parameters;
+
+    if (m_section == SearchSection) {
+        parameters["q"] = m_query;
+        relativeUrl += "search";
+    } else {
+        if (!m_subreddit.isEmpty())
+            relativeUrl += "r/" + m_subreddit + "/";
+        relativeUrl += getSectionString(m_section);
+    }
+
     if (refreshOlder)
-        parameters.insert("after", m_model->lastFullname());
+        parameters["after"] = m_model->lastFullname();
 
     connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
             SLOT(onNetworkReplyReceived(QNetworkReply*)));
