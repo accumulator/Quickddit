@@ -152,10 +152,11 @@ Page {
             }
             dialog.accepted.connect(function() {
                 if (dialog.text) {
+                    var p = { searchQuery: dialog.text };
                     if (dialog.type == 0)
-                        pageStack.push(Qt.resolvedUrl("SearchPage.qml"), {query: dialog.text});
+                        pageStack.push(Qt.resolvedUrl("SearchPage.qml"), p);
                     else
-                        pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml"), {searchQuery: dialog.text});
+                        pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml"), p);
                 } else {
                     infoBanner.alert("Please enter some text to search!");
                 }

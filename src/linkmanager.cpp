@@ -6,7 +6,8 @@
 #include "parser.h"
 
 LinkManager::LinkManager(QObject *parent) :
-    AbstractManager(parent), m_model(new LinkModel(this)), m_section(HotSection), m_reply(0)
+    AbstractManager(parent), m_model(new LinkModel(this)), m_section(HotSection),
+    m_searchSort(RelevanceSort), m_searchTimeRange(AllTime), m_reply(0)
 {
 }
 
@@ -46,16 +47,42 @@ void LinkManager::setSubreddit(const QString &subreddit)
     }
 }
 
-QString LinkManager::query() const
+QString LinkManager::searchQuery() const
 {
-    return m_query;
+    return m_searchQuery;
 }
 
-void LinkManager::setQuery(const QString &query)
+void LinkManager::setSearchQuery(const QString &query)
 {
-    if (m_query != query) {
-        m_query = query;
-        emit queryChanged();
+    if (m_searchQuery != query) {
+        m_searchQuery = query;
+        emit searchQueryChanged();
+    }
+}
+
+LinkManager::SearchSortType LinkManager::searchSort() const
+{
+    return m_searchSort;
+}
+
+void LinkManager::setSearchSort(SearchSortType sort)
+{
+    if (m_searchSort != sort) {
+        m_searchSort = sort;
+        emit searchSortChanged();
+    }
+}
+
+LinkManager::SearchTimeRange LinkManager::searchTimeRange() const
+{
+    return m_searchTimeRange;
+}
+
+void LinkManager::setSearchTimeRange(SearchTimeRange timeRange)
+{
+    if (m_searchTimeRange != timeRange) {
+        m_searchTimeRange = timeRange;
+        emit searchTimeRangeChanged();
     }
 }
 
@@ -77,7 +104,9 @@ void LinkManager::refresh(bool refreshOlder)
     parameters["limit"] = "50";
 
     if (m_section == SearchSection) {
-        parameters["q"] = m_query;
+        parameters["q"] = m_searchQuery;
+        parameters["sort"] = getSearchSortString(m_searchSort);
+        parameters["t"] = getSearchTimeRangeString(m_searchTimeRange);
         relativeUrl += "search";
     } else {
         if (!m_subreddit.isEmpty())
@@ -134,6 +163,35 @@ QString LinkManager::getSectionString(LinkManager::Section section)
     case TopSection: return "top";
     default:
         qWarning("LinkManager::getSectionString(): Invalid section");
+        return "";
+    }
+}
+
+QString LinkManager::getSearchSortString(SearchSortType sort)
+{
+    switch (sort) {
+    case RelevanceSort: return "relevance";
+    case NewSort: return "new";
+    case HotSort: return "hot";
+    case TopSort: return "top";
+    case CommentsSort: return "comments";
+    default:
+        qWarning("LinkManager::getSearchSortString(): Invalid sort");
+        return "";
+    }
+}
+
+QString LinkManager::getSearchTimeRangeString(SearchTimeRange timeRange)
+{
+    switch (timeRange) {
+    case AllTime: return "all";
+    case Hour: return "hour";
+    case Day: return "day";
+    case Week: return "week";
+    case Month: return "month";
+    case Year: return "year";
+    default:
+        qWarning("LinkManager::getSearchTimeRangeString(): Invalid time range");
         return "";
     }
 }
