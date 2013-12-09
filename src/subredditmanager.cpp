@@ -51,6 +51,7 @@ void SubredditManager::refresh(bool refreshOlder)
 
     QString relativeUrl;
     QHash<QString, QString> parameters;
+    parameters["count"] = "50";
     bool oauth = true;
 
     switch (m_section) {
@@ -79,10 +80,12 @@ void SubredditManager::refresh(bool refreshOlder)
         break;
     }
 
-    if (refreshOlder && m_model->count() > 0)
+    if (refreshOlder && m_model->count() > 0) {
+        parameters["count"] = QString::number(m_model->count());
         parameters["after"] = m_model->lastFullname();
-    else if (!refreshOlder)
+    } else if (!refreshOlder) {
         m_model->clear();
+    }
 
     connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
             SLOT(onNetworkReplyReceived(QNetworkReply*)));

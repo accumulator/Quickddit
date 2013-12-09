@@ -74,6 +74,7 @@ void LinkManager::refresh(bool refreshOlder)
 
     QString relativeUrl = "/";
     QHash<QString,QString> parameters;
+    parameters["limit"] = "50";
 
     if (m_section == SearchSection) {
         parameters["q"] = m_query;
@@ -84,8 +85,10 @@ void LinkManager::refresh(bool refreshOlder)
         relativeUrl += getSectionString(m_section);
     }
 
-    if (refreshOlder)
+    if (refreshOlder) {
+        parameters["count"] = QString::number(m_model->count());
         parameters["after"] = m_model->lastFullname();
+    }
 
     connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
             SLOT(onNetworkReplyReceived(QNetworkReply*)));
