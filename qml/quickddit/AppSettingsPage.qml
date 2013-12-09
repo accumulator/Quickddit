@@ -51,14 +51,6 @@ Page {
                 }
             }
 
-            SectionHeader { title: "Content" }
-
-            SettingSwitch {
-                text: "Show NSFW content"
-                checked: appSettings.showNSFW
-                onCheckedChanged: appSettings.showNSFW = checked;
-            }
-
             SectionHeader { title: "Account" }
 
             Text {

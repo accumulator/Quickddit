@@ -73,6 +73,11 @@ void QuickdditManager::createRedditGetRequest(const QString &relativeUrl,
         url.addQueryItem(i.key(), i.value());
     }
 
+    // obey user settings for NSFW filtering
+    // this is not documented but found in source:
+    // <https://github.com/reddit/reddit/commit/6f9f91e7534db713d2bdd199ededd00598adccc1>
+    url.addQueryItem("obey_over18", "true");
+
     emit networkReplyReceived(m_netManager->createGetRequest(url, authHeader));
 }
 

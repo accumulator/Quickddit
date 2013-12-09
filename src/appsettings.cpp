@@ -7,7 +7,6 @@ AppSettings::AppSettings(QObject *parent) :
 {
     m_whiteTheme = m_settings->value("whiteTheme", false).toBool();
     m_fontSize = static_cast<FontSize>(m_settings->value("fontSize", 1).toInt());
-    m_showNSFW = m_settings->value("showNSFW", false).toBool();
     m_refreshToken = m_settings->value("refreshToken").toByteArray();
 }
 
@@ -36,19 +35,6 @@ void AppSettings::setFontSize(AppSettings::FontSize fontSize)
         m_fontSize = fontSize;
         m_settings->setValue("fontSize", static_cast<int>(m_fontSize));
         emit fontSizeChanged();
-    }
-}
-
-bool AppSettings::showNSFW() const
-{
-    return m_showNSFW;
-}
-
-void AppSettings::setShowNSFW(bool showNSFW)
-{
-    if (m_showNSFW != showNSFW) {
-        m_showNSFW = showNSFW;
-        emit showNSFWChanged();
     }
 }
 

@@ -11,7 +11,6 @@ class AppSettings : public QObject
     Q_ENUMS(FontSize)
     Q_PROPERTY(bool whiteTheme READ whiteTheme WRITE setWhiteTheme NOTIFY whiteThemeChanged)
     Q_PROPERTY(FontSize fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
-    Q_PROPERTY(bool showNSFW READ showNSFW WRITE setShowNSFW NOTIFY showNSFWChanged)
 public:
     enum FontSize {
         SmallFontSize = 0,
@@ -27,9 +26,6 @@ public:
     FontSize fontSize() const;
     void setFontSize(FontSize fontSize);
 
-    bool showNSFW() const;
-    void setShowNSFW(bool showNSFW);
-
     QByteArray refreshToken() const;
     void setRefreshToken(const QByteArray &token);
 
@@ -38,14 +34,12 @@ public:
 signals:
     void whiteThemeChanged();
     void fontSizeChanged();
-    void showNSFWChanged();
 
 private:
     QSettings *m_settings;
 
     bool m_whiteTheme;
     FontSize m_fontSize;
-    bool m_showNSFW;
     QByteArray m_refreshToken;
 };
 
