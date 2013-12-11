@@ -58,6 +58,13 @@ public:
     void setScore(int score);
 
     /**
+     * Indicate the vote of authenticated user on this link
+     * 1 = upvoted, 0 = no vote, -1 = downvoted
+     */
+    int likes() const;
+    void setLikes(int likes);
+
+    /**
      * number of comments of this link
      * equivalent to "comment" in Reddit's JSON
      */

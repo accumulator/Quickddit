@@ -15,6 +15,7 @@ public:
         CreatedRole,
         SubredditRole,
         ScoreRole,
+        LikesRole,
         CommentsCountRole,
         TitleRole,
         DomainRole,

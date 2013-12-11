@@ -40,6 +40,8 @@ QList<LinkObject> Parser::parseLinkList(const QByteArray &json)
         link.setCreated(QDateTime::fromTime_t(linkMapJson.value("created_utc").toInt()));
         link.setSubreddit(linkMapJson.value("subreddit").toString());
         link.setScore(linkMapJson.value("score").toInt());
+        if (!linkMapJson.value("likes").isNull())
+            link.setLikes(linkMapJson.value("likes").toBool() ? 1 : -1);
         link.setCommentsCount(linkMapJson.value("num_comments").toInt());
         link.setTitle(linkMapJson.value("title").toString());
         link.setDomain(linkMapJson.value("domain").toString());
@@ -81,6 +83,8 @@ QList<CommentObject> parseCommentListingJson(const QVariantMap &json, const QStr
         int upvotes = commentMap.value("ups").toInt();
         int downvotes = commentMap.value("downs").toInt();
         comment.setScore(upvotes - downvotes);
+        if (!commentMap.value("likes").isNull())
+            comment.setLikes(commentMap.value("likes").toBool() ? 1 : -1);
         comment.setCreated(QDateTime::fromTime_t(commentMap.value("created_utc").toInt()));
         if (commentMap.value("edited").toBool() != false)
             comment.setEdited(QDateTime::fromTime_t(commentMap.value("edited").toInt()));

@@ -1,6 +1,5 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
-import com.nokia.extras 1.1
 import Quickddit 1.0
 
 Page {
@@ -119,9 +118,9 @@ Page {
                         anchors { left: parent.left; right: parent.right }
                         spacing: constant.paddingMedium
 
-                        CountBubble {
-                            largeSized: true
+                        CustomCountBubble {
                             value: link.score
+                            colorMode: link.likes
                         }
 
                         Text {
@@ -131,8 +130,7 @@ Page {
                             text: "points"
                         }
 
-                        CountBubble {
-                            largeSized: true
+                        CustomCountBubble {
                             value: link.commentsCount
                         }
 

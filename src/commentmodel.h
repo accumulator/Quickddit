@@ -14,6 +14,7 @@ public:
         AuthorRole,
         BodyRole,
         ScoreRole,
+        LikesRole,
         CreatedRole,
         DepthRole,
         IsScoreHiddenRole

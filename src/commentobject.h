@@ -34,6 +34,9 @@ public:
     int score() const;
     void setScore(int score);
 
+    int likes() const;
+    void setLikes(int likes);
+
     QDateTime created() const;
     void setCreated(const QDateTime &created);
 

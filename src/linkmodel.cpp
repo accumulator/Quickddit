@@ -14,6 +14,7 @@ LinkModel::LinkModel(QObject *parent) :
     roles[CreatedRole] = "created";
     roles[SubredditRole] = "subreddit";
     roles[ScoreRole] = "score";
+    roles[LikesRole] = "likes";
     roles[CommentsCountRole] = "commentsCount";
     roles[TitleRole] = "title";
     roles[DomainRole] = "domain";
@@ -50,6 +51,7 @@ QVariant LinkModel::data(const QModelIndex &index, int role) const
     case CreatedRole: return Utils::getTimeDiff(link.created());
     case SubredditRole: return link.subreddit();
     case ScoreRole: return link.score();
+    case LikesRole: return link.likes();
     case CommentsCountRole: return link.commentsCount();
     case TitleRole: return link.title();
     case DomainRole: return link.domain();

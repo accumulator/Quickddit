@@ -1,6 +1,5 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
-import com.nokia.extras 1.1
 
 AbstractListItem {
     id: delegate
@@ -46,9 +45,9 @@ AbstractListItem {
             anchors { left: parent.left; right: parent.right }
             spacing: constant.paddingMedium
 
-            CountBubble {
-                largeSized: true
+            CustomCountBubble {
                 value: model.score
+                colorMode: model.likes
             }
 
             Text {
@@ -58,8 +57,7 @@ AbstractListItem {
                 text: "points"
             }
 
-            CountBubble {
-                largeSized: true
+            CustomCountBubble {
                 value: model.commentsCount
             }
 

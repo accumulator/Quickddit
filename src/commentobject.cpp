@@ -6,13 +6,14 @@
 class CommentObjectData : public QSharedData
 {
 public:
-    CommentObjectData() : score(0), distinguished(CommentObject::NotDistinguished), depth(0),
-        isSubmitter(false), isScoreHidden(false) {}
+    CommentObjectData() : score(0), likes(0), distinguished(CommentObject::NotDistinguished),
+        depth(0), isSubmitter(false), isScoreHidden(false) {}
 
     QString fullname;
     QString author;
     QString body;
     int score;
+    int likes;
     QDateTime created;
     QDateTime edited;
     CommentObject::DistinguishedType distinguished;
@@ -82,6 +83,16 @@ int CommentObject::score() const
 void CommentObject::setScore(int score)
 {
     d->score = score;
+}
+
+int CommentObject::likes() const
+{
+    return d->likes;
+}
+
+void CommentObject::setLikes(int likes)
+{
+    d->likes = likes;
 }
 
 QDateTime CommentObject::created() const

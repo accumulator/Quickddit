@@ -12,6 +12,7 @@ CommentModel::CommentModel(QObject *parent) :
     roles[AuthorRole] = "author";
     roles[BodyRole] = "body";
     roles[ScoreRole] = "score";
+    roles[LikesRole] = "likes";
     roles[CreatedRole] = "created";
     roles[DepthRole] = "depth";
     roles[IsScoreHiddenRole] = "isScoreHidden";
@@ -46,6 +47,7 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     }
     case BodyRole: return comment.body();
     case ScoreRole: return comment.score();
+    case LikesRole: return comment.likes();
     case CreatedRole: {
         QString createdTimeDiff = Utils::getTimeDiff(comment.created());
         // TODO: show the edited time diff in UI

@@ -4,11 +4,13 @@ import Quickddit 1.0
 QtObject {
     id: constant
 
-    property color colorHighlighted: colorLight
     property color colorLight: theme.inverted ? "#ffffff" : "#191919"
     property color colorMid: theme.inverted ? "#8c8c8c" : "#666666"
-    property color colorTextSelection: "#4591ff"
     property color colorDisabled: theme.inverted ? "#444444" : "#b2b2b4"
+
+    property color colorPositive: "green"
+    property color colorNegative: "red"
+    property color colorNeutral: theme.inverted ? "dimgray" : "darkgray"
 
     property int paddingSmall: 4
     property int paddingMedium: 8

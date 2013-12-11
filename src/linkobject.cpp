@@ -7,13 +7,15 @@
 class LinkObjectData : public QSharedData
 {
 public:
-    LinkObjectData() : score(0), commentsCount(0), isSticky(false), isNSFW(false) {}
+    LinkObjectData() : score(0), likes(0), commentsCount(0), distinguished(LinkObject::NotDistinguished),
+        isSticky(false), isNSFW(false) {}
 
     QString fullname;
     QString author;
     QDateTime created;
     QString subreddit;
     int score;
+    int likes;
     int commentsCount;
     QString title;
     QString domain;
@@ -97,6 +99,16 @@ int LinkObject::score() const
 void LinkObject::setScore(int score)
 {
     d->score = score;
+}
+
+int LinkObject::likes() const
+{
+    return d->likes;
+}
+
+void LinkObject::setLikes(int likes)
+{
+    d->likes = likes;
 }
 
 int LinkObject::commentsCount() const
