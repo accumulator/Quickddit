@@ -54,6 +54,15 @@ Page {
             }
 
             Text {
+                anchors { left: parent.left; right: parent.right }
+                visible: aboutSubredditManager.isNSFW
+                font.pixelSize: constant.fontSizeMedium
+                color: constant.colorNegative
+                font.italic: true
+                text: "This subreddit is Not Safe For Work"
+            }
+
+            Text {
                 id: shortDescriptionText
                 anchors { left: parent.left; right: parent.right }
                 wrapMode: Text.Wrap
@@ -62,14 +71,39 @@ Page {
                 text: aboutSubredditManager.shortDescription
             }
 
-            Text {
-                id: userCountText
+            Row {
                 anchors { left: parent.left; right: parent.right }
-                wrapMode: Text.Wrap
+                spacing: constant.paddingMedium
+
+                CustomCountBubble {
+                    value: aboutSubredditManager.subscribers
+                }
+
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: constant.fontSizeMedium
+                    color: constant.colorLight
+                    text: "subscribers"
+                }
+
+                CustomCountBubble {
+                    value: aboutSubredditManager.activeUsers
+                }
+
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: constant.fontSizeMedium
+                    color: constant.colorLight
+                    text: "active users"
+                }
+            }
+
+            Text {
+                anchors { left: parent.left; right: parent.right }
+                visible: quickdditManager.signedIn
                 font.pixelSize: constant.fontSizeMedium
-                color: constant.colorLight
-                text: aboutSubredditManager.subscribers + " subscribers | " +
-                      aboutSubredditManager.activeUsers + " active users"
+                color: aboutSubredditManager.isSubscribed ? constant.colorPositive : constant.colorNegative
+                text: aboutSubredditManager.isSubscribed ? "Subscribed" : "Not Subscribed"
             }
 
             Rectangle {

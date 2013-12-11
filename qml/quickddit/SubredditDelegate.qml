@@ -35,7 +35,7 @@ AbstractListItem {
 
         Row {
             anchors { left: parent.left; right: parent.right }
-            spacing: constant.paddingSmall
+            spacing: constant.paddingMedium
             height: subscribersBubble.height
 
             CustomCountBubble {

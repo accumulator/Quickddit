@@ -16,6 +16,8 @@ class AboutSubredditManager : public AbstractManager
     Q_PROPERTY(QString longDescription READ longDescription NOTIFY aboutChanged)
     Q_PROPERTY(int subscribers READ subscribers NOTIFY aboutChanged)
     Q_PROPERTY(int activeUsers READ activeUsers NOTIFY aboutChanged)
+    Q_PROPERTY(bool isNSFW READ isNSFW NOTIFY aboutChanged)
+    Q_PROPERTY(bool isSubscribed READ isSubscribed NOTIFY aboutChanged)
 public:
     explicit AboutSubredditManager(QObject *parent = 0);
 
@@ -26,6 +28,8 @@ public:
     QString longDescription() const;
     int subscribers() const;
     int activeUsers() const;
+    bool isNSFW() const;
+    bool isSubscribed() const;
     
     Q_INVOKABLE void refresh(const QString &subreddit);
 

@@ -44,6 +44,16 @@ int AboutSubredditManager::activeUsers() const
     return m_subredditObject.activeUsers();
 }
 
+bool AboutSubredditManager::isNSFW() const
+{
+    return m_subredditObject.isNSFW();
+}
+
+bool AboutSubredditManager::isSubscribed() const
+{
+    return m_subredditObject.isSubscribed();
+}
+
 void AboutSubredditManager::refresh(const QString &subreddit)
 {
     if (m_reply != 0) {

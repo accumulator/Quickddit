@@ -41,6 +41,9 @@ public:
     bool isNSFW() const;
     void setNSFW(bool nsfw);
 
+    bool isSubscribed() const;
+    void setSubscribed(bool subscribed);
+
 private:
     QExplicitlySharedDataPointer<SubredditObjectData> d;
 };

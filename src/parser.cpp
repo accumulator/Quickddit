@@ -9,8 +9,6 @@
 #include "commentobject.h"
 #include "subredditobject.h"
 
-// TODO: Parse all "description" formatted in markdown to HTML(?) for display
-
 QString unescapeHtml(const QString &html)
 {
     QTextDocument document;
@@ -134,6 +132,7 @@ SubredditObject parseSubredditThing(const QVariantMap &subredditThing)
     subreddit.setSubscribers(data.value("subscribers").toInt());
     subreddit.setActiveUsers(data.value("accounts_active").toInt());
     subreddit.setNSFW(data.value("over18").toBool());
+    subreddit.setSubscribed(data.value("user_is_subscriber").toBool());
     return subreddit;
 }
 

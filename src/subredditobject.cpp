@@ -17,6 +17,7 @@ public:
     int subscribers;
     int activeUsers;
     bool isNSFW;
+    bool isSubscribed;
 
 private:
     Q_DISABLE_COPY(SubredditObjectData)
@@ -131,4 +132,14 @@ bool SubredditObject::isNSFW() const
 void SubredditObject::setNSFW(bool nsfw)
 {
     d->isNSFW = nsfw;
+}
+
+bool SubredditObject::isSubscribed() const
+{
+    return d->isSubscribed;
+}
+
+void SubredditObject::setSubscribed(bool subscribed)
+{
+    d->isSubscribed = subscribed;
 }
