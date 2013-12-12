@@ -21,6 +21,11 @@ QuickdditManager::QuickdditManager(QObject *parent) :
 {
 }
 
+bool QuickdditManager::isSignedIn() const
+{
+    return m_settings->hasRefreshToken();
+}
+
 AppSettings *QuickdditManager::settings() const
 {
     return m_settings;
@@ -34,11 +39,6 @@ void QuickdditManager::setSettings(AppSettings *settings)
 QNetworkReply *QuickdditManager::createGetRequest(const QUrl &url, const QByteArray &authHeader)
 {
     return m_netManager->createGetRequest(url, authHeader);
-}
-
-bool QuickdditManager::signedIn() const
-{
-    return (!m_accessToken.isEmpty() && m_settings->hasRefreshToken());
 }
 
 void QuickdditManager::createRedditGetRequest(const QString &relativeUrl,

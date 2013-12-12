@@ -12,15 +12,15 @@ class NetworkManager;
 class QuickdditManager : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(bool isSignedIn READ isSignedIn NOTIFY signedInChanged)
     Q_PROPERTY(AppSettings* settings READ settings WRITE setSettings)
-    Q_PROPERTY(bool signedIn READ signedIn NOTIFY signedInChanged)
 public:
     explicit QuickdditManager(QObject *parent = 0);
-    
+
+    bool isSignedIn() const;
+
     AppSettings *settings() const;
     void setSettings(AppSettings *settings);
-
-    bool signedIn() const;
 
     /**
      * Create a GET request to non-Reddit API

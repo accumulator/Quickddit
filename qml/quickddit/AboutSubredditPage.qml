@@ -100,7 +100,7 @@ Page {
 
             Text {
                 anchors { left: parent.left; right: parent.right }
-                visible: quickdditManager.signedIn
+                visible: quickdditManager.isSignedIn
                 font.pixelSize: constant.fontSizeMedium
                 color: aboutSubredditManager.isSubscribed ? constant.colorPositive : constant.colorNegative
                 text: aboutSubredditManager.isSubscribed ? "Subscribed" : "Not Subscribed"

@@ -57,16 +57,16 @@ Page {
                 anchors { left: parent.left; right: parent.right }
                 font.pixelSize: constant.fontSizeMedium
                 color: constant.colorLight
-                visible: quickdditManager.signedIn
+                visible: quickdditManager.isSignedIn
                 horizontalAlignment: Text.AlignHCenter
                 text: "Signed in to Reddit"
             }
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: quickdditManager.signedIn ? "Sign out" : "Sign in to Reddit"
+                text: quickdditManager.isSignedIn ? "Sign out" : "Sign in to Reddit"
                 onClicked: {
-                    if (quickdditManager.signedIn) {
+                    if (quickdditManager.isSignedIn) {
                         quickdditManager.signOut();
                         infoBanner.alert("You have signed out from Reddit");
                      } else {

@@ -125,7 +125,7 @@ Page {
             if (!__subredditDialogComponent)
                 __subredditDialogComponent = Qt.createComponent("SubredditDialog.qml");
             var p = {};
-            if (quickdditManager.signedIn)
+            if (quickdditManager.isSignedIn)
                 p.subredditManager = subscribedSubredditManager;
             var dialog = __subredditDialogComponent.createObject(mainPage, p);
             if (!dialog) {
