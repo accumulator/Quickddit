@@ -169,10 +169,15 @@ QPair<QString, QString> parseImgurImageMap(const QVariantMap &imageMap)
     const QString imageUrl = imageMap.value("link").toString();
     int insertThumbIndex = imageUrl.lastIndexOf('.');
 
-    QString largeThumbUrl = QString(imageUrl).insert(insertThumbIndex, 'h');
-    QString smallThumbUrl = QString(imageUrl).insert(insertThumbIndex, 'b');
+    QString mainUrl;
+    if (imageMap.value("animated").toBool())
+        mainUrl = imageUrl;
+    else
+        mainUrl = QString(imageUrl).insert(insertThumbIndex, 'h');
 
-    return qMakePair(largeThumbUrl, smallThumbUrl);
+    QString thumbUrl = QString(imageUrl).insert(insertThumbIndex, 'b');
+
+    return qMakePair(mainUrl, thumbUrl);
 }
 
 QList< QPair<QString, QString> > Parser::parseImgurImages(const QByteArray &json)
