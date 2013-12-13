@@ -12,19 +12,27 @@ Page {
             platformIconId: "toolbar-back"
             onClicked: pageStack.pop()
         }
+        ToolButton {
+            text: aboutSubredditManager.isSubscribed ? "Unsubscribe" : "Subscribe"
+            enabled: !aboutSubredditManager.busy && aboutSubredditManager.displayName
+            visible: quickdditManager.isSignedIn
+            platformStyle: ToolButtonStyle { disabledBackground: "" } // prevent missing image warning text
+            onClicked: aboutSubredditManager.subscribeOrUnsubscribe();
+        }
+        Item { width: 80; height: 64 }
     }
 
     Flickable {
         id: flickable
         anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
         contentHeight: flickableColumn.height + 2 * constant.paddingMedium
-        visible: !aboutSubredditManager.busy
 
         Column {
             id: flickableColumn
             anchors { left: parent.left; right: parent.right; top: parent.top; margins: constant.paddingMedium }
             height: childrenRect.height
             spacing: constant.paddingMedium
+            visible: aboutSubredditManager.displayName
 
             Item {
                 anchors { left: parent.left; right: parent.right }
@@ -110,6 +118,7 @@ Page {
                 anchors { left: parent.left; right: parent.right }
                 height: 1
                 color: constant.colorMid
+                visible: longDescriptionText != ""
             }
 
             Text {
@@ -147,6 +156,13 @@ Page {
     AboutSubredditManager {
         id: aboutSubredditManager
         manager: quickdditManager
+        onSubscribeSuccess: {
+            if (isSubscribed) {
+                infoBanner.alert(qsTr("You have subscribed to %1").arg(displayName))
+            } else {
+                infoBanner.alert(qsTr("You have unsubscribed from %1").arg(displayName))
+            }
+        }
         onError: infoBanner.alert(errorString)
     }
 

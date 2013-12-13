@@ -9,15 +9,15 @@
 class AboutSubredditManager : public AbstractManager
 {
     Q_OBJECT
-    Q_PROPERTY(QString displayName READ displayName NOTIFY aboutChanged)
-    Q_PROPERTY(QString url READ url NOTIFY aboutChanged)
-    Q_PROPERTY(QUrl headerImageUrl READ headerImageUrl NOTIFY aboutChanged)
-    Q_PROPERTY(QString shortDescription READ shortDescription NOTIFY aboutChanged)
-    Q_PROPERTY(QString longDescription READ longDescription NOTIFY aboutChanged)
-    Q_PROPERTY(int subscribers READ subscribers NOTIFY aboutChanged)
-    Q_PROPERTY(int activeUsers READ activeUsers NOTIFY aboutChanged)
-    Q_PROPERTY(bool isNSFW READ isNSFW NOTIFY aboutChanged)
-    Q_PROPERTY(bool isSubscribed READ isSubscribed NOTIFY aboutChanged)
+    Q_PROPERTY(QString displayName READ displayName NOTIFY dataChanged)
+    Q_PROPERTY(QString url READ url NOTIFY dataChanged)
+    Q_PROPERTY(QUrl headerImageUrl READ headerImageUrl NOTIFY dataChanged)
+    Q_PROPERTY(QString shortDescription READ shortDescription NOTIFY dataChanged)
+    Q_PROPERTY(QString longDescription READ longDescription NOTIFY dataChanged)
+    Q_PROPERTY(int subscribers READ subscribers NOTIFY dataChanged)
+    Q_PROPERTY(int activeUsers READ activeUsers NOTIFY dataChanged)
+    Q_PROPERTY(bool isNSFW READ isNSFW NOTIFY dataChanged)
+    Q_PROPERTY(bool isSubscribed READ isSubscribed NOTIFY dataChanged)
 public:
     explicit AboutSubredditManager(QObject *parent = 0);
 
@@ -33,13 +33,19 @@ public:
     
     Q_INVOKABLE void refresh(const QString &subreddit);
 
+    Q_INVOKABLE void subscribeOrUnsubscribe();
+
 signals:
-    void aboutChanged();
+    void dataChanged();
+    void subscribeSuccess();
     void error(const QString &errorString);
 
 private slots:
     void onNetworkReplyReceived(QNetworkReply *reply);
     void onFinished();
+
+    void onSubscribeNetworkReplyReceived(QNetworkReply *reply);
+    void onSubscribeFinished();
 
 private:
     SubredditObject m_subredditObject;
