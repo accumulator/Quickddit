@@ -89,7 +89,7 @@ void SubredditManager::refresh(bool refreshOlder)
 
     connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
             SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditGetRequest(relativeUrl, parameters, oauth);
+    manager()->createRedditRequest(QuickdditManager::GET, relativeUrl, parameters, oauth);
 
     setBusy(true);
 }

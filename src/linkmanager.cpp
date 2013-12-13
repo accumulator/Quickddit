@@ -121,7 +121,7 @@ void LinkManager::refresh(bool refreshOlder)
 
     connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
             SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditGetRequest(relativeUrl, parameters);
+    manager()->createRedditRequest(QuickdditManager::GET, relativeUrl, parameters);
 
     m_title = relativeUrl;
     emit titleChanged();

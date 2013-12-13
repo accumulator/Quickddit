@@ -41,17 +41,18 @@ QNetworkReply *QuickdditManager::createGetRequest(const QUrl &url, const QByteAr
     return m_netManager->createGetRequest(url, authHeader);
 }
 
-void QuickdditManager::createRedditGetRequest(const QString &relativeUrl,
-                                              const QHash<QString, QString> &parameters, bool oauth)
+void QuickdditManager::createRedditRequest(RequestType type, const QString &relativeUrl,
+                                           const QHash<QString, QString> &parameters, bool oauth)
 {
-    QString urlString;
+    QString baseUrl;
     QByteArray authHeader;
 
     if (oauth && m_settings->hasRefreshToken()) {
         if (!m_accessToken.isEmpty() && m_accessTokenExpiry.elapsed() < 3600000) {
-            urlString = "https://oauth.reddit.com";
+            baseUrl = "https://oauth.reddit.com";
             authHeader.append("Bearer " + m_accessToken);
         } else {
+            m_requestType = type;
             m_relativeUrl = relativeUrl;
             m_parameters = parameters;
             connect(this, SIGNAL(accessTokenSuccess()), SLOT(onRefreshTokenFinished()));
@@ -60,25 +61,32 @@ void QuickdditManager::createRedditGetRequest(const QString &relativeUrl,
             return;
         }
     } else {
-        urlString = "http://www.reddit.com";
+        baseUrl = "http://www.reddit.com";
     }
 
-    urlString += relativeUrl + ".json";
-
-    QUrl url(urlString);
+    QUrl requestUrl;
+    if (type == GET)
+        requestUrl = baseUrl + relativeUrl + ".json";
+    else if (type == POST)
+        requestUrl = baseUrl + relativeUrl;
 
     QHashIterator<QString,QString> i(parameters);
     while (i.hasNext()) {
         i.next();
-        url.addQueryItem(i.key(), i.value());
+        requestUrl.addQueryItem(i.key(), i.value());
     }
 
-    // obey user settings for NSFW filtering
-    // this is not documented but found in source:
-    // <https://github.com/reddit/reddit/commit/6f9f91e7534db713d2bdd199ededd00598adccc1>
-    url.addQueryItem("obey_over18", "true");
-
-    emit networkReplyReceived(m_netManager->createGetRequest(url, authHeader));
+    if (type == GET) {
+        // obey user settings for NSFW filtering
+        // this is not documented but found in source:
+        // <https://github.com/reddit/reddit/commit/6f9f91e7534db713d2bdd199ededd00598adccc1>
+        requestUrl.addQueryItem("obey_over18", "true");
+        emit networkReplyReceived(m_netManager->createGetRequest(requestUrl, authHeader));
+    } else if (type == POST) {
+        QByteArray data = requestUrl.encodedQuery();
+        requestUrl.setEncodedQuery(QByteArray());
+        emit networkReplyReceived(m_netManager->createPostRequest(requestUrl, data, authHeader));
+    }
 }
 
 QUrl QuickdditManager::generateAuthorizationUrl()
@@ -205,7 +213,7 @@ void QuickdditManager::onRefreshTokenFinished()
     disconnect(this, 0, this, SLOT(onRefreshTokenFinished()));
 
     if (!m_accessToken.isEmpty() && m_accessTokenExpiry.elapsed() < 3600000)
-        createRedditGetRequest(m_relativeUrl, m_parameters);
+        createRedditRequest(m_requestType, m_relativeUrl, m_parameters);
     else
         emit networkReplyReceived(0);
 

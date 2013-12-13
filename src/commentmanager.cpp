@@ -59,7 +59,7 @@ void CommentManager::refresh()
 
     connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
             SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditGetRequest(m_permalink, parameters);
+    manager()->createRedditRequest(QuickdditManager::GET, m_permalink, parameters);
 
     setBusy(true);
 }

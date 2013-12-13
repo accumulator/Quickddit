@@ -66,7 +66,7 @@ void AboutSubredditManager::refresh(const QString &subreddit)
 
     connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
             SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditGetRequest(relativeUrl);
+    manager()->createRedditRequest(QuickdditManager::GET, relativeUrl);
 
     setBusy(true);
 }

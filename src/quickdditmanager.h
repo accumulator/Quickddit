@@ -15,6 +15,11 @@ class QuickdditManager : public QObject
     Q_PROPERTY(bool isSignedIn READ isSignedIn NOTIFY signedInChanged)
     Q_PROPERTY(AppSettings* settings READ settings WRITE setSettings)
 public:
+    enum RequestType {
+        GET,
+        POST
+    };
+
     explicit QuickdditManager(QObject *parent = 0);
 
     bool isSignedIn() const;
@@ -28,17 +33,18 @@ public:
     QNetworkReply *createGetRequest(const QUrl &url, const QByteArray &authHeader);
 
     /**
-     * Create a GET request to Reddit API
+     * Create a GET/POST request to Reddit API
      * the signal networkReplyReceived() will be emitted with the QNetworkReply in the parameter
      * if this process failed, the QNetworkReply in the signal networkReplyReceived() will be 0
+     * @param type specify GET or POST request
      * @param relativeUrl the relative url of Reddit without the ".json", eg. "/r/nokia/hot"
      * @param parameters parameters for the request (will be added as query items in the url)
      * @param oauth use oauth for this request. Some endpoint does not support oauth and need to
                     set this to false
      */
-    void createRedditGetRequest(const QString &relativeUrl,
-                                const QHash<QString, QString> &parameters = QHash<QString,QString>(),
-                                bool oauth = true);
+    void createRedditRequest(RequestType type, const QString &relativeUrl,
+                             const QHash<QString, QString> &parameters = QHash<QString,QString>(),
+                             bool oauth = true);
 
     /**
      * Generate an authorization url for signing in by the user (through the broswer)
@@ -80,6 +86,7 @@ private:
     QString m_accessToken;
     QTime m_accessTokenExpiry;
 
+    RequestType m_requestType;
     QString m_relativeUrl;
     QHash<QString, QString> m_parameters;
 };
