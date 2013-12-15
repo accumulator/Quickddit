@@ -18,7 +18,8 @@ Page {
         font.pixelSize: constant.fontSizeLarge
         color: constant.colorLight
         wrapMode: Text.Wrap
-        text: "Copyright (c) Dickson Leong\nv" + APP_VERSION + " ALPHA\nApp icon by @andrewzhilin"
+        text: "Copyright (c) Dickson Leong\nv" + APP_VERSION + " ALPHA\nApp icon by @andrewzhilin\n" +
+              "Licensed under GNU GPLv3+"
     }
 
     PageHeader {
