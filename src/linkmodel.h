@@ -4,6 +4,7 @@
 #include <QtCore/QAbstractListModel>
 
 #include "linkobject.h"
+#include "votemanager.h"
 
 class LinkModel : public QAbstractListModel
 {
@@ -37,6 +38,8 @@ public:
 
     void append(const QList<LinkObject> &linkList);
     void clear();
+
+    void changeVote(const QString &fullname, VoteManager::VoteType voteType);
 
 private:
     QList<LinkObject> m_linkList;

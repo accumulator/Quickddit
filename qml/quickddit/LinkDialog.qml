@@ -1,19 +1,50 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
+import Quickddit 1.0
 
 ContextMenu {
     id: linkDialog
 
     property variant link
+    property VoteManager linkVoteManager
+    property bool voteOnly: false
 
     property bool __isClosing: false
 
     MenuLayout {
         MenuItem {
+            id: upvoteButton
+            visible: link.likes != 1
+            enabled: !linkVoteManager.busy
+            text: "Upvote"
+            onClicked: linkVoteManager.vote(link.fullname, VoteManager.Upvote)
+        }
+        MenuItem {
+            visible: link.likes != -1
+            enabled: !linkVoteManager.busy
+            text: "Downvote"
+            platformStyle: MenuItemStyle {
+                position: !upvoteButton.visible ? "vertical-top"
+                                                : (!unvoteButton.visible && voteOnly ? "vertical-bottom"
+                                                                                     : "vertical-center")
+            }
+            onClicked: linkVoteManager.vote(link.fullname, VoteManager.Downvote)
+        }
+        MenuItem {
+            id: unvoteButton
+            visible: link.likes != 0
+            enabled: !linkVoteManager.busy
+            text: "Unvote"
+            platformStyle: MenuItemStyle { position: voteOnly ? "vertical-bottom" : "vertical-center" }
+            onClicked: linkVoteManager.vote(link.fullname, VoteManager.Unvote)
+        }
+        MenuItem {
+            visible: !voteOnly
             text: "URL"
             onClicked: globalDialogManager.createOpenLinkDialog(mainPage, link.url);
         }
         MenuItem {
+            visible: !voteOnly
             text: "View image"
             enabled: {
                 if (link.domain == "i.imgur.com" || link.domain == "imgur.com")

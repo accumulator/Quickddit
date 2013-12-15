@@ -92,7 +92,4 @@ AbstractListItem {
         source: model.thumbnailUrl
         asynchronous: true
     }
-
-    onClicked: pageStack.push(Qt.resolvedUrl("CommentPage.qml"), { link: model });
-    onPressAndHold: dialogManager.createLinkDialog(model);
 }

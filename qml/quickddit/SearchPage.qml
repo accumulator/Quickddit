@@ -26,7 +26,13 @@ Page {
         id: searchListView
         anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
         model: searchManager.model
-        delegate: LinkDelegate { showSubreddit: true }
+        delegate: LinkDelegate {
+            showSubreddit: true
+            onClicked: {
+                var p = { link: model, linkVoteManager: linkVoteManager };
+                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);
+            }
+        }
         footer: Item {
             width: ListView.view.width
             height: loadMoreButton.height + 2 * constant.paddingLarge
@@ -59,6 +65,14 @@ Page {
         id: searchManager
         section: LinkManager.SearchSection
         manager: quickdditManager
+        onError: infoBanner.alert(errorString);
+    }
+
+    VoteManager {
+        id: linkVoteManager
+        manager: quickdditManager
+        type: VoteManager.Link
+        model: searchManager.model
         onError: infoBanner.alert(errorString);
     }
 

@@ -4,6 +4,7 @@
 #include <QtCore/QAbstractListModel>
 
 #include "commentobject.h"
+#include "votemanager.h"
 
 class CommentModel : public QAbstractListModel
 {
@@ -30,6 +31,8 @@ public:
 
     void append(const QList<CommentObject> &commentList);
     void clear();
+
+    void changeVote(const QString &fullname, VoteManager::VoteType voteType);
 
     Q_INVOKABLE int getParentIndex(int index) const;
 

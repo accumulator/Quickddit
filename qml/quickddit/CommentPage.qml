@@ -6,6 +6,7 @@ Page {
     id: commentPage
 
     property variant link
+    property VoteManager linkVoteManager
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -13,11 +14,13 @@ Page {
             onClicked: pageStack.pop()
         }
         ToolIcon {
-            platformIconId: "toolbar-list"
-            onClicked: dialogManager.createCommentSortDialog();
+            platformIconId: "toolbar-callhistory" + (enabled ? "" : "-dimmed")
+            enabled: !linkVoteManager.busy
+            onClicked: dialogManager.createVoteDialog();
         }
         ToolIcon {
-            platformIconId: "toolbar-refresh"
+            platformIconId: "toolbar-refresh" + (enabled ? "" : "-dimmed")
+            enabled: !commentManager.busy
             onClicked: commentManager.refresh();
         }
         ToolIcon {
@@ -50,6 +53,10 @@ Page {
         id: menu
 
         MenuLayout {
+            MenuItem {
+                text: "Sort"
+                onClicked: dialogManager.createCommentSortDialog();
+            }
             MenuItem {
                 text: "Share"
                 onClicked: QMLUtils.shareUrl(QMLUtils.getRedditShortUrl(link.fullname), link.title);
@@ -213,7 +220,7 @@ Page {
         id: pageHeader
         anchors { top: parent.top; left: parent.left; right: parent.right }
         text: "Comments: " + link.title
-        busy: commentManager.busy
+        busy: commentManager.busy || commentVoteManager.busy || linkVoteManager.busy
         onClicked: commentListView.positionViewAtBeginning()
     }
 
@@ -224,11 +231,29 @@ Page {
         onError: infoBanner.alert(errorString)
     }
 
+    VoteManager {
+        id: commentVoteManager
+        manager: quickdditManager
+        type: VoteManager.Comment
+        model: commentManager.model
+        onError: infoBanner.alert(errorString);
+    }
+
     QtObject {
         id: dialogManager
 
+        property Component __voteDialogComponent: null
         property Component __commentSortDialogComponent: null
         property Component __commentDialogComponent: null
+
+        function createVoteDialog() {
+            if (!__voteDialogComponent)
+                __voteDialogComponent = Qt.createComponent("LinkDialog.qml");
+            var p = { link: link, linkVoteManager: linkVoteManager, voteOnly: true }
+            var dialog = __voteDialogComponent.createObject(commentPage, p);
+            if (!dialog)
+                console.log("Error creating dialog:" + __voteDialogComponent.errorString());
+        }
 
         function createCommentSortDialog() {
             if (!__commentSortDialogComponent)
@@ -247,7 +272,7 @@ Page {
         function createCommentDialog(comment, index) {
             if (!__commentDialogComponent)
                 __commentDialogComponent = Qt.createComponent("CommentDialog.qml");
-            var p = { comment: comment, linkPermalink: link.permalink }
+            var p = { comment: comment, linkPermalink: link.permalink, commentVoteManager: commentVoteManager }
             var dialog = __commentDialogComponent.createObject(commentPage, p);
             if (!dialog) {
                 console.log("Error creating dialog:" + __commentDialogComponent.errorString());

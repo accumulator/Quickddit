@@ -94,6 +94,28 @@ void CommentModel::clear()
     endRemoveRows();
 }
 
+void CommentModel::changeVote(const QString &fullname, VoteManager::VoteType voteType)
+{
+    for (int i = 0; i < m_commentList.count(); ++i) {
+        CommentObject comment = m_commentList.at(i);
+
+        if (comment.fullname() == fullname) {
+            int oldLikes = comment.likes();
+            switch (voteType) {
+            case VoteManager::Upvote:
+                comment.setLikes(1); break;
+            case VoteManager::Downvote:
+                comment.setLikes(-1); break;
+            case VoteManager::Unvote:
+                comment.setLikes(0); break;
+            }
+            comment.setScore(comment.score() + (comment.likes() - oldLikes));
+            emit dataChanged(index(i), index(i));
+            break;
+        }
+    }
+}
+
 int CommentModel::getParentIndex(int index) const
 {
     int parentDepth = m_commentList.at(index).depth() - 1;

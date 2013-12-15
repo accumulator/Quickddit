@@ -98,3 +98,25 @@ void LinkModel::clear()
     m_linkList.clear();
     endRemoveRows();
 }
+
+void LinkModel::changeVote(const QString &fullname, VoteManager::VoteType voteType)
+{
+    for (int i = 0; i < m_linkList.count(); ++i) {
+        LinkObject link = m_linkList.at(i);
+
+        if (link.fullname() == fullname) {
+            int oldLikes = link.likes();
+            switch (voteType) {
+            case VoteManager::Upvote:
+                link.setLikes(1); break;
+            case VoteManager::Downvote:
+                link.setLikes(-1); break;
+            case VoteManager::Unvote:
+                link.setLikes(0); break;
+            }
+            link.setScore(link.score() + (link.likes() - oldLikes));
+            emit dataChanged(index(i), index(i));
+            break;
+        }
+    }
+}

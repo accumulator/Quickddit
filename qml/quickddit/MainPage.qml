@@ -71,6 +71,11 @@ Page {
         delegate: LinkDelegate {
             showSubreddit: linkManager.subreddit == ""
                            || linkManager.subreddit.toLowerCase() == "all"
+            onClicked: {
+                var p = { link: model, linkVoteManager: linkVoteManager };
+                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);
+            }
+            onPressAndHold: dialogManager.createLinkDialog(model);
         }
         footer: Item {
             width: ListView.view.width
@@ -96,7 +101,7 @@ Page {
         id: pageHeader
         anchors { top: parent.top; left: parent.left; right: parent.right }
         text: linkManager.title
-        busy: linkManager.busy
+        busy: linkManager.busy || linkVoteManager.busy
         onClicked: linkListView.positionViewAtBeginning()
     }
 
@@ -106,11 +111,19 @@ Page {
         onError: infoBanner.alert(errorString)
     }
 
+    VoteManager {
+        id: linkVoteManager
+        manager: quickdditManager
+        type: VoteManager.Link
+        model: linkManager.model
+        onError: infoBanner.alert(errorString);
+    }
+
     SubredditManager {
         id: subscribedSubredditManager
         manager: quickdditManager
         section: SubredditManager.UserAsSubscriberSection
-        onError: infoBanner.alert(errorString)
+        onError: infoBanner.alert(errorString);
     }
 
     QtObject {
@@ -180,7 +193,8 @@ Page {
         function createLinkDialog(link) {
             if (!__linkDialogComponent)
                 __linkDialogComponent = Qt.createComponent("LinkDialog.qml");
-            var dialog = __linkDialogComponent.createObject(mainPage, {link: link});
+            var p = { link: link, linkVoteManager: linkVoteManager }
+            var dialog = __linkDialogComponent.createObject(mainPage, p);
             if (!dialog) {
                 console.log("Error create dialog: " + __linkDialogComponent.errorString())
             }
