@@ -1,9 +1,12 @@
 #include "subredditmodel.h"
 
 #include <QtCore/QUrl>
+#include <QtNetwork/QNetworkReply>
+
+#include "parser.h"
 
 SubredditModel::SubredditModel(QObject *parent) :
-    QAbstractListModel(parent)
+    AbstractListModelManager(parent), m_section(PopularSection), m_reply(0)
 {
     QHash<int, QByteArray> roles;
     roles[FullnameRole] = "fullname";
@@ -44,34 +47,117 @@ QVariant SubredditModel::data(const QModelIndex &index, int role) const
     }
 }
 
-int SubredditModel::count() const
+SubredditModel::Section SubredditModel::section() const
 {
-    return m_subredditList.count();
+    return m_section;
 }
 
-QString SubredditModel::lastFullname() const
+void SubredditModel::setSection(SubredditModel::Section section)
 {
-    Q_ASSERT(!m_subredditList.isEmpty());
-
-    return m_subredditList.last().fullname();
+    if (m_section != section) {
+        m_section = section;
+        emit sectionChanged();
+    }
 }
 
-void SubredditModel::append(const QList<SubredditObject> &subredditList)
+QString SubredditModel::query() const
 {
-    if (subredditList.isEmpty())
-        return;
-
-    beginInsertRows(QModelIndex(), m_subredditList.count(), m_subredditList.count() + subredditList.count() - 1);
-    m_subredditList.append(subredditList);
-    endInsertRows();
+    return m_query;
 }
 
-void SubredditModel::clear()
+void SubredditModel::setQuery(const QString &query)
 {
-    if (m_subredditList.isEmpty())
-        return;
+    if (m_query != query) {
+        m_query = query;
+        emit queryChanged();
+    }
+}
 
-    beginRemoveRows(QModelIndex(), 0, m_subredditList.count() - 1);
-    m_subredditList.clear();
-    endRemoveRows();
+void SubredditModel::refresh(bool refreshOlder)
+{
+    if (m_reply != 0) {
+        m_reply->disconnect();
+        m_reply->deleteLater();
+        m_reply = 0;
+    }
+
+    QString relativeUrl;
+    QHash<QString, QString> parameters;
+    parameters["count"] = "50";
+    bool oauth = true;
+
+    switch (m_section) {
+    case PopularSection:
+        relativeUrl = "/subreddits/popular";
+        oauth = false;
+        break;
+    case NewSection:
+        relativeUrl = "/subreddits/new";
+        oauth = false;
+        break;
+    case UserAsSubscriberSection:
+        relativeUrl = "/subreddits/mine/subscriber";
+        break;
+    case UserAsContributorSection:
+        relativeUrl = "/subreddits/mine/contributor";
+        break;
+    case UserAsModeratorSection:
+        relativeUrl = "/subreddits/mine/moderator";
+        break;
+    case SearchSection:
+        Q_ASSERT_X(!m_query.isEmpty(), Q_FUNC_INFO, "query is empty");
+        relativeUrl = "/subreddits/search";
+        parameters["q"] = m_query;
+        oauth = false;
+        break;
+    }
+
+    if (!m_subredditList.isEmpty()) {
+        if (refreshOlder) {
+            parameters["count"] = QString::number(m_subredditList.count());
+            parameters["after"] = m_subredditList.last().fullname();
+        } else {
+            beginRemoveRows(QModelIndex(), 0, m_subredditList.count() - 1);
+            m_subredditList.clear();
+            endRemoveRows();
+        }
+    }
+
+    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
+            SLOT(onNetworkReplyReceived(QNetworkReply*)));
+    manager()->createRedditRequest(QuickdditManager::GET, relativeUrl, parameters, oauth);
+
+    setBusy(true);
+}
+
+void SubredditModel::onNetworkReplyReceived(QNetworkReply *reply)
+{
+    disconnect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
+               this, SLOT(onNetworkReplyReceived(QNetworkReply*)));
+    if (reply != 0) {
+        m_reply = reply;
+        m_reply->setParent(this);
+        connect(m_reply, SIGNAL(finished()), SLOT(onFinished()));
+    } else {
+        setBusy(false);
+    }
+}
+
+void SubredditModel::onFinished()
+{
+    if (m_reply->error() == QNetworkReply::NoError) {
+        const QList<SubredditObject> subreddits = Parser::parseSubredditList(m_reply->readAll());
+        if (!subreddits.isEmpty()) {
+            beginInsertRows(QModelIndex(), m_subredditList.count(),
+                            m_subredditList.count() + subreddits.count() - 1);
+            m_subredditList.append(subreddits);
+            endInsertRows();
+        }
+    } else {
+        emit error(m_reply->errorString());
+    }
+
+    m_reply->deleteLater();
+    m_reply = 0;
+    setBusy(false);
 }

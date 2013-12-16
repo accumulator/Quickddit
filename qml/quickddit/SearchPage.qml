@@ -5,7 +5,7 @@ import Quickddit 1.0
 Page {
     id: searchPage
 
-    property alias searchQuery: searchManager.searchQuery
+    property alias searchQuery: searchModel.searchQuery
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -25,7 +25,7 @@ Page {
     ListView {
         id: searchListView
         anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
-        model: searchManager.model
+        model: searchModel
         delegate: LinkDelegate {
             showSubreddit: true
             onClicked: {
@@ -41,14 +41,14 @@ Page {
             Button {
                 id: loadMoreButton
                 anchors.centerIn: parent
-                enabled: !searchManager.busy
+                enabled: !searchModel.busy
                 width: parent.width * 0.75
                 text: "Load More"
-                onClicked: searchManager.refresh(true);
+                onClicked: searchModel.refresh(true);
             }
         }
 
-        EmptyContentLabel { visible: searchListView.count == 0 && !searchManager.busy }
+        EmptyContentLabel { visible: searchListView.count == 0 && !searchModel.busy }
     }
 
     ScrollDecorator { flickableItem: searchListView }
@@ -56,14 +56,14 @@ Page {
     PageHeader {
         id: pageHeader
         anchors { top: parent.top; left: parent.left; right: parent.right }
-        text: "Search Result: " + searchManager.searchQuery
-        busy: searchManager.busy
+        text: "Search Result: " + searchModel.searchQuery
+        busy: searchModel.busy
         onClicked: searchListView.positionViewAtBeginning()
     }
 
-    LinkManager {
-        id: searchManager
-        section: LinkManager.SearchSection
+    LinkModel {
+        id: searchModel
+        section: LinkModel.SearchSection
         manager: quickdditManager
         onError: infoBanner.alert(errorString);
     }
@@ -72,7 +72,7 @@ Page {
         id: linkVoteManager
         manager: quickdditManager
         type: VoteManager.Link
-        model: searchManager.model
+        model: searchModel
         onError: infoBanner.alert(errorString);
     }
 
@@ -85,33 +85,33 @@ Page {
         function createSearchSortDialog() {
             if (!__searchSortDialogComponent)
                 __searchSortDialogComponent = Qt.createComponent("SearchSortDialog.qml");
-            var p = { selectedIndex: searchManager.searchSort }
+            var p = { selectedIndex: searchModel.searchSort }
             var dialog = __searchSortDialogComponent.createObject(searchPage, p);
             if (!dialog) {
                 console.log("Error creating dialog:", __searchSortDialogComponent.errorString());
                 return;
             }
             dialog.accepted.connect(function() {
-                searchManager.searchSort = dialog.selectedIndex;
-                searchManager.refresh(false);
+                searchModel.searchSort = dialog.selectedIndex;
+                searchModel.refresh(false);
             })
         }
 
         function createSearchTimeRangeDialog() {
             if (!__searchTimeRangeDialogComponent)
                 __searchTimeRangeDialogComponent = Qt.createComponent("SearchTimeRangeDialog.qml");
-            var p = { selectedIndex: searchManager.searchTimeRange }
+            var p = { selectedIndex: searchModel.searchTimeRange }
             var dialog = __searchTimeRangeDialogComponent.createObject(searchPage, p);
             if (!dialog) {
                 console.log("Error creating dialog:", __searchTimeRangeDialogComponent.errorString);
                 return;
             }
             dialog.accepted.connect(function() {
-                searchManager.searchTimeRange = dialog.selectedIndex;
-                searchManager.refresh(false);
+                searchModel.searchTimeRange = dialog.selectedIndex;
+                searchModel.refresh(false);
             })
         }
     }
 
-    Component.onCompleted: searchManager.refresh(false);
+    Component.onCompleted: searchModel.refresh(false);
 }

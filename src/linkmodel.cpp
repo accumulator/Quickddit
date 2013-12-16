@@ -2,11 +2,14 @@
 
 #include <QtCore/QDateTime>
 #include <QtCore/QUrl>
+#include <QtNetwork/QNetworkReply>
 
 #include "utils.h"
+#include "parser.h"
 
 LinkModel::LinkModel(QObject *parent) :
-    QAbstractListModel(parent)
+    AbstractListModelManager(parent), m_section(HotSection), m_searchSort(RelevanceSort),
+    m_searchTimeRange(AllTime), m_reply(0)
 {
     QHash<int, QByteArray> roles;
     roles[FullnameRole] = "fullname";
@@ -67,36 +70,117 @@ QVariant LinkModel::data(const QModelIndex &index, int role) const
     }
 }
 
-int LinkModel::count() const
+QString LinkModel::title() const
 {
-    return m_linkList.count();
+    return m_title;
 }
 
-QString LinkModel::lastFullname() const
+LinkModel::Section LinkModel::section() const
 {
-    Q_ASSERT(!m_linkList.isEmpty());
-
-    return m_linkList.last().fullname();
+    return m_section;
 }
 
-void LinkModel::append(const QList<LinkObject> &linkList)
+void LinkModel::setSection(LinkModel::Section section)
 {
-    if (linkList.isEmpty())
-        return;
-
-    beginInsertRows(QModelIndex(), m_linkList.count(), m_linkList.count() + linkList.count() - 1);
-    m_linkList.append(linkList);
-    endInsertRows();
+    if (m_section != section) {
+        m_section = section;
+        emit sectionChanged();
+    }
 }
 
-void LinkModel::clear()
+QString LinkModel::subreddit() const
 {
-    if (m_linkList.isEmpty())
-        return;
+    return m_subreddit;
+}
 
-    beginRemoveRows(QModelIndex(), 0, m_linkList.count() - 1);
-    m_linkList.clear();
-    endRemoveRows();
+void LinkModel::setSubreddit(const QString &subreddit)
+{
+    if (m_subreddit != subreddit) {
+        m_subreddit = subreddit;
+        emit subredditChanged();
+    }
+}
+
+QString LinkModel::searchQuery() const
+{
+    return m_searchQuery;
+}
+
+void LinkModel::setSearchQuery(const QString &query)
+{
+    if (m_searchQuery != query) {
+        m_searchQuery = query;
+        emit searchQueryChanged();
+    }
+}
+
+LinkModel::SearchSortType LinkModel::searchSort() const
+{
+    return m_searchSort;
+}
+
+void LinkModel::setSearchSort(LinkModel::SearchSortType sort)
+{
+    if (m_searchSort != sort) {
+        m_searchSort = sort;
+        emit searchSortChanged();
+    }
+}
+
+LinkModel::SearchTimeRange LinkModel::searchTimeRange() const
+{
+    return m_searchTimeRange;
+}
+
+void LinkModel::setSearchTimeRange(LinkModel::SearchTimeRange timeRange)
+{
+    if (m_searchTimeRange != timeRange) {
+        m_searchTimeRange = timeRange;
+        emit  searchTimeRangeChanged();
+    }
+}
+
+void LinkModel::refresh(bool refreshOlder)
+{
+    if (m_reply != 0) {
+        m_reply->disconnect();
+        m_reply->deleteLater();
+        m_reply = 0;
+    }
+
+    QString relativeUrl = "/";
+    QHash<QString,QString> parameters;
+    parameters["limit"] = "50";
+
+    if (m_section == SearchSection) {
+        parameters["q"] = m_searchQuery;
+        parameters["sort"] = getSearchSortString(m_searchSort);
+        parameters["t"] = getSearchTimeRangeString(m_searchTimeRange);
+        relativeUrl += "search";
+    } else {
+        if (!m_subreddit.isEmpty())
+            relativeUrl += "r/" + m_subreddit + "/";
+        relativeUrl += getSectionString(m_section);
+    }
+
+    if (!m_linkList.isEmpty()) {
+        if (refreshOlder) {
+            parameters["count"] = QString::number(m_linkList.count());
+            parameters["after"] = m_linkList.last().fullname();
+        } else {
+            beginRemoveRows(QModelIndex(), 0, m_linkList.count() - 1);
+            m_linkList.clear();
+            endRemoveRows();
+        }
+    }
+
+    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
+            SLOT(onNetworkReplyReceived(QNetworkReply*)));
+    manager()->createRedditRequest(QuickdditManager::GET, relativeUrl, parameters);
+
+    m_title = relativeUrl;
+    emit titleChanged();
+    setBusy(true);
 }
 
 void LinkModel::changeVote(const QString &fullname, VoteManager::VoteType voteType)
@@ -118,5 +202,79 @@ void LinkModel::changeVote(const QString &fullname, VoteManager::VoteType voteTy
             emit dataChanged(index(i), index(i));
             break;
         }
+    }
+}
+
+void LinkModel::onNetworkReplyReceived(QNetworkReply *reply)
+{
+    disconnect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
+               this, SLOT(onNetworkReplyReceived(QNetworkReply*)));
+    if (reply != 0) {
+        m_reply = reply;
+        m_reply->setParent(this);
+        connect(m_reply, SIGNAL(finished()), SLOT(onFinished()));
+    } else {
+        setBusy(false);
+    }
+}
+
+void LinkModel::onFinished()
+{
+    if (m_reply->error() == QNetworkReply::NoError) {
+        const QList<LinkObject> links = Parser::parseLinkList(m_reply->readAll());
+        if (!links.isEmpty()) {
+            beginInsertRows(QModelIndex(), m_linkList.count(), m_linkList.count() + links.count() - 1);
+            m_linkList.append(links);
+            endInsertRows();
+        }
+    } else {
+        emit error(m_reply->errorString());
+    }
+
+    m_reply->deleteLater();
+    m_reply = 0;
+    setBusy(false);
+}
+
+QString LinkModel::getSectionString(Section section)
+{
+    switch (section) {
+    case HotSection: return "hot";
+    case NewSection: return "new";
+    case RisingSection: return "rising";
+    case ControversialSection: return "controversial";
+    case TopSection: return "top";
+    default:
+        qWarning("LinkModel::getSectionString(): Invalid section");
+        return "";
+    }
+}
+
+QString LinkModel::getSearchSortString(SearchSortType sort)
+{
+    switch (sort) {
+    case RelevanceSort: return "relevance";
+    case NewSort: return "new";
+    case HotSort: return "hot";
+    case TopSort: return "top";
+    case CommentsSort: return "comments";
+    default:
+        qWarning("LinkModel::getSearchSortString(): Invalid sort");
+        return "";
+    }
+}
+
+QString LinkModel::getSearchTimeRangeString(SearchTimeRange timeRange)
+{
+    switch (timeRange) {
+    case AllTime: return "all";
+    case Hour: return "hour";
+    case Day: return "day";
+    case Week: return "week";
+    case Month: return "month";
+    case Year: return "year";
+    default:
+        qWarning("LinkModel::getSearchTimeRangeString(): Invalid time range");
+        return "";
     }
 }

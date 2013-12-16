@@ -6,12 +6,12 @@ Page {
     id: mainPage
 
     function refreshToFrontPage() {
-        linkManager.refresh(false);
+        linkModel.refresh(false);
     }
 
     function setSubreddit(subreddit) {
-        linkManager.subreddit = subreddit;
-        linkManager.refresh(false);
+        linkModel.subreddit = subreddit;
+        linkModel.refresh(false);
     }
 
     tools: ToolBarLayout {
@@ -25,8 +25,8 @@ Page {
         }
         ToolIcon {
             platformIconId: enabled ? "toolbar-refresh" : "toolbar-refresh-dimmed"
-            enabled: !linkManager.busy
-            onClicked: linkManager.refresh(false)
+            enabled: !linkModel.busy
+            onClicked: linkModel.refresh(false)
         }
         ToolIcon {
             platformIconId: "toolbar-search"
@@ -47,10 +47,10 @@ Page {
                 onClicked: dialogManager.createSectionDialog();
             }
             MenuItem {
-                text: "About /r/" + linkManager.subreddit
-                visible: linkManager.subreddit != "" && linkManager.subreddit.toLowerCase() != "all"
+                text: "About /r/" + linkModel.subreddit
+                visible: linkModel.subreddit != "" && linkModel.subreddit.toLowerCase() != "all"
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: linkManager.subreddit});
+                    pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: linkModel.subreddit});
                 }
             }
             MenuItem {
@@ -67,10 +67,10 @@ Page {
     ListView {
         id: linkListView
         anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
-        model: linkManager.model
+        model: linkModel
         delegate: LinkDelegate {
-            showSubreddit: linkManager.subreddit == ""
-                           || linkManager.subreddit.toLowerCase() == "all"
+            showSubreddit: linkModel.subreddit == ""
+                           || linkModel.subreddit.toLowerCase() == "all"
             onClicked: {
                 var p = { link: model, linkVoteManager: linkVoteManager };
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);
@@ -85,14 +85,14 @@ Page {
             Button {
                 id: loadMoreButton
                 anchors.centerIn: parent
-                enabled: !linkManager.busy
+                enabled: !linkModel.busy
                 width: parent.width * 0.75
                 text: "Load More"
-                onClicked: linkManager.refresh(true);
+                onClicked: linkModel.refresh(true);
             }
         }
 
-        EmptyContentLabel { visible: linkListView.count == 0 && !linkManager.busy }
+        EmptyContentLabel { visible: linkListView.count == 0 && !linkModel.busy }
     }
 
     ScrollDecorator { flickableItem: linkListView }
@@ -100,13 +100,13 @@ Page {
     PageHeader {
         id: pageHeader
         anchors { top: parent.top; left: parent.left; right: parent.right }
-        text: linkManager.title
-        busy: linkManager.busy || linkVoteManager.busy
+        text: linkModel.title
+        busy: linkModel.busy || linkVoteManager.busy
         onClicked: linkListView.positionViewAtBeginning()
     }
 
-    LinkManager {
-        id: linkManager
+    LinkModel {
+        id: linkModel
         manager: quickdditManager
         onError: infoBanner.alert(errorString)
     }
@@ -115,14 +115,14 @@ Page {
         id: linkVoteManager
         manager: quickdditManager
         type: VoteManager.Link
-        model: linkManager.model
+        model: linkModel
         onError: infoBanner.alert(errorString);
     }
 
-    SubredditManager {
-        id: subscribedSubredditManager
+    SubredditModel {
+        id: subscribedSubredditModel
         manager: quickdditManager
-        section: SubredditManager.UserAsSubscriberSection
+        section: SubredditModel.UserAsSubscriberSection
         onError: infoBanner.alert(errorString);
     }
 
@@ -139,7 +139,7 @@ Page {
                 __subredditDialogComponent = Qt.createComponent("SubredditDialog.qml");
             var p = {};
             if (quickdditManager.isSignedIn)
-                p.subredditManager = subscribedSubredditManager;
+                p.subredditModel = subscribedSubredditModel;
             var dialog = __subredditDialogComponent.createObject(mainPage, p);
             if (!dialog) {
                 console.log("Error creating object: " + __subredditDialogComponent.errorString());
@@ -149,8 +149,8 @@ Page {
                 if (dialog.browseSubreddits) {
                     pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml"));
                 } else {
-                    linkManager.subreddit = dialog.text;
-                    linkManager.refresh(false);
+                    linkModel.subreddit = dialog.text;
+                    linkModel.refresh(false);
                 }
             })
         }
@@ -179,14 +179,15 @@ Page {
         function createSectionDialog() {
             if (!__sectionDialogComponent)
                 __sectionDialogComponent = Qt.createComponent("SectionDialog.qml");
-            var dialog = __sectionDialogComponent.createObject(mainPage);
+            var p = { selectedIndex: linkModel.section }
+            var dialog = __sectionDialogComponent.createObject(mainPage, p);
             if (!dialog) {
                 console.log("Error creating object: " + __sectionDialogComponent.errorString());
                 return;
             }
             dialog.accepted.connect(function() {
-                linkManager.section =  dialog.selectedIndex;
-                linkManager.refresh(false);
+                linkModel.section =  dialog.selectedIndex;
+                linkModel.refresh(false);
             })
         }
 

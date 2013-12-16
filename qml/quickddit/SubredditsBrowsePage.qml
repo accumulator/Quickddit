@@ -18,15 +18,14 @@ Page {
         }
         ToolIcon {
             platformIconId: "toolbar-refresh"
-            onClicked: subredditManager.refresh(false);
-
+            onClicked: subredditModel.refresh(false);
         }
     }
 
     ListView {
         id: subredditsListView
         anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
-        model: subredditManager.model
+        model: subredditModel
         delegate: SubredditDelegate {}
         footer: Item {
             width: ListView.view.width
@@ -36,14 +35,14 @@ Page {
             Button {
                 id: loadMoreButton
                 anchors.centerIn: parent
-                enabled: !subredditManager.busy
+                enabled: !subredditModel.busy
                 width: parent.width * 0.75
                 text: "Load More"
-                onClicked: subredditManager.refresh(true);
+                onClicked: subredditModel.refresh(true);
             }
         }
 
-        EmptyContentLabel { visible: subredditsListView.count == 0 && !subredditManager.busy }
+        EmptyContentLabel { visible: subredditsListView.count == 0 && !subredditModel.busy }
     }
 
     ScrollDecorator { flickableItem: subredditsListView }
@@ -52,21 +51,21 @@ Page {
         id: pageHeader
         anchors { top: parent.top; left: parent.left; right: parent.right }
         text: {
-            switch (subredditManager.section) {
-            case SubredditManager.PopularSection: return "Popular Subreddits";
-            case SubredditManager.NewSection: return "New Subreddits";
-            case SubredditManager.UserAsSubscriberSection: return "My Subreddits - Subscriber";
-            case SubredditManager.UserAsContributorSection: return "My Subreddits - Approved Submitter";
-            case SubredditManager.UserAsModeratorSection: return "My Subreddits - Moderator";
-            case SubredditManager.SearchSection: return "Search Subreddits: " + subredditManager.query;
+            switch (subredditModel.section) {
+            case SubredditModel.PopularSection: return "Popular Subreddits";
+            case SubredditModel.NewSection: return "New Subreddits";
+            case SubredditModel.UserAsSubscriberSection: return "My Subreddits - Subscriber";
+            case SubredditModel.UserAsContributorSection: return "My Subreddits - Approved Submitter";
+            case SubredditModel.UserAsModeratorSection: return "My Subreddits - Moderator";
+            case SubredditModel.SearchSection: return "Search Subreddits: " + subredditModel.query;
             }
         }
-        busy: subredditManager.busy
+        busy: subredditModel.busy
         onClicked: subredditsListView.positionViewAtBeginning();
     }
 
-    SubredditManager {
-        id: subredditManager
+    SubredditModel {
+        id: subredditModel
         manager: quickdditManager
         onError: infoBanner.alert(errorString);
     }
@@ -79,23 +78,24 @@ Page {
         function createSubredditsSectionDialog() {
             if (!__subredditsSectionDialogComponent)
                 __subredditsSectionDialogComponent = Qt.createComponent("SubredditsSectionDialog.qml");
-            var dialog = __subredditsSectionDialogComponent.createObject(subredditsBrowsePage);
+            var p = { selectedIndex: subredditModel.section }
+            var dialog = __subredditsSectionDialogComponent.createObject(subredditsBrowsePage, p);
             if (!dialog) {
                 console.log("Error creating dialog:" + __subredditsSectionDialogComponent.errorString());
                 return;
             }
             dialog.accepted.connect(function() {
-                subredditManager.section = dialog.selectedIndex;
-                subredditManager.refresh(false);
+                subredditModel.section = dialog.selectedIndex;
+                subredditModel.refresh(false);
             })
         }
     }
 
     Component.onCompleted: {
         if (searchQuery) {
-            subredditManager.section = SubredditManager.SearchSection;
-            subredditManager.query = searchQuery;
+            subredditModel.section = SubredditModel.SearchSection;
+            subredditModel.query = searchQuery;
         }
-        subredditManager.refresh(false);
+        subredditModel.refresh(false);
     }
 }

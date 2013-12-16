@@ -7,7 +7,6 @@ SelectionDialog {
     property bool __isClosing: false
 
     titleText: "Section"
-    selectedIndex: linkManager.section
     model: ListModel {
         ListElement { text: "Hot" }
         ListElement { text: "New" }

@@ -1,11 +1,13 @@
 #include "commentmodel.h"
 
 #include <QtCore/QDateTime>
+#include <QtNetwork/QNetworkReply>
 
 #include "utils.h"
+#include "parser.h"
 
 CommentModel::CommentModel(QObject *parent) :
-    QAbstractListModel(parent)
+    AbstractListModelManager(parent), m_sort(ConfidenceSort), m_reply(0)
 {
     QHash<int, QByteArray> roles;
     roles[FullnameRole] = "fullname";
@@ -63,35 +65,30 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     }
 }
 
-int CommentModel::count() const
+QString CommentModel::permalink() const
 {
-    return m_commentList.count();
+    return m_permalink;
 }
 
-QString CommentModel::lastFullName() const
+void CommentModel::setPermalink(const QString &permalink)
 {
-    Q_ASSERT(!m_commentList.isEmpty());
-    return m_commentList.last().fullname();
+    if (m_permalink != permalink) {
+        m_permalink = permalink;
+        emit permalinkChanged();
+    }
 }
 
-void CommentModel::append(const QList<CommentObject> &commentList)
+CommentModel::SortType CommentModel::sort() const
 {
-    if (commentList.isEmpty())
-        return;
-
-    beginInsertRows(QModelIndex(), m_commentList.count(), m_commentList.count() + commentList.count() - 1);
-    m_commentList.append(commentList);
-    endInsertRows();
+    return m_sort;
 }
 
-void CommentModel::clear()
+void CommentModel::setSort(CommentModel::SortType sort)
 {
-    if (m_commentList.isEmpty())
-        return;
-
-    beginRemoveRows(QModelIndex(), 0, m_commentList.count() - 1);
-    m_commentList.clear();
-    endRemoveRows();
+    if (m_sort != sort) {
+        m_sort = sort;
+        emit sortChanged();
+    }
 }
 
 void CommentModel::changeVote(const QString &fullname, VoteManager::VoteType voteType)
@@ -116,6 +113,33 @@ void CommentModel::changeVote(const QString &fullname, VoteManager::VoteType vot
     }
 }
 
+void CommentModel::refresh(bool refreshOlder)
+{
+    Q_ASSERT(!m_permalink.isEmpty());
+    Q_UNUSED(refreshOlder);
+
+    if (m_reply != 0) {
+        m_reply->disconnect();
+        m_reply->deleteLater();
+        m_reply = 0;
+    }
+
+    if (!m_commentList.isEmpty()) {
+        beginRemoveRows(QModelIndex(), 0, m_commentList.count() - 1);
+        m_commentList.clear();
+        endRemoveRows();
+    }
+
+    QHash<QString, QString> parameters;
+    parameters["sort"] = getSortString(m_sort);
+
+    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
+            SLOT(onNetworkReplyReceived(QNetworkReply*)));
+    manager()->createRedditRequest(QuickdditManager::GET, m_permalink, parameters);
+
+    setBusy(true);
+}
+
 int CommentModel::getParentIndex(int index) const
 {
     int parentDepth = m_commentList.at(index).depth() - 1;
@@ -126,4 +150,47 @@ int CommentModel::getParentIndex(int index) const
 
     qWarning("CommentModel::getParentIndex(): Cannot find parent index");
     return index;
+}
+
+void CommentModel::onNetworkReplyReceived(QNetworkReply *reply)
+{
+    disconnect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
+               this, SLOT(onNetworkReplyReceived(QNetworkReply*)));
+    if (reply != 0) {
+        m_reply = reply;
+        m_reply->setParent(this);
+        connect(m_reply, SIGNAL(finished()), SLOT(onFinished()));
+    } else {
+        setBusy(false);
+    }
+}
+
+void CommentModel::onFinished()
+{
+    if (m_reply->error() == QNetworkReply::NoError) {
+        const QList<CommentObject> comments = Parser::parseCommentList(m_reply->readAll());
+        if (!comments.isEmpty()) {
+            beginInsertRows(QModelIndex(), m_commentList.count(), m_commentList.count() + comments.count() - 1);
+            m_commentList.append(comments);
+            endInsertRows();
+        }
+    } else {
+        emit error(m_reply->errorString());
+    }
+
+    m_reply->deleteLater();
+    m_reply = 0;
+    setBusy(false);
+}
+
+QString CommentModel::getSortString(CommentModel::SortType sort)
+{
+    switch (sort) {
+    default: case ConfidenceSort: return "confidence";
+    case TopSort: return "top";
+    case NewSort: return "new";
+    case HotSort: return "hot";
+    case ControversialSort: return "controversial";
+    case OldSort: return "old";
+    }
 }

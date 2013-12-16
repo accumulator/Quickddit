@@ -7,7 +7,6 @@ SelectionDialog {
     property bool __isClosing: false
 
     titleText: "Sort comments by"
-    selectedIndex: commentManager.sort
     model: ListModel {
         ListElement { text: "Best" }
         ListElement { text: "Top" }

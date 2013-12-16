@@ -27,16 +27,14 @@ HEADERS += \
     src/quickdditmanager.h \
     src/networkmanager.h \
     src/abstractmanager.h \
+    src/abstractlistmodelmanager.h \
     src/parser.h \
-    src/linkmanager.h \
     src/aboutsubredditmanager.h \
     src/appsettings.h \
     src/commentobject.h \
     src/commentmodel.h \
-    src/commentmanager.h \
     src/subredditobject.h \
     src/subredditmodel.h \
-    src/subredditmanager.h \
     src/qmlutils.h \
     src/imgurmanager.h \
     src/votemanager.h
@@ -48,16 +46,14 @@ SOURCES += main.cpp \
     src/quickdditmanager.cpp \
     src/networkmanager.cpp \
     src/abstractmanager.cpp \
+    src/abstractlistmodelmanager.cpp \
     src/parser.cpp \
-    src/linkmanager.cpp \
     src/aboutsubredditmanager.cpp \
     src/appsettings.cpp \
     src/commentobject.cpp \
     src/commentmodel.cpp \
-    src/commentmanager.cpp \
     src/subredditobject.cpp \
     src/subredditmodel.cpp \
-    src/subredditmanager.cpp \
     src/qmlutils.cpp \
     src/imgurmanager.cpp \
     src/votemanager.cpp

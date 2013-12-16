@@ -20,8 +20,8 @@ Page {
         }
         ToolIcon {
             platformIconId: "toolbar-refresh" + (enabled ? "" : "-dimmed")
-            enabled: !commentManager.busy
-            onClicked: commentManager.refresh();
+            enabled: !commentModel.busy
+            onClicked: commentModel.refresh(false);
         }
         ToolIcon {
             platformIconId: enabled ? "toolbar-gallery" : "toolbar-gallery-dimmed"
@@ -77,7 +77,7 @@ Page {
     ListView {
         id: commentListView
         anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
-        model: commentManager.model
+        model: commentModel
         delegate: CommentDelegate {}
         // TODO: Fix header bug
         header: Column {
@@ -220,12 +220,12 @@ Page {
         id: pageHeader
         anchors { top: parent.top; left: parent.left; right: parent.right }
         text: "Comments: " + link.title
-        busy: commentManager.busy || commentVoteManager.busy || linkVoteManager.busy
+        busy: commentModel.busy || commentVoteManager.busy || linkVoteManager.busy
         onClicked: commentListView.positionViewAtBeginning()
     }
 
-    CommentManager {
-        id: commentManager
+    CommentModel {
+        id: commentModel
         manager: quickdditManager
         permalink: link.permalink
         onError: infoBanner.alert(errorString)
@@ -235,7 +235,7 @@ Page {
         id: commentVoteManager
         manager: quickdditManager
         type: VoteManager.Comment
-        model: commentManager.model
+        model: commentModel
         onError: infoBanner.alert(errorString);
     }
 
@@ -258,14 +258,15 @@ Page {
         function createCommentSortDialog() {
             if (!__commentSortDialogComponent)
                 __commentSortDialogComponent = Qt.createComponent("CommentSortDialog.qml");
-            var dialog = __commentSortDialogComponent.createObject(commentPage);
+            var p = { selectedIndex: commentModel.sort }
+            var dialog = __commentSortDialogComponent.createObject(commentPage, p);
             if (!dialog) {
                 console.log("Error creating dialog:" + __commentSortDialogComponent.errorString());
                 return;
             }
             dialog.accepted.connect(function () {
-                commentManager.sort = dialog.selectedIndex;
-                commentManager.refresh();
+                commentModel.sort = dialog.selectedIndex;
+                commentModel.refresh(false);
             })
         }
 
@@ -279,11 +280,11 @@ Page {
                 return;
             }
             dialog.positionToParent.connect(function() {
-                var parentIndex = commentManager.model.getParentIndex(index);
+                var parentIndex = commentModel.getParentIndex(index);
                 commentListView.positionViewAtIndex(parentIndex, ListView.Beginning);
             })
         }
     }
 
-    Component.onCompleted: commentManager.refresh();
+    Component.onCompleted: commentModel.refresh(false);
 }

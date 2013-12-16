@@ -7,7 +7,6 @@ SelectionDialog {
     property bool __isClosing: false
 
     titleText: "Section"
-    selectedIndex: subredditManager.section
     model: ListModel {
         ListElement { text: "Popular Subreddits" }
         ListElement { text: "New Subreddits" }

@@ -7,7 +7,7 @@ Sheet {
     acceptButtonText: "Go"
     rejectButtonText: "Cancel"
 
-    property SubredditManager subredditManager
+    property SubredditModel subredditModel
 
     property alias text: subredditTextField.text
     property bool browseSubreddits: false
@@ -69,7 +69,7 @@ Sheet {
                 top: mainOptionColumn.bottom; left: parent.left; right: parent.right
             }
             height: constant.headerHeight
-            visible: subredditManager ? true : false
+            visible: subredditModel ? true : false
 
             Text {
                 id: headerTitleText
@@ -90,7 +90,7 @@ Sheet {
                     right: parent.right; margins: constant.paddingMedium
                     verticalCenter: parent.verticalCenter
                 }
-                sourceComponent: visible ? (subredditManager.busy ? busyComponent : refreshComponent)
+                sourceComponent: visible ? (subredditModel.busy ? busyComponent : refreshComponent)
                                          : undefined
 
                 Component {
@@ -109,8 +109,8 @@ Sheet {
 
                 MouseArea {
                     anchors.fill: parent
-                    enabled: visible && !subredditManager.busy
-                    onClicked: subredditManager.refresh(false);
+                    enabled: visible && !subredditModel.busy
+                    onClicked: subredditModel.refresh(false);
                 }
             }
 
@@ -127,9 +127,9 @@ Sheet {
                 top: subscribedSubredditHeader.bottom; bottom: parent.bottom
                 left: parent.left; right: parent.right
             }
-            visible: subredditManager ? true : false
+            visible: subredditModel ? true : false
             clip: true
-            model: visible ? subredditManager.model : 0
+            model: visible ? subredditModel : 0
             delegate: AbstractListItem {
                 height: subscribedSubredditText.paintedHeight + 2 * constant.paddingXLarge
 
@@ -154,8 +154,8 @@ Sheet {
 
     Component.onCompleted: {
         open();
-        if (subredditManager && subscribedSubredditListView.count == 0)
-            subredditManager.refresh(false);
+        if (subredditModel && subscribedSubredditListView.count == 0)
+            subredditModel.refresh(false);
     }
     onStatusChanged: {
         if (status === DialogStatus.Closing) __isClosing = true

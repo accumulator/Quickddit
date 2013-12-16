@@ -7,11 +7,8 @@
 #include "src/qmlutils.h"
 #include "src/quickdditmanager.h"
 #include "src/linkmodel.h"
-#include "src/linkmanager.h"
 #include "src/commentmodel.h"
-#include "src/commentmanager.h"
 #include "src/subredditmodel.h"
-#include "src/subredditmanager.h"
 #include "src/aboutsubredditmanager.h"
 #include "src/imgurmanager.h"
 #include "src/votemanager.h"
@@ -26,12 +23,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     qmlRegisterType<AppSettings>("Quickddit", 1, 0, "AppSettings");
     qmlRegisterType<QuickdditManager>("Quickddit", 1, 0, "QuickdditManager");
-    qmlRegisterType<LinkModel>();
-    qmlRegisterType<LinkManager>("Quickddit", 1, 0, "LinkManager");
-    qmlRegisterType<CommentModel>();
-    qmlRegisterType<CommentManager>("Quickddit", 1, 0, "CommentManager");
-    qmlRegisterType<SubredditModel>();
-    qmlRegisterType<SubredditManager>("Quickddit", 1, 0, "SubredditManager");
+    qmlRegisterType<LinkModel>("Quickddit", 1, 0, "LinkModel");
+    qmlRegisterType<CommentModel>("Quickddit", 1, 0, "CommentModel");
+    qmlRegisterType<SubredditModel>("Quickddit", 1, 0, "SubredditModel");
     qmlRegisterType<AboutSubredditManager>("Quickddit", 1, 0, "AboutSubredditManager");
     qmlRegisterType<ImgurManager>("Quickddit", 1, 0, "ImgurManager");
     qmlRegisterType<VoteManager>("Quickddit", 1, 0, "VoteManager");
