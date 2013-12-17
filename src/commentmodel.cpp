@@ -129,6 +129,7 @@ void CommentModel::refresh(bool refreshOlder)
     Q_UNUSED(refreshOlder);
 
     if (m_reply != 0) {
+        qWarning("CommentModel::refresh(): Aborting active network request (Try to avoid!)");
         m_reply->disconnect();
         m_reply->deleteLater();
         m_reply = 0;

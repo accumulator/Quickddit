@@ -80,6 +80,7 @@ void AboutSubredditManager::setSubreddit(const QString &subreddit)
 void AboutSubredditManager::refresh()
 {
     if (m_reply != 0) {
+        qWarning("AboutSubredditManager::refresh(): Aborting active network request (Try to avoid!)");
         m_reply->disconnect();
         m_reply->deleteLater();
         m_reply = 0;
@@ -97,6 +98,8 @@ void AboutSubredditManager::refresh()
 void AboutSubredditManager::subscribeOrUnsubscribe()
 {
     if (m_reply != 0) {
+        qWarning("AboutSubredditManager::subscribeOrUnsubscribe():"
+                 "Aborting active network request (Try to avoid!)");
         m_reply->disconnect();
         m_reply->deleteLater();
         m_reply = 0;

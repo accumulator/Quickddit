@@ -152,6 +152,7 @@ void LinkModel::setSearchTimeRange(LinkModel::SearchTimeRange timeRange)
 void LinkModel::refresh(bool refreshOlder)
 {
     if (m_reply != 0) {
+        qWarning("LinkModel::refresh(): Aborting active network request (Try to avoid!)");
         m_reply->disconnect();
         m_reply->deleteLater();
         m_reply = 0;

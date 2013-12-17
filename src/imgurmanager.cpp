@@ -69,6 +69,7 @@ void ImgurManager::refresh()
     Q_ASSERT(!m_imgurUrl.isEmpty());
 
     if (m_reply != 0) {
+        qWarning("ImgurManager::refresh(): Aborting active network request (Try to avoid!)");
         m_reply->disconnect();
         m_reply->deleteLater();
         m_reply = 0;

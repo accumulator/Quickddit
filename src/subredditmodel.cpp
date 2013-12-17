@@ -85,6 +85,7 @@ void SubredditModel::setQuery(const QString &query)
 void SubredditModel::refresh(bool refreshOlder)
 {
     if (m_reply != 0) {
+        qWarning("SubredditModel::refresh(): Aborting active network request (Try to avoid!)");
         m_reply->disconnect();
         m_reply->deleteLater();
         m_reply = 0;

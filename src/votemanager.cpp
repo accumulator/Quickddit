@@ -33,6 +33,7 @@ void VoteManager::setModel(QObject *model)
 void VoteManager::vote(const QString &fullname, VoteManager::VoteType voteType)
 {
     if (m_reply != 0) {
+        qWarning("VoteManager::vote(): Aborting active network request (Try to avoid!)");
         m_reply->disconnect();
         m_reply->deleteLater();
         m_reply = 0;

@@ -108,7 +108,7 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
     Q_ASSERT(!m_state.isEmpty());
 
     if (m_accessTokenReply != 0) {
-        qWarning("QuickdditManager::getAccessToken(): m_accessTokenReply is not 0");
+        qWarning("QuickdditManager::getAccessToken(): Aborting active network request (Try to avoid!)");
         m_accessTokenReply->disconnect();
         m_accessTokenReply->deleteLater();
         m_accessTokenReply = 0;
@@ -143,7 +143,7 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
 void QuickdditManager::refreshAccessToken()
 {
     if (m_accessTokenReply != 0) {
-        qWarning("QuickdditManager::refreshAccessToken(): m_accessTokenReply is not 0");
+        qWarning("QuickdditManager::refreshAccessToken(): Aborting active network request (Try to avoid!)");
         m_accessTokenReply->disconnect();
         m_accessTokenReply->deleteLater();
         m_accessTokenReply = 0;
