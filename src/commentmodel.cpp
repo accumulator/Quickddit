@@ -21,6 +21,16 @@ CommentModel::CommentModel(QObject *parent) :
     setRoleNames(roles);
 }
 
+void CommentModel::classBegin()
+{
+}
+
+void CommentModel::componentComplete()
+{
+    Q_ASSERT(!m_permalink.isEmpty());
+    refresh(false);
+}
+
 int CommentModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)

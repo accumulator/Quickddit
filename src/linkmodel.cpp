@@ -30,6 +30,15 @@ LinkModel::LinkModel(QObject *parent) :
     setRoleNames(roles);
 }
 
+void LinkModel::classBegin()
+{
+}
+
+void LinkModel::componentComplete()
+{
+    refresh(false);
+}
+
 int LinkModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)

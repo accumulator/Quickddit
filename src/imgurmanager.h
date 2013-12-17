@@ -2,12 +2,14 @@
 #define IMGURMANAGER_H
 
 #include <QtCore/QStringList>
+#include <QtDeclarative/QDeclarativeParserStatus>
 
 #include "abstractmanager.h"
 
-class ImgurManager : public AbstractManager
+class ImgurManager : public AbstractManager, public QDeclarativeParserStatus
 {
     Q_OBJECT
+    Q_INTERFACES(QDeclarativeParserStatus)
     /**
      * (Read only)
      * The direct image url for the image
@@ -25,17 +27,10 @@ class ImgurManager : public AbstractManager
      * Have no effect if the link is not an album
      */
     Q_PROPERTY(int selectedIndex READ selectedIndex WRITE setSelectedIndex NOTIFY selectedIndexChanged)
-public:
-    explicit ImgurManager(QObject *parent = 0);
-
-    QUrl imageUrl() const;
-    QStringList thumbnailUrls() const;
-
-    int selectedIndex() const;
-    void setSelectedIndex(int index);
-
     /**
-     * Get the image url and thumbnail url for the imgurUrl
+     * The Imgur url you want to get the images from
+     * Must be set before calling refresh()
+     *
      * Supported Imgur url formats:
      * - http://imgur.com/xxxxx (image)
      * - http://imgur.com/a/xxxxx (album)
@@ -45,12 +40,29 @@ public:
      * - http://imgur.com/gallery/xxxxx (because I don't know it is an album or image)
      * - any other url format
      */
-    Q_INVOKABLE void getImageUrl(const QString &imgurUrl);
+    Q_PROPERTY(QString imgurUrl READ imgurUrl WRITE setImgurUrl NOTIFY imgurUrlChanged)
+public:
+    explicit ImgurManager(QObject *parent = 0);
+
+    void classBegin();
+    void componentComplete();
+
+    QUrl imageUrl() const;
+    QStringList thumbnailUrls() const;
+
+    int selectedIndex() const;
+    void setSelectedIndex(int index);
+
+    QString imgurUrl() const;
+    void setImgurUrl(const QString &imgurUrl);
+
+    Q_INVOKABLE void refresh();
 
 signals:
     void imageUrlChanged();
     void thumbnailUrlsChanged();
     void selectedIndexChanged();
+    void imgurUrlChanged();
     void error(const QString &errorString);
 
 private slots:
@@ -60,6 +72,7 @@ private:
     QUrl m_imageUrl;
     QStringList m_thumbnailUrls;
     int m_selectedIndex;
+    QString m_imgurUrl;
 
     QNetworkReply *m_reply;
     QList< QPair<QString,QString> > m_imageAndThumbUrlList;

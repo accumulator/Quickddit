@@ -46,6 +46,4 @@ PageStackWindow {
         settings: appSettings
         onAccessTokenFailure: infoBanner.alert(errorString);
     }
-
-    Component.onCompleted: mainPage.refreshToFrontPage();
 }

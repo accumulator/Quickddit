@@ -5,7 +5,7 @@ import Quickddit 1.0
 Page {
     id: aboutSubredditPage
 
-    property string subreddit
+    property alias subreddit: aboutSubredditManager.subreddit
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -14,7 +14,7 @@ Page {
         }
         ToolButton {
             text: aboutSubredditManager.isSubscribed ? "Unsubscribe" : "Subscribe"
-            enabled: !aboutSubredditManager.busy && aboutSubredditManager.displayName
+            enabled: !aboutSubredditManager.busy && aboutSubredditManager.isValid
             visible: quickdditManager.isSignedIn
             platformStyle: ToolButtonStyle { disabledBackground: "" } // prevent missing image warning text
             onClicked: aboutSubredditManager.subscribeOrUnsubscribe();
@@ -32,7 +32,7 @@ Page {
             anchors { left: parent.left; right: parent.right; top: parent.top; margins: constant.paddingMedium }
             height: childrenRect.height
             spacing: constant.paddingMedium
-            visible: aboutSubredditManager.displayName
+            visible: aboutSubredditManager.isValid
 
             Item {
                 anchors { left: parent.left; right: parent.right }
@@ -57,7 +57,7 @@ Page {
                     font.pixelSize: constant.fontSizeLarge
                     color: constant.colorLight
                     font.bold: true
-                    text: aboutSubredditManager.displayName
+                    text: aboutSubredditManager.subreddit
                 }
             }
 
@@ -158,13 +158,11 @@ Page {
         manager: quickdditManager
         onSubscribeSuccess: {
             if (isSubscribed) {
-                infoBanner.alert(qsTr("You have subscribed to %1").arg(displayName))
+                infoBanner.alert(qsTr("You have subscribed to %1").arg(url))
             } else {
-                infoBanner.alert(qsTr("You have unsubscribed from %1").arg(displayName))
+                infoBanner.alert(qsTr("You have unsubscribed from %1").arg(url))
             }
         }
         onError: infoBanner.alert(errorString)
     }
-
-    Component.onCompleted: aboutSubredditManager.refresh(aboutSubredditPage.subreddit);
 }

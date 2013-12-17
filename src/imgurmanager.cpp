@@ -13,6 +13,16 @@ ImgurManager::ImgurManager(QObject *parent) :
 {
 }
 
+void ImgurManager::classBegin()
+{
+}
+
+void ImgurManager::componentComplete()
+{
+    if (!m_imgurUrl.isEmpty())
+        refresh();
+}
+
 QUrl ImgurManager::imageUrl() const
 {
     return m_imageUrl;
@@ -41,8 +51,23 @@ void ImgurManager::setSelectedIndex(int index)
     }
 }
 
-void ImgurManager::getImageUrl(const QString &imgurUrl)
+QString ImgurManager::imgurUrl() const
 {
+    return m_imgurUrl;
+}
+
+void ImgurManager::setImgurUrl(const QString &imgurUrl)
+{
+    if (m_imgurUrl != imgurUrl) {
+        m_imgurUrl = imgurUrl;
+        emit imgurUrlChanged();
+    }
+}
+
+void ImgurManager::refresh()
+{
+    Q_ASSERT(!m_imgurUrl.isEmpty());
+
     if (m_reply != 0) {
         m_reply->disconnect();
         m_reply->deleteLater();
@@ -51,7 +76,7 @@ void ImgurManager::getImageUrl(const QString &imgurUrl)
 
     QString requestUrl = "https://api.imgur.com/3";
 
-    QString id = imgurUrl.mid(imgurUrl.indexOf("imgur.com/") + 10);
+    QString id = m_imgurUrl.mid(m_imgurUrl.indexOf("imgur.com/") + 10);
     if (id.startsWith("a/")) {
         id.remove(0, 2);
         if (id.contains('#')) {
@@ -65,7 +90,7 @@ void ImgurManager::getImageUrl(const QString &imgurUrl)
             id.remove(id.indexOf('#'), id.length() - id.indexOf('#'));
         requestUrl += "/image/" + id;
     } else {
-        emit error("Unable to get Imgur ID from the url: " + imgurUrl);
+        emit error("Unable to get Imgur ID from the url: " + m_imgurUrl);
         return;
     }
 

@@ -5,7 +5,7 @@ import Quickddit 1.0
 Page {
     id: subredditsBrowsePage
 
-    property string searchQuery
+    property alias searchQuery: subredditModel.query
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -67,6 +67,7 @@ Page {
     SubredditModel {
         id: subredditModel
         manager: quickdditManager
+        section: searchQuery ? SubredditModel.SearchSection : SubredditModel.PopularSection
         onError: infoBanner.alert(errorString);
     }
 
@@ -89,13 +90,5 @@ Page {
                 subredditModel.refresh(false);
             })
         }
-    }
-
-    Component.onCompleted: {
-        if (searchQuery) {
-            subredditModel.section = SubredditModel.SearchSection;
-            subredditModel.query = searchQuery;
-        }
-        subredditModel.refresh(false);
     }
 }

@@ -1,13 +1,16 @@
 #ifndef COMMENTMODEL_H
 #define COMMENTMODEL_H
 
+#include <QtDeclarative/QDeclarativeParserStatus>
+
 #include "abstractlistmodelmanager.h"
 #include "commentobject.h"
 #include "votemanager.h"
 
-class CommentModel : public AbstractListModelManager
+class CommentModel : public AbstractListModelManager, public QDeclarativeParserStatus
 {
     Q_OBJECT
+    Q_INTERFACES(QDeclarativeParserStatus)
     Q_ENUMS(SortType)
     Q_PROPERTY(QString permalink READ permalink WRITE setPermalink NOTIFY permalinkChanged)
     Q_PROPERTY(SortType sort READ sort WRITE setSort NOTIFY sortChanged)
@@ -33,6 +36,9 @@ public:
     };
 
     explicit CommentModel(QObject *parent = 0);
+
+    void classBegin();
+    void componentComplete();
 
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;

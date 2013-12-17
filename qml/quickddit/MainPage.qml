@@ -119,13 +119,6 @@ Page {
         onError: infoBanner.alert(errorString);
     }
 
-    SubredditModel {
-        id: subscribedSubredditModel
-        manager: quickdditManager
-        section: SubredditModel.UserAsSubscriberSection
-        onError: infoBanner.alert(errorString);
-    }
-
     QtObject {
         id: dialogManager
 
@@ -134,12 +127,24 @@ Page {
         property Component __sectionDialogComponent: null
         property Component __linkDialogComponent: null
 
+        property Component __subredditDialogModelComponent: Component {
+            SubredditModel {
+                manager: quickdditManager
+                section: SubredditModel.UserAsSubscriberSection
+                onError: infoBanner.alert(errorString);
+            }
+        }
+        property QtObject __subredditDialogModel
+
         function createSubredditDialog() {
             if (!__subredditDialogComponent)
                 __subredditDialogComponent = Qt.createComponent("SubredditDialog.qml");
             var p = {};
-            if (quickdditManager.isSignedIn)
-                p.subredditModel = subscribedSubredditModel;
+            if (quickdditManager.isSignedIn) {
+                if (!__subredditDialogModel)
+                    __subredditDialogModel = __subredditDialogModelComponent.createObject(mainPage);
+                p.subredditModel = __subredditDialogModel;
+            }
             var dialog = __subredditDialogComponent.createObject(mainPage, p);
             if (!dialog) {
                 console.log("Error creating object: " + __subredditDialogComponent.errorString());

@@ -152,11 +152,7 @@ Sheet {
         }
     }
 
-    Component.onCompleted: {
-        open();
-        if (subredditModel && subscribedSubredditListView.count == 0)
-            subredditModel.refresh(false);
-    }
+    Component.onCompleted: open();
     onStatusChanged: {
         if (status === DialogStatus.Closing) __isClosing = true
         else if (status === DialogStatus.Closed && __isClosing) subredditDialog.destroy(250)

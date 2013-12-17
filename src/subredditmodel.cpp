@@ -21,6 +21,15 @@ SubredditModel::SubredditModel(QObject *parent) :
     setRoleNames(roles);
 }
 
+void SubredditModel::classBegin()
+{
+}
+
+void SubredditModel::componentComplete()
+{
+    refresh(false);
+}
+
 int SubredditModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)

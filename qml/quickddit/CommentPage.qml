@@ -285,6 +285,4 @@ Page {
             })
         }
     }
-
-    Component.onCompleted: commentModel.refresh(false);
 }

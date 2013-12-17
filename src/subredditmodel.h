@@ -1,12 +1,15 @@
 #ifndef SUBREDDITMODEL_H
 #define SUBREDDITMODEL_H
 
+#include <QtDeclarative/QDeclarativeParserStatus>
+
 #include "abstractlistmodelmanager.h"
 #include "subredditobject.h"
 
-class SubredditModel : public AbstractListModelManager
+class SubredditModel : public AbstractListModelManager, public QDeclarativeParserStatus
 {
     Q_OBJECT
+    Q_INTERFACES(QDeclarativeParserStatus)
     Q_ENUMS(Section)
     Q_PROPERTY(Section section READ section WRITE setSection NOTIFY sectionChanged)
     Q_PROPERTY(QString query READ query WRITE setQuery NOTIFY queryChanged)
@@ -33,6 +36,9 @@ public:
     };
 
     explicit SubredditModel(QObject *parent = 0);
+
+    void classBegin();
+    void componentComplete();
 
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;

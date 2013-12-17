@@ -1,13 +1,16 @@
 #ifndef LINKMODEL_H
 #define LINKMODEL_H
 
+#include <QtDeclarative/QDeclarativeParserStatus>
+
 #include "abstractlistmodelmanager.h"
 #include "linkobject.h"
 #include "votemanager.h"
 
-class LinkModel : public AbstractListModelManager
+class LinkModel : public AbstractListModelManager, public QDeclarativeParserStatus
 {
     Q_OBJECT
+    Q_INTERFACES(QDeclarativeParserStatus)
     Q_ENUMS(Section)
     Q_ENUMS(SearchSortType)
     Q_ENUMS(SearchTimeRange)
@@ -67,6 +70,9 @@ public:
     };
 
     explicit LinkModel(QObject *parent = 0);
+
+    void classBegin();
+    void componentComplete();
 
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;

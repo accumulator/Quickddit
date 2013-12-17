@@ -9,9 +9,19 @@ AboutSubredditManager::AboutSubredditManager(QObject *parent) :
 {
 }
 
-QString AboutSubredditManager::displayName() const
+void AboutSubredditManager::classBegin()
 {
-    return m_subredditObject.displayName();
+}
+
+void AboutSubredditManager::componentComplete()
+{
+    Q_ASSERT(!m_subreddit.isEmpty());
+    refresh();
+}
+
+bool AboutSubredditManager::isValid() const
+{
+    return !m_subredditObject.fullname().isEmpty();
 }
 
 QString AboutSubredditManager::url() const
@@ -54,7 +64,20 @@ bool AboutSubredditManager::isSubscribed() const
     return m_subredditObject.isSubscribed();
 }
 
-void AboutSubredditManager::refresh(const QString &subreddit)
+QString AboutSubredditManager::subreddit() const
+{
+    return m_subreddit;
+}
+
+void AboutSubredditManager::setSubreddit(const QString &subreddit)
+{
+    if (m_subreddit != subreddit) {
+        m_subreddit = subreddit;
+        emit subredditChanged();
+    }
+}
+
+void AboutSubredditManager::refresh()
 {
     if (m_reply != 0) {
         m_reply->disconnect();
@@ -62,7 +85,7 @@ void AboutSubredditManager::refresh(const QString &subreddit)
         m_reply = 0;
     }
 
-    QString relativeUrl = "/r/" + subreddit + "/about";
+    QString relativeUrl = "/r/" + m_subreddit + "/about";
 
     connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
             SLOT(onNetworkReplyReceived(QNetworkReply*)));
@@ -110,6 +133,7 @@ void AboutSubredditManager::onFinished()
 {
     if (m_reply->error() == QNetworkReply::NoError) {
         m_subredditObject = Parser::parseSubreddit(m_reply->readAll());
+        setSubreddit(m_subredditObject.displayName());
         emit dataChanged();
     } else {
         emit error(m_reply->errorString());

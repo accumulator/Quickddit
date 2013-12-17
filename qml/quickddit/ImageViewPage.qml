@@ -5,8 +5,8 @@ import Quickddit 1.0
 Page {
     id: imageViewPage
 
-    property string imageUrl
-    property string imgurUrl
+    property alias imageUrl: imageItem.source
+    property alias imgurUrl: imgurManager.imgurUrl
 
     tools: ToolBarLayout {
 
@@ -57,7 +57,6 @@ Page {
                 fillMode: Image.PreserveAspectFit
                 // pause the animation when app is in background
                 paused: imageViewPage.status != PageStatus.Active || !platformWindow.active
-                source: imgurManager.imageUrl
 
                 onScaleChanged: {
                     if ((width * scale) > flickable.width) {
@@ -211,10 +210,10 @@ Page {
         onError: infoBanner.alert(errorString);
     }
 
-    Component.onCompleted: {
-        if (imgurUrl)
-            imgurManager.getImageUrl(imgurUrl);
-        else if (imageUrl)
-            imageItem.source = imageUrl;
+    Binding {
+        target: imageItem
+        property: "source"
+        value: imgurManager.imageUrl
+        when: imageViewPage.imgurUrl
     }
 }

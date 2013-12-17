@@ -112,6 +112,4 @@ Page {
             })
         }
     }
-
-    Component.onCompleted: searchModel.refresh(false);
 }
