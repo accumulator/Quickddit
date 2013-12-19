@@ -57,6 +57,7 @@ public:
 signals:
     void permalinkChanged();
     void sortChanged();
+    void commentLoaded();
 
 private slots:
     void onNetworkReplyReceived(QNetworkReply *reply);

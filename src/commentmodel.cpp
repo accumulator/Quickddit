@@ -192,6 +192,7 @@ void CommentModel::onFinished()
     m_reply->deleteLater();
     m_reply = 0;
     setBusy(false);
+    emit commentLoaded();
 }
 
 QString CommentModel::getSortString(CommentModel::SortType sort)

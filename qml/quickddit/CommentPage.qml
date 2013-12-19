@@ -76,14 +76,22 @@ Page {
 
     ListView {
         id: commentListView
+
+        property Item headerBodyWrapper: null
+
         anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
         model: commentModel
         delegate: CommentDelegate {}
-        // TODO: Fix header bug
         header: Column {
             width: ListView.view.width
             height: childrenRect.height
             spacing: constant.paddingMedium
+
+            // dummy item for top spacing
+            Item {
+                anchors { left: parent.left; right: parent.right }
+                height: 1
+            }
 
             Item {
                 id: titleWrapper
@@ -181,9 +189,9 @@ Page {
             Column {
                 id: bodyWrapper
                 anchors { left: parent.left; right: parent.right }
-                height: childrenRect.height
+                height: visible ? childrenRect.height : 0
                 spacing: constant.paddingMedium
-                visible: link.text != ""
+                visible: false
 
                 Rectangle {
                     anchors { left: parent.left; right: parent.right }
@@ -204,6 +212,8 @@ Page {
                         Qt.openUrlExternally(link);
                     }
                 }
+
+                Component.onCompleted: commentListView.headerBodyWrapper = bodyWrapper;
             }
 
             Rectangle {
@@ -229,6 +239,12 @@ Page {
         manager: quickdditManager
         permalink: link.permalink
         onError: infoBanner.alert(errorString)
+        onCommentLoaded: {
+            if (link.text) {
+                commentListView.headerBodyWrapper.visible = true;
+                commentListView.positionViewAtBeginning();
+            }
+        }
     }
 
     VoteManager {
