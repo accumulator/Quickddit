@@ -1,3 +1,16 @@
+quickddit (0.1.0) unstable; urgency=low
+  * NSFW filtering now follow user reddit settings
+  * Add sort and time range option when searching for posts
+  * Add vote option for posts and comments
+  * Change the background color of count bubble to indicate it is upvoted/downvote by user
+  * Add subscribe and unsubscribe option in about subreddit page
+  * Show a text in about subreddit page to indicate whether you are subscribed or not subscribed
+    to the subreddit
+  * Fix GIF fetched from Imgur API is not animated
+  * Fix text stacking bug in comment page
+
+ -- Dickson <dicksonleong8@gmail.com>  Thu, 19 Dec 2013 16:04:55 +0800
+
 quickddit (0.0.3) unstable; urgency=low
   * Add comment dialog
   * Add support for Imgur url with fragment

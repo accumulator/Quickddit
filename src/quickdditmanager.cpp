@@ -13,7 +13,7 @@
 #define REDDIT_REDIRECT_URL ""
 #endif
 
-#define REDDIT_OAUTH_SCOPE "read,mysubreddits,subscribe,vote"
+#define REDDIT_OAUTH_SCOPE "read,mysubreddits,subscribe,vote,submit,edit"
 
 QuickdditManager::QuickdditManager(QObject *parent) :
     QObject(parent), m_netManager(new NetworkManager(this)), m_settings(0),
