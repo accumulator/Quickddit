@@ -1,16 +1,13 @@
 #ifndef LINKMODEL_H
 #define LINKMODEL_H
 
-#include <QtDeclarative/QDeclarativeParserStatus>
-
 #include "abstractlistmodelmanager.h"
 #include "linkobject.h"
 #include "votemanager.h"
 
-class LinkModel : public AbstractListModelManager, public QDeclarativeParserStatus
+class LinkModel : public AbstractListModelManager
 {
     Q_OBJECT
-    Q_INTERFACES(QDeclarativeParserStatus)
     Q_ENUMS(Section)
     Q_ENUMS(SearchSortType)
     Q_ENUMS(SearchTimeRange)
@@ -97,6 +94,9 @@ public:
     void changeVote(const QString &fullname, VoteManager::VoteType voteType);
 
     void refresh(bool refreshOlder);
+
+protected:
+    QHash<int, QByteArray> customRoleNames() const;
 
 signals:
     void titleChanged();

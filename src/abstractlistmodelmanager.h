@@ -2,12 +2,14 @@
 #define ABSTRACTLISTMODELMANAGER_H
 
 #include <QtCore/QAbstractListModel>
+#include <QtDeclarative/QDeclarativeParserStatus>
 
 #include "quickdditmanager.h"
 
-class AbstractListModelManager : public QAbstractListModel
+class AbstractListModelManager : public QAbstractListModel, public QDeclarativeParserStatus
 {
     Q_OBJECT
+    Q_INTERFACES(QDeclarativeParserStatus)
     Q_PROPERTY(bool busy READ isBusy NOTIFY busyChanged)
     Q_PROPERTY(QuickdditManager* manager READ manager WRITE setManager)
 public:
@@ -22,6 +24,7 @@ public:
 
 protected:
     void setBusy(bool busy);
+    virtual QHash<int, QByteArray> customRoleNames() const = 0;
 
 signals:
     void busyChanged();

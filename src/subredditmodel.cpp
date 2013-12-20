@@ -8,17 +8,7 @@
 SubredditModel::SubredditModel(QObject *parent) :
     AbstractListModelManager(parent), m_section(PopularSection), m_reply(0)
 {
-    QHash<int, QByteArray> roles;
-    roles[FullnameRole] = "fullname";
-    roles[DisplayNameRole] = "displayName";
-    roles[UrlRole] = "url";
-    roles[HeaderImageUrlRole] = "headerImageUrl";
-    roles[ShortDescriptionRole] = "shortDescription";
-    roles[LongDescriptionRole] = "longDescription";
-    roles[SubscribersRole] = "subscribers";
-    roles[ActiveUsersRole] = "activeUsers";
-    roles[IsNSFWRole]= "isNSFW";
-    setRoleNames(roles);
+    setRoleNames(customRoleNames());
 }
 
 void SubredditModel::classBegin()
@@ -138,6 +128,21 @@ void SubredditModel::refresh(bool refreshOlder)
     manager()->createRedditRequest(QuickdditManager::GET, relativeUrl, parameters, oauth);
 
     setBusy(true);
+}
+
+QHash<int, QByteArray> SubredditModel::customRoleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[FullnameRole] = "fullname";
+    roles[DisplayNameRole] = "displayName";
+    roles[UrlRole] = "url";
+    roles[HeaderImageUrlRole] = "headerImageUrl";
+    roles[ShortDescriptionRole] = "shortDescription";
+    roles[LongDescriptionRole] = "longDescription";
+    roles[SubscribersRole] = "subscribers";
+    roles[ActiveUsersRole] = "activeUsers";
+    roles[IsNSFWRole]= "isNSFW";
+    return roles;
 }
 
 void SubredditModel::onNetworkReplyReceived(QNetworkReply *reply)

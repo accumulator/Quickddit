@@ -1,16 +1,13 @@
 #ifndef COMMENTMODEL_H
 #define COMMENTMODEL_H
 
-#include <QtDeclarative/QDeclarativeParserStatus>
-
 #include "abstractlistmodelmanager.h"
 #include "commentobject.h"
 #include "votemanager.h"
 
-class CommentModel : public AbstractListModelManager, public QDeclarativeParserStatus
+class CommentModel : public AbstractListModelManager
 {
     Q_OBJECT
-    Q_INTERFACES(QDeclarativeParserStatus)
     Q_ENUMS(SortType)
     Q_PROPERTY(QString permalink READ permalink WRITE setPermalink NOTIFY permalinkChanged)
     Q_PROPERTY(SortType sort READ sort WRITE setSort NOTIFY sortChanged)
@@ -53,6 +50,9 @@ public:
 
     void refresh(bool refreshOlder);
     Q_INVOKABLE int getParentIndex(int index) const;
+
+protected:
+    QHash<int, QByteArray> customRoleNames() const;
 
 signals:
     void permalinkChanged();

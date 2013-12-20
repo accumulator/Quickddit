@@ -11,23 +11,7 @@ LinkModel::LinkModel(QObject *parent) :
     AbstractListModelManager(parent), m_section(HotSection), m_searchSort(RelevanceSort),
     m_searchTimeRange(AllTime), m_reply(0)
 {
-    QHash<int, QByteArray> roles;
-    roles[FullnameRole] = "fullname";
-    roles[AuthorRole] = "author";
-    roles[CreatedRole] = "created";
-    roles[SubredditRole] = "subreddit";
-    roles[ScoreRole] = "score";
-    roles[LikesRole] = "likes";
-    roles[CommentsCountRole] = "commentsCount";
-    roles[TitleRole] = "title";
-    roles[DomainRole] = "domain";
-    roles[ThumbnailUrlRole] = "thumbnailUrl";
-    roles[TextRole] = "text";
-    roles[PermalinkRole] = "permalink";
-    roles[UrlRole] = "url";
-    roles[IsStickyRole] = "isSticky";
-    roles[IsNSFWRole] = "isNSFW";
-    setRoleNames(roles);
+    setRoleNames(customRoleNames());
 }
 
 void LinkModel::classBegin()
@@ -191,6 +175,27 @@ void LinkModel::refresh(bool refreshOlder)
     m_title = relativeUrl;
     emit titleChanged();
     setBusy(true);
+}
+
+QHash<int, QByteArray> LinkModel::customRoleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[FullnameRole] = "fullname";
+    roles[AuthorRole] = "author";
+    roles[CreatedRole] = "created";
+    roles[SubredditRole] = "subreddit";
+    roles[ScoreRole] = "score";
+    roles[LikesRole] = "likes";
+    roles[CommentsCountRole] = "commentsCount";
+    roles[TitleRole] = "title";
+    roles[DomainRole] = "domain";
+    roles[ThumbnailUrlRole] = "thumbnailUrl";
+    roles[TextRole] = "text";
+    roles[PermalinkRole] = "permalink";
+    roles[UrlRole] = "url";
+    roles[IsStickyRole] = "isSticky";
+    roles[IsNSFWRole] = "isNSFW";
+    return roles;
 }
 
 void LinkModel::changeVote(const QString &fullname, VoteManager::VoteType voteType)

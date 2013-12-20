@@ -9,16 +9,7 @@
 CommentModel::CommentModel(QObject *parent) :
     AbstractListModelManager(parent), m_sort(ConfidenceSort), m_reply(0)
 {
-    QHash<int, QByteArray> roles;
-    roles[FullnameRole] = "fullname";
-    roles[AuthorRole] = "author";
-    roles[BodyRole] = "body";
-    roles[ScoreRole] = "score";
-    roles[LikesRole] = "likes";
-    roles[CreatedRole] = "created";
-    roles[DepthRole] = "depth";
-    roles[IsScoreHiddenRole] = "isScoreHidden";
-    setRoleNames(roles);
+    setRoleNames(customRoleNames());
 }
 
 void CommentModel::classBegin()
@@ -161,6 +152,20 @@ int CommentModel::getParentIndex(int index) const
 
     qWarning("CommentModel::getParentIndex(): Cannot find parent index");
     return index;
+}
+
+QHash<int, QByteArray> CommentModel::customRoleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[FullnameRole] = "fullname";
+    roles[AuthorRole] = "author";
+    roles[BodyRole] = "body";
+    roles[ScoreRole] = "score";
+    roles[LikesRole] = "likes";
+    roles[CreatedRole] = "created";
+    roles[DepthRole] = "depth";
+    roles[IsScoreHiddenRole] = "isScoreHidden";
+    return roles;
 }
 
 void CommentModel::onNetworkReplyReceived(QNetworkReply *reply)

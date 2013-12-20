@@ -115,7 +115,8 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
     }
 
     // check state
-    if (m_state != signedInUrl.queryItemValue("state")) {
+    QString state = signedInUrl.queryItemValue("state");
+    if (m_state != state) {
         qCritical("QuickdditManager::getAccessToken(): (OAuth2) state is not matched");
         emit accessTokenFailure("Error: state not match");
         return;
@@ -126,17 +127,17 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
     QUrl accessTokenUrl("https://ssl.reddit.com/api/v1/access_token");
 
     // generate body
-    QUrl accessTokenBody("http://dummy.com");
-    accessTokenBody.addQueryItem("code", signedInUrl.queryItemValue("code"));
-    accessTokenBody.addQueryItem("grant_type", "authorization_code");
-    accessTokenBody.addQueryItem("redirect_uri", REDDIT_REDIRECT_URL);
+    QUrl bodyQuery("http://dummy.com");
+    bodyQuery.addQueryItem("code", signedInUrl.queryItemValue("code"));
+    bodyQuery.addQueryItem("grant_type", "authorization_code");
+    bodyQuery.addQueryItem("redirect_uri", REDDIT_REDIRECT_URL);
+    const QByteArray body = bodyQuery.encodedQuery();
 
     // generate basic auth header
     QByteArray authHeader = "Basic ";
     authHeader += (QByteArray(REDDIT_CLIENT_ID) + ":" + QByteArray(REDDIT_CLIENT_SECRET)).toBase64();
 
-    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, accessTokenBody.encodedQuery(),
-                                                         authHeader);
+    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, body, authHeader);
     connect(m_accessTokenReply, SIGNAL(finished()), SLOT(onAccessTokenRequestFinished()));
 }
 
@@ -155,17 +156,17 @@ void QuickdditManager::refreshAccessToken()
     QUrl accessTokenUrl("https://ssl.reddit.com/api/v1/access_token");
 
     // generate body
-    QUrl accessTokenBody("http://dummy.com");
-    accessTokenBody.addQueryItem("refresh_token", refreshToken);
-    accessTokenBody.addQueryItem("grant_type", "refresh_token");
-    accessTokenBody.addQueryItem("redirect_uri", REDDIT_REDIRECT_URL);
+    QUrl bodyQuery("http://dummy.com");
+    bodyQuery.addQueryItem("refresh_token", refreshToken);
+    bodyQuery.addQueryItem("grant_type", "refresh_token");
+    bodyQuery.addQueryItem("redirect_uri", REDDIT_REDIRECT_URL);
+    const QByteArray body = bodyQuery.encodedQuery();
 
     // generate basic auth header
     QByteArray authHeader = "Basic ";
     authHeader += (QByteArray(REDDIT_CLIENT_ID) + ":" + QByteArray(REDDIT_CLIENT_SECRET)).toBase64();
 
-    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, accessTokenBody.encodedQuery(),
-                                                         authHeader);
+    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, body, authHeader);
     connect(m_accessTokenReply, SIGNAL(finished()), SLOT(onAccessTokenRequestFinished()));
 }
 
@@ -192,7 +193,7 @@ void QuickdditManager::onAccessTokenRequestFinished()
         if (!accessToken.isEmpty() && !refreshToken.isEmpty()) {
             m_accessToken = accessToken;
             m_accessTokenExpiry.start();
-            m_settings->setRefreshToken(refreshToken.toAscii());
+            m_settings->setRefreshToken(refreshToken.toLatin1());
             emit accessTokenSuccess();
             emit signedInChanged();
         } else {
