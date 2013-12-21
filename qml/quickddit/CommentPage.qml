@@ -14,9 +14,8 @@ Page {
             onClicked: pageStack.pop()
         }
         ToolIcon {
-            platformIconId: "toolbar-callhistory" + (enabled ? "" : "-dimmed")
-            enabled: !linkVoteManager.busy
-            onClicked: dialogManager.createVoteDialog();
+            platformIconId: "toolbar-list"
+            onClicked: dialogManager.createCommentSortDialog();
         }
         ToolIcon {
             platformIconId: "toolbar-refresh" + (enabled ? "" : "-dimmed")
@@ -24,24 +23,8 @@ Page {
             onClicked: commentModel.refresh(false);
         }
         ToolIcon {
-            platformIconId: enabled ? "toolbar-gallery" : "toolbar-gallery-dimmed"
-            enabled: {
-                if (!link) return false;
-                if (link.domain == "i.imgur.com" || link.domain == "imgur.com")
-                    return true;
-                if (/^https?:\/\/.+\.(jpe?g|png|gif)/i.test(link.url))
-                    return true;
-                else
-                    return false;
-            }
-            onClicked: {
-                var p = {};
-                if (link.domain == "imgur.com")
-                    p.imgurUrl = link.url;
-                else
-                    p.imageUrl = link.url;
-                pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), p);
-            }
+            platformIconId: "toolbar-share"
+            onClicked: QMLUtils.shareUrl(QMLUtils.getRedditShortUrl(link.fullname), link.title);
         }
         ToolIcon {
             platformIconId: "toolbar-view-menu"
@@ -53,19 +36,6 @@ Page {
         id: menu
 
         MenuLayout {
-            MenuItem {
-                text: "Sort"
-                onClicked: dialogManager.createCommentSortDialog();
-            }
-            MenuItem {
-                text: "Share"
-                onClicked: QMLUtils.shareUrl(QMLUtils.getRedditShortUrl(link.fullname), link.title);
-            }
-            MenuItem {
-                text: "URL"
-                onClicked: globalDialogManager.createOpenLinkDialog(commentPage, link.url);
-            }
-
             MenuItem {
                 text: "Permalink"
                 onClicked: globalDialogManager.createOpenLinkDialog(commentPage,
@@ -186,6 +156,64 @@ Page {
                 }
             }
 
+            ButtonRow {
+                anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                exclusive: false
+
+                Button {
+                    iconSource: "image://theme/icon-m-toolbar-up" + (enabled ? "" : "-dimmed")
+                                + (appSettings.whiteTheme ? "" : "-white")
+                    enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
+                    checked: link.likes == 1
+                    onClicked: {
+                        if (checked)
+                            linkVoteManager.vote(link.fullname, VoteManager.Unvote)
+                        else
+                            linkVoteManager.vote(link.fullname, VoteManager.Upvote)
+                    }
+                }
+
+                Button {
+                    iconSource: "image://theme/icon-m-toolbar-down" + (enabled ? "" : "-dimmed")
+                                + (appSettings.whiteTheme ? "" : "-white")
+                    enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
+                    checked: link.likes == -1
+                    onClicked: {
+                        if (checked)
+                            linkVoteManager.vote(link.fullname, VoteManager.Unvote)
+                        else
+                            linkVoteManager.vote(link.fullname, VoteManager.Downvote)
+                    }
+                }
+
+                Button {
+                    iconSource: "image://theme/icon-m-toolbar-gallery" + (enabled ? "" : "-dimmed")
+                                + (appSettings.whiteTheme ? "" : "-white")
+                    enabled: {
+                        if (!link) return false;
+                        if (link.domain == "i.imgur.com" || link.domain == "imgur.com")
+                            return true;
+                        if (/^https?:\/\/.+\.(jpe?g|png|gif)/i.test(link.url))
+                            return true;
+                        else
+                            return false;
+                    }
+                    onClicked: {
+                        var p = {};
+                        if (link.domain == "imgur.com")
+                            p.imgurUrl = link.url;
+                        else
+                            p.imageUrl = link.url;
+                        pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), p);
+                    }
+                }
+
+                Button {
+                    iconSource: "image://theme/icon-l-browser-main-view"
+                    onClicked: globalDialogManager.createOpenLinkDialog(commentPage, link.url);
+                }
+            }
+
             Column {
                 id: bodyWrapper
                 anchors { left: parent.left; right: parent.right }
@@ -258,18 +286,8 @@ Page {
     QtObject {
         id: dialogManager
 
-        property Component __voteDialogComponent: null
         property Component __commentSortDialogComponent: null
         property Component __commentDialogComponent: null
-
-        function createVoteDialog() {
-            if (!__voteDialogComponent)
-                __voteDialogComponent = Qt.createComponent("LinkDialog.qml");
-            var p = { link: link, linkVoteManager: linkVoteManager, voteOnly: true }
-            var dialog = __voteDialogComponent.createObject(commentPage, p);
-            if (!dialog)
-                console.log("Error creating dialog:" + __voteDialogComponent.errorString());
-        }
 
         function createCommentSortDialog() {
             if (!__commentSortDialogComponent)
