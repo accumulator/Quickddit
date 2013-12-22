@@ -106,6 +106,7 @@ Item {
                 wrapMode: Text.Wrap
                 textFormat: Text.RichText
                 text: model.body
+                onLinkActivated: globalDialogManager.createOpenLinkDialog(commentPage, link);
             }
         }
 

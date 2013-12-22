@@ -5,7 +5,7 @@ import Quickddit 1.0
 
 PageStackWindow {
     id: appWindow
-
+    showStatusBar: inPortrait
     initialPage: MainPage { id: mainPage }
 
     InfoBanner {
@@ -26,6 +26,9 @@ PageStackWindow {
         function createOpenLinkDialog(parent, url) {
             if (!__openLinkDialogComponent)
                 __openLinkDialogComponent = Qt.createComponent("OpenLinkDialog.qml");
+            url = String(url); // convert to string
+            if (url.indexOf("http") != 0)
+                url = QMLUtils.getRedditFullUrl(url);
             var dialog = __openLinkDialogComponent.createObject(parent, {url: url});
             if (!dialog)
                 console.log("Error creating dialog: " + __openLinkDialogComponent.errorString())

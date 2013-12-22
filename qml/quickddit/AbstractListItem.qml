@@ -19,15 +19,15 @@ Item {
                                        : "image://theme/meegotouch-panel-inverted-background-pressed"
     }
 
-    Item {
-        id: contentItem
-        height: parent.height; width: parent.width
-    }
-
     MouseArea {
         id: mouseArea
         anchors.fill: parent
         onClicked: abstractListItem.clicked()
         onPressAndHold: abstractListItem.pressAndHold()
+    }
+
+    Item {
+        id: contentItem
+        height: parent.height; width: parent.width
     }
 }

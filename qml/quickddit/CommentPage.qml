@@ -235,10 +235,7 @@ Page {
                     font.pixelSize: constant.fontSizeDefault
                     color: constant.colorLight
                     text: link.text
-                    onLinkActivated: {
-                        infoBanner.alert("Launching web browser...");
-                        Qt.openUrlExternally(link);
-                    }
+                    onLinkActivated: globalDialogManager.createOpenLinkDialog(commentPage, link);
                 }
 
                 Component.onCompleted: commentListView.headerBodyWrapper = bodyWrapper;
