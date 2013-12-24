@@ -1,3 +1,10 @@
+quickddit (0.1.1) unstable; urgency=low
+  * Add a button row in comment page for voting/view image/open url
+  * Link in comment now can be clicked
+  * Clicking on a compatible in-text image link will allow you to view the image directly
+
+ -- Dickson <dicksonleong8@gmail.com>  Tue, 24 Dec 2013 16:50:11 +0800
+
 quickddit (0.1.0) unstable; urgency=low
   * NSFW filtering now follow user reddit settings
   * Add sort and time range option when searching for posts
