@@ -38,8 +38,8 @@ Page {
         MenuLayout {
             MenuItem {
                 text: "Permalink"
-                onClicked: globalDialogManager.createOpenLinkDialog(commentPage,
-                                                                    QMLUtils.getRedditFullUrl(link.permalink));
+                onClicked: globalUtils.createOpenLinkDialog(commentPage,
+                                                            QMLUtils.getRedditFullUrl(link.permalink));
             }
         }
     }
@@ -210,7 +210,7 @@ Page {
 
                 Button {
                     iconSource: "image://theme/icon-l-browser-main-view"
-                    onClicked: globalDialogManager.createOpenLinkDialog(commentPage, link.url);
+                    onClicked: globalUtils.createOpenLinkDialog(commentPage, link.url);
                 }
             }
 
@@ -235,7 +235,7 @@ Page {
                     font.pixelSize: constant.fontSizeDefault
                     color: constant.colorLight
                     text: link.text
-                    onLinkActivated: globalDialogManager.createOpenLinkDialog(commentPage, link);
+                    onLinkActivated: globalUtils.openInTextLink(commentPage, link);
                 }
 
                 Component.onCompleted: commentListView.headerBodyWrapper = bodyWrapper;

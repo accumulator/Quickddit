@@ -23,6 +23,10 @@ Page {
                 bounceBackAnimation.start()
             }
         }
+        ToolIcon {
+            iconSource: "image://theme/icon-l-browser-main-view"
+            onClicked: globalUtils.createOpenLinkDialog(imageViewPage, imageUrl.toString() || imgurUrl);
+        }
     }
 
     // to make the image outside of the page not visible during page transitions

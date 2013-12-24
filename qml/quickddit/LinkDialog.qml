@@ -54,7 +54,7 @@ ContextMenu {
         }
         MenuItem {
             text: "URL"
-            onClicked: globalDialogManager.createOpenLinkDialog(mainPage, link.url);
+            onClicked: globalUtils.createOpenLinkDialog(mainPage, link.url);
         }
     }
 

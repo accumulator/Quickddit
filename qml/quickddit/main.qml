@@ -19,16 +19,28 @@ PageStackWindow {
     }
 
     QtObject {
-        id: globalDialogManager
+        id: globalUtils
 
         property Component __openLinkDialogComponent: null
+
+        function openInTextLink(parent, url) {
+            url = String(url); // convert to string
+            if (url.indexOf("http") != 0)
+                url = QMLUtils.getRedditFullUrl(url);
+
+            if (/^https?:\/\/imgur\.com/.test(url))
+                pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imgurUrl: url});
+            else if (/^https?:\/\/i\.imgur\.com/.test(url))
+                pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
+            else if (/^https?:\/\/.+\.(jpe?g|png|gif)/i.test(url))
+                pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
+            else
+                createOpenLinkDialog(parent, url);
+        }
 
         function createOpenLinkDialog(parent, url) {
             if (!__openLinkDialogComponent)
                 __openLinkDialogComponent = Qt.createComponent("OpenLinkDialog.qml");
-            url = String(url); // convert to string
-            if (url.indexOf("http") != 0)
-                url = QMLUtils.getRedditFullUrl(url);
             var dialog = __openLinkDialogComponent.createObject(parent, {url: url});
             if (!dialog)
                 console.log("Error creating dialog: " + __openLinkDialogComponent.errorString())

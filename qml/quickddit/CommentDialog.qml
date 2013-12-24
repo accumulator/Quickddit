@@ -38,7 +38,7 @@ ContextMenu {
             text: "Permalink"
             onClicked: {
                 var link = QMLUtils.getRedditFullUrl(linkPermalink + comment.fullname.substring(3));
-                globalDialogManager.createOpenLinkDialog(commentPage, link);
+                globalUtils.createOpenLinkDialog(commentPage, link);
             }
         }
         MenuItem {

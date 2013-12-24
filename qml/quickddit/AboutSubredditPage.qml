@@ -129,7 +129,7 @@ Page {
                 font.pixelSize: constant.fontSizeMedium
                 color: constant.colorLight
                 text: aboutSubredditManager.longDescription
-                onLinkActivated: globalDialogManager.createOpenLinkDialog(aboutSubredditPage, link);
+                onLinkActivated: globalUtils.openInTextLink(aboutSubredditPage, link);
             }
         }
     }
