@@ -2,7 +2,7 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 import Quickddit 1.0
 
-Page {
+AbstractPage {
     id: mainPage
 
     function refreshToFrontPage() {
@@ -13,6 +13,10 @@ Page {
         linkModel.subreddit = subreddit;
         linkModel.refresh(false);
     }
+
+    title: linkModel.title
+    busy: linkModel.busy || linkVoteManager.busy
+    onHeaderClicked: linkListView.positionViewAtBeginning();
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -66,7 +70,7 @@ Page {
 
     ListView {
         id: linkListView
-        anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
+        anchors.fill: parent
         model: linkModel
         delegate: LinkDelegate {
             showSubreddit: linkModel.subreddit == ""
@@ -96,14 +100,6 @@ Page {
     }
 
     ScrollDecorator { flickableItem: linkListView }
-
-    PageHeader {
-        id: pageHeader
-        anchors { top: parent.top; left: parent.left; right: parent.right }
-        text: linkModel.title
-        busy: linkModel.busy || linkVoteManager.busy
-        onClicked: linkListView.positionViewAtBeginning()
-    }
 
     LinkModel {
         id: linkModel

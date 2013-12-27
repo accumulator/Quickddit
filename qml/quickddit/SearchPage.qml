@@ -2,10 +2,14 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 import Quickddit 1.0
 
-Page {
+AbstractPage {
     id: searchPage
 
     property alias searchQuery: searchModel.searchQuery
+
+    title: "Search Result: " + searchModel.searchQuery
+    busy: searchModel.busy
+    onHeaderClicked: searchListView.positionViewAtBeginning();
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -24,7 +28,7 @@ Page {
 
     ListView {
         id: searchListView
-        anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
+        anchors.fill: parent
         model: searchModel
         delegate: LinkDelegate {
             showSubreddit: true
@@ -52,14 +56,6 @@ Page {
     }
 
     ScrollDecorator { flickableItem: searchListView }
-
-    PageHeader {
-        id: pageHeader
-        anchors { top: parent.top; left: parent.left; right: parent.right }
-        text: "Search Result: " + searchModel.searchQuery
-        busy: searchModel.busy
-        onClicked: searchListView.positionViewAtBeginning()
-    }
 
     LinkModel {
         id: searchModel

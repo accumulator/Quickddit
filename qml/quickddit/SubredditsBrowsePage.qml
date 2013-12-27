@@ -2,10 +2,23 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 import Quickddit 1.0
 
-Page {
+AbstractPage {
     id: subredditsBrowsePage
 
     property alias searchQuery: subredditModel.query
+
+    title: {
+        switch (subredditModel.section) {
+        case SubredditModel.PopularSection: return "Popular Subreddits";
+        case SubredditModel.NewSection: return "New Subreddits";
+        case SubredditModel.UserAsSubscriberSection: return "My Subreddits - Subscriber";
+        case SubredditModel.UserAsContributorSection: return "My Subreddits - Approved Submitter";
+        case SubredditModel.UserAsModeratorSection: return "My Subreddits - Moderator";
+        case SubredditModel.SearchSection: return "Search Subreddits: " + subredditModel.query;
+        }
+    }
+    busy: subredditModel.busy
+    onHeaderClicked: subredditsListView.positionViewAtBeginning();
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -24,7 +37,7 @@ Page {
 
     ListView {
         id: subredditsListView
-        anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
+        anchors.fill: parent
         model: subredditModel
         delegate: SubredditDelegate {}
         footer: Item {
@@ -46,23 +59,6 @@ Page {
     }
 
     ScrollDecorator { flickableItem: subredditsListView }
-
-    PageHeader {
-        id: pageHeader
-        anchors { top: parent.top; left: parent.left; right: parent.right }
-        text: {
-            switch (subredditModel.section) {
-            case SubredditModel.PopularSection: return "Popular Subreddits";
-            case SubredditModel.NewSection: return "New Subreddits";
-            case SubredditModel.UserAsSubscriberSection: return "My Subreddits - Subscriber";
-            case SubredditModel.UserAsContributorSection: return "My Subreddits - Approved Submitter";
-            case SubredditModel.UserAsModeratorSection: return "My Subreddits - Moderator";
-            case SubredditModel.SearchSection: return "Search Subreddits: " + subredditModel.query;
-            }
-        }
-        busy: subredditModel.busy
-        onClicked: subredditsListView.positionViewAtBeginning();
-    }
 
     SubredditModel {
         id: subredditModel

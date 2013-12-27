@@ -2,10 +2,14 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 import Quickddit 1.0
 
-Page {
+AbstractPage {
     id: aboutSubredditPage
 
     property alias subreddit: aboutSubredditManager.subreddit
+
+    title: "About " + (aboutSubredditManager.url || "Subreddit")
+    busy: aboutSubredditManager.busy
+    onHeaderClicked: flickable.contentY = 0;
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -24,7 +28,7 @@ Page {
 
     Flickable {
         id: flickable
-        anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
+        anchors.fill: parent
         contentHeight: flickableColumn.height + 2 * constant.paddingMedium
 
         Column {
@@ -135,14 +139,6 @@ Page {
     }
 
     ScrollDecorator { flickableItem: flickable }
-
-    PageHeader {
-        id: pageHeader
-        anchors { top: parent.top; left: parent.left; right: parent.right }
-        busy: aboutSubredditManager.busy
-        text: "About " + (aboutSubredditManager.url || "Subreddit")
-        onClicked: flickable.contentY = 0;
-    }
 
     AboutSubredditManager {
         id: aboutSubredditManager

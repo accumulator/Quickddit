@@ -2,8 +2,9 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 import Quickddit 1.0
 
-Page {
+AbstractPage {
     id: appSettingsPage
+    title: "App Settings"
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -14,7 +15,7 @@ Page {
 
     Flickable {
         id: settingFlickable
-        anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
+        anchors.fill: parent
         contentHeight: settingColumn.height + 2 * constant.paddingMedium
 
         Column {
@@ -75,11 +76,5 @@ Page {
                 }
             }
         }
-    }
-
-    PageHeader {
-        id: pageHeader
-        anchors { top: parent.top; left: parent.left; right: parent.right }
-        text: "App Settings"
     }
 }

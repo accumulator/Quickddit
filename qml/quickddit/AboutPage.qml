@@ -1,8 +1,9 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
 
-Page {
+AbstractPage {
     id: aboutPage
+    title: "About Quickddit"
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -12,7 +13,7 @@ Page {
     }
 
     Text {
-        anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
+        anchors.fill: parent
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.pixelSize: constant.fontSizeLarge
@@ -20,11 +21,5 @@ Page {
         wrapMode: Text.Wrap
         text: "Copyright (c) Dickson Leong\nv" + APP_VERSION + " BETA\nApp icon by @andrewzhilin\n" +
               "Licensed under GNU GPLv3+"
-    }
-
-    PageHeader {
-        id: pageHeader
-        anchors { top: parent.top; left: parent.left; right: parent.right }
-        text: "About Quickddit"
     }
 }

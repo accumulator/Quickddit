@@ -2,11 +2,15 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 import Quickddit 1.0
 
-Page {
+AbstractPage {
     id: commentPage
 
     property variant link
     property VoteManager linkVoteManager
+
+    title: "Comments: " + link.title
+    busy: commentModel.busy || commentVoteManager.busy || linkVoteManager.busy
+    onHeaderClicked: commentListView.positionViewAtBeginning();
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -49,7 +53,7 @@ Page {
 
         property Item headerBodyWrapper: null
 
-        anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
+        anchors.fill: parent
         model: commentModel
         delegate: CommentDelegate {}
         header: Column {
@@ -250,14 +254,6 @@ Page {
     }
 
     ScrollDecorator { flickableItem: commentListView }
-
-    PageHeader {
-        id: pageHeader
-        anchors { top: parent.top; left: parent.left; right: parent.right }
-        text: "Comments: " + link.title
-        busy: commentModel.busy || commentVoteManager.busy || linkVoteManager.busy
-        onClicked: commentListView.positionViewAtBeginning()
-    }
 
     CommentModel {
         id: commentModel

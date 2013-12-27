@@ -2,8 +2,9 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 import QtWebKit 1.0
 
-Page {
+AbstractPage {
     id: signInPage
+    title: "Sign in to Reddit"
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -30,7 +31,7 @@ Page {
 
     Flickable {
         id: webViewFlickable
-        anchors { top: pageHeader.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
+        anchors.fill: parent
         contentHeight: signInWebView.height
         contentWidth: signInWebView.width
 
@@ -42,34 +43,28 @@ Page {
                 if (url.toString().indexOf("code=") > 0) {
                     stop.trigger();
                     quickdditManager.getAccessToken(url);
-                    pageHeader.busy = true;
+                    signInPage.busy = true;
                 }
             }
-            onLoadStarted: pageHeader.busy = true;
-            onLoadFailed: pageHeader.busy = false;
-            onLoadFinished: pageHeader.busy = false;
+            onLoadStarted: signInPage.busy = true;
+            onLoadFailed: signInPage.busy = false;
+            onLoadFinished: signInPage.busy = false;
             onContentsSizeChanged: contentsScale = 1;
         }
     }
 
     ScrollDecorator { flickableItem: webViewFlickable }
 
-    PageHeader {
-        id: pageHeader
-        anchors { top: parent.top; left: parent.left; right: parent.right }
-        text: "Sign in to Reddit"
-    }
-
     Connections {
         target: quickdditManager
         onAccessTokenSuccess: {
-            pageHeader.busy = false;
+            signInPage.busy = false;
             infoBanner.alert("Sign in successfully! Welcome! :)");
             mainPage.refreshToFrontPage();
             pageStack.pop();
         }
         onAccessTokenFailure: {
-            pageHeader.busy = false;
+            signInPage.busy = false;
         }
     }
 
