@@ -3,13 +3,11 @@ import com.nokia.meego 1.0
 import Quickddit 1.0
 
 ContextMenu {
-    id: commentDialog
+    id: commentMenu
 
     property variant comment
     property string linkPermalink
     property VoteManager commentVoteManager
-
-    property bool __isClosing: false
 
     signal positionToParent
 
@@ -46,12 +44,5 @@ ContextMenu {
             text: "Parent"
             onClicked: positionToParent();
         }
-    }
-
-    Component.onCompleted: open();
-
-    onStatusChanged: {
-        if (status === DialogStatus.Closing) __isClosing = true
-        else if (status === DialogStatus.Closed && __isClosing) commentDialog.destroy(250)
     }
 }

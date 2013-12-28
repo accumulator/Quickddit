@@ -1,10 +1,9 @@
 import QtQuick 1.1
 
 Text {
-    anchors.fill: parent
-    horizontalAlignment: Text.AlignHCenter
-    verticalAlignment: Text.AlignVCenter
+    anchors.centerIn: parent
     font.pixelSize: constant.fontSizeXXLarge * 1.5
     color: constant.colorMid
+    visible: enabled
     text: qsTr("Nothing here :(")
 }

@@ -6,7 +6,7 @@ import Quickddit 1.0
 PageStackWindow {
     id: appWindow
     showStatusBar: inPortrait
-    initialPage: MainPage { id: mainPage }
+    initialPage: Component { MainPage {} }
 
     InfoBanner {
         id: infoBanner

@@ -39,7 +39,13 @@ AbstractPage {
         id: subredditsListView
         anchors.fill: parent
         model: subredditModel
-        delegate: SubredditDelegate {}
+        delegate: SubredditDelegate {
+            onClicked: {
+                var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
+                mainPage.refresh(model.displayName);
+                pageStack.pop(mainPage);
+            }
+        }
         footer: Item {
             width: ListView.view.width
             height: loadMoreButton.height + 2 * constant.paddingLarge
@@ -55,7 +61,7 @@ AbstractPage {
             }
         }
 
-        EmptyContentLabel { visible: subredditsListView.count == 0 && !subredditModel.busy }
+        ViewPlaceholder { enabled: subredditsListView.count == 0 && !subredditModel.busy }
     }
 
     ScrollDecorator { flickableItem: subredditsListView }

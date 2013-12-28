@@ -8,7 +8,7 @@ AbstractPage {
     property alias searchQuery: searchModel.searchQuery
 
     title: "Search Result: " + searchModel.searchQuery
-    busy: searchModel.busy
+    busy: searchModel.busy || linkVoteManager.busy
     onHeaderClicked: searchListView.positionViewAtBeginning();
 
     tools: ToolBarLayout {
@@ -31,11 +31,13 @@ AbstractPage {
         anchors.fill: parent
         model: searchModel
         delegate: LinkDelegate {
+            menu: Component { LinkMenu {} }
             showSubreddit: true
             onClicked: {
                 var p = { link: model, linkVoteManager: linkVoteManager };
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);
             }
+            onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager});
         }
         footer: Item {
             width: ListView.view.width
@@ -52,7 +54,7 @@ AbstractPage {
             }
         }
 
-        EmptyContentLabel { visible: searchListView.count == 0 && !searchModel.busy }
+        ViewPlaceholder { enabled: searchListView.count == 0 && !searchModel.busy }
     }
 
     ScrollDecorator { flickableItem: searchListView }

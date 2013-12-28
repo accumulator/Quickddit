@@ -1,7 +1,6 @@
 import QtQuick 1.1
-import com.nokia.meego 1.0
 
-AbstractListItem {
+ListItem {
     id: subredditDelegate
     height: mainColumn.height + 2 * constant.paddingMedium
 
@@ -59,10 +58,5 @@ AbstractListItem {
                 text: "NSFW"
             }
         }
-    }
-
-    onClicked: {
-        mainPage.setSubreddit(model.displayName);
-        pageStack.pop(mainPage);
     }
 }

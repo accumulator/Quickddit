@@ -36,7 +36,7 @@ Sheet {
                 anchors { left: parent.left; right: parent.right }
                 model: ["Front", "All", "Browse for Subreddits..."]
 
-                AbstractListItem {
+                ListItem {
                     height: subredditText.paintedHeight + 2 * constant.paddingXLarge
                     width: mainOptionRepeater.width
 
@@ -130,7 +130,7 @@ Sheet {
             visible: subredditModel ? true : false
             clip: true
             model: visible ? subredditModel : 0
-            delegate: AbstractListItem {
+            delegate: ListItem {
                 height: subscribedSubredditText.paintedHeight + 2 * constant.paddingXLarge
 
                 Text {

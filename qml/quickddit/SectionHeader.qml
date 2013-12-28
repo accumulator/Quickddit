@@ -23,7 +23,7 @@ Item {
         anchors { right: parent.right; rightMargin: constant.paddingMedium }
         font.pixelSize: constant.fontSizeSmall
         font.bold: true
-        color: constant.colorLight
+        color: constant.colorMid
         text: sectionHeader.title
     }
 }

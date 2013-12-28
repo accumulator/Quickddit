@@ -60,8 +60,9 @@ AbstractPage {
         onAccessTokenSuccess: {
             signInPage.busy = false;
             infoBanner.alert("Sign in successfully! Welcome! :)");
-            mainPage.refreshToFrontPage();
-            pageStack.pop();
+            var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
+            mainPage.refresh("");
+            pageStack.pop(mainPage);
         }
         onAccessTokenFailure: {
             signInPage.busy = false;

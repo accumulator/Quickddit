@@ -1,7 +1,6 @@
 import QtQuick 1.1
-import com.nokia.meego 1.0
 
-AbstractListItem {
+ListItem {
     id: delegate
 
     property bool showSubreddit: true

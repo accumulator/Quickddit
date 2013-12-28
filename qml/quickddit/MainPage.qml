@@ -4,12 +4,9 @@ import Quickddit 1.0
 
 AbstractPage {
     id: mainPage
+    objectName: "mainPage"
 
-    function refreshToFrontPage() {
-        linkModel.refresh(false);
-    }
-
-    function setSubreddit(subreddit) {
+    function refresh(subreddit) {
         linkModel.subreddit = subreddit;
         linkModel.refresh(false);
     }
@@ -73,13 +70,14 @@ AbstractPage {
         anchors.fill: parent
         model: linkModel
         delegate: LinkDelegate {
+            menu: Component { LinkMenu {} }
             showSubreddit: linkModel.subreddit == ""
                            || linkModel.subreddit.toLowerCase() == "all"
             onClicked: {
                 var p = { link: model, linkVoteManager: linkVoteManager };
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);
             }
-            onPressAndHold: dialogManager.createLinkDialog(model);
+            onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager});
         }
         footer: Item {
             width: ListView.view.width
@@ -96,7 +94,7 @@ AbstractPage {
             }
         }
 
-        EmptyContentLabel { visible: linkListView.count == 0 && !linkModel.busy }
+        ViewPlaceholder { enabled: linkListView.count == 0 && !linkModel.busy }
     }
 
     ScrollDecorator { flickableItem: linkListView }
@@ -121,7 +119,6 @@ AbstractPage {
         property Component __subredditDialogComponent: null
         property Component __searchDialogComponent: null
         property Component __sectionDialogComponent: null
-        property Component __linkDialogComponent: null
 
         property Component __subredditDialogModelComponent: Component {
             SubredditModel {
@@ -190,16 +187,6 @@ AbstractPage {
                 linkModel.section =  dialog.selectedIndex;
                 linkModel.refresh(false);
             })
-        }
-
-        function createLinkDialog(link) {
-            if (!__linkDialogComponent)
-                __linkDialogComponent = Qt.createComponent("LinkDialog.qml");
-            var p = { link: link, linkVoteManager: linkVoteManager }
-            var dialog = __linkDialogComponent.createObject(mainPage, p);
-            if (!dialog) {
-                console.log("Error create dialog: " + __linkDialogComponent.errorString())
-            }
         }
     }
 }

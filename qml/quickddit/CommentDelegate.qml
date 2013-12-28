@@ -1,8 +1,15 @@
 import QtQuick 1.1
-import com.nokia.meego 1.0
 
 Item {
     id: commentDelegate
+
+    property alias menu: mainItem.menu
+    signal clicked
+
+    function showMenu(properties) {
+        return mainItem.showMenu(properties);
+    }
+
     width: ListView.view.width
     height: mainItem.height
 
@@ -33,7 +40,7 @@ Item {
         }
     }
 
-    AbstractListItem {
+    ListItem {
         id: mainItem
         anchors { left: lineRow.right; right: parent.right }
         height: mainColumn.height + 2 * constant.paddingMedium
@@ -110,6 +117,6 @@ Item {
             }
         }
 
-        onClicked: dialogManager.createCommentDialog(model, index);
+        onClicked: commentDelegate.clicked();
     }
 }

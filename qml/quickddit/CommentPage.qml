@@ -55,7 +55,17 @@ AbstractPage {
 
         anchors.fill: parent
         model: commentModel
-        delegate: CommentDelegate {}
+        delegate: CommentDelegate {
+            menu: Component { CommentMenu {} }
+            onClicked: {
+                var p = {comment: model, linkPermalink: link.permalink, commentVoteManager: commentVoteManager};
+                var dialog = showMenu(p);
+                dialog.positionToParent.connect(function() {
+                    var parentIndex = commentModel.getParentIndex(index);
+                    commentListView.positionViewAtIndex(parentIndex, ListView.Beginning);
+                })
+            }
+        }
         header: Column {
             width: ListView.view.width
             height: childrenRect.height
@@ -280,7 +290,6 @@ AbstractPage {
         id: dialogManager
 
         property Component __commentSortDialogComponent: null
-        property Component __commentDialogComponent: null
 
         function createCommentSortDialog() {
             if (!__commentSortDialogComponent)
@@ -294,21 +303,6 @@ AbstractPage {
             dialog.accepted.connect(function () {
                 commentModel.sort = dialog.selectedIndex;
                 commentModel.refresh(false);
-            })
-        }
-
-        function createCommentDialog(comment, index) {
-            if (!__commentDialogComponent)
-                __commentDialogComponent = Qt.createComponent("CommentDialog.qml");
-            var p = { comment: comment, linkPermalink: link.permalink, commentVoteManager: commentVoteManager }
-            var dialog = __commentDialogComponent.createObject(commentPage, p);
-            if (!dialog) {
-                console.log("Error creating dialog:" + __commentDialogComponent.errorString());
-                return;
-            }
-            dialog.positionToParent.connect(function() {
-                var parentIndex = commentModel.getParentIndex(index);
-                commentListView.positionViewAtIndex(parentIndex, ListView.Beginning);
             })
         }
     }

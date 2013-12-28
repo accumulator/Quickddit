@@ -3,12 +3,10 @@ import com.nokia.meego 1.0
 import Quickddit 1.0
 
 ContextMenu {
-    id: linkDialog
+    id: linkMenu
 
     property variant link
     property VoteManager linkVoteManager
-
-    property bool __isClosing: false
 
     MenuLayout {
         MenuItem {
@@ -56,12 +54,5 @@ ContextMenu {
             text: "URL"
             onClicked: globalUtils.createOpenLinkDialog(mainPage, link.url);
         }
-    }
-
-    Component.onCompleted: open();
-
-    onStatusChanged: {
-        if (status === DialogStatus.Closing) __isClosing = true
-        else if (status === DialogStatus.Closed && __isClosing) linkDialog.destroy(250)
     }
 }
