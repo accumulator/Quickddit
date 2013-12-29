@@ -25,7 +25,7 @@ Page {
         }
         ToolIcon {
             iconSource: "image://theme/icon-l-browser-main-view"
-            onClicked: globalUtils.createOpenLinkDialog(imageViewPage, imageUrl.toString() || imgurUrl);
+            onClicked: globalUtils.createOpenLinkDialog(imageUrl.toString() || imgurUrl);
         }
     }
 

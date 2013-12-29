@@ -9,8 +9,6 @@ Sheet {
     property alias text: searchTextField.text
     property int type: 0
 
-    property bool __isClosing: false
-
     content: Column {
         anchors { left: parent.left; right: parent.right; top: parent.top; margins: constant.paddingMedium }
         height: childrenRect.height
@@ -53,11 +51,5 @@ Sheet {
                 text: "Subreddits"
             }
         }
-    }
-
-    Component.onCompleted: searchDialog.open()
-    onStatusChanged: {
-        if (status === DialogStatus.Closing) __isClosing = true
-        else if (status === DialogStatus.Closed && __isClosing) searchDialog.destroy(250)
     }
 }

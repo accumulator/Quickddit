@@ -113,7 +113,7 @@ Item {
                 wrapMode: Text.Wrap
                 textFormat: Text.RichText
                 text: model.body
-                onLinkActivated: globalUtils.openInTextLink(commentPage, link);
+                onLinkActivated: globalUtils.openInTextLink(link);
             }
         }
 

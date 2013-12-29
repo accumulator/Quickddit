@@ -6,6 +6,8 @@ AbstractPage {
     id: mainPage
     objectName: "mainPage"
 
+    /*readonly*/ property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top"]
+
     function refresh(subreddit) {
         linkModel.subreddit = subreddit;
         linkModel.refresh(false);
@@ -45,7 +47,13 @@ AbstractPage {
         MenuLayout {
             MenuItem {
                 text: "Section"
-                onClicked: dialogManager.createSectionDialog();
+                onClicked: {
+                    globalUtils.createSelectionDialog("Section", sectionModel, linkModel.section,
+                    function(selectedIndex) {
+                        linkModel.section =  selectedIndex;
+                        linkModel.refresh(false);
+                    })
+                }
             }
             MenuItem {
                 text: "About /r/" + linkModel.subreddit
@@ -118,7 +126,6 @@ AbstractPage {
 
         property Component __subredditDialogComponent: null
         property Component __searchDialogComponent: null
-        property Component __sectionDialogComponent: null
 
         property Component __subredditDialogModelComponent: Component {
             SubredditModel {
@@ -139,10 +146,11 @@ AbstractPage {
                 p.subredditModel = __subredditDialogModel;
             }
             var dialog = __subredditDialogComponent.createObject(mainPage, p);
-            if (!dialog) {
-                console.log("Error creating object: " + __subredditDialogComponent.errorString());
-                return;
-            }
+            dialog.statusChanged.connect(function() {
+                if (dialog.status == DialogStatus.Closed) {
+                    dialog.destroy(250);
+                }
+            });
             dialog.accepted.connect(function() {
                 if (dialog.browseSubreddits) {
                     pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml"));
@@ -150,17 +158,19 @@ AbstractPage {
                     linkModel.subreddit = dialog.text;
                     linkModel.refresh(false);
                 }
-            })
+            });
+            dialog.open();
         }
 
         function createSearchDialog() {
             if (!__searchDialogComponent)
                 __searchDialogComponent = Qt.createComponent("SearchDialog.qml");
             var dialog = __searchDialogComponent.createObject(mainPage);
-            if (!dialog) {
-                console.log("Error creating object: " + __searchDialogComponent.errorString());
-                return;
-            }
+            dialog.statusChanged.connect(function() {
+                if (dialog.status == DialogStatus.Closed) {
+                    dialog.destroy(250);
+                }
+            });
             dialog.accepted.connect(function() {
                 if (dialog.text) {
                     var p = { searchQuery: dialog.text };
@@ -171,22 +181,8 @@ AbstractPage {
                 } else {
                     infoBanner.alert("Please enter some text to search!");
                 }
-            })
-        }
-
-        function createSectionDialog() {
-            if (!__sectionDialogComponent)
-                __sectionDialogComponent = Qt.createComponent("SectionDialog.qml");
-            var p = { selectedIndex: linkModel.section }
-            var dialog = __sectionDialogComponent.createObject(mainPage, p);
-            if (!dialog) {
-                console.log("Error creating object: " + __sectionDialogComponent.errorString());
-                return;
-            }
-            dialog.accepted.connect(function() {
-                linkModel.section =  dialog.selectedIndex;
-                linkModel.refresh(false);
-            })
+            });
+            dialog.open();
         }
     }
 }

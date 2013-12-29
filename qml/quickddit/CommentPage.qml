@@ -8,6 +8,8 @@ AbstractPage {
     property variant link
     property VoteManager linkVoteManager
 
+    /*readonly*/ property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
+
     title: "Comments: " + link.title
     busy: commentModel.busy || commentVoteManager.busy || linkVoteManager.busy
     onHeaderClicked: commentListView.positionViewAtBeginning();
@@ -19,7 +21,13 @@ AbstractPage {
         }
         ToolIcon {
             platformIconId: "toolbar-list"
-            onClicked: dialogManager.createCommentSortDialog();
+            onClicked: {
+                globalUtils.createSelectionDialog("Sort", commentSortModel, commentModel.sort,
+                function (selectedIndex) {
+                    commentModel.sort = selectedIndex;
+                    commentModel.refresh(false);
+                })
+            }
         }
         ToolIcon {
             platformIconId: "toolbar-refresh" + (enabled ? "" : "-dimmed")
@@ -42,8 +50,7 @@ AbstractPage {
         MenuLayout {
             MenuItem {
                 text: "Permalink"
-                onClicked: globalUtils.createOpenLinkDialog(commentPage,
-                                                            QMLUtils.getRedditFullUrl(link.permalink));
+                onClicked: globalUtils.createOpenLinkDialog(QMLUtils.getRedditFullUrl(link.permalink));
             }
         }
     }
@@ -224,7 +231,7 @@ AbstractPage {
 
                 Button {
                     iconSource: "image://theme/icon-l-browser-main-view"
-                    onClicked: globalUtils.createOpenLinkDialog(commentPage, link.url);
+                    onClicked: globalUtils.createOpenLinkDialog(link.url);
                 }
             }
 
@@ -249,7 +256,7 @@ AbstractPage {
                     font.pixelSize: constant.fontSizeDefault
                     color: constant.colorLight
                     text: link.text
-                    onLinkActivated: globalUtils.openInTextLink(commentPage, link);
+                    onLinkActivated: globalUtils.openInTextLink(link);
                 }
 
                 Component.onCompleted: commentListView.headerBodyWrapper = bodyWrapper;
@@ -284,26 +291,5 @@ AbstractPage {
         type: VoteManager.Comment
         model: commentModel
         onError: infoBanner.alert(errorString);
-    }
-
-    QtObject {
-        id: dialogManager
-
-        property Component __commentSortDialogComponent: null
-
-        function createCommentSortDialog() {
-            if (!__commentSortDialogComponent)
-                __commentSortDialogComponent = Qt.createComponent("CommentSortDialog.qml");
-            var p = { selectedIndex: commentModel.sort }
-            var dialog = __commentSortDialogComponent.createObject(commentPage, p);
-            if (!dialog) {
-                console.log("Error creating dialog:" + __commentSortDialogComponent.errorString());
-                return;
-            }
-            dialog.accepted.connect(function () {
-                commentModel.sort = dialog.selectedIndex;
-                commentModel.refresh(false);
-            })
-        }
     }
 }

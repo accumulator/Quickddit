@@ -7,6 +7,9 @@ AbstractPage {
 
     property alias searchQuery: subredditModel.query
 
+    /*readonly*/ property variant subredditsSectionModel: ["Popular Subreddits", "New Subreddits",
+        "My Subreddits - Subscriber", "My Subreddits - Approved Submitter", "My Subreddits - Moderator"]
+
     title: {
         switch (subredditModel.section) {
         case SubredditModel.PopularSection: return "Popular Subreddits";
@@ -27,7 +30,13 @@ AbstractPage {
         }
         ToolIcon {
             platformIconId: "toolbar-list"
-            onClicked: dialogManager.createSubredditsSectionDialog();
+            onClicked: {
+                globalUtils.createSelectionDialog("Section", subredditsSectionModel, subredditModel.section,
+                function(selectedIndex) {
+                    subredditModel.section = selectedIndex;
+                    subredditModel.refresh(false);
+                })
+            }
         }
         ToolIcon {
             platformIconId: "toolbar-refresh"
@@ -71,26 +80,5 @@ AbstractPage {
         manager: quickdditManager
         section: searchQuery ? SubredditModel.SearchSection : SubredditModel.PopularSection
         onError: infoBanner.alert(errorString);
-    }
-
-    QtObject {
-        id: dialogManager
-
-        property Component __subredditsSectionDialogComponent: null
-
-        function createSubredditsSectionDialog() {
-            if (!__subredditsSectionDialogComponent)
-                __subredditsSectionDialogComponent = Qt.createComponent("SubredditsSectionDialog.qml");
-            var p = { selectedIndex: subredditModel.section }
-            var dialog = __subredditsSectionDialogComponent.createObject(subredditsBrowsePage, p);
-            if (!dialog) {
-                console.log("Error creating dialog:" + __subredditsSectionDialogComponent.errorString());
-                return;
-            }
-            dialog.accepted.connect(function() {
-                subredditModel.section = dialog.selectedIndex;
-                subredditModel.refresh(false);
-            })
-        }
     }
 }

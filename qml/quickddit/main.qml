@@ -22,8 +22,10 @@ PageStackWindow {
         id: globalUtils
 
         property Component __openLinkDialogComponent: null
+        property Component __selectionDialogComponent: Component { SelectionDialog {} }
+        property Component __listModelComponent: Component { ListModel {} }
 
-        function openInTextLink(parent, url) {
+        function openInTextLink(url) {
             url = String(url); // convert to string
             if (url.indexOf("http") != 0)
                 url = QMLUtils.getRedditFullUrl(url);
@@ -35,15 +37,35 @@ PageStackWindow {
             else if (/^https?:\/\/.+\.(jpe?g|png|gif)/i.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
             else
-                createOpenLinkDialog(parent, url);
+                createOpenLinkDialog(url);
         }
 
-        function createOpenLinkDialog(parent, url) {
+        function createOpenLinkDialog(url) {
             if (!__openLinkDialogComponent)
                 __openLinkDialogComponent = Qt.createComponent("OpenLinkDialog.qml");
-            var dialog = __openLinkDialogComponent.createObject(parent, {url: url});
-            if (!dialog)
-                console.log("Error creating dialog: " + __openLinkDialogComponent.errorString())
+            var dialog = __openLinkDialogComponent.createObject(pageStack.currentPage, {url: url});
+            dialog.statusChanged.connect(function() {
+                if (dialog.status == DialogStatus.Closed)
+                    dialog.destroy(250);
+            });
+            dialog.open();
+        }
+
+        function createSelectionDialog(titleText, model, selectedIndex, onAccepted) {
+            // convert array (model) to ListModel because SelectionDialog can not accept array
+            var listModel = __listModelComponent.createObject(null);
+            model.forEach(function(m) { listModel.append({ "text": m }) });
+
+            var p = {titleText: titleText, model: listModel, selectedIndex: selectedIndex};
+            var dialog = __selectionDialogComponent.createObject(pageStack.currentPage, p);
+            dialog.statusChanged.connect(function() {
+                if (dialog.status == DialogStatus.Closed) {
+                    dialog.destroy(250);
+                    listModel.destroy();
+                }
+            });
+            dialog.accepted.connect(function() { onAccepted(dialog.selectedIndex) });
+            dialog.open();
         }
     }
 

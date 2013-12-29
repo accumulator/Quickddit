@@ -12,8 +12,6 @@ Sheet {
     property alias text: subredditTextField.text
     property bool browseSubreddits: false
 
-    property bool __isClosing: false
-
     content: Item {
         anchors.fill: parent
 
@@ -150,11 +148,5 @@ Sheet {
                 }
             }
         }
-    }
-
-    Component.onCompleted: open();
-    onStatusChanged: {
-        if (status === DialogStatus.Closing) __isClosing = true
-        else if (status === DialogStatus.Closed && __isClosing) subredditDialog.destroy(250)
     }
 }

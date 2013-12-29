@@ -7,6 +7,10 @@ AbstractPage {
 
     property alias searchQuery: searchModel.searchQuery
 
+    /*readonly*/ property variant sortModel: ["Relevance", "New", "Hot", "Top", "Comments"]
+    /*readonly*/ property variant timeRangeModel: ["All time", "This hour", "Today", "This week",
+        "This month", "This year"]
+
     title: "Search Result: " + searchModel.searchQuery
     busy: searchModel.busy || linkVoteManager.busy
     onHeaderClicked: searchListView.positionViewAtBeginning();
@@ -18,11 +22,23 @@ AbstractPage {
         }
         ToolIcon {
             platformIconId: "toolbar-list"
-            onClicked: dialogManager.createSearchSortDialog();
+            onClicked: {
+                globalUtils.createSelectionDialog("Sort", sortModel, searchModel.searchSort,
+                function(selectedIndex) {
+                    searchModel.searchSort = selectedIndex;
+                    searchModel.refresh(false);
+                })
+            }
         }
         ToolIcon {
             platformIconId: "toolbar-clock"
-            onClicked: dialogManager.createSearchTimeRangeDialog();
+            onClicked: {
+                globalUtils.createSelectionDialog("Time Range", timeRangeModel, searchModel.searchTimeRange,
+                function(selectedIndex) {
+                    searchModel.searchTimeRange = selectedIndex;
+                    searchModel.refresh(false);
+                })
+            }
         }
     }
 
@@ -72,42 +88,5 @@ AbstractPage {
         type: VoteManager.Link
         model: searchModel
         onError: infoBanner.alert(errorString);
-    }
-
-    QtObject {
-        id: dialogManager
-
-        property Component __searchSortDialogComponent: null
-        property Component __searchTimeRangeDialogComponent: null
-
-        function createSearchSortDialog() {
-            if (!__searchSortDialogComponent)
-                __searchSortDialogComponent = Qt.createComponent("SearchSortDialog.qml");
-            var p = { selectedIndex: searchModel.searchSort }
-            var dialog = __searchSortDialogComponent.createObject(searchPage, p);
-            if (!dialog) {
-                console.log("Error creating dialog:", __searchSortDialogComponent.errorString());
-                return;
-            }
-            dialog.accepted.connect(function() {
-                searchModel.searchSort = dialog.selectedIndex;
-                searchModel.refresh(false);
-            })
-        }
-
-        function createSearchTimeRangeDialog() {
-            if (!__searchTimeRangeDialogComponent)
-                __searchTimeRangeDialogComponent = Qt.createComponent("SearchTimeRangeDialog.qml");
-            var p = { selectedIndex: searchModel.searchTimeRange }
-            var dialog = __searchTimeRangeDialogComponent.createObject(searchPage, p);
-            if (!dialog) {
-                console.log("Error creating dialog:", __searchTimeRangeDialogComponent.errorString);
-                return;
-            }
-            dialog.accepted.connect(function() {
-                searchModel.searchTimeRange = dialog.selectedIndex;
-                searchModel.refresh(false);
-            })
-        }
     }
 }

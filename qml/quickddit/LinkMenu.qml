@@ -52,7 +52,7 @@ ContextMenu {
         }
         MenuItem {
             text: "URL"
-            onClicked: globalUtils.createOpenLinkDialog(mainPage, link.url);
+            onClicked: globalUtils.createOpenLinkDialog(link.url);
         }
     }
 }

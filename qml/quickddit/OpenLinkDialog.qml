@@ -6,8 +6,6 @@ ContextMenu {
 
     property string url
 
-    property bool __isClosing: false
-
     platformTitle: Text {
         anchors { left: parent.left; right: parent.right }
         horizontalAlignment: Text.AlignHCenter
@@ -35,12 +33,5 @@ ContextMenu {
                 infoBanner.alert("URL copied to clipboard");
             }
         }
-    }
-
-    Component.onCompleted: open()
-
-    onStatusChanged: {
-        if (status === DialogStatus.Closing) __isClosing = true
-        else if (status === DialogStatus.Closed && __isClosing) root.destroy(250)
     }
 }

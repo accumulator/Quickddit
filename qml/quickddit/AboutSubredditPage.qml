@@ -133,7 +133,7 @@ AbstractPage {
                 font.pixelSize: constant.fontSizeMedium
                 color: constant.colorLight
                 text: aboutSubredditManager.longDescription
-                onLinkActivated: globalUtils.openInTextLink(aboutSubredditPage, link);
+                onLinkActivated: globalUtils.openInTextLink(link);
             }
         }
     }
