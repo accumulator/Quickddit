@@ -9,7 +9,9 @@
 CommentModel::CommentModel(QObject *parent) :
     AbstractListModelManager(parent), m_sort(ConfidenceSort), m_reply(0)
 {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
+#endif
 }
 
 void CommentModel::classBegin()

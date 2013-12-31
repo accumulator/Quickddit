@@ -11,7 +11,9 @@ LinkModel::LinkModel(QObject *parent) :
     AbstractListModelManager(parent), m_section(HotSection), m_searchSort(RelevanceSort),
     m_searchTimeRange(AllTime), m_reply(0)
 {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
+#endif
 }
 
 void LinkModel::classBegin()
@@ -20,6 +22,9 @@ void LinkModel::classBegin()
 
 void LinkModel::componentComplete()
 {
+    if (m_section == SearchSection && m_searchQuery.isEmpty())
+        return;
+
     refresh(false);
 }
 

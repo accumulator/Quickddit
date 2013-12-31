@@ -2,18 +2,29 @@
 #define ABSTRACTLISTMODELMANAGER_H
 
 #include <QtCore/QAbstractListModel>
-#include <QtDeclarative/QDeclarativeParserStatus>
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+  #include <QtQml/QQmlParserStatus>
+  #define DECL_QMLPARSERSTATUS_INTERFACE Q_INTERFACES(QQmlParserStatus)
+#else
+  #include <QtDeclarative/QDeclarativeParserStatus>
+  #define QQmlParserStatus QDeclarativeParserStatus
+  #define DECL_QMLPARSERSTATUS_INTERFACE Q_INTERFACES(QDeclarativeParserStatus)
+#endif
 
 #include "quickdditmanager.h"
 
-class AbstractListModelManager : public QAbstractListModel, public QDeclarativeParserStatus
+class AbstractListModelManager : public QAbstractListModel, public QQmlParserStatus
 {
     Q_OBJECT
-    Q_INTERFACES(QDeclarativeParserStatus)
+    DECL_QMLPARSERSTATUS_INTERFACE
     Q_PROPERTY(bool busy READ isBusy NOTIFY busyChanged)
     Q_PROPERTY(QuickdditManager* manager READ manager WRITE setManager)
 public:
     explicit AbstractListModelManager(QObject *parent = 0);
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+    QHash<int, QByteArray> roleNames() const;
+#endif
 
     bool isBusy() const;
 

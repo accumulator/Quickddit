@@ -2,15 +2,22 @@
 #define ABOUTSUBREDDITMANAGER_H
 
 #include <QtCore/QUrl>
-#include <QtDeclarative/QDeclarativeParserStatus>
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+  #include <QtQml/QQmlParserStatus>
+  #define DECL_QMLPARSERSTATUS_INTERFACE Q_INTERFACES(QQmlParserStatus)
+#else
+  #include <QtDeclarative/QDeclarativeParserStatus>
+  #define QQmlParserStatus QDeclarativeParserStatus
+  #define DECL_QMLPARSERSTATUS_INTERFACE Q_INTERFACES(QDeclarativeParserStatus)
+#endif
 
 #include "abstractmanager.h"
 #include "subredditobject.h"
 
-class AboutSubredditManager : public AbstractManager, public QDeclarativeParserStatus
+class AboutSubredditManager : public AbstractManager, public QQmlParserStatus
 {
     Q_OBJECT
-    Q_INTERFACES(QDeclarativeParserStatus)
+    DECL_QMLPARSERSTATUS_INTERFACE
     Q_PROPERTY(bool isValid READ isValid NOTIFY dataChanged)
     Q_PROPERTY(QString url READ url NOTIFY dataChanged)
     Q_PROPERTY(QUrl headerImageUrl READ headerImageUrl NOTIFY dataChanged)

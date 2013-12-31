@@ -5,6 +5,13 @@ AbstractListModelManager::AbstractListModelManager(QObject *parent) :
 {
 }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+QHash<int, QByteArray> AbstractListModelManager::roleNames() const
+{
+    return customRoleNames();
+}
+#endif
+
 bool AbstractListModelManager::isBusy() const
 {
     return m_busy;

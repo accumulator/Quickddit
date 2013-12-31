@@ -8,7 +8,9 @@
 SubredditModel::SubredditModel(QObject *parent) :
     AbstractListModelManager(parent), m_section(PopularSection), m_reply(0)
 {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
+#endif
 }
 
 void SubredditModel::classBegin()
@@ -17,6 +19,9 @@ void SubredditModel::classBegin()
 
 void SubredditModel::componentComplete()
 {
+    if (m_section == SearchSection && m_query.isEmpty())
+        return;
+
     refresh(false);
 }
 

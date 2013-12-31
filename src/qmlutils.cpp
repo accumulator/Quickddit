@@ -1,6 +1,10 @@
 #include "qmlutils.h"
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+#include <QtGui/QGuiApplication>
+#else
 #include <QtGui/QApplication>
+#endif
 #include <QtGui/QClipboard>
 
 #ifdef Q_OS_HARMATTAN
@@ -15,7 +19,11 @@ QMLUtils::QMLUtils(QObject *parent) :
 
 void QMLUtils::copyToClipboard(const QString &text)
 {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+    QClipboard *clipboard = QGuiApplication::clipboard();
+#else
     QClipboard *clipboard = QApplication::clipboard();
+#endif
     clipboard->setText(text);
 #ifdef Q_WS_SIMULATOR
     qDebug("Text copied to clipboard: %s", qPrintable(text));
