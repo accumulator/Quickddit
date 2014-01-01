@@ -1,0 +1,32 @@
+Name: quickddit
+Summary: Unofficial Reddit app for mobile phones
+Version: 0.1.1
+Release: 0.2.alpha
+Group: Qt/Qt
+URL: http://example.org/
+License: GPL-3+
+Sources:
+- '%{name}-%{version}.tar.bz2'
+Description: |
+  Quickddit is an unofficial Reddit app for mobile phones with native and fluid UI.
+Configure: none
+Builder: qtc5
+PkgConfigBR:
+- sailfishapp >= 0.0.10
+- Qt5Core
+- Qt5Qml
+- Qt5Quick
+Requires:
+- sailfishsilica-qt5 >= 0.10.9
+Files:
+- '%{_bindir}'
+- '%{_datadir}/%{name}/qml'
+- '%{_datadir}/applications/%{name}.desktop'
+- '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
+- /usr/bin
+- /usr/share/quickddit
+- /usr/share/applications
+- /usr/share/icons/hicolor/86x86/apps
+PkgBR: []
+Obsoletes:
+- quickddit-sailfish

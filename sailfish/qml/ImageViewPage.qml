@@ -1,0 +1,220 @@
+import QtQuick 2.0
+import Sailfish.Silica 1.0
+import Quickddit 1.0
+
+AbstractPage {
+    id: imageViewPage
+    title: "Image"
+
+    property alias imageUrl: imageItem.source
+    property alias imgurUrl: imgurManager.imgurUrl
+
+    // to make the image outside of the page not visible during page transitions
+    clip: true
+
+    SilicaFlickable {
+        id: imageFlickable
+        anchors { top: parent.top; left: parent.left; right: parent.right; bottom: thumbnailListView.top }
+        contentWidth: imageContainer.width; contentHeight: imageContainer.height
+        onHeightChanged: if (imageItem.status == Image.Ready) imageItem.fitToScreen()
+
+        PullDownMenu {
+            MenuItem {
+                text: "URL"
+                onClicked: globalUtils.createOpenLinkDialog(imageUrl.toString() || imgurUrl);
+            }
+            MenuItem {
+                text: "Reset zoom"
+                enabled: imageItem.scale != pinchArea.minScale
+                onClicked: {
+                    imageFlickable.returnToBounds()
+                    bounceBackAnimation.to = pinchArea.minScale
+                    bounceBackAnimation.start()
+                }
+            }
+        }
+
+        Item {
+            id: imageContainer
+            width: Math.max(imageItem.width * imageItem.scale, imageFlickable.width)
+            height: Math.max(imageItem.height * imageItem.scale, imageFlickable.height)
+
+            // NOTE: AnimatedImage is bugged in Emulator(?), so use Image for now
+            Image {
+                id: imageItem
+
+                property real prevScale
+
+                function fitToScreen() {
+                    scale = Math.min(imageFlickable.width / width, imageFlickable.height / height, 1)
+                    pinchArea.minScale = scale
+                    prevScale = scale
+                }
+
+                anchors.centerIn: parent
+                asynchronous: true
+                smooth: !imageFlickable.moving
+                cache: false
+                fillMode: Image.PreserveAspectFit
+                // pause the animation when app is in background
+                //paused: imageViewPage.status != PageStatus.Active || !Qt.application.active
+
+                onScaleChanged: {
+                    if ((width * scale) > imageFlickable.width) {
+                        var xoff = (imageFlickable.width / 2 + imageFlickable.contentX) * scale / prevScale;
+                        imageFlickable.contentX = xoff - imageFlickable.width / 2
+                    }
+                    if ((height * scale) > imageFlickable.height) {
+                        var yoff = (imageFlickable.height / 2 + imageFlickable.contentY) * scale / prevScale;
+                        imageFlickable.contentY = yoff - imageFlickable.height / 2
+                    }
+                    prevScale = scale
+                }
+
+                onStatusChanged: {
+                    if (status == Image.Ready) {
+                        fitToScreen()
+                        loadedAnimation.start()
+                    }
+                }
+
+                NumberAnimation {
+                    id: loadedAnimation
+                    target: imageItem
+                    property: "opacity"
+                    duration: 250
+                    from: 0; to: 1
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+
+        Loader {
+            id: busyIndicatorLoader
+            anchors.centerIn: parent
+            sourceComponent: {
+                if (imgurManager.busy)
+                    return busyIndicatorComponent;
+
+                switch (imageItem.status) {
+                case Image.Loading: return busyIndicatorComponent
+                case Image.Error: return failedLoading
+                default: return undefined
+                }
+            }
+
+            Component {
+                id: busyIndicatorComponent
+
+                ProgressCircle {
+                    width: Theme.iconSizeLarge
+                    height: Theme.iconSizeLarge
+                    value: imageItem.progress
+                    inAlternateCycle: true
+
+                    Label {
+                        anchors.centerIn: parent
+                        font.pixelSize: constant.fontSizeXSmall
+                        text: Math.round(imageItem.progress * 100) + "%"
+                    }
+                }
+            }
+
+            Component { id: failedLoading; Label { text: "Error loading image" } }
+        }
+
+        PinchArea {
+            id: pinchArea
+
+            property real minScale: 1.0
+            property real maxScale: 3.0
+
+            anchors.fill: parent
+            enabled: imageItem.status == Image.Ready
+            pinch.target: imageItem
+            pinch.minimumScale: minScale * 0.5 // This is to create "bounce back effect"
+            pinch.maximumScale: maxScale * 1.5 // when over zoomed
+
+            onPinchFinished: {
+                imageFlickable.returnToBounds()
+                if (imageItem.scale < pinchArea.minScale) {
+                    bounceBackAnimation.to = pinchArea.minScale
+                    bounceBackAnimation.start()
+                }
+                else if (imageItem.scale > pinchArea.maxScale) {
+                    bounceBackAnimation.to = pinchArea.maxScale
+                    bounceBackAnimation.start()
+                }
+            }
+
+            NumberAnimation {
+                id: bounceBackAnimation
+                target: imageItem
+                duration: 250
+                property: "scale"
+                from: imageItem.scale
+            }
+        }
+
+        ScrollDecorator {}
+    }
+
+    ListView {
+        id: thumbnailListView
+        anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
+        height: visible ? 150 : 0
+        visible: count > 0
+        model: imgurManager.thumbnailUrls
+        orientation: Qt.Horizontal
+        delegate: Item {
+            id: thumbnailDelegate
+            height: ListView.view.height
+            width: height
+
+            Image {
+                id: thumbnailImage
+                anchors.fill: parent
+                asynchronous: true
+                cache: true
+                smooth: !thumbnailDelegate.ListView.view.moving
+                fillMode: Image.PreserveAspectCrop
+                source: modelData
+            }
+
+            Loader {
+                anchors.centerIn: parent
+                sourceComponent: thumbnailImage.status == Image.Loading ? thumbnailBusy : undefined
+
+                Component { id: thumbnailBusy; BusyIndicator { running: true } }
+            }
+
+            Rectangle {
+                id: selectedIndicator
+                anchors.fill: parent
+                color: "transparent"
+                border.color: index == imgurManager.selectedIndex ? "steelblue" : "black"
+                border.width: 4
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: imgurManager.selectedIndex = index;
+            }
+        }
+
+        onModelChanged: positionViewAtIndex(imgurManager.selectedIndex, ListView.Center);
+    }
+
+    ImgurManager {
+        id: imgurManager
+        manager: quickdditManager
+        onError: infoBanner.alert(errorString);
+    }
+
+    Binding {
+        target: imageItem
+        property: "source"
+        value: imgurManager.imageUrl
+        when: imageViewPage.imgurUrl
+    }
+}
