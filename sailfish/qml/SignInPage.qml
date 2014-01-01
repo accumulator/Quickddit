@@ -5,11 +5,13 @@ AbstractPage {
     id: signInPage
     title: "Sign in to Reddit"
     busy: webView.loading
+    backNavigation: webView.atXBeginning && webView.atXEnd && !webView.moving && !webView.pulleyMenuActive
 
     SilicaWebView {
         id: webView
         anchors.fill: parent
         header: PageHeader { title: signInPage.title }
+        overridePageStackNavigation: true
 
         onUrlChanged: {
             if (url.toString().indexOf("code=") > 0) {
@@ -18,6 +20,22 @@ AbstractPage {
                 signInPage.busy = true;
             }
         }
+
+        PullDownMenu {
+            MenuItem {
+                text: "Cancel"
+                onClicked: {
+                    backNavigation = true;
+                    pageStack.pop();
+                }
+            }
+            MenuItem {
+                text: "Reload"
+                onClicked: webView.reload();
+            }
+        }
+
+        ScrollDecorator {}
     }
 
     Connections {
