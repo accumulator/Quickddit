@@ -137,9 +137,13 @@ AbstractPage {
 
             Row {
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: constant.paddingMedium
+                height: Theme.iconSizeLarge
+                spacing: constant.paddingLarge
 
                 IconButton {
+                    anchors.verticalCenter: parent.verticalCenter
+                    icon.height: Theme.iconSizeLarge - constant.paddingMedium
+                    icon.width: Theme.iconSizeLarge - constant.paddingMedium
                     icon.source: "image://theme/icon-l-up"
                     enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
                     highlighted: link.likes == 1
@@ -152,6 +156,9 @@ AbstractPage {
                 }
 
                 IconButton {
+                    anchors.verticalCenter: parent.verticalCenter
+                    icon.height: Theme.iconSizeLarge - constant.paddingMedium
+                    icon.width: Theme.iconSizeLarge - constant.paddingMedium
                     icon.source: "image://theme/icon-l-down"
                     enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
                     highlighted: link.likes == -1
@@ -164,7 +171,10 @@ AbstractPage {
                 }
 
                 IconButton {
-                    icon.source: "image://theme/icon-m-image"
+                    anchors.verticalCenter: parent.verticalCenter
+                    icon.height: Theme.iconSizeLarge - constant.paddingMedium
+                    icon.width: Theme.iconSizeLarge - constant.paddingMedium
+                    icon.source: "image://theme/icon-l-image"
                     enabled: {
                         if (!link) return false;
                         if (link.domain == "i.imgur.com" || link.domain == "imgur.com")
@@ -185,8 +195,10 @@ AbstractPage {
                 }
 
                 IconButton {
-                    // FIXME: better open link icon
-                    icon.source: "image://theme/icon-m-wlan"
+                    anchors.verticalCenter: parent.verticalCenter
+                    icon.height: Theme.iconSizeLarge - constant.paddingLarge
+                    icon.width: Theme.iconSizeLarge - constant.paddingLarge
+                    icon.source: "image://theme/icon-lock-social"
                     onClicked: globalUtils.createOpenLinkDialog(link.url);
                 }
             }
