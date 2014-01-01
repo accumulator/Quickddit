@@ -19,6 +19,10 @@ Sheet {
             id: subredditTextField
             anchors { left: parent.left; right: parent.right; top: parent.top; margins: constant.paddingMedium }
             placeholderText: "Go to specific subreddit..."
+            platformSipAttributes: SipAttributes {
+                actionKeyLabel: "Go"
+            }
+            onAccepted: subredditDialog.accept();
         }
 
         Column {

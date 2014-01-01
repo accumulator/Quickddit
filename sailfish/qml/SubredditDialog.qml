@@ -29,6 +29,8 @@ Dialog {
                 top: dialogHeader.bottom
             }
             placeholderText: "Go to specific subreddit..."
+            EnterKey.iconSource: "image://theme/icon-m-enter-accept"
+            EnterKey.onClicked: accept();
         }
 
         Column {

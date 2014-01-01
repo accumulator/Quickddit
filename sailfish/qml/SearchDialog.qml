@@ -6,7 +6,7 @@ Dialog {
 
     acceptDestination: Qt.resolvedUrl("SearchPage.qml")
     acceptDestinationAction: PageStackAction.Replace
-    canAccept: searchTextField.text
+    canAccept: searchTextField.text.length > 0
 
     onAccepted: {
         acceptDestinationInstance.searchQuery = searchTextField.text;
@@ -26,6 +26,9 @@ Dialog {
             id: searchTextField
             anchors { left: parent.left; right: parent.right }
             placeholderText: "Enter search query..."
+            EnterKey.enabled: text.length > 0
+            EnterKey.iconSource: "image://theme/icon-m-search"
+            EnterKey.onClicked: accept();
         }
 
         ComboBox {

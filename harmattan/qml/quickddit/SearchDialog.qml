@@ -14,16 +14,16 @@ Sheet {
         height: childrenRect.height
         spacing: constant.paddingLarge
 
-        Text {
-            anchors { left: parent.left; right: parent.right }
-            font.pixelSize: constant.fontSizeMedium
-            color: constant.colorLight
-            text: "Enter text:"
-        }
-
         TextField {
             id: searchTextField
+            placeholderText: "Enter search query..."
             anchors { left: parent.left; right: parent.right }
+            platformSipAttributes: SipAttributes {
+                actionKeyEnabled: searchTextField.text.length > 0
+                                  || searchTextField.platformPreedit.length > 0
+                actionKeyLabel: "Search"
+            }
+            onAccepted: searchDialog.accept();
         }
 
         Text {
