@@ -3,6 +3,8 @@
 #endif
 
 #include <QtGui/QGuiApplication>
+#include <QtQml/qqml.h> // for qmlRegisterType
+#include <QtQml/QQmlContext>
 #include <QtQuick/QQuickView>
 #include <sailfishapp.h>
 
