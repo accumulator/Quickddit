@@ -1,4 +1,4 @@
-Name: quickddit
+Name: harbour-quickddit
 Summary: Unofficial Reddit app for mobile phones
 Version: 0.1.1
 Release: 1
@@ -24,9 +24,9 @@ Files:
 - '%{_datadir}/applications/%{name}.desktop'
 - '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
 - /usr/bin
-- /usr/share/quickddit
+- /usr/share/harbour-quickddit
 - /usr/share/applications
 - /usr/share/icons/hicolor/86x86/apps
 PkgBR: []
 Obsoletes:
-- quickddit-sailfish
+- quickddit

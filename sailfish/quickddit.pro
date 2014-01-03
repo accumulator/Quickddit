@@ -5,8 +5,10 @@
 #         - desktop icon filename must be changed
 #         - desktop filename must be changed
 #         - icon definition filename in desktop file must be changed
+#         - filename of rpm/$$TARGET.spec and rpm/$$TARGET.yaml
+#         - the app name in rpm/$$TARGET.yaml file
 TEMPLATE = app
-TARGET = quickddit
+TARGET = harbour-quickddit
 
 DEFINES += APP_VERSION=\\\"0.1.1-1\\\"
 
@@ -59,10 +61,10 @@ HEADERS += ../qt-json/json.h
 SOURCES += ../qt-json/json.cpp
 
 OTHER_FILES += \
-    rpm/quickddit.spec \
-    rpm/quickddit.yaml \
-    quickddit.desktop \
-    quickddit.png \
+    rpm/$${TARGET}.spec \
+    rpm/$${TARGET}.yaml \
+    $${TARGET}.desktop \
+    $${TARGET}.png \
     qml/SubredditsBrowsePage.qml \
     qml/SubredditDialog.qml \
     qml/SubredditDelegate.qml \
