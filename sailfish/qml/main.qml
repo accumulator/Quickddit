@@ -14,6 +14,7 @@ ApplicationWindow {
         height: busyIndicator.height + constant.paddingLarge
         open: pageStack.currentPage.hasOwnProperty('busy') ? pageStack.currentPage.busy : false
         dock: Dock.Bottom
+        enabled: false
 
         BusyIndicator {
             id: busyIndicator
@@ -22,14 +23,7 @@ ApplicationWindow {
         }
     }
 
-    // FIXME: make a replacement for info banner
-    QtObject {
-        id: infoBanner
-
-        function alert(text) {
-            console.log("infoBanner.alert():", text);
-        }
-    }
+    InfoBanner { id: infoBanner }
 
     // A collections of global utility functions
     QtObject {

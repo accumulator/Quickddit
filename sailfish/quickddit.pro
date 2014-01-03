@@ -75,6 +75,7 @@ OTHER_FILES += \
     qml/main.qml \
     qml/LinkMenu.qml \
     qml/LinkDelegate.qml \
+    qml/InfoBanner.qml \
     qml/ImageViewPage.qml \
     qml/CustomCountBubble.qml \
     qml/Constant.qml \
