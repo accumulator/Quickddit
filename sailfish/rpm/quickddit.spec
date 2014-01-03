@@ -14,7 +14,7 @@ Name:       quickddit
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Unofficial Reddit app for mobile phones
 Version:    0.1.1
-Release:    0.2.alpha
+Release:    1
 Group:      Qt/Qt
 License:    GPL-3+
 URL:        http://example.org/

@@ -65,7 +65,7 @@ AbstractPage {
             }
         }
 
-        ViewPlaceholder { enabled: subredditsListView.count == 0 && !subredditModel.busy }
+        ViewPlaceholder { enabled: subredditsListView.count == 0 && !subredditModel.busy; text: "Nothing here :(" }
 
         VerticalScrollDecorator {}
     }

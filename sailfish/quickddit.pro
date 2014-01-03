@@ -8,7 +8,7 @@
 TEMPLATE = app
 TARGET = quickddit
 
-DEFINES += APP_VERSION=\\\"0.1.1-0.2.alpha\\\"
+DEFINES += APP_VERSION=\\\"0.1.1-1\\\"
 
 QT *= network
 

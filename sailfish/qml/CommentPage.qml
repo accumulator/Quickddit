@@ -208,7 +208,7 @@ AbstractPage {
                 anchors { left: parent.left; right: parent.right }
                 height: childrenRect.height
                 spacing: constant.paddingMedium
-                visible: link.text
+                visible: bodyText.text.length > 0
 
                 Separator {
                     anchors { left: parent.left; right: parent.right }
@@ -225,6 +225,9 @@ AbstractPage {
                     text: link.text
                     onLinkActivated: globalUtils.openInTextLink(link);
                 }
+
+                // For spacing after text
+                Item { anchors { left: parent.left; right: parent.right } height: 1 }
             }
 
             Separator {
