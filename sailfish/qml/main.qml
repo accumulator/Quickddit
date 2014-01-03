@@ -32,9 +32,9 @@ ApplicationWindow {
         property Component __openLinkDialogComponent: null
 
         function openInTextLink(url) {
-            url = String(url); // convert to string
-            if (url.indexOf("http") != 0)
-                url = QMLUtils.getRedditFullUrl(url);
+            url = QMLUtils.toAbsoluteUrl(url);
+            if (!url)
+                return;
 
             if (/^https?:\/\/imgur\.com/.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imgurUrl: url});

@@ -1,11 +1,13 @@
 #include "qmlutils.h"
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-#include <QtGui/QGuiApplication>
-#else
-#include <QtGui/QApplication>
-#endif
+#include <QtCore/QUrl>
 #include <QtGui/QClipboard>
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+  #include <QtGui/QGuiApplication>
+#else
+  #include <QtGui/QApplication>
+#endif
 
 #ifdef Q_OS_HARMATTAN
 #include <MDataUri>
@@ -68,7 +70,13 @@ QString QMLUtils::getRedditShortUrl(const QString &fullname)
     return "http://redd.it/" + fullname.mid(3);
 }
 
-QString QMLUtils::getRedditFullUrl(const QString &relativeUrl)
+QString QMLUtils::toAbsoluteUrl(const QString &url)
 {
-    return "http://www.reddit.com" + relativeUrl;
+    if (!QUrl(url).isRelative())
+        return url;
+
+    if (url.startsWith('/'))
+        return "http://www.reddit.com" + url;
+    else
+        return "";
 }

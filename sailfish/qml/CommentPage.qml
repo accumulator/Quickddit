@@ -20,7 +20,7 @@ AbstractPage {
         PullDownMenu {
             MenuItem {
                 text: "Permalink"
-                onClicked: globalUtils.createOpenLinkDialog(QMLUtils.getRedditFullUrl(link.permalink));
+                onClicked: globalUtils.createOpenLinkDialog(QMLUtils.toAbsoluteUrl(link.permalink));
             }
             MenuItem {
                 text: "Sort"

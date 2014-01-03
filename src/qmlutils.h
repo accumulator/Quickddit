@@ -16,16 +16,18 @@ public:
     Q_INVOKABLE void shareUrl(const QString &url, const QString &title = QString());
 
     /**
-     * Get the short Reddit url (http://redd.it/xxxxxx)
+     * Get the shorten Reddit url (http://redd.it/xxxxxx)
      * @param fullname the fullname of the link (eg. "t3_abcdef")
      */
     Q_INVOKABLE QString getRedditShortUrl(const QString &fullname);
 
     /**
-     * Get a full Reddit url from a relative url
-     * @param relativeUrl the Reddit relative url
+     * Get a absolute Reddit url from a relative url
+     * Return the same string if the url is already an absolute url
+     * Return empty string if not able to absolute the url
+     * @param url the Reddit relative url
      */
-    Q_INVOKABLE QString getRedditFullUrl(const QString &relativeUrl);
+    Q_INVOKABLE QString toAbsoluteUrl(const QString &url);
 };
 
 #endif // QMLUTILS_H

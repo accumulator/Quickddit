@@ -50,7 +50,7 @@ AbstractPage {
         MenuLayout {
             MenuItem {
                 text: "Permalink"
-                onClicked: globalUtils.createOpenLinkDialog(QMLUtils.getRedditFullUrl(link.permalink));
+                onClicked: globalUtils.createOpenLinkDialog(QMLUtils.toAbsoluteUrl(link.permalink));
             }
         }
     }
