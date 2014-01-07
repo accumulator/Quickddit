@@ -63,13 +63,16 @@ AbstractPage {
         anchors.fill: parent
         model: commentModel
         delegate: CommentDelegate {
+            id: commentDelegate
             menu: Component { CommentMenu {} }
             onClicked: {
                 var p = {comment: model, linkPermalink: link.permalink, commentVoteManager: commentVoteManager};
                 var dialog = showMenu(p);
-                dialog.positionToParent.connect(function() {
+                dialog.showParent.connect(function() {
                     var parentIndex = commentModel.getParentIndex(index);
-                    commentListView.positionViewAtIndex(parentIndex, ListView.Beginning);
+                    commentDelegate.ListView.view.positionViewAtIndex(parentIndex, ListView.Contain);
+                    commentDelegate.ListView.view.currentIndex = parentIndex;
+                    commentDelegate.ListView.view.currentItem.highlight();
                 })
             }
         }

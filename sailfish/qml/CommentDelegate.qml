@@ -11,6 +11,10 @@ Item {
         return mainItem.showMenu(properties);
     }
 
+    function highlight() {
+        highlightAnimation.start();
+    }
+
     width: ListView.view.width
     height: mainItem.height
 
@@ -46,6 +50,27 @@ Item {
         anchors { left: lineRow.right; right: parent.right }
         contentHeight: mainColumn.height + 2 * constant.paddingMedium
         showMenuOnPressAndHold: false
+
+        Rectangle {
+            id: highlightRect
+            anchors.fill: parent
+            color: "transparent"
+
+            SequentialAnimation {
+                id: highlightAnimation
+
+                ColorAnimation {
+                    target: highlightRect; property: "color"
+                    to: Theme.highlightColor; duration: 300
+                    easing.type: Easing.OutQuart
+                }
+                ColorAnimation {
+                    target: highlightRect; property: "color"
+                    to: "transparent"; duration: 300
+                    easing.type: Easing.InQuint
+                }
+            }
+        }
 
         Column {
             id: mainColumn

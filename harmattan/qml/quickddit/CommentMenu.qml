@@ -9,7 +9,9 @@ ContextMenu {
     property string linkPermalink
     property VoteManager commentVoteManager
 
-    signal positionToParent
+    // to ensure the dialog is destroy properly before position to parent
+    property bool __showParentAtDestruction: false
+    signal showParent
 
     MenuLayout {
         MenuItem {
@@ -42,7 +44,12 @@ ContextMenu {
         MenuItem {
             enabled: comment.depth > 0
             text: "Parent"
-            onClicked: positionToParent();
+            onClicked: __showParentAtDestruction = true;
         }
+    }
+
+    Component.onDestruction: {
+        if (__showParentAtDestruction)
+            showParent();
     }
 }

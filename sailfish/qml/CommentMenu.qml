@@ -9,7 +9,10 @@ ContextMenu {
     property string linkPermalink
     property VoteManager commentVoteManager
 
-    signal positionToParent
+    // when the menu is closing SilicaListView will override the contentY causes the positioning to failed
+    // position at menu destruction to fix this
+    property bool __showParentAtDestruction: false
+    signal showParent
 
     MenuItem {
         id: upvoteButton
@@ -37,11 +40,14 @@ ContextMenu {
             globalUtils.createOpenLinkDialog(link);
         }
     }
-    // positioning listview when menu is closing is not working
-//    MenuItem {
-//        enabled: comment.depth > 0
-//        text: "Parent"
-//        onClicked: positionToParent();
-//    }
+    MenuItem {
+        enabled: comment.depth > 0
+        text: "Parent"
+        onClicked: __showParentAtDestruction = true;
+    }
 
+    Component.onDestruction: {
+        if (__showParentAtDestruction)
+            showParent();
+    }
 }
