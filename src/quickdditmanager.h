@@ -5,6 +5,8 @@
 #include <QtCore/QUrl>
 #include <QtCore/QDateTime>
 
+// TODO: rewrite this whole class
+
 class QNetworkReply;
 class AppSettings;
 class NetworkManager;
@@ -58,11 +60,6 @@ public:
     Q_INVOKABLE void getAccessToken(const QUrl &signedInUrl);
 
     /**
-     * Use the refresh token to get a new access token
-     */
-    Q_INVOKABLE void refreshAccessToken();
-
-    /**
      * Remove the access token and refresh token
      */
     Q_INVOKABLE void signOut();
@@ -76,6 +73,7 @@ signals:
 private slots:
     void onAccessTokenRequestFinished();
     void onRefreshTokenFinished();
+    void onUserInfoFinished();
 
 private:
     NetworkManager *m_netManager;
@@ -89,6 +87,10 @@ private:
     RequestType m_requestType;
     QString m_relativeUrl;
     QHash<QString, QString> m_parameters;
+
+    void refreshAccessToken();
+    void updateRedditUsername();
+    QNetworkReply *m_userInfoReply;
 };
 
 #endif // QUICKDDITMANAGER_H

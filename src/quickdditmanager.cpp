@@ -17,11 +17,11 @@
 #define REDDIT_REDIRECT_URL ""
 #endif
 
-#define REDDIT_OAUTH_SCOPE "read,mysubreddits,subscribe,vote,submit,edit"
+#define REDDIT_OAUTH_SCOPE "read,mysubreddits,subscribe,vote,submit,edit,identity"
 
 QuickdditManager::QuickdditManager(QObject *parent) :
     QObject(parent), m_netManager(new NetworkManager(this)), m_settings(0),
-    m_accessTokenReply(0)
+    m_accessTokenReply(0), m_userInfoReply(0)
 {
 }
 
@@ -232,6 +232,7 @@ void QuickdditManager::signOut()
 {
     m_accessToken.clear();
     m_settings->setRefreshToken(QByteArray());
+    m_settings->setRedditUsername(QString());
     emit signedInChanged();
 }
 
@@ -265,6 +266,9 @@ void QuickdditManager::onAccessTokenRequestFinished()
 
     m_accessTokenReply->deleteLater();
     m_accessTokenReply = 0;
+
+    if (!m_accessToken.isEmpty() && m_settings->redditUsername().isEmpty())
+        updateRedditUsername();
 }
 
 void QuickdditManager::onRefreshTokenFinished()
@@ -278,4 +282,34 @@ void QuickdditManager::onRefreshTokenFinished()
 
     m_relativeUrl.clear();
     m_parameters.clear();
+}
+
+void QuickdditManager::updateRedditUsername()
+{
+    if (m_userInfoReply != 0) {
+        qWarning("QuickdditManager::updateRedditUsername(): Aborting active network request (Try to avoid!)");
+        m_userInfoReply->disconnect();
+        m_userInfoReply->deleteLater();
+        m_userInfoReply = 0;
+    }
+
+    QByteArray authHeader = "Bearer " + m_accessToken.toLatin1();
+
+    m_userInfoReply = m_netManager->createGetRequest(QUrl("https://oauth.reddit.com/api/v1/me.json"), authHeader);
+    connect(m_userInfoReply, SIGNAL(finished()), SLOT(onUserInfoFinished()));
+}
+
+void QuickdditManager::onUserInfoFinished()
+{
+    if (m_userInfoReply->error() == QNetworkReply::NoError) {
+        bool ok;
+        QVariantMap userJson = QtJson::parse(m_userInfoReply->readAll(), ok).toMap();
+        Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+        m_settings->setRedditUsername(userJson.value("name").toString());
+    } else {
+        qDebug("QuickdditManager::onUserInfoFinished(): Network error: %s", qPrintable(m_userInfoReply->errorString()));
+    }
+
+    m_userInfoReply->deleteLater();
+    m_userInfoReply = 0;
 }

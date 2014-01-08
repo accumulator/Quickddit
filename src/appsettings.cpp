@@ -7,6 +7,7 @@ AppSettings::AppSettings(QObject *parent) :
 {
     m_whiteTheme = m_settings->value("whiteTheme", false).toBool();
     m_fontSize = static_cast<FontSize>(m_settings->value("fontSize", 1).toInt());
+    m_redditUsername = m_settings->value("redditUsername").toString();
     m_refreshToken = m_settings->value("refreshToken").toByteArray();
 }
 
@@ -36,6 +37,21 @@ void AppSettings::setFontSize(AppSettings::FontSize fontSize)
         m_settings->setValue("fontSize", static_cast<int>(m_fontSize));
         emit fontSizeChanged();
     }
+}
+
+QString AppSettings::redditUsername() const
+{
+    return m_redditUsername;
+}
+
+void AppSettings::setRedditUsername(const QString &username)
+{
+    m_redditUsername = username;
+
+    if (!m_redditUsername.isEmpty())
+        m_settings->setValue("redditUsername", m_redditUsername);
+    else
+        m_settings->remove("redditUsername");
 }
 
 QByteArray AppSettings::refreshToken() const

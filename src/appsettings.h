@@ -11,6 +11,7 @@ class AppSettings : public QObject
     Q_ENUMS(FontSize)
     Q_PROPERTY(bool whiteTheme READ whiteTheme WRITE setWhiteTheme NOTIFY whiteThemeChanged)
     Q_PROPERTY(FontSize fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
+    Q_PROPERTY(QString redditUsername READ redditUsername CONSTANT)
 public:
     enum FontSize {
         SmallFontSize = 0,
@@ -26,6 +27,9 @@ public:
     FontSize fontSize() const;
     void setFontSize(FontSize fontSize);
 
+    QString redditUsername() const;
+    void setRedditUsername(const QString &username);
+
     QByteArray refreshToken() const;
     void setRefreshToken(const QByteArray &token);
 
@@ -40,6 +44,7 @@ private:
 
     bool m_whiteTheme;
     FontSize m_fontSize;
+    QString m_redditUsername;
     QByteArray m_refreshToken;
 };
 

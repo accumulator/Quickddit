@@ -60,7 +60,7 @@ AbstractPage {
                 color: constant.colorLight
                 visible: quickdditManager.isSignedIn
                 horizontalAlignment: Text.AlignHCenter
-                text: "Signed in to Reddit"
+                text: "Signed in to Reddit" + (appSettings.redditUsername ? " as " + appSettings.redditUsername : "")
             }
 
             Button {
