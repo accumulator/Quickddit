@@ -45,6 +45,7 @@ AbstractPage {
             infoBanner.alert("Sign in successfully! Welcome! :)");
             var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
             mainPage.refresh("");
+            backNavigation = true;
             pageStack.pop(mainPage);
         }
         onAccessTokenFailure: {

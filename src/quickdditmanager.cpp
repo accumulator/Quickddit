@@ -112,7 +112,7 @@ void QuickdditManager::createRedditRequest(RequestType type, const QString &rela
 
 QUrl QuickdditManager::generateAuthorizationUrl()
 {
-    QUrl url("https://ssl.reddit.com/api/v1/authorize");
+    QUrl url("https://ssl.reddit.com/api/v1/authorize.compact");
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
     QUrlQuery query;
     query.addQueryItem("response_type", "code");

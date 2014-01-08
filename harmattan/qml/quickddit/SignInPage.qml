@@ -12,20 +12,8 @@ AbstractPage {
             onClicked: pageStack.pop()
         }
         ToolIcon {
-            platformIconId: "toolbar-add"
-            enabled: signInWebView.contentsScale < 3
-            opacity: enabled ? 1 : 0.25
-            onClicked: signInWebView.contentsScale += 0.2
-        }
-        ToolIcon {
-            iconSource: "image://theme/icon-s-common-remove" + (appSettings.whiteTheme ? "" : "-inverse")
-            enabled: signInWebView.contentsScale > 0.8
-            opacity: enabled ? 1 : 0.25
-            onClicked: signInWebView.contentsScale -= 0.2
-        }
-        ToolIcon {
             platformIconId: "toolbar-refresh"
-            onClicked: signInWebView.url = quickdditManager.generateAuthorizationUrl();
+            onClicked: signInWebView.reload.trigger();
         }
     }
 
@@ -49,7 +37,6 @@ AbstractPage {
             onLoadStarted: signInPage.busy = true;
             onLoadFailed: signInPage.busy = false;
             onLoadFinished: signInPage.busy = false;
-            onContentsSizeChanged: contentsScale = 1;
         }
     }
 
