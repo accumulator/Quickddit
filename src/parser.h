@@ -14,6 +14,7 @@ namespace Parser
 QList<LinkObject> parseLinkList(const QByteArray &json);
 
 QList<CommentObject> parseCommentList(const QByteArray &json);
+CommentObject parseNewComment(const QByteArray &json);
 
 SubredditObject parseSubreddit(const QByteArray &json);
 QList<SubredditObject> parseSubredditList(const QByteArray &json);

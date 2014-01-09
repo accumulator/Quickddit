@@ -13,6 +13,7 @@ ContextMenu {
     // position at menu destruction to fix this
     property bool __showParentAtDestruction: false
     signal showParent
+    signal replyClicked
 
     MenuItem {
         id: upvoteButton
@@ -32,6 +33,11 @@ ContextMenu {
         enabled: !commentVoteManager.busy
         text: "Unvote"
         onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Unvote)
+    }
+    MenuItem {
+        visible: quickdditManager.isSignedIn
+        text: "Reply"
+        onClicked: replyClicked();
     }
     MenuItem {
         text: "Permalink"

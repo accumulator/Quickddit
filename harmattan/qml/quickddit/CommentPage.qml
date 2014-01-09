@@ -9,15 +9,37 @@ AbstractPage {
     property VoteManager linkVoteManager
 
     /*readonly*/ property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
+    property Component __textAreaDialogComponent
+
+    function __createCommentDialog(titleText, replyToFullname) {
+        if (!__textAreaDialogComponent)
+            __textAreaDialogComponent = Qt.createComponent("TextAreaDialog.qml");
+        var dialog = __textAreaDialogComponent.createObject(commentPage, {titleText: titleText});
+        dialog.statusChanged.connect(function() {
+            if (dialog.status == DialogStatus.Closed) {
+                dialog.destroy(250);
+            }
+        });
+        dialog.accepted.connect(function() {
+            commentManager.addComment(replyToFullname, dialog.text);
+        });
+        dialog.open();
+    }
 
     title: "Comments: " + link.title
-    busy: commentModel.busy || commentVoteManager.busy || linkVoteManager.busy
+    busy: commentModel.busy || commentVoteManager.busy || commentManager.busy || linkVoteManager.busy
     onHeaderClicked: commentListView.positionViewAtBeginning();
 
     tools: ToolBarLayout {
         ToolIcon {
             platformIconId: "toolbar-back"
             onClicked: pageStack.pop()
+        }
+        ToolIcon {
+            platformIconId: "toolbar-add"
+            enabled: quickdditManager.isSignedIn && !commentManager.busy
+            opacity: enabled ? 1 : 0.25
+            onClicked: __createCommentDialog("Add Comment", link.fullname);
         }
         ToolIcon {
             platformIconId: "toolbar-list"
@@ -35,10 +57,6 @@ AbstractPage {
             onClicked: commentModel.refresh(false);
         }
         ToolIcon {
-            platformIconId: "toolbar-share"
-            onClicked: QMLUtils.shareUrl(QMLUtils.getRedditShortUrl(link.fullname), link.title);
-        }
-        ToolIcon {
             platformIconId: "toolbar-view-menu"
             onClicked: menu.open();
         }
@@ -48,6 +66,10 @@ AbstractPage {
         id: menu
 
         MenuLayout {
+            MenuItem {
+                text: "Share"
+                onClicked: QMLUtils.shareUrl(QMLUtils.getRedditShortUrl(link.fullname), link.title);
+            }
             MenuItem {
                 text: "Permalink"
                 onClicked: globalUtils.createOpenLinkDialog(QMLUtils.toAbsoluteUrl(link.permalink));
@@ -74,6 +96,7 @@ AbstractPage {
                     commentDelegate.ListView.view.currentIndex = parentIndex;
                     commentDelegate.ListView.view.currentItem.highlight();
                 })
+                dialog.replyClicked.connect(function() { __createCommentDialog("Reply Comment", model.fullname) })
             }
         }
         header: Column {
@@ -292,6 +315,13 @@ AbstractPage {
         id: commentVoteManager
         manager: quickdditManager
         type: VoteManager.Comment
+        model: commentModel
+        onError: infoBanner.alert(errorString);
+    }
+
+    CommentManager {
+        id: commentManager
+        manager: quickdditManager
         model: commentModel
         onError: infoBanner.alert(errorString);
     }

@@ -116,6 +116,26 @@ void CommentModel::changeVote(const QString &fullname, VoteManager::VoteType vot
     }
 }
 
+void CommentModel::insertComment(CommentObject comment, const QString &replyToFullname)
+{
+    int insertIndex = 0;
+
+    // if reply to is a comment, get the insert index and set the comment depth
+    if (replyToFullname.startsWith("t1")) {
+        for (int i = 0; i < m_commentList.count(); ++i) {
+            if (m_commentList.at(i).fullname() == replyToFullname) {
+                comment.setDepth(m_commentList.at(i).depth() + 1);
+                insertIndex = i + 1;
+                break;
+            }
+        }
+    }
+
+    beginInsertRows(QModelIndex(), insertIndex, insertIndex);
+    m_commentList.insert(insertIndex, comment);
+    endInsertRows();
+}
+
 void CommentModel::refresh(bool refreshOlder)
 {
     Q_ASSERT(!m_permalink.isEmpty());

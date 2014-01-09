@@ -115,6 +115,34 @@ QList<CommentObject> Parser::parseCommentList(const QByteArray &json)
     return parseCommentListingJson(root.last().toMap(), linkAuthor, 0);
 }
 
+CommentObject Parser::parseNewComment(const QByteArray &json)
+{
+    bool ok;
+    const QVariant root = QtJson::parse(QString::fromUtf8(json), ok);
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    const QVariantMap commentMap = root.toMap().value("json").toMap().value("data").toMap()
+            .value("things").toList().first().toMap().value("data").toMap();
+
+    CommentObject comment;
+    comment.setFullname(commentMap.value("name").toString());
+    comment.setAuthor(commentMap.value("author").toString());
+    comment.setBody(unescapeHtml(commentMap.value("body_html").toString()));
+    int upvotes = commentMap.value("ups").toInt();
+    int downvotes = commentMap.value("downs").toInt();
+    comment.setScore(upvotes - downvotes);
+    if (!commentMap.value("likes").isNull())
+        comment.setLikes(commentMap.value("likes").toBool() ? 1 : -1);
+    comment.setCreated(QDateTime::fromTime_t(commentMap.value("created_utc").toInt()));
+    if (commentMap.value("edited").toBool() != false)
+        comment.setEdited(QDateTime::fromTime_t(commentMap.value("edited").toInt()));
+    comment.setDistinguished(commentMap.value("distinguished").toString());
+    comment.setScoreHidden(commentMap.value("score_hidden").toBool());
+
+    return comment;
+}
+
 // Private
 SubredditObject parseSubredditThing(const QVariantMap &subredditThing)
 {

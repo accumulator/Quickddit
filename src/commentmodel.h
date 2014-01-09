@@ -46,8 +46,11 @@ public:
     SortType sort() const;
     void setSort(SortType sort);
 
+    // C++ functions
     void changeVote(const QString &fullname, VoteManager::VoteType voteType);
+    void insertComment(CommentObject comment, const QString &replyToFullname);
 
+    // QML functions
     void refresh(bool refreshOlder);
     Q_INVOKABLE int getParentIndex(int index) const;
 

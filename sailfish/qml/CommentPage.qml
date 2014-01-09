@@ -5,12 +5,19 @@ import Quickddit 1.0
 AbstractPage {
     id: commentPage
     title: "Comments"
-    busy: commentModel.busy || commentVoteManager.busy || linkVoteManager.busy
+    busy: commentModel.busy || commentVoteManager.busy || commentManager.busy || linkVoteManager.busy
 
     property variant link
     property VoteManager linkVoteManager
 
     readonly property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
+
+    function __createCommentDialog(titleText, replyToFullname) {
+        var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {titleText: titleText});
+        dialog.accepted.connect(function() {
+            commentManager.addComment(replyToFullname, dialog.text);
+        })
+    }
 
     SilicaListView {
         id: commentListView
@@ -29,6 +36,10 @@ AbstractPage {
                     commentModel.sort = selectedIndex;
                     commentModel.refresh(false);
                 });
+            }
+            MenuItem {
+                text: "Add comment"
+                onClicked: __createCommentDialog("Add Comment", link.fullname);
             }
             MenuItem {
                 text: "Refresh"
@@ -248,6 +259,7 @@ AbstractPage {
                     commentDelegate.ListView.view.currentIndex = parentIndex;
                     commentDelegate.ListView.view.currentItem.highlight();
                 })
+                dialog.replyClicked.connect(function() { __createCommentDialog("Reply Comment", model.fullname); });
             }
         }
 
@@ -265,6 +277,13 @@ AbstractPage {
         id: commentVoteManager
         manager: quickdditManager
         type: VoteManager.Comment
+        model: commentModel
+        onError: infoBanner.alert(errorString);
+    }
+
+    CommentManager {
+        id: commentManager
+        manager: quickdditManager
         model: commentModel
         onError: infoBanner.alert(errorString);
     }

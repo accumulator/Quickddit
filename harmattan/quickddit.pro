@@ -25,7 +25,8 @@ HEADERS += \
     ../src/subredditmodel.h \
     ../src/qmlutils.h \
     ../src/imgurmanager.h \
-    ../src/votemanager.h
+    ../src/votemanager.h \
+    ../src/commentmanager.h
 
 SOURCES += main.cpp \
     ../src/linkobject.cpp \
@@ -44,7 +45,8 @@ SOURCES += main.cpp \
     ../src/subredditmodel.cpp \
     ../src/qmlutils.cpp \
     ../src/imgurmanager.cpp \
-    ../src/votemanager.cpp
+    ../src/votemanager.cpp \
+    ../src/commentmanager.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h
