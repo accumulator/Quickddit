@@ -62,6 +62,7 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     }
     case DepthRole: return comment.depth();
     case IsScoreHiddenRole: return comment.isScoreHidden();
+    case IsValidRole: return comment.author() != "[deleted]";
     default:
         qCritical("CommentModel::data(): Invalid role");
         return QVariant();
@@ -187,6 +188,7 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     roles[CreatedRole] = "created";
     roles[DepthRole] = "depth";
     roles[IsScoreHiddenRole] = "isScoreHidden";
+    roles[IsValidRole] = "isValid";
     return roles;
 }
 

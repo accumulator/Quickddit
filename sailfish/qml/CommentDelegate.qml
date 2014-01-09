@@ -50,6 +50,7 @@ Item {
         anchors { left: lineRow.right; right: parent.right }
         contentHeight: mainColumn.height + 2 * constant.paddingMedium
         showMenuOnPressAndHold: false
+        enabled: model.isValid
 
         Rectangle {
             id: highlightRect
@@ -90,7 +91,7 @@ Item {
                     id: commentAuthorText
                     anchors { left: parent.left; verticalCenter: parent.verticalCenter }
                     font.pixelSize: constant.fontSizeDefault
-                    color: constant.colorLight
+                    color: mainItem.enabled ? constant.colorLight : constant.colorDisabled
                     font.bold: true
                     text: model.author
                 }
@@ -126,7 +127,7 @@ Item {
                         margins: constant.paddingSmall
                     }
                     font.pixelSize: constant.fontSizeDefault
-                    color: constant.colorMid
+                    color: mainItem.enabled ? constant.colorMid : constant.colorDisabled
                     elide: Text.ElideRight
                     text: model.created
                 }
@@ -136,7 +137,7 @@ Item {
                 id: commentBodyText
                 anchors { left: parent.left; right: parent.right }
                 font.pixelSize: constant.fontSizeDefault
-                color: constant.colorLight
+                color: mainItem.enabled ? constant.colorLight : constant.colorDisabled
                 wrapMode: Text.Wrap
                 textFormat: Text.RichText
                 text: model.body

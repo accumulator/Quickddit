@@ -20,7 +20,8 @@ public:
         LikesRole,
         CreatedRole,
         DepthRole,
-        IsScoreHiddenRole
+        IsScoreHiddenRole,
+        IsValidRole
     };
 
     enum SortType {

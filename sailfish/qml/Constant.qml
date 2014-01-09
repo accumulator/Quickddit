@@ -7,7 +7,7 @@ QtObject {
 
     readonly property color colorLight: Theme.primaryColor
     readonly property color colorMid: Theme.secondaryColor
-    readonly property color colorDisabled: colorMid
+    readonly property color colorDisabled: Qt.darker(colorMid, 1.5)
 
     readonly property color colorPositive: "green"
     readonly property color colorNegative: "red"
