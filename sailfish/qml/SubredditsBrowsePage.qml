@@ -51,16 +51,10 @@ AbstractPage {
             }
         }
 
-        footer: Item {
-            width: parent.width
-            height: loadMoreButton.height + 2 * constant.paddingLarge
-            visible: parent.count > 0
-
-            Button {
-                id: loadMoreButton
-                anchors.centerIn: parent
+        PushUpMenu {
+            MenuItem {
+                text: "Load more"
                 enabled: !subredditModel.busy
-                text: "Load More"
                 onClicked: subredditModel.refresh(true);
             }
         }
