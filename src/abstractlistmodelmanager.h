@@ -28,7 +28,7 @@ public:
 
     bool isBusy() const;
 
-    QuickdditManager *manager();
+    QuickdditManager *manager() const;
     void setManager(QuickdditManager *manager);
 
     Q_INVOKABLE virtual void refresh(bool refreshOlder) = 0;

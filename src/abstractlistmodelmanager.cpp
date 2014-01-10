@@ -17,7 +17,7 @@ bool AbstractListModelManager::isBusy() const
     return m_busy;
 }
 
-QuickdditManager *AbstractListModelManager::manager()
+QuickdditManager *AbstractListModelManager::manager() const
 {
     return m_manager;
 }

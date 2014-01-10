@@ -28,12 +28,45 @@ void CommentManager::addComment(const QString &replyTofullname, const QString &r
     parameters.insert("api_type", "json");
     parameters.insert("text", rawText);
     parameters.insert("thing_id", replyTofullname);
-    m_replyToFullname = replyTofullname;
+    m_action = Insert;
+    m_fullname = replyTofullname;
 
     setBusy(true);
 
     connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)), SLOT(onNetworkReplyReceived(QNetworkReply*)));
     manager()->createRedditRequest(QuickdditManager::POST, "/api/comment", parameters);
+}
+
+void CommentManager::editComment(const QString &fullname, const QString &rawText)
+{
+    abortActiveReply();
+
+    QHash<QString, QString> parameters;
+    parameters.insert("api_type", "json");
+    parameters.insert("text", rawText);
+    parameters.insert("thing_id", fullname);
+    m_action = Edit;
+    m_fullname = fullname;
+
+    setBusy(true);
+
+    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)), SLOT(onNetworkReplyReceived(QNetworkReply*)));
+    manager()->createRedditRequest(QuickdditManager::POST, "/api/editusertext", parameters);
+}
+
+void CommentManager::deleteComment(const QString &fullname)
+{
+    abortActiveReply();
+
+    QHash<QString, QString> parameters;
+    parameters.insert("id", fullname);
+    m_action = Delete;
+    m_fullname = fullname;
+
+    setBusy(true);
+
+    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)), SLOT(onNetworkReplyReceived(QNetworkReply*)));
+    manager()->createRedditRequest(QuickdditManager::POST, "/api/del", parameters);
 }
 
 void CommentManager::onNetworkReplyReceived(QNetworkReply *reply)
@@ -52,12 +85,22 @@ void CommentManager::onNetworkReplyReceived(QNetworkReply *reply)
 void CommentManager::onFinished()
 {
     if (m_reply->error() == QNetworkReply::NoError) {
-        const CommentObject comment = Parser::parseNewComment(m_reply->readAll());
-        m_model->insertComment(comment, m_replyToFullname);
+        switch (m_action) {
+        case Insert:
+            m_model->insertComment(Parser::parseNewComment(m_reply->readAll()), m_fullname);
+            break;
+        case Edit:
+            m_model->editComment(Parser::parseNewComment(m_reply->readAll()));
+            break;
+        case Delete:
+            m_model->deleteComment(m_fullname);
+            break;
+        }
     } else {
         emit error(m_reply->errorString());
     }
 
+    m_fullname.clear();
     setBusy(false);
     m_reply->deleteLater();
     m_reply = 0;

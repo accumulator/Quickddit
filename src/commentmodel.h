@@ -16,12 +16,14 @@ public:
         FullnameRole = Qt::UserRole,
         AuthorRole,
         BodyRole,
+        RawBodyRole,
         ScoreRole,
         LikesRole,
         CreatedRole,
         DepthRole,
         IsScoreHiddenRole,
-        IsValidRole
+        IsValidRole,
+        IsAuthorRole
     };
 
     enum SortType {
@@ -50,6 +52,8 @@ public:
     // C++ functions
     void changeVote(const QString &fullname, VoteManager::VoteType voteType);
     void insertComment(CommentObject comment, const QString &replyToFullname);
+    void editComment(CommentObject comment);
+    void deleteComment(const QString &fullname);
 
     // QML functions
     void refresh(bool refreshOlder);

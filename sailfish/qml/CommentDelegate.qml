@@ -15,6 +15,10 @@ Item {
         highlightAnimation.start();
     }
 
+    function remorseAction(title, action, timeout) {
+        mainItem.remorseAction(title, action, timeout);
+    }
+
     width: ListView.view.width
     height: mainItem.height
 
@@ -147,4 +151,6 @@ Item {
 
         onClicked: commentDelegate.clicked();
     }
+
+    ListView.onRemove: mainItem.animateRemoval(commentDelegate);
 }

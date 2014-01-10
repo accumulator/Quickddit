@@ -11,17 +11,20 @@ AbstractPage {
     /*readonly*/ property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
     property Component __textAreaDialogComponent
 
-    function __createCommentDialog(titleText, replyToFullname) {
+    function __createCommentDialog(titleText, fullname, originalText, isEdit) {
         if (!__textAreaDialogComponent)
             __textAreaDialogComponent = Qt.createComponent("TextAreaDialog.qml");
-        var dialog = __textAreaDialogComponent.createObject(commentPage, {titleText: titleText});
+        var dialog = __textAreaDialogComponent.createObject(commentPage, {titleText: titleText, text: originalText || ""});
         dialog.statusChanged.connect(function() {
             if (dialog.status == DialogStatus.Closed) {
                 dialog.destroy(250);
             }
         });
         dialog.accepted.connect(function() {
-            commentManager.addComment(replyToFullname, dialog.text);
+            if (isEdit) // edit
+                commentManager.editComment(fullname, dialog.text);
+            else // add
+                commentManager.addComment(fullname, dialog.text);
         });
         dialog.open();
     }
@@ -97,6 +100,13 @@ AbstractPage {
                     commentDelegate.ListView.view.currentItem.highlight();
                 })
                 dialog.replyClicked.connect(function() { __createCommentDialog("Reply Comment", model.fullname) })
+                dialog.editClicked.connect(function() {
+                    __createCommentDialog("Edit Comment", model.fullname, model.rawBody, true);
+                })
+                dialog.deleteClicked.connect(function() {
+                    globalUtils.createQueryDialog("Delete Comment", "Are you sure want to delete this comment?",
+                    function() { commentManager.deleteComment(model.fullname); });
+                });
             }
         }
         header: Column {

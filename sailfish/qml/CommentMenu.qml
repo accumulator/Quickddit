@@ -14,6 +14,8 @@ ContextMenu {
     property bool __showParentAtDestruction: false
     signal showParent
     signal replyClicked
+    signal editClicked
+    signal deleteClicked
 
     MenuItem {
         id: upvoteButton
@@ -38,6 +40,16 @@ ContextMenu {
         visible: quickdditManager.isSignedIn
         text: "Reply"
         onClicked: replyClicked();
+    }
+    MenuItem {
+        visible: comment.isAuthor
+        text: "Edit"
+        onClicked: editClicked();
+    }
+    MenuItem {
+        visible: comment.isAuthor
+        text: "Delete"
+        onClicked: deleteClicked();
     }
     MenuItem {
         text: "Permalink"

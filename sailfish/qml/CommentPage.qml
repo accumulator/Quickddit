@@ -12,10 +12,13 @@ AbstractPage {
 
     readonly property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
 
-    function __createCommentDialog(titleText, replyToFullname) {
-        var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {titleText: titleText});
+    function __createCommentDialog(titleText, fullname, originalText, isEdit) {
+        var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {titleText: titleText, text: originalText || ""});
         dialog.accepted.connect(function() {
-            commentManager.addComment(replyToFullname, dialog.text);
+            if (isEdit) // edit
+                commentManager.editComment(fullname, dialog.text);
+            else // add
+                commentManager.addComment(fullname, dialog.text);
         })
     }
 
@@ -260,6 +263,14 @@ AbstractPage {
                     commentDelegate.ListView.view.currentItem.highlight();
                 })
                 dialog.replyClicked.connect(function() { __createCommentDialog("Reply Comment", model.fullname); });
+                dialog.editClicked.connect(function() {
+                    __createCommentDialog("Edit Comment", model.fullname, model.rawBody, true);
+                });
+                dialog.deleteClicked.connect(function() {
+                    commentDelegate.remorseAction("Deleting comment", function() {
+                        commentManager.deleteComment(model.fullname);
+                    })
+                });
             }
         }
 

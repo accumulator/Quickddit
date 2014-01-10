@@ -5,6 +5,7 @@
 
 #include "utils.h"
 #include "parser.h"
+#include "appsettings.h"
 
 CommentModel::CommentModel(QObject *parent) :
     AbstractListModelManager(parent), m_sort(ConfidenceSort), m_reply(0)
@@ -51,6 +52,7 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
         return author;
     }
     case BodyRole: return comment.body();
+    case RawBodyRole: return comment.rawBody();
     case ScoreRole: return comment.score();
     case LikesRole: return comment.likes();
     case CreatedRole: {
@@ -63,6 +65,7 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     case DepthRole: return comment.depth();
     case IsScoreHiddenRole: return comment.isScoreHidden();
     case IsValidRole: return comment.author() != "[deleted]";
+    case IsAuthorRole: return comment.author() == manager()->settings()->redditUsername();
     default:
         qCritical("CommentModel::data(): Invalid role");
         return QVariant();
@@ -132,9 +135,53 @@ void CommentModel::insertComment(CommentObject comment, const QString &replyToFu
         }
     }
 
+    comment.setSubmitter(true);
     beginInsertRows(QModelIndex(), insertIndex, insertIndex);
     m_commentList.insert(insertIndex, comment);
     endInsertRows();
+}
+
+void CommentModel::editComment(CommentObject comment)
+{
+    int editIndex = -1;
+
+    for (int i = 0; i < m_commentList.count(); ++i) {
+        if (m_commentList.at(i).fullname() == comment.fullname()) {
+            editIndex = i;
+            break;
+        }
+    }
+
+    if (editIndex == -1) {
+        qWarning("CommentModel::editComment(): Unable to find the comment");
+        return;
+    }
+
+    comment.setSubmitter(true);
+    comment.setDepth(m_commentList.at(editIndex).depth());
+    m_commentList.replace(editIndex, comment);
+    emit dataChanged(index(editIndex), index(editIndex));
+}
+
+void CommentModel::deleteComment(const QString &fullname)
+{
+    int deleteIndex = -1;
+
+    for (int i = 0; i < m_commentList.count(); ++i) {
+        if (m_commentList.at(i).fullname() == fullname) {
+            deleteIndex = i;
+            break;
+        }
+    }
+
+    if (deleteIndex == -1) {
+        qWarning("CommentModel::deleteComment(): Unable to find the comment");
+        return;
+    }
+
+    beginRemoveRows(QModelIndex(), deleteIndex, deleteIndex);
+    m_commentList.removeAt(deleteIndex);
+    endRemoveRows();
 }
 
 void CommentModel::refresh(bool refreshOlder)
@@ -183,12 +230,14 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     roles[FullnameRole] = "fullname";
     roles[AuthorRole] = "author";
     roles[BodyRole] = "body";
+    roles[RawBodyRole] = "rawBody";
     roles[ScoreRole] = "score";
     roles[LikesRole] = "likes";
     roles[CreatedRole] = "created";
     roles[DepthRole] = "depth";
     roles[IsScoreHiddenRole] = "isScoreHidden";
     roles[IsValidRole] = "isValid";
+    roles[IsAuthorRole] = "isAuthor";
     return roles;
 }
 

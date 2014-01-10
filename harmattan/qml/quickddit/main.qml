@@ -24,6 +24,7 @@ PageStackWindow {
         property Component __openLinkDialogComponent: null
         property Component __selectionDialogComponent: Component { SelectionDialog {} }
         property Component __listModelComponent: Component { ListModel {} }
+        property Component __queryDialogCompnent: Component { QueryDialog {} }
 
         function openInTextLink(url) {
             url = QMLUtils.toAbsoluteUrl(url);
@@ -65,6 +66,17 @@ PageStackWindow {
                 }
             });
             dialog.accepted.connect(function() { onAccepted(dialog.selectedIndex) });
+            dialog.open();
+        }
+
+        function createQueryDialog(titleText, message, onAccepted) {
+            var p = { titleText: titleText, message: message, acceptButtonText: "Yes", rejectButtonText: "No" };
+            var dialog = __queryDialogCompnent.createObject(pageStack.currentPage, p);
+            dialog.statusChanged.connect(function() {
+                if (dialog.status == DialogStatus.Closed)
+                    dialog.destroy(250);
+            });
+            dialog.accepted.connect(onAccepted);
             dialog.open();
         }
     }
