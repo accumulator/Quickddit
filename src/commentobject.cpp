@@ -12,6 +12,7 @@ public:
     QString fullname;
     QString author;
     QString body;
+    QString rawBody;
     int score;
     int likes;
     QDateTime created;
@@ -73,6 +74,16 @@ QString CommentObject::body() const
 void CommentObject::setBody(const QString &body)
 {
     d->body = body;
+}
+
+QString CommentObject::rawBody() const
+{
+    return d->rawBody;
+}
+
+void CommentObject::setRawBody(const QString &rawBody)
+{
+    d->rawBody = rawBody;
 }
 
 int CommentObject::score() const

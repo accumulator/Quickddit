@@ -31,6 +31,9 @@ public:
     QString body() const;
     void setBody(const QString &body);
 
+    QString rawBody() const;
+    void setRawBody(const QString &rawBody);
+
     int score() const;
     void setScore(int score);
 

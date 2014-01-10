@@ -19,6 +19,15 @@ QString unescapeHtml(const QString &html)
     return unescaped;
 }
 
+// reddit escape '<', '>' and '&' to '&lt;', '&gt;' and '&amp;' respectively for raw markdown text
+QString unescapeMarkdown(QString markdown)
+{
+    markdown.replace("&lt;", "<");
+    markdown.replace("&gt;", ">");
+    markdown.replace("&amp;", "&");
+    return markdown;
+}
+
 QList<LinkObject> Parser::parseLinkList(const QByteArray &json)
 {
     bool ok;
@@ -48,6 +57,7 @@ QList<LinkObject> Parser::parseLinkList(const QByteArray &json)
         if (thumbnail.startsWith("http"))
             link.setThumbnailUrl(QUrl(thumbnail));
         link.setText(unescapeHtml(linkMapJson.value("selftext_html").toString()));
+        link.setRawText(unescapeMarkdown(linkMapJson.value("selftext").toString()));
         link.setPermalink(linkMapJson.value("permalink").toString());
         link.setUrl(QUrl(linkMapJson.value("url").toString()));
         link.setDistinguished(linkMapJson.value("distinguished").toString());
@@ -78,6 +88,7 @@ QList<CommentObject> parseCommentListingJson(const QVariantMap &json, const QStr
         comment.setFullname(commentMap.value("name").toString());
         comment.setAuthor(commentMap.value("author").toString());
         comment.setBody(unescapeHtml(commentMap.value("body_html").toString()));
+        comment.setRawBody(unescapeMarkdown(commentMap.value("body").toString()));
         int upvotes = commentMap.value("ups").toInt();
         int downvotes = commentMap.value("downs").toInt();
         comment.setScore(upvotes - downvotes);
@@ -129,6 +140,7 @@ CommentObject Parser::parseNewComment(const QByteArray &json)
     comment.setFullname(commentMap.value("name").toString());
     comment.setAuthor(commentMap.value("author").toString());
     comment.setBody(unescapeHtml(commentMap.value("body_html").toString()));
+    comment.setRawBody(unescapeMarkdown(commentMap.value("body").toString()));
     int upvotes = commentMap.value("ups").toInt();
     int downvotes = commentMap.value("downs").toInt();
     comment.setScore(upvotes - downvotes);

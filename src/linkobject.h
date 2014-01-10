@@ -100,6 +100,13 @@ public:
     void setText(const QString &text);
 
     /**
+     * the raw markdown text of this link
+     * equivalent to "selftext" in Reddit's JSON
+     */
+    QString rawText() const;
+    void setRawText(const QString &rawText);
+
+    /**
      * the *relative* permalink
      * equivalent to "permalink" in Reddit's JSON
      */

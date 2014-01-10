@@ -21,6 +21,7 @@ public:
     QString domain;
     QUrl thumbnailUrl;
     QString text;
+    QString rawText;
     QString permalink;
     QUrl url;
     LinkObject::DistinguishedType distinguished;
@@ -159,6 +160,16 @@ QString LinkObject::text() const
 void LinkObject::setText(const QString &text)
 {
     d->text = text;
+}
+
+QString LinkObject::rawText() const
+{
+    return d->rawText;
+}
+
+void LinkObject::setRawText(const QString &rawText)
+{
+    d->rawText = rawText;
 }
 
 QString LinkObject::permalink() const
