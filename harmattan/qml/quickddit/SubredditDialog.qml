@@ -5,6 +5,7 @@ import Quickddit 1.0
 Sheet {
     id: subredditDialog
     acceptButtonText: "Go"
+    acceptButton.enabled: subredditTextField.acceptableInput
     rejectButtonText: "Cancel"
 
     property SubredditModel subredditModel
@@ -19,8 +20,12 @@ Sheet {
             id: subredditTextField
             anchors { left: parent.left; right: parent.right; top: parent.top; margins: constant.paddingMedium }
             placeholderText: "Go to specific subreddit..."
+            inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
+            // RegExp based on <https://github.com/reddit/reddit/blob/aae622d/r2/r2/lib/validator/validator.py#L525>
+            validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
             platformSipAttributes: SipAttributes {
-                actionKeyLabel: "Go"
+                actionKeyEnabled: subredditDialog.acceptButton.enabled
+                actionKeyLabel: subredditDialog.acceptButtonText
             }
             onAccepted: subredditDialog.accept();
         }
@@ -67,11 +72,9 @@ Sheet {
 
         Item {
             id: subscribedSubredditHeader
-            anchors {
-                top: mainOptionColumn.bottom; left: parent.left; right: parent.right
-            }
+            anchors { top: mainOptionColumn.bottom; left: parent.left; right: parent.right }
             height: constant.headerHeight
-            visible: subredditModel ? true : false
+            visible: !!subredditModel
 
             Text {
                 id: headerTitleText
@@ -83,7 +86,7 @@ Sheet {
                 font.pixelSize: constant.fontSizeLarge
                 color: constant.colorLight
                 elide: Text.ElideRight
-                text: "Subscribed Subreddit"
+                text: "Subscribed Subreddits"
             }
 
             Loader {
@@ -129,7 +132,7 @@ Sheet {
                 top: subscribedSubredditHeader.bottom; bottom: parent.bottom
                 left: parent.left; right: parent.right
             }
-            visible: subredditModel ? true : false
+            visible: !!subredditModel
             clip: true
             model: visible ? subredditModel : 0
             delegate: ListItem {
@@ -151,6 +154,22 @@ Sheet {
                     subredditDialog.accept();
                 }
             }
+            footer: Item {
+                width: ListView.view.width
+                height: loadMoreButton.height + 2 * constant.paddingLarge
+                visible: ListView.view.count > 0
+
+                Button {
+                    id: loadMoreButton
+                    anchors.centerIn: parent
+                    enabled: subredditModel ? !subredditModel.busy : false
+                    width: parent.width * 0.75
+                    text: "Load More"
+                    onClicked: subredditModel.refresh(true);
+                }
+            }
         }
+
+        ScrollDecorator { flickableItem: subscribedSubredditListView }
     }
 }

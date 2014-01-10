@@ -8,12 +8,22 @@ Dialog {
     property SubredditModel subredditModel
     property alias text: subredditTextField.text
 
-    property bool busy: subredditModel.busy
+    property bool busy: subredditModel ? subredditModel.busy : false
 
     acceptDestinationAction: PageStackAction.Replace
+    canAccept: subredditTextField.acceptableInput
 
-    Item {
+    SilicaFlickable {
         anchors.fill: parent
+        pressDelay: 0
+
+        PullDownMenu {
+            enabled: !!subredditModel
+            MenuItem {
+                text: "Refresh subscribed subreddits"
+                onClicked: subredditModel.refresh(false);
+            }
+        }
 
         DialogHeader {
             id: dialogHeader
@@ -24,11 +34,12 @@ Dialog {
 
         TextField {
             id: subredditTextField
-            anchors {
-                left: parent.left; right: parent.right
-                top: dialogHeader.bottom
-            }
+            anchors { left: parent.left; right: parent.right; top: dialogHeader.bottom }
             placeholderText: "Go to specific subreddit..."
+            inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
+            // RegExp based on <https://github.com/reddit/reddit/blob/aae622d/r2/r2/lib/validator/validator.py#L525>
+            validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
+            EnterKey.enabled: subredditDialog.canAccept
             EnterKey.iconSource: "image://theme/icon-m-enter-accept"
             EnterKey.onClicked: accept();
         }
@@ -64,6 +75,7 @@ Dialog {
                         case 1: subredditTextField.text = "all"; break;
                         case 2: acceptDestination = Qt.resolvedUrl("SubredditsBrowsePage.qml"); break;
                         }
+                        subredditDialog.canAccept = true;
                         subredditDialog.accept();
                     }
                 }
@@ -73,16 +85,18 @@ Dialog {
         SectionHeader {
             id: subscribedSubredditHeader
             anchors.top: mainOptionColumn.bottom
-            text: "Subscribed Subreddit"
+            visible: !!subredditModel
+            text: "Subscribed Subreddits"
         }
 
-        ListView {
+        SilicaListView {
             id: subscribedSubredditListView
             anchors {
                 top: subscribedSubredditHeader.bottom; bottom: parent.bottom
                 left: parent.left; right: parent.right
             }
-            visible: subredditModel ? true : false
+            pressDelay: 0
+            visible: !!subredditModel
             clip: true
             model: visible ? subredditModel : 0
             delegate: ListItem {
@@ -102,6 +116,14 @@ Dialog {
                 onClicked: {
                     subredditTextField.text = model.displayName;
                     subredditDialog.accept();
+                }
+            }
+
+            PushUpMenu {
+                MenuItem {
+                    text: "Load more"
+                    enabled: subredditModel ? !subredditModel.busy : false
+                    onClicked: subredditModel.refresh(true);
                 }
             }
 

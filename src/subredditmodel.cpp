@@ -88,7 +88,7 @@ void SubredditModel::refresh(bool refreshOlder)
 
     QString relativeUrl;
     QHash<QString, QString> parameters;
-    parameters["count"] = "50";
+    parameters["limit"] = "50";
     bool oauth = true;
 
     switch (m_section) {

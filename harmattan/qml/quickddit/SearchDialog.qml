@@ -4,10 +4,13 @@ import com.nokia.meego 1.0
 Sheet {
     id: searchDialog
     acceptButtonText: "Search"
+    acceptButton.enabled: searchTextField.text.length > 0 || searchTextField.platformPreedit.length > 0
     rejectButtonText: "Cancel"
 
     property alias text: searchTextField.text
     property int type: 0
+
+    onAccepted: searchTextField.parent.focus = true; // force commit of predictive text
 
     content: Column {
         anchors { left: parent.left; right: parent.right; top: parent.top; margins: constant.paddingMedium }
@@ -19,9 +22,8 @@ Sheet {
             placeholderText: "Enter search query..."
             anchors { left: parent.left; right: parent.right }
             platformSipAttributes: SipAttributes {
-                actionKeyEnabled: searchTextField.text.length > 0
-                                  || searchTextField.platformPreedit.length > 0
-                actionKeyLabel: "Search"
+                actionKeyEnabled: searchDialog.acceptButton.enabled
+                actionKeyLabel: searchDialog.acceptButtonText
             }
             onAccepted: searchDialog.accept();
         }

@@ -9,6 +9,7 @@ Dialog {
     canAccept: searchTextField.text.length > 0
 
     onAccepted: {
+        Qt.inputMethod.commit(); // not sure if this is needed
         acceptDestinationInstance.searchQuery = searchTextField.text;
         acceptDestinationInstance.refresh();
     }
@@ -26,7 +27,7 @@ Dialog {
             id: searchTextField
             anchors { left: parent.left; right: parent.right }
             placeholderText: "Enter search query..."
-            EnterKey.enabled: text.length > 0
+            EnterKey.enabled: searchDialog.canAccept
             EnterKey.iconSource: "image://theme/icon-m-search"
             EnterKey.onClicked: accept();
         }
