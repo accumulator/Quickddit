@@ -25,7 +25,7 @@ License
 All files in this project are licensed under the GNU GPLv3+, unless otherwise stated.
 
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2013  Dickson Leong
+    Copyright (C) 2014  Dickson Leong
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

@@ -4,7 +4,7 @@ Upstream-Contact: Dickson Leong <dicksonleong8@gmail.com>
 Source: https://github.com/dicksonleong/Quickddit
 
 Files: *
-Copyright: 2013 Dickson Leong
+Copyright: 2014 Dickson Leong
 License: GPL-3+
 
 Files: qt-json/*
