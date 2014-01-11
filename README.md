@@ -1,9 +1,9 @@
 Quickddit
 =========
 
-Quickddit is an unofficial Reddit app for mobile phones, developed using Qt and Qt Quick.
+Quickddit is a free and open source Reddit client for mobile phones.
 
-Quickddit currently available for MeeGo Harmattan (Qt 4.7.4) and Sailfish OS (Qt 5.1).
+Quickddit is developed using Qt and currently available for MeeGo Harmattan (Qt 4.7.4) and Sailfish OS (Qt 5.1).
 
 Reddit API client id and secret
 ----------------------------------
@@ -24,7 +24,7 @@ License
 -------
 All files in this project are licensed under the GNU GPLv3+, unless otherwise stated.
 
-    Quickddit - Reddit app for mobile phone
+    Quickddit - Reddit client for mobile phones
     Copyright (C) 2013  Dickson Leong
 
     This program is free software: you can redistribute it and/or modify
