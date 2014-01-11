@@ -40,15 +40,15 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     app->setOrganizationName("Quickddit");
     app->setApplicationVersion(APP_VERSION);
 
-    qmlRegisterType<AppSettings>("Quickddit", 1, 0, "AppSettings");
-    qmlRegisterType<QuickdditManager>("Quickddit", 1, 0, "QuickdditManager");
-    qmlRegisterType<LinkModel>("Quickddit", 1, 0, "LinkModel");
-    qmlRegisterType<CommentModel>("Quickddit", 1, 0, "CommentModel");
-    qmlRegisterType<SubredditModel>("Quickddit", 1, 0, "SubredditModel");
-    qmlRegisterType<AboutSubredditManager>("Quickddit", 1, 0, "AboutSubredditManager");
-    qmlRegisterType<ImgurManager>("Quickddit", 1, 0, "ImgurManager");
-    qmlRegisterType<VoteManager>("Quickddit", 1, 0, "VoteManager");
-    qmlRegisterType<CommentManager>("Quickddit", 1, 0, "CommentManager");
+    qmlRegisterType<AppSettings>("Quickddit.Core", 1, 0, "AppSettings");
+    qmlRegisterType<QuickdditManager>("Quickddit.Core", 1, 0, "QuickdditManager");
+    qmlRegisterType<LinkModel>("Quickddit.Core", 1, 0, "LinkModel");
+    qmlRegisterType<CommentModel>("Quickddit.Core", 1, 0, "CommentModel");
+    qmlRegisterType<SubredditModel>("Quickddit.Core", 1, 0, "SubredditModel");
+    qmlRegisterType<AboutSubredditManager>("Quickddit.Core", 1, 0, "AboutSubredditManager");
+    qmlRegisterType<ImgurManager>("Quickddit.Core", 1, 0, "ImgurManager");
+    qmlRegisterType<VoteManager>("Quickddit.Core", 1, 0, "VoteManager");
+    qmlRegisterType<CommentManager>("Quickddit.Core", 1, 0, "CommentManager");
 
     QmlApplicationViewer viewer;
     viewer.rootContext()->setContextProperty("APP_VERSION", APP_VERSION);

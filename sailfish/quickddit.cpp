@@ -45,15 +45,15 @@ int main(int argc, char *argv[])
     app->setOrganizationName("Quickddit");
     app->setApplicationVersion(APP_VERSION);
 
-    qmlRegisterType<AppSettings>("Quickddit", 1, 0, "AppSettings");
-    qmlRegisterType<QuickdditManager>("Quickddit", 1, 0, "QuickdditManager");
-    qmlRegisterType<LinkModel>("Quickddit", 1, 0, "LinkModel");
-    qmlRegisterType<CommentModel>("Quickddit", 1, 0, "CommentModel");
-    qmlRegisterType<SubredditModel>("Quickddit", 1, 0, "SubredditModel");
-    qmlRegisterType<AboutSubredditManager>("Quickddit", 1, 0, "AboutSubredditManager");
-    qmlRegisterType<ImgurManager>("Quickddit", 1, 0, "ImgurManager");
-    qmlRegisterType<VoteManager>("Quickddit", 1, 0, "VoteManager");
-    qmlRegisterType<CommentManager>("Quickddit", 1, 0, "CommentManager");
+    qmlRegisterType<AppSettings>("harbour.quickddit.Core", 1, 0, "AppSettings");
+    qmlRegisterType<QuickdditManager>("harbour.quickddit.Core", 1, 0, "QuickdditManager");
+    qmlRegisterType<LinkModel>("harbour.quickddit.Core", 1, 0, "LinkModel");
+    qmlRegisterType<CommentModel>("harbour.quickddit.Core", 1, 0, "CommentModel");
+    qmlRegisterType<SubredditModel>("harbour.quickddit.Core", 1, 0, "SubredditModel");
+    qmlRegisterType<AboutSubredditManager>("harbour.quickddit.Core", 1, 0, "AboutSubredditManager");
+    qmlRegisterType<ImgurManager>("harbour.quickddit.Core", 1, 0, "ImgurManager");
+    qmlRegisterType<VoteManager>("harbour.quickddit.Core", 1, 0, "VoteManager");
+    qmlRegisterType<CommentManager>("harbour.quickddit.Core", 1, 0, "CommentManager");
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     view->rootContext()->setContextProperty("APP_VERSION", APP_VERSION);

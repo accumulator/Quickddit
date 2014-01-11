@@ -17,7 +17,7 @@
 */
 
 import QtQuick 1.1
-import Quickddit 1.0
+import Quickddit.Core 1.0
 
 QtObject {
     id: constant
