@@ -10,7 +10,7 @@
 TEMPLATE = app
 TARGET = harbour-quickddit
 
-DEFINES += APP_VERSION=\\\"0.1.1-1\\\"
+DEFINES += APP_VERSION=\\\"0.2.0-1\\\"
 
 QT *= network
 

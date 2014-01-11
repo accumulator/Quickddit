@@ -1,3 +1,15 @@
+quickddit (0.2.0) unstable; urgency=low
+  * Clicking on an invalid URL will not trigger any action
+  * When showing the parent comment the comment will be highlighted
+  * Use mobile friendly version of Reddit sign in page
+  * New feature: Add/reply/edit/delete comments
+  * Prevent vote and reply to a deleted comment
+  * Only valid charaters are allowed to type in the subreddit text field
+  * Disable the accept button of search dialog and subreddit dialog when input is invalid
+  * Fix a possible bug when typing in a text field with predictive text activated
+
+ -- Dickson <dicksonleong8@gmail.com>  Sat, 11 Jan 2014 15:25:06 +0800
+
 quickddit (0.1.1) unstable; urgency=low
   * Add a button row in comment page for voting/view image/open url
   * Link in comment now can be clicked
