@@ -24,6 +24,7 @@ AbstractPage {
     id: mainPage
     objectName: "mainPage"
 
+    /*readonly*/ property bool isSubreddit: linkModel.subreddit != "" && linkModel.subreddit.toLowerCase() != "all"
     /*readonly*/ property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top"]
 
     function refresh(subreddit) {
@@ -42,7 +43,13 @@ AbstractPage {
         }
         ToolIcon {
             platformIconId: "toolbar-list"
-            onClicked: dialogManager.createSubredditDialog();
+            onClicked: {
+                globalUtils.createSelectionDialog("Section", sectionModel, linkModel.section,
+                function(selectedIndex) {
+                    linkModel.section =  selectedIndex;
+                    linkModel.refresh(false);
+                })
+            }
         }
         ToolIcon {
             platformIconId: enabled ? "toolbar-refresh" : "toolbar-refresh-dimmed"
@@ -50,9 +57,14 @@ AbstractPage {
             onClicked: linkModel.refresh(false)
         }
         ToolIcon {
-            platformIconId: "toolbar-search"
-            onClicked: dialogManager.createSearchDialog()
+            iconSource: "image://theme/icon-l-user-guide-main-view"
+            enabled: isSubreddit
+            opacity: enabled ? 1 : 0.25
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: linkModel.subreddit});
+            }
         }
+
         ToolIcon {
             platformIconId: "toolbar-view-menu"
             onClicked: menu.open()
@@ -64,21 +76,17 @@ AbstractPage {
 
         MenuLayout {
             MenuItem {
-                text: "Section"
-                onClicked: {
-                    globalUtils.createSelectionDialog("Section", sectionModel, linkModel.section,
-                    function(selectedIndex) {
-                        linkModel.section =  selectedIndex;
-                        linkModel.refresh(false);
-                    })
-                }
+                text: "Front Page"
+                enabled: isSubreddit
+                onClicked: mainPage.refresh("");
             }
             MenuItem {
-                text: "About /r/" + linkModel.subreddit
-                visible: linkModel.subreddit != "" && linkModel.subreddit.toLowerCase() != "all"
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: linkModel.subreddit});
-                }
+                text: "Subreddits"
+                onClicked: dialogManager.createSubredditDialog();
+            }
+            MenuItem {
+                text: "Search"
+                onClicked: dialogManager.createSearchDialog();
             }
             MenuItem {
                 text: "Settings"
@@ -97,8 +105,7 @@ AbstractPage {
         model: linkModel
         delegate: LinkDelegate {
             menu: Component { LinkMenu {} }
-            showSubreddit: linkModel.subreddit == ""
-                           || linkModel.subreddit.toLowerCase() == "all"
+            showSubreddit: !isSubreddit
             onClicked: {
                 var p = { link: model, linkVoteManager: linkVoteManager };
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);

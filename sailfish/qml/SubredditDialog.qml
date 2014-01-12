@@ -70,7 +70,7 @@ Dialog {
             Repeater {
                 id: mainOptionRepeater
                 anchors { left: parent.left; right: parent.right }
-                model: ["Front", "All", "Browse for Subreddits..."]
+                model: ["All", "Browse for Subreddits..."]
 
                 ListItem {
                     contentHeight: Theme.itemSizeSmall
@@ -89,9 +89,8 @@ Dialog {
 
                     onClicked: {
                         switch (index) {
-                        case 0: subredditTextField.text = ""; break;
-                        case 1: subredditTextField.text = "all"; break;
-                        case 2: acceptDestination = Qt.resolvedUrl("SubredditsBrowsePage.qml"); break;
+                        case 0: subredditTextField.text = "all"; break;
+                        case 1: acceptDestination = Qt.resolvedUrl("SubredditsBrowsePage.qml"); break;
                         }
                         subredditDialog.canAccept = true;
                         subredditDialog.accept();

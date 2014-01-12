@@ -92,4 +92,5 @@ OTHER_FILES += \
     qml/AbstractPage.qml \
     qml/cover/CoverPage.qml \
     qml/cover/quickddit.png \
-    qml/TextAreaDialog.qml
+    qml/TextAreaDialog.qml \
+    qml/MainPageMorePage.qml

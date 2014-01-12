@@ -59,7 +59,7 @@ Sheet {
             Repeater {
                 id: mainOptionRepeater
                 anchors { left: parent.left; right: parent.right }
-                model: ["Front", "All", "Browse for Subreddits..."]
+                model: ["All", "Browse for Subreddits..."]
 
                 ListItem {
                     height: subredditText.paintedHeight + 2 * constant.paddingXLarge
@@ -78,9 +78,8 @@ Sheet {
 
                     onClicked: {
                         switch (index) {
-                        case 0: subredditDialog.text = ""; break;
-                        case 1: subredditDialog.text = "all"; break;
-                        case 2: browseSubreddits = true; break;
+                        case 0: subredditDialog.text = "all"; break;
+                        case 1: browseSubreddits = true; break;
                         }
                         subredditDialog.accept();
                     }

@@ -26,6 +26,7 @@ AbstractPage {
     title: linkModel.title
     busy: linkModel.busy || linkVoteManager.busy
 
+    readonly property bool isSubreddit: linkModel.subreddit != "" && linkModel.subreddit.toLowerCase() != "all"
     readonly property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top"]
 
     function refresh(subreddit) {
@@ -50,38 +51,27 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "About"
-                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-            }
-            MenuItem {
-                text: "Settings"
-                onClicked: pageStack.push(Qt.resolvedUrl("AppSettingsPage.qml"))
-            }
-            MenuItem {
-                text: "Search"
-                onClicked: pageStack.push(Qt.resolvedUrl("SearchDialog.qml"));
-            }
-            MenuItem {
-                text: "Subreddits"
+                text: "More"
                 onClicked: {
-                    var p = {}
-                    if (quickdditManager.isSignedIn) {
-                        if (!__subredditDialogModel)
-                            __subredditDialogModel = __subredditDialogModelComponent.createObject(mainPage);
-                        p.subredditModel = __subredditDialogModel;
-                    }
-                    var dialog = pageStack.push(Qt.resolvedUrl("SubredditDialog.qml"), p);
-                    dialog.accepted.connect(function() {
-                        if (!dialog.acceptDestination) {
-                            linkModel.subreddit = dialog.text;
-                            linkModel.refresh(false);
+                    var page = pageStack.push(Qt.resolvedUrl("MainPageMorePage.qml"),  {enableFrontPage: isSubreddit});
+                    page.subredditsClicked.connect(function() {
+                        var p = {}
+                        if (quickdditManager.isSignedIn) {
+                            if (!__subredditDialogModel)
+                                __subredditDialogModel = __subredditDialogModelComponent.createObject(mainPage);
+                            p.subredditModel = __subredditDialogModel;
                         }
+                        var dialog = pageStack.replace(Qt.resolvedUrl("SubredditDialog.qml"), p);
+                        dialog.accepted.connect(function() {
+                            if (!dialog.acceptDestination)
+                                refresh(dialog.text);
+                        })
                     })
                 }
             }
             MenuItem {
                 text: "About /r/" + linkModel.subreddit
-                visible: linkModel.subreddit != "" && linkModel.subreddit.toLowerCase() != "all"
+                visible: isSubreddit
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: linkModel.subreddit});
                 }
@@ -107,8 +97,7 @@ AbstractPage {
         delegate: LinkDelegate {
             menu: Component { LinkMenu {} }
             showMenuOnPressAndHold: false
-            showSubreddit: linkModel.subreddit == ""
-                           || linkModel.subreddit.toLowerCase() == "all"
+            showSubreddit: isSubreddit
             onClicked: {
                 var p = { link: model, linkVoteManager: linkVoteManager };
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);
