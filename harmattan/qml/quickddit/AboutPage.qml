@@ -21,7 +21,7 @@ import com.nokia.meego 1.0
 
 AbstractPage {
     id: aboutPage
-    title: "About Quickddit"
+    title: "About"
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -30,14 +30,40 @@ AbstractPage {
         }
     }
 
-    Text {
+    Flickable {
+        id: flickable
         anchors.fill: parent
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        font.pixelSize: constant.fontSizeLarge
-        color: constant.colorLight
-        wrapMode: Text.Wrap
-        text: "Copyright (c) Dickson Leong\nv" + APP_VERSION + " BETA\nApp icon by @andrewzhilin\n" +
-              "Licensed under GNU GPLv3+"
+        contentHeight: Math.max(column.height + 2 * constant.paddingMedium, flickable.height)
+
+        Column {
+            id: column
+            anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
+            height: childrenRect.height
+            spacing: constant.paddingMedium
+
+            Text {
+                anchors { left: parent.left; right: parent.right }
+                horizontalAlignment: Text.AlignHCenter
+                font.pixelSize: constant.fontSizeLarge
+                color: constant.colorLight
+                wrapMode: Text.Wrap
+                text: "Quickddit - A free and open source Reddit client for mobile phones\n" +
+                      "v" + APP_VERSION + " BETA\n\n" +
+                      "Copyright (c) Dickson Leong\nLicensed under GNU GPLv3+\n" +
+                      "App icon by Andrew Zhilin\n"
+            }
+
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Source Repository"
+                onClicked: globalUtils.createOpenLinkDialog(QMLUtils.SOURCE_REPO_URL);
+            }
+
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "License"
+                onClicked: globalUtils.createOpenLinkDialog(QMLUtils.GPL3_LICENSE_URL);
+            }
+        }
     }
 }

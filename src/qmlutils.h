@@ -24,7 +24,15 @@
 class QMLUtils : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString SOURCE_REPO_URL READ sourceRepoUrl CONSTANT)
+    Q_PROPERTY(QString GPL3_LICENSE_URL READ gpl3LicenseUrl CONSTANT)
 public:
+    static const QString SOURCE_REPO_URL;
+    static QString sourceRepoUrl() { return SOURCE_REPO_URL; }
+
+    static const QString GPL3_LICENSE_URL;
+    static QString gpl3LicenseUrl() { return GPL3_LICENSE_URL; }
+
     explicit QMLUtils(QObject *parent = 0);
 
     // Copy text to system clipboard
