@@ -153,7 +153,6 @@ void CommentModel::insertComment(CommentObject comment, const QString &replyToFu
         }
     }
 
-    comment.setSubmitter(true);
     beginInsertRows(QModelIndex(), insertIndex, insertIndex);
     m_commentList.insert(insertIndex, comment);
     endInsertRows();
@@ -175,7 +174,6 @@ void CommentModel::editComment(CommentObject comment)
         return;
     }
 
-    comment.setSubmitter(true);
     comment.setDepth(m_commentList.at(editIndex).depth());
     m_commentList.replace(editIndex, comment);
     emit dataChanged(index(editIndex), index(editIndex));

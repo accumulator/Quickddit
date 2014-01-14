@@ -351,6 +351,7 @@ AbstractPage {
         id: commentManager
         manager: quickdditManager
         model: commentModel
+        linkAuthor: link.author
         onError: infoBanner.alert(errorString);
     }
 }

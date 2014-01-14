@@ -20,6 +20,7 @@
 
 #include <QtNetwork/QNetworkReply>
 
+#include "appsettings.h"
 #include "commentmodel.h"
 #include "parser.h"
 
@@ -36,6 +37,16 @@ CommentModel *CommentManager::model() const
 void CommentManager::setModel(CommentModel *model)
 {
     m_model = model;
+}
+
+QString CommentManager::linkAuthor() const
+{
+    return m_linkAuthor;
+}
+
+void CommentManager::setLinkAuthor(const QString &linkAuthor)
+{
+    m_linkAuthor = linkAuthor;
 }
 
 void CommentManager::addComment(const QString &replyTofullname, const QString &rawText)
@@ -103,16 +114,17 @@ void CommentManager::onNetworkReplyReceived(QNetworkReply *reply)
 void CommentManager::onFinished()
 {
     if (m_reply->error() == QNetworkReply::NoError) {
-        switch (m_action) {
-        case Insert:
-            m_model->insertComment(Parser::parseNewComment(m_reply->readAll()), m_fullname);
-            break;
-        case Edit:
-            m_model->editComment(Parser::parseNewComment(m_reply->readAll()));
-            break;
-        case Delete:
+        if (m_action == Insert || m_action == Edit) {
+            CommentObject comment = Parser::parseNewComment(m_reply->readAll());
+            if (m_linkAuthor == manager()->settings()->redditUsername())
+                comment.setSubmitter(true);
+
+            if (m_action == Insert)
+                m_model->insertComment(comment, m_fullname);
+            else
+                m_model->editComment(comment);
+        } else if (m_action == Delete) {
             m_model->deleteComment(m_fullname);
-            break;
         }
     } else {
         emit error(m_reply->errorString());

@@ -27,11 +27,15 @@ class CommentManager : public AbstractManager
 {
     Q_OBJECT
     Q_PROPERTY(CommentModel* model READ model WRITE setModel)
+    Q_PROPERTY(QString linkAuthor READ linkAuthor WRITE setLinkAuthor)
 public:
     explicit CommentManager(QObject *parent = 0);
 
     CommentModel *model() const;
     void setModel(CommentModel *model);
+
+    QString linkAuthor() const;
+    void setLinkAuthor(const QString &linkAuthor);
 
     Q_INVOKABLE void addComment(const QString &replyTofullname, const QString &rawText);
 
@@ -47,8 +51,10 @@ private slots:
     void onFinished();
 
 private:
-    enum Action { Insert, Edit, Delete };
     CommentModel *m_model;
+    QString m_linkAuthor;
+
+    enum Action { Insert, Edit, Delete };
     Action m_action;
     QString m_fullname;
     QNetworkReply *m_reply;
