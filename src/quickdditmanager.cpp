@@ -37,6 +37,46 @@
 
 #define REDDIT_OAUTH_SCOPE "read,mysubreddits,subscribe,vote,submit,edit,identity"
 
+// for GET request
+static void setUrlQuery(QUrl *url, const QHash<QString, QString> &parameters)
+{
+    QHashIterator<QString, QString> i(parameters);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
+    QUrlQuery query;
+    while (i.hasNext()) {
+        i.next();
+        query.addQueryItem(i.key(), i.value());
+    }
+    url->setQuery(query);
+#else
+    while (i.hasNext()) {
+        i.next();
+        url->addQueryItem(i.key(), i.value());
+    }
+#endif
+}
+
+// for POST request
+static QByteArray toEncodedQuery(const QHash<QString, QString> &parameters)
+{
+    QHashIterator<QString, QString> i(parameters);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
+    QUrlQuery query;
+    while (i.hasNext()) {
+        i.next();
+        query.addQueryItem(i.key(), i.value());
+    }
+    return query.toString(QUrl::FullyEncoded).toUtf8();
+#else
+    QUrl queryUrl("http://dummy.com");
+    while (i.hasNext()) {
+        i.next();
+        queryUrl.addQueryItem(i.key(), i.value());
+    }
+    return queryUrl.encodedQuery();
+#endif
+}
+
 QuickdditManager::QuickdditManager(QObject *parent) :
     QObject(parent), m_netManager(new NetworkManager(this)), m_settings(0),
     m_accessTokenReply(0), m_userInfoReply(0)
@@ -92,64 +132,33 @@ void QuickdditManager::createRedditRequest(RequestType type, const QString &rela
     else if (type == POST)
         requestUrl = baseUrl + relativeUrl;
 
-    QHashIterator<QString,QString> i(parameters);
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-    QUrlQuery query;
-    while (i.hasNext()) {
-        i.next();
-        query.addQueryItem(i.key(), i.value());
-    }
-#else
-    while (i.hasNext()) {
-        i.next();
-        requestUrl.addQueryItem(i.key(), i.value());
-    }
-#endif
-
     if (type == GET) {
         // obey user settings for NSFW filtering
         // this is not documented but found in source:
         // <https://github.com/reddit/reddit/commit/6f9f91e7534db713d2bdd199ededd00598adccc1>
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-        query.addQueryItem("obey_over18", "true");
-        requestUrl.setQuery(query);
-#else
-        requestUrl.addQueryItem("obey_over18", "true");
-#endif
+        QHash<QString, QString> parametersWithObey18(parameters);
+        parametersWithObey18.insert("obey_over18", "true");
+        setUrlQuery(&requestUrl, parametersWithObey18);
         emit networkReplyReceived(m_netManager->createGetRequest(requestUrl, authHeader));
     } else if (type == POST) {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-        QByteArray data = query.toString(QUrl::FullyEncoded).toLatin1();
-#else
-        QByteArray data = requestUrl.encodedQuery();
-        requestUrl.setEncodedQuery(QByteArray());
-#endif
-        emit networkReplyReceived(m_netManager->createPostRequest(requestUrl, data, authHeader));
+        emit networkReplyReceived(m_netManager->createPostRequest(requestUrl, toEncodedQuery(parameters), authHeader));
     }
 }
 
 QUrl QuickdditManager::generateAuthorizationUrl()
 {
     QUrl url("https://ssl.reddit.com/api/v1/authorize.compact");
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-    QUrlQuery query;
-    query.addQueryItem("response_type", "code");
-    query.addQueryItem("client_id", REDDIT_CLIENT_ID);
-    query.addQueryItem("redirect_uri", REDDIT_REDIRECT_URL);
-    query.addQueryItem("scope", REDDIT_OAUTH_SCOPE);
-    query.addQueryItem("duration", "permanent");
+
+    QHash<QString, QString> parameters;
+    parameters.insert("response_type", "code");
+    parameters.insert("client_id", REDDIT_CLIENT_ID);
+    parameters.insert("redirect_uri", REDDIT_REDIRECT_URL);
+    parameters.insert("scope", REDDIT_OAUTH_SCOPE);
+    parameters.insert("duration", "permanent");
     m_state = QString::number(qrand());
-    query.addQueryItem("state", m_state);
-    url.setQuery(query);
-#else
-    url.addQueryItem("response_type", "code");
-    url.addQueryItem("client_id", REDDIT_CLIENT_ID);
-    url.addQueryItem("redirect_uri", REDDIT_REDIRECT_URL);
-    url.addQueryItem("scope", REDDIT_OAUTH_SCOPE);
-    url.addQueryItem("duration", "permanent");
-    m_state = QString::number(qrand());
-    url.addQueryItem("state", m_state);
-#endif
+    parameters.insert("state", m_state);
+
+    setUrlQuery(&url, parameters);
     return url;
 }
 
@@ -183,28 +192,20 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
 
     QUrl accessTokenUrl("https://ssl.reddit.com/api/v1/access_token");
 
-    // generate body
+    QHash<QString, QString> parameters;
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-    QUrlQuery bodyQuery;
-    bodyQuery.addQueryItem("code", signedInUrlQuery.queryItemValue("code"));
+    parameters.insert("code", signedInUrlQuery.queryItemValue("code"));
 #else
-    QUrl bodyQuery("http://dummy.com");
-    bodyQuery.addQueryItem("code", signedInUrl.queryItemValue("code"));
+    parameters.insert("code", signedInUrl.queryItemValue("code"));
 #endif
-    bodyQuery.addQueryItem("grant_type", "authorization_code");
-    bodyQuery.addQueryItem("redirect_uri", REDDIT_REDIRECT_URL);
-    const QByteArray body =
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-            bodyQuery.toString(QUrl::FullyEncoded).toLatin1();
-#else
-            bodyQuery.encodedQuery();
-#endif
+    parameters.insert("grant_type", "authorization_code");
+    parameters.insert("redirect_uri", REDDIT_REDIRECT_URL);
 
     // generate basic auth header
     QByteArray authHeader = "Basic ";
     authHeader += (QByteArray(REDDIT_CLIENT_ID) + ":" + QByteArray(REDDIT_CLIENT_SECRET)).toBase64();
 
-    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, body, authHeader);
+    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, toEncodedQuery(parameters), authHeader);
     connect(m_accessTokenReply, SIGNAL(finished()), SLOT(onAccessTokenRequestFinished()));
 }
 
@@ -222,27 +223,16 @@ void QuickdditManager::refreshAccessToken()
 
     QUrl accessTokenUrl("https://ssl.reddit.com/api/v1/access_token");
 
-    // generate body
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-    QUrlQuery bodyQuery;
-#else
-    QUrl bodyQuery("http://dummy.com");
-#endif
-    bodyQuery.addQueryItem("refresh_token", refreshToken);
-    bodyQuery.addQueryItem("grant_type", "refresh_token");
-    bodyQuery.addQueryItem("redirect_uri", REDDIT_REDIRECT_URL);
-    const QByteArray body =
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-            bodyQuery.toString(QUrl::FullyEncoded).toLatin1();
-#else
-            bodyQuery.encodedQuery();
-#endif
+    QHash<QString, QString> parameters;
+    parameters.insert("refresh_token", refreshToken);
+    parameters.insert("grant_type", "refresh_token");
+    parameters.insert("redirect_uri", REDDIT_REDIRECT_URL);
 
     // generate basic auth header
     QByteArray authHeader = "Basic ";
     authHeader += (QByteArray(REDDIT_CLIENT_ID) + ":" + QByteArray(REDDIT_CLIENT_SECRET)).toBase64();
 
-    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, body, authHeader);
+    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, toEncodedQuery(parameters), authHeader);
     connect(m_accessTokenReply, SIGNAL(finished()), SLOT(onAccessTokenRequestFinished()));
 }
 
