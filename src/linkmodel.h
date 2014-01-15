@@ -26,15 +26,18 @@
 class LinkModel : public AbstractListModelManager
 {
     Q_OBJECT
+    Q_ENUMS(Location)
     Q_ENUMS(Section)
     Q_ENUMS(SearchSortType)
     Q_ENUMS(SearchTimeRange)
 
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
+    Q_PROPERTY(Location location READ location WRITE setLocation NOTIFY locationChanged)
     Q_PROPERTY(Section section READ section WRITE setSection NOTIFY sectionChanged)
     Q_PROPERTY(QString subreddit READ subreddit WRITE setSubreddit NOTIFY subredditChanged)
+    Q_PROPERTY(QString multireddit READ multireddit WRITE setMultireddit NOTIFY multiredditChanged)
 
-    // Only for SearchSection
+    // Only for Search
     Q_PROPERTY(QString searchQuery READ searchQuery WRITE setSearchQuery NOTIFY searchQueryChanged)
     Q_PROPERTY(SearchSortType searchSort READ searchSort WRITE setSearchSort NOTIFY searchSortChanged)
     Q_PROPERTY(SearchTimeRange searchTimeRange READ searchTimeRange WRITE setSearchTimeRange
@@ -58,13 +61,20 @@ public:
         IsNSFWRole
     };
 
+    enum Location {
+        FrontPage,
+        All,
+        Subreddit,
+        Multireddit,
+        Search
+    };
+
     enum Section {
         HotSection,
         NewSection,
         RisingSection,
         ControversialSection,
-        TopSection,
-        SearchSection
+        TopSection
     };
 
     enum SearchSortType {
@@ -94,11 +104,17 @@ public:
 
     QString title() const;
 
+    Location location() const;
+    void setLocation(Location location);
+
     Section section() const;
     void setSection(Section section);
 
     QString subreddit() const;
     void setSubreddit(const QString &subreddit);
+
+    QString multireddit() const;
+    void setMultireddit(const QString &multireddit);
 
     QString searchQuery() const;
     void setSearchQuery(const QString &query);
@@ -118,8 +134,10 @@ protected:
 
 signals:
     void titleChanged();
+    void locationChanged();
     void sectionChanged();
     void subredditChanged();
+    void multiredditChanged();
     void searchQueryChanged();
     void searchSortChanged();
     void searchTimeRangeChanged();
@@ -130,8 +148,10 @@ private slots:
 
 private:
     QString m_title;
+    Location m_location;
     Section m_section;
     QString m_subreddit;
+    QString m_multireddit;
     QString m_searchQuery;
     SearchSortType m_searchSort;
     SearchTimeRange m_searchTimeRange;

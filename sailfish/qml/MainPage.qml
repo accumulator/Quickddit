@@ -26,12 +26,17 @@ AbstractPage {
     title: linkModel.title
     busy: linkModel.busy || linkVoteManager.busy
 
-    readonly property bool isSubreddit: linkModel.subreddit != "" && linkModel.subreddit.toLowerCase() != "all"
     readonly property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top"]
 
     function refresh(subreddit) {
-        if (subreddit !== undefined)
+        if (subreddit === undefined || subreddit == "") {
+            linkModel.location = LinkModel.FrontPage;
+        } else if (subreddit.toLowerCase() == "all") {
+            linkModel.location = LinkModel.All;
+        } else {
+            linkModel.location = LinkModel.Subreddit;
             linkModel.subreddit = subreddit;
+        }
         linkModel.refresh(false);
     }
 
@@ -43,6 +48,37 @@ AbstractPage {
         }
     }
     property QtObject __subredditDialogModel
+    function __openSubreddiitDialog() {
+        var p = {}
+        if (quickdditManager.isSignedIn) {
+            if (!__subredditDialogModel)
+                __subredditDialogModel = __subredditDialogModelComponent.createObject(mainPage);
+            p.subredditModel = __subredditDialogModel;
+        }
+        var dialog = pageStack.replace(Qt.resolvedUrl("SubredditDialog.qml"), p);
+        dialog.accepted.connect(function() {
+            if (!dialog.acceptDestination)
+                refresh(dialog.text);
+        });
+    }
+
+    property Component __multiredditModelComponent: Component {
+        MultiredditModel {
+            manager: quickdditManager
+            onError: infoBanner.alert(errorString);
+        }
+    }
+    property QtObject __multiredditModel
+    function __openMultiredditDialog() {
+        if (!__multiredditModel)
+            __multiredditModel = __multiredditModelComponent.createObject(mainPage);
+        var dialog = pageStack.replace(Qt.resolvedUrl("MultiredditsDialog.qml"), {multiredditModel: __multiredditModel});
+        dialog.accepted.connect(function() {
+            linkModel.location = LinkModel.Multireddit;
+            linkModel.multireddit = dialog.multiredditName;
+            linkModel.refresh(false);
+        });
+    }
 
     SilicaListView {
         id: linkListView
@@ -53,25 +89,15 @@ AbstractPage {
             MenuItem {
                 text: "More"
                 onClicked: {
-                    var page = pageStack.push(Qt.resolvedUrl("MainPageMorePage.qml"),  {enableFrontPage: isSubreddit});
-                    page.subredditsClicked.connect(function() {
-                        var p = {}
-                        if (quickdditManager.isSignedIn) {
-                            if (!__subredditDialogModel)
-                                __subredditDialogModel = __subredditDialogModelComponent.createObject(mainPage);
-                            p.subredditModel = __subredditDialogModel;
-                        }
-                        var dialog = pageStack.replace(Qt.resolvedUrl("SubredditDialog.qml"), p);
-                        dialog.accepted.connect(function() {
-                            if (!dialog.acceptDestination)
-                                refresh(dialog.text);
-                        })
-                    })
+                    var page = pageStack.push(Qt.resolvedUrl("MainPageMorePage.qml"),
+                                              {enableFrontPage: linkModel.location != LinkModel.FrontPage });
+                    page.subredditsClicked.connect(__openSubreddiitDialog);
+                    page.multiredditsClicked.connect(__openMultiredditDialog);
                 }
             }
             MenuItem {
                 text: "About /r/" + linkModel.subreddit
-                visible: isSubreddit
+                visible: linkModel.location == LinkModel.Subreddit
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: linkModel.subreddit});
                 }
@@ -97,7 +123,7 @@ AbstractPage {
         delegate: LinkDelegate {
             menu: Component { LinkMenu {} }
             showMenuOnPressAndHold: false
-            showSubreddit: isSubreddit
+            showSubreddit: linkModel.location != LinkModel.Subreddit
             onClicked: {
                 var p = { link: model, linkVoteManager: linkVoteManager };
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);

@@ -26,6 +26,7 @@
 class LinkObject;
 class CommentObject;
 class SubredditObject;
+class MultiredditObject;
 
 namespace Parser
 {
@@ -36,6 +37,8 @@ CommentObject parseNewComment(const QByteArray &json);
 
 SubredditObject parseSubreddit(const QByteArray &json);
 QList<SubredditObject> parseSubredditList(const QByteArray &json);
+
+QList<MultiredditObject> parseMultiredditList(const QByteArray &json);
 
 QList< QPair<QString, QString> > parseImgurImages(const QByteArray &json);
 }

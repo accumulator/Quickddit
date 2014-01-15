@@ -153,7 +153,7 @@ Sheet {
             clip: true
             model: visible ? subredditModel : 0
             delegate: ListItem {
-                height: subscribedSubredditText.paintedHeight + 2 * constant.paddingXLarge
+                height: 64
 
                 Text {
                     id: subscribedSubredditText

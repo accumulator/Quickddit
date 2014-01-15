@@ -78,7 +78,7 @@ Page {
                 cache: false
                 fillMode: Image.PreserveAspectFit
                 // pause the animation when app is in background
-                paused: imageViewPage.status != PageStatus.Active || !platformWindow.active
+                paused: imageViewPage.status != PageStatus.Active || !Qt.application.active
 
                 onScaleChanged: {
                     if ((width * scale) > flickable.width) {

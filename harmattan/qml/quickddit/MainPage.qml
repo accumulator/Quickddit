@@ -24,11 +24,17 @@ AbstractPage {
     id: mainPage
     objectName: "mainPage"
 
-    /*readonly*/ property bool isSubreddit: linkModel.subreddit != "" && linkModel.subreddit.toLowerCase() != "all"
     /*readonly*/ property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top"]
 
     function refresh(subreddit) {
-        linkModel.subreddit = subreddit;
+        if (subreddit === undefined || subreddit == "") {
+            linkModel.location = LinkModel.FrontPage;
+        } else if (subreddit.toLowerCase() == "all") {
+            linkModel.location = LinkModel.All;
+        } else {
+            linkModel.location = LinkModel.Subreddit;
+            linkModel.subreddit = subreddit;
+        }
         linkModel.refresh(false);
     }
 
@@ -58,7 +64,7 @@ AbstractPage {
         }
         ToolIcon {
             iconSource: "image://theme/icon-l-user-guide-main-view"
-            enabled: isSubreddit
+            enabled: linkModel.location == LinkModel.Subreddit
             opacity: enabled ? 1 : 0.25
             onClicked: {
                 pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: linkModel.subreddit});
@@ -77,12 +83,17 @@ AbstractPage {
         MenuLayout {
             MenuItem {
                 text: "Front Page"
-                enabled: isSubreddit
-                onClicked: mainPage.refresh("");
+                enabled: linkModel.location != LinkModel.FrontPage
+                onClicked: mainPage.refresh();
             }
             MenuItem {
                 text: "Subreddits"
                 onClicked: dialogManager.createSubredditDialog();
+            }
+            MenuItem {
+                text: "Multireddits"
+                enabled: quickdditManager.isSignedIn
+                onClicked: dialogManager.createMultiredditDialog();
             }
             MenuItem {
                 text: "Search"
@@ -105,7 +116,7 @@ AbstractPage {
         model: linkModel
         delegate: LinkDelegate {
             menu: Component { LinkMenu {} }
-            showSubreddit: !isSubreddit
+            showSubreddit: linkModel.location != LinkModel.Subreddit
             onClicked: {
                 var p = { link: model, linkVoteManager: linkVoteManager };
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);
@@ -150,6 +161,7 @@ AbstractPage {
         id: dialogManager
 
         property Component __subredditDialogComponent: null
+        property Component __multiredditDialogComponent: null
         property Component __searchDialogComponent: null
 
         property Component __subredditDialogModelComponent: Component {
@@ -160,6 +172,14 @@ AbstractPage {
             }
         }
         property QtObject __subredditDialogModel
+
+        property Component __multiredditModelComponent: Component {
+            MultiredditModel {
+                manager: quickdditManager
+                onError: infoBanner.alert(errorString);
+            }
+        }
+        property QtObject __multiredditModel
 
         function createSubredditDialog() {
             if (!__subredditDialogComponent)
@@ -180,10 +200,28 @@ AbstractPage {
                 if (dialog.browseSubreddits) {
                     pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml"));
                 } else {
-                    linkModel.subreddit = dialog.text;
-                    linkModel.refresh(false);
+                    mainPage.refresh(dialog.text);
                 }
             });
+            dialog.open();
+        }
+
+        function createMultiredditDialog() {
+            if (!__multiredditDialogComponent)
+                __multiredditDialogComponent = Qt.createComponent("MultiredditDialog.qml");
+            if (!__multiredditModel)
+                __multiredditModel = __multiredditModelComponent.createObject(mainPage);
+            var dialog = __multiredditDialogComponent.createObject(mainPage, {multiredditModel: __multiredditModel});
+            dialog.statusChanged.connect(function() {
+                if (dialog.status == DialogStatus.Closed) {
+                    dialog.destroy(250);
+                }
+            });
+            dialog.accepted.connect(function() {
+                linkModel.location = LinkModel.Multireddit;
+                linkModel.multireddit = dialog.multiredditName;
+                linkModel.refresh(false);
+            })
             dialog.open();
         }
 

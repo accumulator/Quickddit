@@ -26,6 +26,7 @@
 #include "linkobject.h"
 #include "commentobject.h"
 #include "subredditobject.h"
+#include "multiredditobject.h"
 
 QString unescapeHtml(const QString &html)
 {
@@ -219,6 +220,36 @@ QList<SubredditObject> Parser::parseSubredditList(const QByteArray &json)
     }
 
     return subredditList;
+}
+
+QList<MultiredditObject> Parser::parseMultiredditList(const QByteArray &json)
+{
+    bool ok;
+    const QVariantList list = QtJson::parse(json, ok).toList();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    QList<MultiredditObject> multredditList;
+    foreach (const QVariant multiredditJson, list) {
+        const QVariantMap multiredditMap = multiredditJson.toMap().value("data").toMap();
+
+        MultiredditObject multireddit;
+        multireddit.setName(multiredditMap.value("name").toString());
+        multireddit.setCreated(QDateTime::fromTime_t(multiredditMap.value("created_utc").toInt()));
+
+        QStringList subreddits;
+        foreach (const QVariant &subredditObj, multiredditMap.value("subreddits").toList()) {
+            subreddits.append(subredditObj.toMap().value("name").toString());
+        }
+        multireddit.setSubreddits(subreddits);
+        multireddit.setVisibility(multiredditMap.value("visibility").toString());
+        multireddit.setPath(multiredditMap.value("path").toString());
+        multireddit.setCanEdit(multiredditMap.value("can_edit").toBool());
+
+        multredditList.append(multireddit);
+    }
+
+    return multredditList;
 }
 
 // Private

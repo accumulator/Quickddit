@@ -26,7 +26,7 @@
 #include "parser.h"
 
 LinkModel::LinkModel(QObject *parent) :
-    AbstractListModelManager(parent), m_section(HotSection), m_searchSort(RelevanceSort),
+    AbstractListModelManager(parent), m_location(FrontPage), m_section(HotSection), m_searchSort(RelevanceSort),
     m_searchTimeRange(AllTime), m_reply(0)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
@@ -40,7 +40,7 @@ void LinkModel::classBegin()
 
 void LinkModel::componentComplete()
 {
-    if (m_section == SearchSection && m_searchQuery.isEmpty())
+    if (m_location == Search && m_searchQuery.isEmpty())
         return;
 
     refresh(false);
@@ -91,6 +91,19 @@ QString LinkModel::title() const
     return m_title;
 }
 
+LinkModel::Location LinkModel::location() const
+{
+    return m_location;
+}
+
+void LinkModel::setLocation(LinkModel::Location location)
+{
+    if (m_location != location) {
+        m_location = location;
+        emit locationChanged();
+    }
+}
+
 LinkModel::Section LinkModel::section() const
 {
     return m_section;
@@ -114,6 +127,19 @@ void LinkModel::setSubreddit(const QString &subreddit)
     if (m_subreddit != subreddit) {
         m_subreddit = subreddit;
         emit subredditChanged();
+    }
+}
+
+QString LinkModel::multireddit() const
+{
+    return m_multireddit;
+}
+
+void LinkModel::setMultireddit(const QString &multireddit)
+{
+    if (m_multireddit != multireddit) {
+        m_multireddit = multireddit;
+        emit multiredditChanged();
     }
 }
 
@@ -165,19 +191,30 @@ void LinkModel::refresh(bool refreshOlder)
         m_reply = 0;
     }
 
-    QString relativeUrl = "/";
+    QString relativeUrl;
     QHash<QString,QString> parameters;
     parameters["limit"] = "50";
 
-    if (m_section == SearchSection) {
+    switch (m_location) {
+    case FrontPage:
+        relativeUrl += "/" + getSectionString(m_section);
+        break;
+    case All:
+        relativeUrl += "/r/all/" + getSectionString(m_section);
+        break;
+    case Subreddit:
+        if (m_subreddit.isEmpty() || m_subreddit.compare("all", Qt::CaseInsensitive) == 0)
+            qWarning("LinkModel::refresh(): Set location to FrontPage or All instead");
+        relativeUrl += "/r/" + m_subreddit + "/" + getSectionString(m_section);
+        break;
+    case Multireddit:
+        relativeUrl += "/me/m/" + m_multireddit + "/" + getSectionString(m_section);
+        break;
+    case Search:
         parameters["q"] = m_searchQuery;
         parameters["sort"] = getSearchSortString(m_searchSort);
         parameters["t"] = getSearchTimeRangeString(m_searchTimeRange);
-        relativeUrl += "search";
-    } else {
-        if (!m_subreddit.isEmpty())
-            relativeUrl += "r/" + m_subreddit + "/";
-        relativeUrl += getSectionString(m_section);
+        relativeUrl = "/search";
     }
 
     if (!m_linkList.isEmpty()) {

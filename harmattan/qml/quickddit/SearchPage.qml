@@ -95,7 +95,7 @@ AbstractPage {
 
     LinkModel {
         id: searchModel
-        section: LinkModel.SearchSection
+        location: LinkModel.Search
         manager: quickdditManager
         onError: infoBanner.alert(errorString);
     }

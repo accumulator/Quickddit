@@ -8,6 +8,7 @@ AbstractPage {
     property bool enableFrontPage
 
     signal subredditsClicked
+    signal multiredditsClicked
 
     Flickable {
         anchors.fill: parent
@@ -37,7 +38,7 @@ AbstractPage {
                 }
 
                 onClicked: {
-                    pageStack.previousPage().refresh("");
+                    pageStack.previousPage().refresh();
                     pageStack.pop();
                 }
             }
@@ -54,6 +55,23 @@ AbstractPage {
                 }
 
                 onClicked: subredditsClicked();
+            }
+
+            BackgroundItem {
+                id: multiredditsItem
+                height: Theme.itemSizeSmall
+                enabled: quickdditManager.isSignedIn
+
+                Label {
+                    anchors {
+                        left: parent.left; right: parent.right; margins: constant.paddingLarge
+                        verticalCenter: parent.verticalCenter
+                    }
+                    color: multiredditsItem.enabled ? constant.colorLight : constant.colorDisabled
+                    text: "Multireddits"
+                }
+
+                onClicked: multiredditsClicked();
             }
 
             BackgroundItem {
