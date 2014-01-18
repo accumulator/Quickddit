@@ -96,6 +96,11 @@ AbstractPage {
                 onClicked: dialogManager.createMultiredditDialog();
             }
             MenuItem {
+                text: "Messages"
+                enabled: quickdditManager.isSignedIn
+                onClicked: pageStack.push(Qt.resolvedUrl("MessagePage.qml"));
+            }
+            MenuItem {
                 text: "Search"
                 onClicked: dialogManager.createSearchDialog();
             }

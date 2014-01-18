@@ -28,7 +28,9 @@ HEADERS += \
     ../src/votemanager.h \
     ../src/commentmanager.h \
     ../src/multiredditobject.h \
-    ../src/multiredditmodel.h
+    ../src/multiredditmodel.h \
+    ../src/messageobject.h \
+    ../src/messagemodel.h
 
 SOURCES += main.cpp \
     ../src/linkobject.cpp \
@@ -50,7 +52,9 @@ SOURCES += main.cpp \
     ../src/votemanager.cpp \
     ../src/commentmanager.cpp \
     ../src/multiredditobject.cpp \
-    ../src/multiredditmodel.cpp
+    ../src/multiredditmodel.cpp \
+    ../src/messageobject.cpp \
+    ../src/messagemodel.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h

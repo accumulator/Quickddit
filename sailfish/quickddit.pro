@@ -38,7 +38,9 @@ HEADERS += \
     ../src/votemanager.h \
     ../src/commentmanager.h \
     ../src/multiredditobject.h \
-    ../src/multiredditmodel.h
+    ../src/multiredditmodel.h \
+    ../src/messageobject.h \
+    ../src/messagemodel.h
 
 SOURCES += quickddit.cpp \
     ../src/linkobject.cpp \
@@ -60,7 +62,9 @@ SOURCES += quickddit.cpp \
     ../src/votemanager.cpp \
     ../src/commentmanager.cpp \
     ../src/multiredditmodel.cpp \
-    ../src/multiredditobject.cpp
+    ../src/multiredditobject.cpp \
+    ../src/messageobject.cpp \
+    ../src/messagemodel.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h
@@ -98,4 +102,6 @@ OTHER_FILES += \
     qml/cover/quickddit.png \
     qml/TextAreaDialog.qml \
     qml/MainPageMorePage.qml \
-    qml/MultiredditDialog.qml
+    qml/MultiredditDialog.qml \
+    qml/MessagePage.qml \
+    qml/MessageDelegate.qml

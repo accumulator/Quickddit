@@ -35,7 +35,7 @@
 #define REDDIT_REDIRECT_URL ""
 #endif
 
-#define REDDIT_OAUTH_SCOPE "read,mysubreddits,subscribe,vote,submit,edit,identity"
+#define REDDIT_OAUTH_SCOPE "read,mysubreddits,subscribe,vote,submit,edit,identity,privatemessages"
 
 // for GET request
 static void setUrlQuery(QUrl *url, const QHash<QString, QString> &parameters)

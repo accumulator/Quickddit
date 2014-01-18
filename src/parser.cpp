@@ -27,6 +27,7 @@
 #include "commentobject.h"
 #include "subredditobject.h"
 #include "multiredditobject.h"
+#include "messageobject.h"
 
 QString unescapeHtml(const QString &html)
 {
@@ -250,6 +251,35 @@ QList<MultiredditObject> Parser::parseMultiredditList(const QByteArray &json)
     }
 
     return multredditList;
+}
+
+QList<MessageObject> Parser::parseMessageList(const QByteArray &json)
+{
+    bool ok;
+    const QVariantList messagesJson = QtJson::parse(json, ok).toMap().value("data").toMap().value("children").toList();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    QList<MessageObject> messageList;
+    foreach (const QVariant &messageObject, messagesJson) {
+        const QVariantMap messageMap = messageObject.toMap().value("data").toMap();
+
+        MessageObject message;
+        message.setFullname(messageMap.value("name").toString());
+        message.setAuthor(messageMap.value("author").toString());
+        message.setBody(unescapeHtml(messageMap.value("body_html").toString()));
+        message.setCreated(QDateTime::fromTime_t(messageMap.value("created_utc").toInt()));
+        message.setSubject(messageMap.value("subject").toString());
+        message.setLinkTitle(messageMap.value("link_title").toString());
+        message.setSubreddit(messageMap.value("subreddit").toString());
+        message.setContext(messageMap.value("context").toString());
+        message.setComment(messageMap.value("was_comment").toBool());
+        message.setUnread(messageMap.value("new").toBool());
+
+        messageList.append(message);
+    }
+
+    return messageList;
 }
 
 // Private
