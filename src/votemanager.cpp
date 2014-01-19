@@ -20,32 +20,9 @@
 
 #include <QtNetwork/QNetworkReply>
 
-#include "linkmodel.h"
-#include "commentmodel.h"
-
 VoteManager::VoteManager(QObject *parent) :
-    AbstractManager(parent), m_model(0)
+    AbstractManager(parent)
 {
-}
-
-VoteManager::Type VoteManager::type() const
-{
-    return m_type;
-}
-
-void VoteManager::setType(VoteManager::Type type)
-{
-    m_type = type;
-}
-
-QObject *VoteManager::model() const
-{
-    return m_model;
-}
-
-void VoteManager::setModel(QObject *model)
-{
-    m_model = model;
 }
 
 void VoteManager::vote(const QString &fullname, VoteManager::VoteType voteType)
@@ -62,14 +39,7 @@ void VoteManager::vote(const QString &fullname, VoteManager::VoteType voteType)
 
     QHash<QString, QString> parameters;
     parameters["id"] = m_fullname;
-    switch (voteType) {
-    case Upvote:
-        parameters["dir"] = "1"; break;
-    case Downvote:
-        parameters["dir"] = "-1"; break;
-    case Unvote:
-        parameters["dir"] = "0"; break;
-    }
+    parameters["dir"] = QString::number(voteTypeToLikes(m_voteType));
 
     connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
             SLOT(onNetworkReplyReceived(QNetworkReply*)));
@@ -93,21 +63,23 @@ void VoteManager::onNetworkReplyReceived(QNetworkReply *reply)
 
 void VoteManager::onFinished()
 {
-    if (m_reply->error() == QNetworkReply::NoError) {
-        if (m_type == Link) {
-            LinkModel *model = qobject_cast<LinkModel*>(m_model);
-            Q_ASSERT(model != 0);
-            model->changeVote(m_fullname, m_voteType);
-        } else {
-            CommentModel *model = qobject_cast<CommentModel*>(m_model);
-            Q_ASSERT(model != 0);
-            model->changeVote(m_fullname, m_voteType);
-        }
-    } else {
+    if (m_reply->error() == QNetworkReply::NoError)
+        emit voteSuccess(m_fullname, voteTypeToLikes(m_voteType));
+    else
         emit error(m_reply->errorString());
-    }
 
     m_reply->deleteLater();
     m_reply = 0;
     setBusy(false);
+}
+
+int VoteManager::voteTypeToLikes(VoteType voteType)
+{
+    switch (voteType) {
+    case Upvote: return 1;
+    case Downvote: return -1;
+    case Unvote: return 0;
+    // shouldn't happens
+    default: qFatal("VoteManager::voteTypeToLikes(): Invalid VoteType"); return 0;
+    }
 }

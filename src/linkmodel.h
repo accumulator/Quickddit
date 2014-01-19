@@ -21,7 +21,6 @@
 
 #include "abstractlistmodelmanager.h"
 #include "linkobject.h"
-#include "votemanager.h"
 
 class LinkModel : public AbstractListModelManager
 {
@@ -125,9 +124,8 @@ public:
     SearchTimeRange searchTimeRange() const;
     void setSearchTimeRange(SearchTimeRange timeRange);
 
-    void changeVote(const QString &fullname, VoteManager::VoteType voteType);
-
     void refresh(bool refreshOlder);
+    Q_INVOKABLE void changeLikes(const QString &fullname, int likes);
 
 protected:
     QHash<int, QByteArray> customRoleNames() const;

@@ -157,8 +157,7 @@ AbstractPage {
     VoteManager {
         id: linkVoteManager
         manager: quickdditManager
-        type: VoteManager.Link
-        model: linkModel
+        onVoteSuccess: linkModel.changeLikes(fullname, likes);
         onError: infoBanner.alert(errorString);
     }
 

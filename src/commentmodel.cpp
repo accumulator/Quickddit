@@ -116,28 +116,6 @@ void CommentModel::setSort(CommentModel::SortType sort)
     }
 }
 
-void CommentModel::changeVote(const QString &fullname, VoteManager::VoteType voteType)
-{
-    for (int i = 0; i < m_commentList.count(); ++i) {
-        CommentObject comment = m_commentList.at(i);
-
-        if (comment.fullname() == fullname) {
-            int oldLikes = comment.likes();
-            switch (voteType) {
-            case VoteManager::Upvote:
-                comment.setLikes(1); break;
-            case VoteManager::Downvote:
-                comment.setLikes(-1); break;
-            case VoteManager::Unvote:
-                comment.setLikes(0); break;
-            }
-            comment.setScore(comment.score() + (comment.likes() - oldLikes));
-            emit dataChanged(index(i), index(i));
-            break;
-        }
-    }
-}
-
 void CommentModel::insertComment(CommentObject comment, const QString &replyToFullname)
 {
     int insertIndex = 0;
@@ -238,6 +216,21 @@ int CommentModel::getParentIndex(int index) const
 
     qWarning("CommentModel::getParentIndex(): Cannot find parent index");
     return index;
+}
+
+void CommentModel::changeLikes(const QString &fullname, int likes)
+{
+    for (int i = 0; i < m_commentList.count(); ++i) {
+        CommentObject comment = m_commentList.at(i);
+
+        if (comment.fullname() == fullname) {
+            int oldLikes = comment.likes();
+            comment.setLikes(likes);
+            comment.setScore(comment.score() + (comment.likes() - oldLikes));
+            emit dataChanged(index(i), index(i));
+            break;
+        }
+    }
 }
 
 QHash<int, QByteArray> CommentModel::customRoleNames() const

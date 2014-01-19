@@ -305,8 +305,7 @@ AbstractPage {
     VoteManager {
         id: commentVoteManager
         manager: quickdditManager
-        type: VoteManager.Comment
-        model: commentModel
+        onVoteSuccess: commentModel.changeLikes(fullname, likes);
         onError: infoBanner.alert(errorString);
     }
 

@@ -21,7 +21,6 @@
 
 #include "abstractlistmodelmanager.h"
 #include "commentobject.h"
-#include "votemanager.h"
 
 class CommentModel : public AbstractListModelManager
 {
@@ -68,7 +67,6 @@ public:
     void setSort(SortType sort);
 
     // C++ functions
-    void changeVote(const QString &fullname, VoteManager::VoteType voteType);
     void insertComment(CommentObject comment, const QString &replyToFullname);
     void editComment(CommentObject comment);
     void deleteComment(const QString &fullname);
@@ -76,6 +74,7 @@ public:
     // QML functions
     void refresh(bool refreshOlder);
     Q_INVOKABLE int getParentIndex(int index) const;
+    Q_INVOKABLE void changeLikes(const QString &fullname, int likes);
 
 protected:
     QHash<int, QByteArray> customRoleNames() const;
