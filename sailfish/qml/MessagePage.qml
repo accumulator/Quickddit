@@ -53,7 +53,12 @@ AbstractPage {
         header: PageHeader { title: messagePage.title }
 
         // TODO: implements onClicked action and menu for onPressAndHold
-        delegate: MessageDelegate {}
+        delegate: MessageDelegate {
+            onClicked: {
+                if (model.isComment)
+                    pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
+            }
+        }
 
         PushUpMenu {
             MenuItem {

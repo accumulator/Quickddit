@@ -55,7 +55,12 @@ AbstractPage {
         model: messageModel
 
         // TODO: implements onClicked action and menu for onPressAndHold
-        delegate: MessageDelegate {}
+        delegate: MessageDelegate {
+            onClicked: {
+                if (model.isComment)
+                    pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
+            }
+        }
 
         footer: Item {
             width: ListView.view.width

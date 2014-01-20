@@ -25,6 +25,31 @@
 #include "utils.h"
 #include "parser.h"
 
+QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
+{
+    QVariantMap map;
+    map["fullname"] = link.fullname();
+    switch (link.distinguished()) {
+    case LinkObject::DistinguishedByModerator: map["author"] = link.author() + " [M]"; break;
+    case LinkObject::DistinguishedByAdmin: map["author"] = link.author() + " [A]"; break;
+    default: map["author"] = link.author(); break;
+    }
+    map["created"] = Utils::getTimeDiff(link.created());
+    map["subreddit"] = link.subreddit();
+    map["score"] = link.score();
+    map["likes"] = link.likes();
+    map["commentsCount"] = link.commentsCount();
+    map["title"] = link.title();
+    map["domain"] = link.domain();
+    map["thumbnailUrl"] = link.thumbnailUrl();
+    map["text"] = link.text();
+    map["permalink"] = link.permalink();
+    map["url"] = link.url();
+    map["isSticky"] = link.isSticky();
+    map["isNSFW"] = link.isNSFW();
+    return map;
+}
+
 LinkModel::LinkModel(QObject *parent) :
     AbstractListModelManager(parent), m_location(FrontPage), m_section(HotSection), m_searchSort(RelevanceSort),
     m_searchTimeRange(AllTime), m_reply(0)

@@ -24,9 +24,10 @@
 #include "utils.h"
 #include "parser.h"
 #include "appsettings.h"
+#include "linkmodel.h"
 
 CommentModel::CommentModel(QObject *parent) :
-    AbstractListModelManager(parent), m_sort(ConfidenceSort), m_reply(0)
+    AbstractListModelManager(parent), m_link(0), m_sort(ConfidenceSort), m_reply(0)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
@@ -87,6 +88,19 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     default:
         qCritical("CommentModel::data(): Invalid role");
         return QVariant();
+    }
+}
+
+QVariant CommentModel::link() const
+{
+    return m_link;
+}
+
+void CommentModel::setLink(const QVariant &link)
+{
+    if (m_link != link) {
+        m_link = link;
+        emit linkChanged();
     }
 }
 
@@ -199,9 +213,22 @@ void CommentModel::refresh(bool refreshOlder)
     QHash<QString, QString> parameters;
     parameters["sort"] = getSortString(m_sort);
 
+    QUrl permalinkUrl(m_permalink);
+    if (permalinkUrl.hasQuery()) {
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
+        QListIterator<QPair<QString, QString> > i(QUrlQuery(permalinkUrl).queryItems());
+#else
+        QListIterator<QPair<QString, QString> > i(permalinkUrl.queryItems());
+#endif
+        while (i.hasNext()) {
+            const QPair<QString, QString> &query = i.next();
+            parameters.insert(query.first, query.second);
+        }
+    }
+
     connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
             SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::GET, m_permalink, parameters);
+    manager()->createRedditRequest(QuickdditManager::GET, permalinkUrl.toString(QUrl::RemoveQuery), parameters);
 
     setBusy(true);
 }
@@ -216,6 +243,27 @@ int CommentModel::getParentIndex(int index) const
 
     qWarning("CommentModel::getParentIndex(): Cannot find parent index");
     return index;
+}
+
+void CommentModel::changeLinkLikes(const QString &fullname, int likes)
+{
+    if (!m_link.type() == QVariant::Map) {
+        qWarning("CommentModel::changeLinkLikes(): link is not provided by CommentModel");
+        return;
+    }
+
+    QVariantMap linkMap = m_link.toMap();
+
+    if (linkMap.value("fullname").toString() != fullname) {
+        qCritical("CommentModel::changeLinkLikes(): fullname not match");
+        return;
+    }
+
+    int oldLikes = linkMap.value("likes").toInt();
+    linkMap["likes"] = likes;
+    linkMap["score"] = linkMap["score"].toInt() + (likes - oldLikes);
+    m_link = linkMap;
+    emit linkChanged();
 }
 
 void CommentModel::changeLikes(const QString &fullname, int likes)
@@ -266,11 +314,15 @@ void CommentModel::onNetworkReplyReceived(QNetworkReply *reply)
 void CommentModel::onFinished()
 {
     if (m_reply->error() == QNetworkReply::NoError) {
-        const QList<CommentObject> comments = Parser::parseCommentList(m_reply->readAll());
-        if (!comments.isEmpty()) {
-            beginInsertRows(QModelIndex(), m_commentList.count(), m_commentList.count() + comments.count() - 1);
-            m_commentList.append(comments);
+        const QPair< LinkObject, QList<CommentObject> > comments = Parser::parseCommentList(m_reply->readAll());
+        if (!comments.second.isEmpty()) {
+            beginInsertRows(QModelIndex(), m_commentList.count(), m_commentList.count() + comments.second.count() - 1);
+            m_commentList.append(comments.second);
             endInsertRows();
+        }
+        if (!m_link.canConvert<QObject *>()) {
+            m_link = LinkModel::toLinkVariantMap(comments.first);
+            emit linkChanged();
         }
     } else {
         emit error(m_reply->errorString());

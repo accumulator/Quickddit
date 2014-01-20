@@ -93,6 +93,8 @@ public:
         Year
     };
 
+    static QVariantMap toLinkVariantMap(const LinkObject &link);
+
     explicit LinkModel(QObject *parent = 0);
 
     void classBegin();

@@ -26,6 +26,7 @@ class CommentModel : public AbstractListModelManager
 {
     Q_OBJECT
     Q_ENUMS(SortType)
+    Q_PROPERTY(QVariant link READ link WRITE setLink NOTIFY linkChanged)
     Q_PROPERTY(QString permalink READ permalink WRITE setPermalink NOTIFY permalinkChanged)
     Q_PROPERTY(SortType sort READ sort WRITE setSort NOTIFY sortChanged)
 public:
@@ -60,6 +61,9 @@ public:
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
 
+    QVariant link() const;
+    void setLink(const QVariant &link);
+
     QString permalink() const;
     void setPermalink(const QString &permalink);
 
@@ -74,12 +78,14 @@ public:
     // QML functions
     void refresh(bool refreshOlder);
     Q_INVOKABLE int getParentIndex(int index) const;
+    Q_INVOKABLE void changeLinkLikes(const QString &fullname, int likes);
     Q_INVOKABLE void changeLikes(const QString &fullname, int likes);
 
 protected:
     QHash<int, QByteArray> customRoleNames() const;
 
 signals:
+    void linkChanged();
     void permalinkChanged();
     void sortChanged();
     void commentLoaded();
@@ -89,6 +95,7 @@ private slots:
     void onFinished();
 
 private:
+    QVariant m_link;
     QString m_permalink;
     SortType m_sort;
 

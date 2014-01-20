@@ -23,7 +23,8 @@ import Quickddit.Core 1.0
 AbstractPage {
     id: commentPage
 
-    property variant link
+    property alias link: commentModel.link
+    property alias linkPermalink: commentModel.permalink
     property VoteManager linkVoteManager
 
     /*readonly*/ property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
@@ -47,7 +48,7 @@ AbstractPage {
         dialog.open();
     }
 
-    title: "Comments: " + link.title
+    title: "Comments" + (link ? ": " + link.title : "")
     busy: commentModel.busy || commentVoteManager.busy || commentManager.busy || linkVoteManager.busy
     onHeaderClicked: commentListView.positionViewAtBeginning();
 
@@ -58,7 +59,7 @@ AbstractPage {
         }
         ToolIcon {
             platformIconId: "toolbar-add"
-            enabled: quickdditManager.isSignedIn && !commentManager.busy
+            enabled: quickdditManager.isSignedIn && !commentManager.busy && !!link
             opacity: enabled ? 1 : 0.25
             onClicked: __createCommentDialog("Add Comment", link.fullname);
         }
@@ -89,10 +90,12 @@ AbstractPage {
         MenuLayout {
             MenuItem {
                 text: "Share"
+                enabled: !!link
                 onClicked: QMLUtils.shareUrl(QMLUtils.getRedditShortUrl(link.fullname), link.title);
             }
             MenuItem {
                 text: "Permalink"
+                enabled: !!link
                 onClicked: globalUtils.createOpenLinkDialog(QMLUtils.toAbsoluteUrl(link.permalink));
             }
         }
@@ -105,6 +108,209 @@ AbstractPage {
 
         anchors.fill: parent
         model: commentModel
+
+        header: link ? headerComponent : null
+
+        Component {
+            id: headerComponent
+
+            Column {
+                width: commentListView.width
+                height: childrenRect.height
+                spacing: constant.paddingMedium
+
+                // dummy item for top spacing
+                Item {
+                    anchors { left: parent.left; right: parent.right }
+                    height: 1
+                }
+
+                Item {
+                    id: titleWrapper
+                    anchors { left: parent.left; right: parent.right }
+                    height: Math.max(titleColumn.height, thumbnail.height)
+
+                    Column {
+                        id: titleColumn
+                        anchors {
+                            left: parent.left
+                            right: thumbnail.left
+                            margins: constant.paddingMedium
+                            verticalCenter: parent.verticalCenter
+                        }
+                        height: childrenRect.height
+                        spacing: constant.paddingMedium
+
+                        Text {
+                            id: titleText
+                            anchors { left: parent.left; right: parent.right }
+                            wrapMode: Text.Wrap
+                            font.pixelSize: constant.fontSizeDefault
+                            color: constant.colorLight
+                            font.bold: true
+                            text: link.title + " (" + link.domain + ")"
+                        }
+
+                        Text {
+                            id: timeAndAuthorText
+                            anchors { left: parent.left; right: parent.right }
+                            wrapMode: Text.Wrap
+                            font.pixelSize: constant.fontSizeDefault
+                            color: constant.colorMid
+                            text: "submitted " + link.created + " by " + link.author +
+                                  " to " + link.subreddit
+                        }
+
+                        Row {
+                            anchors { left: parent.left; right: parent.right }
+                            spacing: constant.paddingMedium
+
+                            CustomCountBubble {
+                                value: link.score
+                                colorMode: link.likes
+                            }
+
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                font.pixelSize: constant.fontSizeDefault
+                                color: constant.colorLight
+                                text: "points"
+                            }
+
+                            CustomCountBubble {
+                                value: link.commentsCount
+                            }
+
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                font.pixelSize: constant.fontSizeDefault
+                                color: constant.colorLight
+                                text: "comments"
+                            }
+
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                font.pixelSize: constant.fontSizeDefault
+                                color: "green"
+                                visible: link.isSticky
+                                text: "Sticky"
+                            }
+
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                font.pixelSize: constant.fontSizeDefault
+                                color: "red"
+                                visible: link.isNSFW
+                                text: "NSFW"
+                            }
+                        }
+                    }
+
+                    Image {
+                        id: thumbnail
+                        anchors {
+                            right: parent.right
+                            verticalCenter: parent.verticalCenter
+                            rightMargin: constant.paddingMedium
+                        }
+                        source: link.thumbnailUrl
+                        asynchronous: true
+                    }
+                }
+
+                ButtonRow {
+                    anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                    exclusive: false
+
+                    Button {
+                        iconSource: "image://theme/icon-m-toolbar-up" + (enabled ? "" : "-dimmed")
+                                    + (appSettings.whiteTheme ? "" : "-white")
+                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
+                        checked: link.likes == 1
+                        onClicked: {
+                            if (checked)
+                                linkVoteManager.vote(link.fullname, VoteManager.Unvote)
+                            else
+                                linkVoteManager.vote(link.fullname, VoteManager.Upvote)
+                        }
+                    }
+
+                    Button {
+                        iconSource: "image://theme/icon-m-toolbar-down" + (enabled ? "" : "-dimmed")
+                                    + (appSettings.whiteTheme ? "" : "-white")
+                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
+                        checked: link.likes == -1
+                        onClicked: {
+                            if (checked)
+                                linkVoteManager.vote(link.fullname, VoteManager.Unvote)
+                            else
+                                linkVoteManager.vote(link.fullname, VoteManager.Downvote)
+                        }
+                    }
+
+                    Button {
+                        iconSource: "image://theme/icon-m-toolbar-gallery" + (enabled ? "" : "-dimmed")
+                                    + (appSettings.whiteTheme ? "" : "-white")
+                        enabled: {
+                            if (!link) return false;
+                            if (link.domain == "i.imgur.com" || link.domain == "imgur.com")
+                                return true;
+                            if (/^https?:\/\/.+\.(jpe?g|png|gif)/i.test(link.url))
+                                return true;
+                            else
+                                return false;
+                        }
+                        onClicked: {
+                            var p = {};
+                            if (link.domain == "imgur.com")
+                                p.imgurUrl = link.url;
+                            else
+                                p.imageUrl = link.url;
+                            pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), p);
+                        }
+                    }
+
+                    Button {
+                        iconSource: "image://theme/icon-l-browser-main-view"
+                        onClicked: globalUtils.createOpenLinkDialog(link.url);
+                    }
+                }
+
+                Column {
+                    id: bodyWrapper
+                    anchors { left: parent.left; right: parent.right }
+                    height: visible ? childrenRect.height : 0
+                    spacing: constant.paddingMedium
+                    visible: false
+
+                    Rectangle {
+                        anchors { left: parent.left; right: parent.right }
+                        height: 1
+                        color: constant.colorMid
+                    }
+
+                    Text {
+                        id: bodyText
+                        anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                        wrapMode: Text.Wrap
+                        textFormat: Text.RichText
+                        font.pixelSize: constant.fontSizeDefault
+                        color: constant.colorLight
+                        text: link.text
+                        onLinkActivated: globalUtils.openInTextLink(link);
+                    }
+
+                    Component.onCompleted: commentListView.headerBodyWrapper = bodyWrapper;
+                }
+
+                Rectangle {
+                    anchors { left: parent.left; right: parent.right }
+                    height: 1
+                    color: constant.colorMid
+                }
+            }
+        }
+
         delegate: CommentDelegate {
             id: commentDelegate
             menu: Component { CommentMenu {} }
@@ -127,201 +333,6 @@ AbstractPage {
                 });
             }
         }
-        header: Column {
-            width: ListView.view.width
-            height: childrenRect.height
-            spacing: constant.paddingMedium
-
-            // dummy item for top spacing
-            Item {
-                anchors { left: parent.left; right: parent.right }
-                height: 1
-            }
-
-            Item {
-                id: titleWrapper
-                anchors { left: parent.left; right: parent.right }
-                height: Math.max(titleColumn.height, thumbnail.height)
-
-                Column {
-                    id: titleColumn
-                    anchors {
-                        left: parent.left
-                        right: thumbnail.left
-                        margins: constant.paddingMedium
-                        verticalCenter: parent.verticalCenter
-                    }
-                    height: childrenRect.height
-                    spacing: constant.paddingMedium
-
-                    Text {
-                        id: titleText
-                        anchors { left: parent.left; right: parent.right }
-                        wrapMode: Text.Wrap
-                        font.pixelSize: constant.fontSizeDefault
-                        color: constant.colorLight
-                        font.bold: true
-                        text: link.title + " (" + link.domain + ")"
-                    }
-
-                    Text {
-                        id: timeAndAuthorText
-                        anchors { left: parent.left; right: parent.right }
-                        wrapMode: Text.Wrap
-                        font.pixelSize: constant.fontSizeDefault
-                        color: constant.colorMid
-                        text: "submitted " + link.created + " by " + link.author +
-                              " to " + link.subreddit
-                    }
-
-                    Row {
-                        anchors { left: parent.left; right: parent.right }
-                        spacing: constant.paddingMedium
-
-                        CustomCountBubble {
-                            value: link.score
-                            colorMode: link.likes
-                        }
-
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.pixelSize: constant.fontSizeDefault
-                            color: constant.colorLight
-                            text: "points"
-                        }
-
-                        CustomCountBubble {
-                            value: link.commentsCount
-                        }
-
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.pixelSize: constant.fontSizeDefault
-                            color: constant.colorLight
-                            text: "comments"
-                        }
-
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.pixelSize: constant.fontSizeDefault
-                            color: "green"
-                            visible: link.isSticky
-                            text: "Sticky"
-                        }
-
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.pixelSize: constant.fontSizeDefault
-                            color: "red"
-                            visible: link.isNSFW
-                            text: "NSFW"
-                        }
-                    }
-                }
-
-                Image {
-                    id: thumbnail
-                    anchors {
-                        right: parent.right
-                        verticalCenter: parent.verticalCenter
-                        rightMargin: constant.paddingMedium
-                    }
-                    source: link.thumbnailUrl
-                    asynchronous: true
-                }
-            }
-
-            ButtonRow {
-                anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-                exclusive: false
-
-                Button {
-                    iconSource: "image://theme/icon-m-toolbar-up" + (enabled ? "" : "-dimmed")
-                                + (appSettings.whiteTheme ? "" : "-white")
-                    enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
-                    checked: link.likes == 1
-                    onClicked: {
-                        if (checked)
-                            linkVoteManager.vote(link.fullname, VoteManager.Unvote)
-                        else
-                            linkVoteManager.vote(link.fullname, VoteManager.Upvote)
-                    }
-                }
-
-                Button {
-                    iconSource: "image://theme/icon-m-toolbar-down" + (enabled ? "" : "-dimmed")
-                                + (appSettings.whiteTheme ? "" : "-white")
-                    enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
-                    checked: link.likes == -1
-                    onClicked: {
-                        if (checked)
-                            linkVoteManager.vote(link.fullname, VoteManager.Unvote)
-                        else
-                            linkVoteManager.vote(link.fullname, VoteManager.Downvote)
-                    }
-                }
-
-                Button {
-                    iconSource: "image://theme/icon-m-toolbar-gallery" + (enabled ? "" : "-dimmed")
-                                + (appSettings.whiteTheme ? "" : "-white")
-                    enabled: {
-                        if (!link) return false;
-                        if (link.domain == "i.imgur.com" || link.domain == "imgur.com")
-                            return true;
-                        if (/^https?:\/\/.+\.(jpe?g|png|gif)/i.test(link.url))
-                            return true;
-                        else
-                            return false;
-                    }
-                    onClicked: {
-                        var p = {};
-                        if (link.domain == "imgur.com")
-                            p.imgurUrl = link.url;
-                        else
-                            p.imageUrl = link.url;
-                        pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), p);
-                    }
-                }
-
-                Button {
-                    iconSource: "image://theme/icon-l-browser-main-view"
-                    onClicked: globalUtils.createOpenLinkDialog(link.url);
-                }
-            }
-
-            Column {
-                id: bodyWrapper
-                anchors { left: parent.left; right: parent.right }
-                height: visible ? childrenRect.height : 0
-                spacing: constant.paddingMedium
-                visible: false
-
-                Rectangle {
-                    anchors { left: parent.left; right: parent.right }
-                    height: 1
-                    color: constant.colorMid
-                }
-
-                Text {
-                    id: bodyText
-                    anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-                    wrapMode: Text.Wrap
-                    textFormat: Text.RichText
-                    font.pixelSize: constant.fontSizeDefault
-                    color: constant.colorLight
-                    text: link.text
-                    onLinkActivated: globalUtils.openInTextLink(link);
-                }
-
-                Component.onCompleted: commentListView.headerBodyWrapper = bodyWrapper;
-            }
-
-            Rectangle {
-                anchors { left: parent.left; right: parent.right }
-                height: 1
-                color: constant.colorMid
-            }
-        }
     }
 
     ScrollDecorator { flickableItem: commentListView }
@@ -332,25 +343,34 @@ AbstractPage {
         permalink: link.permalink
         onError: infoBanner.alert(errorString)
         onCommentLoaded: {
-            if (link.text) {
+            if (link.text)
                 commentListView.headerBodyWrapper.visible = true;
-                commentListView.positionViewAtBeginning();
-            }
+            commentListView.positionViewAtBeginning();
         }
     }
 
     VoteManager {
         id: commentVoteManager
         manager: quickdditManager
-        onVoteSuccess: commentModel.changeLikes(fullname, likes);
+        onVoteSuccess: {
+            if (fullname.indexOf("t1") === 0) // comment
+                commentModel.changeLikes(fullname, likes);
+            else if (fullname.indexOf("t3") === 0) // link
+                commentModel.changeLinkLikes(fullname, likes);
+        }
         onError: infoBanner.alert(errorString);
     }
 
     CommentManager {
         id: commentManager
         manager: quickdditManager
+        linkAuthor: link ? link.author: ""
         model: commentModel
-        linkAuthor: link.author
         onError: infoBanner.alert(errorString);
+    }
+
+    Component.onCompleted: {
+        if (!linkVoteManager)
+            linkVoteManager = commentVoteManager;
     }
 }

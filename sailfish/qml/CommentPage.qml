@@ -25,7 +25,8 @@ AbstractPage {
     title: "Comments"
     busy: commentModel.busy || commentVoteManager.busy || commentManager.busy || linkVoteManager.busy
 
-    property variant link
+    property alias link: commentModel.link
+    property alias linkPermalink: commentModel.permalink
     property VoteManager linkVoteManager
 
     readonly property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
@@ -47,6 +48,7 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
+                enabled: !!link
                 text: "Permalink"
                 onClicked: globalUtils.createOpenLinkDialog(QMLUtils.toAbsoluteUrl(link.permalink));
             }
@@ -59,212 +61,220 @@ AbstractPage {
                 });
             }
             MenuItem {
+                enabled: quickdditManager.isSignedIn && !commentManager.busy && !!link
                 text: "Add comment"
                 onClicked: __createCommentDialog("Add Comment", link.fullname);
             }
             MenuItem {
+                enabled: !commentModel.busy
                 text: "Refresh"
                 onClicked: commentModel.refresh(false);
             }
         }
 
-        header: Column {
-            width: parent.width
-            height: childrenRect.height
+        header: link ? headerComponent : null
 
-            PageHeader { title: commentPage.title }
-
-            Item {
-                id: titleWrapper
-                anchors { left: parent.left; right: parent.right }
-                height: Math.max(titleColumn.height, thumbnail.height)
-
-                Column {
-                    id: titleColumn
-                    anchors {
-                        left: parent.left
-                        right: thumbnail.left
-                        margins: constant.paddingMedium
-                        verticalCenter: parent.verticalCenter
-                    }
-                    height: childrenRect.height
-                    spacing: constant.paddingMedium
-
-                    Text {
-                        id: titleText
-                        anchors { left: parent.left; right: parent.right }
-                        wrapMode: Text.Wrap
-                        font.pixelSize: constant.fontSizeDefault
-                        color: constant.colorLight
-                        font.bold: true
-                        text: link.title + " (" + link.domain + ")"
-                    }
-
-                    Text {
-                        id: timeAndAuthorText
-                        anchors { left: parent.left; right: parent.right }
-                        wrapMode: Text.Wrap
-                        font.pixelSize: constant.fontSizeDefault
-                        color: constant.colorMid
-                        text: "submitted " + link.created + " by " + link.author +
-                              " to " + link.subreddit
-                    }
-
-                    Row {
-                        anchors { left: parent.left; right: parent.right }
-                        spacing: constant.paddingMedium
-
-                        CustomCountBubble {
-                            value: link.score
-                            colorMode: link.likes
-                        }
-
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.pixelSize: constant.fontSizeDefault
-                            color: constant.colorLight
-                            text: "points"
-                        }
-
-                        CustomCountBubble {
-                            value: link.commentsCount
-                        }
-
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.pixelSize: constant.fontSizeDefault
-                            color: constant.colorLight
-                            text: "comments"
-                        }
-
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.pixelSize: constant.fontSizeDefault
-                            color: "green"
-                            visible: link.isSticky
-                            text: "Sticky"
-                        }
-
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.pixelSize: constant.fontSizeDefault
-                            color: "red"
-                            visible: link.isNSFW
-                            text: "NSFW"
-                        }
-                    }
-                }
-
-                Image {
-                    id: thumbnail
-                    anchors {
-                        right: parent.right
-                        verticalCenter: parent.verticalCenter
-                        rightMargin: constant.paddingMedium
-                    }
-                    source: link.thumbnailUrl
-                    asynchronous: true
-                }
-            }
-
-            Row {
-                anchors.horizontalCenter: parent.horizontalCenter
-                height: Theme.iconSizeLarge
-                spacing: constant.paddingLarge
-
-                IconButton {
-                    anchors.verticalCenter: parent.verticalCenter
-                    icon.height: Theme.iconSizeLarge - constant.paddingMedium
-                    icon.width: Theme.iconSizeLarge - constant.paddingMedium
-                    icon.source: "image://theme/icon-l-up"
-                    enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
-                    highlighted: link.likes == 1
-                    onClicked: {
-                        if (highlighted)
-                            linkVoteManager.vote(link.fullname, VoteManager.Unvote)
-                        else
-                            linkVoteManager.vote(link.fullname, VoteManager.Upvote)
-                    }
-                }
-
-                IconButton {
-                    anchors.verticalCenter: parent.verticalCenter
-                    icon.height: Theme.iconSizeLarge - constant.paddingMedium
-                    icon.width: Theme.iconSizeLarge - constant.paddingMedium
-                    icon.source: "image://theme/icon-l-down"
-                    enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
-                    highlighted: link.likes == -1
-                    onClicked: {
-                        if (highlighted)
-                            linkVoteManager.vote(link.fullname, VoteManager.Unvote)
-                        else
-                            linkVoteManager.vote(link.fullname, VoteManager.Downvote)
-                    }
-                }
-
-                IconButton {
-                    anchors.verticalCenter: parent.verticalCenter
-                    icon.height: Theme.iconSizeLarge - constant.paddingMedium
-                    icon.width: Theme.iconSizeLarge - constant.paddingMedium
-                    icon.source: "image://theme/icon-l-image"
-                    enabled: {
-                        if (!link) return false;
-                        if (link.domain == "i.imgur.com" || link.domain == "imgur.com")
-                            return true;
-                        if (/^https?:\/\/.+\.(jpe?g|png|gif)/i.test(link.url))
-                            return true;
-                        else
-                            return false;
-                    }
-                    onClicked: {
-                        var p = {};
-                        if (link.domain == "imgur.com")
-                            p.imgurUrl = link.url;
-                        else
-                            p.imageUrl = link.url;
-                        pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), p);
-                    }
-                }
-
-                IconButton {
-                    anchors.verticalCenter: parent.verticalCenter
-                    icon.height: Theme.iconSizeLarge - constant.paddingLarge
-                    icon.width: Theme.iconSizeLarge - constant.paddingLarge
-                    icon.source: "image://theme/icon-lock-social"
-                    onClicked: globalUtils.createOpenLinkDialog(link.url);
-                }
-            }
+        Component {
+            id: headerComponent
 
             Column {
-                id: bodyWrapper
-                anchors { left: parent.left; right: parent.right }
+                width: parent.width
                 height: childrenRect.height
-                spacing: constant.paddingMedium
-                visible: bodyText.text.length > 0
+
+                PageHeader { title: commentPage.title }
+
+                Item {
+                    id: titleWrapper
+                    anchors { left: parent.left; right: parent.right }
+                    height: Math.max(titleColumn.height, thumbnail.height)
+
+                    Column {
+                        id: titleColumn
+                        anchors {
+                            left: parent.left
+                            right: thumbnail.left
+                            margins: constant.paddingMedium
+                            verticalCenter: parent.verticalCenter
+                        }
+                        height: childrenRect.height
+                        spacing: constant.paddingMedium
+
+                        Text {
+                            id: titleText
+                            anchors { left: parent.left; right: parent.right }
+                            wrapMode: Text.Wrap
+                            font.pixelSize: constant.fontSizeDefault
+                            color: constant.colorLight
+                            font.bold: true
+                            text: link.title + " (" + link.domain + ")"
+                        }
+
+                        Text {
+                            id: timeAndAuthorText
+                            anchors { left: parent.left; right: parent.right }
+                            wrapMode: Text.Wrap
+                            font.pixelSize: constant.fontSizeDefault
+                            color: constant.colorMid
+                            text: "submitted " + link.created + " by " + link.author +
+                                  " to " + link.subreddit
+                        }
+
+                        Row {
+                            anchors { left: parent.left; right: parent.right }
+                            spacing: constant.paddingMedium
+
+                            CustomCountBubble {
+                                value: link.score
+                                colorMode: link.likes
+                            }
+
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                font.pixelSize: constant.fontSizeDefault
+                                color: constant.colorLight
+                                text: "points"
+                            }
+
+                            CustomCountBubble {
+                                value: link.commentsCount
+                            }
+
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                font.pixelSize: constant.fontSizeDefault
+                                color: constant.colorLight
+                                text: "comments"
+                            }
+
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                font.pixelSize: constant.fontSizeDefault
+                                color: "green"
+                                visible: link.isSticky
+                                text: "Sticky"
+                            }
+
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                font.pixelSize: constant.fontSizeDefault
+                                color: "red"
+                                visible: link.isNSFW
+                                text: "NSFW"
+                            }
+                        }
+                    }
+
+                    Image {
+                        id: thumbnail
+                        anchors {
+                            right: parent.right
+                            verticalCenter: parent.verticalCenter
+                            rightMargin: constant.paddingMedium
+                        }
+                        source: link.thumbnailUrl
+                        asynchronous: true
+                    }
+                }
+
+                Row {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    height: Theme.iconSizeLarge
+                    spacing: constant.paddingLarge
+
+                    IconButton {
+                        anchors.verticalCenter: parent.verticalCenter
+                        icon.height: Theme.iconSizeLarge - constant.paddingMedium
+                        icon.width: Theme.iconSizeLarge - constant.paddingMedium
+                        icon.source: "image://theme/icon-l-up"
+                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
+                        highlighted: link.likes == 1
+                        onClicked: {
+                            if (highlighted)
+                                linkVoteManager.vote(link.fullname, VoteManager.Unvote)
+                            else
+                                linkVoteManager.vote(link.fullname, VoteManager.Upvote)
+                        }
+                    }
+
+                    IconButton {
+                        anchors.verticalCenter: parent.verticalCenter
+                        icon.height: Theme.iconSizeLarge - constant.paddingMedium
+                        icon.width: Theme.iconSizeLarge - constant.paddingMedium
+                        icon.source: "image://theme/icon-l-down"
+                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
+                        highlighted: link.likes == -1
+                        onClicked: {
+                            if (highlighted)
+                                linkVoteManager.vote(link.fullname, VoteManager.Unvote)
+                            else
+                                linkVoteManager.vote(link.fullname, VoteManager.Downvote)
+                        }
+                    }
+
+                    IconButton {
+                        anchors.verticalCenter: parent.verticalCenter
+                        icon.height: Theme.iconSizeLarge - constant.paddingMedium
+                        icon.width: Theme.iconSizeLarge - constant.paddingMedium
+                        icon.source: "image://theme/icon-l-image"
+                        enabled: {
+                            if (!link) return false;
+                            if (link.domain == "i.imgur.com" || link.domain == "imgur.com")
+                                return true;
+                            if (/^https?:\/\/.+\.(jpe?g|png|gif)/i.test(link.url))
+                                return true;
+                            else
+                                return false;
+                        }
+                        onClicked: {
+                            var p = {};
+                            if (link.domain == "imgur.com")
+                                p.imgurUrl = link.url;
+                            else
+                                p.imageUrl = link.url;
+                            pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), p);
+                        }
+                    }
+
+                    IconButton {
+                        anchors.verticalCenter: parent.verticalCenter
+                        icon.height: Theme.iconSizeLarge - constant.paddingLarge
+                        icon.width: Theme.iconSizeLarge - constant.paddingLarge
+                        icon.source: "image://theme/icon-lock-social"
+                        onClicked: globalUtils.createOpenLinkDialog(link.url);
+                    }
+                }
+
+                Column {
+                    id: bodyWrapper
+                    anchors { left: parent.left; right: parent.right }
+                    height: childrenRect.height
+                    spacing: constant.paddingMedium
+                    visible: bodyText.text.length > 0
+
+                    Separator {
+                        anchors { left: parent.left; right: parent.right }
+                        color: constant.colorMid
+                    }
+
+                    Text {
+                        id: bodyText
+                        anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                        wrapMode: Text.Wrap
+                        textFormat: Text.RichText
+                        font.pixelSize: constant.fontSizeDefault
+                        color: constant.colorLight
+                        text: link.text
+                        onLinkActivated: globalUtils.openInTextLink(link);
+                    }
+
+                    // For spacing after text
+                    Item { anchors { left: parent.left; right: parent.right } height: 1 }
+                }
 
                 Separator {
                     anchors { left: parent.left; right: parent.right }
                     color: constant.colorMid
                 }
-
-                Text {
-                    id: bodyText
-                    anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-                    wrapMode: Text.Wrap
-                    textFormat: Text.RichText
-                    font.pixelSize: constant.fontSizeDefault
-                    color: constant.colorLight
-                    text: link.text
-                    onLinkActivated: globalUtils.openInTextLink(link);
-                }
-
-                // For spacing after text
-                Item { anchors { left: parent.left; right: parent.right } height: 1 }
-            }
-
-            Separator {
-                anchors { left: parent.left; right: parent.right }
-                color: constant.colorMid
             }
         }
 
@@ -300,12 +310,18 @@ AbstractPage {
         manager: quickdditManager
         permalink: link.permalink
         onError: infoBanner.alert(errorString)
+        onCommentLoaded: commentListView.positionViewAtBeginning();
     }
 
     VoteManager {
         id: commentVoteManager
         manager: quickdditManager
-        onVoteSuccess: commentModel.changeLikes(fullname, likes);
+        onVoteSuccess: {
+            if (fullname.indexOf("t1") === 0) // comment
+                commentModel.changeLikes(fullname, likes);
+            else if (fullname.indexOf("t3") === 0) // link
+                commentModel.changeLinkLikes(fullname, likes);
+        }
         onError: infoBanner.alert(errorString);
     }
 
@@ -313,7 +329,12 @@ AbstractPage {
         id: commentManager
         manager: quickdditManager
         model: commentModel
-        linkAuthor: link.author
+        linkAuthor: link ? link.author : ""
         onError: infoBanner.alert(errorString);
+    }
+
+    Component.onCompleted: {
+        if (!linkVoteManager)
+            linkVoteManager = commentVoteManager;
     }
 }
