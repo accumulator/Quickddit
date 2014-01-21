@@ -308,6 +308,32 @@ AbstractPage {
                     height: 1
                     color: constant.colorMid
                 }
+
+                Column {
+                    anchors { left: parent.left; right: parent.right }
+                    visible: commentModel.commentPermalink
+                    height: visible ? childrenRect.height : 0
+                    spacing: constant.paddingMedium
+
+                    Text {
+                        anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                        wrapMode: Text.Wrap
+                        font.pixelSize: constant.fontSizeMedium
+                        font.bold: true
+                        color: constant.colorLight
+                        horizontalAlignment: Text.AlignHCenter
+                        text: "Viewing a single comment's thread"
+                    }
+
+                    Button {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: "View All Comments"
+                        onClicked: {
+                            commentModel.commentPermalink = false;
+                            commentModel.refresh(false);
+                        }
+                    }
+                }
             }
         }
 

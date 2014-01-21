@@ -275,6 +275,35 @@ AbstractPage {
                     anchors { left: parent.left; right: parent.right }
                     color: constant.colorMid
                 }
+
+                Item {
+                    anchors { left: parent.left; right: parent.right }
+                    height: visible ? viewAllCommentColumn.height + 2 * constant.paddingMedium : 0
+                    visible: commentModel.commentPermalink
+
+                    Column {
+                        id: viewAllCommentColumn
+                        anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
+                        height: childrenRect.height
+
+                        Label {
+                            anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                            wrapMode: Text.Wrap
+                            font.bold: true
+                            horizontalAlignment: Text.AlignHCenter
+                            text: "Viewing a single comment's thread"
+                        }
+
+                        Button {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: "View All Comments"
+                            onClicked: {
+                                commentModel.commentPermalink = false;
+                                commentModel.refresh(false);
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -310,6 +339,7 @@ AbstractPage {
         manager: quickdditManager
         permalink: link.permalink
         onError: infoBanner.alert(errorString)
+        // FIXME: not position at top completely after comments are loaded
         onCommentLoaded: commentListView.positionViewAtBeginning();
     }
 

@@ -55,6 +55,8 @@ PageStackWindow {
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
             else if (/^https?:\/\/.+\.(jpe?g|png|gif)/i.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
+            else if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
+                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
             else
                 createOpenLinkDialog(url);
         }

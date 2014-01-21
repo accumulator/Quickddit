@@ -19,12 +19,19 @@
 #include "commentmodel.h"
 
 #include <QtCore/QDateTime>
+#include <QtCore/QRegExp>
 #include <QtNetwork/QNetworkReply>
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
+#include <QtCore/QUrlQuery>
+#endif
 
 #include "utils.h"
 #include "parser.h"
 #include "appsettings.h"
 #include "linkmodel.h"
+
+static QRegExp commentPermalinkRegExp("(/r/\\w+)?/comments/\\w+/\\w+/(\\w+/?)");
 
 CommentModel::CommentModel(QObject *parent) :
     AbstractListModelManager(parent), m_link(0), m_sort(ConfidenceSort), m_reply(0)
@@ -114,6 +121,14 @@ void CommentModel::setPermalink(const QString &permalink)
     if (m_permalink != permalink) {
         m_permalink = permalink;
         emit permalinkChanged();
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
+        bool hasCommentQuery = QUrlQuery(QUrl(m_permalink)).hasQueryItem("comment");
+#else
+        bool hasCommentQuery = QUrl(m_permalink).hasQueryItem("comment");
+#endif
+        if (m_permalink.contains(commentPermalinkRegExp) || hasCommentQuery)
+            setCommentPermalink(true);
     }
 }
 
@@ -127,6 +142,19 @@ void CommentModel::setSort(CommentModel::SortType sort)
     if (m_sort != sort) {
         m_sort = sort;
         emit sortChanged();
+    }
+}
+
+bool CommentModel::isCommentPermalink() const
+{
+    return m_commentPermalink;
+}
+
+void CommentModel::setCommentPermalink(bool commentPermalink)
+{
+    if (m_commentPermalink != commentPermalink) {
+        m_commentPermalink = commentPermalink;
+        emit commentPermalinkChanged();
     }
 }
 
@@ -222,13 +250,19 @@ void CommentModel::refresh(bool refreshOlder)
 #endif
         while (i.hasNext()) {
             const QPair<QString, QString> &query = i.next();
+            if (!m_commentPermalink && query.first == "comment")
+                continue;
             parameters.insert(query.first, query.second);
         }
     }
 
+    QString relativeUrl = permalinkUrl.path();
+    if (!m_commentPermalink && relativeUrl.contains(commentPermalinkRegExp))
+        relativeUrl.remove(commentPermalinkRegExp.cap(2));
+
     connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
             SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::GET, permalinkUrl.toString(QUrl::RemoveQuery), parameters);
+    manager()->createRedditRequest(QuickdditManager::GET, relativeUrl, parameters);
 
     setBusy(true);
 }
@@ -315,14 +349,14 @@ void CommentModel::onFinished()
 {
     if (m_reply->error() == QNetworkReply::NoError) {
         const QPair< LinkObject, QList<CommentObject> > comments = Parser::parseCommentList(m_reply->readAll());
+        if (!m_link.canConvert<QObject *>()) {
+            m_link = LinkModel::toLinkVariantMap(comments.first);
+            emit linkChanged();
+        }
         if (!comments.second.isEmpty()) {
             beginInsertRows(QModelIndex(), m_commentList.count(), m_commentList.count() + comments.second.count() - 1);
             m_commentList.append(comments.second);
             endInsertRows();
-        }
-        if (!m_link.canConvert<QObject *>()) {
-            m_link = LinkModel::toLinkVariantMap(comments.first);
-            emit linkChanged();
         }
     } else {
         emit error(m_reply->errorString());

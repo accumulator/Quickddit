@@ -29,6 +29,7 @@ class CommentModel : public AbstractListModelManager
     Q_PROPERTY(QVariant link READ link WRITE setLink NOTIFY linkChanged)
     Q_PROPERTY(QString permalink READ permalink WRITE setPermalink NOTIFY permalinkChanged)
     Q_PROPERTY(SortType sort READ sort WRITE setSort NOTIFY sortChanged)
+    Q_PROPERTY(bool commentPermalink READ isCommentPermalink WRITE setCommentPermalink NOTIFY commentPermalinkChanged)
 public:
     enum Roles {
         FullnameRole = Qt::UserRole,
@@ -70,6 +71,9 @@ public:
     SortType sort() const;
     void setSort(SortType sort);
 
+    bool isCommentPermalink() const;
+    void setCommentPermalink(bool commentPermalink);
+
     // C++ functions
     void insertComment(CommentObject comment, const QString &replyToFullname);
     void editComment(CommentObject comment);
@@ -88,6 +92,7 @@ signals:
     void linkChanged();
     void permalinkChanged();
     void sortChanged();
+    void commentPermalinkChanged();
     void commentLoaded();
 
 private slots:
@@ -98,6 +103,7 @@ private:
     QVariant m_link;
     QString m_permalink;
     SortType m_sort;
+    bool m_commentPermalink;
 
     QList<CommentObject> m_commentList;
     QNetworkReply *m_reply;
