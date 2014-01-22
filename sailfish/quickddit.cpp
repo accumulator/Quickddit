@@ -35,6 +35,7 @@
 #include "src/aboutsubredditmanager.h"
 #include "src/multiredditmodel.h"
 #include "src/messagemodel.h"
+#include "src/messagemanager.h"
 #include "src/imgurmanager.h"
 #include "src/votemanager.h"
 #include "src/commentmanager.h"
@@ -55,6 +56,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<AboutSubredditManager>("harbour.quickddit.Core", 1, 0, "AboutSubredditManager");
     qmlRegisterType<MultiredditModel>("harbour.quickddit.Core", 1, 0, "MultiredditModel");
     qmlRegisterType<MessageModel>("harbour.quickddit.Core", 1, 0, "MessageModel");
+    qmlRegisterType<MessageManager>("harbour.quickddit.Core", 1, 0, "MessageManager");
     qmlRegisterType<ImgurManager>("harbour.quickddit.Core", 1, 0, "ImgurManager");
     qmlRegisterType<VoteManager>("harbour.quickddit.Core", 1, 0, "VoteManager");
     qmlRegisterType<CommentManager>("harbour.quickddit.Core", 1, 0, "CommentManager");

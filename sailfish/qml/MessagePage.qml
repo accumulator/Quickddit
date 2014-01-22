@@ -23,7 +23,7 @@ import harbour.quickddit.Core 1.0
 AbstractPage {
     id: messagePage
     title: "Messages - " + sectionModel[messageModel.section]
-    busy: messageModel.busy
+    busy: messageModel.busy || messageManager.busy
 
     readonly property variant sectionModel: ["All", "Unread", "Message", "Comment Replies", "Post Replies", "Sent"]
 
@@ -52,12 +52,20 @@ AbstractPage {
 
         header: PageHeader { title: messagePage.title }
 
-        // TODO: implements onClicked action and menu for onPressAndHold
         delegate: MessageDelegate {
+            menu: Component { MessageMenu {} }
+            showMenuOnPressAndHold: false
             onClicked: {
-                if (model.isComment)
+                if (model.isComment) {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
+                } else {
+                    var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {titleText: "Reply Message"});
+                    dialog.accepted.connect(function() {
+                        messageManager.reply(model.fullname, dialog.text);
+                    });
+                }
             }
+            onPressAndHold: showMenu({message: model, messageManager: messageManager})
         }
 
         PushUpMenu {
@@ -77,5 +85,13 @@ AbstractPage {
         id: messageModel
         manager: quickdditManager
         onError: infoBanner.alert(errorString)
+    }
+
+    MessageManager {
+        id: messageManager
+        manager: quickdditManager
+        onReplySuccess: infoBanner.alert("Message sent");
+        onMarkReadStatusSuccess: messageModel.changeIsUnread(fullname, isUnread);
+        onError: infoBanner.alert(errorString);
     }
 }

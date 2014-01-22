@@ -122,6 +122,19 @@ void MessageModel::refresh(bool refreshOlder)
     manager()->createRedditRequest(QuickdditManager::GET, relativeUrl, parameters);
 }
 
+void MessageModel::changeIsUnread(const QString &fullname, bool isUnread)
+{
+    QList<MessageObject>::iterator i;
+    for (i = m_messageList.begin(); i != m_messageList.end(); ++i) {
+        if (i->fullname() == fullname) {
+            i->setUnread(isUnread);
+            int changedIndex = i - m_messageList.begin();
+            emit dataChanged(index(changedIndex), index(changedIndex));
+            break;
+        }
+    }
+}
+
 QHash<int, QByteArray> MessageModel::customRoleNames() const
 {
     QHash<int, QByteArray> roles;

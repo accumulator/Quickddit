@@ -30,6 +30,7 @@
 #include "src/aboutsubredditmanager.h"
 #include "src/multiredditmodel.h"
 #include "src/messagemodel.h"
+#include "src/messagemanager.h"
 #include "src/imgurmanager.h"
 #include "src/votemanager.h"
 #include "src/commentmanager.h"
@@ -50,6 +51,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<AboutSubredditManager>("Quickddit.Core", 1, 0, "AboutSubredditManager");
     qmlRegisterType<MultiredditModel>("Quickddit.Core", 1, 0, "MultiredditModel");
     qmlRegisterType<MessageModel>("Quickddit.Core", 1, 0, "MessageModel");
+    qmlRegisterType<MessageManager>("Quickddit.Core", 1, 0, "MessageManager");
     qmlRegisterType<ImgurManager>("Quickddit.Core", 1, 0, "ImgurManager");
     qmlRegisterType<VoteManager>("Quickddit.Core", 1, 0, "VoteManager");
     qmlRegisterType<CommentManager>("Quickddit.Core", 1, 0, "CommentManager");

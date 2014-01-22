@@ -62,6 +62,7 @@ public:
     void setSection(Section section);
 
     void refresh(bool refreshOlder);
+    Q_INVOKABLE void changeIsUnread(const QString &fullname, bool isUnread);
 
 signals:
     void sectionChanged();

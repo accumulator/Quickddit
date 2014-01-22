@@ -40,7 +40,8 @@ HEADERS += \
     ../src/multiredditobject.h \
     ../src/multiredditmodel.h \
     ../src/messageobject.h \
-    ../src/messagemodel.h
+    ../src/messagemodel.h \
+    ../src/messagemanager.h
 
 SOURCES += quickddit.cpp \
     ../src/linkobject.cpp \
@@ -64,7 +65,8 @@ SOURCES += quickddit.cpp \
     ../src/multiredditmodel.cpp \
     ../src/multiredditobject.cpp \
     ../src/messageobject.cpp \
-    ../src/messagemodel.cpp
+    ../src/messagemodel.cpp \
+    ../src/messagemanager.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h
@@ -104,4 +106,5 @@ OTHER_FILES += \
     qml/MainPageMorePage.qml \
     qml/MultiredditDialog.qml \
     qml/MessagePage.qml \
-    qml/MessageDelegate.qml
+    qml/MessageDelegate.qml \
+    qml/MessageMenu.qml

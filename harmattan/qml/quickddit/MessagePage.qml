@@ -23,10 +23,24 @@ import Quickddit.Core 1.0
 AbstractPage {
     id: messagePage
     title: "Messages - " + sectionModel[messageModel.section]
-    busy: messageModel.busy
+    busy: messageModel.busy || messageManager.busy
     onHeaderClicked: messageListView.positionViewAtBeginning();
 
     /*readonly*/ property variant sectionModel: ["All", "Unread", "Message", "Comment Replies", "Post Replies", "Sent"]
+    property Component __textAreaDialogComponent: null
+
+    function __createTextAreaDialog(titleText) {
+        if (!__textAreaDialogComponent)
+            __textAreaDialogComponent = Qt.createComponent("TextAreaDialog.qml");
+        var dialog = __textAreaDialogComponent.createObject(messagePage, {titleText: titleText});
+        dialog.statusChanged.connect(function() {
+            if (dialog.status == DialogStatus.Closed) {
+                dialog.destroy(250);
+            }
+        });
+        dialog.open();
+        return dialog;
+    }
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -54,12 +68,19 @@ AbstractPage {
         anchors.fill: parent
         model: messageModel
 
-        // TODO: implements onClicked action and menu for onPressAndHold
         delegate: MessageDelegate {
+            menu: Component { MessageMenu {} }
             onClicked: {
-                if (model.isComment)
+                if (model.isComment) {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
+                } else {
+                    var dialog = __createTextAreaDialog("Reply Message");
+                    dialog.accepted.connect(function() {
+                        messageManager.reply(model.fullname, dialog.text);
+                    });
+                }
             }
+            onPressAndHold: showMenu({message: model, messageManager: messageManager})
         }
 
         footer: Item {
@@ -85,6 +106,14 @@ AbstractPage {
     MessageModel {
         id: messageModel
         manager: quickdditManager
+        onError: infoBanner.alert(errorString);
+    }
+
+    MessageManager {
+        id: messageManager
+        manager: quickdditManager
+        onReplySuccess: infoBanner.alert("Message sent");
+        onMarkReadStatusSuccess: messageModel.changeIsUnread(fullname, isUnread);
         onError: infoBanner.alert(errorString);
     }
 }

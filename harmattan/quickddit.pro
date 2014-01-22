@@ -30,7 +30,8 @@ HEADERS += \
     ../src/multiredditobject.h \
     ../src/multiredditmodel.h \
     ../src/messageobject.h \
-    ../src/messagemodel.h
+    ../src/messagemodel.h \
+    ../src/messagemanager.h
 
 SOURCES += main.cpp \
     ../src/linkobject.cpp \
@@ -54,7 +55,8 @@ SOURCES += main.cpp \
     ../src/multiredditobject.cpp \
     ../src/multiredditmodel.cpp \
     ../src/messageobject.cpp \
-    ../src/messagemodel.cpp
+    ../src/messagemodel.cpp \
+    ../src/messagemanager.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h
