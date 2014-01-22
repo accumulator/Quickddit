@@ -54,6 +54,7 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
     switch (role) {
     case FullnameRole: return message.fullname();
     case AuthorRole: return message.author();
+    case DestinationRole: return message.destination();
     case BodyRole: return message.body();
     case CreatedRole: return Utils::getTimeDiff(message.created());
     case SubjectRole: return message.subject();
@@ -140,6 +141,7 @@ QHash<int, QByteArray> MessageModel::customRoleNames() const
     QHash<int, QByteArray> roles;
     roles[FullnameRole] = "fullname";
     roles[AuthorRole] = "author";
+    roles[DestinationRole] = "destination";
     roles[BodyRole] = "body";
     roles[CreatedRole] = "created";
     roles[SubjectRole] = "subject";

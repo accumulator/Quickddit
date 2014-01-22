@@ -23,6 +23,8 @@ ListItem {
     id: messageDelegate
     contentHeight: messageColumn.height + 2 * constant.paddingMedium
 
+    property bool isSentMessage: false
+
     Column {
         id: messageColumn
         anchors {
@@ -61,7 +63,8 @@ ListItem {
             wrapMode: Text.Wrap
             maximumLineCount: 2
             elide: Text.ElideRight
-            text: "from " + model.author + (model.subreddit ? " via /r/" + model.subreddit : "")
+            text: (isSentMessage ? "to " + model.destination : "from " + model.author)
+                  + (model.subreddit ? " via /r/" + model.subreddit : "")
                   + " sent " + model.created
         }
 

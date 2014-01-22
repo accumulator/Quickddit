@@ -31,6 +31,7 @@ public:
     enum Roles {
         FullnameRole = Qt::UserRole,
         AuthorRole,
+        DestinationRole,
         BodyRole,
         CreatedRole,
         SubjectRole,

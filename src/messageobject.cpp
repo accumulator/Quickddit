@@ -27,6 +27,7 @@ public:
 
     QString fullname;
     QString author;
+    QString destination;
     QString body;
     QDateTime created;
     QString subject;
@@ -78,6 +79,16 @@ QString MessageObject::author() const
 void MessageObject::setAuthor(const QString &author)
 {
     d->author = author;
+}
+
+QString MessageObject::destination() const
+{
+    return d->destination;
+}
+
+void MessageObject::setDestination(const QString &dest)
+{
+    d->destination = dest;
 }
 
 QString MessageObject::body() const

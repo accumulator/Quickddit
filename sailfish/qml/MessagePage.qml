@@ -53,19 +53,20 @@ AbstractPage {
         header: PageHeader { title: messagePage.title }
 
         delegate: MessageDelegate {
+            isSentMessage: messageModel.section == MessageModel.SentSection
             menu: Component { MessageMenu {} }
             showMenuOnPressAndHold: false
             onClicked: {
                 if (model.isComment) {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
-                } else {
+                } else if (!isSentMessage) {
                     var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {titleText: "Reply Message"});
                     dialog.accepted.connect(function() {
                         messageManager.reply(model.fullname, dialog.text);
                     });
                 }
             }
-            onPressAndHold: showMenu({message: model, messageManager: messageManager})
+            onPressAndHold: showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
         }
 
         PushUpMenu {

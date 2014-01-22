@@ -38,6 +38,9 @@ public:
     QString author() const;
     void setAuthor(const QString &author);
 
+    QString destination() const;
+    void setDestination(const QString &dest);
+
     QString body() const;
     void setBody(const QString &body);
 

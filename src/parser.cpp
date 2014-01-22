@@ -271,6 +271,7 @@ QList<MessageObject> Parser::parseMessageList(const QByteArray &json)
         MessageObject message;
         message.setFullname(messageMap.value("name").toString());
         message.setAuthor(messageMap.value("author").toString());
+        message.setDestination(messageMap.value("dest").toString());
         message.setBody(unescapeHtml(messageMap.value("body_html").toString()));
         message.setCreated(QDateTime::fromTime_t(messageMap.value("created_utc").toInt()));
         message.setSubject(messageMap.value("subject").toString());

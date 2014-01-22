@@ -69,18 +69,19 @@ AbstractPage {
         model: messageModel
 
         delegate: MessageDelegate {
+            isSentMessage: messageModel.section == MessageModel.SentSection
             menu: Component { MessageMenu {} }
             onClicked: {
                 if (model.isComment) {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
-                } else {
+                } else if (!isSentMessage) {
                     var dialog = __createTextAreaDialog("Reply Message");
                     dialog.accepted.connect(function() {
                         messageManager.reply(model.fullname, dialog.text);
                     });
                 }
             }
-            onPressAndHold: showMenu({message: model, messageManager: messageManager})
+            onPressAndHold: showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
         }
 
         footer: Item {
