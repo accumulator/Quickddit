@@ -124,15 +124,20 @@ AbstractPage {
             Component {
                 id: busyIndicatorComponent
 
-                ProgressCircle {
-                    width: Theme.iconSizeLarge
-                    height: Theme.iconSizeLarge
-                    value: imageItem.progress
-                    inAlternateCycle: true
+                Item {
+                    width: busyIndicator.width
+                    height: busyIndicator.height
+
+                    BusyIndicator {
+                        id: busyIndicator
+                        size: BusyIndicatorSize.Large
+                        running: true
+                    }
 
                     Label {
                         anchors.centerIn: parent
-                        font.pixelSize: constant.fontSizeXSmall
+                        visible: !imgurManager.busy
+                        font.pixelSize: constant.fontSizeSmall
                         text: Math.round(imageItem.progress * 100) + "%"
                     }
                 }
