@@ -171,19 +171,10 @@ Sheet {
                     subredditDialog.accept();
                 }
             }
-            footer: Item {
-                width: ListView.view.width
-                height: loadMoreButton.height + 2 * constant.paddingLarge
-                visible: ListView.view.count > 0
-
-                Button {
-                    id: loadMoreButton
-                    anchors.centerIn: parent
-                    enabled: subredditModel ? !subredditModel.busy : false
-                    width: parent.width * 0.75
-                    text: "Load More"
-                    onClicked: subredditModel.refresh(true);
-                }
+            footer: LoadMoreButton {
+                visible: ListView.view.count > 0 && !!subredditModel && subredditModel.canLoadMore
+                enabled: !!subredditModel && !subredditModel.busy
+                onClicked: subredditModel.refresh(true);
             }
         }
 

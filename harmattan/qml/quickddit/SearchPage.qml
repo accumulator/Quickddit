@@ -73,19 +73,10 @@ AbstractPage {
             }
             onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager});
         }
-        footer: Item {
-            width: ListView.view.width
-            height: loadMoreButton.height + 2 * constant.paddingLarge
-            visible: ListView.view.count > 0
-
-            Button {
-                id: loadMoreButton
-                anchors.centerIn: parent
-                enabled: !searchModel.busy
-                width: parent.width * 0.75
-                text: "Load More"
-                onClicked: searchModel.refresh(true);
-            }
+        footer: LoadMoreButton {
+            visible: ListView.view.count > 0 && searchModel.canLoadMore
+            enabled: !searchModel.busy
+            onClicked: searchModel.refresh(true);
         }
 
         ViewPlaceholder { enabled: searchListView.count == 0 && !searchModel.busy }

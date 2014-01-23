@@ -174,6 +174,9 @@ void MessageModel::onFinished()
             beginInsertRows(QModelIndex(), m_messageList.count(), m_messageList.count() + messageList.count() - 1);
             m_messageList.append(messageList);
             endInsertRows();
+            setCanLoadMore(true);
+        } else {
+            setCanLoadMore(false);
         }
     } else {
         emit error(m_reply->errorString());

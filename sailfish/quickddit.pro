@@ -107,4 +107,5 @@ OTHER_FILES += \
     qml/MultiredditDialog.qml \
     qml/MessagePage.qml \
     qml/MessageDelegate.qml \
-    qml/MessageMenu.qml
+    qml/MessageMenu.qml \
+    qml/LoadMoreMenu.qml

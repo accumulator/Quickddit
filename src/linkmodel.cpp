@@ -319,6 +319,9 @@ void LinkModel::onFinished()
             beginInsertRows(QModelIndex(), m_linkList.count(), m_linkList.count() + links.count() - 1);
             m_linkList.append(links);
             endInsertRows();
+            setCanLoadMore(true);
+        } else {
+            setCanLoadMore(false);
         }
     } else {
         emit error(m_reply->errorString());

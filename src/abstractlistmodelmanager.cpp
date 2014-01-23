@@ -19,7 +19,7 @@
 #include "abstractlistmodelmanager.h"
 
 AbstractListModelManager::AbstractListModelManager(QObject *parent) :
-    QAbstractListModel(parent), m_busy(false), m_manager(0)
+    QAbstractListModel(parent), m_busy(false), m_canLoadMore(true), m_manager(0)
 {
 }
 
@@ -33,6 +33,11 @@ QHash<int, QByteArray> AbstractListModelManager::roleNames() const
 bool AbstractListModelManager::isBusy() const
 {
     return m_busy;
+}
+
+bool AbstractListModelManager::canLoadMore() const
+{
+    return m_canLoadMore;
 }
 
 QuickdditManager *AbstractListModelManager::manager() const
@@ -50,5 +55,13 @@ void AbstractListModelManager::setBusy(bool busy)
     if (m_busy != busy) {
         m_busy = busy;
         emit busyChanged();
+    }
+}
+
+void AbstractListModelManager::setCanLoadMore(bool canLoadMore)
+{
+    if (m_canLoadMore != canLoadMore) {
+        m_canLoadMore = canLoadMore;
+        emit canLoadMoreChanged();
     }
 }

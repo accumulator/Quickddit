@@ -136,12 +136,11 @@ Dialog {
                 }
             }
 
-            PushUpMenu {
-                MenuItem {
-                    text: "Load more"
-                    enabled: subredditModel ? !subredditModel.busy : false
-                    onClicked: subredditModel.refresh(true);
-                }
+            LoadMoreMenu {
+                visible: subscribedSubredditListView.count > 0
+                loadMoreVisible: !!subredditModel && subredditModel.canLoadMore
+                loadMoreEnabled: !!subredditModel && !subredditModel.busy
+                onClicked: subredditModel.refresh(true);
             }
 
             VerticalScrollDecorator {}

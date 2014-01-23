@@ -69,12 +69,11 @@ AbstractPage {
             onPressAndHold: showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
         }
 
-        PushUpMenu {
-            MenuItem {
-                text: "Load more"
-                enabled: !messageModel.busy
-                onClicked: messageModel.refresh(true);
-            }
+        LoadMoreMenu {
+            visible: messageListView.count > 0
+            loadMoreVisible: messageModel.canLoadMore
+            loadMoreEnabled: !messageModel.busy
+            onClicked: messageModel.refresh(true);
         }
 
         ViewPlaceholder { enabled: messageListView.count == 0 && !messageModel.busy; text: "Nothing here :(" }

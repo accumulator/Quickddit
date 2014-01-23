@@ -81,12 +81,11 @@ AbstractPage {
             onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager});
         }
 
-        PushUpMenu {
-            MenuItem {
-                text: "Load more"
-                enabled: !searchModel.busy
-                onClicked: searchModel.refresh(true);
-            }
+        LoadMoreMenu {
+            visible: searchListView.count > 0
+            loadMoreVisible: searchModel.canLoadMore
+            loadMoreEnabled: !searchModel.busy
+            onClicked: searchModel.refresh(true);
         }
 
         ViewPlaceholder { enabled: searchListView.count == 0 && !searchModel.busy; text: "Nothing here :(" }

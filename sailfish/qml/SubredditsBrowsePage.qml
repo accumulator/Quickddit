@@ -69,12 +69,11 @@ AbstractPage {
             }
         }
 
-        PushUpMenu {
-            MenuItem {
-                text: "Load more"
-                enabled: !subredditModel.busy
-                onClicked: subredditModel.refresh(true);
-            }
+        LoadMoreMenu {
+            visible: subredditsListView.count > 0
+            loadMoreVisible: subredditModel.canLoadMore
+            loadMoreEnabled: !subredditModel.busy
+            onClicked: subredditModel.refresh(true);
         }
 
         ViewPlaceholder { enabled: subredditsListView.count == 0 && !subredditModel.busy; text: "Nothing here :(" }

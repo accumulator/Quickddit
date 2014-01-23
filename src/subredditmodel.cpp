@@ -190,6 +190,9 @@ void SubredditModel::onFinished()
                             m_subredditList.count() + subreddits.count() - 1);
             m_subredditList.append(subreddits);
             endInsertRows();
+            setCanLoadMore(true);
+        } else {
+            setCanLoadMore(false);
         }
     } else {
         emit error(m_reply->errorString());

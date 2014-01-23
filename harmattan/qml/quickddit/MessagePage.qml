@@ -84,19 +84,10 @@ AbstractPage {
             onPressAndHold: showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
         }
 
-        footer: Item {
-            width: ListView.view.width
-            height: loadMoreButton.height + 2 * constant.paddingLarge
-            visible: ListView.view.count > 0
-
-            Button {
-                id: loadMoreButton
-                anchors.centerIn: parent
-                enabled: !messageModel.busy
-                width: parent.width * 0.75
-                text: "Load More"
-                onClicked: messageModel.refresh(true);
-            }
+        footer: LoadMoreButton {
+            visible: ListView.view.count > 0 && messageModel.canLoadMore
+            enabled: !messageModel.busy
+            onClicked: messageModel.refresh(true);
         }
 
         ViewPlaceholder { enabled: messageListView.count == 0 && !messageModel.busy }

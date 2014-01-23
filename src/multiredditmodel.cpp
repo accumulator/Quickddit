@@ -29,6 +29,7 @@ MultiredditModel::MultiredditModel(QObject *parent) :
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
 #endif
+    setCanLoadMore(false);
 }
 
 void MultiredditModel::classBegin()
