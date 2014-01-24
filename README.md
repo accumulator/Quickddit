@@ -1,9 +1,11 @@
 Quickddit
 =========
 
-Quickddit is a free and open source Reddit client for mobile phones.
+Quickddit is a free and open source Reddit client for mobile phones. Quickddit is **not** an official client
+of Reddit and does not affiliated with Reddit in anyway.
 
 Quickddit is developed using Qt and currently available for MeeGo Harmattan (Qt 4.7.4) and Sailfish OS (Qt 5.1).
+The logic part is developed in C++ while the UI is developed in QML.
 
 Reddit API client id and secret
 ----------------------------------
@@ -15,10 +17,29 @@ id and secret](https://github.com/reddit/reddit/wiki/OAuth2) and fill it up in
 
 Optionally you can also define `IMGUR_CLIENT_ID` with your own Imgur API client id.
 
+TODO
+-----
+Below is the list of TODOs I planned for future release, before going out of `beta` status.
+
+- Submit link and self post (require Captcha)
+- Compose new message (require Captcha)
+- View multireddit info, create, edit (description, visibility, add/remove subreddits) and delete multireddits
+- Save and unsave posts
+- View additional comments that are omitted from base comments tree
+([/api/morechildren](http://www.reddit.com/dev/api#POST_api_morechildren))
+- View user profile
+- (Sailfish) Attached page for selecting section (not working in emulator)
+- (Sailfish) GIFs support (not working in emulator)
+- Support for more types of Imgur URL
+- Redesign CustomCountBubble
+- Upload to Jolla Harbour
+- Buy [reddit gold](http://www.reddit.com/gold/about)
+
+
 Download
 --------
-The binary of both Harmattan and Sailfish version available for download at
-[OpenRepos](https://openrepos.net/content/dicksonleong/quickddit).
+- MeeGo Harmattan (Nokia N9/N950): [OpenRepos](https://openrepos.net/content/dicksonleong/quickddit)
+- SailfishOS (Jolla): [OpenRepos](https://openrepos.net/content/dicksonleong/quickddit-sailfishos)
 
 License
 -------
