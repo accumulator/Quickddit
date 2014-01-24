@@ -37,43 +37,24 @@
 
 #define REDDIT_OAUTH_SCOPE "read,mysubreddits,subscribe,vote,submit,edit,identity,privatemessages"
 
-// for GET request
-static void setUrlQuery(QUrl *url, const QHash<QString, QString> &parameters)
-{
-    QHashIterator<QString, QString> i(parameters);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
-    QUrlQuery query;
-    while (i.hasNext()) {
-        i.next();
-        query.addQueryItem(i.key(), i.value());
-    }
-    url->setQuery(query);
-#else
-    while (i.hasNext()) {
-        i.next();
-        url->addQueryItem(i.key(), i.value());
-    }
-#endif
-}
-
-// for POST request
 static QByteArray toEncodedQuery(const QHash<QString, QString> &parameters)
 {
+    QByteArray encodedQuery;
     QHashIterator<QString, QString> i(parameters);
+    while (i.hasNext()) {
+        i.next();
+        encodedQuery += QUrl::toPercentEncoding(i.key()) + '=' + QUrl::toPercentEncoding(i.value()) + '&';
+    }
+    encodedQuery.chop(1); // chop the last '&'
+    return encodedQuery;
+}
+
+static void setUrlQuery(QUrl *url, const QHash<QString, QString> &parameters)
+{
 #if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
-    QUrlQuery query;
-    while (i.hasNext()) {
-        i.next();
-        query.addQueryItem(i.key(), i.value());
-    }
-    return query.toString(QUrl::FullyEncoded).toUtf8();
+    url->setQuery(QString::fromUtf8(toEncodedQuery(parameters)), QUrl::StrictMode);
 #else
-    QUrl queryUrl("http://dummy.com");
-    while (i.hasNext()) {
-        i.next();
-        queryUrl.addQueryItem(i.key(), i.value());
-    }
-    return queryUrl.encodedQuery();
+    url->setEncodedQuery(toEncodedQuery(parameters));
 #endif
 }
 
