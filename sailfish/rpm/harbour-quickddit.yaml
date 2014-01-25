@@ -4,7 +4,7 @@ Version: 0.2.0
 Release: 1
 Group: Qt/Qt
 URL: https://github.com/dicksonleong/Quickddit
-License: GPL-3+
+License: GPLv3+
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |
@@ -12,22 +12,18 @@ Description: |
 Configure: none
 Builder: qtc5
 PkgConfigBR:
-- sailfishapp >= 0.0.10
 - Qt5Core
 - Qt5Qml
 - Qt5Quick
+- Qt5Network
+- sailfishapp >= 0.0.10
 Requires:
 - sailfishsilica-qt5 >= 0.10.9
+- libsailfishapp
+- mapplauncherd-booster-silica-qt5
 - qt5-plugin-imageformat-gif
 Files:
 - '%{_bindir}'
 - '%{_datadir}/%{name}/qml'
 - '%{_datadir}/applications/%{name}.desktop'
 - '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
-- /usr/bin
-- /usr/share/harbour-quickddit
-- /usr/share/applications
-- /usr/share/icons/hicolor/86x86/apps
-PkgBR: []
-Obsoletes:
-- quickddit

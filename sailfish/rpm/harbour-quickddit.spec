@@ -16,18 +16,20 @@ Summary:    Reddit client for mobile phones
 Version:    0.2.0
 Release:    1
 Group:      Qt/Qt
-License:    GPL-3+
+License:    GPLv3+
 URL:        https://github.com/dicksonleong/Quickddit
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-quickddit.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
+Requires:   libsailfishapp
+Requires:   mapplauncherd-booster-silica-qt5
 Requires:   qt5-plugin-imageformat-gif
-BuildRequires:  pkgconfig(sailfishapp) >= 0.0.10
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  pkgconfig(Qt5Network)
+BuildRequires:  pkgconfig(sailfishapp) >= 0.0.10
 BuildRequires:  desktop-file-utils
-Obsoletes:   quickddit
 
 %description
 Quickddit is a free and open source Reddit client for mobile phones.
@@ -69,9 +71,5 @@ desktop-file-install --delete-original       \
 %{_datadir}/%{name}/qml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/86x86/apps/%{name}.png
-/usr/bin
-/usr/share/harbour-quickddit
-/usr/share/applications
-/usr/share/icons/hicolor/86x86/apps
 # >> files
 # << files
