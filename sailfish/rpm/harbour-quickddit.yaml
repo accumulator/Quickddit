@@ -18,6 +18,7 @@ PkgConfigBR:
 - Qt5Quick
 Requires:
 - sailfishsilica-qt5 >= 0.10.9
+- qt5-plugin-imageformat-gif
 Files:
 - '%{_bindir}'
 - '%{_datadir}/%{name}/qml'

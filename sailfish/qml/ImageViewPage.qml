@@ -57,8 +57,7 @@ AbstractPage {
             width: Math.max(imageItem.width * imageItem.scale, imageFlickable.width)
             height: Math.max(imageItem.height * imageItem.scale, imageFlickable.height)
 
-            // NOTE: AnimatedImage is bugged in Emulator(?), so use Image for now
-            Image {
+            AnimatedImage {
                 id: imageItem
 
                 property real prevScale
@@ -75,7 +74,7 @@ AbstractPage {
                 cache: false
                 fillMode: Image.PreserveAspectFit
                 // pause the animation when app is in background
-                //paused: imageViewPage.status != PageStatus.Active || !Qt.application.active
+                paused: imageViewPage.status != PageStatus.Active || !Qt.application.active
 
                 onScaleChanged: {
                     if ((width * scale) > imageFlickable.width) {
