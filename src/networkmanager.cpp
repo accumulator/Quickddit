@@ -22,7 +22,15 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
 
-static const QByteArray USER_AGENT = QByteArray("Quickddit/") + APP_VERSION;
+#if defined(Q_OS_HARMATTAN)
+static const QByteArray USER_AGENT = QByteArray("Quickddit/") + APP_VERSION + " (MeeGo Harmattan)";
+#elif defined(Q_OS_SAILFISH)
+static const QByteArray USER_AGENT = QByteArray("Quickddit/") + APP_VERSION + " (SailfishOS)";
+#elif defined(Q_WS_SIMULATOR)
+static const QByteArray USER_AGENT = QByteArray("Quickddit/") + APP_VERSION + " (Qt Simulator)";
+#else
+static const QByteArray USER_AGENT = QByteArray("Quickddit/") + APP_VERSION + " (Unknown)";
+#endif
 
 NetworkManager::NetworkManager(QObject *parent) :
     QObject(parent), m_networkAccessManager(new QNetworkAccessManager(this)),
