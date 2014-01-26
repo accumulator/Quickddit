@@ -35,7 +35,7 @@
 #define REDDIT_REDIRECT_URL ""
 #endif
 
-#define REDDIT_OAUTH_SCOPE "read,mysubreddits,subscribe,vote,submit,edit,identity,privatemessages"
+#define REDDIT_OAUTH_SCOPE "read,mysubreddits,subscribe,vote,submit,edit,identity,privatemessages,history,save"
 
 static QByteArray toEncodedQuery(const QHash<QString, QString> &parameters)
 {

@@ -1,3 +1,15 @@
+quickddit (0.3.0) unstable; urgency=low
+  * Add view-only multireddit support
+  * Add private message support (compose new message is not yet available)
+  * Rearrange items in toolbar/pull down menu
+  * Update about page
+  * Hide the "Load More" button/menu when no more item can be loaded
+  * Clicking on a reddit post/comment link will navigate to the post inside the app
+  * Fix falsely showing the user as the submitter when posting comment on other user's post
+  * Fix posted comment get truncated when using colon or semi-colon in the comment text
+
+ -- Dickson <dicksonleong8@gmail.com>  Sun, 26 Jan 2014 15:39:50 +0800
+
 quickddit (0.2.0) unstable; urgency=low
   * Clicking on an invalid URL will not trigger any action
   * When showing the parent comment the comment will be highlighted
