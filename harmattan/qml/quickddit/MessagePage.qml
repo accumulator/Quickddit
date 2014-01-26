@@ -26,7 +26,7 @@ AbstractPage {
     busy: messageModel.busy || messageManager.busy
     onHeaderClicked: messageListView.positionViewAtBeginning();
 
-    /*readonly*/ property variant sectionModel: ["All", "Unread", "Message", "Comment Replies", "Post Replies", "Sent"]
+    /*readonly*/ property variant sectionModel: ["All", /*"Unread",*/ "Message", "Comment Replies", "Post Replies", "Sent"]
     property Component __textAreaDialogComponent: null
 
     function __createTextAreaDialog(titleText) {

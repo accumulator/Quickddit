@@ -27,7 +27,7 @@
 MessageModel::MessageModel(QObject *parent) :
     AbstractListModelManager(parent), m_section(AllSection), m_reply(0)
 {
-#if (QT_VERSION <= QT_VERSION_CHECK(5,0,0))
+#if (QT_VERSION < QT_VERSION_CHECK(5,0,0))
     setRoleNames(customRoleNames());
 #endif
 }
@@ -94,7 +94,8 @@ void MessageModel::refresh(bool refreshOlder)
     QString relativeUrl = "/message";
     switch (m_section) {
     case AllSection: relativeUrl += "/inbox"; break;
-    case UnreadSection: relativeUrl += "/unread"; break;
+    // temporary disable because /message/unread not working
+    //case UnreadSection: relativeUrl += "/unread"; break;
     case MessageSection: relativeUrl += "/messages"; break;
     case CommentRepliesSection: relativeUrl += "/comments"; break;
     case PostRepliesSection: relativeUrl += "/selfreply"; break;
