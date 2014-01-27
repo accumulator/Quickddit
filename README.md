@@ -29,6 +29,7 @@ Below is the list of TODOs I planned for future release, before going out of `be
 ([/api/morechildren](http://www.reddit.com/dev/api#POST_api_morechildren))
 - View user profile
 - (Sailfish) Attached page for selecting section (not working in emulator)
+- Make comment collapsable (hide all children comments)
 - Support for more types of Imgur URL
 - Redesign CustomCountBubble
 - Upload to Jolla Harbour
@@ -37,7 +38,7 @@ Below is the list of TODOs I planned for future release, before going out of `be
 
 Download
 --------
-- MeeGo Harmattan (Nokia N9/N950): [OpenRepos](https://openrepos.net/content/dicksonleong/quickddit)
+- MeeGo Harmattan (Nokia N9/N950): [OpenRepos](https://openrepos.net/content/dicksonleong/quickddit-harmattan)
 - SailfishOS (Jolla): [OpenRepos](https://openrepos.net/content/dicksonleong/quickddit-sailfishos)
 
 License
