@@ -39,7 +39,7 @@ Sheet {
             Text {
                 id: headerTitleText
                 anchors {
-                    left: parent.left; right: refreshWrapper.left; margins: constant.paddingMedium
+                    left: parent.left; right: refreshItem.left; margins: constant.paddingMedium
                     verticalCenter: parent.verticalCenter
                 }
                 font.bold: true
@@ -49,27 +49,13 @@ Sheet {
                 text: "Multireddits"
             }
 
-            Loader {
-                id: refreshWrapper
+            Image {
+                id: refreshItem
                 anchors {
-                    right: parent.right; margins: constant.paddingMedium
-                    verticalCenter: parent.verticalCenter
+                    right: parent.right; margins: constant.paddingMedium; verticalCenter: parent.verticalCenter
                 }
-                sourceComponent: multiredditModel.busy ? busyComponent : refreshComponent
-
-                Component {
-                    id: refreshComponent
-                    Image {
-                        id: refreshImage
-                        source: "image://theme/icon-m-toolbar-refresh"
-                                + (appSettings.whiteTheme ? "" : "-selected")
-                    }
-                }
-
-                Component {
-                    id: busyComponent
-                    BusyIndicator { running: true }
-                }
+                source: "image://theme/icon-m-toolbar-refresh" + (multiredditModel.busy ? "-dimmed" : "")
+                        + (appSettings.whiteTheme ? "" : "-white")
 
                 MouseArea {
                     anchors.fill: parent
@@ -108,6 +94,8 @@ Sheet {
                     multiredditsDialog.accept();
                 }
             }
+
+            footer: LoadingFooter { visible: multiredditModel.busy; listViewItem: multiredditListView }
 
             ViewPlaceholder { enabled: multiredditListView.count == 0 && !multiredditModel.busy }
         }

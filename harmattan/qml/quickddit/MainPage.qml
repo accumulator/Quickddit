@@ -39,7 +39,7 @@ AbstractPage {
     }
 
     title: linkModel.title
-    busy: linkModel.busy || linkVoteManager.busy
+    busy: linkVoteManager.busy
     onHeaderClicked: linkListView.positionViewAtBeginning();
 
     tools: ToolBarLayout {
@@ -128,10 +128,12 @@ AbstractPage {
             }
             onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager});
         }
-        footer: LoadMoreButton {
-            visible: ListView.view.count > 0 && linkModel.canLoadMore
-            enabled: !linkModel.busy
-            onClicked: linkModel.refresh(true);
+
+        footer: LoadingFooter { visible: linkModel.busy; listViewItem: linkListView }
+
+        onAtYEndChanged: {
+            if (atYEnd && count > 0 && !linkModel.busy && linkModel.canLoadMore)
+                linkModel.refresh(true);
         }
 
         ViewPlaceholder { enabled: linkListView.count == 0 && !linkModel.busy }

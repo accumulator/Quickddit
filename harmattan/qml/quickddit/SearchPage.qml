@@ -30,7 +30,7 @@ AbstractPage {
         "This month", "This year"]
 
     title: "Search Result: " + searchModel.searchQuery
-    busy: searchModel.busy || linkVoteManager.busy
+    busy: linkVoteManager.busy
     onHeaderClicked: searchListView.positionViewAtBeginning();
 
     tools: ToolBarLayout {
@@ -73,10 +73,12 @@ AbstractPage {
             }
             onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager});
         }
-        footer: LoadMoreButton {
-            visible: ListView.view.count > 0 && searchModel.canLoadMore
-            enabled: !searchModel.busy
-            onClicked: searchModel.refresh(true);
+
+        footer: LoadingFooter { visible: searchModel.busy; listViewItem: searchListView }
+
+        onAtYEndChanged: {
+            if (atYEnd && count > 0 && !searchModel.busy && searchModel.canLoadMore)
+                searchModel.refresh(true);
         }
 
         ViewPlaceholder { enabled: searchListView.count == 0 && !searchModel.busy }

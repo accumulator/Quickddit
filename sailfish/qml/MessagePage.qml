@@ -23,7 +23,7 @@ import harbour.quickddit.Core 1.0
 AbstractPage {
     id: messagePage
     title: "Messages - " + sectionModel[messageModel.section]
-    busy: messageModel.busy || messageManager.busy
+    busy: messageManager.busy
 
     readonly property variant sectionModel: ["All", /*"Unread",*/ "Message", "Comment Replies", "Post Replies", "Sent"]
 
@@ -69,11 +69,11 @@ AbstractPage {
             onPressAndHold: showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
         }
 
-        LoadMoreMenu {
-            visible: messageListView.count > 0
-            loadMoreVisible: messageModel.canLoadMore
-            loadMoreEnabled: !messageModel.busy
-            onClicked: messageModel.refresh(true);
+        footer: LoadingFooter { visible: messageModel.busy; listViewItem: messageListView }
+
+        onAtYEndChanged: {
+            if (atYEnd && count > 0 && !messageModel.busy && messageModel.canLoadMore)
+                messageModel.refresh(true);
         }
 
         ViewPlaceholder { enabled: messageListView.count == 0 && !messageModel.busy; text: "Nothing here :(" }

@@ -23,7 +23,7 @@ import harbour.quickddit.Core 1.0
 AbstractPage {
     id: searchPage
     title: "Search Result: " + searchModel.searchQuery
-    busy: searchModel.busy || linkVoteManager.busy
+    busy: linkVoteManager.busy
 
     property alias searchQuery: searchModel.searchQuery
 
@@ -81,11 +81,11 @@ AbstractPage {
             onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager});
         }
 
-        LoadMoreMenu {
-            visible: searchListView.count > 0
-            loadMoreVisible: searchModel.canLoadMore
-            loadMoreEnabled: !searchModel.busy
-            onClicked: searchModel.refresh(true);
+        footer: LoadingFooter { visible: searchModel.busy; listViewItem: searchListView }
+
+        onAtYEndChanged: {
+            if (atYEnd && count > 0 && !searchModel.busy && searchModel.canLoadMore)
+                searchModel.refresh(true);
         }
 
         ViewPlaceholder { enabled: searchListView.count == 0 && !searchModel.busy; text: "Nothing here :(" }

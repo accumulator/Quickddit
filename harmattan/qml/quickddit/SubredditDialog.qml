@@ -96,7 +96,7 @@ Sheet {
             Text {
                 id: headerTitleText
                 anchors {
-                    left: parent.left; right: refreshWrapper.left; margins: constant.paddingMedium
+                    left: parent.left; right: refreshItem.left; margins: constant.paddingMedium
                     verticalCenter: parent.verticalCenter
                 }
                 font.bold: true
@@ -106,32 +106,17 @@ Sheet {
                 text: "Subscribed Subreddits"
             }
 
-            Loader {
-                id: refreshWrapper
+            Image {
+                id: refreshItem
                 anchors {
-                    right: parent.right; margins: constant.paddingMedium
-                    verticalCenter: parent.verticalCenter
+                    right: parent.right; margins: constant.paddingMedium; verticalCenter: parent.verticalCenter
                 }
-                sourceComponent: visible ? (subredditModel.busy ? busyComponent : refreshComponent)
-                                         : undefined
-
-                Component {
-                    id: refreshComponent
-                    Image {
-                        id: refreshImage
-                        source: "image://theme/icon-m-toolbar-refresh"
-                                + (appSettings.whiteTheme ? "" : "-selected")
-                    }
-                }
-
-                Component {
-                    id: busyComponent
-                    BusyIndicator { running: true }
-                }
+                source: "image://theme/icon-m-toolbar-refresh" + (subredditModel.busy ? "-dimmed" : "")
+                        + (appSettings.whiteTheme ? "" : "-white")
 
                 MouseArea {
                     anchors.fill: parent
-                    enabled: visible && !subredditModel.busy
+                    enabled: !subredditModel.busy
                     onClicked: subredditModel.refresh(false);
                 }
             }
@@ -171,10 +156,15 @@ Sheet {
                     subredditDialog.accept();
                 }
             }
-            footer: LoadMoreButton {
-                visible: ListView.view.count > 0 && !!subredditModel && subredditModel.canLoadMore
-                enabled: !!subredditModel && !subredditModel.busy
-                onClicked: subredditModel.refresh(true);
+
+            footer: LoadingFooter {
+                visible: !!subredditModel && subredditModel.busy
+                listViewItem: subscribedSubredditListView
+            }
+
+            onAtYEndChanged: {
+                if (atYEnd && count > 0 && !subredditModel.busy && subredditModel.canLoadMore)
+                    subredditModel.refresh(true);
             }
         }
 

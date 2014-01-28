@@ -26,8 +26,6 @@ Dialog {
     property SubredditModel subredditModel
     property alias text: subredditTextField.text
 
-    property bool busy: subredditModel ? subredditModel.busy : false
-
     acceptDestinationAction: PageStackAction.Replace
     canAccept: subredditTextField.acceptableInput
 
@@ -38,6 +36,7 @@ Dialog {
         PullDownMenu {
             enabled: !!subredditModel
             MenuItem {
+                enabled: !!subredditModel && !subredditModel.busy
                 text: "Refresh subscribed subreddits"
                 onClicked: subredditModel.refresh(false);
             }
@@ -136,11 +135,14 @@ Dialog {
                 }
             }
 
-            LoadMoreMenu {
-                visible: subscribedSubredditListView.count > 0
-                loadMoreVisible: !!subredditModel && subredditModel.canLoadMore
-                loadMoreEnabled: !!subredditModel && !subredditModel.busy
-                onClicked: subredditModel.refresh(true);
+            footer: LoadingFooter {
+                visible: !!subredditModel && subredditModel.busy
+                listViewItem: subscribedSubredditListView
+            }
+
+            onAtYEndChanged: {
+                if (atYEnd && count > 0 && !subredditModel.busy && subredditModel.canLoadMore)
+                    subredditModel.refresh(true);
             }
 
             VerticalScrollDecorator {}

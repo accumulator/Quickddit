@@ -38,7 +38,6 @@ AbstractPage {
         case SubredditModel.SearchSection: return "Search Subreddits: " + subredditModel.query;
         }
     }
-    busy: subredditModel.busy
     onHeaderClicked: subredditsListView.positionViewAtBeginning();
 
     tools: ToolBarLayout {
@@ -73,10 +72,12 @@ AbstractPage {
                 pageStack.pop(mainPage);
             }
         }
-        footer: LoadMoreButton {
-            visible: ListView.view.count > 0 && subredditModel.canLoadMore
-            enabled: !subredditModel.busy
-            onClicked: subredditModel.refresh(true);
+
+        footer: LoadingFooter { visible: subredditModel.busy; listViewItem: subredditsListView }
+
+        onAtYEndChanged: {
+            if (atYEnd && count > 0 && !subredditModel.busy && subredditModel.canLoadMore)
+                subredditModel.refresh(true);
         }
 
         ViewPlaceholder { enabled: subredditsListView.count == 0 && !subredditModel.busy }

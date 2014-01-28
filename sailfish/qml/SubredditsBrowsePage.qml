@@ -25,7 +25,6 @@ AbstractPage {
     title: subredditModel.section == SubredditModel.SearchSection
            ? "Subreddits Search: " + searchQuery
            : subredditsSectionModel[subredditModel.section]
-    busy: subredditModel.busy
 
     property alias searchQuery: subredditModel.query
     property bool isSearch: searchQuery
@@ -69,11 +68,11 @@ AbstractPage {
             }
         }
 
-        LoadMoreMenu {
-            visible: subredditsListView.count > 0
-            loadMoreVisible: subredditModel.canLoadMore
-            loadMoreEnabled: !subredditModel.busy
-            onClicked: subredditModel.refresh(true);
+        footer: LoadingFooter { visible: subredditModel.busy; listViewItem: subredditsListView }
+
+        onAtYEndChanged: {
+            if (atYEnd && count > 0 && !subredditModel.busy && subredditModel.canLoadMore)
+                subredditModel.refresh(true);
         }
 
         ViewPlaceholder { enabled: subredditsListView.count == 0 && !subredditModel.busy; text: "Nothing here :(" }

@@ -24,7 +24,7 @@ AbstractPage {
     id: mainPage
     objectName: "mainPage"
     title: linkModel.title
-    busy: linkModel.busy || linkVoteManager.busy
+    busy: linkVoteManager.busy
 
     readonly property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top"]
 
@@ -72,7 +72,7 @@ AbstractPage {
     function __openMultiredditDialog() {
         if (!__multiredditModel)
             __multiredditModel = __multiredditModelComponent.createObject(mainPage);
-        var dialog = pageStack.replace(Qt.resolvedUrl("MultiredditsDialog.qml"), {multiredditModel: __multiredditModel});
+        var dialog = pageStack.replace(Qt.resolvedUrl("MultiredditDialog.qml"), {multiredditModel: __multiredditModel});
         dialog.accepted.connect(function() {
             linkModel.location = LinkModel.Multireddit;
             linkModel.multireddit = dialog.multiredditName;
@@ -131,11 +131,11 @@ AbstractPage {
             onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager});
         }
 
-        LoadMoreMenu {
-            visible: linkListView.count > 0
-            loadMoreVisible: linkModel.canLoadMore
-            loadMoreEnabled: !linkModel.busy
-            onClicked: linkModel.refresh(true);
+        footer: LoadingFooter { visible: linkModel.busy; listViewItem: linkListView }
+
+        onAtYEndChanged: {
+            if (atYEnd && count > 0 && !linkModel.busy && linkModel.canLoadMore)
+                linkModel.refresh(true);
         }
 
         ViewPlaceholder { enabled: linkListView.count == 0 && !linkModel.busy; text: "Nothing here :(" }

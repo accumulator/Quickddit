@@ -27,8 +27,6 @@ Dialog {
 
     property string multiredditName
 
-    property bool busy: multiredditModel.busy // for global busy indicator
-
     canAccept: false
 
     SilicaListView {
@@ -37,6 +35,7 @@ Dialog {
 
         PullDownMenu {
             MenuItem {
+                enabled: !multiredditModel.busy
                 text: "Refresh"
                 onClicked: multiredditModel.refresh(false);
             }
@@ -61,6 +60,8 @@ Dialog {
                 multiredditDialog.accept();
             }
         }
+
+        footer: LoadingFooter { visible: multiredditModel.busy; listViewItem: multiredditListView }
 
         ViewPlaceholder { enabled: multiredditListView.count == 0 && !multiredditModel.busy; text: "Nothing here :(" }
     }
