@@ -184,13 +184,13 @@ void SubredditModel::onNetworkReplyReceived(QNetworkReply *reply)
 void SubredditModel::onFinished()
 {
     if (m_reply->error() == QNetworkReply::NoError) {
-        const QList<SubredditObject> subreddits = Parser::parseSubredditList(m_reply->readAll());
+        const Listing<SubredditObject> subreddits = Parser::parseSubredditList(m_reply->readAll());
         if (!subreddits.isEmpty()) {
             beginInsertRows(QModelIndex(), m_subredditList.count(),
                             m_subredditList.count() + subreddits.count() - 1);
             m_subredditList.append(subreddits);
             endInsertRows();
-            setCanLoadMore(true);
+            setCanLoadMore(subreddits.hasMore());
         } else {
             setCanLoadMore(false);
         }

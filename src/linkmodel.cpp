@@ -314,12 +314,12 @@ void LinkModel::onNetworkReplyReceived(QNetworkReply *reply)
 void LinkModel::onFinished()
 {
     if (m_reply->error() == QNetworkReply::NoError) {
-        const QList<LinkObject> links = Parser::parseLinkList(m_reply->readAll());
+        const Listing<LinkObject> links = Parser::parseLinkList(m_reply->readAll());
         if (!links.isEmpty()) {
             beginInsertRows(QModelIndex(), m_linkList.count(), m_linkList.count() + links.count() - 1);
             m_linkList.append(links);
             endInsertRows();
-            setCanLoadMore(true);
+            setCanLoadMore(links.hasMore());
         } else {
             setCanLoadMore(false);
         }

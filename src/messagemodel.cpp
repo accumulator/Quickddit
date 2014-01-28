@@ -170,12 +170,12 @@ void MessageModel::onNetweorkReplyReceived(QNetworkReply *reply)
 void MessageModel::onFinished()
 {
     if (m_reply->error() == QNetworkReply::NoError) {
-        const QList<MessageObject> messageList = Parser::parseMessageList(m_reply->readAll());
+        const Listing<MessageObject> messageList = Parser::parseMessageList(m_reply->readAll());
         if (!messageList.isEmpty()) {
             beginInsertRows(QModelIndex(), m_messageList.count(), m_messageList.count() + messageList.count() - 1);
             m_messageList.append(messageList);
             endInsertRows();
-            setCanLoadMore(true);
+            setCanLoadMore(messageList.hasMore());
         } else {
             setCanLoadMore(false);
         }

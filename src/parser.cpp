@@ -79,19 +79,20 @@ LinkObject parseLinkThing(const QVariant &linkThing)
     return link;
 }
 
-QList<LinkObject> Parser::parseLinkList(const QByteArray &json)
+Listing<LinkObject> Parser::parseLinkList(const QByteArray &json)
 {
     bool ok;
-    const QVariant root = QtJson::parse(QString::fromUtf8(json), ok);
+    const QVariantMap data = QtJson::parse(QString::fromUtf8(json), ok).toMap().value("data").toMap();
 
     Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
 
-    const QVariantList linkListJson = root.toMap().value("data").toMap().value("children").toList();
+    const QVariantList linkListJson = data.value("children").toList();
 
-    QList<LinkObject> linkList;
+    Listing<LinkObject> linkList;
     foreach (const QVariant &linkObjectJson, linkListJson) {
         linkList.append(parseLinkThing(linkObjectJson));
     }
+    linkList.setHasMore(!data.value("after").isNull());
 
     return linkList;
 }
@@ -137,19 +138,6 @@ QList<CommentObject> parseCommentListingJson(const QVariantMap &json, const QStr
     return commentList;
 }
 
-QPair< LinkObject, QList<CommentObject> > Parser::parseCommentList(const QByteArray &json)
-{
-    bool ok;
-    const QVariantList root = QtJson::parse(QString::fromUtf8(json), ok).toList();
-
-    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
-
-    const LinkObject link = parseLinkThing(root.first().toMap().value("data").toMap()
-                                           .value("children").toList().first());
-
-    return qMakePair(link, parseCommentListingJson(root.last().toMap(), link.author(), 0));
-}
-
 CommentObject Parser::parseNewComment(const QByteArray &json)
 {
     bool ok;
@@ -177,6 +165,19 @@ CommentObject Parser::parseNewComment(const QByteArray &json)
     comment.setScoreHidden(commentMap.value("score_hidden").toBool());
 
     return comment;
+}
+
+QPair< LinkObject, QList<CommentObject> > Parser::parseCommentList(const QByteArray &json)
+{
+    bool ok;
+    const QVariantList root = QtJson::parse(QString::fromUtf8(json), ok).toList();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    const LinkObject link = parseLinkThing(root.first().toMap().value("data").toMap()
+                                           .value("children").toList().first());
+
+    return qMakePair(link, parseCommentListingJson(root.last().toMap(), link.author(), 0));
 }
 
 // Private
@@ -210,19 +211,20 @@ SubredditObject Parser::parseSubreddit(const QByteArray &json)
     return parseSubredditThing(root.toMap());
 }
 
-QList<SubredditObject> Parser::parseSubredditList(const QByteArray &json)
+Listing<SubredditObject> Parser::parseSubredditList(const QByteArray &json)
 {
     bool ok;
-    const QVariant root = QtJson::parse(json, ok);
+    const QVariantMap data = QtJson::parse(json, ok).toMap().value("data").toMap();
 
     Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
 
-    const QVariantList subredditListJson = root.toMap().value("data").toMap().value("children").toList();
+    const QVariantList subredditListJson = data.value("children").toList();
 
-    QList<SubredditObject> subredditList;
+    Listing<SubredditObject> subredditList;
     foreach (const QVariant &subredditJson, subredditListJson) {
         subredditList.append(parseSubredditThing(subredditJson.toMap()));
     }
+    subredditList.setHasMore(!data.value("after").isNull());
 
     return subredditList;
 }
@@ -257,14 +259,16 @@ QList<MultiredditObject> Parser::parseMultiredditList(const QByteArray &json)
     return multredditList;
 }
 
-QList<MessageObject> Parser::parseMessageList(const QByteArray &json)
+Listing<MessageObject> Parser::parseMessageList(const QByteArray &json)
 {
     bool ok;
-    const QVariantList messagesJson = QtJson::parse(json, ok).toMap().value("data").toMap().value("children").toList();
+    const QVariantMap data = QtJson::parse(json, ok).toMap().value("data").toMap();
 
     Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
 
-    QList<MessageObject> messageList;
+    const QVariantList messagesJson = data.value("children").toList();
+
+    Listing<MessageObject> messageList;
     foreach (const QVariant &messageObject, messagesJson) {
         const QVariantMap messageMap = messageObject.toMap().value("data").toMap();
 
@@ -283,6 +287,7 @@ QList<MessageObject> Parser::parseMessageList(const QByteArray &json)
 
         messageList.append(message);
     }
+    messageList.setHasMore(!data.value("after").isNull());
 
     return messageList;
 }

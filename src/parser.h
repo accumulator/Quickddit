@@ -29,19 +29,32 @@ class SubredditObject;
 class MultiredditObject;
 class MessageObject;
 
+template<typename T>
+class Listing : public QList<T>
+{
+public:
+    Listing() : m_hasMore(true) {}
+
+    bool hasMore() const { return m_hasMore; }
+    void setHasMore(bool hasMore) { m_hasMore = hasMore; }
+
+private:
+    bool m_hasMore;
+};
+
 namespace Parser
 {
-QList<LinkObject> parseLinkList(const QByteArray &json);
+Listing<LinkObject> parseLinkList(const QByteArray &json);
 
-QPair< LinkObject, QList<CommentObject> > parseCommentList(const QByteArray &json);
 CommentObject parseNewComment(const QByteArray &json);
+QPair< LinkObject, QList<CommentObject> > parseCommentList(const QByteArray &json);
 
 SubredditObject parseSubreddit(const QByteArray &json);
-QList<SubredditObject> parseSubredditList(const QByteArray &json);
+Listing<SubredditObject> parseSubredditList(const QByteArray &json);
 
 QList<MultiredditObject> parseMultiredditList(const QByteArray &json);
 
-QList<MessageObject> parseMessageList(const QByteArray &json);
+Listing<MessageObject> parseMessageList(const QByteArray &json);
 
 QList< QPair<QString, QString> > parseImgurImages(const QByteArray &json);
 }
