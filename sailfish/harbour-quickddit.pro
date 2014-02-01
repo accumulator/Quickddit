@@ -43,7 +43,7 @@ HEADERS += \
     ../src/messagemodel.h \
     ../src/messagemanager.h
 
-SOURCES += quickddit.cpp \
+SOURCES += main.cpp \
     ../src/linkobject.cpp \
     ../src/linkmodel.cpp \
     ../src/utils.cpp \
