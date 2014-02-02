@@ -71,21 +71,9 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 model: ["All", "Browse for Subreddits..."]
 
-                ListItem {
-                    contentHeight: Theme.itemSizeSmall
+                SimpleListItem {
                     width: mainOptionRepeater.width
-
-                    Text {
-                        id: subredditText
-                        anchors {
-                            left: parent.left; right: parent.right; margins: constant.paddingLarge
-                            verticalCenter: parent.verticalCenter
-                        }
-                        font.pixelSize: constant.fontSizeMedium
-                        color: constant.colorLight
-                        text: modelData
-                    }
-
+                    text: modelData
                     onClicked: {
                         switch (index) {
                         case 0: subredditTextField.text = "all"; break;
@@ -115,20 +103,8 @@ Dialog {
             visible: !!subredditModel
             clip: true
             model: visible ? subredditModel : 0
-            delegate: ListItem {
-                contentHeight: Theme.itemSizeSmall
-
-                Text {
-                    id: subscribedSubredditText
-                    anchors {
-                        left: parent.left; right: parent.right; margins: constant.paddingLarge
-                        verticalCenter: parent.verticalCenter
-                    }
-                    font.pixelSize: constant.fontSizeMedium
-                    color: constant.colorLight
-                    text: model.url
-                }
-
+            delegate: SimpleListItem {
+                text: model.url
                 onClicked: {
                     subredditTextField.text = model.displayName;
                     subredditDialog.accept();

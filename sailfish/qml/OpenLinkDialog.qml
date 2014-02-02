@@ -58,17 +58,8 @@ Dialog {
             }
         }
 
-        ListItem {
-            Label {
-                anchors {
-                    left: parent.left; right: parent.right; margins: constant.paddingLarge
-                    verticalCenter: parent.verticalCenter
-                }
-                font.pixelSize: constant.fontSizeMedium
-                color: constant.colorLight
-                text: "Open URL in web browser"
-            }
-
+        SimpleListItem {
+            text: "Open URL in web browser"
             onClicked: {
                 Qt.openUrlExternally(url);
                 infoBanner.alert("Launching web browser...");
@@ -76,17 +67,8 @@ Dialog {
             }
         }
 
-        ListItem {
-            Label {
-                anchors {
-                    left: parent.left; right: parent.right; margins: constant.paddingLarge
-                    verticalCenter: parent.verticalCenter
-                }
-                font.pixelSize: constant.fontSizeMedium
-                color: constant.colorLight
-                text: "Copy URL"
-            }
-
+        SimpleListItem {
+            text: "Copy URL"
             onClicked: {
                 QMLUtils.copyToClipboard(url);
                 infoBanner.alert("URL copied to clipboard");

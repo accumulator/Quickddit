@@ -43,17 +43,8 @@ Dialog {
 
         header: DialogHeader { title: "Multireddits" }
 
-        delegate: ListItem {
-            contentHeight: Theme.itemSizeSmall
-
-            Label {
-                anchors {
-                    left: parent.left; right: parent.right; margins: constant.paddingLarge
-                    verticalCenter: parent.verticalCenter
-                }
-                text: "/m/" + model.name
-            }
-
+        delegate: SimpleListItem {
+            text: "/m/" + model.name
             onClicked: {
                 multiredditDialog.multiredditName = model.name;
                 canAccept = true;

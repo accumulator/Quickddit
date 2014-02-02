@@ -61,21 +61,9 @@ Sheet {
                 anchors { left: parent.left; right: parent.right }
                 model: ["All", "Browse for Subreddits..."]
 
-                ListItem {
-                    height: subredditText.paintedHeight + 2 * constant.paddingXLarge
+                SimpleListItem {
                     width: mainOptionRepeater.width
-
-                    Text {
-                        id: subredditText
-                        anchors {
-                            left: parent.left; right: parent.right; margins: constant.paddingLarge
-                            verticalCenter: parent.verticalCenter
-                        }
-                        font.pixelSize: constant.fontSizeMedium
-                        color: constant.colorLight
-                        text: modelData
-                    }
-
+                    text: modelData
                     onClicked: {
                         switch (index) {
                         case 0: subredditDialog.text = "all"; break;
@@ -137,20 +125,8 @@ Sheet {
             visible: !!subredditModel
             clip: true
             model: visible ? subredditModel : 0
-            delegate: ListItem {
-                height: 64
-
-                Text {
-                    id: subscribedSubredditText
-                    anchors {
-                        left: parent.left; right: parent.right; margins: constant.paddingLarge
-                        verticalCenter: parent.verticalCenter
-                    }
-                    font.pixelSize: constant.fontSizeMedium
-                    color: constant.colorLight
-                    text: model.url
-                }
-
+            delegate: SimpleListItem {
+                text: model.url
                 onClicked: {
                     subredditDialog.text = model.displayName;
                     subredditDialog.accept();

@@ -75,20 +75,8 @@ Sheet {
             id: multiredditListView
             anchors { top: header.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
             clip: true
-            delegate: ListItem {
-                height: 64
-
-                Text {
-                    id: nameText
-                    anchors {
-                        left: parent.left; right: parent.right; margins: constant.paddingLarge
-                        verticalCenter: parent.verticalCenter
-                    }
-                    font.pixelSize: constant.fontSizeMedium
-                    color: constant.colorLight
-                    text: "/m/" + model.name
-                }
-
+            delegate: SimpleListItem {
+                text: "/m/" + model.name
                 onClicked: {
                     multiredditsDialog.multiredditName = model.name;
                     multiredditsDialog.accept();

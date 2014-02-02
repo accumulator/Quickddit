@@ -45,7 +45,7 @@ MouseArea {
         return __menuObject;
     }
 
-    implicitWidth: ListView.view ? ListView.view.width : 0
+    implicitWidth: ListView.view ? ListView.view.width : parent.width
 
     Image {
         id: highlight

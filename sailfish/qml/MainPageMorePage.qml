@@ -42,109 +42,43 @@ AbstractPage {
             anchors { top: pageHeader.bottom; left: parent.left; right: parent.right }
             height: childrenRect.height
 
-            BackgroundItem {
-                height: Theme.itemSizeSmall
+            SimpleListItem {
                 enabled: enableFrontPage
-
-                Label {
-                    anchors {
-                        left: parent.left; right: parent.right; margins: constant.paddingLarge
-                        verticalCenter: parent.verticalCenter
-                    }
-                    color: enableFrontPage ? constant.colorLight : constant.colorDisabled
-                    text: "Front Page"
-                }
-
+                text: "Front Page"
                 onClicked: {
                     pageStack.previousPage().refresh();
                     pageStack.pop();
                 }
             }
 
-            BackgroundItem {
-                height: Theme.itemSizeSmall
-
-                Label {
-                    anchors {
-                        left: parent.left; right: parent.right; margins: constant.paddingLarge
-                        verticalCenter: parent.verticalCenter
-                    }
-                    text: "Subreddits"
-                }
-
+            SimpleListItem {
+                text: "Subreddits"
                 onClicked: subredditsClicked();
             }
 
-            BackgroundItem {
-                id: multiredditsItem
-                height: Theme.itemSizeSmall
+            SimpleListItem {
                 enabled: quickdditManager.isSignedIn
-
-                Label {
-                    anchors {
-                        left: parent.left; right: parent.right; margins: constant.paddingLarge
-                        verticalCenter: parent.verticalCenter
-                    }
-                    color: multiredditsItem.enabled ? constant.colorLight : constant.colorDisabled
-                    text: "Multireddits"
-                }
-
+                text: "Multireddits"
                 onClicked: multiredditsClicked();
             }
 
-            BackgroundItem {
-                height: Theme.itemSizeSmall
-
-                Label {
-                    anchors {
-                        left: parent.left; right: parent.right; margins: constant.paddingLarge
-                        verticalCenter: parent.verticalCenter
-                    }
-                    text: "Messages"
-                }
-
+            SimpleListItem {
+                text: "Messages"
                 onClicked: pageStack.replace(Qt.resolvedUrl("MessagePage.qml"));
             }
 
-            BackgroundItem {
-                height: Theme.itemSizeSmall
-
-                Label {
-                    anchors {
-                        left: parent.left; right: parent.right; margins: constant.paddingLarge
-                        verticalCenter: parent.verticalCenter
-                    }
-                    text: "Search"
-                }
-
+            SimpleListItem {
+                text: "Search"
                 onClicked: pageStack.replace(Qt.resolvedUrl("SearchDialog.qml"));
             }
 
-            BackgroundItem {
-                height: Theme.itemSizeSmall
-
-                Label {
-                    anchors {
-                        left: parent.left; right: parent.right; margins: constant.paddingLarge
-                        verticalCenter: parent.verticalCenter
-                    }
-                    text: "Settings"
-                }
-
+            SimpleListItem {
+                text: "Settings"
                 onClicked: pageStack.replace(Qt.resolvedUrl("AppSettingsPage.qml"))
             }
 
-            BackgroundItem {
-                height: Theme.itemSizeSmall
-
-                Label {
-                    anchors {
-                        left: parent.left; right: parent.right; margins: constant.paddingLarge
-                        verticalCenter: parent.verticalCenter
-                    }
-                    text: "About"
-                }
-
+            SimpleListItem {
+                text: "About"
                 onClicked: pageStack.replace(Qt.resolvedUrl("AboutPage.qml"))
             }
         }

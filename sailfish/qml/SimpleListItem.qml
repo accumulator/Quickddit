@@ -19,31 +19,25 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Dialog {
-    id: selectionDialog
+ListItem {
+    id: simpleListItem
 
-    property alias titleText: header.title
-    property alias model: listView.model
-    property int selectedIndex: -1
+    property alias text: labelItem.text
+    property bool selected: false
 
-    canAccept: false
+    contentHeight: Theme.itemSizeSmall
+    width: ListView.view ? ListView.view.width : parent.width
 
-    DialogHeader {
-        id: header
-        anchors { top: parent.top; left: parent.left; right: parent.right }
-    }
-
-    ListView {
-        id: listView
-        anchors { top: header.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
-        delegate: SimpleListItem {
-            selected: selectionDialog.selectedIndex == index
-            text: modelData
-            onClicked: {
-                selectionDialog.selectedIndex = index;
-                canAccept = true;
-                selectionDialog.accept();
-            }
+    Label {
+        id: labelItem
+        anchors {
+            left: parent.left; right: parent.right; margins: constant.paddingLarge
+            verticalCenter: parent.verticalCenter
         }
+        font.bold: selected
+        font.pixelSize: constant.fontSizeMedium
+        color: simpleListItem.enabled ? (simpleListItem.selected ? Theme.highlightColor : constant.colorLight)
+                                      : constant.colorDisabled
+        elide: Text.ElideRight
     }
 }

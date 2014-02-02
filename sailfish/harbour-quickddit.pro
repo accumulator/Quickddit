@@ -108,4 +108,5 @@ OTHER_FILES += \
     qml/MessagePage.qml \
     qml/MessageDelegate.qml \
     qml/MessageMenu.qml \
-    qml/LoadingFooter.qml
+    qml/LoadingFooter.qml \
+    qml/SimpleListItem.qml
