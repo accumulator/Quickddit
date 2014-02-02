@@ -19,6 +19,10 @@
 #include "appsettings.h"
 
 #include <QtCore/QSettings>
+#ifdef Q_OS_SAILFISH
+#include <QtCore/QStringList>
+#include <QtCore/QFile>
+#endif
 
 AppSettings::AppSettings(QObject *parent) :
     QObject(parent), m_settings(new QSettings(this))
@@ -27,6 +31,20 @@ AppSettings::AppSettings(QObject *parent) :
     m_fontSize = static_cast<FontSize>(m_settings->value("fontSize", 1).toInt());
     m_redditUsername = m_settings->value("redditUsername").toString();
     m_refreshToken = m_settings->value("refreshToken").toByteArray();
+
+#ifdef Q_OS_SAILFISH
+    // Restore settings from old settings
+    // TODO: remove in 0.5.0 or 0.6.0
+    QSettings oldSettings("Quickddit", "Quickddit");
+    if (!oldSettings.allKeys().isEmpty()) {
+        m_fontSize = static_cast<FontSize>(oldSettings.value("fontSize", 1).toInt());
+        m_redditUsername = oldSettings.value("redditUsername").toString();
+        m_refreshToken = oldSettings.value("refreshToken").toByteArray();
+        oldSettings.clear();
+        oldSettings.sync(); // sync must be call first if not the config file will be re-create in destructor
+        QFile::remove(oldSettings.fileName()); // remove old config file
+    }
+#endif
 }
 
 bool AppSettings::whiteTheme() const
