@@ -37,7 +37,7 @@ ListItem {
         Text {
             anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
             font.pixelSize: constant.fontSizeDefault
-            color: constant.colorLight
+            color: messageDelegate.highlighted ? Theme.highlightColor : constant.colorLight
             font.bold: true
             font.capitalization: model.isComment ? Font.Capitalize : Font.MixedCase
             elide: Text.ElideRight
@@ -47,7 +47,7 @@ ListItem {
         Text {
             anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
             font.pixelSize: constant.fontSizeDefault
-            color: constant.colorLight
+            color: messageDelegate.highlighted ? Theme.highlightColor : constant.colorLight
             font.italic: true
             wrapMode: Text.Wrap
             maximumLineCount: 2
@@ -59,7 +59,7 @@ ListItem {
         Text {
             anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
             font.pixelSize: constant.fontSizeDefault
-            color: constant.colorMid
+            color: messageDelegate.highlighted ? Theme.secondaryHighlightColor: constant.colorMid
             wrapMode: Text.Wrap
             maximumLineCount: 2
             elide: Text.ElideRight
@@ -71,7 +71,7 @@ ListItem {
         Text {
             anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
             font.pixelSize: constant.fontSizeDefault
-            color: constant.colorLight
+            color: messageDelegate.highlighted ? Theme.highlightColor : constant.colorLight
             wrapMode: Text.Wrap
             textFormat: Text.RichText
             text: model.body

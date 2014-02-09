@@ -36,7 +36,7 @@ ListItem {
             id: titleText
             anchors { left: parent.left; right: parent.right }
             font.pixelSize: constant.fontSizeDefault
-            color: constant.colorLight
+            color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorLight
             font.bold: true
             text: model.url
         }
@@ -45,7 +45,7 @@ ListItem {
             id: descriptionText
             anchors { left: parent.left; right: parent.right }
             font.pixelSize: constant.fontSizeDefault
-            color: constant.colorMid
+            color: subredditDelegate.highlighted ? Theme.secondaryHighlightColor : constant.colorMid
             wrapMode: Text.Wrap
             visible: text != ""
             text: model.shortDescription
@@ -64,7 +64,7 @@ ListItem {
             Text {
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: constant.fontSizeDefault
-                color: constant.colorLight
+                color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorLight
                 wrapMode: Text.Wrap
                 text: "subscribers"
             }

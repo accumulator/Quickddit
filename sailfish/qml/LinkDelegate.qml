@@ -20,7 +20,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 ListItem {
-    id: delegate
+    id: linkDelegate
 
     property bool showSubreddit: true
 
@@ -42,7 +42,7 @@ ListItem {
             elide: Text.ElideRight
             maximumLineCount: 3
             font.pixelSize: constant.fontSizeDefault
-            color: constant.colorLight
+            color: linkDelegate.highlighted ? Theme.highlightColor : constant.colorLight
             font.bold: true
             text: model.title + " (" + model.domain + ")"
         }
@@ -54,7 +54,7 @@ ListItem {
             elide: Text.ElideRight
             maximumLineCount: 2
             font.pixelSize: constant.fontSizeDefault
-            color: constant.colorMid
+            color: linkDelegate.highlighted ? Theme.secondaryHighlightColor : constant.colorMid
             text: "submitted " + model.created + " by " + model.author +
                   (showSubreddit ? " to " + model.subreddit : "")
         }
@@ -71,7 +71,7 @@ ListItem {
             Text {
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: constant.fontSizeDefault
-                color: constant.colorLight
+                color: linkDelegate.highlighted ? Theme.highlightColor : constant.colorLight
                 text: "points"
             }
 
@@ -82,7 +82,7 @@ ListItem {
             Text {
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: constant.fontSizeDefault
-                color: constant.colorLight
+                color: linkDelegate.highlighted ? Theme.highlightColor : constant.colorLight
                 text: "comments"
             }
 

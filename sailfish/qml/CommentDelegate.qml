@@ -113,7 +113,8 @@ Item {
                     id: commentAuthorText
                     anchors { left: parent.left; verticalCenter: parent.verticalCenter }
                     font.pixelSize: constant.fontSizeDefault
-                    color: mainItem.enabled ? constant.colorLight : constant.colorDisabled
+                    color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                            : constant.colorDisabled
                     font.bold: true
                     text: model.author
                 }
@@ -135,7 +136,8 @@ Item {
                         id: scoreHiddenComponent
                         Text {
                             font.pixelSize: constant.fontSizeDefault
-                            color: constant.colorMid
+                            color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
+                                                    : constant.colorDisabled
                             text: "[score hidden]"
                         }
                     }
@@ -149,7 +151,8 @@ Item {
                         margins: constant.paddingSmall
                     }
                     font.pixelSize: constant.fontSizeDefault
-                    color: mainItem.enabled ? constant.colorMid : constant.colorDisabled
+                    color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
+                                            : constant.colorDisabled
                     elide: Text.ElideRight
                     text: model.created
                 }
@@ -159,7 +162,8 @@ Item {
                 id: commentBodyText
                 anchors { left: parent.left; right: parent.right }
                 font.pixelSize: constant.fontSizeDefault
-                color: mainItem.enabled ? constant.colorLight : constant.colorDisabled
+                color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                        : constant.colorDisabled
                 wrapMode: Text.Wrap
                 textFormat: Text.RichText
                 text: model.body

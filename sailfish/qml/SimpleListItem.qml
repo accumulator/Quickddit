@@ -36,7 +36,8 @@ ListItem {
         }
         font.bold: selected
         font.pixelSize: constant.fontSizeMedium
-        color: simpleListItem.enabled ? (simpleListItem.selected ? Theme.highlightColor : constant.colorLight)
+        color: simpleListItem.enabled ? (simpleListItem.selected || simpleListItem.highlighted ? Theme.highlightColor
+                                                                                               : constant.colorLight)
                                       : constant.colorDisabled
         elide: Text.ElideRight
     }
