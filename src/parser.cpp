@@ -39,7 +39,7 @@ QString unescapeHtml(const QString &html)
     return unescaped;
 }
 
-// reddit escape '<', '>' and '&' to '&lt;', '&gt;' and '&amp;' respectively for raw markdown text
+// reddit escape '<', '>' and '&' to '&lt;', '&gt;' and '&amp;' respectively for raw markdown text and link title
 QString unescapeMarkdown(QString markdown)
 {
     markdown.replace("&lt;", "<");
@@ -62,7 +62,7 @@ LinkObject parseLinkThing(const QVariant &linkThing)
     if (!linkMapJson.value("likes").isNull())
         link.setLikes(linkMapJson.value("likes").toBool() ? 1 : -1);
     link.setCommentsCount(linkMapJson.value("num_comments").toInt());
-    link.setTitle(linkMapJson.value("title").toString());
+    link.setTitle(unescapeMarkdown(linkMapJson.value("title").toString()));
     link.setDomain(linkMapJson.value("domain").toString());
 
     QString thumbnail = linkMapJson.value("thumbnail").toString();
