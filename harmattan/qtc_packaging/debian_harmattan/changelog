@@ -1,3 +1,11 @@
+quickddit (0.3.1) unstable; urgency=low
+  * Automatically load for more items when reach the end of the list
+  * Improve loading indicator UI
+  * Fix the characters '>', '<' and '&' are not show correctly in post title
+  * Fix error retriving access token and have to sign in again everytime starting the app
+
+ -- Dickson <dicksonleong8@gmail.com>  Tue, 11 Feb 2014 19:04:30 +0800
+
 quickddit (0.3.0) unstable; urgency=low
   * Add view-only multireddit support
   * Add private message support (compose new message is not yet available)
