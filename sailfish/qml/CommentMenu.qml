@@ -37,25 +37,25 @@ ContextMenu {
 
     MenuItem {
         id: upvoteButton
-        visible: quickdditManager.isSignedIn && comment.likes != 1
-        enabled: !commentVoteManager.busy
+        visible: comment.likes != 1
+        enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
         text: "Upvote"
         onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Upvote)
     }
     MenuItem {
-        visible: quickdditManager.isSignedIn && comment.likes != -1
-        enabled: !commentVoteManager.busy
+        visible: comment.likes != -1
+        enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
         text: "Downvote"
         onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Downvote)
     }
     MenuItem {
-        visible: quickdditManager.isSignedIn && comment.likes != 0
-        enabled: !commentVoteManager.busy
+        visible: comment.likes != 0
+        enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
         text: "Unvote"
         onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Unvote)
     }
     MenuItem {
-        visible: quickdditManager.isSignedIn
+        enabled: quickdditManager.isSignedIn
         text: "Reply"
         onClicked: replyClicked();
     }

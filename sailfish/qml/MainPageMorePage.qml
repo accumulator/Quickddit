@@ -63,6 +63,7 @@ AbstractPage {
             }
 
             SimpleListItem {
+                enabled: quickdditManager.isSignedIn
                 text: "Messages"
                 onClicked: pageStack.replace(Qt.resolvedUrl("MessagePage.qml"));
             }
