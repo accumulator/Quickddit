@@ -23,8 +23,8 @@ import harbour.quickddit.Core 1.0
 Dialog {
     id: multiredditDialog
 
+    readonly property string title: "Multireddits"
     property alias multiredditModel: multiredditListView.model
-
     property string multiredditName
 
     canAccept: false
@@ -41,7 +41,7 @@ Dialog {
             }
         }
 
-        header: DialogHeader { title: "Multireddits" }
+        header: DialogHeader { title: multiredditDialog.title }
 
         delegate: SimpleListItem {
             text: "/m/" + model.name

@@ -72,12 +72,12 @@ PageStackWindow {
             dialog.open();
         }
 
-        function createSelectionDialog(titleText, model, selectedIndex, onAccepted) {
+        function createSelectionDialog(title, model, selectedIndex, onAccepted) {
             // convert array (model) to ListModel because SelectionDialog can not accept array
             var listModel = __listModelComponent.createObject(null);
             model.forEach(function(m) { listModel.append({ "text": m }) });
 
-            var p = {titleText: titleText, model: listModel, selectedIndex: selectedIndex};
+            var p = {titleText: title, model: listModel, selectedIndex: selectedIndex};
             var dialog = __selectionDialogComponent.createObject(pageStack.currentPage, p);
             dialog.statusChanged.connect(function() {
                 if (dialog.status == DialogStatus.Closed) {
@@ -89,8 +89,8 @@ PageStackWindow {
             dialog.open();
         }
 
-        function createQueryDialog(titleText, message, onAccepted) {
-            var p = { titleText: titleText, message: message, acceptButtonText: "Yes", rejectButtonText: "No" };
+        function createQueryDialog(title, message, onAccepted) {
+            var p = { titleText: title, message: message, acceptButtonText: "Yes", rejectButtonText: "No" };
             var dialog = __queryDialogCompnent.createObject(pageStack.currentPage, p);
             dialog.statusChanged.connect(function() {
                 if (dialog.status == DialogStatus.Closed)

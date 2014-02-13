@@ -22,7 +22,7 @@ import Sailfish.Silica 1.0
 Dialog {
     id: selectionDialog
 
-    property alias titleText: header.title
+    property alias title: header.title
     property alias model: listView.model
     property int selectedIndex: -1
 

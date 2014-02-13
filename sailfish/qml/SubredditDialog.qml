@@ -23,6 +23,7 @@ import harbour.quickddit.Core 1.0
 Dialog {
     id: subredditDialog
 
+    readonly property string title: "Subreddits"
     property SubredditModel subredditModel
     property alias text: subredditTextField.text
 
@@ -46,7 +47,7 @@ Dialog {
             id: dialogHeader
             anchors { left: parent.left; right: parent.right; top: parent.top }
             dialog: subredditDialog
-            title: "Subreddits"
+            title: subredditDialog.title
         }
 
         TextField {

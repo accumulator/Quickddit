@@ -22,8 +22,8 @@ import Sailfish.Silica 1.0
 Dialog {
     id: textAreaDialog
 
+    property alias title: dialogHeader.title
     property alias text: textArea.text
-    property alias titleText: dialogHeader.title
 
     canAccept: text.length > 0
 

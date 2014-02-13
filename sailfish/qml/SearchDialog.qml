@@ -22,6 +22,8 @@ import Sailfish.Silica 1.0
 Dialog {
     id: searchDialog
 
+    readonly property string title: "Search"
+
     acceptDestination: Qt.resolvedUrl("SearchPage.qml")
     acceptDestinationAction: PageStackAction.Replace
     canAccept: searchTextField.text.length > 0
@@ -37,7 +39,7 @@ Dialog {
         height: childrenRect.height
 
         DialogHeader {
-            title: "Search"
+            title: searchDialog.title
             dialog: searchDialog
         }
 

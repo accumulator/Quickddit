@@ -31,8 +31,8 @@ AbstractPage {
 
     readonly property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
 
-    function __createCommentDialog(titleText, fullname, originalText, isEdit) {
-        var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {titleText: titleText, text: originalText || ""});
+    function __createCommentDialog(title, fullname, originalText, isEdit) {
+        var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {title: title, text: originalText || ""});
         dialog.accepted.connect(function() {
             if (isEdit) // edit
                 commentManager.editComment(fullname, dialog.text);

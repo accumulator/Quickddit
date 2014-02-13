@@ -70,8 +70,8 @@ ApplicationWindow {
             pageStack.push(Qt.resolvedUrl("OpenLinkDialog.qml"), {url: url});
         }
 
-        function createSelectionDialog(titleText, model, selectedIndex, onAccepted) {
-            var p = {titleText: titleText, model: model, selectedIndex: selectedIndex}
+        function createSelectionDialog(title, model, selectedIndex, onAccepted) {
+            var p = {title: title, model: model, selectedIndex: selectedIndex}
             var dialog = pageStack.push(Qt.resolvedUrl("SelectionDialog.qml"), p);
             dialog.accepted.connect(function() { onAccepted(dialog.selectedIndex); })
         }

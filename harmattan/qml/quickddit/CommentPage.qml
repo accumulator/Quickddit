@@ -30,10 +30,10 @@ AbstractPage {
     /*readonly*/ property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
     property Component __textAreaDialogComponent
 
-    function __createCommentDialog(titleText, fullname, originalText, isEdit) {
+    function __createCommentDialog(title, fullname, originalText, isEdit) {
         if (!__textAreaDialogComponent)
             __textAreaDialogComponent = Qt.createComponent("TextAreaDialog.qml");
-        var dialog = __textAreaDialogComponent.createObject(commentPage, {titleText: titleText, text: originalText || ""});
+        var dialog = __textAreaDialogComponent.createObject(commentPage, {title: title, text: originalText || ""});
         dialog.statusChanged.connect(function() {
             if (dialog.status == DialogStatus.Closed) {
                 dialog.destroy(250);

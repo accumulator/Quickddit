@@ -22,8 +22,8 @@ import com.nokia.meego 1.0
 Sheet {
     id: textAreaDialog
 
+    property alias title: headerItemText.text
     property alias text: textArea.text
-    property alias titleText: headerItemText.text
 
     acceptButtonText: "Accept"
     rejectButtonText: "Cancel"

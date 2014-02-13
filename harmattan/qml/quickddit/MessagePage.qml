@@ -29,10 +29,10 @@ AbstractPage {
     /*readonly*/ property variant sectionModel: ["All", /*"Unread",*/ "Message", "Comment Replies", "Post Replies", "Sent"]
     property Component __textAreaDialogComponent: null
 
-    function __createTextAreaDialog(titleText) {
+    function __createTextAreaDialog(title) {
         if (!__textAreaDialogComponent)
             __textAreaDialogComponent = Qt.createComponent("TextAreaDialog.qml");
-        var dialog = __textAreaDialogComponent.createObject(messagePage, {titleText: titleText});
+        var dialog = __textAreaDialogComponent.createObject(messagePage, {title: title});
         dialog.statusChanged.connect(function() {
             if (dialog.status == DialogStatus.Closed) {
                 dialog.destroy(250);

@@ -60,7 +60,7 @@ AbstractPage {
                 if (model.isComment) {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
                 } else if (!isSentMessage) {
-                    var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {titleText: "Reply Message"});
+                    var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {title: "Reply Message"});
                     dialog.accepted.connect(function() {
                         messageManager.reply(model.fullname, dialog.text);
                     });

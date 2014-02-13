@@ -23,10 +23,8 @@ import Sailfish.Silica 1.0
 CoverBackground {
     id: coverBackground
 
-    property Item mainPage: pageStack.find(function(page) { return page.objectName == "mainPage"; })
-
     CoverPlaceholder {
-        text: pageStack.currentPage.title || mainPage.title
+        text: pageStack.currentPage.title || ""
         icon.source: "quickddit.png"
     }
 }

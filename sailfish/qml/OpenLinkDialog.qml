@@ -22,6 +22,7 @@ import Sailfish.Silica 1.0
 Dialog {
     id: openLinkDialog
 
+    readonly property string title: "Open Link"
     property string url
 
     canAccept: false
@@ -29,7 +30,7 @@ Dialog {
     Column {
         anchors { left: parent.left; right: parent.right }
 
-        DialogHeader { title: "URL" }
+        DialogHeader { title: openLinkDialog.title }
 
         Item {
             anchors { left: parent.left; right: parent.right }
