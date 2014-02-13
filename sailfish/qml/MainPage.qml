@@ -29,13 +29,15 @@ AbstractPage {
     readonly property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top"]
 
     function refresh(subreddit) {
-        if (subreddit === undefined || subreddit == "") {
-            linkModel.location = LinkModel.FrontPage;
-        } else if (subreddit.toLowerCase() == "all") {
-            linkModel.location = LinkModel.All;
-        } else {
-            linkModel.location = LinkModel.Subreddit;
-            linkModel.subreddit = subreddit;
+        if (subreddit !== undefined) {
+            if (subreddit == "") {
+                linkModel.location = LinkModel.FrontPage;
+            } else if (String(subreddit).toLowerCase() === "all") {
+                linkModel.location = LinkModel.All;
+            } else {
+                linkModel.location = LinkModel.Subreddit;
+                linkModel.subreddit = subreddit;
+            }
         }
         linkModel.refresh(false);
     }

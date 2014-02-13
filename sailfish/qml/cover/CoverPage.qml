@@ -27,4 +27,15 @@ CoverBackground {
         text: pageStack.currentPage.title || ""
         icon.source: "quickddit.png"
     }
+
+    CoverActionList {
+        enabled: typeof pageStack.currentPage.refresh === 'function'
+        CoverAction {
+            iconSource: "image://theme/icon-cover-refresh"
+            onTriggered: {
+                appWindow.activate();
+                pageStack.currentPage.refresh();
+            }
+        }
+    }
 }

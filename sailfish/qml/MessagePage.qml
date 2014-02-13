@@ -25,6 +25,10 @@ AbstractPage {
     title: "Messages - " + sectionModel[messageModel.section]
     busy: messageManager.busy
 
+    function refresh() {
+        messageModel.refresh(false);
+    }
+
     readonly property variant sectionModel: ["All", /*"Unread",*/ "Message", "Comment Replies", "Post Replies", "Sent"]
 
     SilicaListView {

@@ -29,6 +29,10 @@ AbstractPage {
     property alias linkPermalink: commentModel.permalink
     property VoteManager linkVoteManager
 
+    function refresh() {
+        commentModel.refresh(false);
+    }
+
     readonly property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
 
     function __createCommentDialog(title, fullname, originalText, isEdit) {

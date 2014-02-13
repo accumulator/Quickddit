@@ -46,7 +46,7 @@ AbstractPage {
                 enabled: enableFrontPage
                 text: "Front Page"
                 onClicked: {
-                    pageStack.previousPage().refresh();
+                    pageStack.previousPage().refresh("");
                     pageStack.pop();
                 }
             }
