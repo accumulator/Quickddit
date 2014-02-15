@@ -22,44 +22,34 @@ import Sailfish.Silica 1.0
 Dialog {
     id: openLinkDialog
 
-    readonly property string title: "Open Link"
+    readonly property string title: "URL"
     property string url
 
-    canAccept: false
+    forwardNavigation: false
 
     Column {
-        anchors { left: parent.left; right: parent.right }
+        anchors { top: parent.top; left: parent.left; right: parent.right }
+        spacing: constant.paddingLarge
 
         DialogHeader { title: openLinkDialog.title }
 
-        Item {
-            anchors { left: parent.left; right: parent.right }
-            height: urlLabel.height + urlSeparator.height + 2 * constant.paddingLarge
-
-            Label {
-                id: urlLabel
-                anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
-                color: Theme.highlightColor
-                font.pixelSize: constant.fontSizeMedium
-                font.italic: true
-                horizontalAlignment: Text.AlignHCenter
-                wrapMode: Text.WrapAnywhere
-                maximumLineCount: 3
-                elide: Text.ElideRight
-                text: url
-            }
-
-            Separator {
-                id: urlSeparator
-                anchors {
-                    left: parent.left; right: parent.right
-                    top: urlLabel.bottom; topMargin: constant.paddingLarge
-                }
-                color: constant.colorMid
-            }
+        Label {
+            anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
+            horizontalAlignment: Text.AlignHCenter
+            color: Theme.highlightColor
+            font.pixelSize: constant.fontSizeLarge
+            wrapMode: Text.WrapAnywhere
+            maximumLineCount: 3
+            elide: Text.ElideRight
+            text: url
         }
+    }
 
-        SimpleListItem {
+    Column {
+        anchors { left: parent.left; right: parent.right; bottom: parent.bottom; margins: constant.paddingLarge }
+
+        Button {
+            anchors.horizontalCenter: parent.horizontalCenter
             text: "Open URL in web browser"
             onClicked: {
                 Qt.openUrlExternally(url);
@@ -68,7 +58,8 @@ Dialog {
             }
         }
 
-        SimpleListItem {
+        Button {
+            anchors.horizontalCenter: parent.horizontalCenter
             text: "Copy URL"
             onClicked: {
                 QMLUtils.copyToClipboard(url);
