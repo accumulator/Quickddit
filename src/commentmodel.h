@@ -42,7 +42,9 @@ public:
         DepthRole,
         IsScoreHiddenRole,
         IsValidRole,
-        IsAuthorRole
+        IsAuthorRole,
+        MoreChildrenCountRole,
+        IsMoreChildrenRole
     };
 
     enum SortType {

@@ -106,28 +106,38 @@ QList<CommentObject> parseCommentListingJson(const QVariantMap &json, const QStr
 
     const QVariantList childrenList = json.value("data").toMap().value("children").toList();
     foreach (const QVariant &commentJson, childrenList) {
-        if (commentJson.toMap().value("kind") != "t1")
-            continue;
-
+        const QString kind = commentJson.toMap().value("kind").toString();
         const QVariantMap commentMap = commentJson.toMap().value("data").toMap();
 
         CommentObject comment;
         comment.setFullname(commentMap.value("name").toString());
-        comment.setAuthor(commentMap.value("author").toString());
-        comment.setBody(unescapeHtml(commentMap.value("body_html").toString()));
-        comment.setRawBody(unescapeMarkdown(commentMap.value("body").toString()));
-        int upvotes = commentMap.value("ups").toInt();
-        int downvotes = commentMap.value("downs").toInt();
-        comment.setScore(upvotes - downvotes);
-        if (!commentMap.value("likes").isNull())
-            comment.setLikes(commentMap.value("likes").toBool() ? 1 : -1);
-        comment.setCreated(QDateTime::fromTime_t(commentMap.value("created_utc").toInt()));
-        if (commentMap.value("edited").toBool() != false)
-            comment.setEdited(QDateTime::fromTime_t(commentMap.value("edited").toInt()));
-        comment.setDistinguished(commentMap.value("distinguished").toString());
         comment.setDepth(depth);
-        comment.setSubmitter(comment.author() == linkAuthor);
-        comment.setScoreHidden(commentMap.value("score_hidden").toBool());
+
+        if (kind == QLatin1String("t1")) {
+            comment.setAuthor(commentMap.value("author").toString());
+            comment.setBody(unescapeHtml(commentMap.value("body_html").toString()));
+            comment.setRawBody(unescapeMarkdown(commentMap.value("body").toString()));
+            int upvotes = commentMap.value("ups").toInt();
+            int downvotes = commentMap.value("downs").toInt();
+            comment.setScore(upvotes - downvotes);
+            if (!commentMap.value("likes").isNull())
+                comment.setLikes(commentMap.value("likes").toBool() ? 1 : -1);
+            comment.setCreated(QDateTime::fromTime_t(commentMap.value("created_utc").toInt()));
+            if (commentMap.value("edited").toBool() != false)
+                comment.setEdited(QDateTime::fromTime_t(commentMap.value("edited").toInt()));
+            comment.setDistinguished(commentMap.value("distinguished").toString());
+            comment.setSubmitter(comment.author() == linkAuthor);
+            comment.setScoreHidden(commentMap.value("score_hidden").toBool());
+        } else if (kind == QLatin1String("more")) {
+            if (commentMap.value("count").toInt() == 0)
+                comment.setFullname(commentMap.value("parent_id").toString());
+            else
+                comment.setMoreChildren(commentMap.value("children").toStringList());
+            comment.setIsMoreChildren(true);
+        } else {
+            qCritical("Parser::parseCommentListingJson(): Invalid kind: %s", qPrintable(kind));
+            continue;
+        }
 
         commentList.append(comment);
 

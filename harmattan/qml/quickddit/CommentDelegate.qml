@@ -17,6 +17,7 @@
 */
 
 import QtQuick 1.1
+import com.nokia.meego 1.0
 
 Item {
     id: commentDelegate
@@ -33,7 +34,8 @@ Item {
     }
 
     width: ListView.view.width
-    height: mainItem.height
+    height: moreChildrenLoader.status == Loader.Null ? mainItem.height
+                                                     : moreChildrenLoader.height + 2 * constant.paddingMedium
 
     Row {
         id: lineRow
@@ -67,6 +69,7 @@ Item {
         anchors { left: lineRow.right; right: parent.right }
         height: mainColumn.height + 2 * constant.paddingMedium
         enabled: model.isValid
+        visible: moreChildrenLoader.status == Loader.Null
 
         Rectangle {
             id: highlightRect
@@ -162,5 +165,44 @@ Item {
         }
 
         onClicked: commentDelegate.clicked();
+    }
+
+    Loader {
+        id: moreChildrenLoader
+        anchors { left: lineRow.right; right: parent.right; top: parent.top; margins: constant.paddingMedium }
+        sourceComponent: model.isMoreChildren ? moreChildrenComponent : undefined
+
+        Component {
+            id: moreChildrenComponent
+
+            Column {
+                height: childrenRect.height
+                spacing: constant.paddingMedium
+
+                Text {
+                    anchors { left: loadMoreButton.left; right: loadMoreButton.right }
+                    color: constant.colorMid
+                    font.pixelSize: constant.fontSizeMedium
+                    horizontalAlignment: Text.AlignHCenter
+                    elide: Text.ElideRight
+                    visible: model.moreChildrenCount > 0
+                    text: qsTr("%n replies hidden", "", model.moreChildrenCount)
+                }
+
+                Button {
+                    id: loadMoreButton
+                    width: Math.min(implicitWidth, parent.width)
+                    text: model.moreChildrenCount > 0 ? qsTr("Load more comments") : qsTr("Continue this thread");
+                    onClicked: {
+                        if (model.moreChildrenCount > 0) {
+                            console.log("Not implemented yet"); // TODO
+                        } else {
+                            var link = QMLUtils.toAbsoluteUrl(linkPermalink + model.fullname.substring(3));
+                            globalUtils.openInTextLink(link);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

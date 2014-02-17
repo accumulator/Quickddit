@@ -93,6 +93,8 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     case IsScoreHiddenRole: return comment.isScoreHidden();
     case IsValidRole: return comment.author() != "[deleted]";
     case IsAuthorRole: return comment.author() == manager()->settings()->redditUsername();
+    case MoreChildrenCountRole: return comment.moreChildren().count();
+    case IsMoreChildrenRole: return comment.isMoreChildren();
     default:
         qCritical("CommentModel::data(): Invalid role");
         return QVariant();
@@ -330,6 +332,8 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     roles[IsScoreHiddenRole] = "isScoreHidden";
     roles[IsValidRole] = "isValid";
     roles[IsAuthorRole] = "isAuthor";
+    roles[MoreChildrenCountRole] = "moreChildrenCount";
+    roles[IsMoreChildrenRole] = "isMoreChildren";
     return roles;
 }
 

@@ -77,6 +77,12 @@ public:
     bool isScoreHidden() const;
     void setScoreHidden(bool scoreHidden);
 
+    QList<QString> moreChildren() const;
+    void setMoreChildren(const QList<QString> &children);
+
+    bool isMoreChildren() const;
+    void setIsMoreChildren(bool isMoreChildren);
+
 private:
     QExplicitlySharedDataPointer<CommentObjectData> d;
 };
