@@ -29,14 +29,14 @@ ApplicationWindow {
     DockedPanel {
         id: busyPanel
         width: parent.width
-        height: busyIndicator.height + constant.paddingLarge
+        height: busyIndicator.height + 2 * constant.paddingLarge
         open: pageStack.currentPage.hasOwnProperty('busy') ? pageStack.currentPage.busy : false
         dock: Dock.Bottom
         enabled: false
 
         BusyIndicator {
             id: busyIndicator
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.centerIn: parent
             running: busyPanel.open
         }
     }
