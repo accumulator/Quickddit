@@ -59,12 +59,9 @@ public:
      * @param type specify GET or POST request
      * @param relativeUrl the relative url of Reddit without the ".json", eg. "/r/nokia/hot"
      * @param parameters parameters for the request (will be added as query items in the url)
-     * @param oauth use oauth for this request. Some endpoint does not support oauth and need to
-                    set this to false
      */
     void createRedditRequest(RequestType type, const QString &relativeUrl,
-                             const QHash<QString, QString> &parameters = QHash<QString,QString>(),
-                             bool oauth = true);
+                             const QHash<QString, QString> &parameters = QHash<QString,QString>());
 
     /**
      * Generate an authorization url for signing in by the user (through the broswer)

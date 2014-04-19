@@ -107,16 +107,13 @@ void SubredditModel::refresh(bool refreshOlder)
     QString relativeUrl;
     QHash<QString, QString> parameters;
     parameters["limit"] = "50";
-    bool oauth = true;
 
     switch (m_section) {
     case PopularSection:
         relativeUrl = "/subreddits/popular";
-        oauth = false;
         break;
     case NewSection:
         relativeUrl = "/subreddits/new";
-        oauth = false;
         break;
     case UserAsSubscriberSection:
         relativeUrl = "/subreddits/mine/subscriber";
@@ -131,7 +128,6 @@ void SubredditModel::refresh(bool refreshOlder)
         Q_ASSERT_X(!m_query.isEmpty(), Q_FUNC_INFO, "query is empty");
         relativeUrl = "/subreddits/search";
         parameters["q"] = m_query;
-        oauth = false;
         break;
     }
 
@@ -148,7 +144,7 @@ void SubredditModel::refresh(bool refreshOlder)
 
     connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
             SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::GET, relativeUrl, parameters, oauth);
+    manager()->createRedditRequest(QuickdditManager::GET, relativeUrl, parameters);
 
     setBusy(true);
 }

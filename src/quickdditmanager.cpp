@@ -85,12 +85,12 @@ QNetworkReply *QuickdditManager::createGetRequest(const QUrl &url, const QByteAr
 }
 
 void QuickdditManager::createRedditRequest(RequestType type, const QString &relativeUrl,
-                                           const QHash<QString, QString> &parameters, bool oauth)
+                                           const QHash<QString, QString> &parameters)
 {
     QString baseUrl;
     QByteArray authHeader;
 
-    if (oauth && m_settings->hasRefreshToken()) {
+    if (m_settings->hasRefreshToken()) {
         if (!m_accessToken.isEmpty() && m_accessTokenExpiry.elapsed() < 3600000) {
             baseUrl = "https://oauth.reddit.com";
             authHeader.append("Bearer " + m_accessToken);
