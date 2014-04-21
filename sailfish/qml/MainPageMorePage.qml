@@ -23,9 +23,6 @@ AbstractPage {
     id: mainPageMorePage
     title: "More"
 
-    property bool enableFrontPage
-
-    signal subredditsClicked
     signal multiredditsClicked
 
     Flickable {
@@ -41,20 +38,6 @@ AbstractPage {
             id: optionsColumn
             anchors { top: pageHeader.bottom; left: parent.left; right: parent.right }
             height: childrenRect.height
-
-            SimpleListItem {
-                enabled: enableFrontPage
-                text: "Front Page"
-                onClicked: {
-                    pageStack.previousPage().refresh("");
-                    pageStack.pop();
-                }
-            }
-
-            SimpleListItem {
-                text: "Subreddits"
-                onClicked: subredditsClicked();
-            }
 
             SimpleListItem {
                 enabled: quickdditManager.isSignedIn

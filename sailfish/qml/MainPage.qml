@@ -50,19 +50,6 @@ AbstractPage {
         }
     }
     property QtObject __subredditDialogModel
-    function __openSubreddiitDialog() {
-        var p = {}
-        if (quickdditManager.isSignedIn) {
-            if (!__subredditDialogModel)
-                __subredditDialogModel = __subredditDialogModelComponent.createObject(mainPage);
-            p.subredditModel = __subredditDialogModel;
-        }
-        var dialog = pageStack.replace(Qt.resolvedUrl("SubredditDialog.qml"), p);
-        dialog.accepted.connect(function() {
-            if (!dialog.acceptDestination)
-                refresh(dialog.text);
-        });
-    }
 
     property Component __multiredditModelComponent: Component {
         MultiredditModel {
@@ -91,11 +78,31 @@ AbstractPage {
             MenuItem {
                 text: "More"
                 onClicked: {
-                    var page = pageStack.push(Qt.resolvedUrl("MainPageMorePage.qml"),
-                                              {enableFrontPage: linkModel.location != LinkModel.FrontPage });
-                    page.subredditsClicked.connect(__openSubreddiitDialog);
+                    var page = pageStack.push(Qt.resolvedUrl("MainPageMorePage.qml"));
                     page.multiredditsClicked.connect(__openMultiredditDialog);
                 }
+            }
+            MenuItem {
+                text: "Subreddits"
+                onClicked: {
+                    var p = {}
+                    if (quickdditManager.isSignedIn) {
+                        if (!__subredditDialogModel)
+                            __subredditDialogModel = __subredditDialogModelComponent.createObject(mainPage);
+                        p.subredditModel = __subredditDialogModel;
+                    }
+                    var dialog = pageStack.push(Qt.resolvedUrl("SubredditDialog.qml"), p);
+                    dialog.accepted.connect(function() {
+                        if (!dialog.acceptDestination)
+                            refresh(dialog.text);
+                    });
+                }
+            }
+
+            MenuItem {
+                text: "Front Page"
+                visible: linkModel.location != LinkModel.FrontPage
+                onClicked: mainPage.refresh("");
             }
             MenuItem {
                 text: "About /r/" + linkModel.subreddit
