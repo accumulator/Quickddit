@@ -60,10 +60,7 @@ class ImgurManager : public AbstractManager, public QQmlParserStatus
      * - http://imgur.com/xxxxx (image)
      * - http://imgur.com/a/xxxxx (album)
      * - http://imgur.com/a/xxxxx#n (album, n = image index in the album)
-     *
-     * Unsupported Imgur url formats:
-     * - http://imgur.com/gallery/xxxxx (because I don't know it is an album or image)
-     * - any other url format
+     * - http://imgur.com/gallery/xxxxx (image or album)
      */
     Q_PROPERTY(QString imgurUrl READ imgurUrl WRITE setImgurUrl NOTIFY imgurUrlChanged)
 public:

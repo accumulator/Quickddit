@@ -39,7 +39,7 @@ AbstractPage {
         PullDownMenu {
             MenuItem {
                 text: "URL"
-                onClicked: globalUtils.createOpenLinkDialog(imageUrl.toString() || imgurUrl);
+                onClicked: globalUtils.createOpenLinkDialog(imgurUrl || imageUrl.toString());
             }
             MenuItem {
                 text: "Reset zoom"

@@ -253,7 +253,7 @@ AbstractPage {
                                     + (appSettings.whiteTheme ? "" : "-white")
                         enabled: {
                             if (!link) return false;
-                            if (link.domain == "i.imgur.com" || link.domain == "imgur.com")
+                            if (link.domain == "i.imgur.com" || link.domain == "imgur.com" || link.domain == "m.imgur.com")
                                 return true;
                             if (/^https?:\/\/.+\.(jpe?g|png|gif)/i.test(link.url))
                                 return true;
@@ -262,7 +262,7 @@ AbstractPage {
                         }
                         onClicked: {
                             var p = {};
-                            if (link.domain == "imgur.com")
+                            if (link.domain == "imgur.com" || link.domain == "m.imgur.com")
                                 p.imgurUrl = link.url;
                             else
                                 p.imageUrl = link.url;

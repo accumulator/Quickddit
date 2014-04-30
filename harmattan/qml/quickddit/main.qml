@@ -49,7 +49,7 @@ PageStackWindow {
             if (!url)
                 return;
 
-            if (/^https?:\/\/imgur\.com/.test(url))
+            if (/^https?:\/\/(m\.)?imgur\.com/.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imgurUrl: url});
             else if (/^https?:\/\/i\.imgur\.com/.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
