@@ -88,7 +88,7 @@ AbstractPage {
                     prevScale = scale
                 }
 
-                onStatusChanged: {
+                onHeightChanged: {
                     if (status == Image.Ready) {
                         fitToScreen()
                         loadedAnimation.start()
