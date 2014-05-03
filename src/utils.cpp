@@ -20,6 +20,9 @@
 
 #include <QtCore/QString>
 #include <QtCore/QDateTime>
+#include <QtCore/QByteArray>
+#include <QtCore/QHash>
+#include <QtCore/QUrl>
 
 QString Utils::getTimeDiff(const QDateTime &created)
 {
@@ -54,4 +57,25 @@ QString Utils::getTimeDiff(const QDateTime &created)
 
     diff /= 12; // years
     return QString::number(diff) + " years ago";
+}
+
+QByteArray Utils::toEncodedQuery(const QHash<QString, QString> &parameters)
+{
+    QByteArray encodedQuery;
+    QHashIterator<QString, QString> i(parameters);
+    while (i.hasNext()) {
+        i.next();
+        encodedQuery += QUrl::toPercentEncoding(i.key()) + '=' + QUrl::toPercentEncoding(i.value()) + '&';
+    }
+    encodedQuery.chop(1); // chop the last '&'
+    return encodedQuery;
+}
+
+void Utils::setUrlQuery(QUrl *url, const QHash<QString, QString> &parameters)
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
+    url->setQuery(QString::fromUtf8(toEncodedQuery(parameters)), QUrl::StrictMode);
+#else
+    url->setEncodedQuery(toEncodedQuery(parameters));
+#endif
 }

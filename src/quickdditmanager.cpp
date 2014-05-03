@@ -27,6 +27,7 @@
 
 #include "networkmanager.h"
 #include "appsettings.h"
+#include "utils.h"
 
 #if !defined(REDDIT_CLIENT_ID) || !defined(REDDIT_CLIENT_SECRET) || !defined(REDDIT_REDIRECT_URL)
 // fill these up with your own Reddit client id, secret and redirect url
@@ -36,27 +37,6 @@
 #endif
 
 #define REDDIT_OAUTH_SCOPE "read,mysubreddits,subscribe,vote,submit,edit,identity,privatemessages,history,save"
-
-static QByteArray toEncodedQuery(const QHash<QString, QString> &parameters)
-{
-    QByteArray encodedQuery;
-    QHashIterator<QString, QString> i(parameters);
-    while (i.hasNext()) {
-        i.next();
-        encodedQuery += QUrl::toPercentEncoding(i.key()) + '=' + QUrl::toPercentEncoding(i.value()) + '&';
-    }
-    encodedQuery.chop(1); // chop the last '&'
-    return encodedQuery;
-}
-
-static void setUrlQuery(QUrl *url, const QHash<QString, QString> &parameters)
-{
-#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
-    url->setQuery(QString::fromUtf8(toEncodedQuery(parameters)), QUrl::StrictMode);
-#else
-    url->setEncodedQuery(toEncodedQuery(parameters));
-#endif
-}
 
 QuickdditManager::QuickdditManager(QObject *parent) :
     QObject(parent), m_netManager(new NetworkManager(this)), m_settings(0),
@@ -119,10 +99,10 @@ void QuickdditManager::createRedditRequest(RequestType type, const QString &rela
         // <https://github.com/reddit/reddit/commit/6f9f91e7534db713d2bdd199ededd00598adccc1>
         QHash<QString, QString> parametersWithObey18(parameters);
         parametersWithObey18.insert("obey_over18", "true");
-        setUrlQuery(&requestUrl, parametersWithObey18);
+        Utils::setUrlQuery(&requestUrl, parametersWithObey18);
         emit networkReplyReceived(m_netManager->createGetRequest(requestUrl, authHeader));
     } else if (type == POST) {
-        emit networkReplyReceived(m_netManager->createPostRequest(requestUrl, toEncodedQuery(parameters), authHeader));
+        emit networkReplyReceived(m_netManager->createPostRequest(requestUrl, Utils::toEncodedQuery(parameters), authHeader));
     }
 }
 
@@ -139,7 +119,7 @@ QUrl QuickdditManager::generateAuthorizationUrl()
     m_state = QString::number(qrand());
     parameters.insert("state", m_state);
 
-    setUrlQuery(&url, parameters);
+    Utils::setUrlQuery(&url, parameters);
     return url;
 }
 
@@ -186,7 +166,7 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
     QByteArray authHeader = "Basic ";
     authHeader += (QByteArray(REDDIT_CLIENT_ID) + ":" + QByteArray(REDDIT_CLIENT_SECRET)).toBase64();
 
-    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, toEncodedQuery(parameters), authHeader);
+    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, Utils::toEncodedQuery(parameters), authHeader);
     connect(m_accessTokenReply, SIGNAL(finished()), SLOT(onAccessTokenRequestFinished()));
 }
 
@@ -213,7 +193,7 @@ void QuickdditManager::refreshAccessToken()
     QByteArray authHeader = "Basic ";
     authHeader += (QByteArray(REDDIT_CLIENT_ID) + ":" + QByteArray(REDDIT_CLIENT_SECRET)).toBase64();
 
-    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, toEncodedQuery(parameters), authHeader);
+    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, Utils::toEncodedQuery(parameters), authHeader);
     connect(m_accessTokenReply, SIGNAL(finished()), SLOT(onAccessTokenRequestFinished()));
 }
 

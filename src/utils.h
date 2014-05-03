@@ -21,10 +21,16 @@
 
 class QString;
 class QDateTime;
+class QByteArray;
+template <class Key, class T> class QHash;
+class QUrl;
 
 namespace Utils
 {
 QString getTimeDiff(const QDateTime &created);
+
+QByteArray toEncodedQuery(const QHash<QString, QString> &parameters);
+void setUrlQuery(QUrl *url, const QHash<QString, QString> &parameters);
 }
 
 #endif // UTILS_H
