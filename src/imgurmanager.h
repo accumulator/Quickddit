@@ -88,7 +88,7 @@ signals:
     void error(const QString &errorString);
 
 private slots:
-    void onFinished();
+    void onFinished(QNetworkReply *reply);
 
 private:
     QUrl m_imageUrl;
@@ -96,7 +96,7 @@ private:
     int m_selectedIndex;
     QString m_imgurUrl;
 
-    QNetworkReply *m_reply;
+    APIRequest *m_request;
     QList< QPair<QString,QString> > m_imageAndThumbUrlList;
 };
 

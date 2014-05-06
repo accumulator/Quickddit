@@ -27,11 +27,11 @@ VoteManager::VoteManager(QObject *parent) :
 
 void VoteManager::vote(const QString &fullname, VoteManager::VoteType voteType)
 {
-    if (m_reply != 0) {
+    if (m_request != 0) {
         qWarning("VoteManager::vote(): Aborting active network request (Try to avoid!)");
-        m_reply->disconnect();
-        m_reply->deleteLater();
-        m_reply = 0;
+        m_request->disconnect();
+        m_request->deleteLater();
+        m_request = 0;
     }
 
     m_fullname = fullname;
@@ -41,35 +41,23 @@ void VoteManager::vote(const QString &fullname, VoteManager::VoteType voteType)
     parameters["id"] = m_fullname;
     parameters["dir"] = QString::number(voteTypeToLikes(m_voteType));
 
-    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-            SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::POST, "/api/vote", parameters);
+    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/vote", parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
     setBusy(true);
 }
 
-void VoteManager::onNetworkReplyReceived(QNetworkReply *reply)
+void VoteManager::onFinished(QNetworkReply *reply)
 {
-    disconnect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-               this, SLOT(onNetworkReplyReceived(QNetworkReply*)));
     if (reply != 0) {
-        m_reply = reply;
-        m_reply->setParent(this);
-        connect(m_reply, SIGNAL(finished()), SLOT(onFinished()));
-    } else {
-        setBusy(false);
+        if (reply->error() == QNetworkReply::NoError)
+            emit voteSuccess(m_fullname, voteTypeToLikes(m_voteType));
+        else
+            emit error(reply->errorString());
     }
-}
 
-void VoteManager::onFinished()
-{
-    if (m_reply->error() == QNetworkReply::NoError)
-        emit voteSuccess(m_fullname, voteTypeToLikes(m_voteType));
-    else
-        emit error(m_reply->errorString());
-
-    m_reply->deleteLater();
-    m_reply = 0;
+    m_request->deleteLater();
+    m_request = 0;
     setBusy(false);
 }
 

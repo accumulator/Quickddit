@@ -18,6 +18,7 @@
 
 #include "quickdditmanager.h"
 
+#include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <qt-json/json.h>
 
@@ -25,7 +26,6 @@
 #include <QtCore/QUrlQuery>
 #endif
 
-#include "networkmanager.h"
 #include "appsettings.h"
 #include "utils.h"
 
@@ -39,8 +39,8 @@
 #define REDDIT_OAUTH_SCOPE "read,mysubreddits,subscribe,vote,submit,edit,identity,privatemessages,history,save"
 
 QuickdditManager::QuickdditManager(QObject *parent) :
-    QObject(parent), m_netManager(new NetworkManager(this)), m_settings(0),
-    m_accessTokenReply(0), m_userInfoReply(0)
+    QObject(parent), m_netManager(new QNetworkAccessManager(this)), m_settings(0),
+    m_accessTokenRequest(0), m_pendingRequest(0), m_userInfoReply(0)
 {
 }
 
@@ -59,51 +59,48 @@ void QuickdditManager::setSettings(AppSettings *settings)
     m_settings = settings;
 }
 
-QNetworkReply *QuickdditManager::createGetRequest(const QUrl &url, const QByteArray &authHeader)
+APIRequest *QuickdditManager::createGetRequest(QObject *parent, const QUrl &url, const QByteArray &authHeader)
 {
-    return m_netManager->createGetRequest(url, authHeader);
+    APIRequest *request = new APIRequest(APIRequest::NormalRequest, m_netManager, parent);
+    request->setRequestMethod(APIRequest::GET);
+    request->setBaseUrl(url);
+    request->setAuthHeader(authHeader);
+    request->send();
+    return request;
 }
 
-void QuickdditManager::createRedditRequest(RequestType type, const QString &relativeUrl,
-                                           const QHash<QString, QString> &parameters)
+APIRequest *QuickdditManager::createRedditRequest(QObject *parent, APIRequest::HttpMethod method,
+                                                  const QString &relativeUrl, const QHash<QString, QString> &parameters)
 {
-    QString baseUrl;
-    QByteArray authHeader;
+    APIRequest *request;
 
     if (m_settings->hasRefreshToken()) {
+        request = new APIRequest(APIRequest::OAuthRequest, m_netManager, parent);
+        request->setRequestMethod(method);
+        request->setRelativeUrl(relativeUrl);
+        request->setParameters(parameters);
         if (!m_accessToken.isEmpty() && m_accessTokenExpiry.elapsed() < 3600000) {
-            baseUrl = "https://oauth.reddit.com";
-            authHeader.append("Bearer " + m_accessToken);
+            request->setAccessToken(m_accessToken);
         } else {
-            m_requestType = type;
-            m_relativeUrl = relativeUrl;
-            m_parameters = parameters;
+            if (m_pendingRequest != 0) {
+                m_pendingRequest->forceFailure();
+                m_pendingRequest = 0;
+            }
+            m_pendingRequest = request;
             connect(this, SIGNAL(accessTokenSuccess()), SLOT(onRefreshTokenFinished()));
             connect(this, SIGNAL(accessTokenFailure(QString)), SLOT(onRefreshTokenFinished()));
             refreshAccessToken();
-            return;
+            return request;
         }
     } else {
-        baseUrl = "http://www.reddit.com";
+        request = new APIRequest(APIRequest::NormalRequest, m_netManager, parent);
+        request->setRequestMethod(method);
+        request->setRelativeUrl(relativeUrl);
+        request->setParameters(parameters);
     }
 
-    QUrl requestUrl;
-    if (type == GET)
-        requestUrl = baseUrl + relativeUrl + ".json";
-    else if (type == POST)
-        requestUrl = baseUrl + relativeUrl;
-
-    if (type == GET) {
-        // obey user settings for NSFW filtering
-        // this is not documented but found in source:
-        // <https://github.com/reddit/reddit/commit/6f9f91e7534db713d2bdd199ededd00598adccc1>
-        QHash<QString, QString> parametersWithObey18(parameters);
-        parametersWithObey18.insert("obey_over18", "true");
-        Utils::setUrlQuery(&requestUrl, parametersWithObey18);
-        emit networkReplyReceived(m_netManager->createGetRequest(requestUrl, authHeader));
-    } else if (type == POST) {
-        emit networkReplyReceived(m_netManager->createPostRequest(requestUrl, Utils::toEncodedQuery(parameters), authHeader));
-    }
+    request->send();
+    return request;
 }
 
 QUrl QuickdditManager::generateAuthorizationUrl()
@@ -128,11 +125,11 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
     // if m_state is empty means generateAuthorizationUrl() is not called first
     Q_ASSERT(!m_state.isEmpty());
 
-    if (m_accessTokenReply != 0) {
+    if (m_accessTokenRequest != 0) {
         qWarning("QuickdditManager::getAccessToken(): Aborting active network request (Try to avoid!)");
-        m_accessTokenReply->disconnect();
-        m_accessTokenReply->deleteLater();
-        m_accessTokenReply = 0;
+        m_accessTokenRequest->disconnect();
+        m_accessTokenRequest->deleteLater();
+        m_accessTokenRequest = 0;
     }
 
     // check state
@@ -151,50 +148,43 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
 
     m_state.clear();
 
-    QUrl accessTokenUrl("https://ssl.reddit.com/api/v1/access_token");
-
-    QHash<QString, QString> parameters;
+    QString code;
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-    parameters.insert("code", signedInUrlQuery.queryItemValue("code"));
+    code = signedInUrlQuery.queryItemValue("code");
 #else
-    parameters.insert("code", signedInUrl.queryItemValue("code"));
+    code = signedInUrl.queryItemValue("code");
 #endif
-    parameters.insert("grant_type", "authorization_code");
-    parameters.insert("redirect_uri", REDDIT_REDIRECT_URL);
 
-    // generate basic auth header
-    QByteArray authHeader = "Basic ";
-    authHeader += (QByteArray(REDDIT_CLIENT_ID) + ":" + QByteArray(REDDIT_CLIENT_SECRET)).toBase64();
+    m_accessTokenRequest = new APIRequest(APIRequest::AccessTokenRequest, m_netManager, this);
+    m_accessTokenRequest->setClientId(REDDIT_CLIENT_ID);
+    m_accessTokenRequest->setClientSecret(REDDIT_CLIENT_SECRET);
+    m_accessTokenRequest->setRedirectUrl(REDDIT_REDIRECT_URL);
+    m_accessTokenRequest->setCode(code);
+    m_accessTokenRequest->send();
 
-    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, Utils::toEncodedQuery(parameters), authHeader);
-    connect(m_accessTokenReply, SIGNAL(finished()), SLOT(onAccessTokenRequestFinished()));
+    connect(m_accessTokenRequest, SIGNAL(finished(QNetworkReply*)), SLOT(onAccessTokenRequestFinished(QNetworkReply*)));
 }
 
 void QuickdditManager::refreshAccessToken()
 {
-    if (m_accessTokenReply != 0) {
+    if (m_accessTokenRequest != 0) {
         qWarning("QuickdditManager::refreshAccessToken(): Aborting active network request (Try to avoid!)");
-        m_accessTokenReply->disconnect();
-        m_accessTokenReply->deleteLater();
-        m_accessTokenReply = 0;
+        m_accessTokenRequest->disconnect();
+        m_accessTokenRequest->deleteLater();
+        m_accessTokenRequest = 0;
     }
 
     QByteArray refreshToken = m_settings->refreshToken();
     Q_ASSERT(!refreshToken.isEmpty());
 
-    QUrl accessTokenUrl("https://ssl.reddit.com/api/v1/access_token");
+    m_accessTokenRequest = new APIRequest(APIRequest::RefreshAccessTokenRequest, m_netManager, this);
+    m_accessTokenRequest->setClientId(REDDIT_CLIENT_ID);
+    m_accessTokenRequest->setClientSecret(REDDIT_CLIENT_SECRET);
+    m_accessTokenRequest->setRedirectUrl(REDDIT_REDIRECT_URL);
+    m_accessTokenRequest->setRefreshToken(refreshToken);
+    m_accessTokenRequest->send();
 
-    QHash<QString, QString> parameters;
-    parameters.insert("refresh_token", refreshToken);
-    parameters.insert("grant_type", "refresh_token");
-    parameters.insert("redirect_uri", REDDIT_REDIRECT_URL);
-
-    // generate basic auth header
-    QByteArray authHeader = "Basic ";
-    authHeader += (QByteArray(REDDIT_CLIENT_ID) + ":" + QByteArray(REDDIT_CLIENT_SECRET)).toBase64();
-
-    m_accessTokenReply = m_netManager->createPostRequest(accessTokenUrl, Utils::toEncodedQuery(parameters), authHeader);
-    connect(m_accessTokenReply, SIGNAL(finished()), SLOT(onAccessTokenRequestFinished()));
+    connect(m_accessTokenRequest, SIGNAL(finished(QNetworkReply*)), SLOT(onAccessTokenRequestFinished(QNetworkReply*)));
 }
 
 void QuickdditManager::signOut()
@@ -205,10 +195,10 @@ void QuickdditManager::signOut()
     emit signedInChanged();
 }
 
-void QuickdditManager::onAccessTokenRequestFinished()
+void QuickdditManager::onAccessTokenRequestFinished(QNetworkReply *reply)
 {
-    if (m_accessTokenReply->error() == QNetworkReply::NoError) {
-        const QString replyString = QString::fromUtf8(m_accessTokenReply->readAll());
+    if (reply->error() == QNetworkReply::NoError) {
+        const QString replyString = QString::fromUtf8(reply->readAll());
 
         bool ok;
         const QVariantMap replyJson = QtJson::parse(replyString, ok).toMap();
@@ -231,11 +221,11 @@ void QuickdditManager::onAccessTokenRequestFinished()
                    "Unable to get access token from the following data:\n%s", qPrintable(replyString));
         }
     } else {
-        emit accessTokenFailure(m_accessTokenReply->errorString());
+        emit accessTokenFailure(reply->errorString());
     }
 
-    m_accessTokenReply->deleteLater();
-    m_accessTokenReply = 0;
+    m_accessTokenRequest->deleteLater();
+    m_accessTokenRequest = 0;
 
     if (!m_accessToken.isEmpty() && m_settings->redditUsername().isEmpty())
         updateRedditUsername();
@@ -245,13 +235,14 @@ void QuickdditManager::onRefreshTokenFinished()
 {
     disconnect(this, 0, this, SLOT(onRefreshTokenFinished()));
 
-    if (!m_accessToken.isEmpty() && m_accessTokenExpiry.elapsed() < 3600000)
-        createRedditRequest(m_requestType, m_relativeUrl, m_parameters);
-    else
-        emit networkReplyReceived(0);
+    if (!m_accessToken.isEmpty() && m_accessTokenExpiry.elapsed() < 3600000) {
+        m_pendingRequest->setAccessToken(m_accessToken);
+        m_pendingRequest->send();
+    } else {
+        m_pendingRequest->forceFailure();
+    }
 
-    m_relativeUrl.clear();
-    m_parameters.clear();
+    m_pendingRequest = 0;
 }
 
 void QuickdditManager::updateRedditUsername()
@@ -263,21 +254,24 @@ void QuickdditManager::updateRedditUsername()
         m_userInfoReply = 0;
     }
 
-    QByteArray authHeader = "Bearer " + m_accessToken.toLatin1();
+    m_userInfoReply = new APIRequest(APIRequest::OAuthRequest, m_netManager, this);
+    m_userInfoReply->setRequestMethod(APIRequest::GET);
+    m_userInfoReply->setRelativeUrl("/api/v1/me");
+    m_userInfoReply->setAccessToken(m_accessToken);
+    m_userInfoReply->send();
 
-    m_userInfoReply = m_netManager->createGetRequest(QUrl("https://oauth.reddit.com/api/v1/me.json"), authHeader);
-    connect(m_userInfoReply, SIGNAL(finished()), SLOT(onUserInfoFinished()));
+    connect(m_userInfoReply, SIGNAL(finished(QNetworkReply*)), SLOT(onUserInfoFinished(QNetworkReply*)));
 }
 
-void QuickdditManager::onUserInfoFinished()
+void QuickdditManager::onUserInfoFinished(QNetworkReply *reply)
 {
-    if (m_userInfoReply->error() == QNetworkReply::NoError) {
+    if (reply->error() == QNetworkReply::NoError) {
         bool ok;
-        QVariantMap userJson = QtJson::parse(m_userInfoReply->readAll(), ok).toMap();
+        QVariantMap userJson = QtJson::parse(reply->readAll(), ok).toMap();
         Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
         m_settings->setRedditUsername(userJson.value("name").toString());
     } else {
-        qDebug("QuickdditManager::onUserInfoFinished(): Network error: %s", qPrintable(m_userInfoReply->errorString()));
+        qDebug("QuickdditManager::onUserInfoFinished(): Network error: %s", qPrintable(reply->errorString()));
     }
 
     m_userInfoReply->deleteLater();

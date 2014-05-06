@@ -25,7 +25,7 @@
 #include "parser.h"
 
 MessageModel::MessageModel(QObject *parent) :
-    AbstractListModelManager(parent), m_section(AllSection), m_reply(0)
+    AbstractListModelManager(parent), m_section(AllSection), m_request(0)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5,0,0))
     setRoleNames(customRoleNames());
@@ -84,11 +84,11 @@ void MessageModel::setSection(MessageModel::Section section)
 
 void MessageModel::refresh(bool refreshOlder)
 {
-    if (m_reply != 0) {
+    if (m_request != 0) {
         qWarning("MessageModel::refresh(): Aborting acitve network request (Try to aviod!)");
-        m_reply->disconnect();
-        m_reply->deleteLater();
-        m_reply = 0;
+        m_request->disconnect();
+        m_request->deleteLater();
+        m_request = 0;
     }
 
     QString relativeUrl = "/message";
@@ -118,10 +118,10 @@ void MessageModel::refresh(bool refreshOlder)
         }
     }
 
-    setBusy(true);
+    m_request = manager()->createRedditRequest(this, APIRequest::GET, relativeUrl, parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
-    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)), SLOT(onNetweorkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::GET, relativeUrl, parameters);
+    setBusy(true);
 }
 
 void MessageModel::changeIsUnread(const QString &fullname, bool isUnread)
@@ -154,36 +154,25 @@ QHash<int, QByteArray> MessageModel::customRoleNames() const
     return roles;
 }
 
-void MessageModel::onNetweorkReplyReceived(QNetworkReply *reply)
+void MessageModel::onFinished(QNetworkReply *reply)
 {
-    disconnect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)), this,
-               SLOT(onNetweorkReplyReceived(QNetworkReply*)));
     if (reply != 0) {
-        m_reply = reply;
-        m_reply->setParent(this);
-        connect(m_reply, SIGNAL(finished()), SLOT(onFinished()));
-    } else {
-        setBusy(false);
-    }
-}
-
-void MessageModel::onFinished()
-{
-    if (m_reply->error() == QNetworkReply::NoError) {
-        const Listing<MessageObject> messageList = Parser::parseMessageList(m_reply->readAll());
-        if (!messageList.isEmpty()) {
-            beginInsertRows(QModelIndex(), m_messageList.count(), m_messageList.count() + messageList.count() - 1);
-            m_messageList.append(messageList);
-            endInsertRows();
-            setCanLoadMore(messageList.hasMore());
+        if (reply->error() == QNetworkReply::NoError) {
+            const Listing<MessageObject> messageList = Parser::parseMessageList(reply->readAll());
+            if (!messageList.isEmpty()) {
+                beginInsertRows(QModelIndex(), m_messageList.count(), m_messageList.count() + messageList.count() - 1);
+                m_messageList.append(messageList);
+                endInsertRows();
+                setCanLoadMore(messageList.hasMore());
+            } else {
+                setCanLoadMore(false);
+            }
         } else {
-            setCanLoadMore(false);
+            emit error(reply->errorString());
         }
-    } else {
-        emit error(m_reply->errorString());
     }
 
+    m_request->deleteLater();
+    m_request = 0;
     setBusy(false);
-    m_reply->deleteLater();
-    m_reply = 0;
 }

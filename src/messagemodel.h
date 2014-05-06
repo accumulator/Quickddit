@@ -72,13 +72,12 @@ protected:
     QHash<int, QByteArray> customRoleNames() const;
 
 private slots:
-    void onNetweorkReplyReceived(QNetworkReply *reply);
-    void onFinished();
+    void onFinished(QNetworkReply *reply);
 
 private:
     Section m_section;
     QList<MessageObject> m_messageList;
-    QNetworkReply *m_reply;
+    APIRequest *m_request;
 };
 
 #endif // MESSAGEMODEL_H

@@ -24,7 +24,7 @@
 #include "parser.h"
 
 SubredditModel::SubredditModel(QObject *parent) :
-    AbstractListModelManager(parent), m_section(PopularSection), m_reply(0)
+    AbstractListModelManager(parent), m_section(PopularSection), m_request(0)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
@@ -97,11 +97,11 @@ void SubredditModel::setQuery(const QString &query)
 
 void SubredditModel::refresh(bool refreshOlder)
 {
-    if (m_reply != 0) {
+    if (m_request != 0) {
         qWarning("SubredditModel::refresh(): Aborting active network request (Try to avoid!)");
-        m_reply->disconnect();
-        m_reply->deleteLater();
-        m_reply = 0;
+        m_request->disconnect();
+        m_request->deleteLater();
+        m_request = 0;
     }
 
     QString relativeUrl;
@@ -142,9 +142,9 @@ void SubredditModel::refresh(bool refreshOlder)
         }
     }
 
-    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-            SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::GET, relativeUrl, parameters);
+
+    m_request = manager()->createRedditRequest(this, APIRequest::GET, relativeUrl, parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
     setBusy(true);
 }
@@ -164,37 +164,26 @@ QHash<int, QByteArray> SubredditModel::customRoleNames() const
     return roles;
 }
 
-void SubredditModel::onNetworkReplyReceived(QNetworkReply *reply)
+void SubredditModel::onFinished(QNetworkReply *reply)
 {
-    disconnect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-               this, SLOT(onNetworkReplyReceived(QNetworkReply*)));
     if (reply != 0) {
-        m_reply = reply;
-        m_reply->setParent(this);
-        connect(m_reply, SIGNAL(finished()), SLOT(onFinished()));
-    } else {
-        setBusy(false);
-    }
-}
-
-void SubredditModel::onFinished()
-{
-    if (m_reply->error() == QNetworkReply::NoError) {
-        const Listing<SubredditObject> subreddits = Parser::parseSubredditList(m_reply->readAll());
-        if (!subreddits.isEmpty()) {
-            beginInsertRows(QModelIndex(), m_subredditList.count(),
-                            m_subredditList.count() + subreddits.count() - 1);
-            m_subredditList.append(subreddits);
-            endInsertRows();
-            setCanLoadMore(subreddits.hasMore());
+        if (reply->error() == QNetworkReply::NoError) {
+            const Listing<SubredditObject> subreddits = Parser::parseSubredditList(reply->readAll());
+            if (!subreddits.isEmpty()) {
+                beginInsertRows(QModelIndex(), m_subredditList.count(),
+                                m_subredditList.count() + subreddits.count() - 1);
+                m_subredditList.append(subreddits);
+                endInsertRows();
+                setCanLoadMore(subreddits.hasMore());
+            } else {
+                setCanLoadMore(false);
+            }
         } else {
-            setCanLoadMore(false);
+            emit error(reply->errorString());
         }
-    } else {
-        emit error(m_reply->errorString());
     }
 
-    m_reply->deleteLater();
-    m_reply = 0;
+    m_request->deleteLater();
+    m_request = 0;
     setBusy(false);
 }

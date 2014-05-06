@@ -27,7 +27,7 @@
 #endif
 
 ImgurManager::ImgurManager(QObject *parent) :
-    AbstractManager(parent), m_selectedIndex(0), m_reply(0)
+    AbstractManager(parent), m_selectedIndex(0), m_request(0)
 {
 }
 
@@ -86,11 +86,11 @@ void ImgurManager::refresh()
 {
     Q_ASSERT(!m_imgurUrl.isEmpty());
 
-    if (m_reply != 0) {
+    if (m_request != 0) {
         qWarning("ImgurManager::refresh(): Aborting active network request (Try to avoid!)");
-        m_reply->disconnect();
-        m_reply->deleteLater();
-        m_reply = 0;
+        m_request->disconnect();
+        m_request->deleteLater();
+        m_request = 0;
     }
 
     QString requestUrl = "https://api.imgur.com/3";
@@ -123,44 +123,45 @@ void ImgurManager::refresh()
 
     QByteArray authHeader = QByteArray("Client-ID ") + IMGUR_CLIENT_ID;
 
-    m_reply = manager()->createGetRequest(QUrl(requestUrl), authHeader);
-    m_reply->setParent(this);
-    connect(m_reply, SIGNAL(finished()), SLOT(onFinished()));
+    m_request = manager()->createGetRequest(this, QUrl(requestUrl), authHeader);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
     setBusy(true);
 }
 
-void ImgurManager::onFinished()
+void ImgurManager::onFinished(QNetworkReply *reply)
 {
-    if (m_reply->error() == QNetworkReply::NoError) {
-        // print rate limit
-        int userLimit = m_reply->rawHeader("X-RateLimit-UserRemaining").toInt();
-        int clientLimit = m_reply->rawHeader("X-RateLimit-ClientRemaining").toInt();
-        qDebug("Imgur Rate Limit: User: %d, Client: %d", userLimit, clientLimit);
+    if (reply != 0) {
+        if (reply->error() == QNetworkReply::NoError) {
+            // print rate limit
+            int userLimit = reply->rawHeader("X-RateLimit-UserRemaining").toInt();
+            int clientLimit = reply->rawHeader("X-RateLimit-ClientRemaining").toInt();
+            qDebug("Imgur Rate Limit: User: %d, Client: %d", userLimit, clientLimit);
 
-        m_imageAndThumbUrlList = Parser::parseImgurImages(m_reply->readAll());
+            m_imageAndThumbUrlList = Parser::parseImgurImages(reply->readAll());
 
-        if (m_imageAndThumbUrlList.count() > 1) {
-            QListIterator< QPair<QString,QString> > i(m_imageAndThumbUrlList);
-            while (i.hasNext()) {
-                m_thumbnailUrls.append(i.next().second);
+            if (m_imageAndThumbUrlList.count() > 1) {
+                QListIterator< QPair<QString,QString> > i(m_imageAndThumbUrlList);
+                while (i.hasNext()) {
+                    m_thumbnailUrls.append(i.next().second);
+                }
+                if (m_selectedIndex >= m_imageAndThumbUrlList.count())
+                    m_selectedIndex = 0;
+                m_imageUrl = m_imageAndThumbUrlList.at(m_selectedIndex).first;
+            } else if (m_imageAndThumbUrlList.count() == 1) {
+                m_imageUrl = m_imageAndThumbUrlList.first().first;
+            } else {
+                emit error("Imgur API return no image");
             }
-            if (m_selectedIndex >= m_imageAndThumbUrlList.count())
-                m_selectedIndex = 0;
-            m_imageUrl = m_imageAndThumbUrlList.at(m_selectedIndex).first;
-        } else if (m_imageAndThumbUrlList.count() == 1) {
-            m_imageUrl = m_imageAndThumbUrlList.first().first;
-        } else {
-            emit error("Imgur API return no image");
-        }
 
-        emit imageUrlChanged();
-        emit thumbnailUrlsChanged();
-    } else {
-        emit error(m_reply->errorString());
+            emit imageUrlChanged();
+            emit thumbnailUrlsChanged();
+        } else {
+            emit error(reply->errorString());
+        }
     }
 
-    m_reply->deleteLater();
-    m_reply = 0;
+    m_request->deleteLater();
+    m_request = 0;
     setBusy(false);
 }

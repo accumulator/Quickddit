@@ -77,17 +77,14 @@ signals:
     void error(const QString &errorString);
 
 private slots:
-    void onNetworkReplyReceived(QNetworkReply *reply);
-    void onFinished();
-
-    void onSubscribeNetworkReplyReceived(QNetworkReply *reply);
-    void onSubscribeFinished();
+    void onFinished(QNetworkReply *reply);
+    void onSubscribeFinished(QNetworkReply *reply);
 
 private:
     QString m_subreddit;
     SubredditObject m_subredditObject;
 
-    QNetworkReply *m_reply;
+    APIRequest *m_request;
 };
 
 #endif // ABOUTSUBREDDITMANAGER_H

@@ -47,8 +47,7 @@ signals:
     void error(const QString &errorString);
 
 private slots:
-    void onNetworkReplyReceived(QNetworkReply *reply);
-    void onFinished();
+    void onFinished(QNetworkReply *reply);
 
 private:
     CommentModel *m_model;
@@ -57,7 +56,7 @@ private:
     enum Action { Insert, Edit, Delete };
     Action m_action;
     QString m_fullname;
-    QNetworkReply *m_reply;
+    APIRequest *m_request;
 
     void abortActiveReply();
 };

@@ -44,12 +44,11 @@ protected:
     QHash<int, QByteArray> customRoleNames() const;
 
 private slots:
-    void onNetworkReplyReceived(QNetworkReply *reply);
-    void onFinished();
+    void onFinished(QNetworkReply *reply);
 
 private:
     QList<MultiredditObject> m_multiredditList;
-    QNetworkReply *m_reply;
+    APIRequest *m_request;
 };
 
 #endif // MULTIREDDITMODEL_H

@@ -21,16 +21,15 @@ signals:
     void error(const QString &errorString);
 
 private slots:
-    void onNetworkReplyReceived(QNetworkReply *reply);
-    void onFinished();
+    void onFinished(QNetworkReply *reply);
 
 private:
-    QNetworkReply *m_reply;
-    void abortActiveReply();
-
     QString m_fullname;
     enum Action { Reply, MarkRead, MarkUnread };
     Action m_action;
+
+    APIRequest *m_request;
+    void abortActiveReply();
 };
 
 #endif // MESSAGEMANAGER_H

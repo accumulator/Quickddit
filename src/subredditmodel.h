@@ -74,15 +74,14 @@ signals:
     void queryChanged();
 
 private slots:
-    void onNetworkReplyReceived(QNetworkReply *reply);
-    void onFinished();
+    void onFinished(QNetworkReply *reply);
 
 private:
     Section m_section;
     QString m_query;
 
     QList<SubredditObject> m_subredditList;
-    QNetworkReply *m_reply;
+    APIRequest *m_request;
 };
 
 #endif // SUBREDDITMODEL_H

@@ -23,11 +23,12 @@
 #include <QtCore/QUrl>
 #include <QtCore/QDateTime>
 
+#include "apirequest.h"
+
 // TODO: rewrite this whole class
 
-class QNetworkReply;
+class QNetworkAccessManager;
 class AppSettings;
-class NetworkManager;
 
 class QuickdditManager : public QObject
 {
@@ -35,11 +36,6 @@ class QuickdditManager : public QObject
     Q_PROPERTY(bool isSignedIn READ isSignedIn NOTIFY signedInChanged)
     Q_PROPERTY(AppSettings* settings READ settings WRITE setSettings)
 public:
-    enum RequestType {
-        GET,
-        POST
-    };
-
     explicit QuickdditManager(QObject *parent = 0);
 
     bool isSignedIn() const;
@@ -50,17 +46,16 @@ public:
     /**
      * Create a GET request to non-Reddit API
      */
-    QNetworkReply *createGetRequest(const QUrl &url, const QByteArray &authHeader);
+    APIRequest *createGetRequest(QObject *parent, const QUrl &url, const QByteArray &authHeader);
 
     /**
      * Create a GET/POST request to Reddit API
-     * the signal networkReplyReceived() will be emitted with the QNetworkReply in the parameter
-     * if this process failed, the QNetworkReply in the signal networkReplyReceived() will be 0
+     * @param parent parent of the APIRequest object
      * @param type specify GET or POST request
      * @param relativeUrl the relative url of Reddit without the ".json", eg. "/r/nokia/hot"
      * @param parameters parameters for the request (will be added as query items in the url)
      */
-    void createRedditRequest(RequestType type, const QString &relativeUrl,
+    APIRequest *createRedditRequest(QObject *parent, APIRequest::HttpMethod method, const QString &relativeUrl,
                              const QHash<QString, QString> &parameters = QHash<QString,QString>());
 
     /**
@@ -83,29 +78,26 @@ signals:
     void signedInChanged();
     void accessTokenSuccess();
     void accessTokenFailure(const QString &errorString);
-    void networkReplyReceived(QNetworkReply *reply);
 
 private slots:
-    void onAccessTokenRequestFinished();
+    void onAccessTokenRequestFinished(QNetworkReply *reply);
     void onRefreshTokenFinished();
-    void onUserInfoFinished();
+    void onUserInfoFinished(QNetworkReply *reply);
 
 private:
-    NetworkManager *m_netManager;
+    QNetworkAccessManager *m_netManager;
     AppSettings *m_settings;
 
     QString m_state;
-    QNetworkReply *m_accessTokenReply;
+    APIRequest *m_accessTokenRequest;
     QString m_accessToken;
     QTime m_accessTokenExpiry;
 
-    RequestType m_requestType;
-    QString m_relativeUrl;
-    QHash<QString, QString> m_parameters;
+    APIRequest *m_pendingRequest;
 
     void refreshAccessToken();
     void updateRedditUsername();
-    QNetworkReply *m_userInfoReply;
+    APIRequest *m_userInfoReply;
 };
 
 #endif // QUICKDDITMANAGER_H

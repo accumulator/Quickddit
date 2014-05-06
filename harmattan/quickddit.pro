@@ -13,7 +13,6 @@ HEADERS += \
     ../src/linkmodel.h \
     ../src/utils.h \
     ../src/quickdditmanager.h \
-    ../src/networkmanager.h \
     ../src/abstractmanager.h \
     ../src/abstractlistmodelmanager.h \
     ../src/parser.h \
@@ -31,14 +30,14 @@ HEADERS += \
     ../src/multiredditmodel.h \
     ../src/messageobject.h \
     ../src/messagemodel.h \
-    ../src/messagemanager.h
+    ../src/messagemanager.h \
+    ../src/apirequest.h
 
 SOURCES += main.cpp \
     ../src/linkobject.cpp \
     ../src/linkmodel.cpp \
     ../src/utils.cpp \
     ../src/quickdditmanager.cpp \
-    ../src/networkmanager.cpp \
     ../src/abstractmanager.cpp \
     ../src/abstractlistmodelmanager.cpp \
     ../src/parser.cpp \
@@ -56,7 +55,8 @@ SOURCES += main.cpp \
     ../src/multiredditmodel.cpp \
     ../src/messageobject.cpp \
     ../src/messagemodel.cpp \
-    ../src/messagemanager.cpp
+    ../src/messagemanager.cpp \
+    ../src/apirequest.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h

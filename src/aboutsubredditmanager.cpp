@@ -23,7 +23,7 @@
 #include "parser.h"
 
 AboutSubredditManager::AboutSubredditManager(QObject *parent) :
-    AbstractManager(parent), m_reply(0)
+    AbstractManager(parent), m_request(0)
 {
 }
 
@@ -97,30 +97,29 @@ void AboutSubredditManager::setSubreddit(const QString &subreddit)
 
 void AboutSubredditManager::refresh()
 {
-    if (m_reply != 0) {
+    if (m_request != 0) {
         qWarning("AboutSubredditManager::refresh(): Aborting active network request (Try to avoid!)");
-        m_reply->disconnect();
-        m_reply->deleteLater();
-        m_reply = 0;
+        m_request->disconnect();
+        m_request->deleteLater();
+        m_request = 0;
     }
 
     QString relativeUrl = "/r/" + m_subreddit + "/about";
 
-    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-            SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::GET, relativeUrl);
+    m_request = manager()->createRedditRequest(this, APIRequest::GET, relativeUrl);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
     setBusy(true);
 }
 
 void AboutSubredditManager::subscribeOrUnsubscribe()
 {
-    if (m_reply != 0) {
+    if (m_request != 0) {
         qWarning("AboutSubredditManager::subscribeOrUnsubscribe():"
                  "Aborting active network request (Try to avoid!)");
-        m_reply->disconnect();
-        m_reply->deleteLater();
-        m_reply = 0;
+        m_request->disconnect();
+        m_request->deleteLater();
+        m_request = 0;
     }
 
     QHash<QString, QString> parameters;
@@ -130,65 +129,42 @@ void AboutSubredditManager::subscribeOrUnsubscribe()
     else
         parameters["action"] = "sub";
 
-    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-            SLOT(onSubscribeNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::POST, "/api/subscribe", parameters);
+    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/subscribe", parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onSubscribeFinished(QNetworkReply*)));
 
     setBusy(true);
 }
 
-void AboutSubredditManager::onNetworkReplyReceived(QNetworkReply *reply)
+void AboutSubredditManager::onFinished(QNetworkReply *reply)
 {
-    disconnect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-               this, SLOT(onNetworkReplyReceived(QNetworkReply*)));
     if (reply != 0) {
-        m_reply = reply;
-        m_reply->setParent(this);
-        connect(m_reply, SIGNAL(finished()), SLOT(onFinished()));
-    } else {
-        setBusy(false);
-    }
-}
-
-void AboutSubredditManager::onFinished()
-{
-    if (m_reply->error() == QNetworkReply::NoError) {
-        m_subredditObject = Parser::parseSubreddit(m_reply->readAll());
-        setSubreddit(m_subredditObject.displayName());
-        emit dataChanged();
-    } else {
-        emit error(m_reply->errorString());
+        if (reply->error() == QNetworkReply::NoError) {
+            m_subredditObject = Parser::parseSubreddit(reply->readAll());
+            setSubreddit(m_subredditObject.displayName());
+            emit dataChanged();
+        } else {
+            emit error(reply->errorString());
+        }
     }
 
-    m_reply->deleteLater();
-    m_reply = 0;
+    m_request->deleteLater();
+    m_request = 0;
     setBusy(false);
 }
 
-void AboutSubredditManager::onSubscribeNetworkReplyReceived(QNetworkReply *reply)
+void AboutSubredditManager::onSubscribeFinished(QNetworkReply *reply)
 {
-    disconnect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-               this, SLOT(onSubscribeNetworkReplyReceived(QNetworkReply*)));
     if (reply != 0) {
-        m_reply = reply;
-        m_reply->setParent(this);
-        connect(m_reply, SIGNAL(finished()), SLOT(onSubscribeFinished()));
-    } else {
-        setBusy(false);
-    }
-}
-
-void AboutSubredditManager::onSubscribeFinished()
-{
-    if (m_reply->error() == QNetworkReply::NoError) {
-        m_subredditObject.setSubscribed(!m_subredditObject.isSubscribed());
-        emit dataChanged();
-        emit subscribeSuccess();
-    } else {
-        emit error(m_reply->errorString());
+        if (reply->error() == QNetworkReply::NoError) {
+            m_subredditObject.setSubscribed(!m_subredditObject.isSubscribed());
+            emit dataChanged();
+            emit subscribeSuccess();
+        } else {
+            emit error(reply->errorString());
+        }
     }
 
-    m_reply->deleteLater();
-    m_reply = 0;
+    m_request->deleteLater();
+    m_request = 0;
     setBusy(false);
 }

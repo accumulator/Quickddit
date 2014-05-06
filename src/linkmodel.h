@@ -143,8 +143,7 @@ signals:
     void searchTimeRangeChanged();
 
 private slots:
-    void onNetworkReplyReceived(QNetworkReply *reply);
-    void onFinished();
+    void onFinished(QNetworkReply *reply);
 
 private:
     QString m_title;
@@ -157,7 +156,7 @@ private:
     SearchTimeRange m_searchTimeRange;
 
     QList<LinkObject> m_linkList;
-    QNetworkReply *m_reply;
+    APIRequest *m_request;
 
     static QString getSectionString(Section section);
     static QString getSearchSortString(SearchSortType sort);

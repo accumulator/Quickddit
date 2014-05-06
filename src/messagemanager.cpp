@@ -1,9 +1,27 @@
+/*
+    Quickddit - Reddit client for mobile phones
+    Copyright (C) 2014  Dickson Leong
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see [http://www.gnu.org/licenses/].
+*/
+
 #include "messagemanager.h"
 
 #include <QtNetwork/QNetworkReply>
 
 MessageManager::MessageManager(QObject *parent) :
-    AbstractManager(parent), m_reply(0)
+    AbstractManager(parent), m_request(0)
 {
 }
 
@@ -18,10 +36,10 @@ void MessageManager::reply(const QString &fullname, const QString &rawText)
     m_fullname = fullname;
     m_action = Reply;
 
-    setBusy(true);
+    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/comment", parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
-    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)), SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::POST, "/api/comment", parameters);
+    setBusy(true);
 }
 
 void MessageManager::markRead(const QString &fullname)
@@ -33,10 +51,10 @@ void MessageManager::markRead(const QString &fullname)
     m_fullname = fullname;
     m_action = MarkRead;
 
-    setBusy(true);
+    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/read_message", parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
-    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)), SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::POST, "/api/read_message", parameters);
+    setBusy(true);
 }
 
 void MessageManager::markUnread(const QString &fullname)
@@ -48,49 +66,38 @@ void MessageManager::markUnread(const QString &fullname)
     m_fullname = fullname;
     m_action = MarkUnread;
 
+    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/unread_message", parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
+
     setBusy(true);
-
-    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)), SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::POST, "/api/unread_message", parameters);
 }
 
-void MessageManager::onNetworkReplyReceived(QNetworkReply *reply)
+void MessageManager::onFinished(QNetworkReply *reply)
 {
-    disconnect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-               this, SLOT(onNetworkReplyReceived(QNetworkReply*)));
     if (reply != 0) {
-        m_reply = reply;
-        m_reply->setParent(this);
-        connect(m_reply, SIGNAL(finished()), SLOT(onFinished()));
-    } else {
-        setBusy(false);
-    }
-}
-
-void MessageManager::onFinished()
-{
-    if (m_reply->error() == QNetworkReply::NoError) {
-        switch (m_action) {
-        case Reply: emit replySuccess(); break;
-        case MarkRead: emit markReadStatusSuccess(m_fullname, false); break;
-        case MarkUnread: emit markReadStatusSuccess(m_fullname, true); break;
-        default: qFatal("MessageManager::onFinished(): Invalid m_action"); break;
+        if (reply->error() == QNetworkReply::NoError) {
+            switch (m_action) {
+            case Reply: emit replySuccess(); break;
+            case MarkRead: emit markReadStatusSuccess(m_fullname, false); break;
+            case MarkUnread: emit markReadStatusSuccess(m_fullname, true); break;
+            default: qFatal("MessageManager::onFinished(): Invalid m_action"); break;
+            }
+        } else {
+            error(reply->errorString());
         }
-    } else {
-        error(m_reply->errorString());
     }
 
+    m_request->deleteLater();
+    m_request = 0;
     setBusy(false);
-    m_reply->deleteLater();
-    m_reply = 0;
 }
 
 void MessageManager::abortActiveReply()
 {
-    if (m_reply != 0) {
+    if (m_request != 0) {
         qWarning("MessageManager::abortActiveReply(): Aborting active network request (Try to avoid!)");
-        m_reply->disconnect();
-        m_reply->deleteLater();
-        m_reply = 0;
+        m_request->disconnect();
+        m_request->deleteLater();
+        m_request = 0;
     }
 }

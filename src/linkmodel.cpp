@@ -52,7 +52,7 @@ QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
 
 LinkModel::LinkModel(QObject *parent) :
     AbstractListModelManager(parent), m_location(FrontPage), m_section(HotSection), m_searchSort(RelevanceSort),
-    m_searchTimeRange(AllTime), m_reply(0)
+    m_searchTimeRange(AllTime), m_request(0)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
@@ -209,11 +209,11 @@ void LinkModel::setSearchTimeRange(LinkModel::SearchTimeRange timeRange)
 
 void LinkModel::refresh(bool refreshOlder)
 {
-    if (m_reply != 0) {
+    if (m_request != 0) {
         qWarning("LinkModel::refresh(): Aborting active network request (Try to avoid!)");
-        m_reply->disconnect();
-        m_reply->deleteLater();
-        m_reply = 0;
+        m_request->disconnect();
+        m_request->deleteLater();
+        m_request = 0;
     }
 
     QString relativeUrl;
@@ -253,9 +253,9 @@ void LinkModel::refresh(bool refreshOlder)
         }
     }
 
-    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-            SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::GET, relativeUrl, parameters);
+
+    m_request = manager()->createRedditRequest(this, APIRequest::GET, relativeUrl, parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
     m_title = relativeUrl;
     emit titleChanged();
@@ -298,37 +298,26 @@ QHash<int, QByteArray> LinkModel::customRoleNames() const
     return roles;
 }
 
-void LinkModel::onNetworkReplyReceived(QNetworkReply *reply)
+void LinkModel::onFinished(QNetworkReply *reply)
 {
-    disconnect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-               this, SLOT(onNetworkReplyReceived(QNetworkReply*)));
     if (reply != 0) {
-        m_reply = reply;
-        m_reply->setParent(this);
-        connect(m_reply, SIGNAL(finished()), SLOT(onFinished()));
-    } else {
-        setBusy(false);
-    }
-}
-
-void LinkModel::onFinished()
-{
-    if (m_reply->error() == QNetworkReply::NoError) {
-        const Listing<LinkObject> links = Parser::parseLinkList(m_reply->readAll());
-        if (!links.isEmpty()) {
-            beginInsertRows(QModelIndex(), m_linkList.count(), m_linkList.count() + links.count() - 1);
-            m_linkList.append(links);
-            endInsertRows();
-            setCanLoadMore(links.hasMore());
+        if (reply->error() == QNetworkReply::NoError) {
+            const Listing<LinkObject> links = Parser::parseLinkList(reply->readAll());
+            if (!links.isEmpty()) {
+                beginInsertRows(QModelIndex(), m_linkList.count(), m_linkList.count() + links.count() - 1);
+                m_linkList.append(links);
+                endInsertRows();
+                setCanLoadMore(links.hasMore());
+            } else {
+                setCanLoadMore(false);
+            }
         } else {
-            setCanLoadMore(false);
+            emit error(reply->errorString());
         }
-    } else {
-        emit error(m_reply->errorString());
     }
 
-    m_reply->deleteLater();
-    m_reply = 0;
+    m_request->deleteLater();
+    m_request = 0;
     setBusy(false);
 }
 

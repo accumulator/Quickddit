@@ -98,8 +98,7 @@ signals:
     void commentLoaded();
 
 private slots:
-    void onNetworkReplyReceived(QNetworkReply *reply);
-    void onFinished();
+    void onFinished(QNetworkReply *reply);
 
 private:
     QVariant m_link;
@@ -108,7 +107,7 @@ private:
     bool m_commentPermalink;
 
     QList<CommentObject> m_commentList;
-    QNetworkReply *m_reply;
+    APIRequest *m_request;
 
     static QString getSortString(SortType sort);
 };

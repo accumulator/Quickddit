@@ -41,13 +41,12 @@ signals:
     void error(const QString &errorString);
 
 private slots:
-    void onNetworkReplyReceived(QNetworkReply *reply);
-    void onFinished();
+    void onFinished(QNetworkReply *reply);
 
 private:
     QString m_fullname;
     VoteType m_voteType;
-    QNetworkReply *m_reply;
+    APIRequest *m_request;
 
     static int voteTypeToLikes(VoteType voteType);
 };

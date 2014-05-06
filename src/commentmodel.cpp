@@ -34,7 +34,7 @@
 static QRegExp commentPermalinkRegExp("(/r/\\w+)?/comments/\\w+/\\w+/(\\w+/?)");
 
 CommentModel::CommentModel(QObject *parent) :
-    AbstractListModelManager(parent), m_link(0), m_sort(ConfidenceSort), m_reply(0)
+    AbstractListModelManager(parent), m_link(0), m_sort(ConfidenceSort), m_request(0)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
@@ -228,11 +228,11 @@ void CommentModel::refresh(bool refreshOlder)
     Q_ASSERT(!m_permalink.isEmpty());
     Q_UNUSED(refreshOlder);
 
-    if (m_reply != 0) {
+    if (m_request != 0) {
         qWarning("CommentModel::refresh(): Aborting active network request (Try to avoid!)");
-        m_reply->disconnect();
-        m_reply->deleteLater();
-        m_reply = 0;
+        m_request->disconnect();
+        m_request->deleteLater();
+        m_request = 0;
     }
 
     if (!m_commentList.isEmpty()) {
@@ -263,9 +263,8 @@ void CommentModel::refresh(bool refreshOlder)
     if (!m_commentPermalink && relativeUrl.contains(commentPermalinkRegExp))
         relativeUrl.remove(commentPermalinkRegExp.cap(2));
 
-    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-            SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::GET, relativeUrl, parameters);
+    m_request = manager()->createRedditRequest(this, APIRequest::GET, relativeUrl, parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
     setBusy(true);
 }
@@ -337,38 +336,27 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     return roles;
 }
 
-void CommentModel::onNetworkReplyReceived(QNetworkReply *reply)
+void CommentModel::onFinished(QNetworkReply *reply)
 {
-    disconnect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-               this, SLOT(onNetworkReplyReceived(QNetworkReply*)));
     if (reply != 0) {
-        m_reply = reply;
-        m_reply->setParent(this);
-        connect(m_reply, SIGNAL(finished()), SLOT(onFinished()));
-    } else {
-        setBusy(false);
-    }
-}
-
-void CommentModel::onFinished()
-{
-    if (m_reply->error() == QNetworkReply::NoError) {
-        const QPair< LinkObject, QList<CommentObject> > comments = Parser::parseCommentList(m_reply->readAll());
-        if (!m_link.canConvert<QObject *>()) {
-            m_link = LinkModel::toLinkVariantMap(comments.first);
-            emit linkChanged();
+        if (reply->error() == QNetworkReply::NoError) {
+            const QPair< LinkObject, QList<CommentObject> > comments = Parser::parseCommentList(reply->readAll());
+            if (!m_link.canConvert<QObject *>()) {
+                m_link = LinkModel::toLinkVariantMap(comments.first);
+                emit linkChanged();
+            }
+            if (!comments.second.isEmpty()) {
+                beginInsertRows(QModelIndex(), m_commentList.count(), m_commentList.count() + comments.second.count() - 1);
+                m_commentList.append(comments.second);
+                endInsertRows();
+            }
+        } else {
+            emit error(reply->errorString());
         }
-        if (!comments.second.isEmpty()) {
-            beginInsertRows(QModelIndex(), m_commentList.count(), m_commentList.count() + comments.second.count() - 1);
-            m_commentList.append(comments.second);
-            endInsertRows();
-        }
-    } else {
-        emit error(m_reply->errorString());
     }
 
-    m_reply->deleteLater();
-    m_reply = 0;
+    m_request->deleteLater();
+    m_request = 0;
     setBusy(false);
     emit commentLoaded();
 }

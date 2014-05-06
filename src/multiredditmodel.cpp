@@ -24,7 +24,7 @@
 #include "utils.h"
 
 MultiredditModel::MultiredditModel(QObject *parent) :
-    AbstractListModelManager(parent), m_reply(0)
+    AbstractListModelManager(parent), m_request(0)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
@@ -63,10 +63,10 @@ void MultiredditModel::refresh(bool refreshOlder)
 {
     Q_UNUSED(refreshOlder)
 
-    if (m_reply != 0) {
-        m_reply->disconnect();
-        m_reply->deleteLater();
-        m_reply = 0;
+    if (m_request != 0) {
+        m_request->disconnect();
+        m_request->deleteLater();
+        m_request = 0;
     }
 
     if (!m_multiredditList.isEmpty()) {
@@ -75,11 +75,10 @@ void MultiredditModel::refresh(bool refreshOlder)
         endRemoveRows();
     }
 
-    setBusy(true);
+    m_request = manager()->createRedditRequest(this, APIRequest::GET, "/api/multi/mine");
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
-    connect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-            SLOT(onNetworkReplyReceived(QNetworkReply*)));
-    manager()->createRedditRequest(QuickdditManager::GET, "/api/multi/mine");
+    setBusy(true);
 }
 
 QHash<int, QByteArray> MultiredditModel::customRoleNames() const
@@ -89,34 +88,23 @@ QHash<int, QByteArray> MultiredditModel::customRoleNames() const
     return roles;
 }
 
-void MultiredditModel::onNetworkReplyReceived(QNetworkReply *reply)
+void MultiredditModel::onFinished(QNetworkReply *reply)
 {
-    disconnect(manager(), SIGNAL(networkReplyReceived(QNetworkReply*)),
-               this, SLOT(onNetworkReplyReceived(QNetworkReply*)));
     if (reply != 0) {
-        m_reply = reply;
-        m_reply->setParent(this);
-        connect(m_reply, SIGNAL(finished()), SLOT(onFinished()));
-    } else {
-        setBusy(false);
-    }
-}
-
-void MultiredditModel::onFinished()
-{
-    if (m_reply->error() == QNetworkReply::NoError) {
-        const QList<MultiredditObject> multiredditList = Parser::parseMultiredditList(m_reply->readAll());
-        if (!multiredditList.isEmpty()) {
-            beginInsertRows(QModelIndex(), m_multiredditList.count(),
-                            m_multiredditList.count() + multiredditList.count() - 1);
-            m_multiredditList.append(multiredditList);
-            endInsertRows();
+        if (reply->error() == QNetworkReply::NoError) {
+            const QList<MultiredditObject> multiredditList = Parser::parseMultiredditList(reply->readAll());
+            if (!multiredditList.isEmpty()) {
+                beginInsertRows(QModelIndex(), m_multiredditList.count(),
+                                m_multiredditList.count() + multiredditList.count() - 1);
+                m_multiredditList.append(multiredditList);
+                endInsertRows();
+            }
+        } else {
+            emit error(reply->errorString());
         }
-    } else {
-        emit error(m_reply->errorString());
     }
 
+    m_request->deleteLater();
+    m_request = 0;
     setBusy(false);
-    m_reply->deleteLater();
-    m_reply = 0;
 }
