@@ -99,12 +99,12 @@ Sheet {
                 anchors {
                     right: parent.right; margins: constant.paddingMedium; verticalCenter: parent.verticalCenter
                 }
-                source: "image://theme/icon-m-toolbar-refresh" + (subredditModel.busy ? "-dimmed" : "")
+                source: "image://theme/icon-m-toolbar-refresh" + (subredditModel && subredditModel.busy ? "-dimmed" : "")
                         + (appSettings.whiteTheme ? "" : "-white")
 
                 MouseArea {
                     anchors.fill: parent
-                    enabled: !subredditModel.busy
+                    enabled: !!subredditModel && !subredditModel.busy
                     onClicked: subredditModel.refresh(false);
                 }
             }
