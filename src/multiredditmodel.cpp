@@ -81,6 +81,17 @@ void MultiredditModel::refresh(bool refreshOlder)
     setBusy(true);
 }
 
+MultiredditObject MultiredditModel::getMultireddit(const QString &name)
+{
+    foreach (const MultiredditObject &m, m_multiredditList) {
+        if (m.name() == name)
+            return m;
+    }
+
+    qCritical("MultiredditModel::getMultireddit(): Unable to find the multireddit");
+    return MultiredditObject();
+}
+
 QHash<int, QByteArray> MultiredditModel::customRoleNames() const
 {
     QHash<int, QByteArray> roles;

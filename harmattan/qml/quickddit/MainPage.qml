@@ -66,10 +66,18 @@ AbstractPage {
         }
         ToolIcon {
             iconSource: "image://theme/icon-l-user-guide-main-view"
-            enabled: linkModel.location == LinkModel.Subreddit
+            enabled: linkModel.location == LinkModel.Subreddit || linkModel.location == LinkModel.Multireddit
             opacity: enabled ? 1 : 0.25
             onClicked: {
-                pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: linkModel.subreddit});
+                var page = "", p = {};
+                if (linkModel.location == LinkModel.Subreddit) {
+                    page = Qt.resolvedUrl("AboutSubredditPage.qml");
+                    p = {subreddit: linkModel.subreddit};
+                } else {
+                    page = Qt.resolvedUrl("AboutMultiredditPage.qml");
+                    p = {multireddit: linkModel.multireddit, model: dialogManager.multiredditModel};
+                }
+                pageStack.push(page, p);
             }
         }
 
@@ -178,7 +186,7 @@ AbstractPage {
                 onError: infoBanner.alert(errorString);
             }
         }
-        property QtObject __multiredditModel
+        property QtObject multiredditModel
 
         function createSubredditDialog() {
             if (!__subredditDialogComponent)
@@ -208,9 +216,9 @@ AbstractPage {
         function createMultiredditDialog() {
             if (!__multiredditDialogComponent)
                 __multiredditDialogComponent = Qt.createComponent("MultiredditDialog.qml");
-            if (!__multiredditModel)
-                __multiredditModel = __multiredditModelComponent.createObject(mainPage);
-            var dialog = __multiredditDialogComponent.createObject(mainPage, {multiredditModel: __multiredditModel});
+            if (!multiredditModel)
+                multiredditModel = __multiredditModelComponent.createObject(mainPage);
+            var dialog = __multiredditDialogComponent.createObject(mainPage, {multiredditModel: multiredditModel});
             dialog.statusChanged.connect(function() {
                 if (dialog.status == DialogStatus.Closed) {
                     dialog.destroy(250);

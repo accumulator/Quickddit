@@ -40,6 +40,8 @@ public:
 
     void refresh(bool refreshOlder);
 
+    MultiredditObject getMultireddit(const QString &name);
+
 protected:
     QHash<int, QByteArray> customRoleNames() const;
 

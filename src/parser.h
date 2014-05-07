@@ -53,6 +53,7 @@ SubredditObject parseSubreddit(const QByteArray &json);
 Listing<SubredditObject> parseSubredditList(const QByteArray &json);
 
 QList<MultiredditObject> parseMultiredditList(const QByteArray &json);
+QString parseMultiredditDescription(const QByteArray &json);
 
 Listing<MessageObject> parseMessageList(const QByteArray &json);
 

@@ -27,6 +27,7 @@ public:
     MultiredditObjectData() : visibility(MultiredditObject::PrivateVisibility), canEdit(false) {}
 
     QString name;
+    QString description;
     QDateTime created;
     QStringList subreddits;
     MultiredditObject::Visibility visibility;
@@ -65,6 +66,16 @@ QString MultiredditObject::name() const
 void MultiredditObject::setName(const QString &name)
 {
     d->name = name;
+}
+
+QString MultiredditObject::description() const
+{
+    return d->description;
+}
+
+void MultiredditObject::setDescription(const QString &description)
+{
+    d->description = description;
 }
 
 QDateTime MultiredditObject::created() const

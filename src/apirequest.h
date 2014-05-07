@@ -39,7 +39,9 @@ public:
 
     enum HttpMethod {
         GET,
-        POST
+        POST,
+        PUT,
+        DELETE
     };
 
     explicit APIRequest(Type type, QNetworkAccessManager *netManager, QObject *parent = 0);

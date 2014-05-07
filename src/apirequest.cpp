@@ -147,6 +147,13 @@ void APIRequest::send()
         request.setUrl(m_baseUrl);
         request.setRawHeader("Content-Type", "application/x-www-form-urlencoded");
         m_reply = m_netManager->post(request, Utils::toEncodedQuery(m_parameters));
+    } else if (m_method == PUT) {
+        request.setUrl(m_baseUrl);
+        request.setRawHeader("Content-Type", "application/x-www-form-urlencoded");
+        m_reply = m_netManager->put(request, Utils::toEncodedQuery(m_parameters));
+    } else if (m_method == DELETE) {
+        request.setUrl(m_baseUrl);
+        m_reply = m_netManager->deleteResource(request);
     } else {
         qFatal("APIRequest::send(): Invalid method");
     }

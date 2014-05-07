@@ -41,7 +41,8 @@ HEADERS += \
     ../src/messageobject.h \
     ../src/messagemodel.h \
     ../src/messagemanager.h \
-    ../src/apirequest.h
+    ../src/apirequest.h \
+    ../src/aboutmultiredditmanager.h
 
 SOURCES += main.cpp \
     ../src/linkobject.cpp \
@@ -66,7 +67,8 @@ SOURCES += main.cpp \
     ../src/messageobject.cpp \
     ../src/messagemodel.cpp \
     ../src/messagemanager.cpp \
-    ../src/apirequest.cpp
+    ../src/apirequest.cpp \
+    ../src/aboutmultiredditmanager.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h
@@ -109,4 +111,5 @@ OTHER_FILES += \
     qml/MessageDelegate.qml \
     qml/MessageMenu.qml \
     qml/LoadingFooter.qml \
-    qml/SimpleListItem.qml
+    qml/SimpleListItem.qml \
+    qml/AboutMultiredditPage.qml

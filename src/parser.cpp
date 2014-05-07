@@ -258,6 +258,7 @@ QList<MultiredditObject> Parser::parseMultiredditList(const QByteArray &json)
         foreach (const QVariant &subredditObj, multiredditMap.value("subreddits").toList()) {
             subreddits.append(subredditObj.toMap().value("name").toString());
         }
+
         multireddit.setSubreddits(subreddits);
         multireddit.setVisibility(multiredditMap.value("visibility").toString());
         multireddit.setPath(multiredditMap.value("path").toString());
@@ -267,6 +268,16 @@ QList<MultiredditObject> Parser::parseMultiredditList(const QByteArray &json)
     }
 
     return multredditList;
+}
+
+QString Parser::parseMultiredditDescription(const QByteArray &json)
+{
+    bool ok;
+    const QVariantMap map = QtJson::parse(json, ok).toMap();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    return unescapeHtml(map.value("data").toMap().value("body_html").toString());
 }
 
 Listing<MessageObject> Parser::parseMessageList(const QByteArray &json)

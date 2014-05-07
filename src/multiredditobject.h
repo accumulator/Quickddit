@@ -41,6 +41,9 @@ public:
     QString name() const;
     void setName(const QString &name);
 
+    QString description() const;
+    void setDescription(const QString &description);
+
     QDateTime created() const;
     void setCreated(const QDateTime &created);
 

@@ -57,11 +57,11 @@ AbstractPage {
             onError: infoBanner.alert(errorString);
         }
     }
-    property QtObject __multiredditModel
+    property QtObject multiredditModel
     function __openMultiredditDialog() {
-        if (!__multiredditModel)
-            __multiredditModel = __multiredditModelComponent.createObject(mainPage);
-        var dialog = pageStack.replace(Qt.resolvedUrl("MultiredditDialog.qml"), {multiredditModel: __multiredditModel});
+        if (!multiredditModel)
+            multiredditModel = __multiredditModelComponent.createObject(mainPage);
+        var dialog = pageStack.replace(Qt.resolvedUrl("MultiredditDialog.qml"), {multiredditModel: multiredditModel});
         dialog.accepted.connect(function() {
             linkModel.location = LinkModel.Multireddit;
             linkModel.multireddit = dialog.multiredditName;
@@ -105,10 +105,19 @@ AbstractPage {
                 onClicked: mainPage.refresh("");
             }
             MenuItem {
-                text: "About /r/" + linkModel.subreddit
-                visible: linkModel.location == LinkModel.Subreddit
+                text: "About " + (linkModel.location == LinkModel.Subreddit ? "/r/" + linkModel.subreddit
+                                                                            : "/m/" + linkModel.multireddit)
+                visible: linkModel.location == LinkModel.Subreddit || linkModel.location == LinkModel.Multireddit
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: linkModel.subreddit});
+                    var page = "", p = {};
+                    if (linkModel.location == LinkModel.Subreddit) {
+                        page = Qt.resolvedUrl("AboutSubredditPage.qml");
+                        p = {subreddit: linkModel.subreddit};
+                    } else {
+                        page = Qt.resolvedUrl("AboutMultiredditPage.qml");
+                        p = {multireddit: linkModel.multireddit, model: multiredditModel};
+                    }
+                    pageStack.push(page, p);
                 }
             }
             MenuItem {

@@ -23,14 +23,11 @@ Below is the list of TODOs I planned for future release, before going out of `be
 
 - Submit link and self post (require Captcha)
 - Compose new message (require Captcha)
-- View multireddit info, create, edit (description, visibility, add/remove subreddits) and delete multireddits
 - Save and unsave posts
 - View additional comments that are omitted from base comments tree
 ([/api/morechildren](http://www.reddit.com/dev/api#POST_api_morechildren))
 - View user profile
-- (Sailfish) Attached page for selecting section (not working in emulator)
 - Make comment collapsable (hide all children comments)
-- Support for more types of Imgur URL
 - Redesign CustomCountBubble
 - Upload to Jolla Harbour
 - Buy [reddit gold](http://www.reddit.com/gold/about)
