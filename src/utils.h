@@ -20,6 +20,7 @@
 #define UTILS_H
 
 class QString;
+class QStringList;
 class QDateTime;
 class QByteArray;
 template <class Key, class T> class QHash;
@@ -28,6 +29,8 @@ class QUrl;
 namespace Utils
 {
 QString getTimeDiff(const QDateTime &created);
+
+void sortCaseInsensitively(QStringList *stringList);
 
 QByteArray toEncodedQuery(const QHash<QString, QString> &parameters);
 void setUrlQuery(QUrl *url, const QHash<QString, QString> &parameters);

@@ -28,6 +28,7 @@
 #include "subredditobject.h"
 #include "multiredditobject.h"
 #include "messageobject.h"
+#include "utils.h"
 
 QString unescapeHtml(const QString &html)
 {
@@ -258,6 +259,7 @@ QList<MultiredditObject> Parser::parseMultiredditList(const QByteArray &json)
         foreach (const QVariant &subredditObj, multiredditMap.value("subreddits").toList()) {
             subreddits.append(subredditObj.toMap().value("name").toString());
         }
+        Utils::sortCaseInsensitively(&subreddits);
 
         multireddit.setSubreddits(subreddits);
         multireddit.setVisibility(multiredditMap.value("visibility").toString());

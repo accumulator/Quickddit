@@ -19,6 +19,7 @@
 #include "utils.h"
 
 #include <QtCore/QString>
+#include <QtCore/QStringList>
 #include <QtCore/QDateTime>
 #include <QtCore/QByteArray>
 #include <QtCore/QHash>
@@ -57,6 +58,16 @@ QString Utils::getTimeDiff(const QDateTime &created)
 
     diff /= 12; // years
     return QString::number(diff) + " years ago";
+}
+
+bool caseInsensitiveLessThan(const QString &s1, const QString &s2)
+{
+    return s1.toLower() < s2.toLower();
+}
+
+void Utils::sortCaseInsensitively(QStringList *stringList)
+{
+    qSort(stringList->begin(), stringList->end(), caseInsensitiveLessThan);
 }
 
 QByteArray Utils::toEncodedQuery(const QHash<QString, QString> &parameters)

@@ -22,6 +22,7 @@
 #include <qt-json/json.h>
 #include "multiredditmodel.h"
 #include "parser.h"
+#include "utils.h"
 
 AboutMultiredditManager::AboutMultiredditManager(QObject *parent) :
     AbstractManager(parent), m_model(0), m_request(0)
@@ -145,6 +146,7 @@ void AboutMultiredditManager::onAddFinished(QNetworkReply *reply)
             if (!addedSubreddit.isEmpty()) {
                 QStringList subreddits = m_multiredditObject.subreddits();
                 subreddits.append(addedSubreddit);
+                Utils::sortCaseInsensitively(&subreddits);
                 m_multiredditObject.setSubreddits(subreddits);
                 emit multiredditChanged();
                 emit success("/r/" + addedSubreddit + " has been added to /m/" + m_name);
