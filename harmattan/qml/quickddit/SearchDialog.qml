@@ -22,11 +22,14 @@ import com.nokia.meego 1.0
 Sheet {
     id: searchDialog
     acceptButtonText: "Search"
-    acceptButton.enabled: searchTextField.text.length > 0 || searchTextField.platformPreedit.length > 0
+    acceptButton.enabled: (searchTextField.text.length > 0 || searchTextField.platformPreedit.length > 0)
+                          && (!subredditTextField.enabled || subredditTextField.acceptableInput)
     rejectButtonText: "Cancel"
 
     property alias text: searchTextField.text
     property int type: 0
+    property bool searchSubreddit: searchSubredditCheckBox.checked
+    property alias subreddit: subredditTextField.text
 
     onAccepted: searchTextField.parent.focus = true; // force commit of predictive text
 
@@ -70,6 +73,29 @@ Sheet {
                 id: subredditButton
                 text: "Subreddits"
             }
+        }
+
+        CheckBox {
+            id: searchSubredditCheckBox
+            anchors { left: parent.left; right: parent.right }
+            enabled: searchButton.checked
+            text: "Search within this subreddit:"
+        }
+
+        TextField {
+            id: subredditTextField
+            anchors { left: parent.left; right: parent.right }
+            enabled: searchSubredditCheckBox.enabled && searchSubredditCheckBox.checked
+            opacity: enabled ? 1 : 0.75
+            errorHighlight: enabled && !acceptableInput
+            placeholderText: "Subreddit name"
+            inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
+            validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
+            platformSipAttributes: SipAttributes {
+                actionKeyEnabled: searchDialog.acceptButton.enabled
+                actionKeyLabel: searchDialog.acceptButtonText
+            }
+            onAccepted: searchDialog.accept();
         }
     }
 }

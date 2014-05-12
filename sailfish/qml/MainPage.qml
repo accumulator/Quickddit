@@ -78,7 +78,10 @@ AbstractPage {
             MenuItem {
                 text: "More"
                 onClicked: {
-                    var page = pageStack.push(Qt.resolvedUrl("MainPageMorePage.qml"));
+                    var p = {};
+                    if (linkModel.location == LinkModel.Subreddit)
+                        p.currentSubreddit = linkModel.subreddit;
+                    var page = pageStack.push(Qt.resolvedUrl("MainPageMorePage.qml"), p);
                     page.multiredditsClicked.connect(__openMultiredditDialog);
                 }
             }

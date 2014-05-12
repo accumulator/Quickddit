@@ -23,6 +23,8 @@ AbstractPage {
     id: mainPageMorePage
     title: "More"
 
+    property string currentSubreddit: ""
+
     signal multiredditsClicked
 
     Flickable {
@@ -53,7 +55,7 @@ AbstractPage {
 
             SimpleListItem {
                 text: "Search"
-                onClicked: pageStack.replace(Qt.resolvedUrl("SearchDialog.qml"));
+                onClicked: pageStack.replace(Qt.resolvedUrl("SearchDialog.qml"), {subreddit: currentSubreddit});
             }
 
             SimpleListItem {

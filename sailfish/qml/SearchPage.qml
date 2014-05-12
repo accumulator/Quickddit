@@ -26,6 +26,7 @@ AbstractPage {
     busy: linkVoteManager.busy
 
     property alias searchQuery: searchModel.searchQuery
+    property alias subreddit: searchModel.subreddit
 
     readonly property variant sortModel: ["Relevance", "New", "Hot", "Top", "Comments"]
     readonly property variant timeRangeModel: ["All time", "This hour", "Today", "This week",

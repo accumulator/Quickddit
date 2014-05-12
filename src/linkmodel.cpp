@@ -239,7 +239,11 @@ void LinkModel::refresh(bool refreshOlder)
         parameters["q"] = m_searchQuery;
         parameters["sort"] = getSearchSortString(m_searchSort);
         parameters["t"] = getSearchTimeRangeString(m_searchTimeRange);
-        relativeUrl = "/search";
+        if (!m_subreddit.isEmpty()) {
+            relativeUrl += "/r/" + m_subreddit;
+            parameters["restrict_sr"] = "true";
+        }
+        relativeUrl += "/search";
     }
 
     if (!m_linkList.isEmpty()) {

@@ -235,7 +235,10 @@ AbstractPage {
         function createSearchDialog() {
             if (!__searchDialogComponent)
                 __searchDialogComponent = Qt.createComponent("SearchDialog.qml");
-            var dialog = __searchDialogComponent.createObject(mainPage);
+            var p = {};
+            if (linkModel.location == LinkModel.Subreddit)
+                p.subreddit = linkModel.subreddit;
+            var dialog = __searchDialogComponent.createObject(mainPage, p);
             dialog.statusChanged.connect(function() {
                 if (dialog.status == DialogStatus.Closed) {
                     dialog.destroy(250);
@@ -243,11 +246,13 @@ AbstractPage {
             });
             dialog.accepted.connect(function() {
                 var p = { searchQuery: dialog.text };
-                if (dialog.type == 0)
+                if (dialog.type == 0) {
+                    if (dialog.searchSubreddit)
+                        p.subreddit = dialog.subreddit;
                     pageStack.push(Qt.resolvedUrl("SearchPage.qml"), p);
-                else
+                } else {
                     pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml"), p);
-
+                }
             });
             dialog.open();
         }
