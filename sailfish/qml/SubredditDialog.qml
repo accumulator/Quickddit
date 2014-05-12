@@ -53,7 +53,8 @@ Dialog {
         TextField {
             id: subredditTextField
             anchors { left: parent.left; right: parent.right; top: dialogHeader.bottom }
-            placeholderText: "Go to specific subreddit..."
+            placeholderText: "Go to a specific subreddit"
+            labelVisible: false
             inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
             // RegExp based on <https://github.com/reddit/reddit/blob/aae622d/r2/r2/lib/validator/validator.py#L525>
             validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }

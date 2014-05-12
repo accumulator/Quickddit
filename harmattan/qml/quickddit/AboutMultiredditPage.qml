@@ -155,7 +155,7 @@ AbstractPage {
                 TextField {
                     id: subredditTextField
                     anchors { left: parent.left; right: parent.right }
-                    placeholderText: "Subreddit name"
+                    placeholderText: "Enter subreddit name"
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                     validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
                     platformSipAttributes: SipAttributes {

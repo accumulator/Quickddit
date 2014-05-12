@@ -40,7 +40,7 @@ Sheet {
 
         TextField {
             id: searchTextField
-            placeholderText: "Enter search query..."
+            placeholderText: "Enter search query"
             anchors { left: parent.left; right: parent.right }
             platformSipAttributes: SipAttributes {
                 actionKeyEnabled: searchDialog.acceptButton.enabled
@@ -88,7 +88,7 @@ Sheet {
             enabled: searchSubredditCheckBox.enabled && searchSubredditCheckBox.checked
             opacity: enabled ? 1 : 0.75
             errorHighlight: enabled && !acceptableInput
-            placeholderText: "Subreddit name"
+            placeholderText: "Enter subreddit name"
             inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
             validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
             platformSipAttributes: SipAttributes {

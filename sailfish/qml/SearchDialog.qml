@@ -49,7 +49,8 @@ Dialog {
         TextField {
             id: searchTextField
             anchors { left: parent.left; right: parent.right }
-            placeholderText: "Enter search query..."
+            placeholderText: "Enter search query"
+            labelVisible: false
             EnterKey.enabled: searchDialog.canAccept
             EnterKey.iconSource: "image://theme/icon-m-search"
             EnterKey.onClicked: accept();
@@ -87,7 +88,8 @@ Dialog {
             enabled: searchSubredditSwitch.enabled && searchSubredditSwitch.checked
             opacity: enabled ? 1 : 0.4
             errorHighlight: enabled && !acceptableInput
-            placeholderText: "Subreddit name"
+            placeholderText: "Enter subreddit name"
+            labelVisible: false
             inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
             validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
             EnterKey.enabled: searchDialog.canAccept

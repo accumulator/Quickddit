@@ -128,8 +128,9 @@ AbstractPage {
 
                 TextField {
                     id: subredditTextField
-                    anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-                    placeholderText: "Subreddit name"
+                    anchors { left: parent.left; right: parent.right }
+                    placeholderText: "Enter subreddit name"
+                    labelVisible: false
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                     validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
                     EnterKey.enabled: addSubredditDialog.canAccept
