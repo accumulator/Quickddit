@@ -44,17 +44,33 @@ PageStackWindow {
         property Component __listModelComponent: Component { ListModel {} }
         property Component __queryDialogCompnent: Component { QueryDialog {} }
 
+        function previewableImage(url) {
+            // imgur url
+            if (/^https?:\/\/((i|m)\.)?imgur\.com/.test(url))
+                return true;
+            // direct image url with image format extension
+            else if (/^https?:\/\/\S+\.(jpe?g|png|gif)/i.test(url))
+                return true;
+            else
+                return false;
+        }
+
+        function openImageViewPage(url) {
+            if (/^https?:\/\/((i|m)\.)?imgur\.com/.test(url))
+                pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imgurUrl: url});
+            else if (/^https?:\/\/\S+\.(jpe?g|png|gif)/i.test(url))
+                pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
+            else
+                infoBanner.alert("Unsupported image url");
+        }
+
         function openInTextLink(url) {
             url = QMLUtils.toAbsoluteUrl(url);
             if (!url)
                 return;
 
-            if (/^https?:\/\/(m\.)?imgur\.com/.test(url))
-                pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imgurUrl: url});
-            else if (/^https?:\/\/i\.imgur\.com/.test(url))
-                pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
-            else if (/^https?:\/\/.+\.(jpe?g|png|gif)/i.test(url))
-                pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
+            if (previewableImage(url))
+                openImageViewPage(url);
             else if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
             else

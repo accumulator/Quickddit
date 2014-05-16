@@ -47,22 +47,8 @@ ContextMenu {
     }
     MenuItem {
         text: "View image"
-        enabled: {
-            if (link.domain == "i.imgur.com" || link.domain == "imgur.com")
-                return true;
-            if (/^https?:\/\/.+\.(jpe?g|png|gif)/i.test(link.url))
-                return true;
-            else
-                return false;
-        }
-        onClicked: {
-            var p = {};
-            if (link.domain == "imgur.com")
-                p.imgurUrl = link.url;
-            else
-                p.imageUrl = link.url;
-            pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), p);
-        }
+        enabled: globalUtils.previewableImage(link.url)
+        onClicked: globalUtils.openImageViewPage(link.url);
     }
     MenuItem {
         text: "URL"

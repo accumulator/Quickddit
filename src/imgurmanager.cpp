@@ -26,6 +26,8 @@
 #define IMGUR_CLIENT_ID "cf8f8118cf90389"
 #endif
 
+static const QRegExp NONE_WORD_REGEXP("\\W");
+
 ImgurManager::ImgurManager(QObject *parent) :
     AbstractManager(parent), m_selectedIndex(0), m_request(0)
 {
@@ -93,28 +95,33 @@ void ImgurManager::refresh()
         m_request = 0;
     }
 
+    const QUrl imgurUrl(m_imgurUrl);
+
+    // direct image url
+    if (imgurUrl.host() == QLatin1String("i.imgur.com")
+            && imgurUrl.path().contains(QRegExp("\\.(png|gif|jpe?g)"))) {
+        m_imageUrl = m_imgurUrl;
+        emit imageUrlChanged();
+        return;
+    }
+
     QString requestUrl = "https://api.imgur.com/3";
 
-    QString id = m_imgurUrl.mid(m_imgurUrl.indexOf("imgur.com/") + 10);
-    if (id.startsWith("a/")) {
-        id.remove(0, 2);
-        if (id.contains('#')) {
-            int hashIndex = id.indexOf('#');
-            m_selectedIndex = id.mid(hashIndex + 1).toInt();
-            id.remove(hashIndex, id.length() - hashIndex);
-        }
+    const QString path = imgurUrl.path();
+    if (path.startsWith("/a/")) {
+        QString id = QString(path).remove(0, 3);
+        if (id.contains(NONE_WORD_REGEXP))
+            id.truncate(id.indexOf(NONE_WORD_REGEXP));
         requestUrl += "/album/" + id + "/images";
-    } else if (id.startsWith("gallery/")) {
-        id.remove(0, 8);
-        if (id.contains('#')) {
-            int hashIndex = id.indexOf('#');
-            m_selectedIndex = id.mid(hashIndex + 1).toInt();
-            id.remove(hashIndex, id.length() - hashIndex);
-        }
+    } else if (path.startsWith("/gallery/")) {
+        QString id = QString(path).remove(0, 9);
+        if (id.contains(NONE_WORD_REGEXP))
+            id.truncate(id.indexOf(NONE_WORD_REGEXP));
         requestUrl += "/gallery/" + id;
-    } else if (!id.contains('/')) {
-        if (id.contains('#'))
-            id.remove(id.indexOf('#'), id.length() - id.indexOf('#'));
+    } else if (path.lastIndexOf('/') == 0) {
+        QString id = QString(path).remove(0, 1);
+        if (id.contains(NONE_WORD_REGEXP))
+            id.truncate(id.indexOf(NONE_WORD_REGEXP));
         requestUrl += "/image/" + id;
     } else {
         emit error("Unable to get Imgur ID from the url: " + m_imgurUrl);
@@ -122,7 +129,6 @@ void ImgurManager::refresh()
     }
 
     QByteArray authHeader = QByteArray("Client-ID ") + IMGUR_CLIENT_ID;
-
     m_request = manager()->createGetRequest(this, QUrl(requestUrl), authHeader);
     connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
