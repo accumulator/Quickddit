@@ -138,9 +138,11 @@ void APIRequest::send()
     if (m_method == GET) {
         // obey user settings for NSFW filtering, this is not documented but found in source:
         // <https://github.com/reddit/reddit/commit/6f9f91e7534db713d2bdd199ededd00598adccc1>
-        m_parameters.insert("obey_over18", "true");
+        if (m_type == OAuthRequest)
+            m_parameters.insert("obey_over18", "true");
 
-        Utils::setUrlQuery(&m_baseUrl, m_parameters);
+        if (!m_parameters.isEmpty())
+            Utils::setUrlQuery(&m_baseUrl, m_parameters);
         request.setUrl(m_baseUrl);
         m_reply = m_netManager->get(request);
     } else if (m_method == POST) {
