@@ -107,12 +107,16 @@ void CommentManager::onFinished(QNetworkReply *reply)
                 if (m_linkAuthor == manager()->settings()->redditUsername())
                     comment.setSubmitter(true);
 
-                if (m_action == Insert)
+                if (m_action == Insert) {
                     m_model->insertComment(comment, m_fullname);
-                else
+                    emit success(tr("The comment has been added"));
+                } else {
                     m_model->editComment(comment);
+                    emit success(tr("The comment has been edited"));
+                }
             } else if (m_action == Delete) {
                 m_model->deleteComment(m_fullname);
+                emit success(tr("The comment has been deleted"));
             }
         } else {
             emit error(reply->errorString());

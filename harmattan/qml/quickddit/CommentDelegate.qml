@@ -195,7 +195,7 @@ Item {
                     text: model.moreChildrenCount > 0 ? qsTr("Load more comments") : qsTr("Continue this thread");
                     onClicked: {
                         if (model.moreChildrenCount > 0) {
-                            console.log("Not implemented yet"); // TODO
+                            infoBanner.alert("Not implemented yet"); // TODO
                         } else {
                             var link = QMLUtils.toAbsoluteUrl(linkPermalink + model.fullname.substring(3));
                             globalUtils.openInTextLink(link);

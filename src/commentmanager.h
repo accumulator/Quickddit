@@ -44,6 +44,7 @@ public:
     Q_INVOKABLE void deleteComment(const QString &fullname);
 
 signals:
+    void success(const QString &message);
     void error(const QString &errorString);
 
 private slots:

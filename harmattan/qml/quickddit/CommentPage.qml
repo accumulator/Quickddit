@@ -375,8 +375,9 @@ AbstractPage {
     CommentManager {
         id: commentManager
         manager: quickdditManager
-        linkAuthor: link ? link.author: ""
         model: commentModel
+        linkAuthor: link ? link.author: ""
+        onSuccess: infoBanner.alert(message);
         onError: infoBanner.alert(errorString);
     }
 
