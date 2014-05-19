@@ -10,7 +10,7 @@
 TEMPLATE = app
 TARGET = harbour-quickddit
 
-DEFINES += APP_VERSION=\\\"0.3.1-1\\\" Q_OS_SAILFISH
+DEFINES += APP_VERSION=\\\"0.3.2-1\\\" Q_OS_SAILFISH
 
 QT *= network
 
@@ -77,6 +77,7 @@ SOURCES += ../qt-json/json.cpp
 OTHER_FILES += \
     rpm/$${TARGET}.spec \
     rpm/$${TARGET}.yaml \
+    rpm/$${TARGET}.changes \
     $${TARGET}.desktop \
     $${TARGET}.png \
     qml/SubredditsBrowsePage.qml \

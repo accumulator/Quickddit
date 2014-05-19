@@ -1,3 +1,13 @@
+quickddit (0.3.2) unstable; urgency=low
+  * Add support for viewing image from more formats of Imgur URL
+  * Add support for view, add and remove subreddits for multireddit
+  * Add support for search within a subreddit
+  * Show number of hidden comments (show additional comments is not implemented yet)
+  * Fix a possible crash when performing multiple request at startup
+  * Show a message after added/edited/deleted a comment successfully
+
+ -- Dickson <dicksonleong8@gmail.com>  Mon, 19 May 2014 13:16:05 +0800
+
 quickddit (0.3.1) unstable; urgency=low
   * Automatically load for more items when reach the end of the list
   * Improve loading indicator UI

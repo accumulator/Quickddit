@@ -1,0 +1,19 @@
+# Add new changelog entries following the format below.
+# Add newest entries to the top of the list.
+# Separate entries from eachother with a blank line.
+
+# * date Author's Name <author's email> version-release
+# - Summary of changes
+
+* Mon May 19 2014 Dickson <dicksonleong8@gmail.com> 0.3.2-1
+- Add support for viewing image from more formats of Imgur URL
+- Add support for view, add and remove subreddits for multireddit
+- Add support for search within a subreddit
+- Show number of hidden comments (show additional comments is not implemented yet)
+- Add refresh action for cover
+- Redesign open link dialog UI
+- A lot of minor UI fixes
+- "Front Page" and "Sureddits" options move from "More" to the pull down menu for easier access
+- Fix image not fit to screen
+- Fix a possible crash when performing multiple request at startup
+- Show a message after added/edited/deleted a comment successfully
