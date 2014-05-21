@@ -81,7 +81,7 @@ OTHER_FILES += \
     $${TARGET}.desktop \
     $${TARGET}.png \
     qml/SubredditsBrowsePage.qml \
-    qml/SubredditDialog.qml \
+    qml/SubredditsPage.qml \
     qml/SubredditDelegate.qml \
     qml/SignInPage.qml \
     qml/SelectionDialog.qml \

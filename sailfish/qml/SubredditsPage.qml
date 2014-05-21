@@ -20,15 +20,27 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.quickddit.Core 1.0
 
-Dialog {
-    id: subredditDialog
+Page {
+    id: subredditsPage
 
     readonly property string title: "Subreddits"
     property SubredditModel subredditModel
-    property alias text: subredditTextField.text
 
-    acceptDestinationAction: PageStackAction.Replace
-    canAccept: subredditTextField.acceptableInput
+    function refresh(subreddit) {
+        var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
+        mainPage.refresh(subreddit);
+        pageStack.navigateBack();
+    }
+
+    onStatusChanged: {
+        if (status == PageStatus.Active) {
+            if (quickdditManager.isSignedIn && !subredditModel)
+                subredditModel = subredditModelComponent.createObject(subredditsPage);
+        } else if (status == PageStatus.Inactive) {
+            subredditTextField.text = "";
+            subredditTextField.focus = false; // remove keyboard focus
+        }
+    }
 
     SilicaFlickable {
         anchors.fill: parent
@@ -43,11 +55,10 @@ Dialog {
             }
         }
 
-        DialogHeader {
+        PageHeader {
             id: dialogHeader
             anchors { left: parent.left; right: parent.right; top: parent.top }
-            dialog: subredditDialog
-            title: subredditDialog.title
+            title: subredditsPage.title
         }
 
         TextField {
@@ -55,12 +66,13 @@ Dialog {
             anchors { left: parent.left; right: parent.right; top: dialogHeader.bottom }
             placeholderText: "Go to a specific subreddit"
             labelVisible: false
+            errorHighlight: activeFocus && !acceptableInput
             inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
             // RegExp based on <https://github.com/reddit/reddit/blob/aae622d/r2/r2/lib/validator/validator.py#L525>
             validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
-            EnterKey.enabled: subredditDialog.canAccept
+            EnterKey.enabled: acceptableInput
             EnterKey.iconSource: "image://theme/icon-m-enter-accept"
-            EnterKey.onClicked: accept();
+            EnterKey.onClicked: refresh(text);
         }
 
         Column {
@@ -78,11 +90,9 @@ Dialog {
                     text: modelData
                     onClicked: {
                         switch (index) {
-                        case 0: subredditTextField.text = "all"; break;
-                        case 1: acceptDestination = Qt.resolvedUrl("SubredditsBrowsePage.qml"); break;
+                        case 0: subredditsPage.refresh("all"); break;
+                        case 1: pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml")); break;
                         }
-                        subredditDialog.canAccept = true;
-                        subredditDialog.accept();
                     }
                 }
             }
@@ -107,10 +117,7 @@ Dialog {
             model: visible ? subredditModel : 0
             delegate: SimpleListItem {
                 text: model.url
-                onClicked: {
-                    subredditTextField.text = model.displayName;
-                    subredditDialog.accept();
-                }
+                onClicked: subredditsPage.refresh(model.displayName);
             }
 
             footer: LoadingFooter {
@@ -124,6 +131,16 @@ Dialog {
             }
 
             VerticalScrollDecorator {}
+        }
+    }
+
+    Component {
+        id: subredditModelComponent
+
+        SubredditModel {
+            manager: quickdditManager
+            section: SubredditModel.UserAsSubscriberSection
+            onError: infoBanner.alert(errorString);
         }
     }
 }

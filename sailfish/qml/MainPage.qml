@@ -42,15 +42,6 @@ AbstractPage {
         linkModel.refresh(false);
     }
 
-    property Component __subredditDialogModelComponent: Component {
-        SubredditModel {
-            manager: quickdditManager
-            section: SubredditModel.UserAsSubscriberSection
-            onError: infoBanner.alert(errorString);
-        }
-    }
-    property QtObject __subredditDialogModel
-
     property Component __multiredditModelComponent: Component {
         MultiredditModel {
             manager: quickdditManager
@@ -69,6 +60,14 @@ AbstractPage {
         });
     }
 
+    property bool __pushedAttached: false
+    onStatusChanged: {
+        if (mainPage.status == PageStatus.Active && !__pushedAttached) {
+            pageStack.pushAttached(Qt.resolvedUrl("SubredditsPage.qml"));
+            __pushedAttached = true;
+        }
+    }
+
     SilicaListView {
         id: linkListView
         anchors.fill: parent
@@ -85,23 +84,6 @@ AbstractPage {
                     page.multiredditsClicked.connect(__openMultiredditDialog);
                 }
             }
-            MenuItem {
-                text: "Subreddits"
-                onClicked: {
-                    var p = {}
-                    if (quickdditManager.isSignedIn) {
-                        if (!__subredditDialogModel)
-                            __subredditDialogModel = __subredditDialogModelComponent.createObject(mainPage);
-                        p.subredditModel = __subredditDialogModel;
-                    }
-                    var dialog = pageStack.push(Qt.resolvedUrl("SubredditDialog.qml"), p);
-                    dialog.accepted.connect(function() {
-                        if (!dialog.acceptDestination)
-                            refresh(dialog.text);
-                    });
-                }
-            }
-
             MenuItem {
                 text: "Front Page"
                 visible: linkModel.location != LinkModel.FrontPage
