@@ -85,11 +85,6 @@ AbstractPage {
                 }
             }
             MenuItem {
-                text: "Front Page"
-                visible: linkModel.location != LinkModel.FrontPage
-                onClicked: mainPage.refresh("");
-            }
-            MenuItem {
                 text: "About " + (linkModel.location == LinkModel.Subreddit ? "/r/" + linkModel.subreddit
                                                                             : "/m/" + linkModel.multireddit)
                 visible: linkModel.location == LinkModel.Subreddit || linkModel.location == LinkModel.Multireddit

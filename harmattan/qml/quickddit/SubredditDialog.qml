@@ -22,128 +22,136 @@ import Quickddit.Core 1.0
 
 Sheet {
     id: subredditDialog
-    acceptButtonText: "Go"
-    acceptButton.enabled: subredditTextField.acceptableInput
-    rejectButtonText: "Cancel"
+    rejectButtonText: "Close"
 
     property SubredditModel subredditModel
 
-    property alias text: subredditTextField.text
+    property string subreddit
     property bool browseSubreddits: false
 
-    content: Item {
+    content: ListView {
+        id: subredditListView
+
+        property Item headerItem: null
+
         anchors.fill: parent
+        model: subredditModel
 
-        TextField {
-            id: subredditTextField
-            anchors { left: parent.left; right: parent.right; top: parent.top; margins: constant.paddingMedium }
-            placeholderText: "Go to a specific subreddit"
-            inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
-            // RegExp based on <https://github.com/reddit/reddit/blob/aae622d/r2/r2/lib/validator/validator.py#L525>
-            validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
-            platformSipAttributes: SipAttributes {
-                actionKeyEnabled: subredditDialog.acceptButton.enabled
-                actionKeyLabel: subredditDialog.acceptButtonText
-            }
-            onAccepted: subredditDialog.accept();
-        }
-
-        Column {
-            id: mainOptionColumn
-            anchors {
-                left: parent.left; right: parent.right
-                top: subredditTextField.bottom; topMargin: constant.paddingMedium
-            }
+        header: Column {
+            id: headerColumn
+            anchors { left: parent.left; right: parent.right }
             height: childrenRect.height
+
+            Item {
+                anchors { left: parent.left; right: parent.right }
+                height: subredditTextField.height + 2 * subredditTextField.anchors.margins
+
+                TextField {
+                    id: subredditTextField
+                    anchors {
+                        left: parent.left; right: parent.right
+                        top: parent.top; margins: constant.paddingMedium
+                    }
+                    errorHighlight: activeFocus && !acceptableInput
+                    placeholderText: "Go to a specific subreddit"
+                    inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
+                    // RegExp based on <https://github.com/reddit/reddit/blob/aae622d/r2/r2/lib/validator/validator.py#L525>
+                    validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
+                    platformSipAttributes: SipAttributes {
+                        actionKeyEnabled: subredditTextField.text.length > 0 && subredditTextField.acceptableInput
+                        actionKeyLabel: "Go"
+                    }
+                    onAccepted: {
+                        subredditDialog.subreddit = text;
+                        subredditDialog.accept();
+                    }
+                }
+            }
 
             Repeater {
                 id: mainOptionRepeater
                 anchors { left: parent.left; right: parent.right }
-                model: ["All", "Browse for Subreddits..."]
+                height: childrenRect.height
+                model: ["Front Page", "All", "Browse for Subreddits..."]
 
                 SimpleListItem {
                     width: mainOptionRepeater.width
                     text: modelData
                     onClicked: {
                         switch (index) {
-                        case 0: subredditDialog.text = "all"; break;
-                        case 1: browseSubreddits = true; break;
+                        case 0: subredditDialog.subreddit = ""; break;
+                        case 1: subredditDialog.subreddit = "all"; break;
+                        case 2: browseSubreddits = true; break;
                         }
                         subredditDialog.accept();
                     }
                 }
             }
+
+            Item {
+                anchors { left: parent.left; right: parent.right }
+                height: constant.headerHeight
+                visible: !!subredditModel
+
+                Text {
+                    anchors {
+                        left: parent.left; right: refreshItem.left; margins: constant.paddingMedium
+                        verticalCenter: parent.verticalCenter
+                    }
+                    font.bold: true
+                    font.pixelSize: constant.fontSizeLarge
+                    color: constant.colorLight
+                    elide: Text.ElideRight
+                    text: "Subscribed Subreddits"
+                }
+
+                Image {
+                    id: refreshItem
+                    anchors {
+                        right: parent.right; margins: constant.paddingMedium;
+                        verticalCenter: parent.verticalCenter
+                    }
+                    source: "image://theme/icon-m-toolbar-refresh"
+                            + (subredditModel && subredditModel.busy ? "-dimmed" : "")
+                            + (appSettings.whiteTheme ? "" : "-white")
+
+                    MouseArea {
+                        anchors.fill: parent
+                        enabled: !!subredditModel && !subredditModel.busy
+                        onClicked: subredditModel.refresh(false);
+                    }
+                }
+
+                Rectangle {
+                    anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
+                    height: 1
+                    color: constant.colorMid
+                }
+            }
+
+            Component.onCompleted: subredditListView.headerItem = headerColumn;
         }
 
-        Item {
-            id: subscribedSubredditHeader
-            anchors { top: mainOptionColumn.bottom; left: parent.left; right: parent.right }
-            height: constant.headerHeight
-            visible: !!subredditModel
-
-            Text {
-                id: headerTitleText
-                anchors {
-                    left: parent.left; right: refreshItem.left; margins: constant.paddingMedium
-                    verticalCenter: parent.verticalCenter
-                }
-                font.bold: true
-                font.pixelSize: constant.fontSizeLarge
-                color: constant.colorLight
-                elide: Text.ElideRight
-                text: "Subscribed Subreddits"
-            }
-
-            Image {
-                id: refreshItem
-                anchors {
-                    right: parent.right; margins: constant.paddingMedium; verticalCenter: parent.verticalCenter
-                }
-                source: "image://theme/icon-m-toolbar-refresh" + (subredditModel && subredditModel.busy ? "-dimmed" : "")
-                        + (appSettings.whiteTheme ? "" : "-white")
-
-                MouseArea {
-                    anchors.fill: parent
-                    enabled: !!subredditModel && !subredditModel.busy
-                    onClicked: subredditModel.refresh(false);
-                }
-            }
-
-            Rectangle {
-                anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
-                height: 1
-                color: constant.colorMid
-            }
-        }
-
-        ListView {
-            id: subscribedSubredditListView
-            anchors {
-                top: subscribedSubredditHeader.bottom; bottom: parent.bottom
-                left: parent.left; right: parent.right
-            }
-            visible: !!subredditModel
-            clip: true
-            model: visible ? subredditModel : 0
-            delegate: SimpleListItem {
-                text: model.url
-                onClicked: {
-                    subredditDialog.text = model.displayName;
-                    subredditDialog.accept();
-                }
-            }
-
-            footer: LoadingFooter {
-                visible: !!subredditModel && subredditModel.busy
-                listViewItem: subscribedSubredditListView
-            }
-
-            onAtYEndChanged: {
-                if (atYEnd && count > 0 && !subredditModel.busy && subredditModel.canLoadMore)
-                    subredditModel.refresh(true);
+        delegate: SimpleListItem {
+            text: model.url
+            onClicked: {
+                subredditDialog.subreddit = model.displayName;
+                subredditDialog.accept();
             }
         }
 
-        ScrollDecorator { flickableItem: subscribedSubredditListView }
+        footer: LoadingFooter {
+            visible: !!subredditModel && subredditModel.busy
+            listViewItem: subredditListView
+        }
+
+        onAtYEndChanged: {
+            if (atYEnd && count > 0 && !subredditModel.busy && subredditModel.canLoadMore)
+                subredditModel.refresh(true);
+        }
+
+        ScrollDecorator { flickableItem: subredditListView }
+
+        Component.onCompleted: subredditListView.positionViewAtBeginning();
     }
 }

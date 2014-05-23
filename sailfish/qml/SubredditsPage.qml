@@ -37,17 +37,18 @@ Page {
             if (quickdditManager.isSignedIn && !subredditModel)
                 subredditModel = subredditModelComponent.createObject(subredditsPage);
         } else if (status == PageStatus.Inactive) {
-            subredditTextField.text = "";
-            subredditTextField.focus = false; // remove keyboard focus
+            subredditListView.headerItem.resetTextField();
+            subredditListView.positionViewAtBeginning();
         }
     }
 
-    SilicaFlickable {
+    SilicaListView {
+        id: subredditListView
         anchors.fill: parent
-        pressDelay: 0
+        model: subredditModel
 
         PullDownMenu {
-            enabled: !!subredditModel
+            visible: !!subredditsPage.subredditModel
             MenuItem {
                 enabled: !!subredditModel && !subredditModel.busy
                 text: "Refresh subscribed subreddits"
@@ -55,83 +56,71 @@ Page {
             }
         }
 
-        PageHeader {
-            id: dialogHeader
-            anchors { left: parent.left; right: parent.right; top: parent.top }
-            title: subredditsPage.title
-        }
-
-        TextField {
-            id: subredditTextField
-            anchors { left: parent.left; right: parent.right; top: dialogHeader.bottom }
-            placeholderText: "Go to a specific subreddit"
-            labelVisible: false
-            errorHighlight: activeFocus && !acceptableInput
-            inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
-            // RegExp based on <https://github.com/reddit/reddit/blob/aae622d/r2/r2/lib/validator/validator.py#L525>
-            validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
-            EnterKey.enabled: acceptableInput
-            EnterKey.iconSource: "image://theme/icon-m-enter-accept"
-            EnterKey.onClicked: refresh(text);
-        }
-
-        Column {
-            id: mainOptionColumn
-            anchors { left: parent.left; right: parent.right; top: subredditTextField.bottom }
+        header: Column {
+            anchors { left: parent.left; right: parent.right }
             height: childrenRect.height
+
+            function resetTextField() {
+                subredditTextField.text = "";
+                subredditTextField.focus = false; // remove keyboard focus
+            }
+
+            PageHeader { title: subredditsPage.title }
+
+            TextField {
+                id: subredditTextField
+                anchors { left: parent.left; right: parent.right }
+                placeholderText: "Go to a specific subreddit"
+                labelVisible: false
+                errorHighlight: activeFocus && !acceptableInput
+                inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
+                // RegExp based on <https://github.com/reddit/reddit/blob/aae622d/r2/r2/lib/validator/validator.py#L525>
+                validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
+                EnterKey.enabled: acceptableInput
+                EnterKey.iconSource: "image://theme/icon-m-enter-accept"
+                EnterKey.onClicked: refresh(text);
+            }
 
             Repeater {
                 id: mainOptionRepeater
                 anchors { left: parent.left; right: parent.right }
-                model: ["All", "Browse for Subreddits..."]
+                model: ["Front Page", "All", "Browse for Subreddits..."]
 
                 SimpleListItem {
                     width: mainOptionRepeater.width
                     text: modelData
                     onClicked: {
                         switch (index) {
-                        case 0: subredditsPage.refresh("all"); break;
-                        case 1: pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml")); break;
+                        case 0: subredditsPage.refresh(""); break;
+                        case 1: subredditsPage.refresh("all"); break;
+                        case 2: pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml")); break;
                         }
                     }
                 }
             }
+
+            SectionHeader {
+                visible: !!subredditModel
+                text: "Subscribed Subreddits"
+            }
         }
 
-        SectionHeader {
-            id: subscribedSubredditHeader
-            anchors.top: mainOptionColumn.bottom
-            visible: !!subredditModel
-            text: "Subscribed Subreddits"
+        delegate: SimpleListItem {
+            text: model.url
+            onClicked: subredditsPage.refresh(model.displayName);
         }
 
-        SilicaListView {
-            id: subscribedSubredditListView
-            anchors {
-                top: subscribedSubredditHeader.bottom; bottom: parent.bottom
-                left: parent.left; right: parent.right
-            }
-            pressDelay: 0
-            visible: !!subredditModel
-            clip: true
-            model: visible ? subredditModel : 0
-            delegate: SimpleListItem {
-                text: model.url
-                onClicked: subredditsPage.refresh(model.displayName);
-            }
-
-            footer: LoadingFooter {
-                visible: !!subredditModel && subredditModel.busy
-                listViewItem: subscribedSubredditListView
-            }
-
-            onAtYEndChanged: {
-                if (atYEnd && count > 0 && !subredditModel.busy && subredditModel.canLoadMore)
-                    subredditModel.refresh(true);
-            }
-
-            VerticalScrollDecorator {}
+        footer: LoadingFooter {
+            visible: !!subredditModel && subredditModel.busy
+            listViewItem: subredditListView
         }
+
+        onAtYEndChanged: {
+            if (atYEnd && count > 0 && !subredditModel.busy && subredditModel.canLoadMore)
+                subredditModel.refresh(true);
+        }
+
+        VerticalScrollDecorator {}
     }
 
     Component {

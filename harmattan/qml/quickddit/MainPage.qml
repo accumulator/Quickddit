@@ -92,11 +92,6 @@ AbstractPage {
 
         MenuLayout {
             MenuItem {
-                text: "Front Page"
-                enabled: linkModel.location != LinkModel.FrontPage
-                onClicked: mainPage.refresh("");
-            }
-            MenuItem {
                 text: "Subreddits"
                 onClicked: dialogManager.createSubredditDialog();
             }
@@ -207,7 +202,7 @@ AbstractPage {
                 if (dialog.browseSubreddits) {
                     pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml"));
                 } else {
-                    mainPage.refresh(dialog.text);
+                    mainPage.refresh(dialog.subreddit);
                 }
             });
             dialog.open();
