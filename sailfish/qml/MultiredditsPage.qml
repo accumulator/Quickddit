@@ -20,14 +20,16 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.quickddit.Core 1.0
 
-Dialog {
-    id: multiredditDialog
+Page {
+    id: multiredditsPage
 
     readonly property string title: "Multireddits"
     property alias multiredditModel: multiredditListView.model
     property string multiredditName
 
-    canAccept: false
+    signal accepted
+
+    onAccepted: pageStack.pop();
 
     SilicaListView {
         id: multiredditListView
@@ -41,14 +43,13 @@ Dialog {
             }
         }
 
-        header: DialogHeader { title: multiredditDialog.title }
+        header: PageHeader { title: multiredditsPage.title }
 
         delegate: SimpleListItem {
             text: "/m/" + model.name
             onClicked: {
-                multiredditDialog.multiredditName = model.name;
-                canAccept = true;
-                multiredditDialog.accept();
+                multiredditsPage.multiredditName = model.name;
+                multiredditsPage.accepted();
             }
         }
 

@@ -107,7 +107,7 @@ OTHER_FILES += \
     qml/cover/quickddit.png \
     qml/TextAreaDialog.qml \
     qml/MainPageMorePage.qml \
-    qml/MultiredditDialog.qml \
+    qml/MultiredditsPage.qml \
     qml/MessagePage.qml \
     qml/MessageDelegate.qml \
     qml/MessageMenu.qml \

@@ -49,10 +49,10 @@ AbstractPage {
         }
     }
     property QtObject multiredditModel
-    function __openMultiredditDialog() {
+    function __openMultiredditsPage() {
         if (!multiredditModel)
             multiredditModel = __multiredditModelComponent.createObject(mainPage);
-        var dialog = pageStack.replace(Qt.resolvedUrl("MultiredditDialog.qml"), {multiredditModel: multiredditModel});
+        var dialog = pageStack.replace(Qt.resolvedUrl("MultiredditsPage.qml"), {multiredditModel: multiredditModel});
         dialog.accepted.connect(function() {
             linkModel.location = LinkModel.Multireddit;
             linkModel.multireddit = dialog.multiredditName;
@@ -81,7 +81,7 @@ AbstractPage {
                     if (linkModel.location == LinkModel.Subreddit)
                         p.currentSubreddit = linkModel.subreddit;
                     var page = pageStack.push(Qt.resolvedUrl("MainPageMorePage.qml"), p);
-                    page.multiredditsClicked.connect(__openMultiredditDialog);
+                    page.multiredditsClicked.connect(__openMultiredditsPage);
                 }
             }
             MenuItem {
