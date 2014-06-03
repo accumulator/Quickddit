@@ -22,16 +22,19 @@ import Quickddit.Core 1.0
 
 Sheet {
     id: multiredditsDialog
-    rejectButtonText: "Cancel"
+    rejectButtonText: "Close"
 
     property alias multiredditModel: multiredditListView.model
 
     property string multiredditName
 
-    content: Item {
+    content: ListView {
+        id: multiredditListView
         anchors.fill: parent
 
-        Item {
+        property Item headerItem: null
+
+        header: Item {
             id: header
             anchors { left: parent.left; right: parent.right }
             height: constant.headerHeight
@@ -69,23 +72,20 @@ Sheet {
                 height: 1
                 color: constant.colorMid
             }
+
+            Component.onCompleted: multiredditListView.headerItem = header;
         }
 
-        ListView {
-            id: multiredditListView
-            anchors { top: header.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
-            clip: true
-            delegate: SimpleListItem {
-                text: "/m/" + model.name
-                onClicked: {
-                    multiredditsDialog.multiredditName = model.name;
-                    multiredditsDialog.accept();
-                }
+        delegate: SimpleListItem {
+            text: "/m/" + model.name
+            onClicked: {
+                multiredditsDialog.multiredditName = model.name;
+                multiredditsDialog.accept();
             }
-
-            footer: LoadingFooter { visible: multiredditModel.busy; listViewItem: multiredditListView }
-
-            ViewPlaceholder { enabled: multiredditListView.count == 0 && !multiredditModel.busy }
         }
+
+        footer: LoadingFooter { visible: multiredditModel.busy; listViewItem: multiredditListView }
+
+        ViewPlaceholder { enabled: multiredditListView.count == 0 && !multiredditModel.busy }
     }
 }
