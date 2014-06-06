@@ -140,9 +140,9 @@ void ImgurManager::onFinished(QNetworkReply *reply)
     if (reply != 0) {
         if (reply->error() == QNetworkReply::NoError) {
             // print rate limit
-            int userLimit = reply->rawHeader("X-RateLimit-UserRemaining").toInt();
-            int clientLimit = reply->rawHeader("X-RateLimit-ClientRemaining").toInt();
-            qDebug("Imgur Rate Limit: User: %d, Client: %d", userLimit, clientLimit);
+            QByteArray userLimit = reply->rawHeader("X-RateLimit-UserRemaining");
+            QByteArray clientLimit = reply->rawHeader("X-RateLimit-ClientRemaining");
+            qDebug("Imgur Rate Limit: User: %s, Client: %s", userLimit.constData(), clientLimit.constData());
 
             m_imageAndThumbUrlList = Parser::parseImgurImages(reply->readAll());
 

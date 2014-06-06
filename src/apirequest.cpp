@@ -174,9 +174,9 @@ void APIRequest::onFinished()
 {
     // print Reddit rate limit
     if (m_type == OAuthRequest && m_reply->error() == QNetworkReply::NoError) {
-        int remaining = m_reply->rawHeader("X-Ratelimit-Remaining").toInt();
-        int reset = m_reply->rawHeader("X-Ratelimit-Reset").toInt();
-        qDebug("Reddit Rate Limit: Remaining: %d, Reset: %ds", remaining, reset);
+        QByteArray remaining = m_reply->rawHeader("X-Ratelimit-Remaining");
+        QByteArray reset = m_reply->rawHeader("X-Ratelimit-Reset");
+        qDebug("Reddit Rate Limit: Remaining: %s, Reset: %ss", remaining.constData(), reset.constData());
     }
 
     emit finished(m_reply);
