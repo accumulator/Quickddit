@@ -76,6 +76,7 @@ LinkObject parseLinkThing(const QVariant &linkThing)
     link.setDistinguished(linkMapJson.value("distinguished").toString());
     link.setSticky(linkMapJson.value("stickied").toBool());
     link.setNSFW(linkMapJson.value("over_18").toBool());
+    link.setPromoted(linkMapJson.value("promoted").toBool());
 
     return link;
 }

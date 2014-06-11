@@ -160,6 +160,13 @@ public:
     bool isNSFW() const;
     void setNSFW(bool isNSFW);
 
+    /**
+     * indicate if this is a promoted (sponsored) post
+     * equivalent to "promoted" in Reddit's JSON
+     */
+    bool isPromoted() const;
+    void setPromoted(bool isPromoted);
+
 private:
     QExplicitlySharedDataPointer<LinkObjectData> d;
 };

@@ -105,6 +105,7 @@ QVariant LinkModel::data(const QModelIndex &index, int role) const
     case UrlRole: return link.url();
     case IsStickyRole: return link.isSticky();
     case IsNSFWRole: return link.isNSFW();
+    case IsPromotedRole: return link.isPromoted();
     default:
         qCritical("LinkModel::data(): Invalid role");
         return QVariant();
@@ -299,6 +300,7 @@ QHash<int, QByteArray> LinkModel::customRoleNames() const
     roles[UrlRole] = "url";
     roles[IsStickyRole] = "isSticky";
     roles[IsNSFWRole] = "isNSFW";
+    roles[IsPromotedRole] = "isPromoted";
     return roles;
 }
 
@@ -333,6 +335,7 @@ QString LinkModel::getSectionString(Section section)
     case RisingSection: return "rising";
     case ControversialSection: return "controversial";
     case TopSection: return "top";
+    case PromotedSection: return "ads";
     default:
         qWarning("LinkModel::getSectionString(): Invalid section");
         return "";

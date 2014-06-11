@@ -26,7 +26,7 @@ AbstractPage {
     title: linkModel.title
     busy: linkVoteManager.busy
 
-    readonly property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top"]
+    readonly property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top", "Promoted"]
 
     function refresh(subreddit) {
         if (subreddit !== undefined) {

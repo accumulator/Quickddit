@@ -57,7 +57,8 @@ public:
         PermalinkRole,
         UrlRole,
         IsStickyRole,
-        IsNSFWRole
+        IsNSFWRole,
+        IsPromotedRole
     };
 
     enum Location {
@@ -73,7 +74,8 @@ public:
         NewSection,
         RisingSection,
         ControversialSection,
-        TopSection
+        TopSection,
+        PromotedSection
     };
 
     enum SearchSortType {

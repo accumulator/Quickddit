@@ -26,7 +26,7 @@ class LinkObjectData : public QSharedData
 {
 public:
     LinkObjectData() : score(0), likes(0), commentsCount(0), distinguished(LinkObject::NotDistinguished),
-        isSticky(false), isNSFW(false) {}
+        isSticky(false), isNSFW(false), isPromoted(false) {}
 
     QString fullname;
     QString author;
@@ -45,6 +45,7 @@ public:
     LinkObject::DistinguishedType distinguished;
     bool isSticky;
     bool isNSFW;
+    bool isPromoted;
 
 private:
     Q_DISABLE_COPY(LinkObjectData)
@@ -250,4 +251,14 @@ bool LinkObject::isNSFW() const
 void LinkObject::setNSFW(bool isNSFW)
 {
     d->isNSFW = isNSFW;
+}
+
+bool LinkObject::isPromoted() const
+{
+    return d->isPromoted;
+}
+
+void LinkObject::setPromoted(bool isPromoted)
+{
+    d->isPromoted = isPromoted;
 }

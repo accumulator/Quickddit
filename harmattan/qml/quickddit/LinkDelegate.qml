@@ -100,6 +100,14 @@ ListItem {
                 visible: model.isNSFW
                 text: "NSFW"
             }
+
+            Text {
+                anchors.verticalCenter: parent.verticalCenter
+                font.pixelSize: constant.fontSizeDefault
+                color: "green"
+                visible: model.isPromoted
+                text: "Promoted"
+            }
         }
     }
 
