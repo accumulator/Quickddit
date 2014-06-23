@@ -127,31 +127,32 @@ AbstractPage {
                             anchors { left: parent.left; right: parent.right }
                             spacing: constant.paddingMedium
 
-                            CustomCountBubble {
-                                value: link.score
-                                colorMode: link.likes
+                            Text {
+                                font.pixelSize: constant.fontSizeDefault
+                                color: {
+                                    if (link.likes > 0)
+                                        return constant.colorLikes;
+                                    else if (link.likes < 0)
+                                        return constant.colorDislikes;
+                                    else
+                                        return constant.colorLight;
+                                }
+                                text: link.score + " points"
                             }
 
                             Text {
-                                anchors.verticalCenter: parent.verticalCenter
                                 font.pixelSize: constant.fontSizeDefault
                                 color: constant.colorLight
-                                text: "points"
-                            }
-
-                            CustomCountBubble {
-                                value: link.commentsCount
+                                text: "·"
                             }
 
                             Text {
-                                anchors.verticalCenter: parent.verticalCenter
                                 font.pixelSize: constant.fontSizeDefault
                                 color: constant.colorLight
-                                text: "comments"
+                                text: link.commentsCount + " comments"
                             }
 
                             Text {
-                                anchors.verticalCenter: parent.verticalCenter
                                 font.pixelSize: constant.fontSizeDefault
                                 color: "green"
                                 visible: link.isSticky
@@ -159,11 +160,17 @@ AbstractPage {
                             }
 
                             Text {
-                                anchors.verticalCenter: parent.verticalCenter
                                 font.pixelSize: constant.fontSizeDefault
                                 color: "red"
                                 visible: link.isNSFW
                                 text: "NSFW"
+                            }
+
+                            Text {
+                                font.pixelSize: constant.fontSizeDefault
+                                color: "green"
+                                visible: link.isPromoted
+                                text: "Promoted"
                             }
                         }
                     }

@@ -80,7 +80,7 @@ AbstractPage {
                 anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
                 visible: aboutSubredditManager.isNSFW
                 font.pixelSize: constant.fontSizeMedium
-                color: constant.colorNegative
+                color: "red"
                 font.italic: true
                 text: "This subreddit is Not Safe For Work"
             }
@@ -94,38 +94,19 @@ AbstractPage {
                 text: aboutSubredditManager.shortDescription
             }
 
-            Row {
+            Text {
                 anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-                spacing: constant.paddingMedium
-
-                CustomCountBubble {
-                    value: aboutSubredditManager.subscribers
-                }
-
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pixelSize: constant.fontSizeMedium
-                    color: constant.colorLight
-                    text: "subscribers"
-                }
-
-                CustomCountBubble {
-                    value: aboutSubredditManager.activeUsers
-                }
-
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pixelSize: constant.fontSizeMedium
-                    color: constant.colorLight
-                    text: "active users"
-                }
+                font.pixelSize: constant.fontSizeMedium
+                color: constant.colorLight
+                text: aboutSubredditManager.subscribers + " subscribers · " + aboutSubredditManager.activeUsers
+                      + " active users"
             }
 
             Text {
                 anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
                 visible: quickdditManager.isSignedIn
                 font.pixelSize: constant.fontSizeMedium
-                color: aboutSubredditManager.isSubscribed ? constant.colorPositive : constant.colorNegative
+                color: aboutSubredditManager.isSubscribed ? "green" : "red"
                 text: aboutSubredditManager.isSubscribed ? "Subscribed" : "Not Subscribed"
             }
 

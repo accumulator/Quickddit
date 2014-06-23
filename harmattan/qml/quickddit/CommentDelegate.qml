@@ -118,13 +118,24 @@ Item {
                 Loader {
                     id: scoreLoader
                     anchors { left: commentAuthorText.right; leftMargin: constant.paddingSmall }
-                    sourceComponent: model.isScoreHidden ? scoreHiddenComponent : scoreBubbleComponent
+                    sourceComponent: model.isScoreHidden ? scoreHiddenComponent : scoreValueComponent
 
                     Component {
-                        id: scoreBubbleComponent
-                        CustomCountBubble {
-                            value: model.score
-                            colorMode: model.likes
+                        id: scoreValueComponent
+
+                        Text {
+                            font.pixelSize: constant.fontSizeDefault
+                            color: {
+                                if (!mainItem.enabled)
+                                    return constant.colorDisabled;
+                                if (model.likes > 0)
+                                    return constant.colorLikes;
+                                else if (model.likes < 0)
+                                    return constant.colorDislikes;
+                                else
+                                    return constant.colorMid;
+                            }
+                            text: model.score + " pts"
                         }
                     }
 
@@ -132,7 +143,7 @@ Item {
                         id: scoreHiddenComponent
                         Text {
                             font.pixelSize: constant.fontSizeDefault
-                            color: constant.colorMid
+                            color: mainItem.enabled ? constant.colorMid : constant.colorDisabled
                             text: "[score hidden]"
                         }
                     }
@@ -148,7 +159,7 @@ Item {
                     font.pixelSize: constant.fontSizeDefault
                     color: mainItem.enabled ? constant.colorMid : constant.colorDisabled
                     elide: Text.ElideRight
-                    text: model.created
+                    text: " · " + model.created
                 }
             }
 

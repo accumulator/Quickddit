@@ -94,7 +94,6 @@ OTHER_FILES += \
     qml/LinkDelegate.qml \
     qml/InfoBanner.qml \
     qml/ImageViewPage.qml \
-    qml/CustomCountBubble.qml \
     qml/Constant.qml \
     qml/CommentPage.qml \
     qml/CommentMenu.qml \

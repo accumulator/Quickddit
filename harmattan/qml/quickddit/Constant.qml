@@ -26,9 +26,8 @@ QtObject {
     property color colorMid: theme.inverted ? "#8c8c8c" : "#666666"
     property color colorDisabled: theme.inverted ? "#444444" : "#b2b2b4"
 
-    property color colorPositive: "green"
-    property color colorNegative: "red"
-    property color colorNeutral: theme.inverted ? "dimgray" : "darkgray"
+    property color colorLikes: "#FF8B60"
+    property color colorDislikes: "#9494FF"
 
     property int paddingSmall: 4
     property int paddingMedium: 8

@@ -62,31 +62,32 @@ ListItem {
             anchors { left: parent.left; right: parent.right }
             spacing: constant.paddingMedium
 
-            CustomCountBubble {
-                value: model.score
-                colorMode: model.likes
+            Text {
+                font.pixelSize: constant.fontSizeDefault
+                color: {
+                    if (model.likes > 0)
+                        return constant.colorLikes;
+                    else if (model.likes < 0)
+                        return constant.colorDislikes;
+                    else
+                        return constant.colorLight;
+                }
+                text: model.score + " points"
             }
 
             Text {
-                anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: constant.fontSizeDefault
                 color: constant.colorLight
-                text: "points"
-            }
-
-            CustomCountBubble {
-                value: model.commentsCount
+                text: "·"
             }
 
             Text {
-                anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: constant.fontSizeDefault
                 color: constant.colorLight
-                text: "comments"
+                text: model.commentsCount + " comments"
             }
 
             Text {
-                anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: constant.fontSizeDefault
                 color: "green"
                 visible: model.isSticky
@@ -94,7 +95,6 @@ ListItem {
             }
 
             Text {
-                anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: constant.fontSizeDefault
                 color: "red"
                 visible: model.isNSFW
@@ -102,7 +102,6 @@ ListItem {
             }
 
             Text {
-                anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: constant.fontSizeDefault
                 color: "green"
                 visible: model.isPromoted

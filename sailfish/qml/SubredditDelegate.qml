@@ -54,19 +54,13 @@ ListItem {
         Row {
             anchors { left: parent.left; right: parent.right }
             spacing: constant.paddingMedium
-            height: subscribersBubble.height
-
-            CustomCountBubble {
-                id: subscribersBubble
-                value: model.subscribers
-            }
 
             Text {
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: constant.fontSizeDefault
                 color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorLight
                 wrapMode: Text.Wrap
-                text: "subscribers"
+                text: model.subscribers + " subscribers"
             }
 
             Text {

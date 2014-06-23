@@ -27,9 +27,8 @@ QtObject {
     readonly property color colorMid: Theme.secondaryColor
     readonly property color colorDisabled: Qt.darker(colorMid, 1.5)
 
-    readonly property color colorPositive: "green"
-    readonly property color colorNegative: "red"
-    readonly property color colorNeutral: "darkgray"
+    property color colorLikes: "#FF8B60"
+    property color colorDislikes: "#9494FF"
 
     readonly property int paddingSmall: Theme.paddingSmall
     readonly property int paddingMedium: Theme.paddingMedium
