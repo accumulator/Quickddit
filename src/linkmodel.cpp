@@ -308,8 +308,17 @@ void LinkModel::onFinished(QNetworkReply *reply)
 {
     if (reply != 0) {
         if (reply->error() == QNetworkReply::NoError) {
-            const Listing<LinkObject> links = Parser::parseLinkList(reply->readAll());
+            Listing<LinkObject> links = Parser::parseLinkList(reply->readAll());
             if (!links.isEmpty()) {
+                // remove duplicate
+                if (!m_linkList.isEmpty()) {
+                    QMutableListIterator<LinkObject> i(links);
+                    while (i.hasNext()) {
+                        if (m_linkList.contains(i.next()))
+                            i.remove();
+                    }
+                }
+
                 beginInsertRows(QModelIndex(), m_linkList.count(), m_linkList.count() + links.count() - 1);
                 m_linkList.append(links);
                 endInsertRows();

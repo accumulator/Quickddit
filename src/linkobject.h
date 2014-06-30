@@ -20,6 +20,7 @@
 #define LINKOBJECT_H
 
 #include <QtCore/QExplicitlySharedDataPointer>
+#include <QtCore/QString>
 
 class QDateTime;
 class QUrl;
@@ -166,6 +167,8 @@ public:
      */
     bool isPromoted() const;
     void setPromoted(bool isPromoted);
+
+    inline bool operator ==(const LinkObject &other) const { return fullname() == other.fullname(); }
 
 private:
     QExplicitlySharedDataPointer<LinkObjectData> d;
