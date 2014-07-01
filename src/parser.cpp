@@ -119,9 +119,7 @@ QList<CommentObject> parseCommentListingJson(const QVariantMap &json, const QStr
             comment.setAuthor(commentMap.value("author").toString());
             comment.setBody(unescapeHtml(commentMap.value("body_html").toString()));
             comment.setRawBody(unescapeMarkdown(commentMap.value("body").toString()));
-            int upvotes = commentMap.value("ups").toInt();
-            int downvotes = commentMap.value("downs").toInt();
-            comment.setScore(upvotes - downvotes);
+            comment.setScore(commentMap.value("score").toInt());
             if (!commentMap.value("likes").isNull())
                 comment.setLikes(commentMap.value("likes").toBool() ? 1 : -1);
             comment.setCreated(QDateTime::fromTime_t(commentMap.value("created_utc").toInt()));
@@ -165,9 +163,7 @@ CommentObject Parser::parseNewComment(const QByteArray &json)
     comment.setAuthor(commentMap.value("author").toString());
     comment.setBody(unescapeHtml(commentMap.value("body_html").toString()));
     comment.setRawBody(unescapeMarkdown(commentMap.value("body").toString()));
-    int upvotes = commentMap.value("ups").toInt();
-    int downvotes = commentMap.value("downs").toInt();
-    comment.setScore(upvotes - downvotes);
+    comment.setScore(commentMap.value("score").toInt());
     if (!commentMap.value("likes").isNull())
         comment.setLikes(commentMap.value("likes").toBool() ? 1 : -1);
     comment.setCreated(QDateTime::fromTime_t(commentMap.value("created_utc").toInt()));
