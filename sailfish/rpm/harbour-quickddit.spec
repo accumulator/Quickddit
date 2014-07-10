@@ -20,15 +20,14 @@ License:    GPLv3+
 URL:        https://github.com/dicksonleong/Quickddit
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-quickddit.yaml
-Requires:   sailfishsilica-qt5 >= 0.10.9
-Requires:   libsailfishapp
+Requires:   sailfishsilica-qt5
 Requires:   mapplauncherd-booster-silica-qt5
 Requires:   qt5-plugin-imageformat-gif
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Network)
-BuildRequires:  pkgconfig(sailfishapp) >= 0.0.10
+BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  desktop-file-utils
 
 %description
@@ -45,7 +44,8 @@ Quickddit is a free and open source Reddit client for mobile phones.
 # >> build pre
 # << build pre
 
-%qtc_qmake5 
+%qtc_qmake5  \
+    VERSION='%{version}-%{release}'
 
 %qtc_make %{?_smp_mflags}
 

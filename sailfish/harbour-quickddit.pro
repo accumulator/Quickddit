@@ -10,7 +10,7 @@
 TEMPLATE = app
 TARGET = harbour-quickddit
 
-DEFINES += APP_VERSION=\\\"0.3.2-1\\\" Q_OS_SAILFISH
+DEFINES += APP_VERSION=\\\"$$VERSION\\\" Q_OS_SAILFISH
 
 QT *= network
 
