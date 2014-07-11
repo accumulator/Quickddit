@@ -22,10 +22,18 @@ import Sailfish.Silica 1.0
 Dialog {
     id: openLinkDialog
 
-    readonly property string title: "URL"
+    readonly property string title: "Open URL"
     property string url
 
-    forwardNavigation: false
+    property bool __buttonClickAccept: false
+
+    onAccepted: {
+        // user accept the dialog by swiping to left instead of clicking on the button
+        if (!__buttonClickAccept) {
+            Qt.openUrlExternally(url);
+            infoBanner.alert("Launching web browser...");
+        }
+    }
 
     Column {
         anchors { top: parent.top; left: parent.left; right: parent.right }
@@ -37,9 +45,8 @@ Dialog {
             anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
             horizontalAlignment: Text.AlignHCenter
             color: Theme.highlightColor
-            font.pixelSize: constant.fontSizeLarge
             wrapMode: Text.WrapAnywhere
-            maximumLineCount: 3
+            maximumLineCount: 4
             elide: Text.ElideRight
             text: url
         }
@@ -54,7 +61,8 @@ Dialog {
             onClicked: {
                 Qt.openUrlExternally(url);
                 infoBanner.alert("Launching web browser...");
-                openLinkDialog.close();
+                __buttonClickAccept = true;
+                openLinkDialog.accept();
             }
         }
 
@@ -64,7 +72,8 @@ Dialog {
             onClicked: {
                 QMLUtils.copyToClipboard(url);
                 infoBanner.alert("URL copied to clipboard");
-                openLinkDialog.close();
+                __buttonClickAccept = true;
+                openLinkDialog.accept();
             }
         }
     }
