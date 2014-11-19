@@ -5,6 +5,13 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Wed Nov 19 2014 Dickson <dicksonleong8@gmail.com> 0.3.3-1
+- Makes subreddit easier to access
+- Hides duplicate posts
+- Remove "bubble" design for number of likes/comments
+- Fix "viewing a single comment threads" keep coming out
+- Fix crash when voting
+
 * Mon May 19 2014 Dickson <dicksonleong8@gmail.com> 0.3.2-1
 - Add support for viewing image from more formats of Imgur URL
 - Add support for view, add and remove subreddits for multireddit

@@ -1,3 +1,9 @@
+quickddit (0.3.3) unstable; urgency=low
+  * Hides duplicate posts
+  * Remove "bubble" design for number of likes/comments
+
+ -- Dickson <dicksonleong8@gmail.com>  Wed, 19 Nov 2014 14:06:35 +0800
+
 quickddit (0.3.2) unstable; urgency=low
   * Add support for viewing image from more formats of Imgur URL
   * Add support for view, add and remove subreddits for multireddit
