@@ -21,7 +21,7 @@
 #include <QtNetwork/QNetworkReply>
 
 VoteManager::VoteManager(QObject *parent) :
-    AbstractManager(parent)
+    AbstractManager(parent), m_request(0)
 {
 }
 

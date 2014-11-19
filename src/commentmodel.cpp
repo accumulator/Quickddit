@@ -34,7 +34,7 @@
 static QRegExp commentPermalinkRegExp("(/r/\\w+)?/comments/\\w+/\\w+/(\\w+/?)");
 
 CommentModel::CommentModel(QObject *parent) :
-    AbstractListModelManager(parent), m_link(0), m_sort(ConfidenceSort), m_request(0)
+    AbstractListModelManager(parent), m_link(0), m_sort(ConfidenceSort), m_commentPermalink(false), m_request(0)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
