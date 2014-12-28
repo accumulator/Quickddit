@@ -113,4 +113,5 @@ OTHER_FILES += \
     qml/LoadingFooter.qml \
     qml/SimpleListItem.qml \
     qml/AboutMultiredditPage.qml \
-    qml/Bubble.qml
+    qml/Bubble.qml \
+    qml/VideoViewPage.qml
