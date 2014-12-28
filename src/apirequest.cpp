@@ -34,7 +34,7 @@ static const QByteArray USER_AGENT = QByteArray("Quickddit/") + APP_VERSION + " 
 static const QByteArray USER_AGENT = QByteArray("Quickddit/") + APP_VERSION + " (Unknown)";
 #endif
 
-#define REDDIT_NORMAL_DOMAIN "http://www.reddit.com"
+#define REDDIT_NORMAL_DOMAIN "https://www.reddit.com"
 #define REDDIT_OAUTH_DOMAIN "https://oauth.reddit.com"
 #define REDDIT_ACCESS_TOKEN_URL "https://ssl.reddit.com/api/v1/access_token"
 
