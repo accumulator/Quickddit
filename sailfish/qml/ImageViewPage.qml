@@ -176,6 +176,17 @@ AbstractPage {
                 property: "scale"
                 from: imageItem.scale
             }
+
+            // workaround to qt5.2 bug
+            // otherwise pincharea is ignored
+            // Copied from: https://github.com/veskuh/Tweetian/commit/ad70015c7c50537db4bcd66f3077e2483f735113
+            // And: http://talk.maemo.org/showthread.php?p=1466386#post1466386
+            Rectangle {
+                opacity: 0.0
+                anchors.fill: parent
+            }
+            
+            
         }
 
         ScrollDecorator {}
