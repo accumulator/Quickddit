@@ -74,7 +74,7 @@ ListItem {
             color: messageDelegate.highlighted ? Theme.highlightColor : constant.colorLight
             wrapMode: Text.Wrap
             textFormat: Text.RichText
-            text: model.body
+            text: "<style>a { color: " + Theme.highlightColor + "; }</style>" + model.body
         }
     }
 
