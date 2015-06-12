@@ -37,7 +37,7 @@ MouseArea {
 
     Rectangle {
         anchors.fill: parent
-        color: Theme.highlightColor
+        color: Theme.highlightBackgroundColor
     }
 
     Text {
