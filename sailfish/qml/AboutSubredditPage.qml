@@ -123,7 +123,7 @@ AbstractPage {
                 textFormat: Text.RichText
                 font.pixelSize: constant.fontSizeMedium
                 color: constant.colorLight
-                text: aboutSubredditManager.longDescription
+                text: "<style>a { color: " + Theme.highlightColor + "; }</style>" + aboutSubredditManager.longDescription
                 onLinkActivated: globalUtils.openInTextLink(link);
             }
         }
