@@ -168,6 +168,13 @@ public:
     bool isPromoted() const;
     void setPromoted(bool isPromoted);
 
+    /**
+     * the flair text of this link
+     * equivalent to link_flair_text in Reddit's JSON
+     */
+    QString flairText() const;
+    void setFlairText(const QString &flairText);
+
     inline bool operator ==(const LinkObject &other) const { return fullname() == other.fullname(); }
 
 private:

@@ -77,7 +77,7 @@ LinkObject parseLinkThing(const QVariant &linkThing)
     link.setSticky(linkMapJson.value("stickied").toBool());
     link.setNSFW(linkMapJson.value("over_18").toBool());
     link.setPromoted(linkMapJson.value("promoted").toBool());
-
+    link.setFlairText(linkMapJson.value("link_flair_text").toString());
     return link;
 }
 

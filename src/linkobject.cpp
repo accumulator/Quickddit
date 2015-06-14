@@ -46,6 +46,7 @@ public:
     bool isSticky;
     bool isNSFW;
     bool isPromoted;
+    QString flairText;
 
 private:
     Q_DISABLE_COPY(LinkObjectData)
@@ -261,4 +262,14 @@ bool LinkObject::isPromoted() const
 void LinkObject::setPromoted(bool isPromoted)
 {
     d->isPromoted = isPromoted;
+}
+
+QString LinkObject::flairText() const
+{
+    return d->flairText;
+}
+
+void LinkObject::setFlairText(const QString &flairText)
+{
+    d->flairText = flairText;
 }

@@ -58,7 +58,8 @@ public:
         UrlRole,
         IsStickyRole,
         IsNSFWRole,
-        IsPromotedRole
+        IsPromotedRole,
+        FlairTextRole
     };
 
     enum Location {
