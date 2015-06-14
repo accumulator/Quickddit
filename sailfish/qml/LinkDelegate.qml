@@ -88,26 +88,24 @@ ListItem {
                 text: model.commentsCount + " comments"
             }
 
-            Text {
-                font.pixelSize: constant.fontSizeDefault
+            Bubble {
                 color: "green"
                 visible: model.isSticky
                 text: "Sticky"
             }
 
-            Text {
-                font.pixelSize: constant.fontSizeDefault
+            Bubble {
                 color: "red"
                 visible: model.isNSFW
                 text: "NSFW"
             }
 
-            Text {
-                font.pixelSize: constant.fontSizeDefault
+            Bubble {
                 color: "green"
                 visible: model.isPromoted
                 text: "Promoted"
             }
+
         }
     }
 
