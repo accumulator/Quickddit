@@ -112,4 +112,5 @@ OTHER_FILES += \
     qml/MessageMenu.qml \
     qml/LoadingFooter.qml \
     qml/SimpleListItem.qml \
-    qml/AboutMultiredditPage.qml
+    qml/AboutMultiredditPage.qml \
+    qml/Bubble.qml
