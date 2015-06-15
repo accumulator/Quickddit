@@ -110,6 +110,11 @@ AbstractPage {
                         height: childrenRect.height
                         spacing: constant.paddingMedium
 
+                        Bubble {
+                            visible: link.flairText != ""
+                            text: link.flairText
+                        }
+
                         Text {
                             id: titleText
                             anchors { left: parent.left; right: parent.right }
