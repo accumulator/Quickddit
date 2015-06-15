@@ -95,6 +95,7 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     case IsAuthorRole: return comment.author() == manager()->settings()->redditUsername();
     case MoreChildrenCountRole: return comment.moreChildren().count();
     case IsMoreChildrenRole: return comment.isMoreChildren();
+    case MoreChildrenRole: return QVariant(comment.moreChildren());
     default:
         qCritical("CommentModel::data(): Invalid role");
         return QVariant();
@@ -269,6 +270,40 @@ void CommentModel::refresh(bool refreshOlder)
     setBusy(true);
 }
 
+void CommentModel::moreComments(int index, const QVariant &children)
+{
+    Q_ASSERT(!m_permalink.isEmpty());
+
+    if (m_request != 0) {
+        qWarning("CommentModel::moreComments(): Aborting active network request (Try to avoid!)");
+        m_request->disconnect();
+        m_request->deleteLater();
+        m_request = 0;
+    }
+
+    if (!m_link.type() == QVariant::Map) {
+        qWarning("CommentModel::moreComments(): link is not provided by CommentModel");
+        return;
+    }
+
+    m_index = index;
+    m_depth = m_commentList.at(index).depth();
+
+    QVariantMap linkMap = m_link.toMap();
+
+    QHash<QString, QString> parameters;
+    parameters["sort"] = getSortString(m_sort);
+    parameters["link_id"] = linkMap.value("fullname").toString();
+    parameters["children"] = children.toStringList().join(",");
+
+    qDebug() << "more comments params:" << parameters;
+
+    m_request = manager()->createRedditRequest(this, APIRequest::GET, "/api/morechildren", parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onMoreCommentsFinished(QNetworkReply*)));
+
+    setBusy(true);
+}
+
 int CommentModel::getParentIndex(int index) const
 {
     int parentDepth = m_commentList.at(index).depth() - 1;
@@ -333,6 +368,7 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     roles[IsAuthorRole] = "isAuthor";
     roles[MoreChildrenCountRole] = "moreChildrenCount";
     roles[IsMoreChildrenRole] = "isMoreChildren";
+    roles[MoreChildrenRole] = "moreChildren";
     return roles;
 }
 
@@ -341,9 +377,13 @@ void CommentModel::onFinished(QNetworkReply *reply)
     if (reply != 0) {
         if (reply->error() == QNetworkReply::NoError) {
             const QPair< LinkObject, QList<CommentObject> > comments = Parser::parseCommentList(reply->readAll());
-            if (!m_link.canConvert<QObject *>()) {
-                m_link = LinkModel::toLinkVariantMap(comments.first);
-                emit linkChanged();
+            m_link = LinkModel::toLinkVariantMap(comments.first);
+            emit linkChanged();
+
+            if (!m_commentList.isEmpty()) {
+                beginRemoveRows(QModelIndex(), 0, m_commentList.count() - 1);
+                m_commentList.clear();
+                endRemoveRows();
             }
             if (!comments.second.isEmpty()) {
                 beginInsertRows(QModelIndex(), m_commentList.count(), m_commentList.count() + comments.second.count() - 1);
@@ -359,6 +399,30 @@ void CommentModel::onFinished(QNetworkReply *reply)
     m_request = 0;
     setBusy(false);
     emit commentLoaded();
+}
+
+void CommentModel::onMoreCommentsFinished(QNetworkReply *reply) {
+    if (reply != 0) {
+        if (reply->error() == QNetworkReply::NoError) {
+            const QList<CommentObject> commentList = Parser::parseMoreChildren(reply->readAll(), m_link.toMap().value("author").toString(), m_depth);
+            qDebug() << commentList.length() << "more comments received";
+            int index = m_index;
+            beginRemoveRows(QModelIndex(), m_index, m_index);
+            m_commentList.removeAt(m_index);
+            endRemoveRows();
+            beginInsertRows(QModelIndex(), m_index, m_index + commentList.length() - 1);
+            foreach(const CommentObject comment, commentList) {
+                m_commentList.insert(index++, comment);
+            }
+            endInsertRows();
+        } else {
+            emit error(reply->errorString());
+        }
+        qDebug() << reply->readAll();
+    }
+    m_request->deleteLater();
+    m_request = 0;
+    setBusy(false);
 }
 
 QString CommentModel::getSortString(CommentModel::SortType sort)

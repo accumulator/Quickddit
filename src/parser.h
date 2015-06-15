@@ -22,6 +22,7 @@
 #include <QtCore/QList>
 #include <QtCore/QPair>
 #include <QtCore/QByteArray>
+#include <QString>
 
 class LinkObject;
 class CommentObject;
@@ -48,6 +49,7 @@ Listing<LinkObject> parseLinkList(const QByteArray &json);
 
 CommentObject parseNewComment(const QByteArray &json);
 QPair< LinkObject, QList<CommentObject> > parseCommentList(const QByteArray &json);
+QList<CommentObject> parseMoreChildren(const QByteArray &json, const QString &linkAuthor, int depth);
 
 SubredditObject parseSubreddit(const QByteArray &json);
 Listing<SubredditObject> parseSubredditList(const QByteArray &json);
