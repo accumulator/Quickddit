@@ -45,6 +45,10 @@ AbstractPage {
         })
     }
 
+    function loadMoreChildren(index, children) {
+        commentModel.moreComments(index, children);
+    }
+
     SilicaListView {
         id: commentListView
         anchors.fill: parent
