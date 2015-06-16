@@ -344,8 +344,6 @@ AbstractPage {
         manager: quickdditManager
         permalink: link.permalink
         onError: infoBanner.alert(errorString)
-        // FIXME: not position at top completely after comments are loaded
-        onCommentLoaded: commentListView.positionViewAtBeginning();
     }
 
     VoteManager {
