@@ -40,6 +40,7 @@ public:
     bool isSubmitter;
     bool isScoreHidden;
     QList<QString> moreChildren;
+    int moreChildrenCount;
     bool isMoreChildren;
 
 private:
@@ -206,6 +207,16 @@ QList<QString> CommentObject::moreChildren() const
 void CommentObject::setMoreChildren(const QList<QString> &children)
 {
     d->moreChildren = children;
+}
+
+int CommentObject::moreChildrenCount() const
+{
+    return d->moreChildrenCount;
+}
+
+void CommentObject::setMoreChildrenCount(int count)
+{
+    d->moreChildrenCount = count;
 }
 
 bool CommentObject::isMoreChildren() const

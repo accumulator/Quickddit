@@ -132,6 +132,7 @@ QList<CommentObject> parseCommentListingJson(const QVariantMap &json, const QStr
             comment.setSubmitter(comment.author() == linkAuthor);
             comment.setScoreHidden(commentMap.value("score_hidden").toBool());
         } else if (kind == QLatin1String("more")) {
+            comment.setMoreChildrenCount(commentMap.value("count").toInt());
             if (commentMap.value("count").toInt() == 0)
                 comment.setFullname(commentMap.value("parent_id").toString());
             else
@@ -186,6 +187,7 @@ QList<CommentObject> Parser::parseMoreChildren(const QByteArray &json, const QSt
             comment.setSubmitter(comment.author() == linkAuthor);
             comment.setScoreHidden(commentMap.value("score_hidden").toBool());
         } else if (kind == QLatin1String("more")) {
+            comment.setMoreChildrenCount(commentMap.value("count").toInt());
             if (commentMap.value("count").toInt() == 0)
                 comment.setFullname(commentMap.value("parent_id").toString());
             else

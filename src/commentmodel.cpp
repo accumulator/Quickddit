@@ -93,7 +93,7 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     case IsScoreHiddenRole: return comment.isScoreHidden();
     case IsValidRole: return comment.author() != "[deleted]";
     case IsAuthorRole: return comment.author() == manager()->settings()->redditUsername();
-    case MoreChildrenCountRole: return comment.moreChildren().count();
+    case MoreChildrenCountRole: return comment.moreChildrenCount();
     case IsMoreChildrenRole: return comment.isMoreChildren();
     case MoreChildrenRole: return QVariant(comment.moreChildren());
     default:
@@ -418,7 +418,6 @@ void CommentModel::onMoreCommentsFinished(QNetworkReply *reply) {
         } else {
             emit error(reply->errorString());
         }
-        qDebug() << reply->readAll();
     }
     m_request->deleteLater();
     m_request = 0;
