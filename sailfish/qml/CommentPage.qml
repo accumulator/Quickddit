@@ -28,9 +28,11 @@ AbstractPage {
     property alias link: commentModel.link
     property alias linkPermalink: commentModel.permalink
     property VoteManager linkVoteManager
+    property bool morechildren_animation
 
-    function refresh() {
-        commentModel.refresh(false);
+    function refresh(refreshOlder) {
+        morechildren_animation = false
+        commentModel.refresh(refreshOlder);
     }
 
     readonly property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
@@ -46,6 +48,7 @@ AbstractPage {
     }
 
     function loadMoreChildren(index, children) {
+        morechildren_animation = true
         commentModel.moreComments(index, children);
     }
 
@@ -65,7 +68,7 @@ AbstractPage {
                 onClicked: globalUtils.createSelectionDialog("Sort", commentSortModel, commentModel.sort,
                 function (selectedIndex) {
                     commentModel.sort = selectedIndex;
-                    commentModel.refresh(false);
+                    refresh(false);
                 });
             }
             MenuItem {
@@ -76,7 +79,7 @@ AbstractPage {
             MenuItem {
                 enabled: !commentModel.busy
                 text: "Refresh"
-                onClicked: commentModel.refresh(false);
+                onClicked: refresh(false);
             }
         }
 
@@ -296,7 +299,7 @@ AbstractPage {
                             text: "View All Comments"
                             onClicked: {
                                 commentModel.commentPermalink = false;
-                                commentModel.refresh(false);
+                                refresh(false);
                             }
                         }
                     }
