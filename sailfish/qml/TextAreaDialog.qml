@@ -41,7 +41,8 @@ Dialog {
             id: textArea
             anchors { left: parent.left; right: parent.right }
             height: Math.max(implicitHeight, Theme.itemSizeLarge * 3)
-            placeholderText: "Tap here to type..."
+            placeholderText: "Enter your comment here..."
+            focus: true
         }
     }
 }
