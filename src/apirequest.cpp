@@ -103,7 +103,7 @@ void APIRequest::send()
     Q_ASSERT(m_reply == 0);
 
     if (m_type == AccessTokenRequest || m_type == RefreshAccessTokenRequest) {
-        Q_ASSERT(!m_clientId.isEmpty() && !m_clientSecret.isEmpty() && !m_redirectUrl.isEmpty());
+        Q_ASSERT(!m_clientId.isEmpty() && !m_redirectUrl.isEmpty());
 
         m_method = POST;
         m_baseUrl = QUrl(REDDIT_ACCESS_TOKEN_URL);
