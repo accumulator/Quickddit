@@ -291,7 +291,6 @@ void CommentModel::changeLinkLikes(const QString &fullname, int likes)
     QVariantMap linkMap = m_link.toMap();
 
     if (linkMap.value("fullname").toString() != fullname) {
-        qCritical("CommentModel::changeLinkLikes(): fullname not match");
         return;
     }
 
