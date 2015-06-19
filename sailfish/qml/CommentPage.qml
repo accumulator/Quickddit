@@ -367,13 +367,12 @@ AbstractPage {
         onError: infoBanner.alert(errorString);
     }
 
-    Component.onCompleted: {
-        if (linkVoteManager) {
-            linkVoteManager.onVoteSuccess.connect( function(fullname, likes) {
-                commentModel.changeLinkLikes(fullname, likes);
-            });
-        }
+    Connections {
+        target: linkVoteManager
+        onVoteSuccess: if (linkVoteManager != commentVoteManager) { commentModel.changeLinkLikes(fullname, likes); }
+    }
 
+    Component.onCompleted: {
         if (!linkVoteManager)
             linkVoteManager = commentVoteManager;
     }

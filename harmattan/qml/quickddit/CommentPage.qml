@@ -385,6 +385,11 @@ AbstractPage {
         onError: infoBanner.alert(errorString);
     }
 
+    Connections {
+        target: linkVoteManager
+        onVoteSuccess: if (linkVoteManager != commentVoteManager) { commentModel.changeLinkLikes(fullname, likes); }
+    }
+
     CommentManager {
         id: commentManager
         manager: quickdditManager
@@ -395,12 +400,6 @@ AbstractPage {
     }
 
     Component.onCompleted: {
-        if (linkVoteManager) {
-            linkVoteManager.onVoteSuccess.connect( function(fullname, likes) {
-                commentModel.changeLinkLikes(fullname, likes);
-            });
-        }
-
         if (!linkVoteManager)
             linkVoteManager = commentVoteManager;
     }
