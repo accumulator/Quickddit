@@ -30,8 +30,6 @@
 #include "messageobject.h"
 #include "utils.h"
 
-#include <QDebug>
-
 QString unescapeHtml(const QString &html)
 {
     QTextDocument document;
@@ -162,7 +160,6 @@ QList<CommentObject> Parser::parseMoreChildren(const QByteArray &json, const QSt
     QList<CommentObject> commentList;
 
     const QVariantList childrenList = root.value("jquery").toList().last().toList().last().toList().first().toList();
-    qDebug() << "children list" << childrenList;
 
     foreach (const QVariant &commentJson, childrenList) {
         const QString kind = commentJson.toMap().value("kind").toString();
@@ -173,7 +170,6 @@ QList<CommentObject> Parser::parseMoreChildren(const QByteArray &json, const QSt
         comment.setDepth(depth);
 
         if (kind == QLatin1String("t1")) {
-            qDebug() << "T1";
             comment.setAuthor(commentMap.value("author").toString());
             comment.setBody(unescapeHtml(commentMap.value("body_html").toString()));
             comment.setRawBody(unescapeMarkdown(commentMap.value("body").toString()));
@@ -205,9 +201,6 @@ QList<CommentObject> Parser::parseMoreChildren(const QByteArray &json, const QSt
         }
 
         commentList.append(comment);
-
-//        if (commentMap.value("replies").type() == QVariant::Map)
-//            commentList.append(parseCommentListingJson(commentMap.value("replies").toMap(), linkAuthor, depth + 1));
     }
 
     return commentList;
