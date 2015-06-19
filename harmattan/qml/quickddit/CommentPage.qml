@@ -390,6 +390,12 @@ AbstractPage {
     }
 
     Component.onCompleted: {
+        if (linkVoteManager) {
+            linkVoteManager.onVoteSuccess.connect( function(fullname, likes) {
+                commentModel.changeLinkLikes(fullname, likes);
+            });
+        }
+
         if (!linkVoteManager)
             linkVoteManager = commentVoteManager;
     }
