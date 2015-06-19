@@ -112,5 +112,16 @@ ListItem {
         anchors { right: parent.right; verticalCenter: parent.verticalCenter; rightMargin: constant.paddingMedium }
         source: model.thumbnailUrl
         asynchronous: true
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                if (globalUtils.previewableImage(model.url)) {
+                    globalUtils.openImageViewPage(model.url);
+                } else {
+                    globalUtils.createOpenLinkDialog(model.url);
+                }
+            }
+        }
     }
 }
