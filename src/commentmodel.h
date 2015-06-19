@@ -44,7 +44,8 @@ public:
         IsValidRole,
         IsAuthorRole,
         MoreChildrenCountRole,
-        IsMoreChildrenRole
+        IsMoreChildrenRole,
+        MoreChildrenRole
     };
 
     enum SortType {
@@ -83,6 +84,7 @@ public:
 
     // QML functions
     void refresh(bool refreshOlder);
+    Q_INVOKABLE void moreComments(int index, const QVariant &children);
     Q_INVOKABLE int getParentIndex(int index) const;
     Q_INVOKABLE void changeLinkLikes(const QString &fullname, int likes);
     Q_INVOKABLE void changeLikes(const QString &fullname, int likes);
@@ -99,12 +101,15 @@ signals:
 
 private slots:
     void onFinished(QNetworkReply *reply);
+    void onMoreCommentsFinished(QNetworkReply *reply);
 
 private:
     QVariant m_link;
     QString m_permalink;
     SortType m_sort;
     bool m_commentPermalink;
+    int m_index;
+    int m_depth;
 
     QList<CommentObject> m_commentList;
     APIRequest *m_request;

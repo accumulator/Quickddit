@@ -48,6 +48,10 @@ AbstractPage {
         dialog.open();
     }
 
+    function loadMoreChildren(index, children) {
+        commentModel.moreComments(index, children);
+    }
+
     title: "Comments" + (link ? ": " + link.title : "")
     busy: commentModel.busy || commentVoteManager.busy || commentManager.busy || linkVoteManager.busy
     onHeaderClicked: commentListView.positionViewAtBeginning();

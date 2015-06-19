@@ -80,6 +80,9 @@ public:
     QList<QString> moreChildren() const;
     void setMoreChildren(const QList<QString> &children);
 
+    int moreChildrenCount() const;
+    void setMoreChildrenCount(int count);
+
     bool isMoreChildren() const;
     void setIsMoreChildren(bool isMoreChildren);
 

@@ -40,6 +40,35 @@ Item {
     width: ListView.view.width
     height: moreChildrenLoader.status == Loader.Null ? mainItem.height : moreChildrenLoader.height + constant.paddingMedium
 
+    ListView.onAdd: ParallelAnimation {
+        NumberAnimation {
+            target: commentDelegate
+            properties: "opacity"
+            from: 0; to: 1
+            duration: commentPage.morechildren_animation ? 500 : 100
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            target: commentDelegate
+            properties: "x"
+            from: commentDelegate.x + commentDelegate.width / 2; to: commentDelegate.x
+            duration: commentPage.morechildren_animation ? 400 : 0
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            target: commentDelegate
+            properties: "height"
+            from: 0; to: commentDelegate.height
+            duration: commentPage.morechildren_animation ? 500 : 0
+            easing.type: Easing.InOutQuad
+        }
+    }
+
+    ListView.onRemove: RemoveAnimation {
+        target: commentDelegate
+        duration: commentPage.morechildren_animation ? 500 : 0
+    }
+
     Row {
         id: lineRow
         anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
@@ -213,7 +242,7 @@ Item {
                     text: model.moreChildrenCount > 0 ? qsTr("Load more comments") : qsTr("Continue this thread");
                     onClicked: {
                         if (model.moreChildrenCount > 0) {
-                            infoBanner.alert("Not implemented yet"); // TODO
+                            commentPage.loadMoreChildren(model.index, model.moreChildren);
                         } else {
                             var link = QMLUtils.toAbsoluteUrl(linkPermalink + model.fullname.substring(3));
                             globalUtils.openInTextLink(link);
@@ -224,5 +253,4 @@ Item {
         }
     }
 
-    ListView.onRemove: mainItem.animateRemoval(commentDelegate);
 }
