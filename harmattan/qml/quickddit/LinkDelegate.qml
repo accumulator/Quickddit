@@ -34,6 +34,11 @@ ListItem {
         height: childrenRect.height
         spacing: constant.paddingSmall
 
+        Bubble {
+            visible: model.flairText != ""
+            text: model.flairText
+        }
+
         Text {
             id: titleText
             anchors { left: parent.left; right: parent.right }

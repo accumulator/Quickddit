@@ -129,6 +129,11 @@ AbstractPage {
                     height: 1
                 }
 
+                Bubble {
+                    visible: link.flairText != ""
+                    text: link.flairText
+                }
+
                 Item {
                     id: titleWrapper
                     anchors { left: parent.left; right: parent.right }
