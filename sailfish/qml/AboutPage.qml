@@ -47,8 +47,10 @@ AbstractPage {
                     color: constant.colorLight
                     wrapMode: Text.Wrap
                     text: "Quickddit - A free and open source Reddit client for mobile phones\n" +
-                          "v" + APP_VERSION + " BETA\n\n" +
-                          "Copyright (c) Dickson Leong\nLicensed under GNU GPLv3+\n" +
+                          "v" + APP_VERSION + "\n\n" +
+                          "Copyright (c) 2013-2014 Dickson Leong\n" +
+                          "Copyright (c) 2015 Sander van Grieken\n" +
+                          "Licensed under GNU GPLv3+\n" +
                           "App icon by Andrew Zhilin\n"
                 }
 
