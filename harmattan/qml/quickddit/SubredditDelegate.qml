@@ -62,9 +62,8 @@ ListItem {
                 text: model.subscribers + " subscribers"
             }
 
-            Text {
+            Bubble {
                 anchors.verticalCenter: parent.verticalCenter
-                font.pixelSize: constant.fontSizeDefault
                 color: "red"
                 visible: model.isNSFW
                 text: "NSFW"

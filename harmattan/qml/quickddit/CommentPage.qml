@@ -190,22 +190,19 @@ AbstractPage {
                                 text: link.commentsCount + " comments"
                             }
 
-                            Text {
-                                font.pixelSize: constant.fontSizeDefault
+                            Bubble {
                                 color: "green"
                                 visible: link.isSticky
                                 text: "Sticky"
                             }
 
-                            Text {
-                                font.pixelSize: constant.fontSizeDefault
+                            Bubble {
                                 color: "red"
                                 visible: link.isNSFW
                                 text: "NSFW"
                             }
 
-                            Text {
-                                font.pixelSize: constant.fontSizeDefault
+                            Bubble {
                                 color: "green"
                                 visible: link.isPromoted
                                 text: "Promoted"
