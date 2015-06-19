@@ -32,7 +32,7 @@
 #include <maemo-meegotouch-interfaces/shareuiinterface.h>
 #endif
 
-const QString QMLUtils::SOURCE_REPO_URL = "https://github.com/dicksonleong/Quickddit";
+const QString QMLUtils::SOURCE_REPO_URL = "https://github.com/accumulator/Quickddit";
 const QString QMLUtils::GPL3_LICENSE_URL = "http://www.gnu.org/licenses/gpl-3.0.html";
 
 QMLUtils::QMLUtils(QObject *parent) :

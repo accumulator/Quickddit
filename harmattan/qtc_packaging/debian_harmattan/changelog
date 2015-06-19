@@ -1,3 +1,12 @@
+quickddit (0.4.0) unstable; urgency=low
+  * Load more comments feature implemented
+  * Sailfish theme color fixes
+  * Show author in italics when it has special status (submitter, admin, moderator)
+  * Updated repository to https://github.com/accumulator/Quickddit
+  * Updated copyright
+
+ -- Sander van Grieken <sander@outrightsolutions.nl>  Fri, 19 Jun 2015 12:48:01 +0100
+
 quickddit (0.3.3) unstable; urgency=low
   * Hides duplicate posts
   * Remove "bubble" design for number of likes/comments

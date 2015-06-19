@@ -1,9 +1,9 @@
 Name: harbour-quickddit
 Summary: Reddit client for mobile phones
-Version: 0.3.3
+Version: 0.4.0
 Release: 1
 Group: Qt/Qt
-URL: https://github.com/dicksonleong/Quickddit
+URL: https://github.com/accumulator/Quickddit
 License: GPLv3+
 Sources:
 - '%{name}-%{version}.tar.bz2'

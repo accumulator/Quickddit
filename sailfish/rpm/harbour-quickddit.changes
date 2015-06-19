@@ -5,6 +5,13 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Fri Jun 19 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.4.0
+- Load more comments feature implemented
+- Sailfish theme color fixes
+- Show author in italics when it has special status (submitter, admin, moderator)
+- Updated repository to https://github.com/accumulator/Quickddit
+- Updated copyright
+
 * Wed Nov 19 2014 Dickson <dicksonleong8@gmail.com> 0.3.3-1
 - Makes subreddit easier to access
 - Hides duplicate posts

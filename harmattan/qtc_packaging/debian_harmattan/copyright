@@ -1,10 +1,14 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Quickddit
-Upstream-Contact: Dickson Leong <dicksonleong8@gmail.com>
-Source: https://github.com/dicksonleong/Quickddit
+Upstream-Contact: Sander van Grieken <sander@outrightsolutions.nl>
+Source: https://github.com/accumulator/Quickddit
 
 Files: *
-Copyright: 2014 Dickson Leong
+Copyright: 2015 Sander van Grieken
+License: GPL-3+
+
+Files: *
+Copyright: 2013-2014 Dickson Leong
 License: GPL-3+
 
 Files: qt-json/*

@@ -13,11 +13,11 @@ Name:       harbour-quickddit
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Reddit client for mobile phones
-Version:    0.3.3
+Version:    0.4.0
 Release:    1
 Group:      Qt/Qt
 License:    GPLv3+
-URL:        https://github.com/dicksonleong/Quickddit
+URL:        https://github.com/accumulator/Quickddit
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-quickddit.yaml
 Requires:   sailfishsilica-qt5

@@ -1,10 +1,10 @@
 Source: quickddit
 Section: user/internet
 Priority: optional
-Maintainer: Dickson Leong <dicksonleong8@gmail.com>
+Maintainer: Sander van Grieken <sander@outrightsolutions.nl>
 Build-Depends: debhelper (>= 5), libqt4-dev
 Standards-Version: 3.7.3
-Homepage: https://github.com/dicksonleong/Quickddit
+Homepage: https://github.com/accumulator/Quickddit
 
 Package: quickddit
 Architecture: any
