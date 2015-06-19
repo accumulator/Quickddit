@@ -112,6 +112,7 @@ Item {
                     font.pixelSize: constant.fontSizeDefault
                     color: mainItem.enabled ? constant.colorLight : constant.colorDisabled
                     font.bold: true
+                    font.italic: model.author.split(" ").length > 1
                     text: model.author
                 }
 
