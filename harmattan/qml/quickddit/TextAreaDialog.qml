@@ -56,7 +56,8 @@ Sheet {
                 height: Math.max(implicitHeight, 300)
                 font.pixelSize: constant.fontSizeLarge
                 textFormat: Text.PlainText
-                placeholderText: "Tap here to type..."
+                placeholderText: "Enter your comment here..."
+                focus: true
             }
         }
     }
