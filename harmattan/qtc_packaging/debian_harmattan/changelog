@@ -2,6 +2,9 @@ quickddit (0.4.0) unstable; urgency=low
   * Load more comments feature implemented
   * Sailfish theme color fixes
   * Show author in italics when it has special status (submitter, admin, moderator)
+  * show link flair
+  * focus TextArea automatically in TextAreaDialog
+  * fix UI link voting in comments page
   * Updated repository to https://github.com/accumulator/Quickddit
   * Updated copyright
 
