@@ -19,19 +19,15 @@ Optionally you can also define `IMGUR_CLIENT_ID` with your own Imgur API client 
 
 TODO
 -----
-Below is the list of TODOs I planned for future release, before going out of `beta` status.
+Below is the list of TODOs I planned for future release, before reaching the 1.0.0 milestone.
 
 - Submit link and self post (require Captcha)
 - Compose new message (require Captcha)
 - Save and unsave posts
-- View additional comments that are omitted from base comments tree
-([/api/morechildren](http://www.reddit.com/dev/api#POST_api_morechildren))
 - View user profile
 - Make comment collapsable (hide all children comments)
-- Redesign CustomCountBubble
 - Upload to Jolla Harbour
 - Buy [reddit gold](http://www.reddit.com/gold/about)
-
 
 Download
 --------
@@ -43,7 +39,8 @@ License
 All files in this project are licensed under the GNU GPLv3+, unless otherwise stated.
 
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2013-2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
