@@ -50,12 +50,14 @@ ApplicationWindow {
         property Component __openLinkDialogComponent: null
 
         function previewableVideo(url) {
-            if (/^https?:\/\/((i|m)\.)?gfycat\.com/.test(url)) {
+            if (/^https?:\/\/((i|m)\.)?gfycat\.com\//.test(url)) {
                 return true
             } else if (/^https?:\/\/mediacru\.sh/.test(url)) {
-                    return true
+                return true
             } else if (/^https?:\/\/\S+\.(mp4|avi|mkv|webm)/i.test(url)) {
                 return true
+            } else if (/^https?\:\/\/((i|m)\.)?imgur\.com\/(.+?).gifv$)/) {
+                return true;
             } else {
                 return false
             }
@@ -63,8 +65,8 @@ ApplicationWindow {
 
         function previewableImage(url) {
             // imgur url
-            if (/^https?:\/\/((i|m)\.)?imgur\.com/.test(url))
-                return true;
+            if (/^https?:\/\/((i|m)\.)?imgur\.com\//.test(url))
+                return !(/^.*\.gifv$/.test(url));
             // direct image url with image format extension
             else if (/^https?:\/\/\S+\.(jpe?g|png|gif)/i.test(url))
                 return true;
@@ -83,32 +85,38 @@ ApplicationWindow {
 
         function openVideoViewPage(url) {
             var match
-            var xhr
             if ((/^https?:\/\/\S+\.(mp4|avi|mkv|webm)/i.test(url))) {
                 pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { videoUrl: url });
             } else if (/^https?:\/\/((i|m)\.)?gfycat.com\/.+/.test(url)) {
-                match = /^https?\:\/\/gfycat\.com\/(.+?)$/g.exec(url)
+                match = /^https?\:\/\/gfycat\.com\/(.+?)$/.exec(url)
                 if (match.length < 2) {
                     console.log("invalid gfycat url: " + url)
                     return
                 }
-                xhr = new XMLHttpRequest()
+                var xhr = new XMLHttpRequest()
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState == 4) {
                         var videoUrl = JSON.parse(xhr.responseText)["gfyItem"]["mp4Url"]
-                        pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { videoUrl: videoUrl });
+                        pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: videoUrl });
                     }
                 }
 
                 xhr.open("GET", "http://gfycat.com/cajax/get/" + match[1], true)
                 xhr.send()
             } else if (/^https?:\/\/mediacru\.sh\/.+/.test(url)) {
-                match = /^https?\:\/\/mediacru\.sh\/(.+?)$/g.exec(url)
+                match = /^https?\:\/\/mediacru\.sh\/(.+?)$/.exec(url)
                 if (match.length < 2) {
                     console.log("invalid mediacru.sh url: " + url)
                     return
                 }
-                pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { videoUrl: "https://mediacru.sh/" + match[1] + ".mp4" });
+                pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://mediacru.sh/" + match[1] + ".mp4" });
+            } else if (/^https?:\/\/((i|m)\.)?imgur\.com\/.+/.test(url)) {
+                match = /^https?\:\/\/(((i|m)\.)?imgur\.com)\/(.+?).gifv$/.exec(url)
+                if (!match || match.length < 4) {
+                    console.log("invalid imgur.com url: " + url)
+                    return
+                }
+                pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://" + match[1] + "/" + match[4] + ".mp4" });
             }
         }
 
