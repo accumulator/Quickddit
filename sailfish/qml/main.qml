@@ -56,7 +56,7 @@ ApplicationWindow {
                 return true
             } else if (/^https?:\/\/\S+\.(mp4|avi|mkv|webm)/i.test(url)) {
                 return true
-            } else if (/^https?\:\/\/((i|m)\.)?imgur\.com\/(.+?).gifv$)/) {
+            } else if (/^https?\:\/\/((i|m)\.)?imgur\.com\/.+\.gifv$/.test(url)) {
                 return true;
             } else {
                 return false
@@ -117,7 +117,8 @@ ApplicationWindow {
                     return
                 }
                 pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://" + match[1] + "/" + match[4] + ".mp4" });
-            }
+            } else
+                infoBanner.alert("Unsupported video url");
         }
 
         function openInTextLink(url) {
