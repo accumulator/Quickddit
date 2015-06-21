@@ -63,8 +63,9 @@ AbstractPage {
                 property real prevScale
 
                 function fitToScreen() {
-                    scale = Math.min(imageFlickable.width / width, imageFlickable.height / height, 1)
-                    pinchArea.minScale = scale
+                    scale = Math.min(imageFlickable.width / width, imageFlickable.height / height)
+                    imageItem.scale = scale
+                    pinchArea.minScale = Math.min(scale, 1)
                     prevScale = scale
                 }
 
