@@ -35,16 +35,17 @@ AbstractPage {
             source: MediaPlayer {
                 id: mediaPlayer
                 autoPlay: true
-                onError: console.log(errorString)
                 onStopped: playPauseButton.opacity = 1
+                onError: console.log(errorString)
             }
 
             Item {
+                id: spinner
                 anchors.centerIn: parent
 
                 width: busyIndicator.width
                 height: busyIndicator.height
-                visible: mediaPlayer.bufferProgress < 1
+                visible: mediaPlayer.bufferProgress < 1 && mediaPlayer.error === MediaPlayer.NoError
 
                 BusyIndicator {
                     id: busyIndicator
@@ -58,10 +59,18 @@ AbstractPage {
                     text: Math.round(mediaPlayer.bufferProgress * 100) + "%"
                 }
             }
+
+            Label {
+                id: errorText
+                anchors.centerIn: parent
+                visible: mediaPlayer.error !== MediaPlayer.NoError
+                text: qsTr("Error loading video")
+            }
         }
 
         Slider {
             id: progressBar
+            enabled: mediaPlayer.seekable
             opacity: playPauseButton.opacity
             anchors {
                 left: parent.left
