@@ -99,6 +99,13 @@ ApplicationWindow {
     QuickdditManager {
         id: quickdditManager
         settings: appSettings
-        onAccessTokenFailure: infoBanner.alert(errorString);
+        onAccessTokenFailure: {
+            if (code == 299 /* QNetworkReply::UnknownContentError */) {
+                infoBanner.alert("Please log in again");
+                pageStack.push(Qt.resolvedUrl("AppSettingsPage.qml"));
+            } else {
+                infoBanner.alert(errorString);
+            }
+        }
     }
 }
