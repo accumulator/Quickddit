@@ -114,4 +114,5 @@ OTHER_FILES += \
     qml/SimpleListItem.qml \
     qml/AboutMultiredditPage.qml \
     qml/Bubble.qml \
-    qml/VideoViewPage.qml
+    qml/VideoViewPage.qml \
+    qml/AbstractDialog.qml
