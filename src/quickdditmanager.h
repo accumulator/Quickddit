@@ -77,7 +77,7 @@ public:
 signals:
     void signedInChanged();
     void accessTokenSuccess();
-    void accessTokenFailure(const QString &errorString);
+    void accessTokenFailure(int code, const QString &errorString);
 
 private slots:
     void onAccessTokenRequestFinished(QNetworkReply *reply);

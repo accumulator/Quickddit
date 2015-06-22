@@ -142,7 +142,7 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
 #endif
     if (m_state != state) {
         qCritical("QuickdditManager::getAccessToken(): (OAuth2) state is not matched");
-        emit accessTokenFailure("Error: state not match");
+        emit accessTokenFailure(0, "Error: state not match");
         return;
     }
 
@@ -216,12 +216,19 @@ void QuickdditManager::onAccessTokenRequestFinished(QNetworkReply *reply)
             emit accessTokenSuccess();
             emit signedInChanged();
         } else {
-            emit accessTokenFailure("Error: access token not found. Please sign in again.");
+            emit accessTokenFailure(0, "Error: access token not found. Please sign in again.");
             qDebug("QuickdditManager::onAccessTokenRequestFinished(): "
                    "Unable to get access token from the following data:\n%s", qPrintable(replyString));
         }
     } else {
-        emit accessTokenFailure(reply->errorString());
+        if (reply->error() == QNetworkReply::UnknownContentError) {
+            // something's wrong with the refresh token
+            qDebug() << "Bad Request using our refresh token, resetting";
+            m_settings->setRefreshToken(QByteArray());
+            emit signedInChanged();
+        }
+        qDebug() << "onAccessTokenRequestFinished error" << reply->error() << ":" << reply->errorString();
+        emit accessTokenFailure(reply->error(), reply->errorString());
     }
 
     m_accessTokenRequest->deleteLater();
