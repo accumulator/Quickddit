@@ -126,7 +126,9 @@ ApplicationWindow {
             if (!url)
                 return;
 
-            if (previewableImage(url))
+            if (previewableVideo(url))
+                openVideoViewPage(url);
+            else if (previewableImage(url))
                 openImageViewPage(url);
             else if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
