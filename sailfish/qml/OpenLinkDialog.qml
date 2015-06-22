@@ -19,7 +19,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Dialog {
+AbstractDialog {
     id: openLinkDialog
 
     readonly property string title: "Open URL"
