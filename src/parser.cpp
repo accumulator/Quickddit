@@ -50,6 +50,23 @@ QString unescapeMarkdown(QString markdown)
 }
 
 // Private
+void commentFromMap(CommentObject &comment, const QVariantMap &commentMap)
+{
+    comment.setFullname(commentMap.value("name").toString());
+    comment.setAuthor(commentMap.value("author").toString());
+    comment.setBody(unescapeHtml(commentMap.value("body_html").toString()));
+    comment.setRawBody(unescapeMarkdown(commentMap.value("body").toString()));
+    comment.setScore(commentMap.value("score").toInt());
+    if (!commentMap.value("likes").isNull())
+        comment.setLikes(commentMap.value("likes").toBool() ? 1 : -1);
+    comment.setCreated(QDateTime::fromTime_t(commentMap.value("created_utc").toInt()));
+    if (commentMap.value("edited").toBool() != false)
+        comment.setEdited(QDateTime::fromTime_t(commentMap.value("edited").toInt()));
+    comment.setDistinguished(commentMap.value("distinguished").toString());
+    comment.setScoreHidden(commentMap.value("score_hidden").toBool());
+}
+
+// Private
 LinkObject parseLinkThing(const QVariant &linkThing)
 {
     const QVariantMap linkMapJson = linkThing.toMap().value("data").toMap();
@@ -113,23 +130,13 @@ QList<CommentObject> parseCommentListingJson(const QVariantMap &json, const QStr
         const QVariantMap commentMap = commentJson.toMap().value("data").toMap();
 
         CommentObject comment;
-        comment.setFullname(commentMap.value("name").toString());
         comment.setDepth(depth);
 
         if (kind == QLatin1String("t1")) {
-            comment.setAuthor(commentMap.value("author").toString());
-            comment.setBody(unescapeHtml(commentMap.value("body_html").toString()));
-            comment.setRawBody(unescapeMarkdown(commentMap.value("body").toString()));
-            comment.setScore(commentMap.value("score").toInt());
-            if (!commentMap.value("likes").isNull())
-                comment.setLikes(commentMap.value("likes").toBool() ? 1 : -1);
-            comment.setCreated(QDateTime::fromTime_t(commentMap.value("created_utc").toInt()));
-            if (commentMap.value("edited").toBool() != false)
-                comment.setEdited(QDateTime::fromTime_t(commentMap.value("edited").toInt()));
-            comment.setDistinguished(commentMap.value("distinguished").toString());
+            commentFromMap(comment, commentMap);
             comment.setSubmitter(comment.author() == linkAuthor);
-            comment.setScoreHidden(commentMap.value("score_hidden").toBool());
         } else if (kind == QLatin1String("more")) {
+            comment.setFullname(commentMap.value("name").toString());
             comment.setMoreChildrenCount(commentMap.value("count").toInt());
             if (commentMap.value("count").toInt() == 0)
                 comment.setFullname(commentMap.value("parent_id").toString());
@@ -166,23 +173,13 @@ QList<CommentObject> Parser::parseMoreChildren(const QByteArray &json, const QSt
         const QVariantMap commentMap = commentJson.toMap().value("data").toMap();
 
         CommentObject comment;
-        comment.setFullname(commentMap.value("name").toString());
         comment.setDepth(depth);
 
         if (kind == QLatin1String("t1")) {
-            comment.setAuthor(commentMap.value("author").toString());
-            comment.setBody(unescapeHtml(commentMap.value("body_html").toString()));
-            comment.setRawBody(unescapeMarkdown(commentMap.value("body").toString()));
-            comment.setScore(commentMap.value("score").toInt());
-            if (!commentMap.value("likes").isNull())
-                comment.setLikes(commentMap.value("likes").toBool() ? 1 : -1);
-            comment.setCreated(QDateTime::fromTime_t(commentMap.value("created_utc").toInt()));
-            if (commentMap.value("edited").toBool() != false)
-                comment.setEdited(QDateTime::fromTime_t(commentMap.value("edited").toInt()));
-            comment.setDistinguished(commentMap.value("distinguished").toString());
+            commentFromMap(comment, commentMap);
             comment.setSubmitter(comment.author() == linkAuthor);
-            comment.setScoreHidden(commentMap.value("score_hidden").toBool());
         } else if (kind == QLatin1String("more")) {
+            comment.setFullname(commentMap.value("name").toString());
             comment.setMoreChildrenCount(commentMap.value("count").toInt());
             if (commentMap.value("count").toInt() == 0)
                 comment.setFullname(commentMap.value("parent_id").toString());
@@ -217,18 +214,7 @@ CommentObject Parser::parseNewComment(const QByteArray &json)
             .value("things").toList().first().toMap().value("data").toMap();
 
     CommentObject comment;
-    comment.setFullname(commentMap.value("name").toString());
-    comment.setAuthor(commentMap.value("author").toString());
-    comment.setBody(unescapeHtml(commentMap.value("body_html").toString()));
-    comment.setRawBody(unescapeMarkdown(commentMap.value("body").toString()));
-    comment.setScore(commentMap.value("score").toInt());
-    if (!commentMap.value("likes").isNull())
-        comment.setLikes(commentMap.value("likes").toBool() ? 1 : -1);
-    comment.setCreated(QDateTime::fromTime_t(commentMap.value("created_utc").toInt()));
-    if (commentMap.value("edited").toBool() != false)
-        comment.setEdited(QDateTime::fromTime_t(commentMap.value("edited").toInt()));
-    comment.setDistinguished(commentMap.value("distinguished").toString());
-    comment.setScoreHidden(commentMap.value("score_hidden").toBool());
+    commentFromMap(comment, commentMap);
 
     return comment;
 }
