@@ -21,6 +21,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: abstractPage
+    allowedOrientations: Orientation.All
 
     property bool busy: false
     property string title: ""
