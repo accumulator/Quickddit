@@ -23,7 +23,7 @@ import harbour.quickddit.Core 1.0
 AbstractPage {
     id: commentPage
     title: "Comments"
-    busy: commentModel.busy || commentVoteManager.busy || commentManager.busy || linkVoteManager.busy
+    busy: (commentModel.busy && commentListView.count > 0) || commentVoteManager.busy || commentManager.busy || linkVoteManager.busy
 
     property alias link: commentModel.link
     property alias linkPermalink: commentModel.permalink
@@ -341,6 +341,8 @@ AbstractPage {
                 });
             }
         }
+
+        footer: LoadingFooter { visible: commentModel.busy && commentListView.count == 0; listViewItem: commentListView }
 
         VerticalScrollDecorator {}
     }
