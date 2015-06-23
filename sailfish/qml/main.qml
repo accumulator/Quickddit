@@ -41,6 +41,11 @@ ApplicationWindow {
         }
     }
 
+    // work around ugly animation of DockedPanel when orientation changes to portrait
+    onOrientationChanged: {
+        busyPanel._initialized = false
+    }
+
     InfoBanner { id: infoBanner }
 
     // A collections of global utility functions
