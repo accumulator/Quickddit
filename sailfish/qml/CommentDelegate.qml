@@ -18,6 +18,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import harbour.quickddit.Core 1.0
 
 Item {
     id: commentDelegate
@@ -225,21 +226,24 @@ Item {
             id: moreChildrenComponent
 
             Column {
+                id: morechildrencolumn
                 height: childrenRect.height
 
-                Label {
-                    anchors { left: loadMoreButton.left; right: loadMoreButton.right }
-                    color: constant.colorMid
-                    font.pixelSize: constant.fontSizeMedium
-                    horizontalAlignment: Text.AlignHCenter
-                    elide: Text.ElideRight
-                    visible: model.moreChildrenCount > 0
-                    text: qsTr("%n replies hidden", "", model.moreChildrenCount)
+                property real buttonScale: __buttonScale()
+
+                function __buttonScale() {
+                    switch (appSettings.fontSize) {
+                    case AppSettings.TinyFontSize: return 0.75;
+                    case AppSettings.SmallFontSize: return 0.90;
+                    default: return 1;
+                    }
                 }
 
                 Button {
                     id: loadMoreButton
-                    text: model.moreChildrenCount > 0 ? qsTr("Load more comments") : qsTr("Continue this thread");
+                    scale: morechildrencolumn.buttonScale
+                    text: model.moreChildrenCount > 0 ? qsTr("Load %n hidden comments", "", model.moreChildrenCount) : qsTr("Continue this thread");
+
                     onClicked: {
                         if (model.moreChildrenCount > 0) {
                             commentPage.loadMoreChildren(model.index, model.moreChildren);
