@@ -270,7 +270,7 @@ AbstractPage {
 
                     Button {
                         iconSource: "image://theme/icon-l-browser-main-view"
-                        onClicked: globalUtils.createOpenLinkDialog(link.url);
+                        onClicked: globalUtils.openInTextLink(link.url);
                     }
                 }
 

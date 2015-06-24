@@ -245,7 +245,7 @@ AbstractPage {
                         icon.height: Theme.iconSizeLarge - constant.paddingLarge
                         icon.width: Theme.iconSizeLarge - constant.paddingLarge
                         icon.source: "image://theme/icon-lock-social"
-                        onClicked: globalUtils.createOpenLinkDialog(link.url);
+                        onClicked: globalUtils.openInTextLink(link.url);
                     }
                 }
 
