@@ -20,6 +20,8 @@
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
+#include <QDebug>
+
 #include <qt-json/json.h>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
