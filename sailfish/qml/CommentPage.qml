@@ -235,9 +235,15 @@ AbstractPage {
                         anchors.verticalCenter: parent.verticalCenter
                         icon.height: Theme.iconSizeLarge - constant.paddingMedium
                         icon.width: Theme.iconSizeLarge - constant.paddingMedium
-                        icon.source: "image://theme/icon-l-image"
-                        enabled: globalUtils.previewableImage(link.url)
-                        onClicked: globalUtils.openImageViewPage(link.url);
+                        icon.source: globalUtils.previewableVideo(link.url) ? "image://theme/icon-l-video" : "image://theme/icon-l-image"
+                        enabled: globalUtils.previewableImage(link.url) || globalUtils.previewableVideo(link.url)
+                        onClicked: {
+                            if (globalUtils.previewableImage(link.url)) {
+                                globalUtils.openImageViewPage(link.url);
+                            } else if (globalUtils.previewableVideo(link.url)) {
+                                globalUtils.openVideoViewPage(link.url);
+                            }
+                        }
                     }
 
                     IconButton {
