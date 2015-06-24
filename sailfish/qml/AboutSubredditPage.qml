@@ -113,11 +113,10 @@ AbstractPage {
             Separator {
                 anchors { left: parent.left; right: parent.right }
                 color: constant.colorMid
-                visible: longDescriptionText != ""
+                visible: aboutSubredditManager.longDescription != ""
             }
 
             Text {
-                id: longDescriptionText
                 anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
                 wrapMode: Text.Wrap
                 textFormat: Text.RichText

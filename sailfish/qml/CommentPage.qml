@@ -260,7 +260,7 @@ AbstractPage {
                     anchors { left: parent.left; right: parent.right }
                     height: childrenRect.height
                     spacing: constant.paddingMedium
-                    visible: bodyText.text.length > 0
+                    visible: link.text.length > 0
 
                     Separator {
                         anchors { left: parent.left; right: parent.right }
