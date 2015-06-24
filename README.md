@@ -23,10 +23,13 @@ Below is the list of TODOs I planned for future release, before reaching the 1.0
 
 - Submit link and self post (require Captcha)
 - Compose new message (require Captcha)
+- Make comment collapsable (hide all children comments)
+- Links to subreddits, comments open in-app
+- Notification of PM or comment reply
 - Save and unsave posts
 - View user profile
-- Make comment collapsable (hide all children comments)
-- Upload to Jolla Harbour
+
+Additional TODOs after the 1.0.0 milestone
 - Buy [reddit gold](http://www.reddit.com/gold/about)
 
 Download
