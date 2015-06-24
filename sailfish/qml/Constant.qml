@@ -46,6 +46,7 @@ QtObject {
 
     function __fontSizeDefaultF() {
         switch (appSettings.fontSize) {
+        case AppSettings.TinyFontSize: return constant.fontSizeXSmall;
         case AppSettings.SmallFontSize: return constant.fontSizeSmall;
         case AppSettings.MediumFontSize: return constant.fontSizeMedium;
         case AppSettings.LargeFontSize: return constant.fontSizeLarge;

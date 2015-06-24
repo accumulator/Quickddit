@@ -42,21 +42,24 @@ AbstractPage {
                 label: "Font Size"
                 currentIndex:  {
                     switch (appSettings.fontSize) {
-                    case AppSettings.SmallFontSize: return 0;
-                    case AppSettings.MediumFontSize: return 1;
-                    case AppSettings.LargeFontSize: return 2;
+                    case AppSettings.TinyFontSize: return 0;
+                    case AppSettings.SmallFontSize: return 1;
+                    case AppSettings.MediumFontSize: return 2;
+                    case AppSettings.LargeFontSize: return 3;
                     }
                 }
                 menu: ContextMenu {
+                    MenuItem { text: "Tiny" }
                     MenuItem { text: "Small" }
                     MenuItem { text: "Medium" }
                     MenuItem { text: "Large" }
                 }
                 onCurrentIndexChanged: {
                     switch (currentIndex) {
-                    case 0: appSettings.fontSize = AppSettings.SmallFontSize; break;
-                    case 1: appSettings.fontSize = AppSettings.MediumFontSize; break;
-                    case 2: appSettings.fontSize = AppSettings.LargeFontSize; break;
+                    case 0: appSettings.fontSize = AppSettings.TinyFontSize; break;
+                    case 1: appSettings.fontSize = AppSettings.SmallFontSize; break;
+                    case 2: appSettings.fontSize = AppSettings.MediumFontSize; break;
+                    case 3: appSettings.fontSize = AppSettings.LargeFontSize; break;
                     }
                 }
             }
