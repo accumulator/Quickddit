@@ -31,6 +31,7 @@ AppSettings::AppSettings(QObject *parent) :
     m_fontSize = static_cast<FontSize>(m_settings->value("fontSize", 1).toInt());
     m_redditUsername = m_settings->value("redditUsername").toString();
     m_refreshToken = m_settings->value("refreshToken").toByteArray();
+    m_orientationProfile = static_cast<OrientationProfile>(m_settings->value("orientationProfile", 0).toInt());
 
 #ifdef Q_OS_SAILFISH
     // Restore settings from old settings
@@ -108,4 +109,18 @@ void AppSettings::setRefreshToken(const QByteArray &token)
 bool AppSettings::hasRefreshToken() const
 {
     return !m_refreshToken.isEmpty();
+}
+
+AppSettings::OrientationProfile AppSettings::orientationProfile() const
+{
+    return m_orientationProfile;
+}
+
+void AppSettings::setOrientationProfile(const AppSettings::OrientationProfile profile)
+{
+    if (m_orientationProfile != profile) {
+        m_orientationProfile = profile;
+        m_settings->setValue("orientationProfile", m_orientationProfile);
+        emit orientationProfileChanged();
+    }
 }

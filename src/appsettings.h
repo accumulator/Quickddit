@@ -27,15 +27,23 @@ class AppSettings : public QObject
 {
     Q_OBJECT
     Q_ENUMS(FontSize)
+    Q_ENUMS(OrientationProfile)
     Q_PROPERTY(bool whiteTheme READ whiteTheme WRITE setWhiteTheme NOTIFY whiteThemeChanged)
     Q_PROPERTY(FontSize fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
     Q_PROPERTY(QString redditUsername READ redditUsername CONSTANT)
+    Q_PROPERTY(OrientationProfile orientationProfile READ orientationProfile WRITE setOrientationProfile NOTIFY orientationProfileChanged)
 public:
     enum FontSize {
         TinyFontSize = -1,
         SmallFontSize,
         MediumFontSize,
         LargeFontSize
+    };
+
+    enum OrientationProfile {
+        DynamicProfile = 0,
+        PortraitOnlyProfile,
+        LandscapeOnlyProfile
     };
 
     explicit AppSettings(QObject *parent = 0);
@@ -51,12 +59,15 @@ public:
 
     QByteArray refreshToken() const;
     void setRefreshToken(const QByteArray &token);
-
     bool hasRefreshToken() const;
+
+    OrientationProfile orientationProfile() const;
+    void setOrientationProfile(const OrientationProfile profile);
 
 signals:
     void whiteThemeChanged();
     void fontSizeChanged();
+    void orientationProfileChanged();
 
 private:
     QSettings *m_settings;
@@ -65,6 +76,7 @@ private:
     FontSize m_fontSize;
     QString m_redditUsername;
     QByteArray m_refreshToken;
+    OrientationProfile m_orientationProfile;
 };
 
 #endif // APPSETTINGS_H
