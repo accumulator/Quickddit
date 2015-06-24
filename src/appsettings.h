@@ -32,7 +32,8 @@ class AppSettings : public QObject
     Q_PROPERTY(QString redditUsername READ redditUsername CONSTANT)
 public:
     enum FontSize {
-        SmallFontSize = 0,
+        TinyFontSize = -1,
+        SmallFontSize,
         MediumFontSize,
         LargeFontSize
     };
