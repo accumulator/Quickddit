@@ -60,13 +60,13 @@ AbstractPage {
             AnimatedImage {
                 id: imageItem
 
-                property real prevScale
+                property real prevScale: 0
 
                 function fitToScreen() {
                     scale = Math.min(imageFlickable.width / width, imageFlickable.height / height)
                     imageItem.scale = scale
-                    pinchArea.minScale = Math.min(scale, 1)
                     prevScale = scale
+                    pinchArea.minScale = Math.min(scale, 1)
                 }
 
                 anchors.centerIn: parent
@@ -78,6 +78,8 @@ AbstractPage {
                 paused: imageViewPage.status != PageStatus.Active || !Qt.application.active
 
                 onScaleChanged: {
+                    if (prevScale == 0)
+                        prevScale = scale
                     if ((width * scale) > imageFlickable.width) {
                         var xoff = (imageFlickable.width / 2 + imageFlickable.contentX) * scale / prevScale;
                         imageFlickable.contentX = xoff - imageFlickable.width / 2
