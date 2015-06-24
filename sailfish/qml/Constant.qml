@@ -43,6 +43,7 @@ QtObject {
     readonly property int fontSizeXXLarge: Theme.fontSizeHuge
 
     property int fontSizeDefault: __fontSizeDefaultF()
+    property int orientationSetting: __orientationSettingF()
 
     function __fontSizeDefaultF() {
         switch (appSettings.fontSize) {
@@ -50,6 +51,14 @@ QtObject {
         case AppSettings.SmallFontSize: return constant.fontSizeSmall;
         case AppSettings.MediumFontSize: return constant.fontSizeMedium;
         case AppSettings.LargeFontSize: return constant.fontSizeLarge;
+        }
+    }
+
+    function __orientationSettingF() {
+        switch (appSettings.orientationProfile) {
+        case AppSettings.DynamicProfile: return Orientation.All;
+        case AppSettings.PortraitOnlyProfile: return Orientation.Portrait;
+        case AppSettings.LandscapeOnlyProfile: return Orientation.Landscape;
         }
     }
 

@@ -64,6 +64,29 @@ AbstractPage {
                 }
             }
 
+            ComboBox {
+                label: "Device Orientation"
+                currentIndex:  {
+                    switch (appSettings.orientationProfile) {
+                    case AppSettings.DynamicProfile: return 0;
+                    case AppSettings.PortraitOnlyProfile: return 1;
+                    case AppSettings.LandscapeOnlyProfile: return 2;
+                    }
+                }
+                menu: ContextMenu {
+                    MenuItem { text: "Automatic" }
+                    MenuItem { text: "Portrait only" }
+                    MenuItem { text: "Landscape only" }
+                }
+                onCurrentIndexChanged: {
+                    switch (currentIndex) {
+                    case 0: appSettings.orientationProfile = AppSettings.DynamicProfile; break;
+                    case 1: appSettings.orientationProfile = AppSettings.PortraitOnlyProfile; break;
+                    case 2: appSettings.orientationProfile = AppSettings.LandscapeOnlyProfile; break;
+                    }
+                }
+            }
+
             SectionHeader { text: "Account" }
 
             Text {

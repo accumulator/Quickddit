@@ -18,10 +18,11 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import harbour.quickddit.Core 1.0
 
 Page {
     id: abstractPage
-    allowedOrientations: Orientation.All
+    allowedOrientations: constant.orientationSetting
 
     property bool busy: false
     property string title: ""
