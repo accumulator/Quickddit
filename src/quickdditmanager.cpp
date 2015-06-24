@@ -88,7 +88,7 @@ APIRequest *QuickdditManager::createRedditRequest(QObject *parent, APIRequest::H
             }
             m_pendingRequest = request;
             connect(this, SIGNAL(accessTokenSuccess()), SLOT(onRefreshTokenFinished()));
-            connect(this, SIGNAL(accessTokenFailure(QString)), SLOT(onRefreshTokenFinished()));
+            connect(this, SIGNAL(accessTokenFailure(int, QString)), SLOT(onRefreshTokenFinished()));
             refreshAccessToken();
             return request;
         }
