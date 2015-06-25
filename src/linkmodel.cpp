@@ -48,6 +48,7 @@ QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
     map["isSticky"] = link.isSticky();
     map["isNSFW"] = link.isNSFW();
     map["flairText"] = link.flairText();
+    map["isSelfPost"] = link.isSelfPost();
     return map;
 }
 
@@ -108,6 +109,7 @@ QVariant LinkModel::data(const QModelIndex &index, int role) const
     case IsNSFWRole: return link.isNSFW();
     case IsPromotedRole: return link.isPromoted();
     case FlairTextRole: return link.flairText();
+    case IsSelfPostRole: return link.isSelfPost();
     default:
         qCritical("LinkModel::data(): Invalid role");
         return QVariant();
@@ -304,6 +306,7 @@ QHash<int, QByteArray> LinkModel::customRoleNames() const
     roles[IsNSFWRole] = "isNSFW";
     roles[IsPromotedRole] = "isPromoted";
     roles[FlairTextRole] = "flairText";
+    roles[IsSelfPostRole] = "isSelfPost";
     return roles;
 }
 

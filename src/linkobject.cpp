@@ -273,3 +273,8 @@ void LinkObject::setFlairText(const QString &flairText)
 {
     d->flairText = flairText;
 }
+
+bool LinkObject::isSelfPost() const
+{
+    return d->domain.indexOf("self.") == 0;
+}

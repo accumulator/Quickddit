@@ -175,6 +175,8 @@ public:
     QString flairText() const;
     void setFlairText(const QString &flairText);
 
+    bool isSelfPost() const;
+
     inline bool operator ==(const LinkObject &other) const { return fullname() == other.fullname(); }
 
 private:
