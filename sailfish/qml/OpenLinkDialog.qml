@@ -22,7 +22,7 @@ import Sailfish.Silica 1.0
 AbstractDialog {
     id: openLinkDialog
 
-    readonly property string title: "Open URL"
+    readonly property string title: qsTr("Open URL")
     property string url
 
     property bool __buttonClickAccept: false
@@ -31,7 +31,7 @@ AbstractDialog {
         // user accept the dialog by swiping to left instead of clicking on the button
         if (!__buttonClickAccept) {
             Qt.openUrlExternally(url);
-            infoBanner.alert("Launching web browser...");
+            infoBanner.alert(qsTr("Launching web browser..."));
         }
     }
 
@@ -57,10 +57,10 @@ AbstractDialog {
 
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: "Open URL in web browser"
+            text: qsTr("Open URL in web browser")
             onClicked: {
                 Qt.openUrlExternally(url);
-                infoBanner.alert("Launching web browser...");
+                infoBanner.alert(qsTr("Launching web browser..."));
                 __buttonClickAccept = true;
                 openLinkDialog.accept();
             }
@@ -68,10 +68,10 @@ AbstractDialog {
 
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: "Copy URL"
+            text: qsTr("Copy URL")
             onClicked: {
                 QMLUtils.copyToClipboard(url);
-                infoBanner.alert("URL copied to clipboard");
+                infoBanner.alert(qsTr("URL copied to clipboard"));
                 __buttonClickAccept = true;
                 openLinkDialog.accept();
             }
