@@ -276,7 +276,7 @@ AbstractPage {
                         font.pixelSize: constant.fontSizeDefault
                         color: constant.colorLight
                         text: "<style>a { color: " + Theme.highlightColor + "; }</style>" + link.text
-                        onLinkActivated: globalUtils.openInTextLink(link);
+                        onLinkActivated: globalUtils.openLink(link);
                     }
 
                     // For spacing after text

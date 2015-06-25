@@ -64,7 +64,7 @@ AbstractPage {
                 textFormat: Text.RichText
                 font.italic: multiredditManager.description.length == 0
                 text: multiredditManager.description ? "<style>a { color: " + Theme.highlightColor + "; }</style>" + multiredditManager.description : "No description"
-                onLinkActivated: globalUtils.openInTextLink(link);
+                onLinkActivated: globalUtils.openLink(link);
             }
 
             SectionHeader { text: "Subreddits" }

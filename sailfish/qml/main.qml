@@ -146,7 +146,7 @@ ApplicationWindow {
                 infoBanner.alert(qsTr("Unsupported video url"));
         }
 
-        function openInTextLink(url) {
+        function openLink(url) {
             url = QMLUtils.toAbsoluteUrl(url);
             if (!url)
                 return;

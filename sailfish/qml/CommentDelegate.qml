@@ -210,7 +210,7 @@ Item {
                 wrapMode: Text.Wrap
                 textFormat: Text.RichText
                 text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
-                onLinkActivated: globalUtils.openInTextLink(link);
+                onLinkActivated: globalUtils.openLink(link);
             }
         }
 
@@ -249,7 +249,7 @@ Item {
                             commentPage.loadMoreChildren(model.index, model.moreChildren);
                         } else {
                             var link = QMLUtils.toAbsoluteUrl(linkPermalink + model.fullname.substring(3));
-                            globalUtils.openInTextLink(link);
+                            globalUtils.openLink(link);
                         }
                     }
                 }
