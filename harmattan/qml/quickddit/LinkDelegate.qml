@@ -120,6 +120,7 @@ ListItem {
 
         MouseArea {
             anchors.fill: parent
+            enabled: !model.isSelfPost
             onClicked: {
                 if (globalUtils.previewableImage(model.url)) {
                     globalUtils.openImageViewPage(model.url);

@@ -270,6 +270,7 @@ AbstractPage {
 
                     Button {
                         iconSource: "image://theme/icon-l-browser-main-view"
+                        enabled: !link.isSelfPost
                         onClicked: globalUtils.createOpenLinkDialog(link.url);
                     }
                 }
