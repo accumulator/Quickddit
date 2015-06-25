@@ -97,7 +97,7 @@ QString QMLUtils::toAbsoluteUrl(const QString &url)
         return url;
 
     if (url.startsWith('/'))
-        return "http://www.reddit.com" + url;
+        return "https://www.reddit.com" + url;
     else
         return "";
 }
