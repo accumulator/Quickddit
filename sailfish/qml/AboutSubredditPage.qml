@@ -34,7 +34,7 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: aboutSubredditManager.isSubscribed ? "Unsubscribe" : "Subscribe"
+                text: aboutSubredditManager.isSubscribed ? qsTr("Unsubscribe") : qsTr("Subscribe")
                 enabled: quickdditManager.isSignedIn && !aboutSubredditManager.busy && aboutSubredditManager.isValid
                 onClicked: aboutSubredditManager.subscribeOrUnsubscribe();
             }
@@ -82,7 +82,7 @@ AbstractPage {
                 font.pixelSize: constant.fontSizeMedium
                 color: "red"
                 font.italic: true
-                text: "This subreddit is Not Safe For Work"
+                text: qsTr("This subreddit is Not Safe For Work")
             }
 
             Text {
@@ -102,12 +102,12 @@ AbstractPage {
                       + " active users"
             }
 
-            Text {
-                anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+            Bubble {
+                anchors { left: parent.left; margins: constant.paddingMedium }
                 visible: quickdditManager.isSignedIn
                 font.pixelSize: constant.fontSizeMedium
                 color: aboutSubredditManager.isSubscribed ? "green" : "red"
-                text: aboutSubredditManager.isSubscribed ? "Subscribed" : "Not Subscribed"
+                text: aboutSubredditManager.isSubscribed ? qsTr("Subscribed") : qsTr("Not Subscribed")
             }
 
             Separator {
