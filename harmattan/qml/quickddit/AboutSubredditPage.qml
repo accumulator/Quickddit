@@ -35,7 +35,7 @@ AbstractPage {
             onClicked: pageStack.pop()
         }
         ToolButton {
-            text: aboutSubredditManager.isSubscribed ? "Unsubscribe" : "Subscribe"
+            text: aboutSubredditManager.isSubscribed ? qsTr("Unsubscribe") : qsTr("Subscribe")
             enabled: !aboutSubredditManager.busy && aboutSubredditManager.isValid
             visible: quickdditManager.isSignedIn
             platformStyle: ToolButtonStyle { disabledBackground: "" } // prevent missing image warning text
@@ -89,7 +89,7 @@ AbstractPage {
                 font.pixelSize: constant.fontSizeMedium
                 color: "red"
                 font.italic: true
-                text: "This subreddit is Not Safe For Work"
+                text: qsTr("This subreddit is Not Safe For Work")
             }
 
             Text {
@@ -109,12 +109,12 @@ AbstractPage {
                       + " active users"
             }
 
-            Text {
-                anchors { left: parent.left; right: parent.right }
+            Bubble {
+                anchors { left: parent.left }
                 visible: quickdditManager.isSignedIn
                 font.pixelSize: constant.fontSizeMedium
                 color: aboutSubredditManager.isSubscribed ? "green" : "red"
-                text: aboutSubredditManager.isSubscribed ? "Subscribed" : "Not Subscribed"
+                text: aboutSubredditManager.isSubscribed ? qsTr("Subscribed") : qsTr("Not Subscribed")
             }
 
             Rectangle {
