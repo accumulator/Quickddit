@@ -39,6 +39,7 @@ AbstractDialog {
 
         TextArea {
             id: textArea
+            font.pixelSize: constant.fontSizeDefault
             anchors { left: parent.left; right: parent.right }
             height: Math.max(implicitHeight, Theme.itemSizeLarge * 3)
             placeholderText: "Enter your comment here..."
