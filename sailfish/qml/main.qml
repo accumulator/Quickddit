@@ -161,6 +161,17 @@ ApplicationWindow {
                 createOpenLinkDialog(url);
         }
 
+        function openNonPreviewLink(url) {
+            url = QMLUtils.toAbsoluteUrl(url);
+            if (!url)
+                return;
+
+            if (redditLink(url))
+                openRedditLink(url);
+            else
+                createOpenLinkDialog(url);
+        }
+
         function createOpenLinkDialog(url) {
             pageStack.push(Qt.resolvedUrl("OpenLinkDialog.qml"), {url: url});
         }
