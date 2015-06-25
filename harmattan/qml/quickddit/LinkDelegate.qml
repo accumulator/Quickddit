@@ -121,7 +121,7 @@ ListItem {
         MouseArea {
             anchors.fill: parent
             enabled: !model.isSelfPost
-            onClicked: globalUtils.openInTextLink(model.url)
+            onClicked: globalUtils.openLink(model.url)
         }
     }
 }

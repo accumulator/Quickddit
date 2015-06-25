@@ -84,7 +84,7 @@ PageStackWindow {
                 infoBanner.alert(qsTr("Unsupported reddit url"));
         }
 
-        function openInTextLink(url) {
+        function openLink(url) {
             url = QMLUtils.toAbsoluteUrl(url);
             if (!url)
                 return;

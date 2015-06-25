@@ -296,7 +296,7 @@ AbstractPage {
                         font.pixelSize: constant.fontSizeDefault
                         color: constant.colorLight
                         text: link.text
-                        onLinkActivated: globalUtils.openInTextLink(link);
+                        onLinkActivated: globalUtils.openLink(link);
                     }
 
                     Component.onCompleted: commentListView.headerBodyWrapper = bodyWrapper;
