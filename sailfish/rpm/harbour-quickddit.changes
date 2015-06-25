@@ -5,6 +5,16 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Thu Jun 25 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.5.0
+- use https for anon access to reddit
+- handle invalid OAuth refresh token more gracefuly
+- open reddit links within app
+- add internal video player (thanks Martin Sandsmark!)
+- add imgur.com gifv support
+- add landscape support
+- add Tiny font option
+- various UI fixes and improvements
+
 * Fri Jun 19 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.4.0-1
 - Load more comments feature implemented
 - Sailfish theme color fixes
