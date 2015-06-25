@@ -42,7 +42,7 @@ PageStackWindow {
         property Component __openLinkDialogComponent: null
         property Component __selectionDialogComponent: Component { SelectionDialog {} }
         property Component __listModelComponent: Component { ListModel {} }
-        property Component __queryDialogCompnent: Component { QueryDialog {} }
+        property Component __queryDialogComponent: Component { QueryDialog {} }
 
         function previewableImage(url) {
             // imgur url
@@ -61,7 +61,27 @@ PageStackWindow {
             else if (/^https?:\/\/\S+\.(jpe?g|png|gif)/i.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
             else
-                infoBanner.alert("Unsupported image url");
+                infoBanner.alert(qsTr("Unsupported image url"));
+        }
+
+        function redditLink(url) {
+            if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
+                return true;
+            else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url))
+                return true;
+            return false
+        }
+
+        function openRedditLink(url) {
+            if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
+                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
+             else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url)) {
+                var subreddit = /^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.exec(url)[2];
+                var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
+                mainPage.refresh(subreddit);
+                pageStack.pop(mainPage);
+            } else
+                infoBanner.alert(qsTr("Unsupported reddit url"));
         }
 
         function openInTextLink(url) {
@@ -71,13 +91,19 @@ PageStackWindow {
 
             if (previewableImage(url))
                 openImageViewPage(url);
-            else if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
-                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
-            else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url)) {
-                var subreddit = /^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.exec(url)[2];
-                var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
-                mainPage.refresh(subreddit);
-                pageStack.pop(mainPage);
+            else if (redditLink(url))
+                openRedditLink(url);
+            else
+                createOpenLinkDialog(url);
+        }
+
+        function openNonPreviewLink(url) {
+            url = QMLUtils.toAbsoluteUrl(url);
+            if (!url)
+                return;
+
+            if (redditLink(url))
+                openRedditLink(url);
             else
                 createOpenLinkDialog(url);
         }
@@ -111,8 +137,8 @@ PageStackWindow {
         }
 
         function createQueryDialog(title, message, onAccepted) {
-            var p = { titleText: title, message: message, acceptButtonText: "Yes", rejectButtonText: "No" };
-            var dialog = __queryDialogCompnent.createObject(pageStack.currentPage, p);
+            var p = { titleText: title, message: message, acceptButtonText: qsTr("Yes"), rejectButtonText: qsTr("No") };
+            var dialog = __queryDialogComponent.createObject(pageStack.currentPage, p);
             dialog.statusChanged.connect(function() {
                 if (dialog.status == DialogStatus.Closed)
                     dialog.destroy(250);
@@ -136,7 +162,7 @@ PageStackWindow {
         settings: appSettings
         onAccessTokenFailure: {
             if (code == 299 /* QNetworkReply::UnknownContentError */) {
-                infoBanner.alert("Please log in again");
+                infoBanner.alert(qsTr("Please log in again"));
                 pageStack.push(Qt.resolvedUrl("AppSettingsPage.qml"));
             } else {
                 infoBanner.alert(errorString);
