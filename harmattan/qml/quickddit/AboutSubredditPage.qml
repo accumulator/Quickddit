@@ -121,11 +121,10 @@ AbstractPage {
                 anchors { left: parent.left; right: parent.right }
                 height: 1
                 color: constant.colorMid
-                visible: longDescriptionText != ""
+                visible: aboutSubredditManager.longDescription != ""
             }
 
             Text {
-                id: longDescriptionText
                 anchors { left: parent.left; right: parent.right }
                 wrapMode: Text.Wrap
                 textFormat: Text.RichText
