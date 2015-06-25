@@ -73,6 +73,11 @@ PageStackWindow {
                 openImageViewPage(url);
             else if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
+            else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url)) {
+                var subreddit = /^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.exec(url)[2];
+                var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
+                mainPage.refresh(subreddit);
+                pageStack.pop(mainPage);
             else
                 createOpenLinkDialog(url);
         }
