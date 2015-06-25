@@ -79,13 +79,33 @@ ApplicationWindow {
                 return false;
         }
 
+        function redditLink(url) {
+            if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
+                return true;
+            else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url))
+                return true;
+            return false
+        }
+
+        function openRedditLink(url) {
+            if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
+                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
+             else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url)) {
+                var subreddit = /^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.exec(url)[2];
+                var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
+                mainPage.refresh(subreddit);
+                pageStack.pop(mainPage);
+            } else
+                infoBanner.alert(qsTr("Unsupported reddit url"));
+        }
+
         function openImageViewPage(url) {
             if (/^https?:\/\/((i|m)\.)?imgur\.com/.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imgurUrl: url});
             else if (/^https?:\/\/\S+\.(jpe?g|png|gif)/i.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
             else
-                infoBanner.alert("Unsupported image url");
+                infoBanner.alert(qsTr("Unsupported image url"));
         }
 
         function openVideoViewPage(url) {
@@ -123,7 +143,7 @@ ApplicationWindow {
                 }
                 pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://" + match[1] + "/" + match[4] + ".mp4" });
             } else
-                infoBanner.alert("Unsupported video url");
+                infoBanner.alert(qsTr("Unsupported video url"));
         }
 
         function openInTextLink(url) {
@@ -135,14 +155,9 @@ ApplicationWindow {
                 openVideoViewPage(url);
             else if (previewableImage(url))
                 openImageViewPage(url);
-            else if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
-                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
-            else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url)) {
-                var subreddit = /^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.exec(url)[2];
-                var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
-                mainPage.refresh(subreddit);
-                pageStack.pop(mainPage);
-            } else
+            else if (redditLink(url))
+                openRedditLink(url);
+            else
                 createOpenLinkDialog(url);
         }
 
@@ -165,7 +180,7 @@ ApplicationWindow {
         settings: appSettings
         onAccessTokenFailure: {
             if (code == 299 /* QNetworkReply::UnknownContentError */) {
-                infoBanner.alert("Please log in again");
+                infoBanner.alert(qsTr("Please log in again"));
                 pageStack.push(Qt.resolvedUrl("AppSettingsPage.qml"));
             } else {
                 infoBanner.alert(errorString);
