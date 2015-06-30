@@ -28,12 +28,60 @@ MouseArea {
         hideTimer.start();
     }
 
-    width: Screen.width
+    property bool isPortrait: appWindow.deviceOrientation === Orientation.Portrait || appWindow.deviceOrientation === Orientation.PortraitInverted
+
+    width: isPortrait ? parent.width : parent.height
     height: messageText.height + 2 * constant.paddingMedium
     visible: opacity > 0.0
     opacity: 0.0
 
     Behavior on opacity { FadeAnimation {} }
+
+    Binding {
+        target: infoBanner
+        property: "y"
+        value: {
+            switch (appWindow.deviceOrientation) {
+            case Orientation.Portrait:
+                return 0
+            case Orientation.Landscape:
+            case Orientation.LandscapeInverted:
+                return width / 2 - height //-halve hoogte + breedte
+            case Orientation.PortraitInverted:
+                return appWindow.height - 2*height
+            }
+        }
+    }
+
+    Binding {
+        target: infoBanner
+        property: "x"
+        value: {
+            switch (appWindow.deviceOrientation) {
+            case Orientation.Portrait:
+            case Orientation.PortraitInverted:
+            case Orientation.Landscape:
+                return 0
+            case Orientation.LandscapeInverted:
+                return 2*height - appWindow.width - 5 // where's this ~-5 offset issue coming from?? it doesn't align without it
+            }
+        }
+    }
+
+    transformOrigin: Item.Bottom
+
+    rotation: {
+        switch (appWindow.deviceOrientation) {
+        case Orientation.Portrait:
+            return 0
+        case Orientation.Landscape:
+            return 90
+        case Orientation.PortraitInverted:
+            return 180
+        case Orientation.LandscapeInverted:
+            return 270
+        }
+    }
 
     Rectangle {
         anchors.fill: parent
