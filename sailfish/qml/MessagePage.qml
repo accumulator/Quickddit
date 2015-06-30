@@ -61,6 +61,7 @@ AbstractPage {
             menu: Component { MessageMenu {} }
             showMenuOnPressAndHold: false
             onClicked: {
+                messageManager.markRead(model.fullname)
                 if (model.isComment) {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
                 } else if (!isSentMessage) {
