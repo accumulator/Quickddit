@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,12 +44,12 @@ MouseArea {
         value: {
             switch (appWindow.deviceOrientation) {
             case Orientation.Portrait:
-                return 0
             case Orientation.Landscape:
-            case Orientation.LandscapeInverted:
-                return width / 2 - height //-halve hoogte + breedte
+                return 0
             case Orientation.PortraitInverted:
-                return appWindow.height - 2*height
+                return appWindow.height
+            case Orientation.LandscapeInverted:
+                return width
             }
         }
     }
@@ -59,16 +60,16 @@ MouseArea {
         value: {
             switch (appWindow.deviceOrientation) {
             case Orientation.Portrait:
-            case Orientation.PortraitInverted:
-            case Orientation.Landscape:
-                return 0
             case Orientation.LandscapeInverted:
-                return 2*height - appWindow.width - 5 // where's this ~-5 offset issue coming from?? it doesn't align without it
+                return 0
+            case Orientation.Landscape:
+            case Orientation.PortraitInverted:
+                return appWindow.width
             }
         }
     }
 
-    transformOrigin: Item.Bottom
+    transformOrigin: Item.TopLeft
 
     rotation: {
         switch (appWindow.deviceOrientation) {
