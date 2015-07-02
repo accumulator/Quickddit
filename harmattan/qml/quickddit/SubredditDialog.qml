@@ -56,7 +56,7 @@ Sheet {
                     placeholderText: "Go to a specific subreddit"
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                     // RegExp based on <https://github.com/reddit/reddit/blob/aae622d/r2/r2/lib/validator/validator.py#L525>
-                    validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
+                    validator: RegExpValidator { regExp: /^([A-Za-z0-9][A-Za-z0-9_]{2,20}|[a-z]{2})$/ }
                     platformSipAttributes: SipAttributes {
                         actionKeyEnabled: subredditTextField.text.length > 0 && subredditTextField.acceptableInput
                         actionKeyLabel: "Go"
