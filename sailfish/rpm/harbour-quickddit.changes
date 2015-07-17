@@ -5,7 +5,12 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Thu Jun 25 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.5.0
+* Fri Jul 17 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.5.1-1
+- mark message as read on open
+- correct placement of InfoBanner in other orientations (fix #3)
+- allow 2-letter language subreddit as valid subreddit syntax
+
+* Thu Jun 25 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.5.0-1
 - use https for anon access to reddit
 - handle invalid OAuth refresh token more gracefuly
 - open reddit links within app
