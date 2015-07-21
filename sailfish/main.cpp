@@ -40,6 +40,7 @@
 #include "src/imgurmanager.h"
 #include "src/votemanager.h"
 #include "src/commentmanager.h"
+#include "src/captchamanager.h"
 
 int main(int argc, char *argv[])
 {
@@ -64,6 +65,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<ImgurManager>("harbour.quickddit.Core", 1, 0, "ImgurManager");
     qmlRegisterType<VoteManager>("harbour.quickddit.Core", 1, 0, "VoteManager");
     qmlRegisterType<CommentManager>("harbour.quickddit.Core", 1, 0, "CommentManager");
+    qmlRegisterType<CaptchaManager>("harbour.quickddit.Core", 1, 0, "CaptchaManager");
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     view->rootContext()->setContextProperty("APP_VERSION", APP_VERSION);

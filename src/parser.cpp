@@ -356,6 +356,16 @@ Listing<MessageObject> Parser::parseMessageList(const QByteArray &json)
     return messageList;
 }
 
+QString Parser::parseNewCaptchaResponse(const QByteArray &json)
+{
+    bool ok;
+    const QVariantMap data = QtJson::parse(json, ok).toMap().value("json").toMap().value("data").toMap();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    return data.value("iden").toString();
+}
+
 // Private
 QPair<QString, QString> parseImgurImageMap(const QVariantMap &imageMap)
 {

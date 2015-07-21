@@ -198,4 +198,9 @@ ApplicationWindow {
             }
         }
     }
+
+    CaptchaManager {
+        id: captchaManager
+        manager: quickdditManager
+    }
 }

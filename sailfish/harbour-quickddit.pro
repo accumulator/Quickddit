@@ -42,7 +42,8 @@ HEADERS += \
     ../src/messagemodel.h \
     ../src/messagemanager.h \
     ../src/apirequest.h \
-    ../src/aboutmultiredditmanager.h
+    ../src/aboutmultiredditmanager.h \
+    ../src/captchamanager.h
 
 SOURCES += main.cpp \
     ../src/linkobject.cpp \
@@ -68,7 +69,8 @@ SOURCES += main.cpp \
     ../src/messagemodel.cpp \
     ../src/messagemanager.cpp \
     ../src/apirequest.cpp \
-    ../src/aboutmultiredditmanager.cpp
+    ../src/aboutmultiredditmanager.cpp \
+    ../src/captchamanager.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h
@@ -115,4 +117,5 @@ OTHER_FILES += \
     qml/AboutMultiredditPage.qml \
     qml/Bubble.qml \
     qml/VideoViewPage.qml \
-    qml/AbstractDialog.qml
+    qml/AbstractDialog.qml \
+    qml/Captcha.qml

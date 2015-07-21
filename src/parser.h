@@ -59,6 +59,8 @@ QString parseMultiredditDescription(const QByteArray &json);
 
 Listing<MessageObject> parseMessageList(const QByteArray &json);
 
+QString parseNewCaptchaResponse(const QByteArray &json);
+
 QList< QPair<QString, QString> > parseImgurImages(const QByteArray &json);
 }
 
