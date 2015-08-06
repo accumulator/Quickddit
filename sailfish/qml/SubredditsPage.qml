@@ -84,16 +84,18 @@ AbstractPage {
             Repeater {
                 id: mainOptionRepeater
                 anchors { left: parent.left; right: parent.right }
-                model: ["Front Page", "All", "Browse for Subreddits..."]
+                model: ["Front Page", "All", "Browse for Subreddits...", "Multireddits"]
 
                 SimpleListItem {
                     width: mainOptionRepeater.width
+                    enabled: index == 3 ? quickdditManager.isSignedIn : true
                     text: modelData
                     onClicked: {
                         switch (index) {
                         case 0: subredditsPage.refresh(""); break;
                         case 1: subredditsPage.refresh("all"); break;
                         case 2: pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml")); break;
+                        case 3: pageStack.push(Qt.resolvedUrl("MultiredditsPage.qml")); break;
                         }
                     }
                 }

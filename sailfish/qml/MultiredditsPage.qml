@@ -29,7 +29,11 @@ AbstractPage {
 
     signal accepted
 
-    onAccepted: pageStack.pop();
+    onAccepted: {
+        var mainPage = globalUtils.getMainPage();
+        mainPage.refreshMR(multiredditName);
+        pageStack.pop(mainPage);
+    }
 
     SilicaListView {
         id: multiredditListView
@@ -56,5 +60,9 @@ AbstractPage {
         footer: LoadingFooter { visible: multiredditModel.busy; listViewItem: multiredditListView }
 
         ViewPlaceholder { enabled: multiredditListView.count == 0 && !multiredditModel.busy; text: "Nothing here :(" }
+    }
+
+    Component.onCompleted: {
+        multiredditModel = globalUtils.getMainPage().getMultiredditModel();
     }
 }

@@ -42,6 +42,12 @@ AbstractPage {
         linkModel.refresh(false);
     }
 
+    function refreshMR(multireddit) {
+        linkModel.location = LinkModel.Multireddit;
+        linkModel.multireddit = multireddit
+        linkModel.refresh(false);
+    }
+
     property Component __multiredditModelComponent: Component {
         MultiredditModel {
             manager: quickdditManager
@@ -49,15 +55,10 @@ AbstractPage {
         }
     }
     property QtObject multiredditModel
-    function __openMultiredditsPage() {
+    function getMultiredditModel() {
         if (!multiredditModel)
             multiredditModel = __multiredditModelComponent.createObject(mainPage);
-        var dialog = pageStack.replace(Qt.resolvedUrl("MultiredditsPage.qml"), {multiredditModel: multiredditModel});
-        dialog.accepted.connect(function() {
-            linkModel.location = LinkModel.Multireddit;
-            linkModel.multireddit = dialog.multiredditName;
-            linkModel.refresh(false);
-        });
+        return multiredditModel;
     }
 
     property bool __pushedAttached: false
@@ -80,8 +81,7 @@ AbstractPage {
                     var p = {};
                     if (linkModel.location == LinkModel.Subreddit)
                         p.currentSubreddit = linkModel.subreddit;
-                    var page = pageStack.push(Qt.resolvedUrl("MainPageMorePage.qml"), p);
-                    page.multiredditsClicked.connect(__openMultiredditsPage);
+                    pageStack.push(Qt.resolvedUrl("MainPageMorePage.qml"), p);
                 }
             }
             MenuItem {

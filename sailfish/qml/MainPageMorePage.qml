@@ -25,8 +25,6 @@ AbstractPage {
 
     property string currentSubreddit: ""
 
-    signal multiredditsClicked
-
     Flickable {
         anchors.fill: parent
         contentHeight: pageHeader.height + optionsColumn.height
@@ -40,12 +38,6 @@ AbstractPage {
             id: optionsColumn
             anchors { top: pageHeader.bottom; left: parent.left; right: parent.right }
             height: childrenRect.height
-
-            SimpleListItem {
-                enabled: quickdditManager.isSignedIn
-                text: "Multireddits"
-                onClicked: multiredditsClicked();
-            }
 
             SimpleListItem {
                 enabled: quickdditManager.isSignedIn

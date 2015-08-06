@@ -54,6 +54,10 @@ ApplicationWindow {
 
         property Component __openLinkDialogComponent: null
 
+        function getMainPage() {
+            return pageStack.find(function(page) { return page.objectName == "mainPage"; });
+        }
+
         function previewableVideo(url) {
             if (/^https?:\/\/((i|m)\.)?gfycat\.com\//.test(url)) {
                 return true
