@@ -58,7 +58,7 @@ AbstractPage {
             Text {
                 id: descriptionText
                 anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-                font.pixelSize: constant.fontSizeMedium
+                font.pixelSize: constant.fontSizeDefault
                 color: constant.colorLight
                 wrapMode: Text.Wrap
                 textFormat: Text.RichText

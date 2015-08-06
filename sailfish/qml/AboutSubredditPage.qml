@@ -89,14 +89,14 @@ AbstractPage {
                 id: shortDescriptionText
                 anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
                 wrapMode: Text.Wrap
-                font.pixelSize: constant.fontSizeMedium
+                font.pixelSize: constant.fontSizeDefault
                 color: constant.colorMid
                 text: aboutSubredditManager.shortDescription
             }
 
             Text {
                 anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-                font.pixelSize: constant.fontSizeMedium
+                font.pixelSize: constant.fontSizeDefault
                 color: constant.colorLight
                 text: aboutSubredditManager.subscribers + " subscribers · " + aboutSubredditManager.activeUsers
                       + " active users"
@@ -105,7 +105,6 @@ AbstractPage {
             Bubble {
                 anchors { left: parent.left; margins: constant.paddingMedium }
                 visible: quickdditManager.isSignedIn
-                font.pixelSize: constant.fontSizeMedium
                 color: aboutSubredditManager.isSubscribed ? "green" : "red"
                 text: aboutSubredditManager.isSubscribed ? qsTr("Subscribed") : qsTr("Not Subscribed")
             }
@@ -120,7 +119,7 @@ AbstractPage {
                 anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
                 wrapMode: Text.Wrap
                 textFormat: Text.RichText
-                font.pixelSize: constant.fontSizeMedium
+                font.pixelSize: constant.fontSizeDefault
                 color: constant.colorLight
                 text: "<style>a { color: " + Theme.highlightColor + "; }</style>" + aboutSubredditManager.longDescription
                 onLinkActivated: globalUtils.openLink(link);
