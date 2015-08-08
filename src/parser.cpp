@@ -36,13 +36,21 @@ QString unescapeHtml(const QString &html)
     // which is problematic when <pre> preformatted text is present.
     // 1. before html unescape: "\n" -> "&lt;&gt;"
     // 2. after html unescape: "<>" -> "\n"
-    QString shieldedHtml(html);
-    shieldedHtml.replace("\n", "&lt;&gt;");
-
+    // TODO: indentation in preformatted text is still an issue (and even more expensive to correct)
+    QString unescaped;
     QTextDocument document;
-    document.setHtml(shieldedHtml);
-    QString unescaped = document.toPlainText();
-    unescaped.replace("<>", "\n");
+    // as the deep-copy and replace might be expensive, only take the effort when
+    // a <pre> tag is present
+    if (html.contains("&lt;pre&gt;")) {
+        QString shieldedHtml(html);
+        shieldedHtml.replace("\n", "&lt;&gt;");
+        document.setHtml(shieldedHtml);
+        unescaped = document.toPlainText();
+        unescaped.replace("<>", "\n");
+    } else {
+        document.setHtml(html);
+        unescaped = document.toPlainText();
+    }
 
     unescaped.remove("<!-- SC_OFF -->").remove("<!-- SC_ON -->");
     unescaped.remove("<div class=\"md\">").remove("</div>");
