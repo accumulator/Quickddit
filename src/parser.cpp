@@ -32,9 +32,18 @@
 
 QString unescapeHtml(const QString &html)
 {
+    // preserve newlines in html-quoted html, otherwise they will get lost upon .toPlainText() call
+    // which is problematic when <pre> preformatted text is present.
+    // 1. before html unescape: "\n" -> "&lt;&gt;"
+    // 2. after html unescape: "<>" -> "\n"
+    QString shieldedHtml(html);
+    shieldedHtml.replace("\n", "&lt;&gt;");
+
     QTextDocument document;
-    document.setHtml(html);
+    document.setHtml(shieldedHtml);
     QString unescaped = document.toPlainText();
+    unescaped.replace("<>", "\n");
+
     unescaped.remove("<!-- SC_OFF -->").remove("<!-- SC_ON -->");
     unescaped.remove("<div class=\"md\">").remove("</div>");
     return unescaped;
