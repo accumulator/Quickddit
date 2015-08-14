@@ -23,9 +23,20 @@ import Sailfish.Silica 1.0
 CoverBackground {
     id: coverBackground
 
+    Image {
+        source: "./background.png"
+        anchors {
+            left: parent.left
+            leftMargin: - (width / 3)
+            top: parent.top
+            topMargin: - (height / 4)
+        }
+        fillMode: Image.PreserveAspectFit
+        opacity: 0.2
+    }
+
     CoverPlaceholder {
         text: pageStack.currentPage.title || ""
-        icon.source: "quickddit.png"
     }
 
     CoverActionList {
