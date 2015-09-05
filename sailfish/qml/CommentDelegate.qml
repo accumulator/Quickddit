@@ -201,16 +201,41 @@ Item {
                 }
             }
 
-            Text {
+            Flickable {
                 id: commentBodyText
-                anchors { left: parent.left; right: parent.right }
-                font.pixelSize: constant.fontSizeDefault
-                color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
-                                        : constant.colorDisabled
-                wrapMode: Text.Wrap
-                textFormat: Text.RichText
-                text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
-                onLinkActivated: globalUtils.openLink(link);
+                width: parent.width
+                height: commentBodyTextInner.height
+                anchors { left: parent.left; right: parent.right; }
+                contentWidth: model.body.indexOf("<pre>") < 0 ? commentBodyTextInner.width : commentBodyTextInnerHidden.width;
+                contentHeight: commentBodyTextInner.height
+                flickableDirection: Flickable.HorizontalFlick
+                interactive: model.body.indexOf("<pre>") >= 0;
+                clip: true
+
+                Text {
+                    id: commentBodyTextInner
+                    width: mainColumn.width
+                    font.pixelSize: constant.fontSizeDefault
+                    color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                            : constant.colorDisabled
+                    wrapMode: Text.Wrap
+                    textFormat: Text.RichText
+                    text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
+                    onLinkActivated: globalUtils.openLink(link);
+                }
+
+                Text {
+                    id: commentBodyTextInnerHidden
+                    font.pixelSize: constant.fontSizeDefault
+                    color: "transparent"
+                    wrapMode: Text.Wrap
+                    textFormat: Text.RichText
+                    text: {
+                        var pre_only = model.body.replace(/<p>[^\n]+\n/g, '');
+                        "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + pre_only
+                    }
+                    onLinkActivated: globalUtils.openLink(link);
+                }
             }
         }
 
