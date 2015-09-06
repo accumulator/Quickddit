@@ -231,7 +231,7 @@ Item {
                     wrapMode: Text.Wrap
                     textFormat: Text.RichText
                     text: {
-                        var pre_only = model.body.replace(/<p>[^\n]+\n/g, '');
+                        var pre_only = model.body.replace(/<p>[^\n]+\n?/g, '');
                         "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + pre_only
                     }
                     onLinkActivated: globalUtils.openLink(link);
