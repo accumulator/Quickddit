@@ -206,10 +206,10 @@ Item {
                 width: parent.width
                 height: commentBodyTextInner.height
                 anchors { left: parent.left; right: parent.right; }
-                contentWidth: model.body.indexOf("<pre>") < 0 ? commentBodyTextInner.width : commentBodyTextInnerHidden.width;
+                contentWidth: commentBodyTextInner.paintedWidth
                 contentHeight: commentBodyTextInner.height
                 flickableDirection: Flickable.HorizontalFlick
-                interactive: model.body.indexOf("<pre>") >= 0;
+                interactive: commentBodyTextInner.paintedWidth > parent.width
                 clip: true
 
                 Text {
@@ -220,20 +220,8 @@ Item {
                                             : constant.colorDisabled
                     wrapMode: Text.Wrap
                     textFormat: Text.RichText
-                    text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
-                    onLinkActivated: globalUtils.openLink(link);
-                }
-
-                Text {
-                    id: commentBodyTextInnerHidden
-                    font.pixelSize: constant.fontSizeDefault
-                    color: "transparent"
-                    wrapMode: Text.Wrap
-                    textFormat: Text.RichText
-                    text: {
-                        var pre_only = model.body.replace(/<p>[^\n]+\n?/g, '');
-                        "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + pre_only
-                    }
+                    text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) +
+                          "; } code { font-size: 20pt; } pre > code { font-size: 18pt; }</style>" + model.body
                     onLinkActivated: globalUtils.openLink(link);
                 }
             }
