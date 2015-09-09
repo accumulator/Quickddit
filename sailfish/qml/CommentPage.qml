@@ -285,8 +285,7 @@ AbstractPage {
                             textFormat: Text.RichText
                             font.pixelSize: constant.fontSizeDefault
                             color: constant.colorLight
-                            text: "<style>a { color: " + Theme.highlightColor +
-                                  "; } code { font-size: 20pt; } pre > code { font-size: 18pt; }</style>" + link.text
+                            text: "<style>a { color: " + Theme.highlightColor + "; }</style>" + link.text
                             onLinkActivated: globalUtils.openLink(link);
                         }
                     }

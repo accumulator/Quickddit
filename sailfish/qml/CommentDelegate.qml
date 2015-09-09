@@ -220,8 +220,7 @@ Item {
                                             : constant.colorDisabled
                     wrapMode: Text.Wrap
                     textFormat: Text.RichText
-                    text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) +
-                          "; } code { font-size: 20pt; } pre > code { font-size: 18pt; }</style>" + model.body
+                    text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
                     onLinkActivated: globalUtils.openLink(link);
                 }
             }
