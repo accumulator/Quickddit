@@ -270,7 +270,6 @@ AbstractPage {
 
                     Flickable {
                         id: bodyText
-                        width: parent.width
                         anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
                         height: bodyTextInner.height
                         contentWidth: bodyTextInner.paintedWidth
@@ -281,7 +280,7 @@ AbstractPage {
 
                         Text {
                             id: bodyTextInner
-                            width: bodyWrapper.width
+                            width: bodyWrapper.width - (constant.paddingMedium * 2)
                             wrapMode: Text.Wrap
                             textFormat: Text.RichText
                             font.pixelSize: constant.fontSizeDefault
