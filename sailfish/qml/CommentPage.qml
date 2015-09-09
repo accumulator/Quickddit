@@ -274,7 +274,7 @@ AbstractPage {
                         height: bodyTextInner.height
                         contentWidth: bodyTextInner.paintedWidth
                         contentHeight: bodyTextInner.height
-                        flickDeceleration: Flickable.HorizontalFlick
+                        flickableDirection: Flickable.HorizontalFlick
                         interactive: bodyTextInner.paintedWidth > parent.width
                         clip: true
 
