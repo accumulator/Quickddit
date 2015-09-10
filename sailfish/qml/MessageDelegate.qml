@@ -75,6 +75,7 @@ ListItem {
             wrapMode: Text.Wrap
             textFormat: Text.RichText
             text: "<style>a { color: " + Theme.highlightColor + "; }</style>" + model.body
+            clip: true
         }
     }
 
