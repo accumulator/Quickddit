@@ -212,6 +212,12 @@ Item {
                 interactive: commentBodyTextInner.paintedWidth > parent.width
                 clip: true
 
+                MouseArea {
+                    width: commentBodyTextInner.paintedWidth
+                    height: commentBodyTextInner.height
+                    propagateComposedEvents: true
+                }
+
                 Text {
                     id: commentBodyTextInner
                     width: mainColumn.width
