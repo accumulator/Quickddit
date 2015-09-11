@@ -118,4 +118,5 @@ OTHER_FILES += \
     qml/Bubble.qml \
     qml/VideoViewPage.qml \
     qml/AbstractDialog.qml \
-    qml/Captcha.qml
+    qml/Captcha.qml \
+    qml/NewLinkPage.qml
