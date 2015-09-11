@@ -35,10 +35,24 @@ AbstractPage {
             anchors { left: parent.left; right: parent.right; top: header.bottom }
             height: Math.max(column.height + 2 * constant.paddingMedium, flickable.height - header.height)
 
+            Image {
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: column.top
+                source: "./cover/background.png"
+                opacity: 0.2
+                scale: 1.5
+            }
+
             Column {
                 id: column
                 anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
                 height: childrenRect.height
+                spacing: Theme.paddingLarge
+
+                Image {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    source: "image://theme/harbour-quickddit"
+                }
 
                 Text {
                     anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
@@ -48,22 +62,25 @@ AbstractPage {
                     wrapMode: Text.Wrap
                     text: "Quickddit - A free and open source Reddit client for mobile phones\n" +
                           "v" + APP_VERSION + "\n\n" +
-                          "Copyright (c) 2013-2014 Dickson Leong\n" +
                           "Copyright (c) 2015 Sander van Grieken\n" +
+                          "Copyright (c) 2013-2014 Dickson Leong\n\n" +
                           "Licensed under GNU GPLv3+\n" +
                           "App icon by Andrew Zhilin\n"
                 }
 
-                Button {
+                Row {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: "Source Repository"
-                    onClicked: globalUtils.createOpenLinkDialog(QMLUtils.SOURCE_REPO_URL);
-                }
+                    spacing: Theme.paddingLarge
 
-                Button {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: "License"
-                    onClicked: globalUtils.createOpenLinkDialog(QMLUtils.GPL3_LICENSE_URL);
+                    Button {
+                        text: "Source"
+                        onClicked: globalUtils.createOpenLinkDialog(QMLUtils.SOURCE_REPO_URL);
+                    }
+
+                    Button {
+                        text: "License"
+                        onClicked: globalUtils.createOpenLinkDialog(QMLUtils.GPL3_LICENSE_URL);
+                    }
                 }
             }
         }
