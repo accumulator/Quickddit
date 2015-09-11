@@ -48,6 +48,11 @@ AbstractPage {
         linkModel.refresh(false);
     }
 
+    function newLink() {
+        var p = {subreddit: linkModel.subreddit};
+        pageStack.push(Qt.resolvedUrl("NewLinkPage.qml"), p);
+    }
+
     property Component __multiredditModelComponent: Component {
         MultiredditModel {
             manager: quickdditManager
@@ -109,6 +114,11 @@ AbstractPage {
                         linkModel.refresh(false);
                     });
                 }
+            }
+            MenuItem {
+                text: "New Link"
+                visible: linkModel.location == LinkModel.Subreddit
+                onClicked: newLink();
             }
             MenuItem {
                 text: "Refresh"
