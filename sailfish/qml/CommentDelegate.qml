@@ -213,9 +213,8 @@ Item {
                 clip: true
 
                 MouseArea {
-                    width: commentBodyTextInner.paintedWidth
-                    height: commentBodyTextInner.height
-                    propagateComposedEvents: true
+                    anchors.fill: parent
+                    onClicked: commentDelegate.clicked()
                 }
 
                 Text {
