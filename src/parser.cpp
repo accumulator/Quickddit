@@ -48,10 +48,8 @@ QString unescapeHtml(const QString &html)
         // preserve spaces for content of <pre>
         QLatin1String open("&lt;pre&gt;");
         QLatin1String close("&lt;/pre&gt;");
-        for (int i = 0, pos = 0, next = html.indexOf(open, pos); pos >= 0; pos = next, next = html.indexOf(i % 2 == 0 ? close : open, pos), i++) {
-            if (next < 0) {
-                shieldedHtml.append(QStringRef(&html, pos, html.length() - pos - 1));
-            } else if (i % 2 == 0) {
+        for (int i = 0, pos = 0, next = html.indexOf(open, pos); next >= 0; pos = next, next = html.indexOf(i % 2 == 0 ? close : open, pos), i++) {
+            if (i % 2 == 0) {
                 shieldedHtml.append(QStringRef(&html, pos, next - pos));
             } else {
                 // in <pre>
