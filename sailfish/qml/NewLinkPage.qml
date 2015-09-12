@@ -28,7 +28,7 @@ AbstractPage {
 
     function submit() {
         console.log("submitting link...");
-        // TODO
+        linkManager.submit(subreddit, captcha.userInput, captchaManager.iden, linkTitle.text, selfLinkSwitch.checked ? "" : linkUrl.text, linkDescription.text);
     }
 
     Flickable {
@@ -90,11 +90,18 @@ AbstractPage {
             Button {
                 text: "Submit"
                 anchors.horizontalCenter: parent.horizontalCenter
-                enabled: linkTitle.text.length >= 10 /* official limits? */
-                         && captcha.userInput.text.length >= 6 /* always? */
-                         && (selfLinkSwitch.checked || linkUrl.acceptableInput)
+                enabled: linkTitle.text.length > 0 /* official limits? */
+                         && captcha.userInput.text.length > 0
+                         && ((selfLinkSwitch.checked && linkDescription.text.length > 0) || linkUrl.acceptableInput)
                 onClicked: submit()
             }
         }
+    }
+
+    LinkManager {
+        id: linkManager
+        manager: quickdditManager
+        onSuccess: infoBanner.alert(message);
+        onError: infoBanner.alert(errorString);
     }
 }
