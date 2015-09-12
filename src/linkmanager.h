@@ -16,6 +16,7 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
+#include "linkmodel.h"
 #include "abstractmanager.h"
 
 #ifndef LINKMANAGER_H
@@ -24,9 +25,15 @@
 class LinkManager : public AbstractManager
 {
     Q_OBJECT
+    Q_PROPERTY(LinkModel* model READ model WRITE setModel)
 public:
     explicit LinkManager(QObject *parent = 0);
+
+    LinkModel *model() const;
+    void setModel(LinkModel *model);
+
     Q_INVOKABLE void submit(const QString &subreddit, const QString &captcha, const QString &iden, const QString &title, const QString& url, const QString& text);
+    Q_INVOKABLE void editLinkText(const QString &fullname, const QString &rawText);
 
 signals:
     void success(const QString &message);
@@ -40,6 +47,11 @@ private slots:
 
 private:
     APIRequest *m_request;
+    enum Action { Submit, Edit };
+    Action m_action;
+    LinkModel *m_model;
+    QString m_fullname;
+    QString m_text;
 
     void abortActiveReply();
 };

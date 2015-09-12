@@ -62,6 +62,8 @@ Listing<MessageObject> parseMessageList(const QByteArray &json);
 QString parseNewCaptchaResponse(const QByteArray &json);
 
 QList< QPair<QString, QString> > parseImgurImages(const QByteArray &json);
+
+LinkObject parseLinkEditResponse(const QByteArray &json);
 }
 
 #endif // PARSER_H

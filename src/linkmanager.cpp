@@ -16,18 +16,33 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
+#include "linkmanager.h"
+
 #include <QtNetwork/QNetworkReply>
 
-#include "linkmanager.h"
+#include "linkmodel.h"
+#include "parser.h"
 
 LinkManager::LinkManager(QObject *parent) :
     AbstractManager(parent), m_request(0)
 {
 }
 
+LinkModel *LinkManager::model() const
+{
+    return m_model;
+}
+
+void LinkManager::setModel(LinkModel *model)
+{
+    m_model = model;
+}
+
 void LinkManager::submit(const QString &subreddit, const QString &captcha, const QString &iden, const QString &title, const QString& url, const QString& text)
 {
     abortActiveReply();
+
+    m_action = Submit;
 
     QHash<QString, QString> parameters;
     parameters.insert("api_type", "json");
@@ -49,11 +64,37 @@ void LinkManager::submit(const QString &subreddit, const QString &captcha, const
     setBusy(true);
 }
 
+void LinkManager::editLinkText(const QString &fullname, const QString &rawText)
+{
+    abortActiveReply();
+
+    m_action = Edit;
+
+    QHash<QString, QString> parameters;
+    parameters.insert("api_type", "json");
+    parameters.insert("text", rawText);
+    parameters.insert("thing_id", fullname);
+    m_fullname = fullname;
+    m_text = rawText;
+
+    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/editusertext", parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
+
+    setBusy(true);
+}
+
+
 void LinkManager::onFinished(QNetworkReply *reply)
 {
     if (reply != 0) {
         if (reply->error() == QNetworkReply::NoError) {
-            emit success(tr("The link has been added"));
+            LinkObject link = Parser::parseLinkEditResponse(reply->readAll());
+            if (m_action == Submit) {
+                emit success(tr("The link has been added"));
+            } else {
+                emit success(tr("The link text has been changed"));
+                m_model->editLink(link);
+            }
         } else {
             emit error(reply->errorString());
         }

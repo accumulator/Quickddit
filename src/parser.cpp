@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -131,6 +132,21 @@ Listing<LinkObject> Parser::parseLinkList(const QByteArray &json)
     linkList.setHasMore(!data.value("after").isNull());
 
     return linkList;
+}
+
+LinkObject Parser::parseLinkEditResponse(const QByteArray &json)
+{
+    bool ok;
+    const QVariantMap root = QtJson::parse(QString::fromUtf8(json), ok).toMap();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    const QVariant linkMap = root.value("json").toMap().value("data").toMap()
+            .value("things").toList().first();
+
+    LinkObject link = parseLinkThing(linkMap);
+
+    return link;
 }
 
 // Private

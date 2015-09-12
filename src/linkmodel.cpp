@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,6 +44,7 @@ QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
     map["domain"] = link.domain();
     map["thumbnailUrl"] = link.thumbnailUrl();
     map["text"] = link.text();
+    map["rawText"] = link.rawText();
     map["permalink"] = link.permalink();
     map["url"] = link.url();
     map["isSticky"] = link.isSticky();
@@ -103,6 +105,7 @@ QVariant LinkModel::data(const QModelIndex &index, int role) const
     case DomainRole: return link.domain();
     case ThumbnailUrlRole: return link.thumbnailUrl();
     case TextRole: return link.text();
+    case RawTextRole: return link.rawText();
     case PermalinkRole: return link.permalink();
     case UrlRole: return link.url();
     case IsStickyRole: return link.isSticky();
@@ -286,6 +289,26 @@ void LinkModel::changeLikes(const QString &fullname, int likes)
     }
 }
 
+void LinkModel::editLink(const LinkObject &link)
+{
+    int editIndex = -1;
+
+    for (int i = 0; i < m_linkList.count(); ++i) {
+        if (m_linkList.at(i).fullname() == link.fullname()) {
+            editIndex = i;
+            break;
+        }
+    }
+
+    if (editIndex == -1) {
+        qWarning("LinkModel::editLink(): Unable to find the link");
+        return;
+    }
+
+    m_linkList.replace(editIndex, link);
+    emit dataChanged(index(editIndex), index(editIndex));
+}
+
 QHash<int, QByteArray> LinkModel::customRoleNames() const
 {
     QHash<int, QByteArray> roles;
@@ -300,6 +323,7 @@ QHash<int, QByteArray> LinkModel::customRoleNames() const
     roles[DomainRole] = "domain";
     roles[ThumbnailUrlRole] = "thumbnailUrl";
     roles[TextRole] = "text";
+    roles[RawTextRole] = "rawText";
     roles[PermalinkRole] = "permalink";
     roles[UrlRole] = "url";
     roles[IsStickyRole] = "isSticky";
