@@ -42,24 +42,9 @@ QString unescapeHtml(const QString &html)
     // as the deep-copy and replace might be expensive, only take the effort when
     // a <pre> tag is present
     if (html.contains("&lt;pre&gt;")) {
-        QString shieldedHtml;
-        shieldedHtml.reserve(html.length());
-
-        // preserve spaces for content of <pre>
-        QLatin1String open("&lt;pre&gt;");
-        QLatin1String close("&lt;/pre&gt;");
-        for (int i = 0, pos = 0, next = html.indexOf(open, pos); next >= 0; pos = next, next = html.indexOf(i % 2 == 0 ? close : open, pos), i++) {
-            if (i % 2 == 0) {
-                shieldedHtml.append(QStringRef(&html, pos, next - pos));
-            } else {
-                // in <pre>
-                QString pre_content(QStringRef(&html, pos, next - pos).toString());
-                pre_content.replace(" ", "&nbsp;");
-                shieldedHtml.append(pre_content);
-            }
-        }
-
+        QString shieldedHtml(html);
         shieldedHtml.replace("\n", "&lt;&gt;");
+        shieldedHtml.replace(" ", "&nbsp;");
         document.setHtml(shieldedHtml);
         unescaped = document.toPlainText();
         unescaped.replace("<>", "\n");
