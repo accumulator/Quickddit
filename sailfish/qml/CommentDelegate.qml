@@ -132,7 +132,7 @@ Item {
                 left: parent.left; right: parent.right; margins: constant.paddingMedium
                 verticalCenter: parent.verticalCenter
             }
-            height: authorTextWrapper.height + commentBodyText.paintedHeight
+            height: childrenRect.height
             spacing: constant.paddingSmall
 
             Item {
@@ -204,7 +204,7 @@ Item {
             Flickable {
                 id: commentBodyText
                 width: parent.width
-                height: commentBodyTextInner.height
+                height: childrenRect.height
                 anchors { left: parent.left; right: parent.right; }
                 contentWidth: commentBodyTextInner.paintedWidth
                 contentHeight: commentBodyTextInner.height
