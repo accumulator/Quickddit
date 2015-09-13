@@ -99,7 +99,12 @@ void LinkManager::onFinished(QNetworkReply *reply)
     if (reply != 0) {
         if (reply->error() == QNetworkReply::NoError) {
             if (m_action == Submit) {
-                emit success(tr("The link has been added"));
+                QList<QString> errors = Parser::parseErrors(reply->readAll());
+                if (errors.size() == 0) {
+                    emit success(tr("The link has been added"));
+                } else {
+                    emit error("Error:" + errors.first());
+                }
             } else {
                 LinkObject link = Parser::parseLinkEditResponse(reply->readAll());
                 emit success(tr("The link text has been changed"));
