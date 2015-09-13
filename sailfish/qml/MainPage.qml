@@ -49,7 +49,7 @@ AbstractPage {
     }
 
     function newLink() {
-        var p = {subreddit: linkModel.subreddit};
+        var p = {linkManager: linkManager, subreddit: linkModel.subreddit};
         pageStack.push(Qt.resolvedUrl("NewLinkPage.qml"), p);
     }
 
@@ -155,6 +155,14 @@ AbstractPage {
         id: linkModel
         manager: quickdditManager
         onError: infoBanner.alert(errorString)
+    }
+
+    LinkManager {
+        id: linkManager
+        manager: quickdditManager
+        linkModel: linkModel
+        onSuccess: infoBanner.alert(message);
+        onError: infoBanner.alert(errorString);
     }
 
     VoteManager {

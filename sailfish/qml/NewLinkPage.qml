@@ -25,6 +25,7 @@ AbstractPage {
     title: "New Link"
 
     property string subreddit
+    property QtObject linkManager
 
     function submit() {
         console.log("submitting link...");
@@ -98,10 +99,4 @@ AbstractPage {
         }
     }
 
-    LinkManager {
-        id: linkManager
-        manager: quickdditManager
-        onSuccess: infoBanner.alert(message);
-        onError: infoBanner.alert(errorString);
-    }
 }
