@@ -161,7 +161,10 @@ AbstractPage {
         id: linkManager
         manager: quickdditManager
         linkModel: linkModel
-        onSuccess: infoBanner.alert(message);
+        onSuccess: {
+            infoBanner.alert(message);
+            pageStack.pop();
+        }
         onError: infoBanner.alert(errorString);
     }
 
