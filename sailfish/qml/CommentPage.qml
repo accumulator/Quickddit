@@ -74,11 +74,6 @@ AbstractPage {
             }
 
             MenuItem {
-                enabled: !!link
-                text: "Permalink"
-                onClicked: globalUtils.createOpenLinkDialog(QMLUtils.toAbsoluteUrl(link.permalink));
-            }
-            MenuItem {
                 text: "Sort"
                 onClicked: globalUtils.createSelectionDialog("Sort", commentSortModel, commentModel.sort,
                 function (selectedIndex) {
@@ -86,11 +81,13 @@ AbstractPage {
                     refresh(false);
                 });
             }
+
             MenuItem {
                 enabled: quickdditManager.isSignedIn && !commentManager.busy && !!link
                 text: "Add comment"
                 onClicked: __createCommentDialog("Add Comment", link.fullname);
             }
+
             MenuItem {
                 enabled: !commentModel.busy
                 text: "Refresh"
@@ -220,7 +217,7 @@ AbstractPage {
                         anchors.verticalCenter: parent.verticalCenter
                         icon.height: Theme.iconSizeLarge - constant.paddingMedium
                         icon.width: Theme.iconSizeLarge - constant.paddingMedium
-                        icon.source: "image://theme/icon-l-up"
+                        icon.source: "image://theme/icon-m-up"
                         enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
                         highlighted: link.likes == 1
                         onClicked: {
@@ -235,7 +232,7 @@ AbstractPage {
                         anchors.verticalCenter: parent.verticalCenter
                         icon.height: Theme.iconSizeLarge - constant.paddingMedium
                         icon.width: Theme.iconSizeLarge - constant.paddingMedium
-                        icon.source: "image://theme/icon-l-down"
+                        icon.source: "image://theme/icon-m-down"
                         enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
                         highlighted: link.likes == -1
                         onClicked: {
@@ -250,13 +247,21 @@ AbstractPage {
                         anchors.verticalCenter: parent.verticalCenter
                         icon.height: Theme.iconSizeLarge - constant.paddingMedium
                         icon.width: Theme.iconSizeLarge - constant.paddingMedium
-                        icon.source: globalUtils.previewableVideo(link.url) ? "image://theme/icon-l-video" : "image://theme/icon-l-image"
-                        enabled: globalUtils.previewableImage(link.url) || globalUtils.previewableVideo(link.url)
+                        icon.source: {
+                            return globalUtils.previewableVideo(link.url) ? "image://theme/icon-m-video"
+                                   : globalUtils.redditLink(link.url) ? "image://theme/icon-m-forward" //m-chat
+                                   : "image://theme/icon-m-image";
+                        }
+                        enabled: globalUtils.previewableImage(link.url)
+                                 || globalUtils.previewableVideo(link.url)
+                                 || (globalUtils.redditLink(link.url) && !link.isSelfPost)
                         onClicked: {
                             if (globalUtils.previewableImage(link.url)) {
                                 globalUtils.openImageViewPage(link.url);
                             } else if (globalUtils.previewableVideo(link.url)) {
                                 globalUtils.openVideoViewPage(link.url);
+                            } else if (globalUtils.redditLink(link.url)) {
+                                globalUtils.openRedditLink(link.url);
                             }
                         }
                     }
@@ -265,8 +270,7 @@ AbstractPage {
                         anchors.verticalCenter: parent.verticalCenter
                         icon.height: Theme.iconSizeLarge - constant.paddingLarge
                         icon.width: Theme.iconSizeLarge - constant.paddingLarge
-                        icon.source: "image://theme/icon-lock-social"
-                        enabled: !link.isSelfPost;
+                        icon.source: "image://theme/icon-m-link"
                         onClicked: globalUtils.openNonPreviewLink(link.url);
                     }
                 }
