@@ -24,18 +24,28 @@
 #include "parser.h"
 
 LinkManager::LinkManager(QObject *parent) :
-    AbstractManager(parent), m_request(0)
+    AbstractManager(parent), m_request(0), m_linkModel(0), m_commentModel(0)
 {
 }
 
-LinkModel *LinkManager::model() const
+LinkModel *LinkManager::linkModel() const
 {
-    return m_model;
+    return m_linkModel;
 }
 
-void LinkManager::setModel(LinkModel *model)
+void LinkManager::setLinkModel(LinkModel *model)
 {
-    m_model = model;
+    m_linkModel = model;
+}
+
+CommentModel *LinkManager::commentModel() const
+{
+    return m_commentModel;
+}
+
+void LinkManager::setCommentModel(CommentModel *model)
+{
+    m_commentModel = model;
 }
 
 void LinkManager::submit(const QString &subreddit, const QString &captcha, const QString &iden, const QString &title, const QString& url, const QString& text)
@@ -88,12 +98,17 @@ void LinkManager::onFinished(QNetworkReply *reply)
 {
     if (reply != 0) {
         if (reply->error() == QNetworkReply::NoError) {
-            LinkObject link = Parser::parseLinkEditResponse(reply->readAll());
             if (m_action == Submit) {
                 emit success(tr("The link has been added"));
             } else {
+                LinkObject link = Parser::parseLinkEditResponse(reply->readAll());
                 emit success(tr("The link text has been changed"));
-                m_model->editLink(link);
+                // update both occurrences of a Link. Bit ugly to have to refer to two models,
+                // but this way the UI never shows stale data.
+                if (m_linkModel)
+                    m_linkModel->editLink(link);
+                if (m_commentModel)
+                    m_commentModel->setLink(LinkModel::toLinkVariantMap(link));
             }
         } else {
             emit error(reply->errorString());
