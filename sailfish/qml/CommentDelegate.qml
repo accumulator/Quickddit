@@ -132,7 +132,7 @@ Item {
                 left: parent.left; right: parent.right; margins: constant.paddingMedium
                 verticalCenter: parent.verticalCenter
             }
-            height: authorTextWrapper.height + commentBodyText.paintedHeight
+            height: childrenRect.height
             spacing: constant.paddingSmall
 
             Item {
@@ -201,16 +201,33 @@ Item {
                 }
             }
 
-            Text {
+            Flickable {
                 id: commentBodyText
-                anchors { left: parent.left; right: parent.right }
-                font.pixelSize: constant.fontSizeDefault
-                color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
-                                        : constant.colorDisabled
-                wrapMode: Text.Wrap
-                textFormat: Text.RichText
-                text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
-                onLinkActivated: globalUtils.openLink(link);
+                width: parent.width
+                height: childrenRect.height
+                anchors { left: parent.left; right: parent.right; }
+                contentWidth: commentBodyTextInner.paintedWidth
+                contentHeight: commentBodyTextInner.height
+                flickableDirection: Flickable.HorizontalFlick
+                interactive: commentBodyTextInner.paintedWidth > parent.width
+                clip: true
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: commentDelegate.clicked()
+                }
+
+                Text {
+                    id: commentBodyTextInner
+                    width: mainColumn.width
+                    font.pixelSize: constant.fontSizeDefault
+                    color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                            : constant.colorDisabled
+                    wrapMode: Text.Wrap
+                    textFormat: Text.RichText
+                    text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
+                    onLinkActivated: globalUtils.openLink(link);
+                }
             }
         }
 

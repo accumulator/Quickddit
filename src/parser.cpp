@@ -44,6 +44,7 @@ QString unescapeHtml(const QString &html)
     if (html.contains("&lt;pre&gt;")) {
         QString shieldedHtml(html);
         shieldedHtml.replace("\n", "&lt;&gt;");
+        shieldedHtml.replace(" ", "&nbsp;");
         document.setHtml(shieldedHtml);
         unescaped = document.toPlainText();
         unescaped.replace("<>", "\n");

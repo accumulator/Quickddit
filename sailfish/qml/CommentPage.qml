@@ -268,15 +268,26 @@ AbstractPage {
                         color: constant.colorMid
                     }
 
-                    Text {
+                    Flickable {
                         id: bodyText
                         anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-                        wrapMode: Text.Wrap
-                        textFormat: Text.RichText
-                        font.pixelSize: constant.fontSizeDefault
-                        color: constant.colorLight
-                        text: "<style>a { color: " + Theme.highlightColor + "; }</style>" + link.text
-                        onLinkActivated: globalUtils.openLink(link);
+                        height: bodyTextInner.height
+                        contentWidth: bodyTextInner.paintedWidth
+                        contentHeight: bodyTextInner.height
+                        flickableDirection: Flickable.HorizontalFlick
+                        interactive: bodyTextInner.paintedWidth > parent.width
+                        clip: true
+
+                        Text {
+                            id: bodyTextInner
+                            width: bodyWrapper.width - (constant.paddingMedium * 2)
+                            wrapMode: Text.Wrap
+                            textFormat: Text.RichText
+                            font.pixelSize: constant.fontSizeDefault
+                            color: constant.colorLight
+                            text: "<style>a { color: " + Theme.highlightColor + "; }</style>" + link.text
+                            onLinkActivated: globalUtils.openLink(link);
+                        }
                     }
 
                     // For spacing after text
