@@ -149,6 +149,7 @@ LinkObject Parser::parseLinkEditResponse(const QByteArray &json)
     return link;
 }
 
+
 // Private
 QList<CommentObject> parseCommentListingJson(const QVariantMap &json, const QString &linkAuthor, int depth)
 {
@@ -397,6 +398,23 @@ QString Parser::parseNewCaptchaResponse(const QByteArray &json)
     Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
 
     return data.value("iden").toString();
+}
+
+QList<QString> Parser::parseErrors(const QByteArray &json)
+{
+    bool ok;
+    const QVariantList errors = QtJson::parse(json, ok).toMap().value("json").toMap().value("errors").toList();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    QList<QString> result;
+
+    foreach(const QVariant &error, errors) {
+        // only add the error code for now
+        result.append(error.toList().first().toString());
+    }
+
+    return result;
 }
 
 // Private
