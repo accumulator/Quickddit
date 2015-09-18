@@ -21,7 +21,6 @@ TODO
 -----
 Below is the list of TODOs I planned for future release, before reaching the 1.0.0 milestone.
 
-- Submit link and self post (require Captcha)
 - Compose new message (require Captcha)
 - Make comment collapsable (hide all children comments)
 - Notification of PM or comment reply
