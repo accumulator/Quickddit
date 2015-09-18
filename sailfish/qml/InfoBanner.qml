@@ -27,6 +27,7 @@ MouseArea {
         messageText.text = text;
         infoBanner.opacity = 1.0;
         hideTimer.start();
+        console.log(text);
     }
 
     property bool isPortrait: appWindow.deviceOrientation === Orientation.Portrait || appWindow.deviceOrientation === Orientation.PortraitInverted

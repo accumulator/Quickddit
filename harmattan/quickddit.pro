@@ -32,7 +32,9 @@ HEADERS += \
     ../src/messagemodel.h \
     ../src/messagemanager.h \
     ../src/apirequest.h \
-    ../src/aboutmultiredditmanager.h
+    ../src/aboutmultiredditmanager.h \
+    ../src/captchamanager.h \
+    ../src/linkmanager.h
 
 SOURCES += main.cpp \
     ../src/linkobject.cpp \
@@ -58,7 +60,9 @@ SOURCES += main.cpp \
     ../src/messagemodel.cpp \
     ../src/messagemanager.cpp \
     ../src/apirequest.cpp \
-    ../src/aboutmultiredditmanager.cpp
+    ../src/aboutmultiredditmanager.cpp \
+    ../src/captchamanager.cpp \
+    ../src/linkmanager.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h

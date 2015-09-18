@@ -27,10 +27,17 @@ CaptchaManager::CaptchaManager(QObject *parent) :
 {
     m_ready = false;
     m_iden = "";
+    m_captchaNeededState = Unknown;
 }
 
 void CaptchaManager::request()
 {
+    // first ask if we need to submit a captcha for this user
+    if (m_captchaNeededState == Unknown) {
+        requestCaptchaNeeded();
+        return;
+    }
+
     abortActiveReply();
 
     QHash<QString, QString> parameters;
@@ -65,6 +72,46 @@ void CaptchaManager::onRequestFinished(QNetworkReply *reply)
     setBusy(false);
 }
 
+void CaptchaManager::requestCaptchaNeeded()
+{
+    abortActiveReply();
+
+    m_request = manager()->createRedditRequest(this, APIRequest::GET, "/api/needs_captcha");
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onCaptchaNeededFinished(QNetworkReply*)));
+
+    setBusy(true);
+}
+
+void CaptchaManager::onCaptchaNeededFinished(QNetworkReply *reply)
+{
+    if (reply != 0) {
+        if (reply->error() == QNetworkReply::NoError) {
+            QString response = reply->readAll();
+            if (response == "false") {
+                m_captchaNeededState = False;
+                qDebug() << "No captcha needed";
+            } else {
+                m_captchaNeededState = True;
+                qDebug() << "Captcha needed";
+            }
+        } else {
+            error(reply->errorString());
+            m_captchaNeededState = Error;
+        }
+    }
+
+    emit captchaNeededChanged();
+
+    m_request->deleteLater();
+    m_request = 0;
+    setBusy(false);
+
+    // since this slot is only reached as a step-out request-reply by request(), call it now that we have the captcha-needed state.
+    // unless we don't need a captcha at all, of course.
+    if (m_captchaNeededState != False)
+        request();
+}
+
 QUrl CaptchaManager::imageUrl()
 {
     qDebug() << "URL retrieved for iden" << m_iden;
@@ -81,6 +128,11 @@ bool CaptchaManager::ready()
 QString CaptchaManager::iden()
 {
     return m_iden;
+}
+
+bool CaptchaManager::captchaNeeded()
+{
+    return (m_captchaNeededState == True || m_captchaNeededState == Error);
 }
 
 void CaptchaManager::abortActiveReply()

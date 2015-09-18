@@ -16,9 +16,9 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.0
-import Sailfish.Silica 1.0
-import harbour.quickddit.Core 1.0
+import QtQuick 1.1
+import com.nokia.meego 1.0
+import Quickddit.Core 1.0
 
 Rectangle {
     id: container
@@ -28,7 +28,7 @@ Rectangle {
     color: "transparent"
 
     width: refresh.width + captcha.width + constant.paddingLarge + 2 * border.width
-    height: captcha.height + description.height + _userInput.height // + 2 * constant.paddingSmall + 2 * border.width
+    height: captcha.height + description.height + _userInput.height
 
     property alias userInput: _userInput.text
     property real captchaScale: 2
@@ -50,7 +50,7 @@ Rectangle {
 
             Image {
                 id: refresh
-                source: "image://theme/icon-m-refresh"
+                source: "image://theme/icon-m-toolbar-refresh"
                 anchors.verticalCenter: parent.verticalCenter
 
                 MouseArea {

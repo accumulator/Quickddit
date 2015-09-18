@@ -47,6 +47,13 @@ AbstractPage {
         })
     }
 
+    function __createLinkTextDialog(title, fullname, originalText) {
+        var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {linkManager: linkManager, title: title, text: originalText || ""});
+        dialog.accepted.connect(function() {
+            linkManager.editLinkText(fullname, dialog.text);
+        })
+    }
+
     function loadMoreChildren(index, children) {
         morechildren_animation = true
         commentModel.moreComments(index, children);
@@ -58,6 +65,14 @@ AbstractPage {
         model: commentModel
 
         PullDownMenu {
+            MenuItem {
+                visible: link.author === appSettings.redditUsername && link.isSelfPost
+                text: "Edit Link"
+                onClicked: {
+                    __createLinkTextDialog("Edit Link", link.fullname, link.rawText);
+                }
+            }
+
             MenuItem {
                 enabled: !!link
                 text: "Permalink"
@@ -383,6 +398,14 @@ AbstractPage {
         manager: quickdditManager
         model: commentModel
         linkAuthor: link ? link.author : ""
+        onSuccess: infoBanner.alert(message);
+        onError: infoBanner.alert(errorString);
+    }
+
+    LinkManager {
+        id: linkManager
+        manager: quickdditManager
+        commentModel: commentModel
         onSuccess: infoBanner.alert(message);
         onError: infoBanner.alert(errorString);
     }

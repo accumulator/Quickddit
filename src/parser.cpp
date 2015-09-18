@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -133,6 +134,22 @@ Listing<LinkObject> Parser::parseLinkList(const QByteArray &json)
 
     return linkList;
 }
+
+LinkObject Parser::parseLinkEditResponse(const QByteArray &json)
+{
+    bool ok;
+    const QVariantMap root = QtJson::parse(QString::fromUtf8(json), ok).toMap();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    const QVariant linkMap = root.value("json").toMap().value("data").toMap()
+            .value("things").toList().first();
+
+    LinkObject link = parseLinkThing(linkMap);
+
+    return link;
+}
+
 
 // Private
 QList<CommentObject> parseCommentListingJson(const QVariantMap &json, const QString &linkAuthor, int depth)
@@ -382,6 +399,23 @@ QString Parser::parseNewCaptchaResponse(const QByteArray &json)
     Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
 
     return data.value("iden").toString();
+}
+
+QList<QString> Parser::parseErrors(const QByteArray &json)
+{
+    bool ok;
+    const QVariantList errors = QtJson::parse(json, ok).toMap().value("json").toMap().value("errors").toList();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    QList<QString> result;
+
+    foreach(const QVariant &error, errors) {
+        // only add the error code for now
+        result.append(error.toList().first().toString());
+    }
+
+    return result;
 }
 
 // Private

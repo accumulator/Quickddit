@@ -48,6 +48,11 @@ AbstractPage {
         linkModel.refresh(false);
     }
 
+    function newLink() {
+        var p = {linkManager: linkManager, subreddit: linkModel.subreddit};
+        pageStack.push(Qt.resolvedUrl("NewLinkPage.qml"), p);
+    }
+
     property Component __multiredditModelComponent: Component {
         MultiredditModel {
             manager: quickdditManager
@@ -111,6 +116,11 @@ AbstractPage {
                 }
             }
             MenuItem {
+                text: "New Link"
+                visible: linkModel.location == LinkModel.Subreddit
+                onClicked: newLink();
+            }
+            MenuItem {
                 text: "Refresh"
                 onClicked: linkModel.refresh(false);
             }
@@ -145,6 +155,17 @@ AbstractPage {
         id: linkModel
         manager: quickdditManager
         onError: infoBanner.alert(errorString)
+    }
+
+    LinkManager {
+        id: linkManager
+        manager: quickdditManager
+        linkModel: linkModel
+        onSuccess: {
+            infoBanner.alert(message);
+            pageStack.pop();
+        }
+        onError: infoBanner.alert(errorString);
     }
 
     VoteManager {

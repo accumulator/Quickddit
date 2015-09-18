@@ -48,6 +48,21 @@ AbstractPage {
         dialog.open();
     }
 
+    function __createLinkTextDialog(title, fullname, originalText) {
+        if (!__textAreaDialogComponent)
+            __textAreaDialogComponent = Qt.createComponent("TextAreaDialog.qml");
+        var dialog = __textAreaDialogComponent.createObject(commentPage, {title: title, text: originalText || ""});
+        dialog.statusChanged.connect(function() {
+            if (dialog.status == DialogStatus.Closed) {
+                dialog.destroy(250);
+            }
+        });
+        dialog.accepted.connect(function() {
+            linkManager.editLinkText(fullname, dialog.text);
+        });
+        dialog.open();
+    }
+
     function loadMoreChildren(index, children) {
         commentModel.moreComments(index, children);
     }
@@ -92,6 +107,12 @@ AbstractPage {
         id: menu
 
         MenuLayout {
+            MenuItem {
+                text: "Edit Link"
+                visible: link.author === appSettings.redditUsername && link.isSelfPost
+                onClicked: __createLinkTextDialog("Edit Link", link.fullname, link.rawText);
+            }
+
             MenuItem {
                 text: "Share"
                 enabled: !!link
@@ -383,6 +404,14 @@ AbstractPage {
             else if (fullname.indexOf("t3") === 0) // link
                 commentModel.changeLinkLikes(fullname, likes);
         }
+        onError: infoBanner.alert(errorString);
+    }
+
+    LinkManager {
+        id: linkManager
+        manager: quickdditManager
+        commentModel: commentModel
+        onSuccess: infoBanner.alert(message);
         onError: infoBanner.alert(errorString);
     }
 

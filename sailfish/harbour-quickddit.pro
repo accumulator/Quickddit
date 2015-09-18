@@ -19,6 +19,7 @@ CONFIG += sailfishapp
 INCLUDEPATH += ..
 
 HEADERS += \
+    ../src/linkmanager.h \
     ../src/linkobject.h \
     ../src/linkmodel.h \
     ../src/utils.h \
@@ -46,6 +47,7 @@ HEADERS += \
     ../src/captchamanager.h
 
 SOURCES += main.cpp \
+    ../src/linkmanager.cpp \
     ../src/linkobject.cpp \
     ../src/linkmodel.cpp \
     ../src/utils.cpp \
@@ -118,4 +120,5 @@ OTHER_FILES += \
     qml/Bubble.qml \
     qml/VideoViewPage.qml \
     qml/AbstractDialog.qml \
-    qml/Captcha.qml
+    qml/Captcha.qml \
+    qml/NewLinkPage.qml
