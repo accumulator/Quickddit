@@ -36,6 +36,7 @@
 #include "src/votemanager.h"
 #include "src/commentmanager.h"
 #include "src/captchamanager.h"
+#include "src/linkmanager.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -59,6 +60,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<VoteManager>("Quickddit.Core", 1, 0, "VoteManager");
     qmlRegisterType<CommentManager>("Quickddit.Core", 1, 0, "CommentManager");
     qmlRegisterType<CaptchaManager>("Quickddit.Core", 1, 0, "CaptchaManager");
+    qmlRegisterType<LinkManager>("Quickddit.Core", 1, 0, "LinkManager");
 
     QmlApplicationViewer viewer;
     viewer.rootContext()->setContextProperty("APP_VERSION", APP_VERSION);
