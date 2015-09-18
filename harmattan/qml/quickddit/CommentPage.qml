@@ -118,11 +118,6 @@ AbstractPage {
                 enabled: !!link
                 onClicked: QMLUtils.shareUrl(QMLUtils.getRedditShortUrl(link.fullname), link.title);
             }
-            MenuItem {
-                text: "Permalink"
-                enabled: !!link
-                onClicked: globalUtils.createOpenLinkDialog(QMLUtils.toAbsoluteUrl(link.permalink));
-            }
         }
     }
 
@@ -286,12 +281,18 @@ AbstractPage {
                         iconSource: "image://theme/icon-m-toolbar-gallery" + (enabled ? "" : "-dimmed")
                                     + (appSettings.whiteTheme ? "" : "-white")
                         enabled: globalUtils.previewableImage(link.url)
-                        onClicked: globalUtils.openImageViewPage(link.url);
+                                 || (globalUtils.redditLink(link.url) && !link.isSelfPost)
+                        onClicked: {
+                            if (globalUtils.previewableImage(link.url)) {
+                                globalUtils.openImageViewPage(link.url);
+                            } else if (globalUtils.redditLink(link.url)) {
+                                globalUtils.openRedditLink(link.url);
+                            }
+                        }
                     }
 
                     Button {
                         iconSource: "image://theme/icon-l-browser-main-view"
-                        enabled: !link.isSelfPost
                         onClicked: globalUtils.openNonPreviewLink(link.url);
                     }
                 }

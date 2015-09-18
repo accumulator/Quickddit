@@ -99,12 +99,7 @@ PageStackWindow {
 
         function openNonPreviewLink(url) {
             url = QMLUtils.toAbsoluteUrl(url);
-            if (!url)
-                return;
-
-            if (redditLink(url))
-                openRedditLink(url);
-            else
+            if (url)
                 createOpenLinkDialog(url);
         }
 
