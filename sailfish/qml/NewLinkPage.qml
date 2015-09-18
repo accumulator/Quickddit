@@ -80,6 +80,8 @@ AbstractPage {
                 id: linkDescription
                 anchors { left: parent.left; right: parent.right }
                 placeholderText: "Link Description"
+                enabled: selfLinkSwitch.checked
+                visible: enabled
                 height: Math.max(implicitHeight, Theme.itemSizeLarge * 3)
             }
 
