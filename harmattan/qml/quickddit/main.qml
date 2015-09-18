@@ -169,4 +169,9 @@ PageStackWindow {
             }
         }
     }
+
+    CaptchaManager {
+        id: captchaManager
+        manager: quickdditManager
+    }
 }
