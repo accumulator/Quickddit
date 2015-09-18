@@ -35,6 +35,7 @@
 #include "src/imgurmanager.h"
 #include "src/votemanager.h"
 #include "src/commentmanager.h"
+#include "src/captchamanager.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -57,6 +58,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<ImgurManager>("Quickddit.Core", 1, 0, "ImgurManager");
     qmlRegisterType<VoteManager>("Quickddit.Core", 1, 0, "VoteManager");
     qmlRegisterType<CommentManager>("Quickddit.Core", 1, 0, "CommentManager");
+    qmlRegisterType<CaptchaManager>("Quickddit.Core", 1, 0, "CaptchaManager");
 
     QmlApplicationViewer viewer;
     viewer.rootContext()->setContextProperty("APP_VERSION", APP_VERSION);
