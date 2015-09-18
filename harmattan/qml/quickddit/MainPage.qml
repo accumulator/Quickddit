@@ -92,6 +92,15 @@ AbstractPage {
 
         MenuLayout {
             MenuItem {
+                text: "New Link"
+                visible: linkModel.location == LinkModel.Subreddit
+                onClicked: {
+                    var p = {linkManager: linkManager, subreddit: linkModel.subreddit};
+                    pageStack.push(Qt.resolvedUrl("NewLinkPage.qml"), p);
+                }
+            }
+
+            MenuItem {
                 text: "Subreddits"
                 onClicked: dialogManager.createSubredditDialog();
             }
@@ -150,6 +159,17 @@ AbstractPage {
         id: linkModel
         manager: quickdditManager
         onError: infoBanner.alert(errorString)
+    }
+
+    LinkManager {
+        id: linkManager
+        manager: quickdditManager
+        linkModel: linkModel
+        onSuccess: {
+            infoBanner.alert(message);
+            pageStack.pop();
+        }
+        onError: infoBanner.alert(errorString);
     }
 
     VoteManager {
