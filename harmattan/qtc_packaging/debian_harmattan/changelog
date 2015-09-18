@@ -1,3 +1,13 @@
+quickddit (0.6.0) unstable; urgency=low
+  * mark message as read on open
+  * add link implemented
+  * add/edit self-post implemented
+  * captcha supported
+  * comment page preview and external link buttons consistency
+  * language subreddit format added acceptable subreddit regex
+
+ -- Sander van Grieken <sander@outrightsolutions.nl>  Thu, 18 Sep 2015 20:30:04 +0100
+
 quickddit (0.5.0) unstable; urgency=low
   * use https for anon access to reddit
   * handle invalid OAuth refresh token more gracefuly

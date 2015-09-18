@@ -5,6 +5,15 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Fri Sep 18 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.6.0-1
+- add link implemented
+- add/edit self-post implemented
+- captcha supported
+- rendering of preformatted text fixed (thanks Anatolyl)
+- horizontal scrolling of wide post/comments (thanks Anatolyl)
+- comment page preview and external link buttons consistency
+- multireddits moved from pulley menu to subreddits page
+
 * Fri Jul 17 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.5.1-1
 - mark message as read on open
 - correct placement of InfoBanner in other orientations (fix #3)
