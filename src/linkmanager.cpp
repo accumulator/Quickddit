@@ -56,9 +56,11 @@ void LinkManager::submit(const QString &subreddit, const QString &captcha, const
 
     QHash<QString, QString> parameters;
     parameters.insert("api_type", "json");
-    // captcha
-    parameters.insert("captcha", captcha);
-    parameters.insert("iden", iden);
+    // captcha, if defined
+    if (captcha != "") {
+        parameters.insert("captcha", captcha);
+        parameters.insert("iden", iden);
+    }
     // self?
     parameters.insert("kind", url.isEmpty() ? "self" : "link");
     if (!url.isEmpty())
