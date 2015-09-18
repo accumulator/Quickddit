@@ -85,6 +85,7 @@ AbstractPage {
 
             Captcha {
                 id: captcha
+                visible: captchaManager.captchaNeeded
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
@@ -92,7 +93,7 @@ AbstractPage {
                 text: "Submit"
                 anchors.horizontalCenter: parent.horizontalCenter
                 enabled: linkTitle.text.length > 0 /* official limits? */
-                         && captcha.userInput.text.length > 0
+                         && (!captchaManager.captchaNeeded || captcha.userInput.length > 0)
                          && ((selfLinkSwitch.checked && linkDescription.text.length > 0) || linkUrl.acceptableInput)
                 onClicked: submit()
             }

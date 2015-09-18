@@ -30,7 +30,7 @@ Rectangle {
     width: refresh.width + captcha.width + constant.paddingLarge + 2 * border.width
     height: captcha.height + description.height + _userInput.height // + 2 * constant.paddingSmall + 2 * border.width
 
-    property alias userInput: _userInput
+    property alias userInput: _userInput.text
     property real captchaScale: 2
 
     Column {
