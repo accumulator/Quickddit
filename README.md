@@ -2,7 +2,7 @@ Quickddit
 =========
 
 Quickddit is a free and open source Reddit client for mobile phones. Quickddit is **not** an official client
-of Reddit and does not affiliated with Reddit in anyway.
+of Reddit and is not affiliated with Reddit in anyway.
 
 Quickddit is developed using Qt and currently available for MeeGo Harmattan (Qt 4.7.4) and Sailfish OS (Qt 5.1).
 The logic part is developed in C++ while the UI is developed in QML.
@@ -28,12 +28,14 @@ Below is the list of TODOs I planned for future release, before reaching the 1.0
 - View user profile
 
 Additional TODOs after the 1.0.0 milestone
+- Reddit Live
 - Buy [reddit gold](http://www.reddit.com/gold/about)
+- Multiple accounts
 
 Download
 --------
-- MeeGo Harmattan (Nokia N9/N950): [OpenRepos](https://openrepos.net/content/dicksonleong/quickddit-harmattan)
-- SailfishOS (Jolla): [OpenRepos](https://openrepos.net/content/dicksonleong/quickddit-sailfishos)
+- MeeGo Harmattan (Nokia N9/N950): [OpenRepos](https://openrepos.net/content/accumulator/quickddit)
+- SailfishOS (Jolla): [OpenRepos](https://openrepos.net/content/accumulator/quickddit-0)
 
 License
 -------
