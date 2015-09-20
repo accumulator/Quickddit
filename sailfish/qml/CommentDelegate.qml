@@ -18,6 +18,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import harbour.quickddit.Core 1.0
 
 Item {
     id: commentDelegate
@@ -39,6 +40,35 @@ Item {
 
     width: ListView.view.width
     height: moreChildrenLoader.status == Loader.Null ? mainItem.height : moreChildrenLoader.height + constant.paddingMedium
+
+    ListView.onAdd: ParallelAnimation {
+        NumberAnimation {
+            target: commentDelegate
+            properties: "opacity"
+            from: 0; to: 1
+            duration: commentPage.morechildren_animation ? 500 : 100
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            target: commentDelegate
+            properties: "x"
+            from: commentDelegate.x + commentDelegate.width / 2; to: commentDelegate.x
+            duration: commentPage.morechildren_animation ? 400 : 0
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            target: commentDelegate
+            properties: "height"
+            from: 0; to: commentDelegate.height
+            duration: commentPage.morechildren_animation ? 500 : 0
+            easing.type: Easing.InOutQuad
+        }
+    }
+
+    ListView.onRemove: RemoveAnimation {
+        target: commentDelegate
+        duration: commentPage.morechildren_animation ? 500 : 0
+    }
 
     Row {
         id: lineRow
@@ -102,7 +132,7 @@ Item {
                 left: parent.left; right: parent.right; margins: constant.paddingMedium
                 verticalCenter: parent.verticalCenter
             }
-            height: authorTextWrapper.height + commentBodyText.paintedHeight
+            height: childrenRect.height
             spacing: constant.paddingSmall
 
             Item {
@@ -117,6 +147,7 @@ Item {
                     color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
                                             : constant.colorDisabled
                     font.bold: true
+                    font.italic: model.author.split(" ").length > 1
                     text: model.author
                 }
 
@@ -169,18 +200,56 @@ Item {
                     text: " · " + model.created
                 }
             }
-
-            Text {
-                id: commentBodyText
-                anchors { left: parent.left; right: parent.right }
-                font.pixelSize: constant.fontSizeDefault
-                color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
-                                        : constant.colorDisabled
-                wrapMode: Text.Wrap
-                textFormat: Text.RichText
-                text: model.body
-                onLinkActivated: globalUtils.openInTextLink(link);
+            Loader {
+                id: commentLoader
+                sourceComponent: commentBodyTextInnerComponent
             }
+            Component {
+                id: wideCommentComponent
+                Flickable {
+                    id: commentBodyText
+                    width: mainColumn.width
+                    height: childrenRect.height
+                    anchors { left: mainColumn.left; right: mainColumn.right; }
+                    contentWidth: commentBodyTextInner.paintedWidth
+                    contentHeight: commentBodyTextInner.height
+                    flickableDirection: Flickable.HorizontalFlick
+                    clip: true
+
+                    MouseArea {
+                        anchors.fill: parent
+                        propagateComposedEvents: true
+                        onClicked: commentDelegate.clicked()
+                        onPressed: mainItem.pressed()
+                        onReleased: mainItem.released()
+                    }
+
+                    Loader {
+                        id: commentBodyTextInner
+                        sourceComponent: commentBodyTextInnerComponent
+                    }
+                }
+            }
+            Component {
+                id: commentBodyTextInnerComponent
+                Text {
+                    id: commentBodyTextInner
+                    width: mainColumn.width
+                    font.pixelSize: constant.fontSizeDefault
+                    color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                            : constant.colorDisabled
+                    wrapMode: Text.Wrap
+                    textFormat: Text.RichText
+                    text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
+                    onLinkActivated: globalUtils.openLink(link);
+                    Component.onCompleted: {
+                        if (commentBodyTextInner.paintedWidth > mainItem.width && commentLoader.sourceComponent != wideCommentComponent) {
+                            commentLoader.sourceComponent = wideCommentComponent
+                        }
+                    }
+                }
+            }
+
         }
 
         onClicked: commentDelegate.clicked();
@@ -195,27 +264,30 @@ Item {
             id: moreChildrenComponent
 
             Column {
+                id: morechildrencolumn
                 height: childrenRect.height
 
-                Label {
-                    anchors { left: loadMoreButton.left; right: loadMoreButton.right }
-                    color: constant.colorMid
-                    font.pixelSize: constant.fontSizeMedium
-                    horizontalAlignment: Text.AlignHCenter
-                    elide: Text.ElideRight
-                    visible: model.moreChildrenCount > 0
-                    text: qsTr("%n replies hidden", "", model.moreChildrenCount)
+                property real buttonScale: __buttonScale()
+
+                function __buttonScale() {
+                    switch (appSettings.fontSize) {
+                    case AppSettings.TinyFontSize: return 0.75;
+                    case AppSettings.SmallFontSize: return 0.90;
+                    default: return 1;
+                    }
                 }
 
                 Button {
                     id: loadMoreButton
-                    text: model.moreChildrenCount > 0 ? qsTr("Load more comments") : qsTr("Continue this thread");
+                    scale: morechildrencolumn.buttonScale
+                    text: model.moreChildrenCount > 0 ? qsTr("Load %n hidden comments", "", model.moreChildrenCount) : qsTr("Continue this thread");
+
                     onClicked: {
                         if (model.moreChildrenCount > 0) {
-                            infoBanner.alert("Not implemented yet"); // TODO
+                            commentPage.loadMoreChildren(model.index, model.moreChildren);
                         } else {
                             var link = QMLUtils.toAbsoluteUrl(linkPermalink + model.fullname.substring(3));
-                            globalUtils.openInTextLink(link);
+                            globalUtils.openLink(link);
                         }
                     }
                 }
@@ -223,5 +295,4 @@ Item {
         }
     }
 
-    ListView.onRemove: mainItem.animateRemoval(commentDelegate);
 }
