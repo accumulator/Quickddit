@@ -92,7 +92,7 @@ AbstractPage {
 
         MenuLayout {
             MenuItem {
-                text: "New Link"
+                text: "New Post"
                 visible: linkModel.location == LinkModel.Subreddit
                 onClicked: {
                     var p = {linkManager: linkManager, subreddit: linkModel.subreddit};

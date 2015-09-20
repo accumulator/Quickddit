@@ -22,7 +22,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: newLinkPage
-    title: "New Link"
+    title: "New Post"
 
     property string subreddit
     property QtObject linkManager

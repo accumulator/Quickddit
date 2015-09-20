@@ -116,7 +116,7 @@ AbstractPage {
                 }
             }
             MenuItem {
-                text: "New Link"
+                text: "New Post"
                 visible: linkModel.location == LinkModel.Subreddit
                 onClicked: newLink();
             }

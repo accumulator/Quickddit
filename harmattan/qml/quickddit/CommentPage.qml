@@ -108,9 +108,9 @@ AbstractPage {
 
         MenuLayout {
             MenuItem {
-                text: "Edit Link"
+                text: "Edit Post"
                 visible: link.author === appSettings.redditUsername && link.isSelfPost
-                onClicked: __createLinkTextDialog("Edit Link", link.fullname, link.rawText);
+                onClicked: __createLinkTextDialog("Edit Post", link.fullname, link.rawText);
             }
 
             MenuItem {

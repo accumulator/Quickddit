@@ -67,9 +67,9 @@ AbstractPage {
         PullDownMenu {
             MenuItem {
                 visible: link.author === appSettings.redditUsername && link.isSelfPost
-                text: "Edit Link"
+                text: "Edit Post"
                 onClicked: {
-                    __createLinkTextDialog("Edit Link", link.fullname, link.rawText);
+                    __createLinkTextDialog("Edit Post", link.fullname, link.rawText);
                 }
             }
 
