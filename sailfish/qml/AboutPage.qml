@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,6 +24,18 @@ AbstractPage {
     id: aboutPage
     title: "About"
 
+    Image {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        width: aboutPage.width * 0.8
+        height: aboutPage.height * 0.8
+
+        fillMode: Image.PreserveAspectFit
+        source: "./cover/background.png"
+        opacity: 0.1
+        smooth: true
+    }
+
     Flickable {
         id: flickable
         anchors.fill: parent
@@ -34,14 +47,6 @@ AbstractPage {
             id: columnWrapper
             anchors { left: parent.left; right: parent.right; top: header.bottom }
             height: Math.max(column.height + 2 * constant.paddingMedium, flickable.height - header.height)
-
-            Image {
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: column.top
-                source: "./cover/background.png"
-                opacity: 0.2
-                scale: 1.5
-            }
 
             Column {
                 id: column
