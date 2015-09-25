@@ -94,6 +94,7 @@ AbstractPage {
             MenuItem {
                 text: "New Post"
                 visible: linkModel.location == LinkModel.Subreddit
+                enabled: quickdditManager.isSignedIn
                 onClicked: {
                     var p = {linkManager: linkManager, subreddit: linkModel.subreddit};
                     pageStack.push(Qt.resolvedUrl("NewLinkPage.qml"), p);

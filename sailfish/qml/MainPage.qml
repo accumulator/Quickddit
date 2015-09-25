@@ -118,6 +118,7 @@ AbstractPage {
             MenuItem {
                 text: "New Post"
                 visible: linkModel.location == LinkModel.Subreddit
+                enabled: quickdditManager.isSignedIn
                 onClicked: newLink();
             }
             MenuItem {
