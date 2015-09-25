@@ -29,6 +29,7 @@ AbstractPage {
     property alias linkPermalink: commentModel.permalink
     property VoteManager linkVoteManager
     property bool morechildren_animation
+    property bool widePage: commentPage.width > 700
 
     function refresh(refreshOlder) {
         morechildren_animation = false
@@ -107,171 +108,52 @@ AbstractPage {
                 PageHeader { title: commentPage.title }
 
                 Item {
-                    id: titleWrapper
                     anchors { left: parent.left; right: parent.right }
-                    height: Math.max(titleColumn.height, thumbnail.height)
+                    height: Math.max(postInfoText.height + postButtonRow.height, thumbnail.height) + constant.paddingMedium
 
-                    Column {
-                        id: titleColumn
+                    PostInfoText {
+                        id: postInfoText
+                        link: commentModel.link
+
                         anchors {
                             left: parent.left
                             right: thumbnail.left
                             margins: constant.paddingMedium
-                            verticalCenter: parent.verticalCenter
-                        }
-                        height: childrenRect.height
-                        spacing: constant.paddingMedium
-
-                        Bubble {
-                            visible: link.flairText != ""
-                            text: link.flairText
-                        }
-
-                        Text {
-                            id: titleText
-                            anchors { left: parent.left; right: parent.right }
-                            wrapMode: Text.Wrap
-                            font.pixelSize: constant.fontSizeDefault
-                            color: constant.colorLight
-                            font.bold: true
-                            text: link.title + " (" + link.domain + ")"
-                        }
-
-                        Text {
-                            id: timeAndAuthorText
-                            anchors { left: parent.left; right: parent.right }
-                            wrapMode: Text.Wrap
-                            font.pixelSize: constant.fontSizeDefault
-                            color: constant.colorMid
-                            text: "submitted " + link.created + " by " + link.author +
-                                  " to " + link.subreddit
-                        }
-
-                        Row {
-                            anchors { left: parent.left; right: parent.right }
-                            spacing: constant.paddingMedium
-
-                            Text {
-                                font.pixelSize: constant.fontSizeDefault
-                                color: {
-                                    if (link.likes > 0)
-                                        return constant.colorLikes;
-                                    else if (link.likes < 0)
-                                        return constant.colorDislikes;
-                                    else
-                                        return constant.colorLight;
-                                }
-                                text: link.score + " points"
-                            }
-
-                            Text {
-                                font.pixelSize: constant.fontSizeDefault
-                                color: constant.colorLight
-                                text: "·"
-                            }
-
-                            Text {
-                                font.pixelSize: constant.fontSizeDefault
-                                color: constant.colorLight
-                                text: link.commentsCount + " comments"
-                            }
-
-                            Bubble {
-                                color: "green"
-                                visible: link.isSticky
-                                text: "Sticky"
-                            }
-
-                            Bubble {
-                                color: "red"
-                                visible: link.isNSFW
-                                text: "NSFW"
-                            }
-
-                            Bubble {
-                                color: "green"
-                                visible: link.isPromoted
-                                text: "Promoted"
-                            }
                         }
                     }
 
-                    Image {
+                    PostThumbnail {
                         id: thumbnail
+                        link: commentModel.link
+
+                        function scaleToText() {
+                            var scale = (postInfoText.height + postButtonRow.height) / thumbnail.sourceSize.height;
+                            return Math.max(Math.min(scale, 2.0), 1.0);
+                        }
+
+                        width: widePage ? sourceSize.width * scaleToText() : sourceSize.width
+                        height: widePage ? sourceSize.height * scaleToText() : sourceSize.height
+
                         anchors {
                             right: parent.right
-                            verticalCenter: parent.verticalCenter
-                            rightMargin: constant.paddingMedium
-                        }
-                        source: link.thumbnailUrl
-                        asynchronous: true
-                    }
-                }
-
-                Row {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    height: Theme.iconSizeLarge
-                    spacing: constant.paddingLarge
-
-                    IconButton {
-                        anchors.verticalCenter: parent.verticalCenter
-                        icon.height: Theme.iconSizeLarge - constant.paddingMedium
-                        icon.width: Theme.iconSizeLarge - constant.paddingMedium
-                        icon.source: "image://theme/icon-m-up"
-                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
-                        highlighted: link.likes == 1
-                        onClicked: {
-                            if (highlighted)
-                                linkVoteManager.vote(link.fullname, VoteManager.Unvote)
-                            else
-                                linkVoteManager.vote(link.fullname, VoteManager.Upvote)
+                            top: parent.top
+                            margins: constant.paddingMedium
                         }
                     }
 
-                    IconButton {
-                        anchors.verticalCenter: parent.verticalCenter
-                        icon.height: Theme.iconSizeLarge - constant.paddingMedium
-                        icon.width: Theme.iconSizeLarge - constant.paddingMedium
-                        icon.source: "image://theme/icon-m-down"
-                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
-                        highlighted: link.likes == -1
-                        onClicked: {
-                            if (highlighted)
-                                linkVoteManager.vote(link.fullname, VoteManager.Unvote)
-                            else
-                                linkVoteManager.vote(link.fullname, VoteManager.Downvote)
-                        }
-                    }
+                    Item {
+                        anchors.top: postInfoText.bottom
+                        anchors.left: parent.left
+                        anchors.right: thumbnail.height > postInfoText.height ? thumbnail.left : parent.right
 
-                    IconButton {
-                        anchors.verticalCenter: parent.verticalCenter
-                        icon.height: Theme.iconSizeLarge - constant.paddingMedium
-                        icon.width: Theme.iconSizeLarge - constant.paddingMedium
-                        icon.source: {
-                            return globalUtils.previewableVideo(link.url) ? "image://theme/icon-m-video"
-                                   : globalUtils.redditLink(link.url) ? "image://theme/icon-m-forward" //m-chat
-                                   : "image://theme/icon-m-image";
-                        }
-                        enabled: globalUtils.previewableImage(link.url)
-                                 || globalUtils.previewableVideo(link.url)
-                                 || (globalUtils.redditLink(link.url) && !link.isSelfPost)
-                        onClicked: {
-                            if (globalUtils.previewableImage(link.url)) {
-                                globalUtils.openImageViewPage(link.url);
-                            } else if (globalUtils.previewableVideo(link.url)) {
-                                globalUtils.openVideoViewPage(link.url);
-                            } else if (globalUtils.redditLink(link.url)) {
-                                globalUtils.openRedditLink(link.url);
-                            }
-                        }
-                    }
+                        PostButtonRow {
+                            id: postButtonRow
 
-                    IconButton {
-                        anchors.verticalCenter: parent.verticalCenter
-                        icon.height: Theme.iconSizeLarge - constant.paddingLarge
-                        icon.width: Theme.iconSizeLarge - constant.paddingLarge
-                        icon.source: "image://theme/icon-m-link"
-                        onClicked: globalUtils.openNonPreviewLink(link.url);
+                            anchors.horizontalCenter: parent.horizontalCenter
+
+                            link: commentModel.link
+                            linkVoteManager: commentPage.linkVoteManager
+                        }
                     }
                 }
 
