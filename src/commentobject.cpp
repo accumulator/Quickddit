@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,7 +26,7 @@ class CommentObjectData : public QSharedData
 {
 public:
     CommentObjectData() : score(0), likes(0), distinguished(CommentObject::NotDistinguished),
-        depth(0), isSubmitter(false), isScoreHidden(false), isMoreChildren(false) {}
+        depth(0), isSubmitter(false), isScoreHidden(false), isMoreChildren(false), isCollapsed(false) {}
 
     QString fullname;
     QString author;
@@ -42,6 +43,7 @@ public:
     QList<QString> moreChildren;
     int moreChildrenCount;
     bool isMoreChildren;
+    bool isCollapsed;
 
 private:
     Q_DISABLE_COPY(CommentObjectData)
@@ -227,4 +229,14 @@ bool CommentObject::isMoreChildren() const
 void CommentObject::setIsMoreChildren(bool isMoreChildren)
 {
     d->isMoreChildren = isMoreChildren;
+}
+
+bool CommentObject::isCollapsed() const
+{
+    return d->isCollapsed;
+}
+
+void CommentObject::setIsCollapsed(bool isCollapsed)
+{
+    d->isCollapsed = isCollapsed;
 }
