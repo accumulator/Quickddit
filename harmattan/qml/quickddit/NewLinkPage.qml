@@ -59,7 +59,7 @@ AbstractPage {
             TextField {
                 id: linkTitle
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Link Title"
+                placeholderText: "Post Title"
             }
 
             Row {
@@ -67,7 +67,7 @@ AbstractPage {
 
                 Label {
                     anchors.verticalCenter: selfLinkSwitch.verticalCenter
-                    text: "Self link"
+                    text: "Self Post"
                 }
 
                 Switch {
@@ -79,7 +79,7 @@ AbstractPage {
             TextField {
                 id: linkUrl
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Link URL"
+                placeholderText: "Post URL"
                 enabled: !selfLinkSwitch.checked
                 visible: enabled
                 inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText

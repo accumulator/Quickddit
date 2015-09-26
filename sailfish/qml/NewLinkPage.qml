@@ -54,20 +54,20 @@ AbstractPage {
             TextField {
                 id: linkTitle
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Link Title"
+                placeholderText: "Post Title"
                 labelVisible: false
             }
 
             TextSwitch {
                 id: selfLinkSwitch
-                text: "Self link"
+                text: "Self Post"
                 checked: true
             }
 
             TextField {
                 id: linkUrl
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Link URL"
+                placeholderText: "Post URL"
                 enabled: !selfLinkSwitch.checked
                 visible: enabled
                 labelVisible: false
@@ -79,7 +79,7 @@ AbstractPage {
             TextArea {
                 id: linkDescription
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Link Description"
+                placeholderText: "Post Description"
                 enabled: selfLinkSwitch.checked
                 visible: enabled
                 height: Math.max(implicitHeight, Theme.itemSizeLarge * 3)
