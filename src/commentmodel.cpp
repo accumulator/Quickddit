@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -60,6 +61,26 @@ int CommentModel::rowCount(const QModelIndex &parent) const
     return m_commentList.count();
 }
 
+QHash<int, QByteArray> CommentModel::customRoleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[FullnameRole] = "fullname";
+    roles[AuthorRole] = "author";
+    roles[BodyRole] = "body";
+    roles[RawBodyRole] = "rawBody";
+    roles[ScoreRole] = "score";
+    roles[LikesRole] = "likes";
+    roles[CreatedRole] = "created";
+    roles[DepthRole] = "depth";
+    roles[IsScoreHiddenRole] = "isScoreHidden";
+    roles[IsValidRole] = "isValid";
+    roles[IsAuthorRole] = "isAuthor";
+    roles[MoreChildrenCountRole] = "moreChildrenCount";
+    roles[IsMoreChildrenRole] = "isMoreChildren";
+    roles[MoreChildrenRole] = "moreChildren";
+    return roles;
+}
+
 QVariant CommentModel::data(const QModelIndex &index, int role) const
 {
     Q_ASSERT_X(index.row() < m_commentList.count(), Q_FUNC_INFO, "index out of range");
@@ -101,6 +122,18 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     default:
         qCritical("CommentModel::data(): Invalid role");
         return QVariant();
+    }
+}
+
+QString CommentModel::getSortString(CommentModel::SortType sort)
+{
+    switch (sort) {
+    default: case ConfidenceSort: return "confidence";
+    case TopSort: return "top";
+    case NewSort: return "new";
+    case HotSort: return "hot";
+    case ControversialSort: return "controversial";
+    case OldSort: return "old";
     }
 }
 
@@ -164,6 +197,8 @@ void CommentModel::setCommentPermalink(bool commentPermalink)
     }
 }
 
+// model manipulation methods
+
 void CommentModel::insertComment(CommentObject comment, const QString &replyToFullname)
 {
     int insertIndex = 0;
@@ -225,6 +260,55 @@ void CommentModel::deleteComment(const QString &fullname)
     m_commentList.removeAt(deleteIndex);
     endRemoveRows();
 }
+
+int CommentModel::getParentIndex(int index) const
+{
+    int parentDepth = m_commentList.at(index).depth() - 1;
+    for (int i = index; i >= 0; --i) {
+        if (m_commentList.at(i).depth() == parentDepth)
+            return i;
+    }
+
+    qWarning("CommentModel::getParentIndex(): Cannot find parent index");
+    return index;
+}
+
+void CommentModel::changeLinkLikes(const QString &fullname, int likes)
+{
+    if (!m_link.type() == QVariant::Map) {
+        qWarning("CommentModel::changeLinkLikes(): link is not provided by CommentModel");
+        return;
+    }
+
+    QVariantMap linkMap = m_link.toMap();
+
+    if (linkMap.value("fullname").toString() != fullname) {
+        return;
+    }
+
+    int oldLikes = linkMap.value("likes").toInt();
+    linkMap["likes"] = likes;
+    linkMap["score"] = linkMap["score"].toInt() + (likes - oldLikes);
+    m_link = linkMap;
+    emit linkChanged();
+}
+
+void CommentModel::changeLikes(const QString &fullname, int likes)
+{
+    for (int i = 0; i < m_commentList.count(); ++i) {
+        CommentObject comment = m_commentList.at(i);
+
+        if (comment.fullname() == fullname) {
+            int oldLikes = comment.likes();
+            comment.setLikes(likes);
+            comment.setScore(comment.score() + (comment.likes() - oldLikes));
+            emit dataChanged(index(i), index(i));
+            break;
+        }
+    }
+}
+
+// network methods
 
 void CommentModel::refresh(bool refreshOlder)
 {
@@ -306,73 +390,6 @@ void CommentModel::moreComments(int index, const QVariant &children)
     setBusy(true);
 }
 
-int CommentModel::getParentIndex(int index) const
-{
-    int parentDepth = m_commentList.at(index).depth() - 1;
-    for (int i = index; i >= 0; --i) {
-        if (m_commentList.at(i).depth() == parentDepth)
-            return i;
-    }
-
-    qWarning("CommentModel::getParentIndex(): Cannot find parent index");
-    return index;
-}
-
-void CommentModel::changeLinkLikes(const QString &fullname, int likes)
-{
-    if (!m_link.type() == QVariant::Map) {
-        qWarning("CommentModel::changeLinkLikes(): link is not provided by CommentModel");
-        return;
-    }
-
-    QVariantMap linkMap = m_link.toMap();
-
-    if (linkMap.value("fullname").toString() != fullname) {
-        return;
-    }
-
-    int oldLikes = linkMap.value("likes").toInt();
-    linkMap["likes"] = likes;
-    linkMap["score"] = linkMap["score"].toInt() + (likes - oldLikes);
-    m_link = linkMap;
-    emit linkChanged();
-}
-
-void CommentModel::changeLikes(const QString &fullname, int likes)
-{
-    for (int i = 0; i < m_commentList.count(); ++i) {
-        CommentObject comment = m_commentList.at(i);
-
-        if (comment.fullname() == fullname) {
-            int oldLikes = comment.likes();
-            comment.setLikes(likes);
-            comment.setScore(comment.score() + (comment.likes() - oldLikes));
-            emit dataChanged(index(i), index(i));
-            break;
-        }
-    }
-}
-
-QHash<int, QByteArray> CommentModel::customRoleNames() const
-{
-    QHash<int, QByteArray> roles;
-    roles[FullnameRole] = "fullname";
-    roles[AuthorRole] = "author";
-    roles[BodyRole] = "body";
-    roles[RawBodyRole] = "rawBody";
-    roles[ScoreRole] = "score";
-    roles[LikesRole] = "likes";
-    roles[CreatedRole] = "created";
-    roles[DepthRole] = "depth";
-    roles[IsScoreHiddenRole] = "isScoreHidden";
-    roles[IsValidRole] = "isValid";
-    roles[IsAuthorRole] = "isAuthor";
-    roles[MoreChildrenCountRole] = "moreChildrenCount";
-    roles[IsMoreChildrenRole] = "isMoreChildren";
-    roles[MoreChildrenRole] = "moreChildren";
-    return roles;
-}
-
 void CommentModel::onFinished(QNetworkReply *reply)
 {
     if (reply != 0) {
@@ -423,16 +440,4 @@ void CommentModel::onMoreCommentsFinished(QNetworkReply *reply) {
     m_request->deleteLater();
     m_request = 0;
     setBusy(false);
-}
-
-QString CommentModel::getSortString(CommentModel::SortType sort)
-{
-    switch (sort) {
-    default: case ConfidenceSort: return "confidence";
-    case TopSort: return "top";
-    case NewSort: return "new";
-    case HotSort: return "hot";
-    case ControversialSort: return "controversial";
-    case OldSort: return "old";
-    }
 }
