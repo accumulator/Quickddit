@@ -78,6 +78,7 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     roles[MoreChildrenCountRole] = "moreChildrenCount";
     roles[IsMoreChildrenRole] = "isMoreChildren";
     roles[MoreChildrenRole] = "moreChildren";
+    roles[CollapsedRole] = "isCollapsed";
     return roles;
 }
 
@@ -119,6 +120,7 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     case MoreChildrenCountRole: return comment.moreChildrenCount();
     case IsMoreChildrenRole: return comment.isMoreChildren();
     case MoreChildrenRole: return QVariant(comment.moreChildren());
+    case CollapsedRole: return (comment.isCollapsed());
     default:
         qCritical("CommentModel::data(): Invalid role");
         return QVariant();
@@ -308,6 +310,89 @@ void CommentModel::changeLikes(const QString &fullname, int likes)
     }
 }
 
+void CommentModel::collapse(int index)
+{
+    Q_ASSERT(index < m_commentList.count());
+
+    QList<CommentObject> subtree;
+
+    CommentObject first = m_commentList.at(index);
+    int depth = first.depth();
+
+    int itemIndex = index + 1;
+    for (; itemIndex < m_commentList.count(); ++itemIndex) {
+        if (m_commentList.at(itemIndex).depth() <= depth) {
+            break;
+        }
+        qDebug() << "collapsing" << itemIndex << "at" << m_commentList.at(itemIndex).depth() << "from" << index << first.fullname() << "at" << depth;
+        subtree.append(m_commentList.at(itemIndex)); // reparents?
+    }
+    itemIndex--;
+
+    m_collapsedCommentLists.insert(first.fullname(), subtree);
+
+    qDebug() << "trees" << m_collapsedCommentLists.size() << index << ".." << itemIndex;
+
+    beginRemoveRows(QModelIndex(), index, itemIndex);
+    for (int i = itemIndex; i >= index; i--) {
+        qDebug() << "removing" << i;
+        m_commentList.removeAt(i);
+    }
+    endRemoveRows();
+
+    first.setIsCollapsed(true);
+    first.setMoreChildrenCount(itemIndex - index + 1);
+
+    beginInsertRows(QModelIndex(), index, index);
+    m_commentList.insert(index, first);
+    endInsertRows();
+}
+
+void CommentModel::expand(const QString &fullname)
+{
+    qDebug() << "expand" << fullname;
+    QHash<QString, QList<CommentObject> >::const_iterator i = m_collapsedCommentLists.find(fullname);
+
+    if (i == m_collapsedCommentLists.end()) {
+        qDebug() << fullname << "not found";
+        return;
+    }
+
+    QList<CommentObject> commentList = i.value();
+
+    qDebug() << "found" << commentList.size() << "items in list";
+
+    int itemIndex = -1;
+    for (int i = 0; i < m_commentList.count(); ++i) {
+        if (m_commentList.at(i).fullname() == fullname) {
+            itemIndex = i;
+            break;
+        }
+    }
+
+    if (itemIndex == -1) {
+        qWarning("CommentModel::expand(): Unable to find the comment");
+        return;
+    }
+
+    CommentObject item = m_commentList.at(itemIndex);
+
+    beginRemoveRows(QModelIndex(), itemIndex, itemIndex);
+    m_commentList.removeAt(itemIndex);
+    endRemoveRows();
+
+    item.setIsCollapsed(false);
+
+    beginInsertRows(QModelIndex(), itemIndex, itemIndex + commentList.size());
+    m_commentList.insert(itemIndex++, item);
+    for (int i=0; i < commentList.size(); i++) {
+        m_commentList.insert(itemIndex + i, commentList.at(i));
+    }
+    endInsertRows();
+
+    m_collapsedCommentLists.remove(fullname);
+}
+
 // network methods
 
 void CommentModel::refresh(bool refreshOlder)
@@ -326,6 +411,9 @@ void CommentModel::refresh(bool refreshOlder)
         beginRemoveRows(QModelIndex(), 0, m_commentList.count() - 1);
         m_commentList.clear();
         endRemoveRows();
+
+        // clear side storage
+        m_collapsedCommentLists.clear();
     }
 
     QHash<QString, QString> parameters;
