@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -215,6 +216,10 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: commentDelegate.clicked()
+                    onPressAndHold: {
+                        commentPage.morechildren_animation = true;
+                        commentModel.collapse(index)
+                    }
                 }
 
                 Text {
@@ -237,7 +242,9 @@ Item {
     Loader {
         id: moreChildrenLoader
         anchors { left: lineRow.right; right: parent.right; top: parent.top; margins: constant.paddingMedium }
-        sourceComponent: model.isMoreChildren ? moreChildrenComponent : undefined
+        sourceComponent: model.isMoreChildren ? moreChildrenComponent
+                         : model.isCollapsed ? collapsedChildrenComponent
+                         : undefined
 
         Component {
             id: moreChildrenComponent
@@ -268,6 +275,36 @@ Item {
                             var link = QMLUtils.toAbsoluteUrl(linkPermalink + model.fullname.substring(3));
                             globalUtils.openLink(link);
                         }
+                    }
+                }
+            }
+        }
+
+        Component {
+            id: collapsedChildrenComponent
+
+            Column {
+                id: collapsedChildrenColumn
+                height: childrenRect.height
+
+                property real buttonScale: __buttonScale()
+
+                function __buttonScale() {
+                    switch (appSettings.fontSize) {
+                    case AppSettings.TinyFontSize: return 0.75;
+                    case AppSettings.SmallFontSize: return 0.90;
+                    default: return 1;
+                    }
+                }
+
+                Button {
+                    id: expandChildrenButton
+                    scale: collapsedChildrenColumn.buttonScale
+                    text: qsTr("Show %n collapsed comments", "", model.moreChildrenCount);
+
+                    onClicked: {
+                        commentPage.morechildren_animation = true;
+                        commentModel.expand(model.fullname);
                     }
                 }
             }
