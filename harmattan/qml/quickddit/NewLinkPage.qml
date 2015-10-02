@@ -90,7 +90,7 @@ AbstractPage {
             TextArea {
                 id: linkDescription
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Link Description"
+                placeholderText: "Post Text"
                 enabled: selfLinkSwitch.checked
                 visible: enabled
                 height: Math.max(implicitHeight, Theme.itemSizeLarge * 3)
