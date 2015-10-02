@@ -1,3 +1,9 @@
+quickddit (0.7.0) unstable; urgency=low
+  * collapse/expand comment tree
+  * new post bugfixes/textual changes
+
+ -- Sander van Grieken <sander@outrightsolutions.nl>  Thu, 02 Oct 2015 10:30:00 +0100
+
 quickddit (0.6.0) unstable; urgency=low
   * mark message as read on open
   * add link implemented

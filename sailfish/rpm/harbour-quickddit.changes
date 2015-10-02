@@ -5,6 +5,13 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Fri Oct 02 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.7.0-1
+- collapse/expand comment tree
+- new post bugfixes/textual changes
+- horizontal mode add/edit comment view improvements
+- smarter thumbnail placement/sizing (phone & tablet)
+- remove cover page action, as it was annoying anyway
+
 * Fri Sep 18 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.6.0-1
 - add link implemented
 - add/edit self-post implemented
