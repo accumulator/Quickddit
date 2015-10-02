@@ -209,6 +209,7 @@ AbstractPage {
                         id: viewAllCommentColumn
                         anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
                         height: childrenRect.height
+                        spacing: constant.paddingMedium
 
                         Label {
                             anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
