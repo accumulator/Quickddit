@@ -39,14 +39,4 @@ CoverBackground {
         text: pageStack.currentPage.title || ""
     }
 
-    CoverActionList {
-        enabled: typeof pageStack.currentPage.refresh === 'function'
-        CoverAction {
-            iconSource: "image://theme/icon-cover-refresh"
-            onTriggered: {
-                appWindow.activate();
-                pageStack.currentPage.refresh();
-            }
-        }
-    }
 }
