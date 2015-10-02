@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,14 +23,18 @@ import Sailfish.Silica 1.0
 AbstractDialog {
     id: textAreaDialog
 
-    property alias title: dialogHeader.title
+    property string title
     property alias text: textArea.text
+    property bool verticallyChallenged: textAreaDialog.height < 300
 
     canAccept: text.length > 0
 
     onAccepted: Qt.inputMethod.commit(); // not sure if this is needed
 
-    DialogHeader { id: dialogHeader }
+    DialogHeader {
+        id: dialogHeader
+        title:  verticallyChallenged ? "" : textAreaDialog.title
+    }
 
     Flickable {
         id: flickable
@@ -42,7 +47,7 @@ AbstractDialog {
             font.pixelSize: constant.fontSizeDefault
             anchors { left: parent.left; right: parent.right }
             height: Math.max(implicitHeight, Theme.itemSizeLarge * 3)
-            placeholderText: "Enter your comment here..."
+            placeholderText: verticallyChallenged ? textAreaDialog.title : "Enter your comment here..."
             focus: true
         }
     }
