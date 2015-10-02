@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -85,6 +86,9 @@ public:
 
     bool isMoreChildren() const;
     void setIsMoreChildren(bool isMoreChildren);
+
+    bool isCollapsed() const;
+    void setIsCollapsed(bool isCollapsed);
 
 private:
     QExplicitlySharedDataPointer<CommentObjectData> d;

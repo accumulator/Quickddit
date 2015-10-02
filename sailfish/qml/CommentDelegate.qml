@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -105,6 +106,11 @@ Item {
         enabled: model.isValid
         visible: moreChildrenLoader.status == Loader.Null
 
+        onPressAndHold: {
+            commentPage.morechildren_animation = true;
+            commentModel.collapse(index)
+        }
+
         Rectangle {
             id: highlightRect
             anchors.fill: parent
@@ -201,22 +207,13 @@ Item {
                 }
             }
 
-            Flickable {
-                id: commentBodyText
-                width: parent.width
-                height: childrenRect.height
-                anchors { left: parent.left; right: parent.right; }
-                contentWidth: commentBodyTextInner.paintedWidth
-                contentHeight: commentBodyTextInner.height
-                flickableDirection: Flickable.HorizontalFlick
-                interactive: commentBodyTextInner.paintedWidth > parent.width
-                clip: true
+            Loader {
+                id: commentLoader
+                sourceComponent: normalCommentComponent
+            }
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: commentDelegate.clicked()
-                }
-
+            Component {
+                id: normalCommentComponent
                 Text {
                     id: commentBodyTextInner
                     width: mainColumn.width
@@ -227,8 +224,48 @@ Item {
                     textFormat: Text.RichText
                     text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
                     onLinkActivated: globalUtils.openLink(link);
+
+                    Component.onCompleted: {
+                        if (commentBodyTextInner.paintedWidth > mainItem.width && commentLoader.sourceComponent != wideCommentComponent) {
+                            commentLoader.sourceComponent = wideCommentComponent
+                        }
+                    }
                 }
             }
+
+            Component {
+                id: wideCommentComponent
+                Flickable {
+                    width: mainColumn.width
+                    height: childrenRect.height
+                    anchors { left: mainColumn.left; right: mainColumn.right; }
+                    contentWidth: commentBodyTextInner.paintedWidth
+                    contentHeight: commentBodyTextInner.height
+                    flickableDirection: Flickable.HorizontalFlick
+                    clip: true
+
+                    MouseArea {
+                        anchors.fill: parent
+                        propagateComposedEvents: false
+                        onClicked: commentDelegate.clicked()
+                        onPressed: mainItem.onPressed(mouse)
+                        onReleased: mainItem.onReleased(mouse)
+                    }
+
+                    Text {
+                        id: commentBodyTextInner
+                        width: mainColumn.width
+                        font.pixelSize: constant.fontSizeDefault
+                        color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                                : constant.colorDisabled
+                        wrapMode: Text.Wrap
+                        textFormat: Text.RichText
+                        text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
+                        onLinkActivated: globalUtils.openLink(link);
+                    }
+                 }
+            }
+
         }
 
         onClicked: commentDelegate.clicked();
@@ -237,7 +274,9 @@ Item {
     Loader {
         id: moreChildrenLoader
         anchors { left: lineRow.right; right: parent.right; top: parent.top; margins: constant.paddingMedium }
-        sourceComponent: model.isMoreChildren ? moreChildrenComponent : undefined
+        sourceComponent: model.isMoreChildren ? moreChildrenComponent
+                         : model.isCollapsed ? collapsedChildrenComponent
+                         : undefined
 
         Component {
             id: moreChildrenComponent
@@ -268,6 +307,36 @@ Item {
                             var link = QMLUtils.toAbsoluteUrl(linkPermalink + model.fullname.substring(3));
                             globalUtils.openLink(link);
                         }
+                    }
+                }
+            }
+        }
+
+        Component {
+            id: collapsedChildrenComponent
+
+            Column {
+                id: collapsedChildrenColumn
+                height: childrenRect.height
+
+                property real buttonScale: __buttonScale()
+
+                function __buttonScale() {
+                    switch (appSettings.fontSize) {
+                    case AppSettings.TinyFontSize: return 0.75;
+                    case AppSettings.SmallFontSize: return 0.90;
+                    default: return 1;
+                    }
+                }
+
+                Button {
+                    id: expandChildrenButton
+                    scale: collapsedChildrenColumn.buttonScale
+                    text: qsTr("Show %n collapsed comments", "", model.moreChildrenCount);
+
+                    onClicked: {
+                        commentPage.morechildren_animation = true;
+                        commentModel.expand(model.fullname);
                     }
                 }
             }

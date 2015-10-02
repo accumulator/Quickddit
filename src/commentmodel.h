@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -45,7 +46,8 @@ public:
         IsAuthorRole,
         MoreChildrenCountRole,
         IsMoreChildrenRole,
-        MoreChildrenRole
+        MoreChildrenRole,
+        CollapsedRole
     };
 
     enum SortType {
@@ -88,6 +90,8 @@ public:
     Q_INVOKABLE int getParentIndex(int index) const;
     Q_INVOKABLE void changeLinkLikes(const QString &fullname, int likes);
     Q_INVOKABLE void changeLikes(const QString &fullname, int likes);
+    Q_INVOKABLE void collapse(int index);
+    Q_INVOKABLE void expand(const QString &fullname);
 
 protected:
     QHash<int, QByteArray> customRoleNames() const;
@@ -110,6 +114,8 @@ private:
     bool m_commentPermalink;
     int m_index;
     int m_depth;
+
+    QHash<QString, QList<CommentObject> > m_collapsedCommentLists;
 
     QList<CommentObject> m_commentList;
     APIRequest *m_request;

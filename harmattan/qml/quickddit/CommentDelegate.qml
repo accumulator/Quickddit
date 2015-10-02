@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -70,6 +71,10 @@ Item {
         height: mainColumn.height + 2 * constant.paddingMedium
         enabled: model.isValid
         visible: moreChildrenLoader.status == Loader.Null
+
+        onPressAndHold: {
+            commentModel.collapse(index)
+        }
 
         Rectangle {
             id: highlightRect
@@ -182,7 +187,9 @@ Item {
     Loader {
         id: moreChildrenLoader
         anchors { left: lineRow.right; right: parent.right; top: parent.top; margins: constant.paddingMedium }
-        sourceComponent: model.isMoreChildren ? moreChildrenComponent : undefined
+        sourceComponent: model.isMoreChildren ? moreChildrenComponent
+                         : model.isCollapsed ? collapsedChildrenComponent
+                         : undefined
 
         Component {
             id: moreChildrenComponent
@@ -191,20 +198,10 @@ Item {
                 height: childrenRect.height
                 spacing: constant.paddingMedium
 
-                Text {
-                    anchors { left: loadMoreButton.left; right: loadMoreButton.right }
-                    color: constant.colorMid
-                    font.pixelSize: constant.fontSizeMedium
-                    horizontalAlignment: Text.AlignHCenter
-                    elide: Text.ElideRight
-                    visible: model.moreChildrenCount > 0
-                    text: qsTr("%n replies hidden", "", model.moreChildrenCount)
-                }
-
                 Button {
                     id: loadMoreButton
                     width: Math.min(implicitWidth, parent.width)
-                    text: model.moreChildrenCount > 0 ? qsTr("Load more comments") : qsTr("Continue this thread");
+                    text: model.moreChildrenCount > 0 ? qsTr("Load %n more comments", "", model.moreChildrenCount) : qsTr("Continue this thread");
                     onClicked: {
                         if (model.moreChildrenCount > 0) {
                             commentPage.loadMoreChildren(model.index, model.moreChildren);
@@ -212,6 +209,24 @@ Item {
                             var link = QMLUtils.toAbsoluteUrl(linkPermalink + model.fullname.substring(3));
                             globalUtils.openLink(link);
                         }
+                    }
+                }
+            }
+        }
+
+        Component {
+            id: collapsedChildrenComponent
+
+            Column {
+                height: childrenRect.height
+                spacing: constant.paddingMedium
+
+                Button {
+                    id: expandChildrenButton
+                    width: Math.min(implicitWidth, parent.width)
+                    text: qsTr("Show %n collapsed comments", "", model.moreChildrenCount);
+                    onClicked: {
+                        commentModel.expand(model.fullname);
                     }
                 }
             }
