@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -81,15 +82,6 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "More"
-                onClicked: {
-                    var p = {};
-                    if (linkModel.location == LinkModel.Subreddit)
-                        p.currentSubreddit = linkModel.subreddit;
-                    pageStack.push(Qt.resolvedUrl("MainPageMorePage.qml"), p);
-                }
-            }
-            MenuItem {
                 text: "About " + (linkModel.location == LinkModel.Subreddit ? "/r/" + linkModel.subreddit
                                                                             : "/m/" + linkModel.multireddit)
                 visible: linkModel.location == LinkModel.Subreddit || linkModel.location == LinkModel.Multireddit
@@ -106,6 +98,12 @@ AbstractPage {
                 }
             }
             MenuItem {
+                text: "New Post"
+                visible: linkModel.location == LinkModel.Subreddit
+                enabled: quickdditManager.isSignedIn
+                onClicked: newLink();
+            }
+            MenuItem {
                 text: "Section"
                 onClicked: {
                     globalUtils.createSelectionDialog("Section", sectionModel, linkModel.section,
@@ -116,10 +114,8 @@ AbstractPage {
                 }
             }
             MenuItem {
-                text: "New Post"
-                visible: linkModel.location == LinkModel.Subreddit
-                enabled: quickdditManager.isSignedIn
-                onClicked: newLink();
+                text: "Search"
+                onClicked: pageStack.push(Qt.resolvedUrl("SearchDialog.qml"), {subreddit: linkModel.subreddit});
             }
             MenuItem {
                 text: "Refresh"

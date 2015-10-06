@@ -79,6 +79,7 @@ AbstractDialog {
             id: searchSubredditSwitch
             anchors { left: parent.left; right: parent.right }
             enabled: searchTypeComboBox.currentIndex == 0
+            checked: subreddit !== ""
             text: "Search within this subreddit:"
         }
 

@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2014  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,16 +28,22 @@ AbstractPage {
     property SubredditModel subredditModel
 
     function refresh(subreddit) {
-        var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
+        var mainPage = globalUtils.getMainPage();
         mainPage.refresh(subreddit);
         pageStack.navigateBack();
     }
 
+    function replacePage(newpage) {
+        var mainPage = globalUtils.getMainPage();
+        mainPage.__pushedAttached = false;
+        pageStack.replaceAbove(mainPage, newpage);
+    }
+
     onStatusChanged: {
-        if (status == PageStatus.Active) {
+        if (status === PageStatus.Active) {
             if (quickdditManager.isSignedIn && !subredditModel)
                 subredditModel = subredditModelComponent.createObject(subredditsPage);
-        } else if (status == PageStatus.Inactive) {
+        } else if (status === PageStatus.Inactive) {
             subredditListView.headerItem.resetTextField();
             subredditListView.positionViewAtBeginning();
         }
@@ -49,11 +56,23 @@ AbstractPage {
 
         PullDownMenu {
             visible: !!subredditsPage.subredditModel
+
             MenuItem {
-                enabled: !!subredditModel && !subredditModel.busy
-                text: "Refresh subscribed subreddits"
-                onClicked: subredditModel.refresh(false);
+                text: "About Quickddit"
+                onClicked: replacePage(Qt.resolvedUrl("AboutPage.qml"))
             }
+
+            MenuItem {
+                text: "Settings"
+                onClicked: replacePage(Qt.resolvedUrl("AppSettingsPage.qml"))
+            }
+
+            MenuItem {
+                enabled: quickdditManager.isSignedIn
+                text: "Messages"
+                onClicked: replacePage(Qt.resolvedUrl("MessagePage.qml"));
+            }
+
         }
 
         header: Column {
@@ -102,9 +121,16 @@ AbstractPage {
             }
 
             SectionHeader {
+                id: sectionheader
                 visible: !!subredditModel
                 text: "Subscribed Subreddits"
+
+                MouseArea {
+                    anchors.fill: sectionheader
+                    onClicked: subredditModel.refresh(false);
+                }
             }
+
         }
 
         delegate: SimpleListItem {

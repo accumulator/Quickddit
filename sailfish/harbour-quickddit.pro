@@ -109,7 +109,6 @@ OTHER_FILES += \
     qml/cover/CoverPage.qml \
     qml/cover/quickddit.png \
     qml/TextAreaDialog.qml \
-    qml/MainPageMorePage.qml \
     qml/MultiredditsPage.qml \
     qml/MessagePage.qml \
     qml/MessageDelegate.qml \
