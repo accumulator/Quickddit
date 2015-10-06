@@ -5,6 +5,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Tue Oct 06 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.7.1-1
+- reorganize menus
+- copy comment to clipboard
+
 * Fri Oct 02 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.7.0-1
 - collapse/expand comment tree
 - new post bugfixes/textual changes
