@@ -37,19 +37,19 @@ ContextMenu {
 
     MenuItem {
         id: upvoteButton
-        visible: comment.likes != 1
+        visible: comment.likes !== 1
         enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
         text: "Upvote"
         onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Upvote)
     }
     MenuItem {
-        visible: comment.likes != -1
+        visible: comment.likes !== -1
         enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
         text: "Downvote"
         onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Downvote)
     }
     MenuItem {
-        visible: comment.likes != 0
+        visible: comment.likes !== 0
         enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
         text: "Unvote"
         onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Unvote)
@@ -80,6 +80,14 @@ ContextMenu {
         enabled: comment.depth > 0
         text: "Parent"
         onClicked: __showParentAtDestruction = true;
+    }
+
+    MenuItem {
+        text: "Copy Comment"
+        onClicked: {
+            QMLUtils.copyToClipboard(comment.rawBody);
+            infoBanner.alert(qsTr("Comment copied to clipboard"));
+        }
     }
 
     Component.onDestruction: {
