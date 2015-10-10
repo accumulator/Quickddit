@@ -275,6 +275,17 @@ int CommentModel::getParentIndex(int index) const
     return index;
 }
 
+int CommentModel::getCommentIndex(const QString &comment)
+{
+    for (int i = 0; i < m_commentList.count(); ++i) {
+        if (m_commentList.at(i).fullname() == comment) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
 void CommentModel::changeLinkLikes(const QString &fullname, int likes)
 {
     if (!m_link.type() == QVariant::Map) {

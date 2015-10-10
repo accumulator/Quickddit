@@ -88,6 +88,7 @@ public:
     void refresh(bool refreshOlder);
     Q_INVOKABLE void moreComments(int index, const QVariant &children);
     Q_INVOKABLE int getParentIndex(int index) const;
+    Q_INVOKABLE int getCommentIndex(const QString &comment);
     Q_INVOKABLE void changeLinkLikes(const QString &fullname, int likes);
     Q_INVOKABLE void changeLikes(const QString &fullname, int likes);
     Q_INVOKABLE void collapse(int index);
