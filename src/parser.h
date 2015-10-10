@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,6 +30,7 @@ class CommentObject;
 class SubredditObject;
 class MultiredditObject;
 class MessageObject;
+class UserObject;
 
 template<typename T>
 class Listing : public QList<T>
@@ -65,6 +67,8 @@ QList<QString> parseErrors(const QByteArray &json);
 QList< QPair<QString, QString> > parseImgurImages(const QByteArray &json);
 
 LinkObject parseLinkEditResponse(const QByteArray &json);
+UserObject parseUserAbout(const QByteArray &json);
+
 }
 
 #endif // PARSER_H

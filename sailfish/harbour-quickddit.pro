@@ -57,7 +57,9 @@ HEADERS += \
     ../src/apirequest.h \
     ../src/aboutmultiredditmanager.h \
     ../src/captchamanager.h \
-    ../src/inboxmanager.h
+    ../src/inboxmanager.h \
+    ../src/usermanager.h \
+    ../src/userobject.h
 
 SOURCES += main.cpp \
     dbusapp.cpp \
@@ -89,7 +91,9 @@ SOURCES += main.cpp \
     ../src/apirequest.cpp \
     ../src/aboutmultiredditmanager.cpp \
     ../src/captchamanager.cpp \
-    ../src/inboxmanager.cpp
+    ../src/inboxmanager.cpp \
+    ../src/usermanager.cpp \
+    ../src/userobject.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h

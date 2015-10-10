@@ -29,6 +29,7 @@
 #include "subredditobject.h"
 #include "multiredditobject.h"
 #include "messageobject.h"
+#include "userobject.h"
 #include "utils.h"
 
 QString unescapeHtml(const QString &html)
@@ -471,4 +472,29 @@ QList< QPair<QString, QString> > Parser::parseImgurImages(const QByteArray &json
     }
 
     return imageAndThumbUrlList;
+}
+
+UserObject Parser::parseUserAbout(const QByteArray &json)
+{
+    bool ok;
+    const QVariant root = QtJson::parse(json, ok);
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    UserObject userObject;
+
+    const QVariantMap data = root.toMap().value("data").toMap();
+
+    userObject.setName(data.value("name").toString());
+    userObject.setLinkKarma(data.value("link_karma").toInt());
+    userObject.setCommentKarma(data.value("comment_karma").toInt());
+    userObject.setCreated(data.value("created").toDateTime());
+    userObject.setFriend(data.value("is_friend").toBool());
+    userObject.setHideFromRobots(data.value("hide_from_robots").toBool());
+    userObject.setMod(data.value("is_mod").toBool());
+    userObject.setVerifiedEmail(data.value("has_verified_email").toBool());
+    userObject.setId(data.value("id").toString());
+    userObject.setGold(data.value("is_gold").toBool());
+
+    return userObject;
 }
