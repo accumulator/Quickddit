@@ -86,19 +86,19 @@ Column {
 
         Bubble {
             color: "green"
-            visible: link.isSticky
+            visible: !!link.isSticky
             text: "Sticky"
         }
 
         Bubble {
             color: "red"
-            visible: link.isNSFW
+            visible: !!link.isNSFW
             text: "NSFW"
         }
 
         Bubble {
             color: "green"
-            visible: link.isPromoted
+            visible: !!link.isPromoted
             text: "Promoted"
         }
     }
