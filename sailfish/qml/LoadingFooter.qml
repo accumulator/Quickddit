@@ -27,8 +27,10 @@ Item {
     height: {
         if (!visible)
             return 0;
-        if (listViewItem.count === 0)
-            return listViewItem.height - (listViewItem.headerItem ? listViewItem.headerItem.height : 0)
+        if (listViewItem.count === 0) {
+            var minAvail = listViewItem.height - (listViewItem.headerItem ? listViewItem.headerItem.height : 0)
+            return Math.max(minAvail, busyIndicatorLoader.height + 2 * constant.paddingLarge)
+        }
         return busyIndicatorLoader.height + 2 * constant.paddingLarge
     }
     width: listViewItem.width
