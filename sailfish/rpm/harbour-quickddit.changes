@@ -5,6 +5,12 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Mon Oct 19 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.7.2-1
+- added open/copy source URL to link dialog
+- fix scroll bug when LoadingFooter is visible
+- follow target comment id and show/highlight
+- fix pulley menu not visible when not logged in.
+
 * Tue Oct 06 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.7.1-1
 - reorganize menus
 - copy comment to clipboard
