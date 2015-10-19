@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,6 +25,7 @@ AbstractDialog {
 
     readonly property string title: qsTr("Open URL")
     property string url
+    property string source
 
     property bool __buttonClickAccept: false
 
@@ -39,7 +41,14 @@ AbstractDialog {
         anchors { top: parent.top; left: parent.left; right: parent.right }
         spacing: constant.paddingLarge
 
-        DialogHeader { title: openLinkDialog.title }
+        DialogHeader { }
+
+        Label {
+            anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
+            text: openLinkDialog.title
+            font.pixelSize: constant.fontSizeXXLarge
+            color: constant.colorLight
+        }
 
         Label {
             anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
@@ -49,21 +58,6 @@ AbstractDialog {
             maximumLineCount: 4
             elide: Text.ElideRight
             text: url
-        }
-    }
-
-    Column {
-        anchors { left: parent.left; right: parent.right; bottom: parent.bottom; margins: constant.paddingLarge }
-
-        Button {
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: qsTr("Open URL in web browser")
-            onClicked: {
-                Qt.openUrlExternally(url);
-                infoBanner.alert(qsTr("Launching web browser..."));
-                __buttonClickAccept = true;
-                openLinkDialog.accept();
-            }
         }
 
         Button {
@@ -76,5 +70,50 @@ AbstractDialog {
                 openLinkDialog.accept();
             }
         }
+
+        Label {
+            anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
+            text: "Source"
+            visible: source != ""
+            font.pixelSize: constant.fontSizeLarge
+            color: constant.colorLight
+        }
+
+        Label {
+            anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
+            horizontalAlignment: Text.AlignHCenter
+            color: Theme.highlightColor
+            wrapMode: Text.WrapAnywhere
+            maximumLineCount: 4
+            elide: Text.ElideRight
+            visible: source != ""
+            text: source
+        }
+
+        Button {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("Open in browser")
+            visible: source != ""
+            onClicked: {
+                Qt.openUrlExternally(source);
+                infoBanner.alert(qsTr("Launching web browser..."));
+                __buttonClickAccept = true;
+                openLinkDialog.accept();
+            }
+        }
+
+        Button {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("Copy URL")
+            visible: source != ""
+            onClicked: {
+                QMLUtils.copyToClipboard(source);
+                infoBanner.alert(qsTr("URL copied to clipboard"));
+                __buttonClickAccept = true;
+                openLinkDialog.accept();
+            }
+        }
+
     }
+
 }
