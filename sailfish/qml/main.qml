@@ -166,14 +166,20 @@ ApplicationWindow {
                 createOpenLinkDialog(url);
         }
 
-        function openNonPreviewLink(url) {
+        function openNonPreviewLink(url, source) {
             url = QMLUtils.toAbsoluteUrl(url);
-            if (url)
-                createOpenLinkDialog(url);
+            if (url) {
+                source = QMLUtils.toAbsoluteUrl(source);
+                if (source === url) {
+                    source = undefined
+                }
+
+                createOpenLinkDialog(url,source);
+            }
         }
 
-        function createOpenLinkDialog(url) {
-            pageStack.push(Qt.resolvedUrl("OpenLinkDialog.qml"), {url: url});
+        function createOpenLinkDialog(url, source) {
+            pageStack.push(Qt.resolvedUrl("OpenLinkDialog.qml"), {url: url, source: source});
         }
 
         function createSelectionDialog(title, model, selectedIndex, onAccepted) {

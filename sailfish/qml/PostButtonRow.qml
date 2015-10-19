@@ -85,6 +85,6 @@ Row {
         icon.height: Theme.iconSizeLarge - constant.paddingLarge
         icon.width: Theme.iconSizeLarge - constant.paddingLarge
         icon.source: "image://theme/icon-m-link"
-        onClicked: globalUtils.openNonPreviewLink(link.url);
+        onClicked: globalUtils.openNonPreviewLink(link.url, link.permalink);
     }
 }
