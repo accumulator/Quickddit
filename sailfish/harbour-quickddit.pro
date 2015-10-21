@@ -14,6 +14,8 @@ DEFINES += APP_VERSION=\\\"$$VERSION\\\" Q_OS_SAILFISH
 
 QT *= network
 
+# auto-installs 86x86 icon, desktop file, qml/* is automatically installed by sailfishapp.prf
+# (but IDE don't show these when not in OTHER_FILES, so we still need to list them :( )
 CONFIG += sailfishapp
 
 INCLUDEPATH += ..
@@ -84,6 +86,7 @@ OTHER_FILES += \
     rpm/$${TARGET}.changes \
     $${TARGET}.desktop \
     $${TARGET}.png \
+    qml/cover/CoverPage.qml \
     qml/SubredditsBrowsePage.qml \
     qml/SubredditsPage.qml \
     qml/SubredditDelegate.qml \
@@ -106,8 +109,6 @@ OTHER_FILES += \
     qml/AboutSubredditPage.qml \
     qml/AboutPage.qml \
     qml/AbstractPage.qml \
-    qml/cover/CoverPage.qml \
-    qml/cover/quickddit.png \
     qml/TextAreaDialog.qml \
     qml/MultiredditsPage.qml \
     qml/MessagePage.qml \
@@ -124,3 +125,8 @@ OTHER_FILES += \
     qml/PostThumbnail.qml \
     qml/PostInfoText.qml \
     qml/PostButtonRow.qml
+
+icon128.files = icon128/$${TARGET}.png
+icon128.path = /usr/share/icons/hicolor/128x128/apps
+
+INSTALLS += icon128
