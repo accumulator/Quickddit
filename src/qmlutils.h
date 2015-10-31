@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +21,9 @@
 #define QMLUTILS_H
 
 #include <QtCore/QObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QFile>
 
 class QMLUtils : public QObject
 {
@@ -54,6 +58,20 @@ public:
      * @param url the Reddit relative url
      */
     Q_INVOKABLE QString toAbsoluteUrl(const QString &url);
+
+    Q_INVOKABLE void saveImage(const QString &url);
+
+private slots:
+    void onSaveImageFinished();
+
+signals:
+    void saveImageSucceeded(const QString &name);
+    void saveImageFailed(const QString &name);
+
+private:
+    QNetworkAccessManager m_manager;
+    QNetworkReply* m_reply;
+    QFile *m_imageFile;
 };
 
 #endif // QMLUTILS_H

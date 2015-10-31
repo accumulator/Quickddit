@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,11 +21,15 @@
 
 #include <QtCore/QUrl>
 #include <QtGui/QClipboard>
+#include <QNetworkRequest>
+#include <QDebug>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
   #include <QtGui/QGuiApplication>
+  #include <QStandardPaths>
 #else
   #include <QtGui/QApplication>
+  #include <QDesktopServices>
 #endif
 
 #ifdef Q_OS_HARMATTAN
@@ -100,4 +105,43 @@ QString QMLUtils::toAbsoluteUrl(const QString &url)
         return "https://www.reddit.com" + url;
     else
         return "";
+}
+
+void QMLUtils::saveImage(const QString &url)
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+    QString picturesLocation = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+#else
+    QString picturesLocation = QDesktopServices::storageLocation(QDesktopServices::PicturesLocation);
+#endif
+    QString name = url.split("/").last().split("@").first();
+    QString targetFileName = picturesLocation + "/" + name;
+    if (QFile::exists(targetFileName)) {
+        emit saveImageFailed(name);
+        return;
+    } else {
+        m_imageFile = new QFile;
+        m_imageFile->setFileName(targetFileName);
+
+        QNetworkRequest request;
+        request.setUrl(QUrl(url));
+        m_reply = m_manager.get(request);
+        connect(m_reply, SIGNAL(finished(QNetworkReply*)), this, SLOT(onSaveImageFinished));
+    }
+
+}
+
+void QMLUtils::onSaveImageFinished()
+{
+    if (!m_reply->error()) {
+        m_imageFile->open(QIODevice::WriteOnly);
+        m_imageFile->write(m_reply->readAll());
+        m_imageFile->close();
+        QString filename = m_imageFile->fileName().split("/").last().split("@").first();
+        emit saveImageSucceeded(filename);
+        delete m_imageFile;
+        m_imageFile = 0;
+    }
+    m_reply->deleteLater();
+    m_reply = 0;
 }
