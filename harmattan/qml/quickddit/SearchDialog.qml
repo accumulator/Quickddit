@@ -79,6 +79,7 @@ Sheet {
             id: searchSubredditCheckBox
             anchors { left: parent.left; right: parent.right }
             enabled: searchButton.checked
+            checked: subreddit != "" ? true : false
             text: "Search within this subreddit:"
         }
 
