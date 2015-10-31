@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,6 +24,7 @@ ContextMenu {
     id: root
 
     property string url
+    property string source
 
     platformTitle: Text {
         anchors { left: parent.left; right: parent.right }
@@ -48,6 +50,14 @@ ContextMenu {
             text: "Copy URL"
             onClicked: {
                 QMLUtils.copyToClipboard(url);
+                infoBanner.alert("URL copied to clipboard");
+            }
+        }
+        MenuItem {
+            text: "Copy source URL"
+            visible: source != ""
+            onClicked: {
+                QMLUtils.copyToClipboard(source);
                 infoBanner.alert("URL copied to clipboard");
             }
         }
