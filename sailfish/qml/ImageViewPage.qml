@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -61,12 +62,13 @@ AbstractPage {
                 id: imageItem
 
                 property real prevScale: 0
+                property real fitScale: 0
 
                 function fitToScreen() {
-                    scale = Math.min(imageFlickable.width / width, imageFlickable.height / height)
-                    imageItem.scale = scale
-                    prevScale = scale
-                    pinchArea.minScale = Math.min(scale, 1)
+                    fitScale = Math.min(imageFlickable.width / width, imageFlickable.height / height)
+                    imageItem.scale = fitScale
+                    prevScale = fitScale
+                    pinchArea.minScale = Math.min(fitScale, 1)
                 }
 
                 anchors.centerIn: parent
@@ -188,8 +190,37 @@ AbstractPage {
                 opacity: 0.0
                 anchors.fill: parent
             }
-            
-            
+
+            MouseArea {
+                z: parent.z + 1
+                anchors.fill: parent
+                enabled: imageItem.status == Image.Ready
+
+                onClicked: {
+                    if (!dclickTimer.running) {
+                        dclickTimer.start();
+                        return;
+                    }
+
+                    dclickTimer.stop();
+
+                    if (imageItem.scale > imageItem.fitScale) {
+                        imageFlickable.returnToBounds()
+                        bounceBackAnimation.to = imageItem.fitScale
+                        bounceBackAnimation.start()
+                    } else {
+                        imageFlickable.returnToBounds()
+                        bounceBackAnimation.to = imageItem.fitScale * 2.0
+                        bounceBackAnimation.start()
+                    }
+                }
+
+                Timer {
+                    id: dclickTimer
+                    interval: 300
+                }
+
+            }
         }
 
         ScrollDecorator {}
