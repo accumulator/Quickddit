@@ -34,22 +34,28 @@ Page {
             onClicked: pageStack.pop()
         }
         ToolIcon {
-            platformIconId: "toolbar-undo" + (enabled ? "" : "-dimmed")
-            enabled: imageItem.scale != pinchArea.minScale
-            onClicked: {
-                flickable.returnToBounds()
-                bounceBackAnimation.to = pinchArea.minScale
-                bounceBackAnimation.start()
-            }
-        }
-        ToolIcon {
             iconSource: "image://theme/icon-l-browser-main-view"
             onClicked: globalUtils.createOpenLinkDialog(imgurUrl || imageUrl.toString());
         }
+        ToolIcon {
+            platformIconId: "toolbar-view-menu"
+            onClicked: menu.open()
+        }
+
     }
 
     // to make the image outside of the page not visible during page transitions
     clip: true
+
+    Menu {
+        id: menu
+        MenuLayout {
+            MenuItem {
+                text: "Save to gallery"
+                onClicked: QMLUtils.saveImage(imageUrl.toString());
+            }
+        }
+    }
 
     Flickable {
         id: flickable
@@ -272,5 +278,11 @@ Page {
         property: "source"
         value: imgurManager.imageUrl
         when: imageViewPage.imgurUrl
+    }
+
+    Connections {
+        target: QMLUtils
+        onSaveImageSucceeded: infoBanner.alert("Image saved to gallery");
+        onSaveImageFailed: infoBanner.alert("Image save failed!");
     }
 }
