@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -64,12 +65,14 @@ Page {
             AnimatedImage {
                 id: imageItem
 
-                property real prevScale
+                property real prevScale: 0
+                property real fitScale: 0
 
                 function fitToScreen() {
-                    scale = Math.min(flickable.width / width, flickable.height / height, 1)
-                    pinchArea.minScale = scale
-                    prevScale = scale
+                    fitScale = Math.min(flickable.width / width, flickable.height / height)
+                    imageItem.scale = fitScale
+                    prevScale = fitScale
+                    pinchArea.minScale = Math.min(fitScale,1)
                 }
 
                 anchors.centerIn: parent
@@ -175,6 +178,38 @@ Page {
                 property: "scale"
                 from: imageItem.scale
             }
+
+            MouseArea {
+                z: parent.z + 1
+                anchors.fill: parent
+                enabled: imageItem.status == Image.Ready
+
+                onClicked: {
+                    if (!dclickTimer.running) {
+                        dclickTimer.start();
+                        return;
+                    }
+
+                    dclickTimer.stop();
+
+                    // allow 1% above fitscale to handle rounding errors
+                    if (imageItem.scale > (imageItem.fitScale * 1.01)) {
+                        flickable.returnToBounds()
+                        bounceBackAnimation.to = imageItem.fitScale
+                        bounceBackAnimation.start()
+                    } else {
+                        flickable.returnToBounds()
+                        bounceBackAnimation.to = imageItem.fitScale * 2.5
+                        bounceBackAnimation.start()
+                    }
+                }
+
+                Timer {
+                    id: dclickTimer
+                    interval: 300
+                }
+            }
+
         }
     }
 
