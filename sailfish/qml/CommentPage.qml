@@ -95,6 +95,12 @@ AbstractPage {
                 text: "Refresh"
                 onClicked: refresh(false);
             }
+            MenuItem {
+                text: "/u/" + commentModel.link.author
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("UserPage.qml"), { username: commentModel.link.author } );
+                }
+            }
         }
 
         header: link ? headerComponent : null

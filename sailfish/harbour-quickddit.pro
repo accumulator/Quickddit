@@ -105,6 +105,7 @@ OTHER_FILES += \
     rpm/$${TARGET}.changes \
     $${TARGET}.desktop \
     $${TARGET}.png \
+    iface/org.quickddit.xml \
     qml/cover/CoverPage.qml \
     qml/SubredditsBrowsePage.qml \
     qml/SubredditsPage.qml \
@@ -145,7 +146,7 @@ OTHER_FILES += \
     qml/PostInfoText.qml \
     qml/PostButtonRow.qml \
     qml/QuickdditPageHeader.qml \
-    iface/org.quickddit.xml
+    qml/UserPage.qml
 
 icon128.files = icon128/$${TARGET}.png
 icon128.path = /usr/share/icons/hicolor/128x128/apps
