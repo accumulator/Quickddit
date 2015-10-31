@@ -39,17 +39,12 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "URL"
-                onClicked: globalUtils.createOpenLinkDialog(imgurUrl || imageUrl.toString());
+                text: "Save Image"
+                onClicked: QMLUtils.saveImage(imageUrl.toString());
             }
             MenuItem {
-                text: "Reset zoom"
-                enabled: imageItem.scale != pinchArea.minScale
-                onClicked: {
-                    imageFlickable.returnToBounds()
-                    bounceBackAnimation.to = pinchArea.minScale
-                    bounceBackAnimation.start()
-                }
+                text: "URL"
+                onClicked: globalUtils.createOpenLinkDialog(imgurUrl || imageUrl.toString());
             }
         }
 
@@ -283,5 +278,11 @@ AbstractPage {
         property: "source"
         value: imgurManager.imageUrl
         when: imageViewPage.imgurUrl
+    }
+
+    Connections {
+        target: QMLUtils
+        onSaveImageSucceeded: infoBanner.alert("Image saved to gallery");
+        onSaveImageFailed: infoBanner.alert("Image save failed!");
     }
 }
