@@ -31,7 +31,8 @@ AbstractPage {
 
     function refresh(subreddit) {
         if (subreddit !== undefined) {
-            if (subreddit == "") {
+            linkModel.subreddit = "";
+            if (subreddit === "") {
                 linkModel.location = LinkModel.FrontPage;
             } else if (String(subreddit).toLowerCase() === "all") {
                 linkModel.location = LinkModel.All;
