@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -293,7 +294,7 @@ AbstractPage {
 
                     Button {
                         iconSource: "image://theme/icon-l-browser-main-view"
-                        onClicked: globalUtils.openNonPreviewLink(link.url);
+                        onClicked: globalUtils.openNonPreviewLink(link.url, link.permalink);
                     }
                 }
 

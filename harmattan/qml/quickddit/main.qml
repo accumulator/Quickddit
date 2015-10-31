@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -97,16 +98,22 @@ PageStackWindow {
                 createOpenLinkDialog(url);
         }
 
-        function openNonPreviewLink(url) {
+        function openNonPreviewLink(url, source) {
             url = QMLUtils.toAbsoluteUrl(url);
-            if (url)
-                createOpenLinkDialog(url);
+            if (url) {
+                source = QMLUtils.toAbsoluteUrl(source);
+                if (source === url) {
+                    source = undefined;
+                }
+
+                createOpenLinkDialog(url,source);
+            }
         }
 
-        function createOpenLinkDialog(url) {
+        function createOpenLinkDialog(url, source) {
             if (!__openLinkDialogComponent)
                 __openLinkDialogComponent = Qt.createComponent("OpenLinkDialog.qml");
-            var dialog = __openLinkDialogComponent.createObject(pageStack.currentPage, {url: url});
+            var dialog = __openLinkDialogComponent.createObject(pageStack.currentPage, {url: url, source: source});
             dialog.statusChanged.connect(function() {
                 if (dialog.status == DialogStatus.Closed)
                     dialog.destroy(250);
