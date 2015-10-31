@@ -56,11 +56,11 @@ ApplicationWindow {
         property Component __openLinkDialogComponent: null
 
         function getMainPage() {
-            return pageStack.find(function(page) { return page.objectName == "mainPage"; });
+            return pageStack.find(function(page) { return page.objectName === "mainPage"; });
         }
 
         function previewableVideo(url) {
-            if (/^https?:\/\/((i|m)\.)?gfycat\.com\//.test(url)) {
+            if (/^https?:\/\/(www\.)?gfycat\.com\//.test(url)) {
                 return true
             } else if (/^https?:\/\/mediacru\.sh/.test(url)) {
                 return true
@@ -97,7 +97,7 @@ ApplicationWindow {
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
              else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url)) {
                 var subreddit = /^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.exec(url)[2];
-                var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
+                var mainPage = getMainPage();
                 mainPage.refresh(subreddit);
                 pageStack.pop(mainPage);
             } else
@@ -117,9 +117,9 @@ ApplicationWindow {
             var match
             if ((/^https?:\/\/\S+\.(mp4|avi|mkv|webm)/i.test(url))) {
                 pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { videoUrl: url });
-            } else if (/^https?:\/\/((i|m)\.)?gfycat.com\/.+/.test(url)) {
-                match = /^https?\:\/\/gfycat\.com\/(.+?)$/.exec(url)
-                if (match.length < 2) {
+            } else if (/^https?:\/\/(www\.)?gfycat\.com\/.+/.test(url)) {
+                match = /^https?\:\/\/(www\.)?gfycat\.com\/(.+?)$/.exec(url)
+                if (match.length < 3) {
                     console.log("invalid gfycat url: " + url)
                     return
                 }
@@ -131,7 +131,7 @@ ApplicationWindow {
                     }
                 }
 
-                xhr.open("GET", "http://gfycat.com/cajax/get/" + match[1], true)
+                xhr.open("GET", "http://gfycat.com/cajax/get/" + match[2], true)
                 xhr.send()
             } else if (/^https?:\/\/mediacru\.sh\/.+/.test(url)) {
                 match = /^https?\:\/\/mediacru\.sh\/(.+?)$/.exec(url)
