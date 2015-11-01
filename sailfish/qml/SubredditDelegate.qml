@@ -68,6 +68,7 @@ ListItem {
                 color: "red"
                 visible: model.isNSFW
                 text: "NSFW"
+                font.bold: true
             }
 
         }

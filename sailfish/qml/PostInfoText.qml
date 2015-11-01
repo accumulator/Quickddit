@@ -88,18 +88,21 @@ Column {
             color: "green"
             visible: !!link.isSticky
             text: "Sticky"
+            font.bold: true
         }
 
         Bubble {
             color: "red"
             visible: !!link.isNSFW
             text: "NSFW"
+            font.bold: true
         }
 
         Bubble {
             color: "green"
             visible: !!link.isPromoted
             text: "Promoted"
+            font.bold: true
         }
     }
 }
