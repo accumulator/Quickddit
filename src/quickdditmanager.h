@@ -33,10 +33,14 @@ class AppSettings;
 class QuickdditManager : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(bool isBusy READ isBusy NOTIFY busyChanged)
     Q_PROPERTY(bool isSignedIn READ isSignedIn NOTIFY signedInChanged)
     Q_PROPERTY(AppSettings* settings READ settings WRITE setSettings)
 public:
     explicit QuickdditManager(QObject *parent = 0);
+
+    bool isBusy() const;
+    void setBusy(const bool busy);
 
     bool isSignedIn() const;
 
@@ -78,6 +82,7 @@ signals:
     void signedInChanged();
     void accessTokenSuccess();
     void accessTokenFailure(int code, const QString &errorString);
+    void busyChanged();
 
 private slots:
     void onAccessTokenRequestFinished(QNetworkReply *reply);
@@ -98,6 +103,8 @@ private:
     void refreshAccessToken();
     void updateRedditUsername();
     APIRequest *m_userInfoReply;
+
+    bool m_busy;
 };
 
 #endif // QUICKDDITMANAGER_H

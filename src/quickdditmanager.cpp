@@ -46,6 +46,20 @@ QuickdditManager::QuickdditManager(QObject *parent) :
 {
 }
 
+bool QuickdditManager::isBusy() const
+{
+    return m_busy;
+}
+
+void QuickdditManager::setBusy(const bool busy)
+{
+    if (m_busy == busy)
+        return;
+
+    m_busy = busy;
+    emit busyChanged();
+}
+
 bool QuickdditManager::isSignedIn() const
 {
     return m_settings->hasRefreshToken();
@@ -176,6 +190,8 @@ void QuickdditManager::refreshAccessToken()
         m_accessTokenRequest = 0;
     }
 
+    setBusy(true);
+
     QByteArray refreshToken = m_settings->refreshToken();
     Q_ASSERT(!refreshToken.isEmpty());
 
@@ -238,6 +254,8 @@ void QuickdditManager::onAccessTokenRequestFinished(QNetworkReply *reply)
 
     if (!m_accessToken.isEmpty() && m_settings->redditUsername().isEmpty())
         updateRedditUsername();
+
+    setBusy(false);
 }
 
 void QuickdditManager::onRefreshTokenFinished()
