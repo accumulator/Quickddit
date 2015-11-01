@@ -68,6 +68,12 @@ QString unescapeMarkdown(QString markdown)
     return markdown;
 }
 
+QString unescapeUrl(QString url)
+{
+    url.replace("&amp;", "&");
+    return url;
+}
+
 // Private
 void commentFromMap(CommentObject &comment, const QVariantMap &commentMap)
 {
@@ -108,7 +114,7 @@ LinkObject parseLinkThing(const QVariant &linkThing)
     link.setText(unescapeHtml(linkMapJson.value("selftext_html").toString()));
     link.setRawText(unescapeMarkdown(linkMapJson.value("selftext").toString()));
     link.setPermalink(linkMapJson.value("permalink").toString());
-    link.setUrl(QUrl(linkMapJson.value("url").toString()));
+    link.setUrl(QUrl(unescapeUrl(linkMapJson.value("url").toString())));
     link.setDistinguished(linkMapJson.value("distinguished").toString());
     link.setSticky(linkMapJson.value("stickied").toBool());
     link.setNSFW(linkMapJson.value("over_18").toBool());
