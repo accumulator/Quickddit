@@ -29,7 +29,7 @@ AbstractPage {
         messageModel.refresh(false);
     }
 
-    readonly property variant sectionModel: ["All", /*"Unread",*/ "Message", "Comment Replies", "Post Replies", "Sent"]
+    readonly property variant sectionModel: ["All", "Unread", "Message", "Comment Replies", "Post Replies", "Sent"]
 
     SilicaListView {
         id: messageListView
