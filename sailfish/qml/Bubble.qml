@@ -33,7 +33,7 @@ Text {
         anchors.leftMargin: -5
         anchors.rightMargin: -5
         color: constant.colorMid
-        opacity: 0.2
+        opacity: 0.3
         radius: 6
     }
 }
