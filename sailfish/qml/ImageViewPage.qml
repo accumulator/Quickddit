@@ -205,7 +205,7 @@ AbstractPage {
                         bounceBackAnimation.start()
                     } else {
                         imageFlickable.returnToBounds()
-                        bounceBackAnimation.to = imageItem.fitScale * 2.0
+                        bounceBackAnimation.to = imageItem.fitScale * 2.5
                         bounceBackAnimation.start()
                     }
                 }
