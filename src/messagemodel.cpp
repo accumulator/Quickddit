@@ -85,7 +85,7 @@ void MessageModel::setSection(MessageModel::Section section)
 void MessageModel::refresh(bool refreshOlder)
 {
     if (m_request != 0) {
-        qWarning("MessageModel::refresh(): Aborting acitve network request (Try to aviod!)");
+        qWarning("MessageModel::refresh(): Aborting active network request (Try to avoid!)");
         m_request->disconnect();
         m_request->deleteLater();
         m_request = 0;
@@ -94,8 +94,7 @@ void MessageModel::refresh(bool refreshOlder)
     QString relativeUrl = "/message";
     switch (m_section) {
     case AllSection: relativeUrl += "/inbox"; break;
-    // temporary disable because /message/unread not working
-    //case UnreadSection: relativeUrl += "/unread"; break;
+    case UnreadSection: relativeUrl += "/unread"; break;
     case MessageSection: relativeUrl += "/messages"; break;
     case CommentRepliesSection: relativeUrl += "/comments"; break;
     case PostRepliesSection: relativeUrl += "/selfreply"; break;

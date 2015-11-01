@@ -44,7 +44,7 @@ public:
 
     enum Section {
         AllSection,
-        //UnreadSection, // temporary disable because /message/unread not working
+        UnreadSection,
         MessageSection,
         CommentRepliesSection,
         PostRepliesSection,
