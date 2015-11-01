@@ -13,7 +13,7 @@ Name:       harbour-quickddit
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Reddit client for mobile phones
-Version:    0.7.2
+Version:    0.7.3
 Release:    1
 Group:      Qt/Qt
 License:    GPLv3+

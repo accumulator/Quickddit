@@ -5,6 +5,15 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Nov 01 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.7.3-1
+- include 128x128 tablet icon
+- double-tap alternates zoom levels in image viewer
+- add save to gallery option for images
+- enable Unread section in Messages view
+- fix: properly html-unescape links
+- fix: reset subreddit when navigating to front page or /r/all
+- fix: detect more variants of gfycat urls
+
 * Mon Oct 19 2015 Sander van Grieken <sander@outrightsolutions.nl> 0.7.2-1
 - added open/copy source URL to link dialog
 - fix scroll bug when LoadingFooter is visible

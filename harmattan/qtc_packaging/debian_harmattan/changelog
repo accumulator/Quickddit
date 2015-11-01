@@ -1,3 +1,14 @@
+quickddit (0.7.3) unstable; urgency=low
+  * follow target comment id and show/highlight
+  * added copy source URL to link dialog
+  * by default search within subreddit
+  * double-tap alternates zoom level in image viewer
+  * add save image to gallery option
+  * enable Unread section in message view
+  * fix: properly html-unescape urls
+
+ -- Sander van Grieken <sander@outrightsolutions.nl>  Sun, 01 Nov 2015 12:48:00 +0100
+
 quickddit (0.7.0) unstable; urgency=low
   * collapse/expand comment tree
   * new post bugfixes/textual changes
