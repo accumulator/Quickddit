@@ -391,6 +391,8 @@ AbstractPage {
         permalink: link.permalink
         onError: infoBanner.alert(errorString)
         onCommentLoaded: {
+            if (link.text)
+                 commentListView.headerBodyWrapper.visible = true;
             var path = permalink.split("?")[0].split("/");
             var post = path[path.length-1];
             var postIndex = commentModel.getCommentIndex("t1_" + post);
@@ -398,6 +400,8 @@ AbstractPage {
                 commentListView.positionViewAtIndex(postIndex, ListView.Contain);
                 commentListView.currentIndex = postIndex;
                 commentListView.currentItem.highlight();
+            } else {
+                commentListView.positionViewAtBeginning();
             }
         }
     }
