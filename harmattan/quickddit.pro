@@ -3,7 +3,7 @@ TARGET = quickddit
 
 QT *= network
 
-VERSION = 0.7.3
+VERSION = 0.7.4
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 INCLUDEPATH += ..
