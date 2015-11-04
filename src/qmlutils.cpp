@@ -126,11 +126,7 @@ void QMLUtils::saveImage(const QString &url)
         QNetworkRequest request;
         request.setUrl(QUrl(url));
         m_reply = m_manager.get(request);
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-        connect(m_reply, SIGNAL(finished(QNetworkReply*)), this, SLOT(onSaveImageFinished));
-#else
         connect(m_reply, SIGNAL(finished()), this, SLOT(onSaveImageFinished()));
-#endif
     }
 
 }
