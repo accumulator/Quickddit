@@ -199,7 +199,8 @@ AbstractPage {
 
                     dclickTimer.stop();
 
-                    if (imageItem.scale > imageItem.fitScale) {
+                    // allow 1% above fitscale to handle rounding errors
+                    if (imageItem.scale > (imageItem.fitScale * 1.01)) {
                         imageFlickable.returnToBounds()
                         bounceBackAnimation.to = imageItem.fitScale
                         bounceBackAnimation.start()
