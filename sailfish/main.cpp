@@ -26,6 +26,7 @@
 #include <QtQml/QQmlContext>
 #include <QtQuick/QQuickView>
 #include <sailfishapp.h>
+#include <dbusapp.h>
 
 #include "src/appsettings.h"
 #include "src/qmlutils.h"
@@ -77,6 +78,9 @@ int main(int argc, char *argv[])
 
     QMLUtils qmlUtils;
     view->rootContext()->setContextProperty("QMLUtils", &qmlUtils);
+
+    DbusApp dbusApp;
+    view->rootContext()->setContextProperty("DbusApp", &dbusApp);
 
     view->setSource(SailfishApp::pathTo("qml/main.qml"));
     view->show();

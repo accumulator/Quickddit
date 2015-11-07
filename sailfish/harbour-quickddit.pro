@@ -12,7 +12,7 @@ TARGET = harbour-quickddit
 
 DEFINES += APP_VERSION=\\\"$$VERSION\\\" Q_OS_SAILFISH
 
-QT *= network
+QT *= network dbus
 
 # auto-installs 86x86 icon, desktop file, qml/* is automatically installed by sailfishapp.prf
 # (but IDE don't show these when not in OTHER_FILES, so we still need to list them :( )
@@ -21,6 +21,7 @@ CONFIG += sailfishapp
 INCLUDEPATH += ..
 
 HEADERS += \
+    dbusapp.h \
     ../src/linkmanager.h \
     ../src/linkobject.h \
     ../src/linkmodel.h \
@@ -50,6 +51,7 @@ HEADERS += \
     ../src/inboxmanager.h
 
 SOURCES += main.cpp \
+    dbusapp.cpp \
     ../src/linkmanager.cpp \
     ../src/linkobject.cpp \
     ../src/linkmodel.cpp \
@@ -126,9 +128,13 @@ OTHER_FILES += \
     qml/NewLinkPage.qml \
     qml/PostThumbnail.qml \
     qml/PostInfoText.qml \
-    qml/PostButtonRow.qml
+    qml/PostButtonRow.qml \
+    iface/org.quickddit.xml
 
 icon128.files = icon128/$${TARGET}.png
 icon128.path = /usr/share/icons/hicolor/128x128/apps
 
 INSTALLS += icon128
+
+DBUS_ADAPTORS += iface/org.quickddit.xml
+DBUS_INTERFACES += iface/org.quickddit.xml
