@@ -44,6 +44,9 @@ public:
     QString body() const;
     void setBody(const QString &body);
 
+    QString rawBody() const;
+    void setRawBody(const QString &raw_body);
+
     QDateTime created() const;
     void setCreated(const QDateTime &created);
 

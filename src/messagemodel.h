@@ -33,6 +33,7 @@ public:
         AuthorRole,
         DestinationRole,
         BodyRole,
+        RawBodyRole,
         CreatedRole,
         SubjectRole,
         LinkTitleRole,
@@ -50,6 +51,8 @@ public:
         PostRepliesSection,
         SentSection
     };
+
+    static QVariantMap toMessageVariantMap(const MessageObject &m);
 
     explicit MessageModel(QObject *parent = 0);
 

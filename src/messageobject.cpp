@@ -29,6 +29,7 @@ public:
     QString author;
     QString destination;
     QString body;
+    QString rawBody;
     QDateTime created;
     QString subject;
     QString linkTitle;
@@ -99,6 +100,16 @@ QString MessageObject::body() const
 void MessageObject::setBody(const QString &body)
 {
     d->body = body;
+}
+
+QString MessageObject::rawBody() const
+{
+    return d->rawBody;
+}
+
+void MessageObject::setRawBody(const QString &raw_body)
+{
+    d->rawBody = raw_body;
 }
 
 QDateTime MessageObject::created() const

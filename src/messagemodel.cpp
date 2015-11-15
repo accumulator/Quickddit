@@ -24,6 +24,24 @@
 #include "utils.h"
 #include "parser.h"
 
+QVariantMap MessageModel::toMessageVariantMap(const MessageObject &m)
+{
+    QVariantMap map;
+    map["fullname"] = m.fullname();
+    map["created"] = Utils::getTimeDiff(m.created());
+    map["author"] = m.author();
+    map["destination"] = m.destination();
+    map["subject"] = m.subject();
+    map["body"] = m.body();
+    map["rawBody"] = m.rawBody();
+    map["linkTitle"] = m.linkTitle();
+    map["subreddit"] = m.subreddit();
+    map["context"] = m.context();
+    map["isComment"] = m.isComment();
+    map["isUnread"] = m.isUnread();
+    return map;
+}
+
 MessageModel::MessageModel(QObject *parent) :
     AbstractListModelManager(parent), m_section(AllSection), m_request(0)
 {
@@ -56,6 +74,7 @@ QVariant MessageModel::data(const QModelIndex &index, int role) const
     case AuthorRole: return message.author();
     case DestinationRole: return message.destination();
     case BodyRole: return message.body();
+    case RawBodyRole: return message.rawBody();
     case CreatedRole: return Utils::getTimeDiff(message.created());
     case SubjectRole: return message.subject();
     case LinkTitleRole: return message.linkTitle();
@@ -143,6 +162,7 @@ QHash<int, QByteArray> MessageModel::customRoleNames() const
     roles[AuthorRole] = "author";
     roles[DestinationRole] = "destination";
     roles[BodyRole] = "body";
+    roles[RawBodyRole] = "rawBody";
     roles[CreatedRole] = "created";
     roles[SubjectRole] = "subject";
     roles[LinkTitleRole] = "linkTitle";
