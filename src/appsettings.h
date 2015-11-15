@@ -64,6 +64,9 @@ public:
     OrientationProfile orientationProfile() const;
     void setOrientationProfile(const OrientationProfile profile);
 
+    QString lastSeenMessage() const;
+    void setLastSeenMessage(const QString &lastSeenMessage);
+
 signals:
     void whiteThemeChanged();
     void fontSizeChanged();
@@ -77,6 +80,7 @@ private:
     QString m_redditUsername;
     QByteArray m_refreshToken;
     OrientationProfile m_orientationProfile;
+    QString m_lastSeenMessage;
 };
 
 #endif // APPSETTINGS_H

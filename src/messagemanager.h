@@ -10,9 +10,7 @@ public:
     explicit MessageManager(QObject *parent = 0);
 
     Q_INVOKABLE void reply(const QString &fullname, const QString &rawText);
-
     Q_INVOKABLE void markRead(const QString &fullname);
-
     Q_INVOKABLE void markUnread(const QString &fullname);
 
 signals:

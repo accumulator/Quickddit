@@ -46,7 +46,8 @@ HEADERS += \
     ../src/messagemanager.h \
     ../src/apirequest.h \
     ../src/aboutmultiredditmanager.h \
-    ../src/captchamanager.h
+    ../src/captchamanager.h \
+    ../src/inboxmanager.h
 
 SOURCES += main.cpp \
     ../src/linkmanager.cpp \
@@ -74,7 +75,8 @@ SOURCES += main.cpp \
     ../src/messagemanager.cpp \
     ../src/apirequest.cpp \
     ../src/aboutmultiredditmanager.cpp \
-    ../src/captchamanager.cpp
+    ../src/captchamanager.cpp \
+    ../src/inboxmanager.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h
