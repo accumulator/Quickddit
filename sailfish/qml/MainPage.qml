@@ -131,7 +131,7 @@ AbstractPage {
             }
         }
 
-        header: PageHeader { title: mainPage.title }
+        header: QuickdditPageHeader { title: mainPage.title }
 
         delegate: LinkDelegate {
             menu: Component { LinkMenu {} }

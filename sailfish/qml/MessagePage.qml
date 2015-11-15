@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,6 +29,7 @@ AbstractPage {
 
     function refresh() {
         messageModel.refresh(false);
+        inboxManager.dismiss();
     }
 
     readonly property variant sectionModel: ["All", "Unread", "Message", "Comment Replies", "Post Replies", "Sent"]
@@ -44,18 +46,18 @@ AbstractPage {
                     globalUtils.createSelectionDialog("Section", sectionModel, messageModel.section,
                     function(selectedIndex) {
                         messageModel.section = selectedIndex;
-                        messageModel.refresh(false);
+                        messagePage.refresh();
                     });
                 }
             }
             MenuItem {
                 text: "Refresh"
                 enabled: !messageModel.busy
-                onClicked: messageModel.refresh(false);
+                onClicked: messagePage.refresh();
             }
         }
 
-        header: PageHeader { title: messagePage.title }
+        header: QuickdditPageHeader { title: messagePage.title }
 
         delegate: MessageDelegate {
             isSentMessage: messageModel.section == MessageModel.SentSection
@@ -99,5 +101,9 @@ AbstractPage {
         onReplySuccess: infoBanner.alert("Message sent");
         onMarkReadStatusSuccess: messageModel.changeIsUnread(fullname, isUnread);
         onError: infoBanner.alert(errorString);
+    }
+
+    Component.onCompleted: {
+        inboxManager.dismiss();
     }
 }

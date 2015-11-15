@@ -139,3 +139,10 @@ INSTALLS += icon128
 
 DBUS_ADAPTORS += iface/org.quickddit.xml
 DBUS_INTERFACES += iface/org.quickddit.xml
+
+#notification.files = notifications/harbour-quickddit.inbox.conf
+#notification.path = /usr/share/lipstick/notificationcategories
+
+#INSTALLS += notification
+
+

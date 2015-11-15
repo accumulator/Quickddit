@@ -47,7 +47,7 @@ AbstractPage {
             }
         }
 
-        header: PageHeader { title: multiredditsPage.title }
+        header: QuickdditPageHeader { title: multiredditsPage.title }
 
         delegate: SimpleListItem {
             text: "/m/" + model.name

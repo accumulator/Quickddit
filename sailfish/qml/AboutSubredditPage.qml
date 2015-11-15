@@ -47,7 +47,7 @@ AbstractPage {
             spacing: constant.paddingMedium
             visible: aboutSubredditManager.isValid
 
-            PageHeader { title: aboutSubredditPage.title }
+            QuickdditPageHeader { title: aboutSubredditPage.title }
 
             Item {
                 anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }

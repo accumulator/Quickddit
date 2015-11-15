@@ -41,7 +41,7 @@ AbstractPage {
         anchors.fill: parent
         contentHeight: header.height + columnWrapper.height
 
-        PageHeader { id: header; title: aboutPage.title }
+        QuickdditPageHeader { id: header; title: aboutPage.title }
 
         Item {
             id: columnWrapper

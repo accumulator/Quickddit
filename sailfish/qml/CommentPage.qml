@@ -106,7 +106,7 @@ AbstractPage {
                 width: parent.width
                 height: childrenRect.height
 
-                PageHeader { title: commentPage.title }
+                QuickdditPageHeader { title: commentPage.title }
 
                 Item {
                     anchors { left: parent.left; right: parent.right }

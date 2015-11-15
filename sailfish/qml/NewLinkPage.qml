@@ -42,7 +42,7 @@ AbstractPage {
             width: parent.width
             spacing: constant.paddingMedium
 
-            PageHeader { title: newLinkPage.title }
+            QuickdditPageHeader { title: newLinkPage.title }
 
             Label {
                 anchors {right: parent.right; rightMargin: Theme.paddingLarge }

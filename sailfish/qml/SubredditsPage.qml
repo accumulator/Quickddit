@@ -84,7 +84,7 @@ AbstractPage {
                 subredditTextField.focus = false; // remove keyboard focus
             }
 
-            PageHeader { title: subredditsPage.title }
+            QuickdditPageHeader { title: subredditsPage.title }
 
             TextField {
                 id: subredditTextField

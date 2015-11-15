@@ -35,7 +35,7 @@ AbstractPage {
             anchors { left: parent.left; right: parent.right }
             height: childrenRect.height
 
-            PageHeader { title: appSettingsPage.title }
+            QuickdditPageHeader { title: appSettingsPage.title }
 
             SectionHeader { text: "Display" }
 

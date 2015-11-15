@@ -69,7 +69,7 @@ AbstractPage {
             }
         }
 
-        header: PageHeader { title: searchPage.title }
+        header: QuickdditPageHeader { title: searchPage.title }
 
         delegate: LinkDelegate {
             menu: Component { LinkMenu {} }
