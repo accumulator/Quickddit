@@ -22,6 +22,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: messagePage
+    objectName: "messagePage"
     title: "Messages - " + sectionModel[messageModel.section]
     busy: messageManager.busy
 

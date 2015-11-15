@@ -20,6 +20,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.quickddit.Core 1.0
+import org.nemomobile.notifications 1.0
 
 ApplicationWindow {
     id: appWindow
@@ -208,5 +209,63 @@ ApplicationWindow {
     CaptchaManager {
         id: captchaManager
         manager: quickdditManager
+    }
+
+    InboxManager {
+        id: inboxManager
+        manager: quickdditManager
+        enabled: appSettings.pollUnread
+
+        property bool hasUnseenUnread: false
+
+        function dismiss() {
+            hasUnseenUnread = false;
+        }
+
+        onNewUnread: {
+            if (appWindow.applicationActive) {
+                infoBanner.alert(messages.length === 1
+                                 ? qsTr("New message from %1").arg(messages[0].author)
+                                 : qsTr("%n new messages", "0", messages.length));
+            } else {
+                notification.body = "/u/" + messages[0].author + ": \n" + messages[0].rawBody;
+                notification.itemCount = messages.length;
+                notification.summary = messages.length === 1 ? messages[0].subject : qsTr("%n new messages", "0", messages.length);
+                notification.replacesId = 0;
+                notification.publish();
+            }
+            hasUnseenUnread = true;
+        }
+
+        onError: console.log(error);
+    }
+
+    Notification {
+        id: notification
+
+        property int count
+
+        category: "harbour-quickddit.inbox"
+
+        remoteActions: [ {
+                "name" : "default",
+                "service" : "org.quickddit",
+                "path" : "/",
+                "iface": "org.quickddit.view",
+                "method": "showInbox"
+        } ]
+    }
+
+    Connections {
+        target: DbusApp
+        onRequestMessageView: {
+            if (pageStack.currentPage.objectName === "messagePage") {
+                pageStack.currentPage.refresh();
+            } else {
+                pageStack.push(Qt.resolvedUrl("MessagePage.qml"));
+            }
+
+            appWindow.activate();
+        }
     }
 }
