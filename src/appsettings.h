@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +33,7 @@ class AppSettings : public QObject
     Q_PROPERTY(FontSize fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
     Q_PROPERTY(QString redditUsername READ redditUsername CONSTANT)
     Q_PROPERTY(OrientationProfile orientationProfile READ orientationProfile WRITE setOrientationProfile NOTIFY orientationProfileChanged)
+    Q_PROPERTY(bool pollUnread READ pollUnread WRITE setPollUnread NOTIFY pollUnreadChanged)
 public:
     enum FontSize {
         TinyFontSize = -1,
@@ -67,10 +69,14 @@ public:
     QString lastSeenMessage() const;
     void setLastSeenMessage(const QString &lastSeenMessage);
 
+    bool pollUnread() const;
+    void setPollUnread(const bool pollUnread);
+
 signals:
     void whiteThemeChanged();
     void fontSizeChanged();
     void orientationProfileChanged();
+    void pollUnreadChanged();
 
 private:
     QSettings *m_settings;
@@ -81,6 +87,7 @@ private:
     QByteArray m_refreshToken;
     OrientationProfile m_orientationProfile;
     QString m_lastSeenMessage;
+    bool m_pollUnread;
 };
 
 #endif // APPSETTINGS_H

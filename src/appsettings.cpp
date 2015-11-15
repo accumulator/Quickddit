@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,6 +30,7 @@ AppSettings::AppSettings(QObject *parent) :
     m_refreshToken = m_settings->value("refreshToken").toByteArray();
     m_orientationProfile = static_cast<OrientationProfile>(m_settings->value("orientationProfile", 0).toInt());
     m_lastSeenMessage = m_settings->value("lastSeenMessage").toString();
+    m_pollUnread = m_settings->value("pollUnread", true).toBool();
 }
 
 bool AppSettings::whiteTheme() const
@@ -118,5 +120,19 @@ void AppSettings::setLastSeenMessage(const QString &lastSeenMessage)
     if (m_lastSeenMessage != lastSeenMessage) {
         m_lastSeenMessage = lastSeenMessage;
         m_settings->setValue("lastSeenMessage", m_lastSeenMessage);
+    }
+}
+
+bool AppSettings::pollUnread() const
+{
+    return m_pollUnread;
+}
+
+void AppSettings::setPollUnread(const bool pollUnread)
+{
+    if (m_pollUnread != pollUnread) {
+        m_pollUnread = pollUnread;
+        m_settings->setValue("pollUnread", m_pollUnread);
+        emit pollUnreadChanged();
     }
 }
