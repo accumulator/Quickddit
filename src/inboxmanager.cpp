@@ -21,6 +21,9 @@
 #include "messageobject.h"
 #include "messagemodel.h"
 
+#define TIMER_MIN_INTERVAL 60 * 1000
+#define TIMER_MAX_INTERVAL 2 * 60 * 60 * 1000
+
 /*
  * use cases
  * 1. has any unread message.
@@ -73,12 +76,16 @@ void InboxManager::pollTimeout()
         request();
 
     int interval = m_pollTimer->interval();
-    // exponential back-off to configured interval (2 hours)
-    interval = qMin(interval * 3, 2 * 60 * 60 * 1000);
+    // exponential back-off to max interval
+    interval = qMin(interval * 3, TIMER_MAX_INTERVAL);
     // interval lower bound
-    interval = qMax(interval, 60 * 1000);
+    interval = qMax(interval, TIMER_MIN_INTERVAL);
 
     m_pollTimer->setInterval(interval);
+}
+
+void InboxManager::resetTimer(){
+    m_pollTimer->setInterval(TIMER_MIN_INTERVAL);
 }
 
 void InboxManager::request()
@@ -180,7 +187,7 @@ void InboxManager::filterInbox(Listing<MessageObject> messages)
     }
 
     if (unreadSinceLastSeen) {
-        m_pollTimer->setInterval(60 * 1000);
+        m_pollTimer->setInterval(TIMER_MIN_INTERVAL);
         emit newUnread(unreadSinceLastSeen, unreadMessages);
     }
 

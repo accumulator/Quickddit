@@ -41,6 +41,7 @@ public:
     void setEnabled(bool enabled);
 
     Q_INVOKABLE void request();
+    Q_INVOKABLE void resetTimer();
 
 signals:
     void hasUnreadChanged(bool hasUnread);
