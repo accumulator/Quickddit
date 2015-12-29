@@ -62,6 +62,8 @@ void InboxManager::setEnabled(bool enabled)
     if (enabled != m_enabled) {
         m_enabled = enabled;
         emit enabledChanged(enabled);
+        if (enabled)
+            resetTimer();
     }
 }
 
