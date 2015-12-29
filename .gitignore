@@ -23,3 +23,5 @@ Makefile*
 # QtCreator
 
 *.autosave
+
+sailfish/rpm/harbour-quickddit.spec
