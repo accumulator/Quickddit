@@ -18,6 +18,11 @@ QT *= network dbus
 # (but IDE don't show these when not in OTHER_FILES, so we still need to list them :( )
 CONFIG += sailfishapp
 
+# Harbour is quite strict about what it allows. Quickddit has features that would not allow it to pass
+# through QA. Add CONFIG+=harbour to the .pro file (uncomment below) or add it to the qmake command
+# to force harbour compatibility.
+# CONFIG += harbour
+
 INCLUDEPATH += ..
 
 HEADERS += \
@@ -140,9 +145,15 @@ INSTALLS += icon128
 DBUS_ADAPTORS += iface/org.quickddit.xml
 DBUS_INTERFACES += iface/org.quickddit.xml
 
-#notification.files = notifications/harbour-quickddit.inbox.conf
-#notification.path = /usr/share/lipstick/notificationcategories
+harbour {
+    message("Harbour build")
+    message("Notification specification is excluded")
+} else {
+    message("Non-harbour build")
+    notification.files = notifications/harbour-quickddit.inbox.conf
+    notification.path = /usr/share/lipstick/notificationcategories
 
-#INSTALLS += notification
+    INSTALLS += notification
+}
 
 
