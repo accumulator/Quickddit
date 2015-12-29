@@ -61,6 +61,9 @@ public:
 
     Q_INVOKABLE void saveImage(const QString &url);
 
+    Q_INVOKABLE void publishNotification(const QString &summary, const QString &body, const int count);
+    Q_INVOKABLE void clearNotification();
+
 private slots:
     void onSaveImageFinished();
 

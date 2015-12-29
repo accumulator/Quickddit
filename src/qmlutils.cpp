@@ -34,6 +34,8 @@
 
 #ifdef Q_OS_HARMATTAN
 #include <MDataUri>
+#include <MNotification>
+#include <MRemoteAction>
 #include <maemo-meegotouch-interfaces/shareuiinterface.h>
 #endif
 
@@ -144,4 +146,35 @@ void QMLUtils::onSaveImageFinished()
     }
     m_reply->deleteLater();
     m_reply = 0;
+}
+
+void QMLUtils::publishNotification(const QString &summary, const QString &body,
+                                         const int count)
+{
+#ifdef Q_OS_HARMATTAN
+    QString identifier = "0";
+
+    MNotification notification("default", summary, body);
+    notification.setCount(count);
+    notification.setIdentifier(identifier);
+    MRemoteAction action("org.quickddit", "/", "org.quickddit.view", "showInbox");
+    notification.setAction(action);
+    notification.publish();
+#else
+    Q_UNUSED(summary)
+    Q_UNUSED(body)
+    Q_UNUSED(count)
+#endif
+}
+
+void QMLUtils::clearNotification()
+{
+#ifdef Q_OS_HARMATTAN
+    QList<MNotification*> activeNotifications = MNotification::notifications();
+    QMutableListIterator<MNotification*> i(activeNotifications);
+    while (i.hasNext()) {
+        MNotification *notification = i.next();
+        notification->remove();
+    }
+#endif
 }
