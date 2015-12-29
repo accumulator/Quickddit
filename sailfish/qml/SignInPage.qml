@@ -61,6 +61,7 @@ AbstractPage {
         onAccessTokenSuccess: {
             signInPage.busy = false;
             infoBanner.alert("Sign in successfully! Welcome! :)");
+            inboxManager.resetTimer();
             var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
             mainPage.refresh("");
             backNavigation = true;

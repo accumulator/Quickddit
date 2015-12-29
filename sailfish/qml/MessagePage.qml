@@ -98,7 +98,10 @@ AbstractPage {
     MessageManager {
         id: messageManager
         manager: quickdditManager
-        onReplySuccess: infoBanner.alert("Message sent");
+        onReplySuccess: {
+            infoBanner.alert("Message sent");
+            inboxManager.resetTimer();
+        }
         onMarkReadStatusSuccess: messageModel.changeIsUnread(fullname, isUnread);
         onError: infoBanner.alert(errorString);
     }
