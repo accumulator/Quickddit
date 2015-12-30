@@ -176,4 +176,47 @@ PageStackWindow {
         id: captchaManager
         manager: quickdditManager
     }
+
+    InboxManager {
+        id: inboxManager
+        manager: quickdditManager
+        enabled: appSettings.pollUnread
+
+        property bool hasUnseenUnread: false
+
+        function dismiss() {
+            hasUnseenUnread = false;
+        }
+
+        onNewUnread: {
+            console.log("new unread!");
+            if (appWindow.applicationActive) {
+                infoBanner.alert(messages.length === 1
+                                 ? qsTr("New message from %1").arg(messages[0].author)
+                                 : qsTr("%n new messages", "0", messages.length));
+            } else {
+                for (var i=0; i < messages.length; i++) {
+                    QMLUtils.publishNotification(
+                                messages[i].subject,
+                                "/u/" + messages[i].author + ": \n" + messages[i].rawBody,
+                                1);
+                }
+            }
+            hasUnseenUnread = true;
+        }
+
+        onError: console.log(error);
+    }
+
+    Connections {
+        target: DbusApp
+        onRequestMessageView: {
+            if (pageStack.currentPage.objectName === "messagePage") {
+                pageStack.currentPage.refresh();
+            } else {
+                pageStack.push(Qt.resolvedUrl("MessagePage.qml"));
+            }
+        }
+    }
+
 }
