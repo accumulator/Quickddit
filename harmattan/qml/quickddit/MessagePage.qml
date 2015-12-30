@@ -22,12 +22,18 @@ import Quickddit.Core 1.0
 
 AbstractPage {
     id: messagePage
+    objectName: "messagePage"
     title: "Messages - " + sectionModel[messageModel.section]
     busy: messageManager.busy
     onHeaderClicked: messageListView.positionViewAtBeginning();
 
     property variant sectionModel: ["All", "Unread", "Message", "Comment Replies", "Post Replies", "Sent"]
     property Component __textAreaDialogComponent: null
+
+    function refresh() {
+        messageModel.refresh(false);
+        inboxManager.dismiss();
+    }
 
     function __createTextAreaDialog(title) {
         if (!__textAreaDialogComponent)
@@ -110,4 +116,9 @@ AbstractPage {
         onMarkReadStatusSuccess: messageModel.changeIsUnread(fullname, isUnread);
         onError: infoBanner.alert(errorString);
     }
+
+    Component.onCompleted: {
+        inboxManager.dismiss();
+    }
+
 }
