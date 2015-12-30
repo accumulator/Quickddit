@@ -23,7 +23,7 @@
 #include "app_adaptor.h"
 #include "app_interface.h"
 
-DbusApp::DbusApp(QObject *parent) :
+DbusApp::DbusApp(QDeclarativeView *view, QObject *parent) :
     QObject(parent)
 {
     new ViewAdaptor(this);
@@ -33,16 +33,20 @@ DbusApp::DbusApp(QObject *parent) :
     Q_ASSERT(ret);
     ret = c.registerObject("/", this);
     Q_ASSERT(ret);
+
+    m_view = view;
 }
 
 void DbusApp::showInbox()
 {
     qDebug() << "showInbox";
+    m_view->activateWindow();
     emit requestMessageView();
 }
 
 void DbusApp::showInboxFor(const QString& target)
 {
     qDebug() << "showInboxFor" << target;
+    m_view->activateWindow();
     emit requestMessageView(target);
 }

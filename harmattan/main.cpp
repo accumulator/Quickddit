@@ -73,7 +73,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QMLUtils qmlUtils;
     viewer.rootContext()->setContextProperty("QMLUtils", &qmlUtils);
 
-    DbusApp dbusApp;
+    DbusApp dbusApp(&viewer);
     viewer.rootContext()->setContextProperty("DbusApp", &dbusApp);
 
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);

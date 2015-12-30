@@ -20,12 +20,13 @@
 #define DBUSAPP_H
 
 #include <QObject>
+#include <QDeclarativeView>
 
 class DbusApp : public QObject
 {
     Q_OBJECT
 public:
-    explicit DbusApp(QObject *parent = 0);
+    explicit DbusApp(QDeclarativeView* m_view, QObject *parent = 0);
 
 signals:
     void requestMessageView(const QString &fullname = "");
@@ -33,6 +34,9 @@ signals:
 public slots:
     void showInbox();
     void showInboxFor(const QString& target);
+
+private:
+    QDeclarativeView* m_view;
 };
 
 #endif // DBUSAPP_H
