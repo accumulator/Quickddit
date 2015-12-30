@@ -97,4 +97,12 @@ qtcAddDeployment()
 
 OTHER_FILES += \
     qtc_packaging/debian_harmattan/* \
-    quickddit_harmattan.desktop
+    quickddit_harmattan.desktop \
+    notifications/quickddit.inbox.conf
+
+notif-icons.files = notifications/icon-m-quickddit.png
+notif-icons.path = /usr/share/themes/blanco/meegotouch/icons
+notif-config.files = notifications/quickddit.inbox.conf
+notif-config.path = /usr/share/meegotouch/notifications/eventtypes
+
+INSTALLS += notif-icons notif-config

@@ -154,7 +154,7 @@ void QMLUtils::publishNotification(const QString &summary, const QString &body,
 #ifdef Q_OS_HARMATTAN
     QString identifier = "0";
 
-    MNotification notification("default", summary, body);
+    MNotification notification("quickddit.inbox", summary, body);
     notification.setCount(count);
     notification.setIdentifier(identifier);
     MRemoteAction action("org.quickddit", "/", "org.quickddit.view", "showInbox");
