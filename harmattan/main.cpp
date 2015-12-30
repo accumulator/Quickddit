@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,6 +40,7 @@
 #include "src/commentmanager.h"
 #include "src/captchamanager.h"
 #include "src/linkmanager.h"
+#include "src/inboxmanager.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -63,6 +65,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<CommentManager>("Quickddit.Core", 1, 0, "CommentManager");
     qmlRegisterType<CaptchaManager>("Quickddit.Core", 1, 0, "CaptchaManager");
     qmlRegisterType<LinkManager>("Quickddit.Core", 1, 0, "LinkManager");
+    qmlRegisterType<InboxManager>("Quickddit.Core", 1, 0, "InboxManager");
 
     QmlApplicationViewer viewer;
     viewer.rootContext()->setContextProperty("APP_VERSION", APP_VERSION);
