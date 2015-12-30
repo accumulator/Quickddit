@@ -19,7 +19,9 @@
 #include <QtGui/QApplication>
 #include <QtDeclarative/qdeclarative.h>
 #include <QtDeclarative/QDeclarativeContext>
+
 #include "qmlapplicationviewer.h"
+#include "dbusapp.h"
 
 #include "src/appsettings.h"
 #include "src/qmlutils.h"
@@ -67,6 +69,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     QMLUtils qmlUtils;
     viewer.rootContext()->setContextProperty("QMLUtils", &qmlUtils);
+
+    DbusApp dbusApp;
+    viewer.rootContext()->setContextProperty("DbusApp", &dbusApp);
 
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
     viewer.setMainQmlFile(QLatin1String("qml/quickddit/main.qml"));

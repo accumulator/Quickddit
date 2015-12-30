@@ -9,6 +9,9 @@ DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 INCLUDEPATH += ..
 
 HEADERS += \
+    app_adaptor.h \
+    app_interface.h \
+    dbusapp.h \
     ../src/linkobject.h \
     ../src/linkmodel.h \
     ../src/utils.h \
@@ -37,6 +40,9 @@ HEADERS += \
     ../src/linkmanager.h
 
 SOURCES += main.cpp \
+    app_adaptor.cpp \
+    app_interface.cpp \
+    dbusapp.cpp \
     ../src/linkobject.cpp \
     ../src/linkmodel.cpp \
     ../src/utils.cpp \
