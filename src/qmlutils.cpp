@@ -37,6 +37,8 @@
 #include <MNotification>
 #include <MRemoteAction>
 #include <maemo-meegotouch-interfaces/shareuiinterface.h>
+#else
+#include <nemonotifications-qt5/notification.h>
 #endif
 
 const QString QMLUtils::SOURCE_REPO_URL = "https://github.com/accumulator/Quickddit";
@@ -152,18 +154,26 @@ void QMLUtils::publishNotification(const QString &summary, const QString &body,
                                          const int count)
 {
 #ifdef Q_OS_HARMATTAN
-    QString identifier = "0";
-
     MNotification notification("quickddit.inbox", summary, body);
     notification.setCount(count);
-    notification.setIdentifier(identifier);
+    notification.setIdentifier("0");
     MRemoteAction action("org.quickddit", "/", "org.quickddit.view", "showInbox");
     notification.setAction(action);
     notification.publish();
 #else
-    Q_UNUSED(summary)
-    Q_UNUSED(body)
-    Q_UNUSED(count)
+    Notification notification;
+    notification.setCategory("harbour-quickddit.inbox");
+
+    notification.setSummary(summary);
+    notification.setBody(body);
+    notification.setItemCount(count);
+    notification.setReplacesId(0);
+
+    notification.setRemoteAction(
+                Notification::remoteAction(
+                    "default", "show Inbox", "org.quickddit", "/", "org.quickddit.view", "showInbox"));
+
+    notification.publish();
 #endif
 }
 
@@ -175,6 +185,13 @@ void QMLUtils::clearNotification()
     while (i.hasNext()) {
         MNotification *notification = i.next();
         notification->remove();
+    }
+#else
+    QList<QObject*> activeNotifications = Notification::notifications();
+    QMutableListIterator<QObject*> i(activeNotifications);
+    while (i.hasNext()) {
+        Notification *notification = (Notification*)i.next();
+        notification->close();
     }
 #endif
 }
