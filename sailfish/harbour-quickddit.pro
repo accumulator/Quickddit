@@ -23,6 +23,8 @@ CONFIG += sailfishapp
 # to force harbour compatibility.
 # CONFIG += harbour
 
+LIBS += -lnemonotifications-qt5
+
 INCLUDEPATH += ..
 
 HEADERS += \
