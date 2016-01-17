@@ -232,7 +232,8 @@ ApplicationWindow {
             if (result.length > 0)
                 QMLUtils.publishNotification(
                         result[0].subject,
-                        "in /r/" + result[0].subreddit + " by " + result[0].author,
+                        "in /r/" + result[0].subreddit + " by " + result[0].author
+                            + (result.length === 1 ? "" : qsTr(" and %1 other").arg(result.length-1)),
                         result.length);
         }
 
