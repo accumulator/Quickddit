@@ -63,14 +63,22 @@ AbstractPage {
                     anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
                     horizontalAlignment: Text.AlignHCenter
                     font.pixelSize: constant.fontSizeMedium
-                    color: constant.colorLight
+                    color: Theme.highlightColor
                     wrapMode: Text.Wrap
                     text: "Quickddit - A free and open source Reddit client for mobile phones\n" +
-                          "v" + APP_VERSION + "\n\n" +
-                          "Copyright (c) 2015 Sander van Grieken\n" +
+                          "v" + APP_VERSION
+                }
+
+                Text {
+                    anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                    horizontalAlignment: Text.AlignHCenter
+                    font.pixelSize: constant.fontSizeSmall
+                    color: constant.colorLight
+                    wrapMode: Text.Wrap
+                    text: "Copyright (c) 2015-2016 Sander van Grieken\n" +
                           "Copyright (c) 2013-2014 Dickson Leong\n\n" +
-                          "Licensed under GNU GPLv3+\n" +
-                          "App icon by Andrew Zhilin\n"
+                          "App icon by Andrew Zhilin\n\n" +
+                          "Licensed under GNU GPLv3+\n"
                 }
 
                 Row {
