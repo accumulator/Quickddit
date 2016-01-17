@@ -222,38 +222,44 @@ ApplicationWindow {
             hasUnseenUnread = false;
         }
 
+        function publishReplies(messages) {
+            var result = [];
+            for (var i=0; i < messages.length; i++) {
+                if (messages[i].isComment === true) {
+                    result.push(messages[i]);
+                }
+            }
+            if (result.length > 0)
+                QMLUtils.publishNotification(
+                        result[0].subject,
+                        "in /r/" + result[0].subreddit + " by " + result[0].author,
+                        result.length);
+        }
+
+        function publishMessages(messages) {
+            for (var i=0; i < messages.length; i++) {
+                if (messages[i].isComment === false) {
+                    QMLUtils.publishNotification(
+                            qsTr("Message from %1").arg(messages[i].author),
+                            messages[i].rawBody,
+                            1);
+                }
+            }
+        }
+
         onNewUnread: {
             if (appWindow.applicationActive) {
                 infoBanner.alert(messages.length === 1
                                  ? qsTr("New message from %1").arg(messages[0].author)
                                  : qsTr("%n new messages", "0", messages.length));
             } else {
-                notification.body = "/u/" + messages[0].author + ": \n" + messages[0].rawBody;
-                notification.itemCount = messages.length;
-                notification.summary = messages.length === 1 ? messages[0].subject : qsTr("%n new messages", "0", messages.length);
-                notification.replacesId = 0;
-                notification.publish();
+                publishReplies(messages);
+                publishMessages(messages);
             }
             hasUnseenUnread = true;
         }
 
         onError: console.log(error);
-    }
-
-    Notification {
-        id: notification
-
-        property int count
-
-        category: "harbour-quickddit.inbox"
-
-        remoteActions: [ {
-                "name" : "default",
-                "service" : "org.quickddit",
-                "path" : "/",
-                "iface": "org.quickddit.view",
-                "method": "showInbox"
-        } ]
     }
 
     Connections {
