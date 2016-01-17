@@ -47,13 +47,13 @@ AbstractPage {
         Column {
             id: mainContentColumn
             width: parent.width
-            spacing: constant.paddingMedium
+            spacing: constant.paddingLarge
 
             Label {
-                anchors {right: parent.right; rightMargin: Theme.paddingLarge }
+                anchors {right: parent.right; rightMargin: constant.paddingLarge }
                 text: "/r/" + subreddit
                 font.pixelSize: constant.fontSizeXSmall
-                color: Theme.highlightColor
+                color: constant.colorMid
             }
 
             TextField {
@@ -71,6 +71,8 @@ AbstractPage {
                 }
 
                 Switch {
+                    anchors.right: parent.right
+
                     id: selfLinkSwitch
                     checked: true
                 }

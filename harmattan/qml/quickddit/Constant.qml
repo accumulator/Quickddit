@@ -54,7 +54,7 @@ QtObject {
     property int headerHeight: inPortrait ? 72 : 56
 
     // Quickddit specific
-    property int commentRepliesIndentWidth: 20
+    property int commentRepliesIndentWidth: 16
     property variant commentRepliesColor: ["green", "orange", "purple", "yellow",
                                            "royalblue", "pink", "indigo", "gold",
                                            "red", colorLight];
