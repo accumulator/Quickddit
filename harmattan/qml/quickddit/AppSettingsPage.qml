@@ -70,6 +70,24 @@ AbstractPage {
                 }
             }
 
+            SectionHeader { title: "Notifications" }
+
+            Row {
+                anchors.left: parent.left
+                anchors.right: parent.right
+
+                Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "Check Messages"
+                }
+
+                Switch {
+                    anchors.right: parent.right
+                    checked: appSettings.pollUnread;
+                    onCheckedChanged: appSettings.pollUnread = checked;
+                }
+            }
+
             SectionHeader { title: "Account" }
 
             Text {
