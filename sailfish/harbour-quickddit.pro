@@ -21,7 +21,7 @@ CONFIG += sailfishapp
 # Harbour is quite strict about what it allows. Quickddit has features that would not allow it to pass
 # through QA. Add CONFIG+=harbour to the .pro file (uncomment below) or add it to the qmake command
 # to force harbour compatibility.
-# CONFIG += harbour
+#CONFIG += harbour
 
 LIBS += -lnemonotifications-qt5
 
