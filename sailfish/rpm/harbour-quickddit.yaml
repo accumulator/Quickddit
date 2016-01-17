@@ -19,10 +19,13 @@ PkgConfigBR:
 - Qt5Quick
 - Qt5Network
 - sailfishapp
+- nemonotifications-qt5
 Requires:
 - sailfishsilica-qt5
 - mapplauncherd-booster-silica-qt5
 - qt5-plugin-imageformat-gif
+PkgBr:
+- nemo-qml-plugin-notifications-qt5-devel
 Files:
 - '%{_bindir}'
 - '%{_datadir}'

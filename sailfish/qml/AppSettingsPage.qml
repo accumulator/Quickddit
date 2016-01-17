@@ -90,20 +90,11 @@ AbstractPage {
 
             SectionHeader { text: "Notifications" }
 
-            ComboBox {
-                label: "Check Messages"
-                currentIndex:  {
-                    return appSettings.pollUnread ? 0 : 1;
-                }
-                menu: ContextMenu {
-                    MenuItem { text: "On" }
-                    MenuItem { text: "Off" }
-                }
-                onCurrentIndexChanged: {
-                    switch (currentIndex) {
-                    case 0: appSettings.pollUnread = true; break;
-                    case 1: appSettings.pollUnread = false; break;
-                    }
+            TextSwitch {
+                text: "Check Messages"
+                checked: appSettings.pollUnread;
+                onCheckedChanged: {
+                    appSettings.pollUnread = checked;
                 }
             }
 

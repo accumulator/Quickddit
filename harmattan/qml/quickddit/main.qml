@@ -176,4 +176,68 @@ PageStackWindow {
         id: captchaManager
         manager: quickdditManager
     }
+
+    InboxManager {
+        id: inboxManager
+        manager: quickdditManager
+        enabled: appSettings.pollUnread
+
+        property bool hasUnseenUnread: false
+
+        function dismiss() {
+            hasUnseenUnread = false;
+        }
+
+        function publishReplies(messages) {
+            var result = [];
+            for (var i=0; i < messages.length; i++) {
+                if (messages[i].isComment === true) {
+                    result.push(messages[i]);
+                }
+            }
+            if (result.length > 0)
+                QMLUtils.publishNotification(
+                        result[0].subject,
+                        "in /r/" + result[0].subreddit + " by " + result[0].author
+                            + (result.length === 1 ? "" : qsTr(" and %1 other").arg(result.length-1)),
+                        result.length);
+        }
+
+        function publishMessages(messages) {
+            for (var i=0; i < messages.length; i++) {
+                if (messages[i].isComment === false) {
+                    QMLUtils.publishNotification(
+                            qsTr("Message from %1").arg(messages[i].author),
+                            messages[i].rawBody,
+                            1);
+                }
+            }
+        }
+
+        onNewUnread: {
+            if (Qt.application.active) {
+                infoBanner.alert(messages.length === 1
+                                 ? qsTr("New message from %1").arg(messages[0].author)
+                                 : qsTr("%n new messages", "0", messages.length));
+            } else {
+                publishReplies(messages);
+                publishMessages(messages);
+            }
+            hasUnseenUnread = true;
+        }
+
+        onError: console.log(error);
+    }
+
+    Connections {
+        target: DbusApp
+        onRequestMessageView: {
+            if (pageStack.currentPage.objectName === "messagePage") {
+                pageStack.currentPage.refresh();
+            } else {
+                pageStack.push(Qt.resolvedUrl("MessagePage.qml"));
+            }
+        }
+    }
+
 }

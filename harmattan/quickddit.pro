@@ -9,6 +9,9 @@ DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 INCLUDEPATH += ..
 
 HEADERS += \
+    app_adaptor.h \
+    app_interface.h \
+    dbusapp.h \
     ../src/linkobject.h \
     ../src/linkmodel.h \
     ../src/utils.h \
@@ -34,9 +37,13 @@ HEADERS += \
     ../src/apirequest.h \
     ../src/aboutmultiredditmanager.h \
     ../src/captchamanager.h \
-    ../src/linkmanager.h
+    ../src/linkmanager.h \
+    ../src/inboxmanager.h
 
 SOURCES += main.cpp \
+    app_adaptor.cpp \
+    app_interface.cpp \
+    dbusapp.cpp \
     ../src/linkobject.cpp \
     ../src/linkmodel.cpp \
     ../src/utils.cpp \
@@ -62,7 +69,8 @@ SOURCES += main.cpp \
     ../src/apirequest.cpp \
     ../src/aboutmultiredditmanager.cpp \
     ../src/captchamanager.cpp \
-    ../src/linkmanager.cpp
+    ../src/linkmanager.cpp \
+    ../src/inboxmanager.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h
@@ -89,4 +97,12 @@ qtcAddDeployment()
 
 OTHER_FILES += \
     qtc_packaging/debian_harmattan/* \
-    quickddit_harmattan.desktop
+    quickddit_harmattan.desktop \
+    notifications/quickddit.inbox.conf
+
+notif-icons.files = notifications/icon-m-quickddit.png
+notif-icons.path = /usr/share/themes/blanco/meegotouch/icons
+notif-config.files = notifications/quickddit.inbox.conf
+notif-config.path = /usr/share/meegotouch/notifications/eventtypes
+
+INSTALLS += notif-icons notif-config

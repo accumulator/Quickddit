@@ -16,6 +16,8 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
+#include <QDebug>
+
 #include "inboxmanager.h"
 #include "appsettings.h"
 #include "messageobject.h"
@@ -135,7 +137,7 @@ void InboxManager::checkNewUnread()
 {
     QHash<QString, QString> parameters;
     parameters["mark"] = "false";
-    parameters["limit"] = "5";
+    parameters["limit"] = "10";
 
     m_request = manager()->createRedditRequest(this, APIRequest::GET, "/message/inbox", parameters);
     connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onInboxReceived(QNetworkReply*)));
