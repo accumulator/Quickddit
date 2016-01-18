@@ -22,14 +22,14 @@ TODO
 Below is the list of TODOs I planned for future release, before reaching the 1.0.0 milestone.
 
 - Compose new message (require Captcha)
-- Notification of PM or comment reply
 - Save and unsave posts
 - View user profile
 
 Additional TODOs after the 1.0.0 milestone
+- (Local) browse history
+- Multiple accounts
 - Reddit Live
 - Buy [reddit gold](http://www.reddit.com/gold/about)
-- Multiple accounts
 
 Download
 --------
@@ -42,7 +42,7 @@ All files in this project are licensed under the GNU GPLv3+, unless otherwise st
 
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2013-2014  Dickson Leong
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2015-2016  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
