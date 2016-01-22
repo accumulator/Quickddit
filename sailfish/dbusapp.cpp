@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2015-2016  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,6 +33,7 @@ DbusApp::DbusApp(QObject *parent) :
     Q_ASSERT(ret);
     ret = c.registerObject("/", this);
     Q_ASSERT(ret);
+    Q_UNUSED(ret);
 }
 
 void DbusApp::showInbox()
