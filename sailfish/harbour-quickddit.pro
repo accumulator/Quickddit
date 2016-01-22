@@ -16,19 +16,21 @@ QT *= network dbus
 
 # auto-installs 86x86 icon, desktop file, qml/* is automatically installed by sailfishapp.prf
 # (but IDE don't show these when not in OTHER_FILES, so we still need to list them :( )
-CONFIG += sailfishapp
+CONFIG += sailfishapp link_pkgconfig
 
 # Harbour is quite strict about what it allows. Quickddit has features that would not allow it to pass
 # through QA. Add CONFIG+=harbour to the .pro file (uncomment below) or add it to the qmake command
 # to force harbour compatibility.
 #CONFIG += harbour
 
-LIBS += -lnemonotifications-qt5
+PKGCONFIG += sailfishapp nemonotifications-qt5
 
 INCLUDEPATH += ..
 
 HEADERS += \
     dbusapp.h \
+    app_adaptor.h \
+    app_interface.h \
     ../src/linkmanager.h \
     ../src/linkobject.h \
     ../src/linkmodel.h \
@@ -59,6 +61,8 @@ HEADERS += \
 
 SOURCES += main.cpp \
     dbusapp.cpp \
+    app_adaptor.cpp \
+    app_interface.cpp \
     ../src/linkmanager.cpp \
     ../src/linkobject.cpp \
     ../src/linkmodel.cpp \
@@ -144,8 +148,13 @@ icon128.path = /usr/share/icons/hicolor/128x128/apps
 
 INSTALLS += icon128
 
-DBUS_ADAPTORS += iface/org.quickddit.xml
-DBUS_INTERFACES += iface/org.quickddit.xml
+# hm, I prefer generating code directly to the build dir, and not including the
+# generated sources in the HEADERS and SOURCES lists.. Manually remove app_adaptor.h
+# to force rebuilding the dbus iface spec.
+!exists( app_adaptor.h ) {
+    message("generating DBus adaptor and proxy..")
+    system(qdbusxml2cpp iface/org.quickddit.xml -a app_adaptor -p app_interface)
+}
 
 harbour {
     message("Harbour build")
