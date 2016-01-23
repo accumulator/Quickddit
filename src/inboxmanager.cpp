@@ -23,6 +23,7 @@
 #include "messageobject.h"
 #include "messagemodel.h"
 
+#define TIMER_INI_INTERVAL 5 * 1000
 #define TIMER_MIN_INTERVAL 60 * 1000
 #define TIMER_MAX_INTERVAL 2 * 60 * 60 * 1000
 
@@ -35,7 +36,7 @@ InboxManager::InboxManager(QObject *parent) :
     AbstractManager(parent), m_request(0), m_enabled(true)
 {
     m_pollTimer = new QTimer(this);
-    m_pollTimer->setInterval(5 * 1000);
+    m_pollTimer->setInterval(TIMER_INI_INTERVAL);
     m_pollTimer->setSingleShot(false);
     connect(m_pollTimer, SIGNAL(timeout()), this, SLOT(pollTimeout()));
     m_pollTimer->start();
@@ -71,13 +72,8 @@ void InboxManager::setEnabled(bool enabled)
 
 void InboxManager::pollTimeout()
 {
-    qDebug() << "polling timer, interval" << m_pollTimer->interval();
-
-    if (manager()->isBusy() || !manager()->isSignedIn())
+    if (manager()->isBusy())
         return;
-
-    if (m_enabled)
-        request();
 
     int interval = m_pollTimer->interval();
     // exponential back-off to max interval
@@ -86,10 +82,13 @@ void InboxManager::pollTimeout()
     interval = qMax(interval, TIMER_MIN_INTERVAL);
 
     m_pollTimer->setInterval(interval);
+
+    if (manager()->isSignedIn() && m_enabled)
+        request();
 }
 
 void InboxManager::resetTimer(){
-    m_pollTimer->setInterval(TIMER_MIN_INTERVAL);
+    m_pollTimer->setInterval(TIMER_INI_INTERVAL);
 }
 
 void InboxManager::request()
@@ -191,7 +190,7 @@ void InboxManager::filterInbox(Listing<MessageObject> messages)
     }
 
     if (unreadSinceLastSeen) {
-        m_pollTimer->setInterval(TIMER_MIN_INTERVAL);
+        resetTimer();
         emit newUnread(unreadSinceLastSeen, unreadMessages);
     }
 
