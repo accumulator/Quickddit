@@ -44,6 +44,8 @@ public:
     int moreChildrenCount;
     bool isMoreChildren;
     bool isCollapsed;
+    QString subreddit;
+    QString linkTitle;
 
 private:
     Q_DISABLE_COPY(CommentObjectData)
@@ -239,4 +241,24 @@ bool CommentObject::isCollapsed() const
 void CommentObject::setIsCollapsed(bool isCollapsed)
 {
     d->isCollapsed = isCollapsed;
+}
+
+QString CommentObject::subreddit() const
+{
+    return d->subreddit;
+}
+
+void CommentObject::setSubreddit(const QString &subreddit)
+{
+    d->subreddit = subreddit;
+}
+
+QString CommentObject::linkTitle() const
+{
+    return d->linkTitle;
+}
+
+void CommentObject::setLinkTitle(const QString &linkTitle)
+{
+    d->linkTitle = linkTitle;
 }

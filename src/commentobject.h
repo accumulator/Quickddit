@@ -90,6 +90,12 @@ public:
     bool isCollapsed() const;
     void setIsCollapsed(bool isCollapsed);
 
+    QString subreddit() const;
+    void setSubreddit(const QString &subreddit);
+
+    QString linkTitle() const;
+    void setLinkTitle(const QString &linkTitle);
+
 private:
     QExplicitlySharedDataPointer<CommentObjectData> d;
 };

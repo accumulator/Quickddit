@@ -23,6 +23,7 @@
 #include <QtCore/QUrl>
 #include <QtGui/QTextDocument>
 #include <qt-json/json.h>
+#include <QDebug>
 
 #include "linkobject.h"
 #include "commentobject.h"
@@ -90,6 +91,8 @@ void commentFromMap(CommentObject &comment, const QVariantMap &commentMap)
         comment.setEdited(QDateTime::fromTime_t(commentMap.value("edited").toInt()));
     comment.setDistinguished(commentMap.value("distinguished").toString());
     comment.setScoreHidden(commentMap.value("score_hidden").toBool());
+    comment.setSubreddit(commentMap.value("subreddit").toString());
+    comment.setLinkTitle(commentMap.value("link_title").toString());
 }
 
 // Private
@@ -488,7 +491,9 @@ UserObject Parser::parseUserAbout(const QByteArray &json)
     userObject.setName(data.value("name").toString());
     userObject.setLinkKarma(data.value("link_karma").toInt());
     userObject.setCommentKarma(data.value("comment_karma").toInt());
-    userObject.setCreated(data.value("created").toDateTime());
+    QDateTime d;
+    d.setTime_t(data.value("created").toInt());
+    userObject.setCreated(d);
     userObject.setFriend(data.value("is_friend").toBool());
     userObject.setHideFromRobots(data.value("hide_from_robots").toBool());
     userObject.setMod(data.value("is_mod").toBool());
@@ -498,3 +503,30 @@ UserObject Parser::parseUserAbout(const QByteArray &json)
 
     return userObject;
 }
+
+Listing<CommentObject> Parser::parseUserThingList(const QByteArray &json)
+{
+    bool ok;
+    const QVariantMap data = QtJson::parse(json, ok).toMap().value("data").toMap();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    const QVariantList thingsJson = data.value("children").toList();
+
+    Listing<CommentObject> commentList;
+    foreach (const QVariant &thing, thingsJson) {
+        const QVariantMap thingMap = thing.toMap();
+        const QVariantMap thingData = thingMap.value("data").toMap();
+
+        if (thingMap.value("kind").toString() == "t1") {
+            CommentObject comment;
+            commentFromMap(comment, thingData);
+            commentList.append(comment);
+        }
+    }
+
+    qDebug() << "hasMore" <<data.value("after").isNull();
+    commentList.setHasMore(!data.value("after").isNull());
+    return commentList;
+}
+

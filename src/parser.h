@@ -68,7 +68,7 @@ QList< QPair<QString, QString> > parseImgurImages(const QByteArray &json);
 
 LinkObject parseLinkEditResponse(const QByteArray &json);
 UserObject parseUserAbout(const QByteArray &json);
-
+Listing<CommentObject> parseUserThingList(const QByteArray &json);
 }
 
 #endif // PARSER_H

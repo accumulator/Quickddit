@@ -59,7 +59,8 @@ HEADERS += \
     ../src/captchamanager.h \
     ../src/inboxmanager.h \
     ../src/usermanager.h \
-    ../src/userobject.h
+    ../src/userobject.h \
+    ../src/userthingmodel.h
 
 SOURCES += main.cpp \
     dbusapp.cpp \
@@ -93,7 +94,8 @@ SOURCES += main.cpp \
     ../src/captchamanager.cpp \
     ../src/inboxmanager.cpp \
     ../src/usermanager.cpp \
-    ../src/userobject.cpp
+    ../src/userobject.cpp \
+    ../src/userthingmodel.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h

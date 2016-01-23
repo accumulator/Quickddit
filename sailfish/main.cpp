@@ -46,6 +46,7 @@
 #include "src/linkmanager.h"
 #include "src/inboxmanager.h"
 #include "src/usermanager.h"
+#include "src/userthingmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -74,6 +75,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<LinkManager>("harbour.quickddit.Core", 1, 0, "LinkManager");
     qmlRegisterType<InboxManager>("harbour.quickddit.Core", 1, 0, "InboxManager");
     qmlRegisterType<UserManager>("harbour.quickddit.Core", 1, 0, "UserManager");
+    qmlRegisterType<UserThingModel>("harbour.quickddit.Core", 1, 0, "UserThingModel");
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     view->rootContext()->setContextProperty("APP_VERSION", APP_VERSION);
