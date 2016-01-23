@@ -190,6 +190,8 @@ AbstractPage {
 
         footer: LoadingFooter { visible: userManager.busy; listViewItem: userItemsListView }
 
+        ViewPlaceholder { enabled: userItemsListView.count == 0 && !userThingModel.busy; text: "Nothing here :(" }
+
         VerticalScrollDecorator {}
     }
 
