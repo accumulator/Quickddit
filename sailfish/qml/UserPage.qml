@@ -22,7 +22,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: userPage
-    title: "/u/" + username
+    title: "User"
     busy: userManager.busy
 
     property string username;
@@ -30,7 +30,7 @@ AbstractPage {
     SilicaListView {
         id: userItemsListView
         anchors.fill: parent
-        //model: messageModel
+        model: userThingModel
 
         PullDownMenu {
             MenuItem {
@@ -41,91 +41,223 @@ AbstractPage {
         }
 
         header: Column {
-            PageHeader { title: "/u/" + userManager.user.name }
+            width: parent.width
+            anchors.margins: constant.paddingMedium
+
+            spacing: 20
+
+            QuickdditPageHeader { title: userPage.title }
 
             Text {
-                text: "link karma: " + userManager.user.linkKarma
+                anchors.left: parent.left
+                anchors.margins: constant.paddingMedium
                 color: constant.colorLight
+                font.pixelSize: constant.fontSizeLarger
+                font.bold: true
+                text: "/u/" + userManager.user.name
             }
 
-            Text {
-                text: "comment karma: " + userManager.user.commentKarma
-                color: constant.colorLight
+            Row {
+                anchors.left: parent.left
+                anchors.margins: constant.paddingMedium
+                spacing: 20
+
+                Bubble {
+                    color: "green"
+                    visible: !!userManager.user.isFriend
+                    font.bold: true
+                    text: "Friend"
+                }
+                Bubble {
+                    visible: !!userManager.user.isGold
+                    text: "Gold"
+                }
+                Bubble {
+                    visible: !!userManager.user.hasVerifiedEmail
+                    text: "Email Verified"
+                }
+                Bubble {
+                    visible: !!userManager.user.isMod
+                    text: "Mod"
+                }
+                Bubble {
+                    visible: !!userManager.user.isHideFromRobots
+                    text: "No Robots"
+                }
             }
 
-            Text {
-                text: "created: " + userManager.user.created
-                color: constant.colorLight
+            Separator {
+                anchors { left: parent.left; right: parent.right }
+                color: constant.colorMid
             }
 
-            Bubble {
-                color: "green"
-                visible: !!userManager.user.isFriend
-                text: "Friend"
-            }
-            Bubble {
-                color: "yellow"
-                visible: !!userManager.user.isGold
-                text: "Gold"
-            }
-            Bubble {
-                color: "blue"
-                visible: !!userManager.user.hasVerifiedEmail
-                text: "Email Verified"
-            }
-            Bubble {
-                color: "purple"
-                visible: !!userManager.user.isMod
-                text: "Mod"
+            Column {
+                anchors.left: parent.left
+                anchors.margins: constant.paddingMedium
+
+                Text {
+                    text: userManager.user.linkKarma + " link karma"
+                    color: constant.colorLight
+                    font.pixelSize: constant.fontSizeDefault
+                }
+
+                Text {
+                    text: userManager.user.commentKarma + " comment karma"
+                    color: constant.colorLight
+                    font.pixelSize: constant.fontSizeDefault
+                }
+
+                Text {
+                    text: "created " + userManager.user.created
+                    color: constant.colorLight
+                    font.pixelSize: constant.fontSizeDefault
+                }
             }
 
-            Bubble {
-                color: "grey"
-                visible: !!userManager.user.isHideFromRobots
-                text: "No Robots"
+            Separator {
+                anchors { left: parent.left; right: parent.right }
+                color: constant.colorMid
+            }
+
+            // spacer
+            Rectangle {
+                height: 10
+                width: 1
+                color: "transparent"
+            }
+
+        }
+
+        delegate: Item {
+            id: commentDelegate
+
+            width: ListView.view.width
+            height: mainItem.height
+
+            ListItem {
+                id: mainItem
+                width: commentDelegate.width
+
+                contentHeight: mainColumn.height + 2 * constant.paddingMedium
+                showMenuOnPressAndHold: false
+
+                Column {
+                    id: mainColumn
+                    anchors {
+                        left: parent.left; right: parent.right; margins: constant.paddingMedium
+                    }
+                    height: childrenRect.height
+                    spacing: constant.paddingSmall
+
+                    Row {
+                        Text {
+                            font.pixelSize: constant.fontSizeDefault
+                            color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                                    : constant.colorDisabled
+                            font.bold: true
+                            text: "Comment in /r/" + model.subreddit
+                        }
+                        Text {
+                            font.pixelSize: constant.fontSizeDefault
+                            color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
+                                                    : constant.colorDisabled
+                            elide: Text.ElideRight
+                            text: " · " + model.created
+                        }
+                    }
+
+                    Text {
+                        width: parent.width
+                        font.pixelSize: constant.fontSizeSmaller
+                        color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
+                                                : constant.colorDisabled
+                        elide: Text.ElideRight
+                        wrapMode: Text.WordWrap
+                        maximumLineCount: 2
+                        text: model.linkTitle
+                    }
+
+                    Loader {
+                        id: commentLoader
+                        sourceComponent: normalCommentComponent
+                    }
+
+                    Component {
+                        id: normalCommentComponent
+                        Text {
+                            id: commentBodyTextInner
+                            width: mainColumn.width
+                            font.pixelSize: constant.fontSizeDefault
+                            color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                                    : constant.colorDisabled
+                            wrapMode: Text.Wrap
+                            textFormat: Text.RichText
+                            text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
+                            onLinkActivated: globalUtils.openLink(link);
+
+                            Component.onCompleted: {
+                                if (commentBodyTextInner.paintedWidth > mainItem.width && commentLoader.sourceComponent != wideCommentComponent) {
+                                    commentLoader.sourceComponent = wideCommentComponent
+                                }
+                            }
+                        }
+                    }
+
+                    Component {
+                        id: wideCommentComponent
+                        Flickable {
+                            width: mainColumn.width
+                            height: childrenRect.height
+                            contentWidth: commentBodyTextInner.paintedWidth
+                            contentHeight: commentBodyTextInner.height
+                            flickableDirection: Flickable.HorizontalFlick
+                            clip: true
+
+                            MouseArea {
+                                anchors.fill: parent
+                                propagateComposedEvents: false
+                                onClicked: commentDelegate.clicked()
+                                onPressed: mainItem.onPressed(mouse)
+                                onReleased: mainItem.onReleased(mouse)
+                            }
+
+                            Text {
+                                id: commentBodyTextInner
+                                width: mainColumn.width
+                                font.pixelSize: constant.fontSizeDefault
+                                color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                                        : constant.colorDisabled
+                                wrapMode: Text.Wrap
+                                textFormat: Text.RichText
+                                text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
+                                onLinkActivated: globalUtils.openLink(link);
+                            }
+                        }
+                    }
+
+                }
             }
         }
 
-//        delegate: MessageDelegate {
-//            isSentMessage: messageModel.section == MessageModel.SentSection
-//            menu: Component { MessageMenu {} }
-//            showMenuOnPressAndHold: false
-//            onClicked: {
-//                messageManager.markRead(model.fullname)
-//                if (model.isComment) {
-//                    pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
-//                } else if (!isSentMessage) {
-//                    var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {title: "Reply Message"});
-//                    dialog.accepted.connect(function() {
-//                        messageManager.reply(model.fullname, dialog.text);
-//                    });
-//                }
-//            }
-//            onPressAndHold: showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
-//        }
-
         footer: LoadingFooter { visible: userManager.busy; listViewItem: userItemsListView }
-
-//        onAtYEndChanged: {
-//            if (atYEnd && count > 0 && !messageModel.busy && messageModel.canLoadMore)
-//                messageModel.refresh(true);
-//        }
-
-//        ViewPlaceholder { enabled: messageListView.count == 0 && !messageModel.busy; text: "Nothing here :(" }
 
         VerticalScrollDecorator {}
     }
 
     Component.onCompleted: {
         userManager.request(username);
+        userThingModel.username = username;
+        userThingModel.refresh(false);
     }
 
     UserManager {
         id: userManager
         manager: quickdditManager
-//        onSuccess: infoBanner.alert(message);
         onError: infoBanner.alert(errorString);
     }
 
-
+    UserThingModel {
+        id: userThingModel
+        manager: quickdditManager
+    }
 }
