@@ -148,7 +148,8 @@ OTHER_FILES += \
     qml/PostInfoText.qml \
     qml/PostButtonRow.qml \
     qml/QuickdditPageHeader.qml \
-    qml/UserPage.qml
+    qml/UserPage.qml \
+    qml/WideText.qml
 
 icon128.files = icon128/$${TARGET}.png
 icon128.path = /usr/share/icons/hicolor/128x128/apps

@@ -19,71 +19,82 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-ListItem {
+Item {
     id: messageDelegate
-    contentHeight: messageColumn.height + 2 * constant.paddingMedium
 
     property bool isSentMessage: false
 
-    Column {
-        id: messageColumn
-        anchors {
-            left: unreadIndicator.visible ? unreadIndicator.right : parent.left
-            right: parent.right
-            verticalCenter: parent.verticalCenter
-        }
-        height: childrenRect.height
+    property alias listItem: mainItem
 
-        Text {
-            anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-            font.pixelSize: constant.fontSizeDefault
-            color: messageDelegate.highlighted ? Theme.highlightColor : constant.colorLight
-            font.bold: true
-            font.capitalization: model.isComment ? Font.Capitalize : Font.MixedCase
-            elide: Text.ElideRight
-            text: model.subject
+    signal clicked
+
+    width: ListView.view.width
+    height: mainItem.height
+
+    ListItem {
+        id: mainItem
+        contentHeight: messageColumn.height + 2 * constant.paddingMedium
+
+        onClicked: messageDelegate.clicked();
+
+        Column {
+            id: messageColumn
+            anchors {
+                left: unreadIndicator.visible ? unreadIndicator.right : parent.left
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+            }
+            height: childrenRect.height
+
+            Text {
+                anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                font.pixelSize: constant.fontSizeDefault
+                color: mainItem.highlighted ? Theme.highlightColor : constant.colorLight
+                font.bold: true
+                font.capitalization: model.isComment ? Font.Capitalize : Font.MixedCase
+                elide: Text.ElideRight
+                text: model.subject
+            }
+
+            Text {
+                anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                font.pixelSize: constant.fontSizeDefault
+                color: mainItem.highlighted ? Theme.highlightColor : constant.colorLight
+                font.italic: true
+                wrapMode: Text.Wrap
+                maximumLineCount: 2
+                elide: Text.ElideRight
+                visible: text.length > 0
+                text: model.linkTitle
+            }
+
+            Text {
+                anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                font.pixelSize: constant.fontSizeDefault
+                color: mainItem.highlighted ? Theme.secondaryHighlightColor: constant.colorMid
+                wrapMode: Text.Wrap
+                maximumLineCount: 2
+                elide: Text.ElideRight
+                text: (isSentMessage ? "to " + model.destination : "from " + model.author)
+                      + (model.subreddit ? " via /r/" + model.subreddit : "")
+                      + " sent " + model.created
+            }
+
+            WideText {
+                anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                body: model.body
+                listItem: mainItem
+                onClicked: messageDelegate.clicked()
+            }
+
         }
 
-        Text {
-            anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-            font.pixelSize: constant.fontSizeDefault
-            color: messageDelegate.highlighted ? Theme.highlightColor : constant.colorLight
-            font.italic: true
-            wrapMode: Text.Wrap
-            maximumLineCount: 2
-            elide: Text.ElideRight
-            visible: text.length > 0
-            text: model.linkTitle
+        Rectangle {
+            id: unreadIndicator
+            anchors { top: parent.top; bottom: parent.bottom; left: parent.left; margins: constant.paddingMedium }
+            width: visible ? constant.paddingMedium : 0
+            color: "royalblue"
+            visible: model.isUnread
         }
-
-        Text {
-            anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-            font.pixelSize: constant.fontSizeDefault
-            color: messageDelegate.highlighted ? Theme.secondaryHighlightColor: constant.colorMid
-            wrapMode: Text.Wrap
-            maximumLineCount: 2
-            elide: Text.ElideRight
-            text: (isSentMessage ? "to " + model.destination : "from " + model.author)
-                  + (model.subreddit ? " via /r/" + model.subreddit : "")
-                  + " sent " + model.created
-        }
-
-        Text {
-            anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-            font.pixelSize: constant.fontSizeDefault
-            color: messageDelegate.highlighted ? Theme.highlightColor : constant.colorLight
-            wrapMode: Text.Wrap
-            textFormat: Text.RichText
-            text: "<style>a { color: " + Theme.highlightColor + "; }</style>" + model.body
-            clip: true
-        }
-    }
-
-    Rectangle {
-        id: unreadIndicator
-        anchors { top: parent.top; bottom: parent.bottom; left: parent.left; margins: constant.paddingMedium }
-        width: visible ? constant.paddingMedium : 0
-        color: "royalblue"
-        visible: model.isUnread
     }
 }

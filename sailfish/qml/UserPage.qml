@@ -177,62 +177,11 @@ AbstractPage {
                         text: model.linkTitle
                     }
 
-                    Loader {
-                        id: commentLoader
-                        sourceComponent: normalCommentComponent
-                    }
-
-                    Component {
-                        id: normalCommentComponent
-                        Text {
-                            id: commentBodyTextInner
-                            width: mainColumn.width
-                            font.pixelSize: constant.fontSizeDefault
-                            color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
-                                                    : constant.colorDisabled
-                            wrapMode: Text.Wrap
-                            textFormat: Text.RichText
-                            text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
-                            onLinkActivated: globalUtils.openLink(link);
-
-                            Component.onCompleted: {
-                                if (commentBodyTextInner.paintedWidth > mainItem.width && commentLoader.sourceComponent != wideCommentComponent) {
-                                    commentLoader.sourceComponent = wideCommentComponent
-                                }
-                            }
-                        }
-                    }
-
-                    Component {
-                        id: wideCommentComponent
-                        Flickable {
-                            width: mainColumn.width
-                            height: childrenRect.height
-                            contentWidth: commentBodyTextInner.paintedWidth
-                            contentHeight: commentBodyTextInner.height
-                            flickableDirection: Flickable.HorizontalFlick
-                            clip: true
-
-                            MouseArea {
-                                anchors.fill: parent
-                                propagateComposedEvents: false
-                                onClicked: commentDelegate.clicked()
-                                onPressed: mainItem.onPressed(mouse)
-                                onReleased: mainItem.onReleased(mouse)
-                            }
-
-                            Text {
-                                id: commentBodyTextInner
-                                width: mainColumn.width
-                                font.pixelSize: constant.fontSizeDefault
-                                color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
-                                                        : constant.colorDisabled
-                                wrapMode: Text.Wrap
-                                textFormat: Text.RichText
-                                text: "<style>a { color: " + (mainItem.enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>" + model.body
-                                onLinkActivated: globalUtils.openLink(link);
-                            }
-                        }
+                    WideText {
+                        width: parent.width
+                        body: model.body
+                        listItem: mainItem
+                        onClicked: commentDelegate.clicked()
                     }
 
                 }
