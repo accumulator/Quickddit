@@ -43,6 +43,8 @@ QtObject {
     readonly property int fontSizeXXLarge: Theme.fontSizeHuge
 
     property int fontSizeDefault: __fontSizeDefaultF()
+    property int fontSizeSmaller: __fontSizeSmallerF()
+    property int fontSizeLarger: __fontSizeLargerF()
     property int orientationSetting: __orientationSettingF()
 
     function __fontSizeDefaultF() {
@@ -51,6 +53,24 @@ QtObject {
         case AppSettings.SmallFontSize: return constant.fontSizeSmall;
         case AppSettings.MediumFontSize: return constant.fontSizeMedium;
         case AppSettings.LargeFontSize: return constant.fontSizeLarge;
+        }
+    }
+
+    function __fontSizeSmallerF() {
+        switch (appSettings.fontSize) {
+        case AppSettings.TinyFontSize: return constant.fontSizeXSmall - 1;
+        case AppSettings.SmallFontSize: return constant.fontSizeXSmall;
+        case AppSettings.MediumFontSize: return constant.fontSizeSmall;
+        case AppSettings.LargeFontSize: return constant.fontSizeMedium;
+        }
+    }
+
+    function __fontSizeLargerF() {
+        switch (appSettings.fontSize) {
+        case AppSettings.TinyFontSize: return constant.fontSizeSmall;
+        case AppSettings.SmallFontSize: return constant.fontSizeMedium;
+        case AppSettings.MediumFontSize: return constant.fontSizeLarge;
+        case AppSettings.LargeFontSize: return constant.fontSizeXLarge;
         }
     }
 
