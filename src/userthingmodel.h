@@ -47,7 +47,8 @@ public:
         MoreChildrenRole,
         CollapsedRole,
         SubredditRole,
-        LinkTitleRole
+        LinkTitleRole,
+        LinkIdRole
     };
 
     explicit UserThingModel(QObject *parent = 0);

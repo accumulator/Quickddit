@@ -96,6 +96,9 @@ public:
     QString linkTitle() const;
     void setLinkTitle(const QString &linkTitle);
 
+    QString linkId() const;
+    void setLinkId(const QString &linkId);
+
 private:
     QExplicitlySharedDataPointer<CommentObjectData> d;
 };

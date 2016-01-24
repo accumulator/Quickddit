@@ -84,8 +84,9 @@ QVariant UserThingModel::data(const QModelIndex &index, int role) const
     case IsValidRole: return comment.author() != "[deleted]";
     case IsAuthorRole: return comment.author() == manager()->settings()->redditUsername();
     case CollapsedRole: return (comment.isCollapsed());
-    case SubredditRole: return (comment.subreddit());
-    case LinkTitleRole: return (comment.linkTitle());
+    case SubredditRole: return comment.subreddit();
+    case LinkTitleRole: return comment.linkTitle();
+    case LinkIdRole: return comment.linkId();
     default:
         qCritical("UserThingModel::data(): Invalid role");
         return QVariant();
@@ -124,6 +125,7 @@ QHash<int, QByteArray> UserThingModel::customRoleNames() const
     roles[CollapsedRole] = "isCollapsed";
     roles[SubredditRole] = "subreddit";
     roles[LinkTitleRole] = "linkTitle";
+    roles[LinkIdRole] = "linkId";
     return roles;
 }
 
@@ -161,7 +163,6 @@ void UserThingModel::onFinished(QNetworkReply *reply)
                 m_commentList.append(comments);
                 endInsertRows();
             }
-//            emit success();
         }
         else
             emit error(reply->errorString());

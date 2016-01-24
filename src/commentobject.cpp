@@ -46,6 +46,7 @@ public:
     bool isCollapsed;
     QString subreddit;
     QString linkTitle;
+    QString linkId;
 
 private:
     Q_DISABLE_COPY(CommentObjectData)
@@ -261,4 +262,14 @@ QString CommentObject::linkTitle() const
 void CommentObject::setLinkTitle(const QString &linkTitle)
 {
     d->linkTitle = linkTitle;
+}
+
+QString CommentObject::linkId() const
+{
+    return d->linkId;
+}
+
+void CommentObject::setLinkId(const QString &linkId)
+{
+    d->linkId = linkId;
 }
