@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2016  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,21 +19,23 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-// draws a text in a bubble
-Text {
-    // defaults, usually overridden
-    font.pixelSize: constant.fontSizeDefault
-    color: Theme.highlightColor
+Label {
+    property bool down
+    property bool highlighted
+    property bool _invertColors
 
-    Rectangle {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        anchors.leftMargin: -5
-        anchors.rightMargin: -5
-        color: constant.colorMid
-        opacity: 0.3
-        radius: 6
+    signal clicked
+
+    width: parent.itemWidth
+
+    onVisibleChanged: {
+        parent.calculateItemWidth();
     }
+
+    verticalAlignment: Text.AlignVCenter
+    height: Theme.itemSizeSmall
+    horizontalAlignment: implicitWidth > width && truncationMode != TruncationMode.None ? Text.AlignLeft : Text.AlignHCenter
+    color: enabled ? ((down || highlighted) ^ _invertColors ? Theme.highlightColor : Theme.primaryColor)
+                   : Theme.rgba(Theme.secondaryColor, 0.4)
 }
+

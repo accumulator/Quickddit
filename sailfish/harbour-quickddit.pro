@@ -148,8 +148,12 @@ OTHER_FILES += \
     qml/PostInfoText.qml \
     qml/PostButtonRow.qml \
     qml/QuickdditPageHeader.qml \
+    qml/FancyContextMenu.qml \
+    qml/FancyMenuItemRow.qml \
+    qml/FancyMenuItem.qml \
     qml/UserPage.qml \
     qml/WideText.qml
+    iface/org.quickddit.xml
 
 icon128.files = icon128/$${TARGET}.png
 icon128.path = /usr/share/icons/hicolor/128x128/apps
