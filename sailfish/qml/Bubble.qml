@@ -23,7 +23,7 @@ import Sailfish.Silica 1.0
 Text {
     // defaults, usually overridden
     font.pixelSize: constant.fontSizeDefault
-    color: constant.colorLight
+    color: Theme.highlightColor
 
     Rectangle {
         anchors.top: parent.top
