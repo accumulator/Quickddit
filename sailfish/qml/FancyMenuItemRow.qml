@@ -68,8 +68,12 @@ Row {
     onXPosChanged: {
         var item = childAt(xPos, y);
         if (item !== _highlightedItem) {
+            if (_highlightedItem)
+                _highlightedItem.down = false
             updateHighlightbarFor(item);
             _highlightedItem = item
+            if (_highlightedItem)
+                _highlightedItem.down = down
         }
     }
 
@@ -80,8 +84,12 @@ Row {
             var item = childAt(xPos, y);
             updateHighlightbarFor(item);
             _highlightedItem = item
+            if (_highlightedItem)
+                _highlightedItem.down = true
         } else {
             resetHighlightbar();
+            if (_highlightedItem)
+                _highlightedItem.down = false
             _highlightedItem = null
         }
     }
