@@ -22,7 +22,6 @@ import Sailfish.Silica 1.0
 Row {
     id: menuRow
 
-    width: parent.parent.width
     spacing: 0
 
     property FancyContextMenu contextMenu: parent.parent
@@ -51,7 +50,7 @@ Row {
 
     function resetHighlightbar() {
         contextMenu._highlightBar.x = parent.x
-        contextMenu._highlightBar.width = parent.width
+        contextMenu._highlightBar.width = contextMenu.width
     }
 
     function calculateItemWidth() {
@@ -96,8 +95,13 @@ Row {
             // else: prevent menu from being closed, because the Row is always enabled
     }
 
+    Binding {
+        target: menuRow
+        property: "width"
+        value: contextMenu.width
+    }
+
     onWidthChanged: {
-        console.log("width=" + width);
         calculateItemWidth();
     }
 
