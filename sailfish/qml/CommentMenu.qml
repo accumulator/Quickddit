@@ -49,39 +49,48 @@ FancyContextMenu {
                             comment.likes === -1 ? VoteManager.Unvote : VoteManager.Downvote)
         }
     }
-    MenuItem {
-        enabled: quickdditManager.isSignedIn
-        text: "Reply"
-        onClicked: replyClicked();
-    }
-    MenuItem {
-        visible: comment.isAuthor
-        text: "Edit"
-        onClicked: editClicked();
-    }
-    MenuItem {
-        visible: comment.isAuthor
-        text: "Delete"
-        onClicked: deleteClicked();
-    }
-    MenuItem {
-        text: "Permalink"
-        onClicked: {
-            var link = QMLUtils.toAbsoluteUrl(linkPermalink + comment.fullname.substring(3));
-            globalUtils.createOpenLinkDialog(link);
+
+    FancyMenuItemRow {
+        FancyMenuItem {
+            text: "Copy Comment"
+            onClicked: {
+                QMLUtils.copyToClipboard(comment.rawBody);
+                infoBanner.alert(qsTr("Comment copied to clipboard"));
+            }
+        }
+
+        FancyMenuItem {
+            enabled: quickdditManager.isSignedIn
+            text: "Reply"
+            onClicked: replyClicked();
         }
     }
-    MenuItem {
-        enabled: comment.depth > 0
-        text: "Parent"
-        onClicked: __showParentAtDestruction = true;
+
+    FancyMenuItemRow {
+        FancyMenuItem {
+            enabled: comment.isAuthor
+            text: "Edit"
+            onClicked: editClicked();
+        }
+        FancyMenuItem {
+            enabled: comment.isAuthor
+            text: "Delete"
+            onClicked: deleteClicked();
+        }
     }
 
-    MenuItem {
-        text: "Copy Comment"
-        onClicked: {
-            QMLUtils.copyToClipboard(comment.rawBody);
-            infoBanner.alert(qsTr("Comment copied to clipboard"));
+    FancyMenuItemRow {
+        FancyMenuItem {
+            enabled: comment.depth > 0
+            text: "Parent"
+            onClicked: __showParentAtDestruction = true;
+        }
+        FancyMenuItem {
+            text: "Permalink"
+            onClicked: {
+                var link = QMLUtils.toAbsoluteUrl(linkPermalink + comment.fullname.substring(3));
+                globalUtils.createOpenLinkDialog(link);
+            }
         }
     }
 
