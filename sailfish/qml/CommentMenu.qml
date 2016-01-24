@@ -95,7 +95,7 @@ FancyContextMenu {
     }
 
     MenuItem {
-        text: comment.author.split(" ")[0]
+        text: "/u/" + comment.author.split(" ")[0]
         onClicked: {
             pageStack.push(Qt.resolvedUrl("UserPage.qml"), { username: comment.author.split(" ")[0] } );
         }
