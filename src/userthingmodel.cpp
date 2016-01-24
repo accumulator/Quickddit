@@ -36,9 +36,6 @@ void UserThingModel::classBegin()
 
 void UserThingModel::componentComplete()
 {
-//    if (m_location == Search && m_searchQuery.isEmpty())
-//        return;
-
     refresh(false);
 }
 
@@ -136,10 +133,21 @@ void UserThingModel::refresh(bool refreshOlder)
 
     abortActiveReply();
 
-//    QHash<QString,QString> parameters;
-//    parameters["limit"] = "50";
+    QHash<QString,QString> parameters;
+    parameters["limit"] = "25";
 
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, "/user/" + m_username + "/overview");
+    if (!m_commentList.isEmpty()) {
+        if (refreshOlder) {
+            parameters["count"] = QString::number(m_commentList.count());
+            parameters["after"] = m_commentList.last().fullname();
+        } else {
+            beginRemoveRows(QModelIndex(), 0, m_commentList.count() - 1);
+            m_commentList.clear();
+            endRemoveRows();
+        }
+    }
+
+    m_request = manager()->createRedditRequest(this, APIRequest::GET, "/user/" + m_username + "/overview", parameters);
     connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
     setBusy(true);
@@ -153,15 +161,13 @@ void UserThingModel::onFinished(QNetworkReply *reply)
             qDebug() << "user things :" << result;
             Listing<CommentObject> comments = Parser::parseUserThingList(result);
 
-            if (!m_commentList.isEmpty()) {
-                beginRemoveRows(QModelIndex(), 0, m_commentList.count() - 1);
-                m_commentList.clear();
-                endRemoveRows();
-            }
             if (!comments.isEmpty()) {
                 beginInsertRows(QModelIndex(), m_commentList.count(), m_commentList.count() + comments.count() - 1);
                 m_commentList.append(comments);
                 endInsertRows();
+                setCanLoadMore(comments.hasMore());
+            } else {
+                setCanLoadMore(false);
             }
         }
         else
