@@ -23,7 +23,6 @@ import harbour.quickddit.Core 1.0
 AbstractPage {
     id: userPage
     title: "User /u/" + username
-    busy: userManager.busy
 
     property string username;
 
@@ -36,7 +35,7 @@ AbstractPage {
             MenuItem {
                 text: "Refresh"
                 enabled: !userManager.busy
-                onClicked: userManager.request(username);
+                onClicked: userThingModel.refresh(false);
             }
         }
 
@@ -54,7 +53,7 @@ AbstractPage {
                 color: constant.colorLight
                 font.pixelSize: constant.fontSizeLarger
                 font.bold: true
-                text: "/u/" + userManager.user.name
+                text: "/u/" + username
             }
 
             Row {
@@ -92,23 +91,26 @@ AbstractPage {
             }
 
             Column {
+                id: aboutColumn
                 anchors.left: parent.left
                 anchors.margins: constant.paddingMedium
 
+                function object_or(o,d) { return (!!o ? o : d) }
+
                 Text {
-                    text: userManager.user.linkKarma + " link karma"
+                    text: aboutColumn.object_or(userManager.user.linkKarma,0) + " link karma"
                     color: constant.colorLight
                     font.pixelSize: constant.fontSizeDefault
                 }
 
                 Text {
-                    text: userManager.user.commentKarma + " comment karma"
+                    text: aboutColumn.object_or(userManager.user.commentKarma,0) + " comment karma"
                     color: constant.colorLight
                     font.pixelSize: constant.fontSizeDefault
                 }
 
                 Text {
-                    text: "created " + userManager.user.created
+                    text: "created " + aboutColumn.object_or(userManager.user.created,"?")
                     color: constant.colorLight
                     font.pixelSize: constant.fontSizeDefault
                 }
@@ -152,7 +154,7 @@ AbstractPage {
                 Column {
                     id: mainColumn
                     anchors {
-                        left: parent.left; right: parent.right; margins: constant.paddingMedium
+                        left: parent.left; right: parent.right; margins: constant.paddingSmall
                     }
                     height: childrenRect.height
                     spacing: constant.paddingSmall
@@ -197,6 +199,11 @@ AbstractPage {
         }
 
         footer: LoadingFooter { visible: userManager.busy; listViewItem: userItemsListView }
+
+        onAtYEndChanged: {
+            if (atYEnd && count > 0 && !userThingModel.busy && userThingModel.canLoadMore)
+                userThingModel.refresh(true);
+        }
 
         ViewPlaceholder { enabled: userItemsListView.count == 0 && !userThingModel.busy; text: "Nothing here :(" }
 
