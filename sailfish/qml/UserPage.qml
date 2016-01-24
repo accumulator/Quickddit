@@ -22,7 +22,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: userPage
-    title: "User"
+    title: "User /u/" + username
     busy: userManager.busy
 
     property string username;
@@ -46,7 +46,7 @@ AbstractPage {
 
             spacing: 20
 
-            QuickdditPageHeader { title: userPage.title }
+            QuickdditPageHeader { title: "User Profile" }
 
             Text {
                 anchors.left: parent.left
