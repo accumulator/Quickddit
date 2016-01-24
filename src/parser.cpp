@@ -526,8 +526,8 @@ Listing<CommentObject> Parser::parseUserThingList(const QByteArray &json)
         }
     }
 
-    qDebug() << "hasMore" <<data.value("after").isNull();
     commentList.setHasMore(!data.value("after").isNull());
+
     return commentList;
 }
 
