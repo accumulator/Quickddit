@@ -66,7 +66,7 @@ Row {
     }
 
     onXPosChanged: {
-        var item = childAt(xPos, y);
+        var item = childAt(xPos, 0);
         if (item !== _highlightedItem) {
             if (_highlightedItem)
                 _highlightedItem.down = false
@@ -78,10 +78,9 @@ Row {
     }
 
     onDownChanged: {
-        console.log("row down changed to " + down);
         if (down) {
             updateXPosFromMenu();
-            var item = childAt(xPos, y);
+            var item = childAt(xPos, 0);
             updateHighlightbarFor(item);
             _highlightedItem = item
             if (_highlightedItem)
@@ -96,7 +95,7 @@ Row {
 
     onClicked: {
         updateXPosFromMenu();
-        var item = childAt(xPos, y);
+        var item = childAt(xPos, 0);
         if (item)
             if (item.enabled)
                 item.clicked();
