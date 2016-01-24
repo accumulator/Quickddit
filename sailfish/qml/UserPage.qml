@@ -134,12 +134,20 @@ AbstractPage {
             width: ListView.view.width
             height: mainItem.height
 
+            signal clicked
+
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: "/r/" + model.subreddit + "/comments/" + model.linkId + "/" + model.fullname.substring(3)})
+            }
+
             ListItem {
                 id: mainItem
                 width: commentDelegate.width
 
                 contentHeight: mainColumn.height + 2 * constant.paddingMedium
                 showMenuOnPressAndHold: false
+
+                onClicked: commentDelegate.clicked()
 
                 Column {
                     id: mainColumn
