@@ -20,7 +20,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.quickddit.Core 1.0
 
-ContextMenu {
+FancyContextMenu {
     id: commentMenu
 
     property variant comment
@@ -35,24 +35,19 @@ ContextMenu {
     signal editClicked
     signal deleteClicked
 
-    MenuItem {
-        id: upvoteButton
-        visible: comment.likes !== 1
-        enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
-        text: "Upvote"
-        onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Upvote)
-    }
-    MenuItem {
-        visible: comment.likes !== -1
-        enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
-        text: "Downvote"
-        onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Downvote)
-    }
-    MenuItem {
-        visible: comment.likes !== 0
-        enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
-        text: "Unvote"
-        onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Unvote)
+    FancyMenuItemRow {
+        FancyMenuItem {
+            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
+            text: comment.likes === 1 ? "Unvote" : "Upvote"
+            onClicked: commentVoteManager.vote(comment.fullname,
+                            comment.likes === 1 ? VoteManager.Unvote : VoteManager.Upvote)
+        }
+        FancyMenuItem {
+            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
+            text: comment.likes === -1 ? "Unvote" : "Downvote"
+            onClicked: commentVoteManager.vote(comment.fullname,
+                            comment.likes === -1 ? VoteManager.Unvote : VoteManager.Downvote)
+        }
     }
     MenuItem {
         enabled: quickdditManager.isSignedIn
