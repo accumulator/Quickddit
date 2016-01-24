@@ -20,7 +20,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.quickddit.Core 1.0
 
-ContextMenu {
+FancyContextMenu {
     id: commentMenu
 
     property variant comment
@@ -35,58 +35,62 @@ ContextMenu {
     signal editClicked
     signal deleteClicked
 
-    MenuItem {
-        id: upvoteButton
-        visible: comment.likes !== 1
-        enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
-        text: "Upvote"
-        onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Upvote)
-    }
-    MenuItem {
-        visible: comment.likes !== -1
-        enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
-        text: "Downvote"
-        onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Downvote)
-    }
-    MenuItem {
-        visible: comment.likes !== 0
-        enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
-        text: "Unvote"
-        onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Unvote)
-    }
-    MenuItem {
-        enabled: quickdditManager.isSignedIn
-        text: "Reply"
-        onClicked: replyClicked();
-    }
-    MenuItem {
-        visible: comment.isAuthor
-        text: "Edit"
-        onClicked: editClicked();
-    }
-    MenuItem {
-        visible: comment.isAuthor
-        text: "Delete"
-        onClicked: deleteClicked();
-    }
-    MenuItem {
-        text: "Permalink"
-        onClicked: {
-            var link = QMLUtils.toAbsoluteUrl(linkPermalink + comment.fullname.substring(3));
-            globalUtils.createOpenLinkDialog(link);
+    FancyMenuItemRow {
+        FancyMenuItem {
+            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
+            text: comment.likes === 1 ? "Unvote" : "Upvote"
+            onClicked: commentVoteManager.vote(comment.fullname,
+                            comment.likes === 1 ? VoteManager.Unvote : VoteManager.Upvote)
+        }
+        FancyMenuItem {
+            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
+            text: comment.likes === -1 ? "Unvote" : "Downvote"
+            onClicked: commentVoteManager.vote(comment.fullname,
+                            comment.likes === -1 ? VoteManager.Unvote : VoteManager.Downvote)
         }
     }
-    MenuItem {
-        enabled: comment.depth > 0
-        text: "Parent"
-        onClicked: __showParentAtDestruction = true;
+
+    FancyMenuItemRow {
+        FancyMenuItem {
+            text: "Copy Comment"
+            onClicked: {
+                QMLUtils.copyToClipboard(comment.rawBody);
+                infoBanner.alert(qsTr("Comment copied to clipboard"));
+            }
+        }
+
+        FancyMenuItem {
+            enabled: quickdditManager.isSignedIn
+            text: "Reply"
+            onClicked: replyClicked();
+        }
     }
 
-    MenuItem {
-        text: "Copy Comment"
-        onClicked: {
-            QMLUtils.copyToClipboard(comment.rawBody);
-            infoBanner.alert(qsTr("Comment copied to clipboard"));
+    FancyMenuItemRow {
+        FancyMenuItem {
+            enabled: comment.isAuthor
+            text: "Edit"
+            onClicked: editClicked();
+        }
+        FancyMenuItem {
+            enabled: comment.isAuthor
+            text: "Delete"
+            onClicked: deleteClicked();
+        }
+    }
+
+    FancyMenuItemRow {
+        FancyMenuItem {
+            enabled: comment.depth > 0
+            text: "Parent"
+            onClicked: __showParentAtDestruction = true;
+        }
+        FancyMenuItem {
+            text: "Permalink"
+            onClicked: {
+                var link = QMLUtils.toAbsoluteUrl(linkPermalink + comment.fullname.substring(3));
+                globalUtils.createOpenLinkDialog(link);
+            }
         }
     }
 

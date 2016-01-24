@@ -141,6 +141,9 @@ OTHER_FILES += \
     qml/PostInfoText.qml \
     qml/PostButtonRow.qml \
     qml/QuickdditPageHeader.qml \
+    qml/FancyContextMenu.qml \
+    qml/FancyMenuItemRow.qml \
+    qml/FancyMenuItem.qml
     iface/org.quickddit.xml
 
 icon128.files = icon128/$${TARGET}.png
