@@ -93,6 +93,7 @@ AbstractPage {
             TextSwitch {
                 text: "Check Messages"
                 checked: appSettings.pollUnread;
+                enabled: quickdditManager.isSignedIn
                 onCheckedChanged: {
                     appSettings.pollUnread = checked;
                 }
