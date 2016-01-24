@@ -144,7 +144,11 @@ AbstractPage {
             onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager});
         }
 
-        footer: LoadingFooter { visible: linkModel.busy; listViewItem: linkListView }
+        footer: LoadingFooter {
+            visible: linkModel.busy || (linkListView.count > 0 && linkModel.canLoadMore)
+            running: linkModel.busy
+            listViewItem: linkListView
+        }
 
         onAtYEndChanged: {
             if (atYEnd && count > 0 && !linkModel.busy && linkModel.canLoadMore)
