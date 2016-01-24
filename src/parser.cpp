@@ -92,7 +92,8 @@ void commentFromMap(CommentObject &comment, const QVariantMap &commentMap)
     comment.setDistinguished(commentMap.value("distinguished").toString());
     comment.setScoreHidden(commentMap.value("score_hidden").toBool());
     comment.setSubreddit(commentMap.value("subreddit").toString());
-    comment.setLinkTitle(commentMap.value("link_title").toString());
+    comment.setLinkTitle(unescapeHtml(commentMap.value("link_title").toString()));
+    comment.setLinkId(commentMap.value("link_id").toString().mid(3));
 }
 
 // Private
@@ -388,8 +389,8 @@ Listing<MessageObject> Parser::parseMessageList(const QByteArray &json)
         message.setBody(unescapeHtml(messageMap.value("body_html").toString()));
         message.setRawBody(unescapeMarkdown(messageMap.value("body").toString()));
         message.setCreated(QDateTime::fromTime_t(messageMap.value("created_utc").toInt()));
-        message.setSubject(messageMap.value("subject").toString());
-        message.setLinkTitle(messageMap.value("link_title").toString());
+        message.setSubject(unescapeHtml(messageMap.value("subject").toString()));
+        message.setLinkTitle(unescapeHtml(messageMap.value("link_title").toString()));
         message.setSubreddit(messageMap.value("subreddit").toString());
         message.setContext(messageMap.value("context").toString());
         message.setComment(messageMap.value("was_comment").toBool());
