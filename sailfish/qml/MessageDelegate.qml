@@ -42,46 +42,55 @@ Item {
             anchors {
                 left: unreadIndicator.visible ? unreadIndicator.right : parent.left
                 right: parent.right
-                verticalCenter: parent.verticalCenter
+                margins: constant.paddingMedium
             }
             height: childrenRect.height
+            spacing: constant.paddingSmall
 
-            Text {
-                anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-                font.pixelSize: constant.fontSizeDefault
-                color: mainItem.highlighted ? Theme.highlightColor : constant.colorLight
-                font.bold: true
-                font.capitalization: model.isComment ? Font.Capitalize : Font.MixedCase
-                elide: Text.ElideRight
-                text: model.subject
+            Row {
+                width: parent.width
+                spacing: constant.paddingSmall
+
+                Bubble {
+                    text: "PM"
+                    visible: !isComment
+                }
+
+                Text {
+                    font.pixelSize: constant.fontSizeDefault
+                    color: mainItem.highlighted ? Theme.highlightColor : constant.colorLight
+                    font.bold: true
+                    elide: Text.ElideRight
+                    text: isComment ? model.subject + " from " + model.author
+                                    : model.subject
+                }
             }
 
             Text {
-                anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-                font.pixelSize: constant.fontSizeDefault
-                color: mainItem.highlighted ? Theme.highlightColor : constant.colorLight
-                font.italic: true
+                width: parent.width
+                font.pixelSize: constant.fontSizeSmaller
+                color: Theme.highlightColor
                 wrapMode: Text.Wrap
+                maximumLineCount: 2
+                elide: Text.ElideRight
+                text: isComment ? "in /r/" + model.subreddit + ", " + model.created
+                                : (isSentMessage ? "to " + model.destination
+                                                 : "from " + model.author) + ", " + model.created
+            }
+
+            Text {
+                width: parent.width
+                font.pixelSize: constant.fontSizeSmaller
+                color: mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid
+                wrapMode: Text.WordWrap
                 maximumLineCount: 2
                 elide: Text.ElideRight
                 visible: text.length > 0
                 text: model.linkTitle
             }
 
-            Text {
-                anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
-                font.pixelSize: constant.fontSizeDefault
-                color: mainItem.highlighted ? Theme.secondaryHighlightColor: constant.colorMid
-                wrapMode: Text.Wrap
-                maximumLineCount: 2
-                elide: Text.ElideRight
-                text: (isSentMessage ? "to " + model.destination : "from " + model.author)
-                      + (model.subreddit ? " via /r/" + model.subreddit : "")
-                      + " sent " + model.created
-            }
-
             WideText {
-                anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                width: parent.width
                 body: model.body
                 listItem: mainItem
                 onClicked: messageDelegate.clicked()
