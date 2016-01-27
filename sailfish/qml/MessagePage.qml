@@ -77,7 +77,11 @@ AbstractPage {
             onPressAndHold: showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
         }
 
-        footer: LoadingFooter { visible: messageModel.busy; listViewItem: messageListView }
+        footer: LoadingFooter {
+            visible: messageModel.busy || (messageListView.count > 0 && messageModel.canLoadMore)
+            running: messageModel.busy
+            listViewItem: messageListView
+        }
 
         onAtYEndChanged: {
             if (atYEnd && count > 0 && !messageModel.busy && messageModel.canLoadMore)
