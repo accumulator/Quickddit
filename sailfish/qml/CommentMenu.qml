@@ -67,6 +67,8 @@ FancyContextMenu {
     }
 
     FancyMenuItemRow {
+        visible: comment.isAuthor
+
         FancyMenuItem {
             enabled: comment.isAuthor
             text: "Edit"
