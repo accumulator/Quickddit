@@ -198,7 +198,11 @@ AbstractPage {
             }
         }
 
-        footer: LoadingFooter { visible: userManager.busy; listViewItem: userItemsListView }
+        footer: LoadingFooter {
+            listViewItem: userItemsListView
+            visible: userThingModel.busy || (userItemsListView.count > 0 && userThingModel.canLoadMore)
+            running: userThingModel.busy
+        }
 
         onAtYEndChanged: {
             if (atYEnd && count > 0 && !userThingModel.busy && userThingModel.canLoadMore)
