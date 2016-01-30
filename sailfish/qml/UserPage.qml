@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2015-2016  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -130,10 +130,27 @@ AbstractPage {
 
         }
 
-        delegate: UserPageCommentDelegate {
-            onClicked: {
-                pageStack.push(Qt.resolvedUrl("CommentPage.qml"),
-                               {linkPermalink: "/r/" + model.comment.subreddit + "/comments/" + model.comment.linkId + "/" + model.comment.fullname.substring(3)})
+        delegate: Component {
+            Loader {
+                id: delegateLoader
+                width: parent.width
+
+                property variant item: model
+
+                //sourceComponent: model.kind === "t1" ? commentDelegate : undefined
+                sourceComponent: commentDelegate
+            }
+        }
+
+        Component {
+            id: commentDelegate
+            UserPageCommentDelegate {
+                model: item.comment
+
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("CommentPage.qml"),
+                                   {linkPermalink: "/r/" + model.subreddit + "/comments/" + model.linkId + "/" + model.fullname.substring(3)})
+                }
             }
         }
 
