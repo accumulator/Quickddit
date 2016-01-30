@@ -51,9 +51,11 @@ Item {
                 width: parent.width
                 spacing: constant.paddingSmall
 
-                Bubble {
-                    text: "PM"
-                    visible: !isComment
+                Image {
+                    source: isComment ? "image://theme/icon-m-chat" : "image://theme/icon-m-mail"
+                    width: 32
+                    height: 32
+                    anchors.verticalCenter: parent.verticalCenter
                 }
 
                 Text {
