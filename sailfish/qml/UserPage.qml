@@ -137,8 +137,8 @@ AbstractPage {
 
                 property variant item: model
 
-                //sourceComponent: model.kind === "t1" ? commentDelegate : undefined
-                sourceComponent: commentDelegate
+                sourceComponent: model.kind === "t1" ? commentDelegate
+                                                     : model.kind === "t3" ? linkDelegate : undefined
             }
         }
 
@@ -150,6 +150,18 @@ AbstractPage {
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"),
                                    {linkPermalink: "/r/" + model.subreddit + "/comments/" + model.linkId + "/" + model.fullname.substring(3)})
+                }
+            }
+        }
+
+        Component {
+            id: linkDelegate
+            UserPageLinkDelegate {
+                model: item.link
+
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("CommentPage.qml"),
+                                   {linkPermalink: "/r/" + model.subreddit + "/comments/" + model.fullname.substring(3)})
                 }
             }
         }
