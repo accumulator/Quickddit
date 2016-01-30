@@ -57,7 +57,11 @@ HEADERS += \
     ../src/apirequest.h \
     ../src/aboutmultiredditmanager.h \
     ../src/captchamanager.h \
-    ../src/inboxmanager.h
+    ../src/inboxmanager.h \
+    ../src/usermanager.h \
+    ../src/userobject.h \
+    ../src/userthingmodel.h \
+    ../src/thing.h
 
 SOURCES += main.cpp \
     dbusapp.cpp \
@@ -89,7 +93,11 @@ SOURCES += main.cpp \
     ../src/apirequest.cpp \
     ../src/aboutmultiredditmanager.cpp \
     ../src/captchamanager.cpp \
-    ../src/inboxmanager.cpp
+    ../src/inboxmanager.cpp \
+    ../src/usermanager.cpp \
+    ../src/userobject.cpp \
+    ../src/userthingmodel.cpp \
+    ../src/thing.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h
@@ -101,6 +109,7 @@ OTHER_FILES += \
     rpm/$${TARGET}.changes \
     $${TARGET}.desktop \
     $${TARGET}.png \
+    iface/org.quickddit.xml \
     qml/cover/CoverPage.qml \
     qml/SubredditsBrowsePage.qml \
     qml/SubredditsPage.qml \
@@ -143,8 +152,11 @@ OTHER_FILES += \
     qml/QuickdditPageHeader.qml \
     qml/FancyContextMenu.qml \
     qml/FancyMenuItemRow.qml \
-    qml/FancyMenuItem.qml
-    iface/org.quickddit.xml
+    qml/FancyMenuItem.qml \
+    qml/UserPage.qml \
+    qml/WideText.qml \
+    qml/UserPageCommentDelegate.qml \
+    qml/UserPageLinkDelegate.qml
 
 icon128.files = icon128/$${TARGET}.png
 icon128.path = /usr/share/icons/hicolor/128x128/apps

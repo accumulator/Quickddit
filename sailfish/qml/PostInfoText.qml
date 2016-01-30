@@ -47,12 +47,15 @@ Column {
     Text {
         anchors { left: parent.left; right: parent.right }
         wrapMode: Text.Wrap
+        textFormat: Text.RichText
         elide: compact ? Text.ElideRight : Text.ElideNone
         maximumLineCount: compact ? 2 : 9999 /* TODO : maxint */
         font.pixelSize: constant.fontSizeDefault
         color: highlighted ? Theme.secondaryHighlightColor : constant.colorMid
-        text: "submitted " + link.created + " by " + link.author +
-              (showSubreddit ? " to " + link.subreddit : "")
+        onLinkActivated: globalUtils.openLink(link)
+        text: "<style>a { color: " + Theme.highlightColor + "; }</style>" + "submitted " + link.created + " by " +
+                (compact ? link.author : "<a href=\"https://reddit.com/u/" + link.author.split(" ")[0] + "\">" + link.author + "</a>") +
+                (showSubreddit ? " to " + link.subreddit : "")
     }
 
     Row {

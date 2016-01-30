@@ -90,17 +90,22 @@ ApplicationWindow {
                 return true;
             else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url))
                 return true;
+            else if (/^https?:\/\/(\w+\.)?reddit.com\/u\/(\w+)\/?/.test(url))
+                return true;
             return false
         }
 
         function openRedditLink(url) {
             if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
-             else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url)) {
+            else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url)) {
                 var subreddit = /^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.exec(url)[2];
                 var mainPage = getMainPage();
                 mainPage.refresh(subreddit);
                 pageStack.pop(mainPage);
+            } else if (/^https?:\/\/(\w+\.)?reddit.com\/u\/(\w+)\/?/.test(url)) {
+                var username = /^https?:\/\/(\w+\.)?reddit.com\/u\/(\w+)\/?/.exec(url)[2];
+                pageStack.push(Qt.resolvedUrl("UserPage.qml"), {username: username});
             } else
                 infoBanner.alert(qsTr("Unsupported reddit url"));
         }

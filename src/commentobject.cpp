@@ -28,7 +28,6 @@ public:
     CommentObjectData() : score(0), likes(0), distinguished(CommentObject::NotDistinguished),
         depth(0), isSubmitter(false), isScoreHidden(false), isMoreChildren(false), isCollapsed(false) {}
 
-    QString fullname;
     QString author;
     QString body;
     QString rawBody;
@@ -44,39 +43,34 @@ public:
     int moreChildrenCount;
     bool isMoreChildren;
     bool isCollapsed;
+    QString subreddit;
+    QString linkTitle;
+    QString linkId;
 
 private:
     Q_DISABLE_COPY(CommentObjectData)
 };
 
 CommentObject::CommentObject()
-    : d(new CommentObjectData)
+    : Thing(), d(new CommentObjectData)
 {
+    setKind("t1");
 }
 
 CommentObject::CommentObject(const CommentObject &other)
-    : d(other.d)
+    : Thing(other), d(other.d)
 {
 }
 
 CommentObject &CommentObject::operator =(const CommentObject &other)
 {
+    Thing::operator =(other);
     d = other.d;
     return *this;
 }
 
 CommentObject::~CommentObject()
 {
-}
-
-QString CommentObject::fullname() const
-{
-    return d->fullname;
-}
-
-void CommentObject::setFullname(const QString &fullname)
-{
-    d->fullname = fullname;
 }
 
 QString CommentObject::author() const
@@ -239,4 +233,34 @@ bool CommentObject::isCollapsed() const
 void CommentObject::setIsCollapsed(bool isCollapsed)
 {
     d->isCollapsed = isCollapsed;
+}
+
+QString CommentObject::subreddit() const
+{
+    return d->subreddit;
+}
+
+void CommentObject::setSubreddit(const QString &subreddit)
+{
+    d->subreddit = subreddit;
+}
+
+QString CommentObject::linkTitle() const
+{
+    return d->linkTitle;
+}
+
+void CommentObject::setLinkTitle(const QString &linkTitle)
+{
+    d->linkTitle = linkTitle;
+}
+
+QString CommentObject::linkId() const
+{
+    return d->linkId;
+}
+
+void CommentObject::setLinkId(const QString &linkId)
+{
+    d->linkId = linkId;
 }

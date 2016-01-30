@@ -96,6 +96,13 @@ FancyContextMenu {
         }
     }
 
+    MenuItem {
+        text: "/u/" + comment.author.split(" ")[0]
+        onClicked: {
+            pageStack.push(Qt.resolvedUrl("UserPage.qml"), { username: comment.author.split(" ")[0] } );
+        }
+    }
+
     Component.onDestruction: {
         if (__showParentAtDestruction)
             showParent();

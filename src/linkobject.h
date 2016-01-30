@@ -22,11 +22,13 @@
 #include <QtCore/QExplicitlySharedDataPointer>
 #include <QtCore/QString>
 
+#include "thing.h"
+
 class QDateTime;
 class QUrl;
 class LinkObjectData;
 
-class LinkObject
+class LinkObject : public Thing
 {
 public:
     enum DistinguishedType {
@@ -39,14 +41,7 @@ public:
     LinkObject();
     LinkObject(const LinkObject &other);
     LinkObject &operator=(const LinkObject &other);
-    ~LinkObject();
-
-    /**
-     * fullname of the link (actually it means id, see http://www.reddit.com/dev/api#fullnames)
-     * equivalent to "name" in Reddit's JSON
-     */
-    QString fullname() const;
-    void setFullname(const QString &fullname);
+    virtual ~LinkObject();
 
     /**
      * the name of the author
@@ -91,7 +86,7 @@ public:
     void setCommentsCount(int count);
 
     /**
-     * title of this lnk
+     * title of this link
      * equivalent to "title" in Reddit's JSON
      */
     QString title() const;
