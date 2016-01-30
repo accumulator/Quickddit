@@ -38,6 +38,13 @@ ListItem {
             width: parent.width
             clip: true
 
+            Image {
+                source: "image://theme/icon-m-chat"
+                width: 32
+                height: 32
+                anchors.verticalCenter: titleText.verticalCenter
+            }
+
             Text {
                 font.pixelSize: constant.fontSizeDefault
                 color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)

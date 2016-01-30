@@ -38,7 +38,15 @@ ListItem {
             width: parent.width
             clip: true
 
+            Image {
+                source: model.isSelfPost ? "image://theme/icon-m-bubble-universal" : "image://theme/icon-m-link"
+                width: 32
+                height: 32
+                anchors.verticalCenter: titleText.verticalCenter
+            }
+
             Text {
+                id: titleText
                 font.pixelSize: constant.fontSizeDefault
                 color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
                                         : constant.colorDisabled
@@ -66,11 +74,12 @@ ListItem {
             text: model.title
         }
 
-//        WideText {
-//            width: parent.width
-//            body: model.body
-//            listItem: mainItem
-//        }
+        WideText {
+            visible: model.isSelfPost
+            width: parent.width
+            body: model.text
+            listItem: mainItem
+        }
 
     }
 }
