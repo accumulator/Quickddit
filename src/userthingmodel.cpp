@@ -114,6 +114,7 @@ QVariantMap UserThingModel::linkData(const LinkObject* o) const
     result.insert("created", QVariant(Utils::getTimeDiff(o->created())));
     result.insert("subreddit", QVariant(o->subreddit()));
     result.insert("title", QVariant(o->title()));
+    result.insert("isSelfPost", QVariant(o->isSelfPost()));
     return result;
 }
 
