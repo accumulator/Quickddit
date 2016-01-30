@@ -42,7 +42,7 @@ ListItem {
                 source: "image://theme/icon-m-chat"
                 width: 32
                 height: 32
-                anchors.verticalCenter: titleText.verticalCenter
+                anchors.verticalCenter: parent.verticalCenter
             }
 
             Text {

@@ -42,7 +42,7 @@ ListItem {
                 source: model.isSelfPost ? "image://theme/icon-m-bubble-universal" : "image://theme/icon-m-link"
                 width: 32
                 height: 32
-                anchors.verticalCenter: titleText.verticalCenter
+                anchors.verticalCenter: parent.verticalCenter
             }
 
             Text {
