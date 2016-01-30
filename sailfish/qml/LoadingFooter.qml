@@ -23,6 +23,7 @@ Item {
     id: loadingFooter
 
     property ListView listViewItem: null
+    property bool running: true
 
     height: {
         if (!visible)
@@ -38,7 +39,9 @@ Item {
     Loader {
         id: busyIndicatorLoader
         anchors.centerIn: parent
-        sourceComponent: loadingFooter.visible ? busyIndicatorComponent : undefined
+        sourceComponent: loadingFooter.visible
+                            ? (loadingFooter.running ? busyIndicatorComponent : busyActionComponent)
+                            : undefined
     }
 
     Component {
@@ -48,5 +51,16 @@ Item {
             running: true
             size: listViewItem.count > 0 ? BusyIndicatorSize.Medium : BusyIndicatorSize.Large
         }
+    }
+
+    Component {
+        id: busyActionComponent
+
+        Label {
+            visible: listViewItem.count > 0
+            text: "Load More..."
+            color: constant.colorMid
+        }
+
     }
 }

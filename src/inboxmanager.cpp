@@ -72,7 +72,7 @@ void InboxManager::setEnabled(bool enabled)
 
 void InboxManager::pollTimeout()
 {
-    if (manager()->isBusy())
+    if (isBusy())
         return;
 
     int interval = m_pollTimer->interval();
