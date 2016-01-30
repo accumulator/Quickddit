@@ -60,7 +60,8 @@ HEADERS += \
     ../src/inboxmanager.h \
     ../src/usermanager.h \
     ../src/userobject.h \
-    ../src/userthingmodel.h
+    ../src/userthingmodel.h \
+    ../src/thing.h
 
 SOURCES += main.cpp \
     dbusapp.cpp \
@@ -95,7 +96,8 @@ SOURCES += main.cpp \
     ../src/inboxmanager.cpp \
     ../src/usermanager.cpp \
     ../src/userobject.cpp \
-    ../src/userthingmodel.cpp
+    ../src/userthingmodel.cpp \
+    ../src/thing.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h
