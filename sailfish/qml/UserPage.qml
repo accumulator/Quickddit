@@ -139,7 +139,7 @@ AbstractPage {
             signal clicked
 
             onClicked: {
-                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: "/r/" + model.subreddit + "/comments/" + model.linkId + "/" + model.fullname.substring(3)})
+                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: "/r/" + model.comment.subreddit + "/comments/" + model.comment.linkId + "/" + model.comment.fullname.substring(3)})
             }
 
             ListItem {
@@ -165,14 +165,14 @@ AbstractPage {
                             color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
                                                     : constant.colorDisabled
                             font.bold: true
-                            text: "Comment in /r/" + model.subreddit
+                            text: "Comment in /r/" + model.comment.subreddit
                         }
                         Text {
                             font.pixelSize: constant.fontSizeDefault
                             color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
                                                     : constant.colorDisabled
                             elide: Text.ElideRight
-                            text: " · " + model.created
+                            text: " · " + model.comment.created
                         }
                     }
 
@@ -184,12 +184,12 @@ AbstractPage {
                         elide: Text.ElideRight
                         wrapMode: Text.WordWrap
                         maximumLineCount: 2
-                        text: model.linkTitle
+                        text: model.comment.linkTitle
                     }
 
                     WideText {
                         width: parent.width
-                        body: model.body
+                        body: model.comment.body
                         listItem: mainItem
                         onClicked: commentDelegate.clicked()
                     }
