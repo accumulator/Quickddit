@@ -96,36 +96,31 @@ void commentFromMap(CommentObject &comment, const QVariantMap &commentMap)
     comment.setLinkId(commentMap.value("link_id").toString().mid(3));
 }
 
-// Private
-LinkObject parseLinkThing(const QVariant &linkThing)
+void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
 {
-    const QVariantMap linkMapJson = linkThing.toMap().value("data").toMap();
+    link.setFullname(linkMap.value("name").toString());
+    link.setAuthor(linkMap.value("author").toString());
+    link.setCreated(QDateTime::fromTime_t(linkMap.value("created_utc").toInt()));
+    link.setSubreddit(linkMap.value("subreddit").toString());
+    link.setScore(linkMap.value("score").toInt());
+    if (!linkMap.value("likes").isNull())
+        link.setLikes(linkMap.value("likes").toBool() ? 1 : -1);
+    link.setCommentsCount(linkMap.value("num_comments").toInt());
+    link.setTitle(unescapeMarkdown(linkMap.value("title").toString()));
+    link.setDomain(linkMap.value("domain").toString());
 
-    LinkObject link;
-    link.setFullname(linkMapJson.value("name").toString());
-    link.setAuthor(linkMapJson.value("author").toString());
-    link.setCreated(QDateTime::fromTime_t(linkMapJson.value("created_utc").toInt()));
-    link.setSubreddit(linkMapJson.value("subreddit").toString());
-    link.setScore(linkMapJson.value("score").toInt());
-    if (!linkMapJson.value("likes").isNull())
-        link.setLikes(linkMapJson.value("likes").toBool() ? 1 : -1);
-    link.setCommentsCount(linkMapJson.value("num_comments").toInt());
-    link.setTitle(unescapeMarkdown(linkMapJson.value("title").toString()));
-    link.setDomain(linkMapJson.value("domain").toString());
-
-    QString thumbnail = linkMapJson.value("thumbnail").toString();
+    QString thumbnail = linkMap.value("thumbnail").toString();
     if (thumbnail.startsWith("http"))
         link.setThumbnailUrl(QUrl(thumbnail));
-    link.setText(unescapeHtml(linkMapJson.value("selftext_html").toString()));
-    link.setRawText(unescapeMarkdown(linkMapJson.value("selftext").toString()));
-    link.setPermalink(linkMapJson.value("permalink").toString());
-    link.setUrl(QUrl(unescapeUrl(linkMapJson.value("url").toString())));
-    link.setDistinguished(linkMapJson.value("distinguished").toString());
-    link.setSticky(linkMapJson.value("stickied").toBool());
-    link.setNSFW(linkMapJson.value("over_18").toBool());
-    link.setPromoted(linkMapJson.value("promoted").toBool());
-    link.setFlairText(linkMapJson.value("link_flair_text").toString());
-    return link;
+    link.setText(unescapeHtml(linkMap.value("selftext_html").toString()));
+    link.setRawText(unescapeMarkdown(linkMap.value("selftext").toString()));
+    link.setPermalink(linkMap.value("permalink").toString());
+    link.setUrl(QUrl(unescapeUrl(linkMap.value("url").toString())));
+    link.setDistinguished(linkMap.value("distinguished").toString());
+    link.setSticky(linkMap.value("stickied").toBool());
+    link.setNSFW(linkMap.value("over_18").toBool());
+    link.setPromoted(linkMap.value("promoted").toBool());
+    link.setFlairText(linkMap.value("link_flair_text").toString());
 }
 
 Listing<LinkObject> Parser::parseLinkList(const QByteArray &json)
@@ -139,7 +134,10 @@ Listing<LinkObject> Parser::parseLinkList(const QByteArray &json)
 
     Listing<LinkObject> linkList;
     foreach (const QVariant &linkObjectJson, linkListJson) {
-        linkList.append(parseLinkThing(linkObjectJson));
+        QVariantMap linkMap = linkObjectJson.toMap().value("data").toMap();
+        LinkObject link;
+        linkFromMap(link, linkMap);
+        linkList.append(link);
     }
     linkList.setHasMore(!data.value("after").isNull());
 
@@ -153,10 +151,12 @@ LinkObject Parser::parseLinkEditResponse(const QByteArray &json)
 
     Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
 
-    const QVariant linkMap = root.value("json").toMap().value("data").toMap()
+    const QVariant linkObjectJson = root.value("json").toMap().value("data").toMap()
             .value("things").toList().first();
 
-    LinkObject link = parseLinkThing(linkMap);
+    QVariantMap linkMap = linkObjectJson.toMap().value("data").toMap();
+    LinkObject link;
+    linkFromMap(link, linkMap);
 
     return link;
 }
@@ -272,8 +272,12 @@ QPair< LinkObject, QList<CommentObject> > Parser::parseCommentList(const QByteAr
 
     Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
 
-    const LinkObject link = parseLinkThing(root.first().toMap().value("data").toMap()
-                                           .value("children").toList().first());
+    QVariant linkObjectJson = root.first().toMap().value("data").toMap()
+                                           .value("children").toList().first();
+
+    QVariantMap linkMap = linkObjectJson.toMap().value("data").toMap();
+    LinkObject link;
+    linkFromMap(link, linkMap);
 
     return qMakePair(link, parseCommentListingJson(root.last().toMap(), link.author(), 0));
 }
