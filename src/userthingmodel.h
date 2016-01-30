@@ -22,6 +22,7 @@
 #include "abstractlistmodelmanager.h"
 #include "parser.h"
 #include "commentobject.h"
+#include "linkobject.h"
 
 class UserThingModelData;
 
@@ -32,10 +33,12 @@ class UserThingModel : public AbstractListModelManager
 public:
     enum Roles {
         KindRole = Qt::UserRole,
-        CommentRole
+        CommentRole,
+        LinkRole
     };
 
     explicit UserThingModel(QObject *parent = 0);
+    ~UserThingModel();
 
     void classBegin();
     void componentComplete();
@@ -60,11 +63,13 @@ protected:
 
 private:
     QString m_username;
-    Listing<CommentObject> m_commentList;
+    Listing<Thing*> m_thingList;
     APIRequest *m_request;
 
-    QVariantMap commentData(const CommentObject o) const;
+    QVariantMap commentData(const CommentObject* o) const;
+    QVariantMap linkData(const LinkObject* o) const;
 
+    void clearThingList();
     void abortActiveReply();
 };
 

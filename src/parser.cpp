@@ -509,7 +509,7 @@ UserObject Parser::parseUserAbout(const QByteArray &json)
     return userObject;
 }
 
-Listing<CommentObject> Parser::parseUserThingList(const QByteArray &json)
+Listing<Thing*> Parser::parseUserThingList(const QByteArray &json)
 {
     bool ok;
     const QVariantMap data = QtJson::parse(json, ok).toMap().value("data").toMap();
@@ -518,16 +518,23 @@ Listing<CommentObject> Parser::parseUserThingList(const QByteArray &json)
 
     const QVariantList thingsJson = data.value("children").toList();
 
-    Listing<CommentObject> commentList;
+    Listing<Thing*> commentList;
     foreach (const QVariant &thing, thingsJson) {
         const QVariantMap thingMap = thing.toMap();
         const QVariantMap thingData = thingMap.value("data").toMap();
 
         if (thingMap.value("kind").toString() == "t1") {
-            CommentObject comment;
-            commentFromMap(comment, thingData);
+            CommentObject* comment = new CommentObject;
+            commentFromMap(*comment, thingData);
             commentList.append(comment);
         }
+        else if (thingMap.value("kind").toString() == "t3") {
+            LinkObject* link = new LinkObject;
+            linkFromMap(*link, thingData);
+            commentList.append(link);
+        }
+        else
+            qDebug() << "noncomment:" << thingMap;
     }
 
     commentList.setHasMore(!data.value("after").isNull());

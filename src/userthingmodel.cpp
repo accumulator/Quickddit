@@ -30,6 +30,11 @@ UserThingModel::UserThingModel(QObject *parent) :
 #endif
 }
 
+UserThingModel::~UserThingModel()
+{
+    clearThingList();
+}
+
 void UserThingModel::classBegin()
 {
 }
@@ -42,18 +47,29 @@ void UserThingModel::componentComplete()
 int UserThingModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return m_commentList.count();
+    return m_thingList.count();
+}
+
+QHash<int, QByteArray> UserThingModel::customRoleNames() const
+{
+    QHash<int, QByteArray> roles;
+    roles[KindRole] = "kind";
+    roles[CommentRole] = "comment";
+    roles[LinkRole] = "link";
+
+    return roles;
 }
 
 QVariant UserThingModel::data(const QModelIndex &index, int role) const
 {
-    Q_ASSERT_X(index.row() < m_commentList.count(), Q_FUNC_INFO, "index out of range");
+    Q_ASSERT_X(index.row() < m_thingList.count(), Q_FUNC_INFO, "index out of range");
 
-    const CommentObject comment = m_commentList.at(index.row());
+    const Thing* thing = m_thingList.at(index.row());
 
     switch (role) {
-    case KindRole: return "t1";
-    case CommentRole: return commentData(comment);
+    case KindRole: return QVariant(thing->kind());
+    case CommentRole: return commentData(dynamic_cast<const CommentObject*>(thing));
+    case LinkRole: return linkData(dynamic_cast<const LinkObject *>(thing));
 
     default:
         qCritical("UserThingModel::data(): Invalid role");
@@ -61,20 +77,43 @@ QVariant UserThingModel::data(const QModelIndex &index, int role) const
     }
 }
 
-QVariantMap UserThingModel::commentData(const CommentObject o) const
+QVariantMap UserThingModel::commentData(const CommentObject* o) const
 {
+    if (!o) {
+        qDebug() << "comment problem!";
+        return QVariantMap();
+    }
+
     QVariantMap result;
-    result.insert("fullname", QVariant(o.fullname()));
-    result.insert("author", QVariant(o.author()));
-    result.insert("body", QVariant(o.body()));
-    result.insert("score", QVariant(o.score()));
-    QString createdTimeDiff = Utils::getTimeDiff(o.created());
-    if (o.edited().isValid())
+    result.insert("fullname", QVariant(o->fullname()));
+    result.insert("author", QVariant(o->author()));
+    result.insert("body", QVariant(o->body()));
+    result.insert("score", QVariant(o->score()));
+    QString createdTimeDiff = Utils::getTimeDiff(o->created());
+    if (o->edited().isValid())
         createdTimeDiff.append("*");
     result.insert("created", QVariant(createdTimeDiff));
-    result.insert("subreddit", QVariant(o.subreddit()));
-    result.insert("linkTitle", QVariant(o.linkTitle()));
-    result.insert("linkId", QVariant(o.linkId()));
+    result.insert("subreddit", QVariant(o->subreddit()));
+    result.insert("linkTitle", QVariant(o->linkTitle()));
+    result.insert("linkId", QVariant(o->linkId()));
+    return result;
+}
+
+QVariantMap UserThingModel::linkData(const LinkObject* o) const
+{
+    if (!o) {
+        qDebug() << "link problem!";
+        return QVariantMap();
+    }
+
+    QVariantMap result;
+    result.insert("fullname", QVariant(o->fullname()));
+    result.insert("author", QVariant(o->author()));
+    result.insert("text", QVariant(o->text()));
+    result.insert("score", QVariant(o->score()));
+    result.insert("created", QVariant(Utils::getTimeDiff(o->created())));
+    result.insert("subreddit", QVariant(o->subreddit()));
+    result.insert("title", QVariant(o->title()));
     return result;
 }
 
@@ -92,15 +131,6 @@ void UserThingModel::setUsername(const QString &username)
 }
 
 
-QHash<int, QByteArray> UserThingModel::customRoleNames() const
-{
-    QHash<int, QByteArray> roles;
-    roles[KindRole] = "kind";
-    roles[CommentRole] = "comment";
-
-    return roles;
-}
-
 void UserThingModel::refresh(bool refreshOlder)
 {
     if (m_username == "")
@@ -111,13 +141,14 @@ void UserThingModel::refresh(bool refreshOlder)
     QHash<QString,QString> parameters;
     parameters["limit"] = "25";
 
-    if (!m_commentList.isEmpty()) {
+    if (!m_thingList.isEmpty()) {
         if (refreshOlder) {
-            parameters["count"] = QString::number(m_commentList.count());
-            parameters["after"] = m_commentList.last().fullname();
+            Thing* t = m_thingList.last();
+            parameters["count"] = QString::number(m_thingList.count());
+            parameters["after"] = t->fullname();
         } else {
-            beginRemoveRows(QModelIndex(), 0, m_commentList.count() - 1);
-            m_commentList.clear();
+            beginRemoveRows(QModelIndex(), 0, m_thingList.count() - 1);
+            clearThingList();
             endRemoveRows();
         }
     }
@@ -132,11 +163,11 @@ void UserThingModel::onFinished(QNetworkReply *reply)
 {
     if (reply != 0) {
         if (reply->error() == QNetworkReply::NoError) {
-            Listing<CommentObject> comments = Parser::parseUserThingList(reply->readAll());
+            Listing<Thing*> comments = Parser::parseUserThingList(reply->readAll());
 
             if (!comments.isEmpty()) {
-                beginInsertRows(QModelIndex(), m_commentList.count(), m_commentList.count() + comments.count() - 1);
-                m_commentList.append(comments);
+                beginInsertRows(QModelIndex(), m_thingList.count(), m_thingList.count() + comments.count() - 1);
+                m_thingList.append(comments);
                 endInsertRows();
                 setCanLoadMore(comments.hasMore());
             } else {
@@ -150,6 +181,13 @@ void UserThingModel::onFinished(QNetworkReply *reply)
     m_request->deleteLater();
     m_request = 0;
     setBusy(false);
+}
+
+void UserThingModel::clearThingList()
+{
+    while(!m_thingList.isEmpty()) {
+        delete m_thingList.takeLast();
+    }
 }
 
 void UserThingModel::abortActiveReply()
