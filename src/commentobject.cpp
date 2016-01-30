@@ -28,7 +28,6 @@ public:
     CommentObjectData() : score(0), likes(0), distinguished(CommentObject::NotDistinguished),
         depth(0), isSubmitter(false), isScoreHidden(false), isMoreChildren(false), isCollapsed(false) {}
 
-    QString fullname;
     QString author;
     QString body;
     QString rawBody;
@@ -53,33 +52,24 @@ private:
 };
 
 CommentObject::CommentObject()
-    : d(new CommentObjectData)
+    : Thing(), d(new CommentObjectData)
 {
 }
 
 CommentObject::CommentObject(const CommentObject &other)
-    : d(other.d)
+    : Thing(other), d(other.d)
 {
 }
 
 CommentObject &CommentObject::operator =(const CommentObject &other)
 {
+    Thing::operator =(other);
     d = other.d;
     return *this;
 }
 
 CommentObject::~CommentObject()
 {
-}
-
-QString CommentObject::fullname() const
-{
-    return d->fullname;
-}
-
-void CommentObject::setFullname(const QString &fullname)
-{
-    d->fullname = fullname;
 }
 
 QString CommentObject::author() const

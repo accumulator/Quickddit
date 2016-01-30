@@ -28,7 +28,6 @@ public:
     LinkObjectData() : score(0), likes(0), commentsCount(0), distinguished(LinkObject::NotDistinguished),
         isSticky(false), isNSFW(false), isPromoted(false) {}
 
-    QString fullname;
     QString author;
     QDateTime created;
     QString subreddit;
@@ -52,34 +51,25 @@ private:
     Q_DISABLE_COPY(LinkObjectData)
 };
 
-LinkObject::LinkObject() :
+LinkObject::LinkObject() : Thing(),
     d(new LinkObjectData)
 {
 }
 
-LinkObject::LinkObject(const LinkObject &other) :
+LinkObject::LinkObject(const LinkObject &other) : Thing(other),
     d(other.d)
 {
 }
 
 LinkObject &LinkObject::operator =(const LinkObject &other)
 {
+    Thing::operator =(other);
     d = other.d;
     return *this;
 }
 
 LinkObject::~LinkObject()
 {
-}
-
-QString LinkObject::fullname() const
-{
-    return d->fullname;
-}
-
-void LinkObject::setFullname(const QString &fullname)
-{
-    d->fullname = fullname;
 }
 
 QString LinkObject::author() const

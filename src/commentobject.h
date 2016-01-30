@@ -23,10 +23,12 @@
 #include <QtCore/QExplicitlySharedDataPointer>
 #include <QtCore/QList>
 
+#include "thing.h"
+
 class QDateTime;
 class CommentObjectData;
 
-class CommentObject
+class CommentObject : public Thing
 {
 public:
     enum DistinguishedType {
@@ -39,10 +41,7 @@ public:
     CommentObject();
     CommentObject(const CommentObject &other);
     CommentObject &operator= (const CommentObject &other);
-    ~CommentObject();
-
-    QString fullname() const;
-    void setFullname(const QString &fullname);
+    virtual ~CommentObject();
 
     QString author() const;
     void setAuthor(const QString &author);
