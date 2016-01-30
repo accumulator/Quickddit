@@ -54,6 +54,7 @@ private:
 CommentObject::CommentObject()
     : Thing(), d(new CommentObjectData)
 {
+    setKind("t1");
 }
 
 CommentObject::CommentObject(const CommentObject &other)

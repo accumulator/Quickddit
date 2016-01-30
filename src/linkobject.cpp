@@ -54,6 +54,7 @@ private:
 LinkObject::LinkObject() : Thing(),
     d(new LinkObjectData)
 {
+    setKind("t3");
 }
 
 LinkObject::LinkObject(const LinkObject &other) : Thing(other),
