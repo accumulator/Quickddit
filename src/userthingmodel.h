@@ -31,24 +31,8 @@ class UserThingModel : public AbstractListModelManager
     Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
 public:
     enum Roles {
-        FullnameRole = Qt::UserRole,
-        AuthorRole,
-        BodyRole,
-        RawBodyRole,
-        ScoreRole,
-        LikesRole,
-        CreatedRole,
-        DepthRole,
-        IsScoreHiddenRole,
-        IsValidRole,
-        IsAuthorRole,
-        MoreChildrenCountRole,
-        IsMoreChildrenRole,
-        MoreChildrenRole,
-        CollapsedRole,
-        SubredditRole,
-        LinkTitleRole,
-        LinkIdRole
+        KindRole = Qt::UserRole,
+        CommentRole
     };
 
     explicit UserThingModel(QObject *parent = 0);
@@ -78,6 +62,8 @@ private:
     QString m_username;
     Listing<CommentObject> m_commentList;
     APIRequest *m_request;
+
+    QVariantMap commentData(const CommentObject o) const;
 
     void abortActiveReply();
 };

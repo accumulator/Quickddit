@@ -52,44 +52,31 @@ QVariant UserThingModel::data(const QModelIndex &index, int role) const
     const CommentObject comment = m_commentList.at(index.row());
 
     switch (role) {
-    case FullnameRole: return comment.fullname();
-    case AuthorRole: {
-        QString author = comment.author();
-        if (comment.isSubmitter())
-            author += " [S]";
-        switch (comment.distinguished()) {
-        case CommentObject::DistinguishedByModerator: author += " [M]"; break;
-        case CommentObject::DistinguishedByAdmin: author += " [A]"; break;
-        case CommentObject::DistinguishedBySpecial: author += " [?]"; break;
-        default: break;
-        }
-        return author;
-    }
-    case BodyRole: return comment.body();
-    case RawBodyRole: return comment.rawBody();
-    case ScoreRole: return comment.score();
-    case LikesRole: return comment.likes();
-    case CreatedRole: {
-        QString createdTimeDiff = Utils::getTimeDiff(comment.created());
-        // TODO: show the edited time diff in UI
-        if (comment.edited().isValid())
-            createdTimeDiff.append("*");
-        return createdTimeDiff;
-    }
-    case DepthRole: return comment.depth();
-    case IsScoreHiddenRole: return comment.isScoreHidden();
-    case IsValidRole: return comment.author() != "[deleted]";
-    case IsAuthorRole: return comment.author() == manager()->settings()->redditUsername();
-    case CollapsedRole: return (comment.isCollapsed());
-    case SubredditRole: return comment.subreddit();
-    case LinkTitleRole: return comment.linkTitle();
-    case LinkIdRole: return comment.linkId();
+    case KindRole: return "t1";
+    case CommentRole: return commentData(comment);
+
     default:
         qCritical("UserThingModel::data(): Invalid role");
         return QVariant();
     }
 }
 
+QVariantMap UserThingModel::commentData(const CommentObject o) const
+{
+    QVariantMap result;
+    result.insert("fullname", QVariant(o.fullname()));
+    result.insert("author", QVariant(o.author()));
+    result.insert("body", QVariant(o.body()));
+    result.insert("score", QVariant(o.score()));
+    QString createdTimeDiff = Utils::getTimeDiff(o.created());
+    if (o.edited().isValid())
+        createdTimeDiff.append("*");
+    result.insert("created", QVariant(createdTimeDiff));
+    result.insert("subreddit", QVariant(o.subreddit()));
+    result.insert("linkTitle", QVariant(o.linkTitle()));
+    result.insert("linkId", QVariant(o.linkId()));
+    return result;
+}
 
 QString UserThingModel::username() const
 {
@@ -108,21 +95,9 @@ void UserThingModel::setUsername(const QString &username)
 QHash<int, QByteArray> UserThingModel::customRoleNames() const
 {
     QHash<int, QByteArray> roles;
-    roles[FullnameRole] = "fullname";
-    roles[AuthorRole] = "author";
-    roles[BodyRole] = "body";
-    roles[RawBodyRole] = "rawBody";
-    roles[ScoreRole] = "score";
-    roles[LikesRole] = "likes";
-    roles[CreatedRole] = "created";
-    roles[DepthRole] = "depth";
-    roles[IsScoreHiddenRole] = "isScoreHidden";
-    roles[IsValidRole] = "isValid";
-    roles[IsAuthorRole] = "isAuthor";
-    roles[CollapsedRole] = "isCollapsed";
-    roles[SubredditRole] = "subreddit";
-    roles[LinkTitleRole] = "linkTitle";
-    roles[LinkIdRole] = "linkId";
+    roles[KindRole] = "kind";
+    roles[CommentRole] = "comment";
+
     return roles;
 }
 
@@ -157,9 +132,7 @@ void UserThingModel::onFinished(QNetworkReply *reply)
 {
     if (reply != 0) {
         if (reply->error() == QNetworkReply::NoError) {
-            QByteArray result = reply->readAll();
-            qDebug() << "user things :" << result;
-            Listing<CommentObject> comments = Parser::parseUserThingList(result);
+            Listing<CommentObject> comments = Parser::parseUserThingList(reply->readAll());
 
             if (!comments.isEmpty()) {
                 beginInsertRows(QModelIndex(), m_commentList.count(), m_commentList.count() + comments.count() - 1);
