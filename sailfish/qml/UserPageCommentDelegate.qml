@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2016  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,67 +19,57 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Item {
-    id: commentDelegate
+ListItem {
+    id: mainItem
 
-    width: ListView.view.width
-    height: mainItem.height
+    property variant model
 
-    signal clicked
+    contentHeight: mainColumn.height + 2 * constant.paddingMedium
+    showMenuOnPressAndHold: false
 
-    ListItem {
-        id: mainItem
-        width: commentDelegate.width
+    Column {
+        id: mainColumn
+        anchors {
+            left: parent.left; right: parent.right; margins: constant.paddingSmall
+        }
+        spacing: constant.paddingSmall
 
-        contentHeight: mainColumn.height + 2 * constant.paddingMedium
-        showMenuOnPressAndHold: false
-
-        onClicked: commentDelegate.clicked()
-
-        Column {
-            id: mainColumn
-            anchors {
-                left: parent.left; right: parent.right; margins: constant.paddingSmall
-            }
-            height: childrenRect.height
-            spacing: constant.paddingSmall
-
-            Row {
-                Text {
-                    font.pixelSize: constant.fontSizeDefault
-                    color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
-                                            : constant.colorDisabled
-                    font.bold: true
-                    text: "Comment in /r/" + model.comment.subreddit
-                }
-                Text {
-                    font.pixelSize: constant.fontSizeDefault
-                    color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
-                                            : constant.colorDisabled
-                    elide: Text.ElideRight
-                    text: " · " + model.comment.created
-                }
-            }
+        Row {
+            width: parent.width
+            clip: true
 
             Text {
-                width: parent.width
-                font.pixelSize: constant.fontSizeSmaller
+                font.pixelSize: constant.fontSizeDefault
+                color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                        : constant.colorDisabled
+                font.bold: true
+                text: "Comment in /r/" + model.subreddit
+            }
+            Text {
+                font.pixelSize: constant.fontSizeDefault
                 color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
                                         : constant.colorDisabled
                 elide: Text.ElideRight
-                wrapMode: Text.WordWrap
-                maximumLineCount: 2
-                text: model.comment.linkTitle
+                text: " · " + model.created
             }
-
-            WideText {
-                width: parent.width
-                body: model.comment.body
-                listItem: mainItem
-                onClicked: commentDelegate.clicked()
-            }
-
         }
+
+        Text {
+            width: parent.width
+            font.pixelSize: constant.fontSizeSmaller
+            color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
+                                    : constant.colorDisabled
+            elide: Text.ElideRight
+            wrapMode: Text.WordWrap
+            maximumLineCount: 2
+            text: model.linkTitle
+        }
+
+        WideText {
+            width: parent.width
+            body: model.body
+            listItem: mainItem
+        }
+
     }
 }
-
