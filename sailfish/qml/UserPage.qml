@@ -33,6 +33,14 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
+                text: "Send Message"
+                enabled: !messageManager.busy
+                onClicked: {
+                    var p = {messageManager: messageManager, user: username};
+                    pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), p);
+                }
+            }
+            MenuItem {
                 text: "Refresh"
                 enabled: !userManager.busy
                 onClicked: userThingModel.refresh(false);
@@ -200,4 +208,15 @@ AbstractPage {
         manager: quickdditManager
         onError: infoBanner.warning(errorString);
     }
+
+    MessageManager {
+        id: messageManager
+        manager: quickdditManager
+        onSendSuccess: {
+            infoBanner.alert("Message sent");
+            pageStack.pop();
+        }
+        onError: infoBanner.warning(errorString);
+    }
+
 }
