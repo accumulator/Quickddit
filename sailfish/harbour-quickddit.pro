@@ -156,7 +156,8 @@ OTHER_FILES += \
     qml/UserPage.qml \
     qml/WideText.qml \
     qml/UserPageCommentDelegate.qml \
-    qml/UserPageLinkDelegate.qml
+    qml/UserPageLinkDelegate.qml \
+    qml/NewMessagePage.qml
 
 icon128.files = icon128/$${TARGET}.png
 icon128.path = /usr/share/icons/hicolor/128x128/apps
