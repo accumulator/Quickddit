@@ -90,7 +90,7 @@ ApplicationWindow {
                 return true;
             else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url))
                 return true;
-            else if (/^https?:\/\/(\w+\.)?reddit.com\/u\/(\w+)\/?/.test(url))
+            else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.test(url))
                 return true;
             return false
         }
@@ -103,8 +103,8 @@ ApplicationWindow {
                 var mainPage = getMainPage();
                 mainPage.refresh(subreddit);
                 pageStack.pop(mainPage);
-            } else if (/^https?:\/\/(\w+\.)?reddit.com\/u\/(\w+)\/?/.test(url)) {
-                var username = /^https?:\/\/(\w+\.)?reddit.com\/u\/(\w+)\/?/.exec(url)[2];
+            } else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.test(url)) {
+                var username = /^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.exec(url)[3];
                 pageStack.push(Qt.resolvedUrl("UserPage.qml"), {username: username});
             } else
                 infoBanner.alert(qsTr("Unsupported reddit url"));
