@@ -42,6 +42,30 @@ void MessageManager::reply(const QString &fullname, const QString &rawText)
     setBusy(true);
 }
 
+void MessageManager::send(const QString &username, const QString &subject, const QString &rawText, const QString &captcha, const QString &iden)
+{
+    abortActiveReply();
+
+    QHash<QString, QString> parameters;
+    parameters.insert("api_type", "json");
+    parameters.insert("subject", subject);
+    parameters.insert("text", rawText);
+    parameters.insert("to", username);
+    // captcha, if defined
+    if (captcha != "") {
+        parameters.insert("captcha", captcha);
+        parameters.insert("iden", iden);
+    }
+    //parameters.insert("from_sr", from subreddit);
+
+    m_action = Send;
+
+    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/compose", parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
+
+    setBusy(true);
+}
+
 void MessageManager::markRead(const QString &fullname)
 {
     abortActiveReply();
@@ -78,6 +102,7 @@ void MessageManager::onFinished(QNetworkReply *reply)
         if (reply->error() == QNetworkReply::NoError) {
             switch (m_action) {
             case Reply: emit replySuccess(); break;
+            case Send: emit sendSuccess(); break;
             case MarkRead: emit markReadStatusSuccess(m_fullname, false); break;
             case MarkUnread: emit markReadStatusSuccess(m_fullname, true); break;
             default: qFatal("MessageManager::onFinished(): Invalid m_action"); break;
