@@ -21,7 +21,6 @@ TODO
 -----
 Below is the list of TODOs I planned for future release, before reaching the 1.0.0 milestone.
 
-- Compose new message (require Captcha)
 - Save and unsave posts
 
 Additional TODOs after the 1.0.0 milestone
