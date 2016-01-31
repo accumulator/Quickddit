@@ -129,14 +129,6 @@ AbstractPage {
                 anchors { left: parent.left; right: parent.right }
                 color: constant.colorMid
             }
-
-            // spacer
-            Rectangle {
-                height: 10
-                width: 1
-                color: "transparent"
-            }
-
         }
 
         delegate: Component {

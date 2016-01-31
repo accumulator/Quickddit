@@ -43,6 +43,7 @@ Item {
                 left: unreadIndicator.visible ? unreadIndicator.right : parent.left
                 right: parent.right
                 margins: constant.paddingMedium
+                verticalCenter: parent.verticalCenter
             }
             height: childrenRect.height
             spacing: constant.paddingSmall

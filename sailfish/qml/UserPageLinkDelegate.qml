@@ -30,8 +30,10 @@ ListItem {
     Column {
         id: mainColumn
         anchors {
-            left: parent.left; right: parent.right; margins: constant.paddingSmall
+            left: parent.left; right: parent.right; margins: constant.paddingMedium
+            verticalCenter:  parent.verticalCenter
         }
+
         spacing: constant.paddingSmall
 
         Row {
