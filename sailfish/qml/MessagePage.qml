@@ -61,8 +61,8 @@ AbstractPage {
 
         delegate: MessageDelegate {
             isSentMessage: messageModel.section == MessageModel.SentSection
-            listItem.menu: Component { MessageMenu {} }
-            listItem.showMenuOnPressAndHold: false
+            menu: Component { MessageMenu {} }
+            showMenuOnPressAndHold: false
             onClicked: {
                 messageManager.markRead(model.fullname)
                 if (model.isComment) {
@@ -74,7 +74,7 @@ AbstractPage {
                     });
                 }
             }
-            listItem.onPressAndHold: listItem.showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
+            onPressAndHold: showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
         }
 
         footer: LoadingFooter {
