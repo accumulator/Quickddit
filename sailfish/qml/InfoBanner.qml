@@ -23,7 +23,18 @@ import Sailfish.Silica 1.0
 MouseArea {
     id: infoBanner
 
+    property bool isWarning: false
+
     function alert(text) {
+        isWarning = false
+        messageText.text = text;
+        infoBanner.opacity = 1.0;
+        hideTimer.start();
+        console.log(text);
+    }
+
+    function warning(text) {
+        isWarning = true
         messageText.text = text;
         infoBanner.opacity = 1.0;
         hideTimer.start();
@@ -90,17 +101,29 @@ MouseArea {
         color: Theme.highlightBackgroundColor
     }
 
-    Text {
-        id: messageText
+    Row {
+        spacing: 20
+
         anchors {
-            left: parent.left; right: parent.right; margins: constant.paddingMedium
+            margins: constant.paddingMedium
+            left: parent.left;
+            right: parent.right;
             verticalCenter: parent.verticalCenter
         }
-        font.pixelSize: constant.fontSizeSmall
-        color: constant.colorLight
-        wrapMode: Text.Wrap
-        elide: Text.ElideRight
-        maximumLineCount: 3
+
+        Image {
+            source: isWarning ? "image://theme/icon-lock-warning" : "image://theme/icon-lock-information"
+            anchors.verticalCenter: parent.verticalCenter
+        }
+
+        Text {
+            id: messageText
+            font.pixelSize: constant.fontSizeSmall
+            color: constant.colorLight
+            wrapMode: Text.Wrap
+            elide: Text.ElideRight
+            maximumLineCount: 3
+        }
     }
 
     Timer {
