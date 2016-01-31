@@ -47,13 +47,22 @@ AbstractPage {
 
             QuickdditPageHeader { title: "User Profile" }
 
-            Text {
+            Row {
                 anchors.left: parent.left
                 anchors.margins: constant.paddingMedium
-                color: constant.colorLight
-                font.pixelSize: constant.fontSizeLarger
-                font.bold: true
-                text: "/u/" + username
+
+                Image {
+                    source: "image://theme/icon-m-person"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
+                Text {
+                    color: constant.colorLight
+                    font.pixelSize: constant.fontSizeLarger
+                    font.bold: true
+                    text: "/u/" + username
+                    anchors.verticalCenter: parent.verticalCenter
+                }
             }
 
             Row {
