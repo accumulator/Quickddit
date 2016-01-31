@@ -84,6 +84,6 @@ AbstractPage {
         id: subredditModel
         manager: quickdditManager
         section: isSearch ? SubredditModel.SearchSection : SubredditModel.PopularSection
-        onError: infoBanner.alert(errorString);
+        onError: infoBanner.warning(errorString);
     }
 }

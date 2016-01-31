@@ -146,6 +146,6 @@ AbstractPage {
         id: multiredditManager
         manager: quickdditManager
         onSuccess: infoBanner.alert(message);
-        onError: infoBanner.alert(errorString);
+        onError: infoBanner.warning(errorString);
     }
 }

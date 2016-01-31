@@ -266,7 +266,7 @@ AbstractPage {
         id: commentModel
         manager: quickdditManager
         permalink: link.permalink
-        onError: infoBanner.alert(errorString)
+        onError: infoBanner.warning(errorString)
         onCommentLoaded: {
             var path = permalink.split("?")[0].split("/");
             var post = path[path.length-1];
@@ -288,7 +288,7 @@ AbstractPage {
             else if (fullname.indexOf("t3") === 0) // link
                 commentModel.changeLinkLikes(fullname, likes);
         }
-        onError: infoBanner.alert(errorString);
+        onError: infoBanner.warning(errorString);
     }
 
     CommentManager {
@@ -300,7 +300,7 @@ AbstractPage {
             infoBanner.alert(message);
             inboxManager.resetTimer();
         }
-        onError: infoBanner.alert(errorString);
+        onError: infoBanner.warning(errorString);
     }
 
     LinkManager {
@@ -311,7 +311,7 @@ AbstractPage {
             infoBanner.alert(message);
             inboxManager.resetTimer();
         }
-        onError: infoBanner.alert(errorString);
+        onError: infoBanner.warning(errorString);
     }
 
     Connections {

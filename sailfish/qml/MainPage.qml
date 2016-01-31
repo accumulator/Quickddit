@@ -58,7 +58,7 @@ AbstractPage {
     property Component __multiredditModelComponent: Component {
         MultiredditModel {
             manager: quickdditManager
-            onError: infoBanner.alert(errorString);
+            onError: infoBanner.warning(errorString);
         }
     }
     property QtObject multiredditModel
@@ -163,7 +163,7 @@ AbstractPage {
     LinkModel {
         id: linkModel
         manager: quickdditManager
-        onError: infoBanner.alert(errorString)
+        onError: infoBanner.warning(errorString)
     }
 
     LinkManager {
@@ -175,13 +175,13 @@ AbstractPage {
             inboxManager.resetTimer();
             pageStack.pop();
         }
-        onError: infoBanner.alert(errorString);
+        onError: infoBanner.warning(errorString);
     }
 
     VoteManager {
         id: linkVoteManager
         manager: quickdditManager
         onVoteSuccess: linkModel.changeLikes(fullname, likes);
-        onError: infoBanner.alert(errorString);
+        onError: infoBanner.warning(errorString);
     }
 }

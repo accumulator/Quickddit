@@ -271,7 +271,7 @@ AbstractPage {
     ImgurManager {
         id: imgurManager
         manager: quickdditManager
-        onError: infoBanner.alert(errorString);
+        onError: infoBanner.warning(errorString);
     }
 
     Binding {
@@ -284,6 +284,6 @@ AbstractPage {
     Connections {
         target: QMLUtils
         onSaveImageSucceeded: infoBanner.alert("Image saved to gallery");
-        onSaveImageFailed: infoBanner.alert("Image save failed!");
+        onSaveImageFailed: infoBanner.warning("Image save failed!");
     }
 }

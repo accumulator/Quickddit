@@ -200,11 +200,12 @@ AbstractPage {
     UserManager {
         id: userManager
         manager: quickdditManager
-        onError: infoBanner.alert(errorString);
+        onError: infoBanner.warning(errorString);
     }
 
     UserThingModel {
         id: userThingModel
         manager: quickdditManager
+        onError: infoBanner.warning(errorString);
     }
 }

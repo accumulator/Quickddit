@@ -157,7 +157,7 @@ AbstractPage {
         SubredditModel {
             manager: quickdditManager
             section: SubredditModel.UserAsSubscriberSection
-            onError: infoBanner.alert(errorString);
+            onError: infoBanner.warning(errorString);
         }
     }
 }

@@ -125,7 +125,7 @@ ApplicationWindow {
             } else if (/^https?:\/\/(www\.)?gfycat\.com\/.+/.test(url)) {
                 match = /^https?\:\/\/(www\.)?gfycat\.com\/(.+?)$/.exec(url)
                 if (match.length < 3) {
-                    console.log("invalid gfycat url: " + url)
+                    infoBanner.warning("invalid gfycat url: " + url)
                     return
                 }
                 var xhr = new XMLHttpRequest()
@@ -141,14 +141,14 @@ ApplicationWindow {
             } else if (/^https?:\/\/mediacru\.sh\/.+/.test(url)) {
                 match = /^https?\:\/\/mediacru\.sh\/(.+?)$/.exec(url)
                 if (match.length < 2) {
-                    console.log("invalid mediacru.sh url: " + url)
+                    infoBanner.warning("invalid mediacru.sh url: " + url)
                     return
                 }
                 pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://mediacru.sh/" + match[1] + ".mp4" });
             } else if (/^https?:\/\/((i|m)\.)?imgur\.com\/.+/.test(url)) {
                 match = /^https?\:\/\/(((i|m)\.)?imgur\.com)\/(.+?).gifv$/.exec(url)
                 if (!match || match.length < 4) {
-                    console.log("invalid imgur.com url: " + url)
+                    infoBanner.warning("invalid imgur.com url: " + url)
                     return
                 }
                 pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://" + match[1] + "/" + match[4] + ".mp4" });
@@ -202,10 +202,10 @@ ApplicationWindow {
         settings: appSettings
         onAccessTokenFailure: {
             if (code == 299 /* QNetworkReply::UnknownContentError */) {
-                infoBanner.alert(qsTr("Please log in again"));
+                infoBanner.warning(qsTr("Please log in again"));
                 pageStack.push(Qt.resolvedUrl("AppSettingsPage.qml"));
             } else {
-                infoBanner.alert(errorString);
+                infoBanner.warning(errorString);
             }
         }
     }
@@ -264,7 +264,7 @@ ApplicationWindow {
             hasUnseenUnread = true;
         }
 
-        onError: console.log(error);
+        onError: infoBanner.warning(error);
     }
 
     Connections {

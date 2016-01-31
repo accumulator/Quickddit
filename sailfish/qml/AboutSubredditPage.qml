@@ -139,6 +139,6 @@ AbstractPage {
                 infoBanner.alert(qsTr("You have unsubscribed from %1").arg(url))
             }
         }
-        onError: infoBanner.alert(errorString)
+        onError: infoBanner.warning(errorString)
     }
 }

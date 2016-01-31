@@ -96,7 +96,7 @@ AbstractPage {
     MessageModel {
         id: messageModel
         manager: quickdditManager
-        onError: infoBanner.alert(errorString)
+        onError: infoBanner.warning(errorString)
     }
 
     MessageManager {
@@ -107,7 +107,7 @@ AbstractPage {
             inboxManager.resetTimer();
         }
         onMarkReadStatusSuccess: messageModel.changeIsUnread(fullname, isUnread);
-        onError: infoBanner.alert(errorString);
+        onError: infoBanner.warning(errorString);
     }
 
     Component.onCompleted: {

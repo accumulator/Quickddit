@@ -98,13 +98,13 @@ AbstractPage {
         id: searchModel
         location: LinkModel.Search
         manager: quickdditManager
-        onError: infoBanner.alert(errorString);
+        onError: infoBanner.warning(errorString);
     }
 
     VoteManager {
         id: linkVoteManager
         manager: quickdditManager
         onVoteSuccess: searchModel.changeLikes(fullname, likes);
-        onError: infoBanner.alert(errorString);
+        onError: infoBanner.warning(errorString);
     }
 }
