@@ -38,6 +38,7 @@ ListItem {
 
         Row {
             width: parent.width
+            spacing: constant.paddingSmall
             clip: true
 
             Image {
