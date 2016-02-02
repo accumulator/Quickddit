@@ -5,6 +5,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Tue Feb 02 2016 Sander van Grieken <sander@outrightsolutions.nl> 0.9.1-1
+- also handle /user/ style urls
+- various visual improvements
+- new feature: new private message to user
+
 * Sat Jan 30 2016 Sander van Grieken <sander@outrightsolutions.nl> 0.9.0-1
 - new 2 column menu for comments, to save on vertical space
 - new feature: view User Profile
