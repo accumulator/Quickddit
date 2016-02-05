@@ -22,6 +22,7 @@
 #include <QtCore/QUrl>
 #include <QtGui/QClipboard>
 #include <QNetworkRequest>
+#include <QScreen>
 #include <QDebug>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
@@ -47,6 +48,7 @@ const QString QMLUtils::GPL3_LICENSE_URL = "http://www.gnu.org/licenses/gpl-3.0.
 QMLUtils::QMLUtils(QObject *parent) :
     QObject(parent)
 {
+    setPScale();
 }
 
 void QMLUtils::copyToClipboard(const QString &text)
@@ -193,5 +195,21 @@ void QMLUtils::clearNotification()
         Notification *notification = (Notification*)i.next();
         notification->close();
     }
+#endif
+}
+
+void QMLUtils::setPScale()
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+    QGuiApplication* app = static_cast<QGuiApplication*>(parent());
+    float ppi = app->primaryScreen()->physicalDotsPerInch();
+    float rjolla = ppi / 242;
+    float q = 0.25; // 25% quantizer (100%, 125%, 150%, ...)
+    int intermediate = (int)(rjolla / q);
+    cpScale = ((float)(intermediate)) * q;
+    if (cpScale < 1.0)
+        cpScale = 1.0;
+#else
+    cpScale = 1.0;
 #endif
 }
