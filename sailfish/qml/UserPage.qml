@@ -157,8 +157,9 @@ AbstractPage {
                 model: item.comment
 
                 onClicked: {
+                    // context needs the double slash '//' in the path
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"),
-                                   {linkPermalink: "/r/" + model.subreddit + "/comments/" + model.linkId + "/" + model.fullname.substring(3)})
+                                   {linkPermalink: "/r/" + model.subreddit + "/comments/" + model.linkId + "//" + model.fullname.substring(3) + "?context=3" })
                 }
             }
         }
