@@ -33,4 +33,11 @@ Image {
         enabled: !link.isSelfPost && thumbnail.enabled
         onClicked: globalUtils.openLink(link.url)
     }
+
+    onStatusChanged: {
+        if (thumbnail.status === Image.Ready) {
+            width = width * QMLUtils.pScale
+            height = height * QMLUtils.pScale
+        }
+    }
 }
