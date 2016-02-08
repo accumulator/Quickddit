@@ -34,7 +34,7 @@
 #include "appsettings.h"
 #include "linkmodel.h"
 
-static QRegExp commentPermalinkRegExp("(/r/\\w+)?/comments/\\w+/\\w+/(\\w+/?)");
+static QRegExp commentPermalinkRegExp("(/r/\\w+)?/comments/\\w+/\\w*/(\\w+/?)");
 
 CommentModel::CommentModel(QObject *parent) :
     AbstractListModelManager(parent), m_link(0), m_sort(ConfidenceSort), m_commentPermalink(false), m_request(0)
