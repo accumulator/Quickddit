@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2016  Sander van Grieken
+    Copyright (C) 2014  Dickson Leong
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,79 +19,94 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-ListItem {
-    id: mainItem
-    contentHeight: messageColumn.height + 2 * constant.paddingMedium
+Item {
+    id: messageDelegate
 
     property bool isSentMessage: false
 
-    Column {
-        id: messageColumn
-        anchors {
-            left: unreadIndicator.visible ? unreadIndicator.right : parent.left
-            right: parent.right
-            margins: constant.paddingMedium
-            verticalCenter: parent.verticalCenter
-        }
-        height: childrenRect.height
-        spacing: constant.paddingSmall
+    property alias listItem: mainItem
 
-        Row {
-            width: parent.width
+    signal clicked
+
+    width: ListView.view.width
+    height: mainItem.height
+
+    ListItem {
+        id: mainItem
+        contentHeight: messageColumn.height + 2 * constant.paddingMedium
+
+        onClicked: messageDelegate.clicked();
+
+        Column {
+            id: messageColumn
+            anchors {
+                left: unreadIndicator.visible ? unreadIndicator.right : parent.left
+                right: parent.right
+                margins: constant.paddingMedium
+                verticalCenter: parent.verticalCenter
+            }
+            height: childrenRect.height
             spacing: constant.paddingSmall
 
-            Image {
-                source: isComment ? "image://theme/icon-m-chat" : "image://theme/icon-m-mail"
-                width: 32
-                height: 32
-                anchors.verticalCenter: parent.verticalCenter
+            Row {
+                width: parent.width
+                spacing: constant.paddingSmall
+
+                Image {
+                    source: isComment ? "image://theme/icon-m-chat" : "image://theme/icon-m-mail"
+                    width: 32
+                    height: 32
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
+                Text {
+                    font.pixelSize: constant.fontSizeDefault
+                    color: mainItem.highlighted ? Theme.highlightColor : constant.colorLight
+                    font.bold: true
+                    elide: Text.ElideRight
+                    text: isComment ? model.subject + " from " + model.author
+                                    : model.subject
+                }
             }
 
             Text {
-                font.pixelSize: constant.fontSizeDefault
-                color: mainItem.highlighted ? Theme.highlightColor : constant.colorLight
-                font.bold: true
+                width: parent.width
+                font.pixelSize: constant.fontSizeSmaller
+                color: Theme.highlightColor
+                wrapMode: Text.Wrap
+                maximumLineCount: 2
                 elide: Text.ElideRight
-                text: isComment ? model.subject + " from " + model.author
-                                : model.subject
+                text: isComment ? "in /r/" + model.subreddit + ", " + model.created
+                                : (isSentMessage ? "to " + model.destination
+                                                 : "from " + model.author) + ", " + model.created
             }
+
+            Text {
+                width: parent.width
+                font.pixelSize: constant.fontSizeSmaller
+                color: mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid
+                wrapMode: Text.WordWrap
+                maximumLineCount: 2
+                elide: Text.ElideRight
+                visible: text.length > 0
+                text: model.linkTitle
+            }
+
+            WideText {
+                width: parent.width
+                body: model.body
+                listItem: mainItem
+                onClicked: messageDelegate.clicked()
+            }
+
         }
 
-        Text {
-            width: parent.width
-            font.pixelSize: constant.fontSizeSmaller
-            color: Theme.highlightColor
-            wrapMode: Text.Wrap
-            maximumLineCount: 2
-            elide: Text.ElideRight
-            text: isComment ? "in /r/" + model.subreddit + ", " + model.created
-                            : (isSentMessage ? "to " + model.destination
-                                             : "from " + model.author) + ", " + model.created
+        Rectangle {
+            id: unreadIndicator
+            anchors { top: parent.top; bottom: parent.bottom; left: parent.left; margins: constant.paddingMedium }
+            width: visible ? constant.paddingMedium : 0
+            color: "royalblue"
+            visible: model.isUnread
         }
-
-        Text {
-            width: parent.width
-            font.pixelSize: constant.fontSizeSmaller
-            color: mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid
-            wrapMode: Text.WordWrap
-            maximumLineCount: 2
-            elide: Text.ElideRight
-            visible: text.length > 0
-            text: model.linkTitle
-        }
-
-        WideText {
-            width: parent.width
-            body: model.body
-            listItem: mainItem
-        }
-    }
-
-    Rectangle {
-        id: unreadIndicator
-        anchors { top: parent.top; bottom: parent.bottom; left: parent.left; margins: constant.paddingMedium }
-        width: visible ? constant.paddingMedium : 0
-        color: "royalblue"
-        visible: model.isUnread
     }
 }
