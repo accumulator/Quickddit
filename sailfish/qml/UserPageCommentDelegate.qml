@@ -19,67 +19,81 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-ListItem {
-    id: mainItem
+Item {
+    id: commentDelegate
 
     property variant model
 
-    contentHeight: mainColumn.height + 2 * constant.paddingMedium
-    showMenuOnPressAndHold: false
+    signal clicked
 
-    Column {
-        id: mainColumn
-        anchors {
-            left: parent.left; right: parent.right; margins: constant.paddingMedium
-            verticalCenter:  parent.verticalCenter
-        }
+    width: ListView.view.width
+    height: mainItem.height
 
-        spacing: constant.paddingSmall
+    ListItem {
+        id: mainItem
 
-        Row {
-            width: parent.width
+        contentHeight: mainColumn.height + 2 * constant.paddingMedium
+        showMenuOnPressAndHold: false
+
+        Column {
+            id: mainColumn
+            anchors {
+                left: parent.left; right: parent.right; margins: constant.paddingMedium
+                verticalCenter:  parent.verticalCenter
+            }
+
             spacing: constant.paddingSmall
-            clip: true
 
-            Image {
-                source: "image://theme/icon-m-chat"
-                width: 32
-                height: 32
-                anchors.verticalCenter: parent.verticalCenter
+            Row {
+                width: parent.width
+                spacing: constant.paddingSmall
+                clip: true
+
+                Image {
+                    source: "image://theme/icon-m-chat"
+                    width: 32
+                    height: 32
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
+                Text {
+                    font.pixelSize: constant.fontSizeDefault
+                    color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                            : constant.colorDisabled
+                    font.bold: true
+                    text: "Comment in /r/" + model.subreddit
+                }
+                Text {
+                    font.pixelSize: constant.fontSizeDefault
+                    color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
+                                            : constant.colorDisabled
+                    elide: Text.ElideRight
+                    text: " · " + model.created
+                }
             }
 
             Text {
-                font.pixelSize: constant.fontSizeDefault
-                color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
-                                        : constant.colorDisabled
-                font.bold: true
-                text: "Comment in /r/" + model.subreddit
-            }
-            Text {
-                font.pixelSize: constant.fontSizeDefault
+                width: parent.width
+                font.pixelSize: constant.fontSizeSmaller
                 color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
                                         : constant.colorDisabled
                 elide: Text.ElideRight
-                text: " · " + model.created
+                wrapMode: Text.WordWrap
+                maximumLineCount: 2
+                text: model.linkTitle
             }
+
+            WideText {
+                width: parent.width
+                body: model.body
+                listItem: mainItem
+                onClicked: commentDelegate.clicked();
+            }
+
         }
 
-        Text {
-            width: parent.width
-            font.pixelSize: constant.fontSizeSmaller
-            color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
-                                    : constant.colorDisabled
-            elide: Text.ElideRight
-            wrapMode: Text.WordWrap
-            maximumLineCount: 2
-            text: model.linkTitle
-        }
-
-        WideText {
-            width: parent.width
-            body: model.body
-            listItem: mainItem
-        }
-
+        onClicked: commentDelegate.clicked();
     }
+
 }
+
