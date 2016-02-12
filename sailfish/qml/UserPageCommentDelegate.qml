@@ -26,7 +26,6 @@ Item {
 
     signal clicked
 
-    width: ListView.view.width
     height: mainItem.height
 
     ListItem {

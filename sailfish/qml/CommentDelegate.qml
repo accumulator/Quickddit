@@ -39,7 +39,6 @@ Item {
         mainItem.remorseAction(title, action, timeout);
     }
 
-    width: ListView.view.width
     height: moreChildrenLoader.status == Loader.Null ? mainItem.height : moreChildrenLoader.height + constant.paddingMedium
 
     ListView.onAdd: ParallelAnimation {

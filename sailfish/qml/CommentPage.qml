@@ -235,7 +235,9 @@ AbstractPage {
 
         delegate: CommentDelegate {
             id: commentDelegate
+            width: parent.width
             menu: Component { CommentMenu {} }
+
             onClicked: {
                 var p = {comment: model, linkPermalink: link.permalink, commentVoteManager: commentVoteManager};
                 var dialog = showMenu(p);

@@ -60,9 +60,14 @@ AbstractPage {
         header: QuickdditPageHeader { title: messagePage.title }
 
         delegate: MessageDelegate {
+            width: parent.width
+
             isSentMessage: messageModel.section == MessageModel.SentSection
+
             listItem.menu: Component { MessageMenu {} }
             listItem.showMenuOnPressAndHold: false
+            listItem.onPressAndHold: listItem.showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
+
             onClicked: {
                 messageManager.markRead(model.fullname)
                 if (model.isComment) {
@@ -74,7 +79,6 @@ AbstractPage {
                     });
                 }
             }
-            listItem.onPressAndHold: listItem.showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
         }
 
         footer: LoadingFooter {
