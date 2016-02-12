@@ -47,7 +47,11 @@ public:
         MoreChildrenCountRole,
         IsMoreChildrenRole,
         MoreChildrenRole,
-        CollapsedRole
+        CollapsedRole,
+        IsSavedRole,
+        IsArchivedRole,
+        IsStickiedRole,
+        GildedRole
     };
 
     enum SortType {

@@ -46,6 +46,10 @@ public:
     QString subreddit;
     QString linkTitle;
     QString linkId;
+    bool saved;
+    bool archived;
+    bool stickied;
+    int gilded;
 
 private:
     Q_DISABLE_COPY(CommentObjectData)
@@ -263,4 +267,44 @@ QString CommentObject::linkId() const
 void CommentObject::setLinkId(const QString &linkId)
 {
     d->linkId = linkId;
+}
+
+bool CommentObject::isSaved() const
+{
+    return d->saved;
+}
+
+void CommentObject::setSaved(bool saved)
+{
+    d->saved = saved;
+}
+
+bool CommentObject::isArchived() const
+{
+    return d->archived;
+}
+
+void CommentObject::setArchived(bool archived)
+{
+    d->archived = archived;
+}
+
+bool CommentObject::isStickied() const
+{
+    return d->stickied;
+}
+
+void CommentObject::setStickied(bool stickied)
+{
+    d->stickied = stickied;
+}
+
+int CommentObject::gilded() const
+{
+    return d->gilded;
+}
+
+void CommentObject::setGilded(int gilded)
+{
+    d->gilded = gilded;
 }

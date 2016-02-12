@@ -98,6 +98,19 @@ public:
     QString linkId() const;
     void setLinkId(const QString &linkId);
 
+    bool isSaved() const;
+    void setSaved(bool saved);
+
+    bool isArchived() const;
+    void setArchived(bool archived);
+
+    bool isStickied() const;
+    void setStickied(bool stickied);
+
+    int gilded() const;
+    void setGilded(int gilded);
+
+
 private:
     QExplicitlySharedDataPointer<CommentObjectData> d;
 };

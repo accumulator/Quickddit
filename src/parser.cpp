@@ -94,6 +94,10 @@ void commentFromMap(CommentObject &comment, const QVariantMap &commentMap)
     comment.setSubreddit(commentMap.value("subreddit").toString());
     comment.setLinkTitle(unescapeHtml(commentMap.value("link_title").toString()));
     comment.setLinkId(commentMap.value("link_id").toString().mid(3));
+    comment.setSaved(commentMap.value("saved").toBool());
+    comment.setArchived(commentMap.value("archived").toBool());
+    comment.setStickied(commentMap.value("stickied").toBool());
+    comment.setGilded(commentMap.value("gilded").toInt());
 }
 
 void linkFromMap(LinkObject &link, const QVariantMap &linkMap)

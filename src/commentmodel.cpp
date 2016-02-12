@@ -79,6 +79,11 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     roles[IsMoreChildrenRole] = "isMoreChildren";
     roles[MoreChildrenRole] = "moreChildren";
     roles[CollapsedRole] = "isCollapsed";
+    roles[IsSavedRole] = "isSaved";
+    roles[IsArchivedRole] = "isArchived";
+    roles[IsStickiedRole] = "isStickied";
+    roles[GildedRole] = "gilded";
+
     return roles;
 }
 
@@ -121,6 +126,10 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     case IsMoreChildrenRole: return comment.isMoreChildren();
     case MoreChildrenRole: return QVariant(comment.moreChildren());
     case CollapsedRole: return (comment.isCollapsed());
+    case IsSavedRole: return (comment.isSaved());
+    case IsArchivedRole: return (comment.isArchived());
+    case IsStickiedRole: return (comment.isStickied());
+    case GildedRole: return (comment.gilded());
     default:
         qCritical("CommentModel::data(): Invalid role");
         return QVariant();
