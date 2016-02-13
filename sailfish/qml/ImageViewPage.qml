@@ -25,7 +25,7 @@ AbstractPage {
     id: imageViewPage
     title: "Image"
 
-    property alias imageUrl: imageItem.source
+    property alias imageUrl: viewer.source
     property alias imgurUrl: imgurManager.imgurUrl
 
     // to make the image outside of the page not visible during page transitions
@@ -34,8 +34,7 @@ AbstractPage {
     SilicaFlickable {
         id: imageFlickable
         anchors { top: parent.top; left: parent.left; right: parent.right; bottom: thumbnailListView.top }
-        contentWidth: imageContainer.width; contentHeight: imageContainer.height
-        onHeightChanged: if (imageItem.status == Image.Ready) imageItem.fitToScreen()
+        contentWidth: viewer.width; contentHeight: viewer.height
 
         PullDownMenu {
             MenuItem {
@@ -48,62 +47,11 @@ AbstractPage {
             }
         }
 
-        Item {
-            id: imageContainer
-            width: Math.max(imageItem.width * imageItem.scale, imageFlickable.width)
-            height: Math.max(imageItem.height * imageItem.scale, imageFlickable.height)
-
-            AnimatedImage {
-                id: imageItem
-
-                property real prevScale: 0
-                property real fitScale: 0
-
-                function fitToScreen() {
-                    fitScale = Math.min(imageFlickable.width / width, imageFlickable.height / height)
-                    imageItem.scale = fitScale
-                    prevScale = fitScale
-                    pinchArea.minScale = Math.min(fitScale, 1)
-                }
-
-                anchors.centerIn: parent
-                asynchronous: true
-                smooth: !imageFlickable.moving
-                cache: false
-                fillMode: Image.PreserveAspectFit
-                // pause the animation when app is in background
-                paused: imageViewPage.status != PageStatus.Active || !Qt.application.active
-
-                onScaleChanged: {
-                    if (prevScale == 0)
-                        prevScale = scale
-                    if ((width * scale) > imageFlickable.width) {
-                        var xoff = (imageFlickable.width / 2 + imageFlickable.contentX) * scale / prevScale;
-                        imageFlickable.contentX = xoff - imageFlickable.width / 2
-                    }
-                    if ((height * scale) > imageFlickable.height) {
-                        var yoff = (imageFlickable.height / 2 + imageFlickable.contentY) * scale / prevScale;
-                        imageFlickable.contentY = yoff - imageFlickable.height / 2
-                    }
-                    prevScale = scale
-                }
-
-                onHeightChanged: {
-                    if (status == Image.Ready) {
-                        fitToScreen()
-                        loadedAnimation.start()
-                    }
-                }
-
-                NumberAnimation {
-                    id: loadedAnimation
-                    target: imageItem
-                    property: "opacity"
-                    duration: 250
-                    from: 0; to: 1
-                    easing.type: Easing.InOutQuad
-                }
-            }
+        ImageViewer {
+            id: viewer
+            flickable: imageFlickable
+            // pause the animation when app is in background
+            paused: imageViewPage.status !== PageStatus.Active || !Qt.application.active
         }
 
         Loader {
@@ -113,7 +61,7 @@ AbstractPage {
                 if (imgurManager.busy)
                     return busyIndicatorComponent;
 
-                switch (imageItem.status) {
+                switch (viewer.status) {
                 case Image.Loading: return busyIndicatorComponent
                 case Image.Error: return failedLoading
                 default: return undefined
@@ -137,86 +85,12 @@ AbstractPage {
                         anchors.centerIn: parent
                         visible: !imgurManager.busy
                         font.pixelSize: constant.fontSizeSmall
-                        text: Math.round(imageItem.progress * 100) + "%"
+                        text: Math.round(viewer.progress * 100) + "%"
                     }
                 }
             }
 
             Component { id: failedLoading; Label { text: "Error loading image" } }
-        }
-
-        PinchArea {
-            id: pinchArea
-
-            property real minScale: 1.0
-            property real maxScale: 3.0
-
-            anchors.fill: parent
-            enabled: imageItem.status == Image.Ready
-            pinch.target: imageItem
-            pinch.minimumScale: minScale * 0.5 // This is to create "bounce back effect"
-            pinch.maximumScale: maxScale * 1.5 // when over zoomed
-
-            onPinchFinished: {
-                imageFlickable.returnToBounds()
-                if (imageItem.scale < pinchArea.minScale) {
-                    bounceBackAnimation.to = pinchArea.minScale
-                    bounceBackAnimation.start()
-                }
-                else if (imageItem.scale > pinchArea.maxScale) {
-                    bounceBackAnimation.to = pinchArea.maxScale
-                    bounceBackAnimation.start()
-                }
-            }
-
-            NumberAnimation {
-                id: bounceBackAnimation
-                target: imageItem
-                duration: 250
-                property: "scale"
-                from: imageItem.scale
-            }
-
-            // workaround to qt5.2 bug
-            // otherwise pincharea is ignored
-            // Copied from: https://github.com/veskuh/Tweetian/commit/ad70015c7c50537db4bcd66f3077e2483f735113
-            // And: http://talk.maemo.org/showthread.php?p=1466386#post1466386
-            Rectangle {
-                opacity: 0.0
-                anchors.fill: parent
-            }
-
-            MouseArea {
-                z: parent.z + 1
-                anchors.fill: parent
-                enabled: imageItem.status == Image.Ready
-
-                onClicked: {
-                    if (!dclickTimer.running) {
-                        dclickTimer.start();
-                        return;
-                    }
-
-                    dclickTimer.stop();
-
-                    // allow 1% above fitscale to handle rounding errors
-                    if (imageItem.scale > (imageItem.fitScale * 1.01)) {
-                        imageFlickable.returnToBounds()
-                        bounceBackAnimation.to = imageItem.fitScale
-                        bounceBackAnimation.start()
-                    } else {
-                        imageFlickable.returnToBounds()
-                        bounceBackAnimation.to = imageItem.fitScale * 2.5
-                        bounceBackAnimation.start()
-                    }
-                }
-
-                Timer {
-                    id: dclickTimer
-                    interval: 300
-                }
-
-            }
         }
 
         ScrollDecorator {}
@@ -275,7 +149,7 @@ AbstractPage {
     }
 
     Binding {
-        target: imageItem
+        target: viewer
         property: "source"
         value: imgurManager.imageUrl
         when: imageViewPage.imgurUrl

@@ -157,7 +157,8 @@ OTHER_FILES += \
     qml/WideText.qml \
     qml/UserPageCommentDelegate.qml \
     qml/UserPageLinkDelegate.qml \
-    qml/NewMessagePage.qml
+    qml/NewMessagePage.qml \
+    qml/ImageViewer.qml
 
 icon128.files = icon128/$${TARGET}.png
 icon128.path = /usr/share/icons/hicolor/128x128/apps
@@ -182,5 +183,4 @@ harbour {
 
     INSTALLS += notification
 }
-
 
