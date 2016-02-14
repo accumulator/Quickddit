@@ -134,6 +134,7 @@ AbstractPage {
         }
 
         delegate: SimpleListItem {
+            id: itemDelegate
             text: model.url
             onClicked: subredditsPage.refresh(model.displayName);
         }
@@ -146,6 +147,15 @@ AbstractPage {
         onAtYEndChanged: {
             if (atYEnd && count > 0 && !subredditModel.busy && subredditModel.canLoadMore)
                 subredditModel.refresh(true);
+        }
+
+        add: Transition {
+            NumberAnimation {
+                properties: "opacity"
+                from: 0; to: 1
+                duration: 300
+                easing.type: Easing.InOutQuad
+            }
         }
 
         VerticalScrollDecorator {}
