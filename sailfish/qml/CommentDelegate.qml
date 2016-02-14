@@ -140,6 +140,30 @@ Item {
             height: childrenRect.height
             spacing: constant.paddingSmall
 
+            Row {
+                visible: model.isSaved || model.isArchived || model.isStickied || model.gilded > 0
+                Bubble {
+                    visible: model.isSaved
+                    font.pixelSize: constant.fontSizeSmaller
+                    text: "Saved"
+                }
+                Bubble {
+                    visible: model.isArchived
+                    font.pixelSize: constant.fontSizeSmaller
+                    text: "Archived"
+                }
+                Bubble {
+                    visible: model.isStickied
+                    font.pixelSize: constant.fontSizeSmaller
+                    text: "Stickied"
+                }
+                Bubble {
+                    visible: model.gilded > 0
+                    font.pixelSize: constant.fontSizeSmaller
+                    text: "Gilded"
+                }
+            }
+
             Item {
                 id: authorTextWrapper
                 anchors { left: parent.left; right: parent.right }
