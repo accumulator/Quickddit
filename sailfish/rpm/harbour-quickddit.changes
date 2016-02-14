@@ -5,6 +5,13 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Feb 14 2016 Sander van Grieken <sander@outrightsolutions.nl> 0.9.2-1
+- thumbnails are now scaled according to device ppi
+- show comment flags (gilded, stickied, saved, archived) in comments view
+- open user comment in context
+- fix for black image, when dimensions are larger than gl texture can handle
+- fix for clicks getting lost in message list and user comment list
+
 * Tue Feb 02 2016 Sander van Grieken <sander@outrightsolutions.nl> 0.9.1-1
 - also handle /user/ style urls
 - various visual improvements
