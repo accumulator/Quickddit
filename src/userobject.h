@@ -21,6 +21,7 @@
 
 #include <QtCore/QExplicitlySharedDataPointer>
 #include <QtCore/QStringList>
+#include <QtCore/QDateTime>
 
 class UserObjectData;
 

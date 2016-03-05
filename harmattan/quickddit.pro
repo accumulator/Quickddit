@@ -38,7 +38,11 @@ HEADERS += \
     ../src/aboutmultiredditmanager.h \
     ../src/captchamanager.h \
     ../src/linkmanager.h \
-    ../src/inboxmanager.h
+    ../src/inboxmanager.h \
+    ../src/usermanager.h \
+    ../src/userobject.h \
+    ../src/userthingmodel.h \
+    ../src/thing.h
 
 SOURCES += main.cpp \
     app_adaptor.cpp \
@@ -70,7 +74,11 @@ SOURCES += main.cpp \
     ../src/aboutmultiredditmanager.cpp \
     ../src/captchamanager.cpp \
     ../src/linkmanager.cpp \
-    ../src/inboxmanager.cpp
+    ../src/inboxmanager.cpp \
+    ../src/usermanager.cpp \
+    ../src/userobject.cpp \
+    ../src/userthingmodel.cpp \
+    ../src/thing.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h

@@ -41,6 +41,8 @@
 #include "src/captchamanager.h"
 #include "src/linkmanager.h"
 #include "src/inboxmanager.h"
+#include "src/usermanager.h"
+#include "src/userthingmodel.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -66,6 +68,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<CaptchaManager>("Quickddit.Core", 1, 0, "CaptchaManager");
     qmlRegisterType<LinkManager>("Quickddit.Core", 1, 0, "LinkManager");
     qmlRegisterType<InboxManager>("Quickddit.Core", 1, 0, "InboxManager");
+    qmlRegisterType<UserManager>("Quickddit.Core", 1, 0, "UserManager");
+    qmlRegisterType<UserThingModel>("Quickddit.Core", 1, 0, "UserThingModel");
 
     QmlApplicationViewer viewer;
     viewer.rootContext()->setContextProperty("APP_VERSION", APP_VERSION);
