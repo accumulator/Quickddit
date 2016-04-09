@@ -59,46 +59,48 @@ AbstractPage {
             paused: imageViewPage.status !== PageStatus.Active || !Qt.application.active
         }
 
-        Loader {
-            id: busyIndicatorLoader
-            anchors.centerIn: parent
-            sourceComponent: {
-                if (imgurManager.busy)
-                    return busyIndicatorComponent;
+        ScrollDecorator {}
+    }
 
-                switch (viewer.status) {
-                case Image.Loading: return busyIndicatorComponent
-                case Image.Error: return failedLoading
-                default: return undefined
-                }
+    Loader {
+        id: busyIndicatorLoader
+        anchors.centerIn: parent
+        sourceComponent: {
+            if (imgurManager.busy)
+                return busyIndicatorComponent;
+
+            switch (viewer.status) {
+            case Image.Loading: return busyIndicatorComponent
+            case Image.Error: return failedLoading
+            default: return undefined
             }
-
-            Component {
-                id: busyIndicatorComponent
-
-                Item {
-                    width: busyIndicator.width
-                    height: busyIndicator.height
-
-                    BusyIndicator {
-                        id: busyIndicator
-                        size: BusyIndicatorSize.Large
-                        running: true
-                    }
-
-                    Label {
-                        anchors.centerIn: parent
-                        visible: !imgurManager.busy
-                        font.pixelSize: constant.fontSizeSmall
-                        text: Math.round(viewer.progress * 100) + "%"
-                    }
-                }
-            }
-
-            Component { id: failedLoading; Label { text: "Error loading image" } }
         }
 
-        ScrollDecorator {}
+        Component {
+            id: busyIndicatorComponent
+
+            Item {
+                width: busyIndicator.width
+                height: busyIndicator.height
+
+                anchors.centerIn: parent
+
+                BusyIndicator {
+                    id: busyIndicator
+                    size: BusyIndicatorSize.Large
+                    running: true
+                }
+
+                Label {
+                    anchors.centerIn: parent
+                    visible: !imgurManager.busy
+                    font.pixelSize: constant.fontSizeSmall
+                    text: Math.round(viewer.progress * 100) + "%"
+                }
+            }
+        }
+
+        Component { id: failedLoading; Label { text: "Error loading image" } }
     }
 
     ListView {
