@@ -5,6 +5,14 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Apr 09 2016 Sander van Grieken <sander@outrightsolutions.nl> 0.9.3-1
+- fix network error at application start
+- fix video player stuttering due to buffer underruns, fixes #15
+- fix strikethrough not rendered correctly, fixes #11
+- fix image not properly scaled after orientation change, fixes #12
+- fix image load progress indicator position
+- tags and flairtext now together at top of post
+
 * Sun Feb 14 2016 Sander van Grieken <sander@outrightsolutions.nl> 0.9.2-1
 - thumbnails are now scaled according to device ppi
 - show comment flags (gilded, stickied, saved, archived) in comments view
