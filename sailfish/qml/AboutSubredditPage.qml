@@ -121,7 +121,7 @@ AbstractPage {
                 textFormat: Text.RichText
                 font.pixelSize: constant.fontSizeDefault
                 color: constant.colorLight
-                text: "<style>a { color: " + Theme.highlightColor + "; }</style>" + aboutSubredditManager.longDescription
+                text: constant.richtextStyle + aboutSubredditManager.longDescription
                 onLinkActivated: globalUtils.openLink(link);
             }
         }

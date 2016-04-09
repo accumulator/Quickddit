@@ -53,7 +53,7 @@ Column {
         font.pixelSize: constant.fontSizeDefault
         color: highlighted ? Theme.secondaryHighlightColor : constant.colorMid
         onLinkActivated: globalUtils.openLink(link)
-        text: "<style>a { color: " + Theme.highlightColor + "; }</style>" + "submitted " + link.created + " by " +
+        text: constant.richtextStyle + "submitted " + link.created + " by " +
                 (compact ? link.author : "<a href=\"https://reddit.com/u/" + link.author.split(" ")[0] + "\">" + link.author + "</a>") +
                 (showSubreddit ? " to " + link.subreddit : "")
     }

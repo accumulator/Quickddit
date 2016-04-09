@@ -47,6 +47,12 @@ QtObject {
     property int fontSizeLarger: __fontSizeLargerF()
     property int orientationSetting: __orientationSettingF()
 
+    property string richtextStyle: "<style>del {text-decoration: line-through;} a { color: " + Theme.highlightColor + "; }</style>"
+
+    function commentStyle(enabled) {
+        return "<style>del {text-decoration: line-through;} a { color: " + (enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>"
+    }
+
     function __fontSizeDefaultF() {
         switch (appSettings.fontSize) {
         case AppSettings.TinyFontSize: return constant.fontSizeXSmall;
@@ -87,4 +93,5 @@ QtObject {
     readonly property variant commentRepliesColor: ["green", "orange", "purple", "yellow",
                                                     "royalblue", "pink", "indigo", "gold",
                                                     "red", colorLight];
+
 }

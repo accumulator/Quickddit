@@ -63,7 +63,7 @@ AbstractPage {
                 wrapMode: Text.Wrap
                 textFormat: Text.RichText
                 font.italic: multiredditManager.description.length == 0
-                text: multiredditManager.description ? "<style>a { color: " + Theme.highlightColor + "; }</style>" + multiredditManager.description : "No description"
+                text: multiredditManager.description ? constant.richtextStyle + multiredditManager.description : "No description"
                 onLinkActivated: globalUtils.openLink(link);
             }
 
