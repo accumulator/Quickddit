@@ -34,9 +34,17 @@ AbstractPage {
 
             source: MediaPlayer {
                 id: mediaPlayer
-                autoPlay: true
+                autoPlay: false
                 onStopped: playPauseButton.opacity = 1
                 onError: console.log(errorString)
+
+                onBufferProgressChanged: {
+                    if (bufferProgress > 0.95)
+                        play();
+                    else if (bufferProgress < 0.05)
+                        pause();
+                }
+
             }
 
             Item {
