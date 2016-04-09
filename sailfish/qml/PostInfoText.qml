@@ -28,9 +28,35 @@ Column {
 
     spacing: constant.paddingMedium
 
-    Bubble {
-        visible: link.flairText !== ""
-        text: link.flairText
+    Row {
+        anchors { left: parent.left; right: parent.right }
+        spacing: constant.paddingMedium
+
+        Bubble {
+            visible: link.flairText !== ""
+            text: link.flairText
+        }
+
+        Bubble {
+            color: "green"
+            visible: !!link.isSticky
+            text: "Sticky"
+            font.bold: true
+        }
+
+        Bubble {
+            color: "red"
+            visible: !!link.isNSFW
+            text: "NSFW"
+            font.bold: true
+        }
+
+        Bubble {
+            color: "green"
+            visible: !!link.isPromoted
+            text: "Promoted"
+            font.bold: true
+        }
     }
 
     Text {
@@ -87,25 +113,5 @@ Column {
             text: link.commentsCount + " comments"
         }
 
-        Bubble {
-            color: "green"
-            visible: !!link.isSticky
-            text: "Sticky"
-            font.bold: true
-        }
-
-        Bubble {
-            color: "red"
-            visible: !!link.isNSFW
-            text: "NSFW"
-            font.bold: true
-        }
-
-        Bubble {
-            color: "green"
-            visible: !!link.isPromoted
-            text: "Promoted"
-            font.bold: true
-        }
     }
 }
