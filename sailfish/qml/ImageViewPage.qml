@@ -36,6 +36,11 @@ AbstractPage {
         anchors { top: parent.top; left: parent.left; right: parent.right; bottom: thumbnailListView.top }
         contentWidth: viewer.width; contentHeight: viewer.height
 
+        // height changed event seems to always come after width changed event, we only trigger on height.
+        onHeightChanged: {
+            viewer._fitToScreen();
+        }
+
         PullDownMenu {
             MenuItem {
                 text: "Save Image"
