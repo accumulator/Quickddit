@@ -131,6 +131,13 @@ Item {
             }
         }
 
+        Rectangle {
+            id: savedRect
+            anchors.fill: parent
+            color: Theme.highlightColor
+            opacity: model.saved ? 0.1 : 0.0
+        }
+
         Column {
             id: mainColumn
             anchors {
@@ -141,12 +148,7 @@ Item {
             spacing: constant.paddingSmall
 
             Row {
-                visible: model.isSaved || model.isArchived || model.isStickied || model.gilded > 0
-                Bubble {
-                    visible: model.isSaved
-                    font.pixelSize: constant.fontSizeSmaller
-                    text: "Saved"
-                }
+                visible: model.isArchived || model.isStickied || model.gilded > 0
                 Bubble {
                     visible: model.isArchived
                     font.pixelSize: constant.fontSizeSmaller
