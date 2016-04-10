@@ -23,10 +23,11 @@
 class ThingData : public QSharedData
 {
 public:
-    ThingData() {}
+    ThingData() : saved(false) {}
 
     QString kind;
     QString fullname;
+    bool saved;
 
 private:
     Q_DISABLE_COPY(ThingData)
@@ -71,4 +72,15 @@ QString Thing::kind() const
 void Thing::setKind(const QString &kind)
 {
     t->kind = kind;
+}
+
+
+bool Thing::saved() const
+{
+    return t->saved;
+}
+
+void Thing::setSaved(const bool saved)
+{
+    t->saved = saved;
 }

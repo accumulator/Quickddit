@@ -113,6 +113,8 @@ QVariant LinkModel::data(const QModelIndex &index, int role) const
     case IsPromotedRole: return link.isPromoted();
     case FlairTextRole: return link.flairText();
     case IsSelfPostRole: return link.isSelfPost();
+    case IsSavedRole: return link.saved();
+
     default:
         qCritical("LinkModel::data(): Invalid role");
         return QVariant();
@@ -331,6 +333,7 @@ QHash<int, QByteArray> LinkModel::customRoleNames() const
     roles[IsPromotedRole] = "isPromoted";
     roles[FlairTextRole] = "flairText";
     roles[IsSelfPostRole] = "isSelfPost";
+    roles[IsSavedRole] = "saved";
     return roles;
 }
 

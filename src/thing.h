@@ -36,6 +36,8 @@ public:
     void setKind(const QString &kind);
     QString fullname() const;
     void setFullname(const QString &fullname);
+    bool saved() const;
+    void setSaved(const bool saved);
 
 protected:
     QExplicitlySharedDataPointer<ThingData> t;

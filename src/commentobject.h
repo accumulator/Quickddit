@@ -98,9 +98,6 @@ public:
     QString linkId() const;
     void setLinkId(const QString &linkId);
 
-    bool isSaved() const;
-    void setSaved(bool saved);
-
     bool isArchived() const;
     void setArchived(bool archived);
 
