@@ -142,6 +142,8 @@ Item {
 
             Row {
                 visible: model.isSaved || model.isArchived || model.isStickied || model.gilded > 0
+                spacing: constant.paddingMedium
+
                 Bubble {
                     visible: model.isSaved
                     font.pixelSize: constant.fontSizeSmaller
