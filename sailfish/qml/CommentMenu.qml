@@ -26,6 +26,7 @@ FancyContextMenu {
     property variant comment
     property string linkPermalink
     property VoteManager commentVoteManager
+    property SaveManager commentSaveManager
 
     // when the menu is closing SilicaListView will override the contentY causes the positioning to failed
     // position at menu destruction to fix this
@@ -36,17 +37,33 @@ FancyContextMenu {
     signal deleteClicked
 
     FancyMenuItemRow {
-        FancyMenuItem {
+        FancyMenuImage {
             enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
-            text: comment.likes === 1 ? "Unvote" : "Upvote"
+            icon: "image://theme/icon-m-up"
             onClicked: commentVoteManager.vote(comment.fullname,
                             comment.likes === 1 ? VoteManager.Unvote : VoteManager.Upvote)
         }
-        FancyMenuItem {
+        FancyMenuImage {
             enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
-            text: comment.likes === -1 ? "Unvote" : "Downvote"
+            icon: "image://theme/icon-m-down"
             onClicked: commentVoteManager.vote(comment.fullname,
                             comment.likes === -1 ? VoteManager.Unvote : VoteManager.Downvote)
+        }
+        FancyMenuImage {
+            enabled: comment.depth > 0
+            icon: "image://theme/icon-m-page-up"
+            onClicked: __showParentAtDestruction = true;
+        }
+        FancyMenuImage {
+            icon: "image://theme/icon-m-link"
+            onClicked: {
+                var link = QMLUtils.toAbsoluteUrl(linkPermalink + comment.fullname.substring(3));
+                globalUtils.createOpenLinkDialog(link);
+            }
+        }
+        FancyMenuImage {
+            icon: comment.saved ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
+            onClicked: commentSaveManager.save(comment.fullname, !comment.saved);
         }
     }
 
@@ -78,21 +95,6 @@ FancyContextMenu {
             enabled: comment.isAuthor
             text: "Delete"
             onClicked: deleteClicked();
-        }
-    }
-
-    FancyMenuItemRow {
-        FancyMenuItem {
-            enabled: comment.depth > 0
-            text: "Parent"
-            onClicked: __showParentAtDestruction = true;
-        }
-        FancyMenuItem {
-            text: "Permalink"
-            onClicked: {
-                var link = QMLUtils.toAbsoluteUrl(linkPermalink + comment.fullname.substring(3));
-                globalUtils.createOpenLinkDialog(link);
-            }
         }
     }
 

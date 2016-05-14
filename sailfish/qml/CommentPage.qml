@@ -241,7 +241,7 @@ AbstractPage {
             menu: Component { CommentMenu {} }
 
             onClicked: {
-                var p = {comment: model, linkPermalink: link.permalink, commentVoteManager: commentVoteManager};
+                var p = {comment: model, linkPermalink: link.permalink, commentVoteManager: commentVoteManager, commentSaveManager: commentSaveManager};
                 var dialog = showMenu(p);
                 dialog.showParent.connect(function() {
                     var parentIndex = commentModel.getParentIndex(index);
@@ -321,7 +321,7 @@ AbstractPage {
     SaveManager {
         id: commentSaveManager
         manager: quickdditManager
-        onSuccess: link.saved = save;
+        onSuccess: commentModel.changeSaved(fullname, saved);
         onError: infoBanner.warning(errorString);
     }
 
