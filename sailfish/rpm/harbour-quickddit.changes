@@ -5,6 +5,14 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat May 14 2016 Sander van Grieken <sander@outrightsolutions.nl> 0.9.4-1
+- add Save option to links and comments
+- show saved links and comments highlighted
+- use icon bar in comment menu
+- support for i.reddituploads.com domain in image preview
+- fix bubble spacing in comments list
+- support /r/subreddit imgur link style variant (thx Francesco Gazzetta)
+
 * Sat Apr 09 2016 Sander van Grieken <sander@outrightsolutions.nl> 0.9.3-1
 - fix network error at application start
 - fix video player stuttering due to buffer underruns, fixes #15
