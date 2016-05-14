@@ -209,6 +209,7 @@ void QMLUtils::setPScale()
     cpScale = ((float)(intermediate)) * q;
     if (cpScale < 1.0)
         cpScale = 1.0;
+    qDebug() << "Device PPI =" << ppi << "scale = " << cpScale;
 #else
     cpScale = 1.0;
 #endif
