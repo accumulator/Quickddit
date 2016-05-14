@@ -155,6 +155,7 @@ OTHER_FILES += \
     qml/FancyContextMenu.qml \
     qml/FancyMenuItemRow.qml \
     qml/FancyMenuItem.qml \
+    qml/FancyMenuImage.qml \
     qml/UserPage.qml \
     qml/WideText.qml \
     qml/UserPageCommentDelegate.qml \
