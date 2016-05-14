@@ -349,6 +349,19 @@ void CommentModel::changeLikes(const QString &fullname, int likes)
     }
 }
 
+void CommentModel::changeSaved(const QString &fullname, bool saved)
+{
+    for (int i = 0; i < m_commentList.count(); ++i) {
+        CommentObject comment = m_commentList.at(i);
+
+        if (comment.fullname() == fullname) {
+            comment.setSaved(saved);
+            emit dataChanged(index(i), index(i));
+            break;
+        }
+    }
+}
+
 void CommentModel::collapse(int index)
 {
     Q_ASSERT(index < m_commentList.count());
