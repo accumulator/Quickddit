@@ -131,13 +131,6 @@ Item {
             }
         }
 
-        Rectangle {
-            id: savedRect
-            anchors.fill: parent
-            color: Theme.highlightColor
-            opacity: model.saved ? 0.1 : 0.0
-        }
-
         Column {
             id: mainColumn
             anchors {
@@ -241,7 +234,23 @@ Item {
 
         }
 
+        Image {
+            visible: model.saved
+            anchors {
+                right: parent.right
+                top: parent.top
+            }
+            source: "image://theme/icon-s-favorite?" + Theme.highlightColor
+        }
+
         onClicked: commentDelegate.clicked();
+    }
+
+    Rectangle {
+        id: savedRect
+        anchors.fill: parent
+        color: Theme.highlightColor
+        opacity: model.saved ? 0.1 : 0.0
     }
 
     Loader {
