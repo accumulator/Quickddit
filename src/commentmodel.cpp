@@ -316,6 +316,24 @@ void CommentModel::changeLinkLikes(const QString &fullname, int likes)
     emit linkChanged();
 }
 
+void CommentModel::changeLinkSaved(const QString &fullname, bool saved)
+{
+    if (!m_link.type() == QVariant::Map) {
+        qWarning("CommentModel::changeLinkSaved(): link is not provided by CommentModel");
+        return;
+    }
+
+    QVariantMap linkMap = m_link.toMap();
+
+    if (linkMap.value("fullname").toString() != fullname) {
+        return;
+    }
+
+    linkMap["saved"] = saved;
+    m_link = linkMap;
+    emit linkChanged();
+}
+
 void CommentModel::changeLikes(const QString &fullname, int likes)
 {
     for (int i = 0; i < m_commentList.count(); ++i) {

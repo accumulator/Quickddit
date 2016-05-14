@@ -51,6 +51,8 @@ QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
     map["isNSFW"] = link.isNSFW();
     map["flairText"] = link.flairText();
     map["isSelfPost"] = link.isSelfPost();
+    map["saved"] = link.saved();
+
     return map;
 }
 
@@ -285,6 +287,19 @@ void LinkModel::changeLikes(const QString &fullname, int likes)
             int oldLikes = link.likes();
             link.setLikes(likes);
             link.setScore(link.score() + (link.likes() - oldLikes));
+            emit dataChanged(index(i), index(i));
+            break;
+        }
+    }
+}
+
+void LinkModel::changeSaved(const QString &fullname, bool saved)
+{
+    for (int i = 0; i < m_linkList.count(); ++i) {
+        LinkObject link = m_linkList.at(i);
+
+        if (link.fullname() == fullname) {
+            link.setSaved(saved);
             emit dataChanged(index(i), index(i));
             break;
         }

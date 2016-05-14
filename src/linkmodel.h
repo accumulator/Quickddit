@@ -135,6 +135,7 @@ public:
 
     void refresh(bool refreshOlder);
     Q_INVOKABLE void changeLikes(const QString &fullname, int likes);
+    Q_INVOKABLE void changeSaved(const QString &fullname, bool saved);
 
     void editLink(const LinkObject &link);
 
