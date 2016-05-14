@@ -23,6 +23,7 @@ import harbour.quickddit.Core 1.0
 Row {
     property variant link
     property VoteManager linkVoteManager
+    property SaveManager linkSaveManager
 
     height: Theme.iconSizeLarge
     spacing: constant.paddingLarge
@@ -86,5 +87,13 @@ Row {
         icon.width: Theme.iconSizeLarge - constant.paddingLarge
         icon.source: "image://theme/icon-m-link"
         onClicked: globalUtils.openNonPreviewLink(link.url, link.permalink);
+    }
+
+    IconButton {
+        anchors.verticalCenter: parent.verticalCenter
+        icon.height: Theme.iconSizeLarge - constant.paddingLarge
+        icon.width: Theme.iconSizeLarge - constant.paddingLarge
+        icon.source: link.saved ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
+        onClicked: linkSaveManager.save(link.fullname, !link.saved);
     }
 }
