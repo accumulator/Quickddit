@@ -118,6 +118,11 @@ void ImgurManager::refresh()
         if (id.contains(NONE_WORD_REGEXP))
             id.truncate(id.indexOf(NONE_WORD_REGEXP));
         requestUrl += "/gallery/" + id;
+    } else if (path.startsWith("/r/")) {
+        QString id = QString(path).remove(QRegExp("^/r/[^/]+/"));
+        if (id.contains(NONE_WORD_REGEXP))
+            id.truncate(id.indexOf(NONE_WORD_REGEXP));
+        requestUrl += "/image/" + id;
     } else if (path.lastIndexOf('/') == 0) {
         QString id = QString(path).remove(0, 1);
         if (id.contains(NONE_WORD_REGEXP))
