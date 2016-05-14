@@ -50,4 +50,19 @@ ListItem {
         anchors { right: parent.right; verticalCenter: parent.verticalCenter; rightMargin: constant.paddingMedium }
     }
 
+    Rectangle {
+        id: savedRect
+        anchors.fill: parent
+        color: Theme.highlightColor
+        opacity: model.saved ? 0.1 : 0.0
+    }
+
+    Image {
+        visible: model.saved
+        anchors {
+            right: parent.right
+            top: parent.top
+        }
+        source: "image://theme/icon-s-favorite?" + Theme.highlightColor
+    }
 }

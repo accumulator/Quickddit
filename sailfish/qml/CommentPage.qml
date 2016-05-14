@@ -29,6 +29,7 @@ AbstractPage {
     property alias link: commentModel.link
     property alias linkPermalink: commentModel.permalink
     property VoteManager linkVoteManager
+    property SaveManager linkSaveManager
     property bool morechildren_animation
     property bool widePage: commentPage.width > 700
 
@@ -154,6 +155,7 @@ AbstractPage {
 
                             link: commentModel.link
                             linkVoteManager: commentPage.linkVoteManager
+                            linkSaveManager: commentPage.linkSaveManager
                         }
                     }
                 }
@@ -239,7 +241,7 @@ AbstractPage {
             menu: Component { CommentMenu {} }
 
             onClicked: {
-                var p = {comment: model, linkPermalink: link.permalink, commentVoteManager: commentVoteManager};
+                var p = {comment: model, linkPermalink: link.permalink, commentVoteManager: commentVoteManager, commentSaveManager: commentSaveManager};
                 var dialog = showMenu(p);
                 dialog.showParent.connect(function() {
                     var parentIndex = commentModel.getParentIndex(index);
@@ -316,9 +318,21 @@ AbstractPage {
         onError: infoBanner.warning(errorString);
     }
 
+    SaveManager {
+        id: commentSaveManager
+        manager: quickdditManager
+        onSuccess: commentModel.changeSaved(fullname, saved);
+        onError: infoBanner.warning(errorString);
+    }
+
     Connections {
         target: linkVoteManager
         onVoteSuccess: if (linkVoteManager != commentVoteManager) { commentModel.changeLinkLikes(fullname, likes); }
+    }
+
+    Connections {
+        target: linkSaveManager
+        onSuccess: if (linkSaveManager != commentSaveManager) { commentModel.changeLinkSaved(fullname, saved); }
     }
 
     Component.onCompleted: {

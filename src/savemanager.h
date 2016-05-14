@@ -16,32 +16,31 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-#ifndef THING_H
-#define THING_H
+#ifndef SAVEMANAGER_H
+#define SAVEMANAGER_H
 
-#include <QString>
-#include <QtCore/QExplicitlySharedDataPointer>
+#include "abstractmanager.h"
 
-class ThingData;
-
-class Thing
+class SaveManager : public AbstractManager
 {
+    Q_OBJECT
+
 public:
-    Thing();
-    Thing(const Thing &other);
-    Thing &operator= (const Thing &other);
-    virtual ~Thing();
+    SaveManager(QObject *parent = 0);
+    Q_INVOKABLE void save(const QString &fullname, bool save = true);
+    Q_INVOKABLE void unsave(const QString &fullname);
 
-    QString kind() const;
-    void setKind(const QString &kind);
-    QString fullname() const;
-    void setFullname(const QString &fullname);
-    bool saved() const;
-    void setSaved(const bool saved);
+signals:
+    void success(const QString &fullname, bool saved);
+    void error(const QString &errorString);
 
-protected:
-    QExplicitlySharedDataPointer<ThingData> t;
+private slots:
+    void onFinished(QNetworkReply *reply);
 
+private:
+    QString m_fullname;
+    bool m_save;
+    APIRequest *m_request;
 };
 
-#endif // THING_H
+#endif // SAVEMANAGER_H

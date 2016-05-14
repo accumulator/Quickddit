@@ -141,14 +141,8 @@ Item {
             spacing: constant.paddingSmall
 
             Row {
-                visible: model.isSaved || model.isArchived || model.isStickied || model.gilded > 0
-                spacing: constant.paddingMedium
+                visible: model.isArchived || model.isStickied || model.gilded > 0
 
-                Bubble {
-                    visible: model.isSaved
-                    font.pixelSize: constant.fontSizeSmaller
-                    text: "Saved"
-                }
                 Bubble {
                     visible: model.isArchived
                     font.pixelSize: constant.fontSizeSmaller
@@ -241,7 +235,23 @@ Item {
 
         }
 
+        Image {
+            visible: model.saved
+            anchors {
+                right: parent.right
+                top: parent.top
+            }
+            source: "image://theme/icon-s-favorite?" + Theme.highlightColor
+        }
+
         onClicked: commentDelegate.clicked();
+    }
+
+    Rectangle {
+        id: savedRect
+        anchors.fill: parent
+        color: Theme.highlightColor
+        opacity: model.saved ? 0.1 : 0.0
     }
 
     Loader {

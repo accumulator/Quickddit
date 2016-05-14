@@ -46,7 +46,6 @@ public:
     QString subreddit;
     QString linkTitle;
     QString linkId;
-    bool saved;
     bool archived;
     bool stickied;
     int gilded;
@@ -267,16 +266,6 @@ QString CommentObject::linkId() const
 void CommentObject::setLinkId(const QString &linkId)
 {
     d->linkId = linkId;
-}
-
-bool CommentObject::isSaved() const
-{
-    return d->saved;
-}
-
-void CommentObject::setSaved(bool saved)
-{
-    d->saved = saved;
 }
 
 bool CommentObject::isArchived() const

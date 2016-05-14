@@ -51,6 +51,8 @@ QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
     map["isNSFW"] = link.isNSFW();
     map["flairText"] = link.flairText();
     map["isSelfPost"] = link.isSelfPost();
+    map["saved"] = link.saved();
+
     return map;
 }
 
@@ -113,6 +115,8 @@ QVariant LinkModel::data(const QModelIndex &index, int role) const
     case IsPromotedRole: return link.isPromoted();
     case FlairTextRole: return link.flairText();
     case IsSelfPostRole: return link.isSelfPost();
+    case IsSavedRole: return link.saved();
+
     default:
         qCritical("LinkModel::data(): Invalid role");
         return QVariant();
@@ -289,6 +293,19 @@ void LinkModel::changeLikes(const QString &fullname, int likes)
     }
 }
 
+void LinkModel::changeSaved(const QString &fullname, bool saved)
+{
+    for (int i = 0; i < m_linkList.count(); ++i) {
+        LinkObject link = m_linkList.at(i);
+
+        if (link.fullname() == fullname) {
+            link.setSaved(saved);
+            emit dataChanged(index(i), index(i));
+            break;
+        }
+    }
+}
+
 void LinkModel::editLink(const LinkObject &link)
 {
     int editIndex = -1;
@@ -331,6 +348,7 @@ QHash<int, QByteArray> LinkModel::customRoleNames() const
     roles[IsPromotedRole] = "isPromoted";
     roles[FlairTextRole] = "flairText";
     roles[IsSelfPostRole] = "isSelfPost";
+    roles[IsSavedRole] = "saved";
     return roles;
 }
 

@@ -83,6 +83,7 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     roles[IsArchivedRole] = "isArchived";
     roles[IsStickiedRole] = "isStickied";
     roles[GildedRole] = "gilded";
+    roles[IsSavedRole] = "saved";
 
     return roles;
 }
@@ -126,10 +127,10 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     case IsMoreChildrenRole: return comment.isMoreChildren();
     case MoreChildrenRole: return QVariant(comment.moreChildren());
     case CollapsedRole: return (comment.isCollapsed());
-    case IsSavedRole: return (comment.isSaved());
     case IsArchivedRole: return (comment.isArchived());
     case IsStickiedRole: return (comment.isStickied());
     case GildedRole: return (comment.gilded());
+    case IsSavedRole: return (comment.saved());
     default:
         qCritical("CommentModel::data(): Invalid role");
         return QVariant();
@@ -315,6 +316,24 @@ void CommentModel::changeLinkLikes(const QString &fullname, int likes)
     emit linkChanged();
 }
 
+void CommentModel::changeLinkSaved(const QString &fullname, bool saved)
+{
+    if (!m_link.type() == QVariant::Map) {
+        qWarning("CommentModel::changeLinkSaved(): link is not provided by CommentModel");
+        return;
+    }
+
+    QVariantMap linkMap = m_link.toMap();
+
+    if (linkMap.value("fullname").toString() != fullname) {
+        return;
+    }
+
+    linkMap["saved"] = saved;
+    m_link = linkMap;
+    emit linkChanged();
+}
+
 void CommentModel::changeLikes(const QString &fullname, int likes)
 {
     for (int i = 0; i < m_commentList.count(); ++i) {
@@ -324,6 +343,19 @@ void CommentModel::changeLikes(const QString &fullname, int likes)
             int oldLikes = comment.likes();
             comment.setLikes(likes);
             comment.setScore(comment.score() + (comment.likes() - oldLikes));
+            emit dataChanged(index(i), index(i));
+            break;
+        }
+    }
+}
+
+void CommentModel::changeSaved(const QString &fullname, bool saved)
+{
+    for (int i = 0; i < m_commentList.count(); ++i) {
+        CommentObject comment = m_commentList.at(i);
+
+        if (comment.fullname() == fullname) {
+            comment.setSaved(saved);
             emit dataChanged(index(i), index(i));
             break;
         }

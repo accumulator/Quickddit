@@ -138,10 +138,10 @@ AbstractPage {
             showMenuOnPressAndHold: false
             showSubreddit: linkModel.location != LinkModel.Subreddit
             onClicked: {
-                var p = { link: model, linkVoteManager: linkVoteManager };
+                var p = { link: model, linkVoteManager: linkVoteManager, linkSaveManager: linkSaveManager };
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);
             }
-            onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager});
+            onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager, linkSaveManager: linkSaveManager});
         }
 
         footer: LoadingFooter {
@@ -184,4 +184,12 @@ AbstractPage {
         onVoteSuccess: linkModel.changeLikes(fullname, likes);
         onError: infoBanner.warning(errorString);
     }
+
+    SaveManager {
+        id: linkSaveManager
+        manager: quickdditManager
+        onSuccess: linkModel.changeSaved(fullname, saved);
+        onError: infoBanner.warning(errorString);
+    }
+
 }

@@ -94,10 +94,10 @@ void commentFromMap(CommentObject &comment, const QVariantMap &commentMap)
     comment.setSubreddit(commentMap.value("subreddit").toString());
     comment.setLinkTitle(unescapeHtml(commentMap.value("link_title").toString()));
     comment.setLinkId(commentMap.value("link_id").toString().mid(3));
-    comment.setSaved(commentMap.value("saved").toBool());
     comment.setArchived(commentMap.value("archived").toBool());
     comment.setStickied(commentMap.value("stickied").toBool());
     comment.setGilded(commentMap.value("gilded").toInt());
+    comment.setSaved(commentMap.value("saved").toBool());
 }
 
 void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
@@ -125,6 +125,7 @@ void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
     link.setNSFW(linkMap.value("over_18").toBool());
     link.setPromoted(linkMap.value("promoted").toBool());
     link.setFlairText(linkMap.value("link_flair_text").toString());
+    link.setSaved(linkMap.value("saved").toBool());
 }
 
 Listing<LinkObject> Parser::parseLinkList(const QByteArray &json)

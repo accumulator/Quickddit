@@ -16,32 +16,24 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-#ifndef THING_H
-#define THING_H
+import QtQuick 2.0
+import Sailfish.Silica 1.0
 
-#include <QString>
-#include <QtCore/QExplicitlySharedDataPointer>
+Image {
+    property bool down
+    property bool highlighted
+    property string icon
 
-class ThingData;
+    signal clicked
 
-class Thing
-{
-public:
-    Thing();
-    Thing(const Thing &other);
-    Thing &operator= (const Thing &other);
-    virtual ~Thing();
+    source: highlighted ? icon + "?" + constant.colorLight :
+                          enabled ? icon : icon + "?" + constant.colorDisabled
+    width: parent.itemWidth
+    fillMode: Image.Pad
 
-    QString kind() const;
-    void setKind(const QString &kind);
-    QString fullname() const;
-    void setFullname(const QString &fullname);
-    bool saved() const;
-    void setSaved(const bool saved);
+    onVisibleChanged: {
+        parent.calculateItemWidth();
+    }
 
-protected:
-    QExplicitlySharedDataPointer<ThingData> t;
-
-};
-
-#endif // THING_H
+    height: Theme.itemSizeSmall
+}

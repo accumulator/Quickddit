@@ -94,7 +94,9 @@ public:
     Q_INVOKABLE int getParentIndex(int index) const;
     Q_INVOKABLE int getCommentIndex(const QString &comment);
     Q_INVOKABLE void changeLinkLikes(const QString &fullname, int likes);
+    Q_INVOKABLE void changeLinkSaved(const QString &fullname, bool saved);
     Q_INVOKABLE void changeLikes(const QString &fullname, int likes);
+    Q_INVOKABLE void changeSaved(const QString &fullname, bool saved);
     Q_INVOKABLE void collapse(int index);
     Q_INVOKABLE void expand(const QString &fullname);
 
