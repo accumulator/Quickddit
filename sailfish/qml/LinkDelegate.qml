@@ -57,4 +57,12 @@ ListItem {
         opacity: model.saved ? 0.1 : 0.0
     }
 
+    Image {
+        visible: model.saved
+        anchors {
+            right: parent.right
+            top: parent.top
+        }
+        source: "image://theme/icon-s-favorite?" + Theme.highlightColor
+    }
 }
