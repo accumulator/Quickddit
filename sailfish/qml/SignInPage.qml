@@ -62,7 +62,7 @@ AbstractPage {
             signInPage.busy = false;
             infoBanner.alert("Sign in successfully! Welcome! :)");
             inboxManager.resetTimer();
-            var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
+            var mainPage = globalUtils.getMainPage();
             mainPage.refresh("");
             backNavigation = true;
             pageStack.pop(mainPage);

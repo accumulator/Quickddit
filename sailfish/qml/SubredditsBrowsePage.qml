@@ -62,7 +62,7 @@ AbstractPage {
 
         delegate: SubredditDelegate {
             onClicked: {
-                var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
+                var mainPage = globalUtils.getMainPage();
                 mainPage.refresh(model.displayName);
                 pageStack.pop(mainPage);
             }
