@@ -33,10 +33,10 @@ AbstractPage {
         pageStack.navigateBack();
     }
 
-    function replacePage(newpage) {
+    function replacePage(newpage, parms) {
         var mainPage = globalUtils.getMainPage();
         mainPage.__pushedAttached = false;
-        pageStack.replaceAbove(mainPage, newpage);
+        pageStack.replaceAbove(mainPage, newpage, parms);
     }
 
     onStatusChanged: {
@@ -69,6 +69,12 @@ AbstractPage {
                 enabled: quickdditManager.isSignedIn
                 text: "Messages"
                 onClicked: replacePage(Qt.resolvedUrl("MessagePage.qml"));
+            }
+
+            MenuItem {
+                enabled: quickdditManager.isSignedIn
+                text: "My Profile"
+                onClicked: replacePage(Qt.resolvedUrl("UserPage.qml"), {username: appSettings.redditUsername});
             }
 
         }
@@ -175,4 +181,5 @@ AbstractPage {
             subredditModel = subredditModelComponent.createObject(subredditsPage);
         }
     }
+
 }
