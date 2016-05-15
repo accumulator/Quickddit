@@ -28,7 +28,8 @@ AbstractPage {
 
     property bool myself: appSettings.redditUsername === username && username !== ""
 
-    readonly property variant sectionModel: ["Overview", "Saved Things"]
+    readonly property variant sectionModel: ["Overview", "Comments", "Submitted"]
+    readonly property variant sectionModelMy: ["Overview", "Comments", "Submitted", "Upvoted", "Downvoted", "Saved Things"]
 
     SilicaListView {
         id: userItemsListView
@@ -38,9 +39,8 @@ AbstractPage {
         PullDownMenu {
             MenuItem {
                 text: "Section"
-                visible: myself
                 onClicked: {
-                    globalUtils.createSelectionDialog("Section", sectionModel, userThingModel.section,
+                    globalUtils.createSelectionDialog("Section", myself ? sectionModelMy : sectionModel, userThingModel.section,
                     function(selectedIndex) {
                         userThingModel.section = selectedIndex;
                         userThingModel.refresh(false);
@@ -69,7 +69,7 @@ AbstractPage {
 
             spacing: 20
 
-            QuickdditPageHeader { title: (myself ? "My Profile" : "User Profile") + " (" + sectionModel[userThingModel.section] + ")" }
+            QuickdditPageHeader { title: (myself ? "My Profile" : "User Profile") + " (" + sectionModelMy[userThingModel.section] + ")" }
 
             Row {
                 visible: userThingModel.section === UserThingModel.OverviewSection
