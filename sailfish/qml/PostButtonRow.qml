@@ -90,6 +90,7 @@ Row {
     }
 
     IconButton {
+        enabled: quickdditManager.isSignedIn && !linkSaveManager.busy
         anchors.verticalCenter: parent.verticalCenter
         icon.height: Theme.iconSizeLarge - constant.paddingLarge
         icon.width: Theme.iconSizeLarge - constant.paddingLarge

@@ -62,6 +62,7 @@ FancyContextMenu {
             }
         }
         FancyMenuImage {
+            enabled: quickdditManager.isSignedIn && !commentSaveManager.busy
             icon: comment.saved ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
             onClicked: commentSaveManager.save(comment.fullname, !comment.saved);
         }
