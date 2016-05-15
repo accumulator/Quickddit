@@ -34,7 +34,8 @@ AbstractPage {
         PullDownMenu {
             MenuItem {
                 text: "Send Message"
-                enabled: !messageManager.busy
+                visible: appSettings.redditUserName !== username
+                enabled: !messageManager.busy && quickdditManager.isSignedIn
                 onClicked: {
                     var p = {messageManager: messageManager, user: username};
                     pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), p);
@@ -53,7 +54,7 @@ AbstractPage {
 
             spacing: 20
 
-            QuickdditPageHeader { title: "User Profile" }
+            QuickdditPageHeader { title: appSettings.redditUserName !== username ? "User Profile" : "My Profile" }
 
             Row {
                 anchors.left: parent.left
@@ -154,7 +155,7 @@ AbstractPage {
         Component {
             id: commentDelegate
             UserPageCommentDelegate {
-                model: item.comment
+                model: !!item ? item.comment : undefined
 
                 onClicked: {
                     // context needs the double slash '//' in the path
@@ -167,7 +168,7 @@ AbstractPage {
         Component {
             id: linkDelegate
             UserPageLinkDelegate {
-                model: item.link
+                model: !!item ? item.link : undefined
 
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"),
