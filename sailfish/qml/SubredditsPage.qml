@@ -27,7 +27,7 @@ AbstractPage {
     readonly property string title: "Subreddits"
     property SubredditModel subredditModel
 
-    function refresh(subreddit) {
+    function showSubreddit(subreddit) {
         var mainPage = globalUtils.getMainPage();
         mainPage.refresh(subreddit);
         pageStack.navigateBack();
@@ -55,8 +55,6 @@ AbstractPage {
         model: subredditModel
 
         PullDownMenu {
-            visible: !!subredditsPage.subredditModel
-
             MenuItem {
                 text: "About Quickddit"
                 onClicked: replacePage(Qt.resolvedUrl("AboutPage.qml"))
@@ -97,7 +95,7 @@ AbstractPage {
                 validator: RegExpValidator { regExp: /^([A-Za-z0-9][A-Za-z0-9_]{2,20}|[a-z]{2})$/ }
                 EnterKey.enabled: acceptableInput
                 EnterKey.iconSource: "image://theme/icon-m-enter-accept"
-                EnterKey.onClicked: refresh(text);
+                EnterKey.onClicked: showSubreddit(text);
             }
 
             Repeater {
@@ -111,8 +109,8 @@ AbstractPage {
                     text: modelData
                     onClicked: {
                         switch (index) {
-                        case 0: subredditsPage.refresh(""); break;
-                        case 1: subredditsPage.refresh("all"); break;
+                        case 0: subredditsPage.showSubreddit(""); break;
+                        case 1: subredditsPage.showSubreddit("all"); break;
                         case 2: pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml")); break;
                         case 3: pageStack.push(Qt.resolvedUrl("MultiredditsPage.qml")); break;
                         }
@@ -122,7 +120,7 @@ AbstractPage {
 
             SectionHeader {
                 id: sectionheader
-                visible: !!subredditModel
+                visible: !!subredditModel && quickdditManager.isSignedIn
                 text: "Subscribed Subreddits"
 
                 MouseArea {
@@ -136,7 +134,7 @@ AbstractPage {
         delegate: SimpleListItem {
             id: itemDelegate
             text: model.url
-            onClicked: subredditsPage.refresh(model.displayName);
+            onClicked: subredditsPage.showSubreddit(model.displayName);
         }
 
         footer: LoadingFooter {
@@ -145,7 +143,7 @@ AbstractPage {
         }
 
         onAtYEndChanged: {
-            if (atYEnd && count > 0 && !subredditModel.busy && subredditModel.canLoadMore)
+            if (atYEnd && count > 0 && quickdditManager.isSignedIn && !!subredditModel && !subredditModel.busy && subredditModel.canLoadMore)
                 subredditModel.refresh(true);
         }
 
@@ -168,6 +166,13 @@ AbstractPage {
             manager: quickdditManager
             section: SubredditModel.UserAsSubscriberSection
             onError: infoBanner.warning(errorString);
+        }
+    }
+
+    Connections {
+        target: quickdditManager
+        onSignedInChanged: {
+            subredditModel = subredditModelComponent.createObject(subredditsPage);
         }
     }
 }
