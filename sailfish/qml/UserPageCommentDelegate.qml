@@ -91,7 +91,24 @@ Item {
 
         }
 
+        Image {
+            visible: model.saved
+            anchors {
+                right: parent.right
+                top: parent.top
+            }
+            source: "image://theme/icon-s-favorite?" + Theme.highlightColor
+        }
+
+        Rectangle {
+            anchors.fill: parent
+            visible: model.saved
+            color: Theme.highlightColor
+            opacity: 0.1
+        }
+
         onClicked: commentDelegate.clicked();
+
     }
 
 }
