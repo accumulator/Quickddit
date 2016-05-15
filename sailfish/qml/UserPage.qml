@@ -26,6 +26,10 @@ AbstractPage {
 
     property string username;
 
+    property bool myself: appSettings.redditUsername === username && username !== ""
+
+    readonly property variant sectionModel: ["Overview", "Saved Things"]
+
     SilicaListView {
         id: userItemsListView
         anchors.fill: parent
@@ -33,8 +37,19 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
+                text: "Section"
+                visible: myself
+                onClicked: {
+                    globalUtils.createSelectionDialog("Section", sectionModel, userThingModel.section,
+                    function(selectedIndex) {
+                        userThingModel.section = selectedIndex;
+                        userThingModel.refresh(false);
+                    });
+                }
+            }
+            MenuItem {
                 text: "Send Message"
-                visible: appSettings.redditUserName !== username
+                visible: !myself
                 enabled: !messageManager.busy && quickdditManager.isSignedIn
                 onClicked: {
                     var p = {messageManager: messageManager, user: username};
@@ -54,9 +69,10 @@ AbstractPage {
 
             spacing: 20
 
-            QuickdditPageHeader { title: appSettings.redditUserName !== username ? "User Profile" : "My Profile" }
+            QuickdditPageHeader { title: (myself ? "My Profile" : "User Profile") + " (" + sectionModel[userThingModel.section] + ")" }
 
             Row {
+                visible: userThingModel.section === UserThingModel.OverviewSection
                 anchors.left: parent.left
                 anchors.margins: constant.paddingMedium
 
@@ -75,6 +91,7 @@ AbstractPage {
             }
 
             Row {
+                visible: userThingModel.section === UserThingModel.OverviewSection
                 anchors.left: parent.left
                 anchors.margins: constant.paddingMedium
                 spacing: 20
@@ -104,12 +121,14 @@ AbstractPage {
             }
 
             Separator {
+                visible: userThingModel.section === UserThingModel.OverviewSection
                 anchors { left: parent.left; right: parent.right }
                 color: constant.colorMid
             }
 
             Column {
                 id: aboutColumn
+                visible: userThingModel.section === UserThingModel.OverviewSection
                 anchors.left: parent.left
                 anchors.margins: constant.paddingMedium
 
@@ -135,6 +154,7 @@ AbstractPage {
             }
 
             Separator {
+                visible: userThingModel.section === UserThingModel.OverviewSection
                 anchors { left: parent.left; right: parent.right }
                 color: constant.colorMid
             }
