@@ -172,6 +172,10 @@ void UserThingModel::refresh(bool refreshOlder)
     QString path = "/user/" + m_username;
     switch(m_section) {
     case OverviewSection : path += "/overview"; break;
+    case CommentsSection : path += "/comments"; break;
+    case SubmittedSection : path += "/submitted"; break;
+    case UpvotedSection : path += "/upvoted"; break;
+    case DownvotedSection : path += "/downvoted"; break;
     case SavedSection : path += "/saved"; break;
     default: qCritical("UserThingModel::refresh(): Invalid section"); break;
     }

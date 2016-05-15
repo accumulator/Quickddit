@@ -41,6 +41,10 @@ public:
 
     enum Section {
         OverviewSection,
+        CommentsSection,
+        SubmittedSection,
+        UpvotedSection,
+        DownvotedSection,
         SavedSection
     };
 
