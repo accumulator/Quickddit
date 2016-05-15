@@ -29,12 +29,19 @@ class UserThingModelData;
 class UserThingModel : public AbstractListModelManager
 {
     Q_OBJECT
+    Q_ENUMS(Section)
     Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
+    Q_PROPERTY(Section section READ section WRITE setSection NOTIFY sectionChanged)
 public:
     enum Roles {
         KindRole = Qt::UserRole,
         CommentRole,
         LinkRole
+    };
+
+    enum Section {
+        OverviewSection,
+        SavedSection
     };
 
     explicit UserThingModel(QObject *parent = 0);
@@ -50,8 +57,12 @@ public:
     QString username() const;
     void setUsername(const QString &username);
 
+    Section section() const;
+    void setSection(Section section);
+
 signals:
     void usernameChanged();
+    void sectionChanged();
 
 public slots:
 
@@ -63,6 +74,7 @@ protected:
 
 private:
     QString m_username;
+    Section m_section;
     Listing<Thing*> m_thingList;
     APIRequest *m_request;
 

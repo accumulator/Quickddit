@@ -24,7 +24,7 @@
 #include "appsettings.h"
 
 UserThingModel::UserThingModel(QObject *parent) :
-  AbstractListModelManager(parent), m_request(0)
+  AbstractListModelManager(parent), m_section(OverviewSection), m_request(0)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
   setRoleNames(customRoleNames());
@@ -97,6 +97,7 @@ QVariantMap UserThingModel::commentData(const CommentObject* o) const
     result.insert("subreddit", QVariant(o->subreddit()));
     result.insert("linkTitle", QVariant(o->linkTitle()));
     result.insert("linkId", QVariant(o->linkId()));
+    result.insert("saved", QVariant(o->saved()));
     return result;
 }
 
@@ -116,6 +117,7 @@ QVariantMap UserThingModel::linkData(const LinkObject* o) const
     result.insert("subreddit", QVariant(o->subreddit()));
     result.insert("title", QVariant(o->title()));
     result.insert("isSelfPost", QVariant(o->isSelfPost()));
+    result.insert("saved", QVariant(o->saved()));
     return result;
 }
 
@@ -132,6 +134,18 @@ void UserThingModel::setUsername(const QString &username)
     }
 }
 
+UserThingModel::Section UserThingModel::section() const
+{
+    return m_section;
+}
+
+void UserThingModel::setSection(UserThingModel::Section section)
+{
+    if (m_section != section) {
+        m_section = section;
+        emit sectionChanged();
+    }
+}
 
 void UserThingModel::refresh(bool refreshOlder)
 {
@@ -155,7 +169,14 @@ void UserThingModel::refresh(bool refreshOlder)
         }
     }
 
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, "/user/" + m_username + "/overview", parameters);
+    QString path = "/user/" + m_username;
+    switch(m_section) {
+    case OverviewSection : path += "/overview"; break;
+    case SavedSection : path += "/saved"; break;
+    default: qCritical("UserThingModel::refresh(): Invalid section"); break;
+    }
+
+    m_request = manager()->createRedditRequest(this, APIRequest::GET, path, parameters);
     connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
     setBusy(true);
