@@ -228,6 +228,7 @@ AbstractPage {
     UserThingModel {
         id: userThingModel
         manager: quickdditManager
+        section: myself ? UserThingModel.SavedSection : UserThingModel.OverviewSection
         onError: infoBanner.warning(errorString);
     }
 
