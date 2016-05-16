@@ -23,6 +23,7 @@ ListItem {
     id: mainItem
 
     property variant model
+    property bool markSaved: true
 
     contentHeight: mainColumn.height + 2 * constant.paddingMedium
     showMenuOnPressAndHold: false
@@ -91,13 +92,15 @@ ListItem {
         anchors {
             right: parent.right
             top: parent.top
+            topMargin: 5
+            rightMargin: 5
         }
         source: "image://theme/icon-s-favorite?" + Theme.highlightColor
     }
 
     Rectangle {
         anchors.fill: parent
-        visible: model.saved
+        visible: model.saved && markSaved
         color: Theme.highlightColor
         opacity: 0.1
     }

@@ -176,7 +176,7 @@ AbstractPage {
             id: commentDelegate
             UserPageCommentDelegate {
                 model: !!item ? item.comment : undefined
-
+                markSaved: userThingModel.section !== UserThingModel.SavedSection
                 onClicked: {
                     // context needs the double slash '//' in the path
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"),
@@ -189,7 +189,7 @@ AbstractPage {
             id: linkDelegate
             UserPageLinkDelegate {
                 model: !!item ? item.link : undefined
-
+                markSaved: userThingModel.section !== UserThingModel.SavedSection
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"),
                                    {linkPermalink: "/r/" + model.subreddit + "/comments/" + model.fullname.substring(3)})

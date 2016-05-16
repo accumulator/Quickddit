@@ -240,6 +240,8 @@ Item {
             anchors {
                 right: parent.right
                 top: parent.top
+                topMargin: 5
+                rightMargin: 5
             }
             source: "image://theme/icon-s-favorite?" + Theme.highlightColor
         }
