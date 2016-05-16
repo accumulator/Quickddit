@@ -133,12 +133,14 @@ AbstractPage {
                     placeholderText: "Enter subreddit name"
                     labelVisible: false
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
-                    validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
+                    validator: RegExpValidator { regExp: /^([A-Za-z0-9][A-Za-z0-9_]{2,20}|[a-z]{2})$/ }
                     EnterKey.enabled: addSubredditDialog.canAccept
                     EnterKey.iconSource: "image://theme/icon-m-enter-accept"
                     EnterKey.onClicked: addSubredditDialog.accept();
                 }
             }
+
+            Component.onCompleted: subredditTextField.focus = true;
         }
     }
 
