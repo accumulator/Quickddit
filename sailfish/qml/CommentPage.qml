@@ -65,7 +65,7 @@ AbstractPage {
     SilicaListView {
         id: commentListView
         anchors.fill: parent
-        model: commentModel
+        model: undefined
 
         PullDownMenu {
             MenuItem {
@@ -266,6 +266,17 @@ AbstractPage {
         VerticalScrollDecorator {}
     }
 
+    Timer {
+        // viewhack to delay having listview model until listview header is fully rendered,
+        // otherwise the view stays fixed around a modelitem when header resizes,
+        // pushing the top out and making the menu not immediately accessible.
+        // (IMO a SilicaListView bug)
+        // listview model is initialized to undefined, and is set from CommentModel signal handler below
+        id: viewHack
+        repeat: false; interval: 1
+        onTriggered: commentListView.model = commentModel
+    }
+
     CommentModel {
         id: commentModel
         manager: quickdditManager
@@ -276,9 +287,12 @@ AbstractPage {
             var post = path[path.length-1];
             var postIndex = commentModel.getCommentIndex("t1_" + post);
             if (postIndex !== -1) {
+                commentListView.model = commentModel
                 commentListView.positionViewAtIndex(postIndex, ListView.Contain);
                 commentListView.currentIndex = postIndex;
                 commentListView.currentItem.highlight();
+            } else {
+                viewHack.start();
             }
         }
     }
