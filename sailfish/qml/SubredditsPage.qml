@@ -81,7 +81,6 @@ AbstractPage {
 
         header: Column {
             anchors { left: parent.left; right: parent.right }
-            height: childrenRect.height
 
             function resetTextField() {
                 subredditTextField.text = "";
@@ -126,7 +125,7 @@ AbstractPage {
 
             SectionHeader {
                 id: sectionheader
-                visible: !!subredditModel && quickdditManager.isSignedIn
+                visible: quickdditManager.isSignedIn
                 text: "Subscribed Subreddits"
 
                 MouseArea {
