@@ -163,10 +163,14 @@ OTHER_FILES += \
     qml/NewMessagePage.qml \
     qml/ImageViewer.qml
 
+icon108.files = icon108/$${TARGET}.png
+icon108.path = /usr/share/icons/hicolor/108x108/apps
 icon128.files = icon128/$${TARGET}.png
 icon128.path = /usr/share/icons/hicolor/128x128/apps
+icon256.files = icon256/$${TARGET}.png
+icon256.path = /usr/share/icons/hicolor/256x256/apps
 
-INSTALLS += icon128
+INSTALLS += icon108 icon128 icon256
 
 # hm, I prefer generating code directly to the build dir, and not including the
 # generated sources in the HEADERS and SOURCES lists.. Manually remove app_adaptor.h
