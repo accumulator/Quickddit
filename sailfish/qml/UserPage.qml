@@ -69,7 +69,7 @@ AbstractPage {
 
             spacing: 20
 
-            QuickdditPageHeader { title: (myself ? "My Profile" : "User Profile") + " (" + sectionModelMy[userThingModel.section] + ")" }
+            QuickdditPageHeader { title: (myself ? "My Profile" : "User Profile") + " - " + sectionModelMy[userThingModel.section] }
 
             Row {
                 visible: userThingModel.section === UserThingModel.OverviewSection
