@@ -376,18 +376,14 @@ void CommentModel::collapse(int index)
         if (m_commentList.at(itemIndex).depth() <= depth) {
             break;
         }
-        qDebug() << "collapsing" << itemIndex << "at" << m_commentList.at(itemIndex).depth() << "from" << index << first.fullname() << "at" << depth;
         subtree.append(m_commentList.at(itemIndex)); // reparents?
     }
     itemIndex--;
 
     m_collapsedCommentLists.insert(first.fullname(), subtree);
 
-    qDebug() << "trees" << m_collapsedCommentLists.size() << index << ".." << itemIndex;
-
     beginRemoveRows(QModelIndex(), index, itemIndex);
     for (int i = itemIndex; i >= index; i--) {
-        qDebug() << "removing" << i;
         m_commentList.removeAt(i);
     }
     endRemoveRows();
@@ -402,7 +398,6 @@ void CommentModel::collapse(int index)
 
 void CommentModel::expand(const QString &fullname)
 {
-    qDebug() << "expand" << fullname;
     QHash<QString, QList<CommentObject> >::const_iterator i = m_collapsedCommentLists.find(fullname);
 
     if (i == m_collapsedCommentLists.end()) {
@@ -411,8 +406,6 @@ void CommentModel::expand(const QString &fullname)
     }
 
     QList<CommentObject> commentList = i.value();
-
-    qDebug() << "found" << commentList.size() << "items in list";
 
     int itemIndex = -1;
     for (int i = 0; i < m_commentList.count(); ++i) {
