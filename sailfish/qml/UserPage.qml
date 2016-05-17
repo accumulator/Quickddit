@@ -179,8 +179,10 @@ AbstractPage {
                 markSaved: userThingModel.section !== UserThingModel.SavedSection
                 onClicked: {
                     // context needs the double slash '//' in the path
-                    pageStack.push(Qt.resolvedUrl("CommentPage.qml"),
-                                   {linkPermalink: "/r/" + model.subreddit + "/comments/" + model.linkId + "//" + model.fullname.substring(3) + "?context=3" })
+                    pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {
+                                       linkPermalink: "/r/" + model.subreddit + "/comments/" + model.linkId + "//" + model.fullname.substring(3) + "?context=3",
+                                       linkSaveManager: linkSaveManager
+                                   });
                 }
             }
         }
@@ -191,8 +193,10 @@ AbstractPage {
                 model: !!item ? item.link : undefined
                 markSaved: userThingModel.section !== UserThingModel.SavedSection
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("CommentPage.qml"),
-                                   {linkPermalink: "/r/" + model.subreddit + "/comments/" + model.fullname.substring(3)})
+                    pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {
+                                       linkPermalink: "/r/" + model.subreddit + "/comments/" + model.fullname.substring(3),
+                                       linkSaveManager: linkSaveManager
+                                   });
                 }
             }
         }
@@ -239,6 +243,13 @@ AbstractPage {
             infoBanner.alert("Message sent");
             pageStack.pop();
         }
+        onError: infoBanner.warning(errorString);
+    }
+
+    SaveManager {
+        id: linkSaveManager
+        manager: quickdditManager
+        onSuccess: console.log("TODO: update userpage model");
         onError: infoBanner.warning(errorString);
     }
 
