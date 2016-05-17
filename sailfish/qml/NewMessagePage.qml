@@ -57,6 +57,7 @@ AbstractPage {
                 placeholderText: "Subject"
                 maximumLength: 100 // reddit constraint
                 labelVisible: false
+                focus: true
             }
 
             TextArea {
