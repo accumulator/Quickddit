@@ -18,6 +18,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import harbour.quickddit.Core 1.0
 
 Image {
     id: thumbnail
@@ -36,8 +37,14 @@ Image {
 
     onStatusChanged: {
         if (thumbnail.status === Image.Ready) {
-            width = width * QMLUtils.pScale
-            height = height * QMLUtils.pScale
+            if (appSettings.thumbnailScale === AppSettings.ScaleAuto) {
+                width = width * QMLUtils.pScale
+                height = height * QMLUtils.pScale
+            } else {
+                var scale = 1 + (appSettings.thumbnailScale * 0.25) // naughty
+                width = width * scale
+                height = height * scale
+            }
         }
     }
 }

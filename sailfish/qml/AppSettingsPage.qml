@@ -88,6 +88,38 @@ AbstractPage {
                 }
             }
 
+            ComboBox {
+                label: "Thumbnail Size"
+                currentIndex:  {
+                    switch (appSettings.thumbnailScale) {
+                    case AppSettings.ScaleAuto: return 0;
+                    case AppSettings.Scale100: return 1;
+                    case AppSettings.Scale125: return 2;
+                    case AppSettings.Scale150: return 3;
+                    case AppSettings.Scale175: return 4;
+                    case AppSettings.Scale200: return 5;
+                    }
+                }
+                menu: ContextMenu {
+                    MenuItem { text: "Auto" }
+                    MenuItem { text: "x1" }
+                    MenuItem { text: "x1.25" }
+                    MenuItem { text: "x1.5" }
+                    MenuItem { text: "x1.75" }
+                    MenuItem { text: "x2" }
+                }
+                onCurrentIndexChanged: {
+                    switch (currentIndex) {
+                    case 0: appSettings.thumbnailScale = AppSettings.ScaleAuto; break;
+                    case 1: appSettings.thumbnailScale = AppSettings.Scale100; break;
+                    case 2: appSettings.thumbnailScale = AppSettings.Scale125; break;
+                    case 3: appSettings.thumbnailScale = AppSettings.Scale150; break;
+                    case 4: appSettings.thumbnailScale = AppSettings.Scale175; break;
+                    case 5: appSettings.thumbnailScale = AppSettings.Scale200; break;
+                    }
+                }
+            }
+
             SectionHeader { text: "Notifications" }
 
             TextSwitch {
@@ -107,7 +139,21 @@ AbstractPage {
                 color: constant.colorLight
                 visible: quickdditManager.isSignedIn
                 horizontalAlignment: Text.AlignHCenter
-                text: "Signed in to Reddit" + (appSettings.redditUsername ? " as " + appSettings.redditUsername : "")
+                text: "Signed in to Reddit as"
+            }
+
+            Text {
+                anchors { left: parent.left; right: parent.right }
+                font.pixelSize: constant.fontSizeLarge
+                color: Theme.secondaryHighlightColor
+                visible: quickdditManager.isSignedIn
+                horizontalAlignment: Text.AlignHCenter
+                text: appSettings.redditUsername
+            }
+
+            Rectangle {
+                color: "transparent"
+                height: 10
             }
 
             Button {
