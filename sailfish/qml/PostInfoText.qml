@@ -57,6 +57,16 @@ Column {
             text: "Promoted"
             font.bold: true
         }
+
+        Bubble {
+            visible: !!link.gilded
+            text: "Gilded"
+        }
+
+        Bubble {
+            visible: !!link.isArchived
+            text: "Archived"
+        }
     }
 
     Text {

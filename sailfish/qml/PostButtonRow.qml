@@ -33,7 +33,7 @@ Row {
         icon.height: Theme.iconSizeLarge - constant.paddingMedium
         icon.width: Theme.iconSizeLarge - constant.paddingMedium
         icon.source: "image://theme/icon-m-up"
-        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
+        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
         highlighted: link.likes === 1
         onClicked: {
             if (highlighted)
@@ -48,7 +48,7 @@ Row {
         icon.height: Theme.iconSizeLarge - constant.paddingMedium
         icon.width: Theme.iconSizeLarge - constant.paddingMedium
         icon.source: "image://theme/icon-m-down"
-        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
+        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
         highlighted: link.likes === -1
         onClicked: {
             if (highlighted)

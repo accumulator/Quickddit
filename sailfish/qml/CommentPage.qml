@@ -70,6 +70,7 @@ AbstractPage {
         PullDownMenu {
             MenuItem {
                 visible: link.author === appSettings.redditUsername && link.isSelfPost
+                enabled: !link.isArchived
                 text: "Edit Post"
                 onClicked: {
                     __createLinkTextDialog("Edit Post", link.fullname, link.rawText);
@@ -86,7 +87,7 @@ AbstractPage {
             }
 
             MenuItem {
-                enabled: quickdditManager.isSignedIn && !commentManager.busy && !!link
+                enabled: quickdditManager.isSignedIn && !commentManager.busy && !link.isArchived
                 text: "Add comment"
                 onClicked: __createCommentDialog("Add Comment", link.fullname);
             }
