@@ -142,6 +142,8 @@ AbstractPage {
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);
             }
             onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager, linkSaveManager: linkSaveManager});
+
+            AltMarker { }
         }
 
         footer: LoadingFooter {

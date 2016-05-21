@@ -166,6 +166,7 @@ AbstractPage {
                 width: parent.width
 
                 property variant item: model
+                property int listIndex: index
 
                 sourceComponent: model.kind === "t1" ? commentDelegate
                                                      : model.kind === "t3" ? linkDelegate : undefined
@@ -175,6 +176,8 @@ AbstractPage {
         Component {
             id: commentDelegate
             UserPageCommentDelegate {
+                property int index: listIndex
+
                 model: !!item ? item.comment : undefined
                 markSaved: userThingModel.section !== UserThingModel.SavedSection
                 onClicked: {
@@ -184,12 +187,16 @@ AbstractPage {
                                        linkSaveManager: linkSaveManager
                                    });
                 }
+
+                AltMarker { }
             }
         }
 
         Component {
             id: linkDelegate
             UserPageLinkDelegate {
+                property int index: listIndex
+
                 model: !!item ? item.link : undefined
                 markSaved: userThingModel.section !== UserThingModel.SavedSection
                 onClicked: {
@@ -198,6 +205,8 @@ AbstractPage {
                                        linkSaveManager: linkSaveManager
                                    });
                 }
+
+                AltMarker { }
             }
         }
 

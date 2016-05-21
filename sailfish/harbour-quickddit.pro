@@ -161,7 +161,8 @@ OTHER_FILES += \
     qml/UserPageCommentDelegate.qml \
     qml/UserPageLinkDelegate.qml \
     qml/NewMessagePage.qml \
-    qml/ImageViewer.qml
+    qml/ImageViewer.qml \
+    qml/AltMarker.qml
 
 icon108.files = icon108/$${TARGET}.png
 icon108.path = /usr/share/icons/hicolor/108x108/apps

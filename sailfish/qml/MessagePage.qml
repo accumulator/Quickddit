@@ -79,6 +79,8 @@ AbstractPage {
                     });
                 }
             }
+
+            AltMarker { }
         }
 
         footer: LoadingFooter {
