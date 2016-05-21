@@ -60,6 +60,7 @@ AbstractPage {
 
             TextSwitch {
                 id: selfLinkSwitch
+                visible: aboutSubredditManager.submissionType === AboutSubredditManager.Any
                 text: "Self Post"
                 checked: true
             }
@@ -102,4 +103,16 @@ AbstractPage {
         }
     }
 
+    AboutSubredditManager {
+        id: aboutSubredditManager
+        manager: quickdditManager
+        subreddit: newLinkPage.subreddit
+        onError: infoBanner.warning(errorString)
+        onDataChanged: {
+            if (submissionType === AboutSubredditManager.Link)
+                selfLinkSwitch.checked = false
+        }
+    }
+
+    Component.onCompleted: aboutSubredditManager.refresh();
 }
