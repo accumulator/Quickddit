@@ -47,8 +47,13 @@ ContextMenu {
     }
     MenuItem {
         text: "View image"
-        enabled: globalUtils.previewableImage(link.url)
+        visible: globalUtils.previewableImage(link.url)
         onClicked: globalUtils.openImageViewPage(link.url);
+    }
+    MenuItem {
+        text: "View video"
+        visible: globalUtils.previewableVideo(link.url)
+        onClicked: globalUtils.openVideoViewPage(link.url);
     }
     MenuItem {
         text: "URL"
