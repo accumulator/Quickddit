@@ -38,6 +38,17 @@ Item {
         id: normalCommentComponent
         Text {
             id: commentBodyTextInner
+
+            // viewhack to render richtext wide again after orientation goes horizontal (?)
+            property bool oriChanged: false
+            onWidthChanged: {
+                if (oriChanged) text = text + " ";
+            }
+            Connections {
+                target: appWindow
+                onOrientationChanged: oriChanged = true
+            }
+
             width: rootItem.width
             font.pixelSize: constant.fontSizeDefault
             color: listItem.enabled ? (listItem.highlighted ? Theme.highlightColor : constant.colorLight)
@@ -75,6 +86,17 @@ Item {
 
             Text {
                 id: commentBodyTextInner
+
+                // viewhack to render richtext wide again after orientation goes horizontal (?)
+                property bool oriChanged: false
+                onWidthChanged: {
+                    if (oriChanged) text = text + " ";
+                }
+                Connections {
+                    target: appWindow
+                    onOrientationChanged: oriChanged = true
+                }
+
                 width: rootItem.width
                 font.pixelSize: constant.fontSizeDefault
                 color: listItem.enabled ? (listItem.highlighted ? Theme.highlightColor : constant.colorLight)

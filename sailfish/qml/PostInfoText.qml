@@ -83,6 +83,7 @@ Column {
     }
 
     Text {
+        id: submittedText
         anchors { left: parent.left; right: parent.right }
         wrapMode: Text.Wrap
         textFormat: Text.RichText
@@ -94,6 +95,16 @@ Column {
         text: constant.richtextStyle + "submitted " + link.created + " by " +
                 (compact ? link.author : "<a href=\"https://reddit.com/u/" + link.author.split(" ")[0] + "\">" + link.author + "</a>") +
                 (showSubreddit ? " to " + link.subreddit : "")
+    }
+
+    // viewhack to render richtext wide again after orientation goes horizontal (?)
+    property bool oriChanged: false
+    onWidthChanged: {
+        if (oriChanged) submittedText.text = submittedText.text + " ";
+    }
+    Connections {
+        target: appWindow
+        onOrientationChanged: oriChanged = true
     }
 
     Row {
