@@ -34,6 +34,13 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
+                text: "Message Moderators"
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), {recipient: aboutSubredditManager.url});
+                }
+            }
+
+            MenuItem {
                 text: aboutSubredditManager.isSubscribed ? qsTr("Unsubscribe") : qsTr("Subscribe")
                 enabled: quickdditManager.isSignedIn && !aboutSubredditManager.busy && aboutSubredditManager.isValid
                 onClicked: aboutSubredditManager.subscribeOrUnsubscribe();
