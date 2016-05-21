@@ -38,13 +38,13 @@ FancyContextMenu {
 
     FancyMenuItemRow {
         FancyMenuImage {
-            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
+            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !comment.isArchived
             icon: "image://theme/icon-m-up"
             onClicked: commentVoteManager.vote(comment.fullname,
                             comment.likes === 1 ? VoteManager.Unvote : VoteManager.Upvote)
         }
         FancyMenuImage {
-            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
+            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !comment.isArchived
             icon: "image://theme/icon-m-down"
             onClicked: commentVoteManager.vote(comment.fullname,
                             comment.likes === -1 ? VoteManager.Unvote : VoteManager.Downvote)
@@ -78,14 +78,14 @@ FancyContextMenu {
         }
 
         FancyMenuItem {
-            enabled: quickdditManager.isSignedIn
+            enabled: quickdditManager.isSignedIn && !comment.isArchived
             text: "Reply"
             onClicked: replyClicked();
         }
     }
 
     FancyMenuItemRow {
-        visible: comment.isAuthor
+        visible: comment.isAuthor && !comment.isArchived
 
         FancyMenuItem {
             enabled: comment.isAuthor
