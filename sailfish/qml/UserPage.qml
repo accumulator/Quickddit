@@ -52,7 +52,7 @@ AbstractPage {
                 visible: !myself
                 enabled: !messageManager.busy && quickdditManager.isSignedIn
                 onClicked: {
-                    var p = {messageManager: messageManager, user: username};
+                    var p = {messageManager: messageManager, recipient: username};
                     pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), p);
                 }
             }

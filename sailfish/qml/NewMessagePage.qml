@@ -24,12 +24,14 @@ AbstractPage {
     id: newMessagePage
     title: "New Message"
 
-    property string user
+    property string recipient
+    property alias subject: subjectField.text
+    property alias message: messageField.text
     property QtObject messageManager
 
     function send() {
         console.log("sending message...");
-        messageManager.send(user, subject.text, message.text, captcha.userInput, captchaManager.iden);
+        messageManager.send(recipient, subjectField.text, messageField.text, captcha.userInput, captchaManager.iden);
     }
 
     Flickable {
@@ -46,13 +48,13 @@ AbstractPage {
 
             Label {
                 anchors {right: parent.right; rightMargin: Theme.paddingLarge }
-                text: "to " + user
+                text: "to " + (recipient.indexOf("/r") == 0 ? "moderators of " : "") + recipient
                 font.pixelSize: constant.fontSizeXSmall
                 color: Theme.highlightColor
             }
 
             TextField {
-                id: subject
+                id: subjectField
                 anchors { left: parent.left; right: parent.right }
                 placeholderText: "Subject"
                 maximumLength: 100 // reddit constraint
@@ -61,7 +63,7 @@ AbstractPage {
             }
 
             TextArea {
-                id: message
+                id: messageField
                 anchors { left: parent.left; right: parent.right }
                 placeholderText: "Message"
                 visible: enabled
@@ -77,7 +79,7 @@ AbstractPage {
             Button {
                 text: "Send"
                 anchors.horizontalCenter: parent.horizontalCenter
-                enabled: message.text.length > 0 && subject.text.length > 0
+                enabled: messageField.text.length > 0 && subjectField.text.length > 0
                          && (!captchaManager.captchaNeeded || captcha.userInput.length > 0)
                 onClicked: send()
             }
