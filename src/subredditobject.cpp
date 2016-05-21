@@ -24,7 +24,7 @@
 class SubredditObjectData : public QSharedData
 {
 public:
-    SubredditObjectData() : subscribers(0), activeUsers(0), isNSFW(false) {}
+    SubredditObjectData() : subscribers(0), activeUsers(0), isNSFW(false), submissionType(SubredditObject::Any) {}
 
     QString fullname;
     QString displayName;
@@ -36,6 +36,7 @@ public:
     int activeUsers;
     bool isNSFW;
     bool isSubscribed;
+    SubredditObject::SubmissionType submissionType;
 
 private:
     Q_DISABLE_COPY(SubredditObjectData)
@@ -161,3 +162,24 @@ void SubredditObject::setSubscribed(bool subscribed)
 {
     d->isSubscribed = subscribed;
 }
+
+SubredditObject::SubmissionType SubredditObject::submissionType() const
+{
+    return d->submissionType;
+}
+
+void SubredditObject::setSubmissionType(SubmissionType submissionType)
+{
+    d->submissionType = submissionType;
+}
+
+void SubredditObject::setSubmissionType(const QString &submissionTypeString)
+{
+    if (submissionTypeString == "any")
+        d->submissionType = Any;
+    else if (submissionTypeString == "link")
+        d->submissionType = Link;
+    else if (submissionTypeString == "self")
+        d->submissionType = Self;
+}
+

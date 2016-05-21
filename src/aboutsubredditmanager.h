@@ -36,6 +36,7 @@ class AboutSubredditManager : public AbstractManager, public QQmlParserStatus
 {
     Q_OBJECT
     DECL_QMLPARSERSTATUS_INTERFACE
+    Q_ENUMS(SubmissionType)
     Q_PROPERTY(bool isValid READ isValid NOTIFY dataChanged)
     Q_PROPERTY(QString url READ url NOTIFY dataChanged)
     Q_PROPERTY(QUrl headerImageUrl READ headerImageUrl NOTIFY dataChanged)
@@ -45,9 +46,16 @@ class AboutSubredditManager : public AbstractManager, public QQmlParserStatus
     Q_PROPERTY(int activeUsers READ activeUsers NOTIFY dataChanged)
     Q_PROPERTY(bool isNSFW READ isNSFW NOTIFY dataChanged)
     Q_PROPERTY(bool isSubscribed READ isSubscribed NOTIFY dataChanged)
+    Q_PROPERTY(SubmissionType submissionType READ submissionType NOTIFY dataChanged)
 
     Q_PROPERTY(QString subreddit READ subreddit WRITE setSubreddit NOTIFY subredditChanged)
 public:
+    enum SubmissionType {
+        Any,
+        Link,
+        Self
+    };
+
     explicit AboutSubredditManager(QObject *parent = 0);
 
     void classBegin();
@@ -62,6 +70,7 @@ public:
     int activeUsers() const;
     bool isNSFW() const;
     bool isSubscribed() const;
+    SubmissionType submissionType() const;
 
     QString subreddit() const;
     void setSubreddit(const QString &subreddit);

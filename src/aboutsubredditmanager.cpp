@@ -82,6 +82,16 @@ bool AboutSubredditManager::isSubscribed() const
     return m_subredditObject.isSubscribed();
 }
 
+AboutSubredditManager::SubmissionType AboutSubredditManager::submissionType() const
+{
+    switch (m_subredditObject.submissionType()) {
+    case Any: return Any;
+    case Link: return Link;
+    case Self: return Self;
+    }
+    return Any;
+}
+
 QString AboutSubredditManager::subreddit() const
 {
     return m_subreddit;

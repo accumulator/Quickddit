@@ -27,6 +27,12 @@ class SubredditObjectData;
 class SubredditObject
 {
 public:
+    enum SubmissionType {
+        Any,
+        Link,
+        Self
+    };
+
     SubredditObject();
     SubredditObject(const SubredditObject &other);
     SubredditObject &operator=(const SubredditObject &other);
@@ -61,6 +67,10 @@ public:
 
     bool isSubscribed() const;
     void setSubscribed(bool subscribed);
+
+    SubmissionType submissionType() const;
+    void setSubmissionType(SubmissionType submissionType);
+    void setSubmissionType(const QString &submissionTypeString);
 
 private:
     QExplicitlySharedDataPointer<SubredditObjectData> d;
