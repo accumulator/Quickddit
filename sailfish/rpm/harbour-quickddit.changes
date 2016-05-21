@@ -5,6 +5,22 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat May 21 2016 Sander van Grieken <sander@outrightsolutions.nl> 1.0.0-1
+- 1.0 milestone reached
+- new: browse your own saved items, comments, posts, and up and downvoted items
+- new: your saved items are visible as such throughout the UI
+- new: application icon now all sailfish standard icon sizes
+- new: handle /message/compose links in-app
+- new: message moderators from subreddit about page
+- new: sync UI with Archived items (no reply, no vote etc)
+- new: archived and gilded flags on links/posts
+- new: submission limits in subreddit about page and new list/post page
+- new: thumbnail scale option in setings. Auto still scales relative to PPI
+- fix: many UI fixes
+- fix: regexes synced
+- fix: Continue this Thread didn't follow the correct links
+- fix: listitems in commentpage now resize after orientation change
+
 * Sat May 14 2016 Sander van Grieken <sander@outrightsolutions.nl> 0.9.4-1
 - add Save option to links and comments
 - show saved links and comments highlighted
