@@ -27,5 +27,5 @@ Rectangle {
     anchors.left: parent.left
     anchors.bottom: parent.bottom
     color: Theme.rgba(constant.colorMid, 0.25)
-    width: 1
+    width: 2
 }
