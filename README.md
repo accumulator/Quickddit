@@ -7,6 +7,26 @@ of Reddit and is not affiliated with Reddit in any way.
 Quickddit is developed using Qt and currently available for MeeGo Harmattan (Qt 4.7.4) and Sailfish OS (Qt 5.2).
 The logic part is developed in C++ while the UI is developed in QML.
 
+Features
+========
+- Sign in with your Reddit account or browse anonymously
+- Very quick navigation through content
+- Threaded comments view
+- Browse your private messages, comment and post  replies, sent messages
+- Vote on comments and posts
+- Save comments and posts
+- Multireddit support
+- Integrated image viewer
+- Integrated imgur album viewer
+- Integrated video player
+- Search for posts and subreddits
+- Add, reply, edit and delete comments
+- Submit new links and self-posts
+- Edit your posts and comments
+- Inbox Notifications to the event screen
+- Browse user's profile
+- Captcha support
+
 Reddit API client id and secret
 ----------------------------------
 
