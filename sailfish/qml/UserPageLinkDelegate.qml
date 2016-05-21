@@ -88,7 +88,7 @@ ListItem {
     }
 
     Image {
-        visible: model.saved
+        visible: model.saved && markSaved
         anchors {
             right: parent.right
             top: parent.top
