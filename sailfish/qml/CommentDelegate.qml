@@ -157,6 +157,7 @@ Item {
                     visible: model.gilded > 0
                     font.pixelSize: constant.fontSizeSmaller
                     text: "Gilded"
+                    color: "gold"
                 }
             }
 

@@ -61,6 +61,8 @@ Column {
         Bubble {
             visible: !!link.gilded
             text: "Gilded"
+            color: "gold"
+            font.bold: true
         }
 
         Bubble {
