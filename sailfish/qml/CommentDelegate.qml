@@ -142,6 +142,7 @@ Item {
 
             Row {
                 visible: model.isArchived || model.isStickied || model.gilded > 0
+                spacing: constant.paddingMedium
 
                 Bubble {
                     visible: model.isArchived
