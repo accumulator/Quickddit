@@ -31,6 +31,7 @@ AppSettings::AppSettings(QObject *parent) :
     m_orientationProfile = static_cast<OrientationProfile>(m_settings->value("orientationProfile", 0).toInt());
     m_lastSeenMessage = m_settings->value("lastSeenMessage").toString();
     m_pollUnread = m_settings->value("pollUnread", true).toBool();
+    m_thumbnailScale = static_cast<ThumbnailScale>(m_settings->value("thumbnailScale", 0).toInt());
 }
 
 bool AppSettings::whiteTheme() const
@@ -136,3 +137,18 @@ void AppSettings::setPollUnread(const bool pollUnread)
         emit pollUnreadChanged();
     }
 }
+
+AppSettings::ThumbnailScale AppSettings::thumbnailScale() const
+{
+    return m_thumbnailScale;
+}
+
+void AppSettings::setThumbnailScale(const AppSettings::ThumbnailScale scale)
+{
+    if (m_thumbnailScale != scale) {
+        m_thumbnailScale = scale;
+        m_settings->setValue("thumbnailScale", m_thumbnailScale);
+        emit thumbnailScaleChanged();
+    }
+}
+

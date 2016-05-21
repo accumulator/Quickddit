@@ -29,11 +29,13 @@ class AppSettings : public QObject
     Q_OBJECT
     Q_ENUMS(FontSize)
     Q_ENUMS(OrientationProfile)
+    Q_ENUMS(ThumbnailScale)
     Q_PROPERTY(bool whiteTheme READ whiteTheme WRITE setWhiteTheme NOTIFY whiteThemeChanged)
     Q_PROPERTY(FontSize fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
     Q_PROPERTY(QString redditUsername READ redditUsername CONSTANT)
     Q_PROPERTY(OrientationProfile orientationProfile READ orientationProfile WRITE setOrientationProfile NOTIFY orientationProfileChanged)
     Q_PROPERTY(bool pollUnread READ pollUnread WRITE setPollUnread NOTIFY pollUnreadChanged)
+    Q_PROPERTY(ThumbnailScale thumbnailScale READ thumbnailScale WRITE setThumbnailScale NOTIFY thumbnailScaleChanged)
 public:
     enum FontSize {
         TinyFontSize = -1,
@@ -46,6 +48,15 @@ public:
         DynamicProfile = 0,
         PortraitOnlyProfile,
         LandscapeOnlyProfile
+    };
+
+    enum ThumbnailScale {
+        ScaleAuto,
+        Scale100,
+        Scale125,
+        Scale150,
+        Scale175,
+        Scale200
     };
 
     explicit AppSettings(QObject *parent = 0);
@@ -72,11 +83,15 @@ public:
     bool pollUnread() const;
     void setPollUnread(const bool pollUnread);
 
+    ThumbnailScale thumbnailScale() const;
+    void setThumbnailScale(const ThumbnailScale scale);
+
 signals:
     void whiteThemeChanged();
     void fontSizeChanged();
     void orientationProfileChanged();
     void pollUnreadChanged();
+    void thumbnailScaleChanged();
 
 private:
     QSettings *m_settings;
@@ -88,6 +103,7 @@ private:
     OrientationProfile m_orientationProfile;
     QString m_lastSeenMessage;
     bool m_pollUnread;
+    ThumbnailScale m_thumbnailScale;
 };
 
 #endif // APPSETTINGS_H
