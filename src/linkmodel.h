@@ -63,7 +63,9 @@ public:
         IsPromotedRole,
         FlairTextRole,
         IsSelfPostRole,
-        IsSavedRole
+        IsSavedRole,
+        IsArchivedRole,
+        GildedRole
     };
 
     enum Location {

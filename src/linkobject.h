@@ -170,6 +170,13 @@ public:
     QString flairText() const;
     void setFlairText(const QString &flairText);
 
+    bool isArchived() const;
+    void setArchived(bool archived);
+
+    int gilded() const;
+    void setGilded(int gilded);
+
+
     bool isSelfPost() const;
 
     inline bool operator ==(const LinkObject &other) const { return fullname() == other.fullname(); }

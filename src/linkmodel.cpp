@@ -51,6 +51,8 @@ QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
     map["isNSFW"] = link.isNSFW();
     map["flairText"] = link.flairText();
     map["isSelfPost"] = link.isSelfPost();
+    map["isArchived"] = link.isArchived();
+    map["gilded"] = link.gilded();
     map["saved"] = link.saved();
 
     return map;
@@ -115,6 +117,8 @@ QVariant LinkModel::data(const QModelIndex &index, int role) const
     case IsPromotedRole: return link.isPromoted();
     case FlairTextRole: return link.flairText();
     case IsSelfPostRole: return link.isSelfPost();
+    case IsArchivedRole: return link.isArchived();
+    case GildedRole: return link.gilded();
     case IsSavedRole: return link.saved();
 
     default:
@@ -348,6 +352,8 @@ QHash<int, QByteArray> LinkModel::customRoleNames() const
     roles[IsPromotedRole] = "isPromoted";
     roles[FlairTextRole] = "flairText";
     roles[IsSelfPostRole] = "isSelfPost";
+    roles[IsArchivedRole] = "isArchived";
+    roles[GildedRole] = "gilded";
     roles[IsSavedRole] = "saved";
     return roles;
 }

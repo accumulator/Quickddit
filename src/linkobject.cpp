@@ -46,6 +46,8 @@ public:
     bool isNSFW;
     bool isPromoted;
     QString flairText;
+    bool archived;
+    int gilded;
 
 private:
     Q_DISABLE_COPY(LinkObjectData)
@@ -265,7 +267,28 @@ void LinkObject::setFlairText(const QString &flairText)
     d->flairText = flairText;
 }
 
+bool LinkObject::isArchived() const
+{
+    return d->archived;
+}
+
+void LinkObject::setArchived(bool archived)
+{
+    d->archived = archived;
+}
+
+int LinkObject::gilded() const
+{
+    return d->gilded;
+}
+
+void LinkObject::setGilded(int gilded)
+{
+    d->gilded = gilded;
+}
+
 bool LinkObject::isSelfPost() const
 {
     return d->domain.indexOf("self.") == 0;
 }
+
