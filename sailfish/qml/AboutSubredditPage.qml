@@ -109,11 +109,21 @@ AbstractPage {
                       + " active users"
             }
 
-            Bubble {
-                anchors { left: parent.left; margins: constant.paddingMedium }
-                visible: quickdditManager.isSignedIn
-                color: aboutSubredditManager.isSubscribed ? "green" : "red"
-                text: aboutSubredditManager.isSubscribed ? qsTr("Subscribed") : qsTr("Not Subscribed")
+            Row {
+                spacing: constant.paddingMedium
+                anchors.left: parent.left
+                anchors.margins: constant.paddingMedium
+
+                Bubble {
+                    visible: quickdditManager.isSignedIn
+                    color: aboutSubredditManager.isSubscribed ? "green" : "red"
+                    text: aboutSubredditManager.isSubscribed ? qsTr("Subscribed") : qsTr("Not Subscribed")
+                }
+
+                Bubble {
+                    visible: aboutSubredditManager.submissionType !== AboutSubredditManager.Any
+                    text: aboutSubredditManager.submissionType === AboutSubredditManager.Link ? "Links only" : "Self posts only"
+                }
             }
 
             Separator {
