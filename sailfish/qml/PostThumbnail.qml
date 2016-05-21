@@ -41,7 +41,7 @@ Image {
                 width = width * QMLUtils.pScale
                 height = height * QMLUtils.pScale
             } else {
-                var scale = 1 + (appSettings.thumbnailScale * 0.25) // naughty
+                var scale = 1 + ((appSettings.thumbnailScale - 1) * 0.25) // naughty
                 width = width * scale
                 height = height * scale
             }
