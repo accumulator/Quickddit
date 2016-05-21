@@ -53,8 +53,9 @@ ListItem {
     Rectangle {
         id: savedRect
         anchors.fill: parent
+        visible: model.saved
         color: Theme.highlightColor
-        opacity: model.saved ? 0.1 : 0.0
+        opacity: 0.1
     }
 
     Image {
