@@ -22,12 +22,18 @@ import Sailfish.Silica 1.0
 Image {
     property bool down
     property bool highlighted
+    property color color: constant.colorLight
+    property color highlightColor : Theme.highlightColor
     property string icon
 
     signal clicked
 
-    source: highlighted ? icon + "?" + constant.colorLight :
-                          enabled ? icon : icon + "?" + constant.colorDisabled
+    source: icon + "?" + (enabled
+                              ? highlighted
+                                  ? highlightColor
+                                  : color
+                              : constant.colorDisabled
+                          )
     width: parent.itemWidth
     fillMode: Image.Pad
 

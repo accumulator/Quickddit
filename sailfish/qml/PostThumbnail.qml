@@ -36,15 +36,23 @@ Image {
     }
 
     onStatusChanged: {
-        if (thumbnail.status === Image.Ready) {
-            if (appSettings.thumbnailScale === AppSettings.ScaleAuto) {
-                width = width * QMLUtils.pScale
-                height = height * QMLUtils.pScale
-            } else {
-                var scale = 1 + ((appSettings.thumbnailScale - 1) * 0.25) // naughty
-                width = width * scale
-                height = height * scale
-            }
+        if (thumbnail.status === Image.Ready)
+            applyScale();
+    }
+
+    Connections {
+        target: appSettings
+        onThumbnailScaleChanged: applyScale()
+    }
+
+    function applyScale() {
+        if (appSettings.thumbnailScale === AppSettings.ScaleAuto) {
+            width = sourceSize.width * QMLUtils.pScale
+            height = sourceSize.height * QMLUtils.pScale
+        } else {
+            var scale = 1 + ((appSettings.thumbnailScale - 1) * 0.25) // naughty
+            width = sourceSize.width * scale
+            height = sourceSize.height * scale
         }
     }
 }
