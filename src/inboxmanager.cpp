@@ -25,7 +25,7 @@
 
 #define TIMER_INI_INTERVAL 15 * 1000
 #define TIMER_MIN_INTERVAL 60 * 1000
-#define TIMER_MAX_INTERVAL 2 * 60 * 60 * 1000
+#define TIMER_MAX_INTERVAL 30 * 60 * 1000
 
 /*
  * use cases
