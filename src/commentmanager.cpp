@@ -102,21 +102,28 @@ void CommentManager::onFinished(QNetworkReply *reply)
 {
     if (reply != 0) {
         if (reply->error() == QNetworkReply::NoError) {
-            if (m_action == Insert || m_action == Edit) {
-                CommentObject comment = Parser::parseNewComment(reply->readAll());
-                if (m_linkAuthor == manager()->settings()->redditUsername())
-                    comment.setSubmitter(true);
+            const QByteArray json = reply->readAll();
 
-                if (m_action == Insert) {
-                    m_model->insertComment(comment, m_fullname);
-                    emit success(tr("The comment has been added"));
-                } else {
-                    m_model->editComment(comment);
-                    emit success(tr("The comment has been edited"));
+            QList<QString> errors = Parser::parseErrors(json);
+            if (errors.size() > 0) {
+                emit error(errors.takeFirst());
+            } else {
+                if (m_action == Insert || m_action == Edit) {
+                    CommentObject comment = Parser::parseNewComment(json);
+                    if (m_linkAuthor == manager()->settings()->redditUsername())
+                        comment.setSubmitter(true);
+
+                    if (m_action == Insert) {
+                        m_model->insertComment(comment, m_fullname);
+                        emit success(tr("The comment has been added"));
+                    } else {
+                        m_model->editComment(comment);
+                        emit success(tr("The comment has been edited"));
+                    }
+                } else if (m_action == Delete) {
+                    m_model->deleteComment(m_fullname);
+                    emit success(tr("The comment has been deleted"));
                 }
-            } else if (m_action == Delete) {
-                m_model->deleteComment(m_fullname);
-                emit success(tr("The comment has been deleted"));
             }
         } else {
             emit error(reply->errorString());

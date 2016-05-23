@@ -318,6 +318,8 @@ SubredditObject Parser::parseSubreddit(const QByteArray &json)
 
     Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
 
+    qDebug() << "About" << root;
+
     return parseSubredditThing(root.toMap());
 }
 
