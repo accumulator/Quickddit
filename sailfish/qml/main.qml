@@ -49,6 +49,11 @@ ApplicationWindow {
 
     InfoBanner { id: infoBanner }
 
+    property QtObject webViewPage: null
+    property Component __webViewPage: Component {
+        WebViewer {}
+    }
+
     // A collections of global utility functions
     QtObject {
         id: globalUtils
@@ -57,6 +62,13 @@ ApplicationWindow {
 
         function getMainPage() {
             return pageStack.find(function(page) { return page.objectName === "mainPage"; });
+        }
+
+        function getWebViewPage() {
+            if (webViewPage === null) {
+                webViewPage = __webViewPage.createObject(appWindow);
+            }
+            return webViewPage;
         }
 
         function previewableVideo(url) {
@@ -296,4 +308,5 @@ ApplicationWindow {
             appWindow.activate();
         }
     }
+
 }
