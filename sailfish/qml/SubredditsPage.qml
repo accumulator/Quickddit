@@ -67,16 +67,15 @@ AbstractPage {
 
             MenuItem {
                 enabled: quickdditManager.isSignedIn
-                text: "Messages"
-                onClicked: replacePage(Qt.resolvedUrl("MessagePage.qml"));
-            }
-
-            MenuItem {
-                enabled: quickdditManager.isSignedIn
                 text: "My Profile"
                 onClicked: replacePage(Qt.resolvedUrl("UserPage.qml"), {username: appSettings.redditUsername});
             }
 
+            MenuItem {
+                enabled: quickdditManager.isSignedIn
+                text: "Messages"
+                onClicked: replacePage(Qt.resolvedUrl("MessagePage.qml"));
+            }
         }
 
         header: Column {
