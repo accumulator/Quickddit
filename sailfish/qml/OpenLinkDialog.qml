@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2015-2016  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,14 +27,10 @@ AbstractDialog {
     property string url
     property string source
 
-    property bool __buttonClickAccept: false
+    acceptDestination: globalUtils.getWebViewPage()
 
     onAccepted: {
-        // user accept the dialog by swiping to left instead of clicking on the button
-        if (!__buttonClickAccept) {
-            Qt.openUrlExternally(url);
-            infoBanner.alert(qsTr("Launching web browser..."));
-        }
+        pageStack.replace(globalUtils.getWebViewPage(), {url: url});
     }
 
     Column {
@@ -60,14 +56,27 @@ AbstractDialog {
             text: url
         }
 
-        Button {
+        Row {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: qsTr("Copy URL")
-            onClicked: {
-                QMLUtils.copyToClipboard(url);
-                infoBanner.alert(qsTr("URL copied to clipboard"));
-                __buttonClickAccept = true;
-                openLinkDialog.accept();
+            spacing: constant.paddingMedium
+
+            Button {
+                text: qsTr("Open in browser")
+                visible: url != ""
+                onClicked: {
+                    Qt.openUrlExternally(url);
+                    infoBanner.alert(qsTr("Launching web browser..."));
+                    openLinkDialog.reject();
+                }
+            }
+
+            Button {
+                text: qsTr("Copy URL")
+                onClicked: {
+                    QMLUtils.copyToClipboard(url);
+                    infoBanner.alert(qsTr("URL copied to clipboard"));
+                    openLinkDialog.reject();
+                }
             }
         }
 
@@ -90,27 +99,28 @@ AbstractDialog {
             text: source
         }
 
-        Button {
+        Row {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: qsTr("Open in browser")
-            visible: source != ""
-            onClicked: {
-                Qt.openUrlExternally(source);
-                infoBanner.alert(qsTr("Launching web browser..."));
-                __buttonClickAccept = true;
-                openLinkDialog.accept();
-            }
-        }
+            spacing: constant.paddingMedium
 
-        Button {
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: qsTr("Copy URL")
-            visible: source != ""
-            onClicked: {
-                QMLUtils.copyToClipboard(source);
-                infoBanner.alert(qsTr("URL copied to clipboard"));
-                __buttonClickAccept = true;
-                openLinkDialog.accept();
+            Button {
+                text: qsTr("Open in browser")
+                visible: source != ""
+                onClicked: {
+                    Qt.openUrlExternally(source);
+                    infoBanner.alert(qsTr("Launching web browser..."));
+                    openLinkDialog.reject();
+                }
+            }
+
+            Button {
+                text: qsTr("Copy URL")
+                visible: source != ""
+                onClicked: {
+                    QMLUtils.copyToClipboard(source);
+                    infoBanner.alert(qsTr("URL copied to clipboard"));
+                    openLinkDialog.reject();
+                }
             }
         }
 
