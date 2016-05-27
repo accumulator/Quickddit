@@ -54,6 +54,16 @@ AbstractPage {
                     Qt.openUrlExternally(url);
                 }
             }
+            MenuItem {
+                text: "Back"
+                visible: webView.canGoBack
+                onClicked: webView.goBack()
+            }
+            MenuItem {
+                text: "Forward"
+                visible: webView.canGoForward
+                onClicked: webView.goForward()
+            }
         }
     }
 
