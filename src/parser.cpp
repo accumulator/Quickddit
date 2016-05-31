@@ -124,7 +124,7 @@ void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
     link.setSticky(linkMap.value("stickied").toBool());
     link.setNSFW(linkMap.value("over_18").toBool());
     link.setPromoted(linkMap.value("promoted").toBool());
-    link.setFlairText(linkMap.value("link_flair_text").toString());
+    link.setFlairText(unescapeHtml(linkMap.value("link_flair_text").toString()));
     link.setArchived(linkMap.value("archived").toBool());
     link.setGilded(linkMap.value("gilded").toBool());
     link.setSaved(linkMap.value("saved").toBool());
