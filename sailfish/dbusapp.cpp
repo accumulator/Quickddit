@@ -42,8 +42,8 @@ void DbusApp::showInbox()
     emit requestMessageView();
 }
 
-void DbusApp::showInboxFor(const QString& target)
+void DbusApp::openURL(const QString& url)
 {
-    qDebug() << "showInboxFor" << target;
-    emit requestMessageView(target);
+    qDebug() << "openURL" << url;
+    emit requestOpenURL(url);
 }

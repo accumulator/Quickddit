@@ -3,8 +3,8 @@
 <node>
     <interface name="org.quickddit.view">
         <method name="showInbox"/>
-        <method name="showInboxFor">
-            <arg name="target" type="s" direction="in">
+        <method name="openURL">
+            <arg name="url" type="s" direction="in"/>
         </method>
     </interface>
 </node>

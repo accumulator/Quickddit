@@ -29,10 +29,11 @@ public:
 
 signals:
     void requestMessageView(const QString &fullname = "");
+    void requestOpenURL(const QString& url);
 
 public slots:
     void showInbox();
-    void showInboxFor(const QString& target);
+    void openURL(const QString& url);
 };
 
 #endif // DBUSAPP_H
