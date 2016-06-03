@@ -307,6 +307,10 @@ ApplicationWindow {
 
             appWindow.activate();
         }
+        onRequestOpenURL: {
+            if (globalUtils.redditLink(url))
+                globalUtils.openRedditLink(url);
+        }
     }
 
 }
