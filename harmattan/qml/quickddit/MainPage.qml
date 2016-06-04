@@ -143,10 +143,10 @@ AbstractPage {
             menu: Component { LinkMenu {} }
             showSubreddit: linkModel.location != LinkModel.Subreddit
             onClicked: {
-                var p = { link: model, linkVoteManager: linkVoteManager };
+                var p = { link: model, linkVoteManager: linkVoteManager, linkSaveManager: linkSaveManager };
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);
             }
-            onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager});
+            onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager, linkSaveManager: linkSaveManager});
         }
 
         footer: LoadingFooter { visible: linkModel.busy; listViewItem: linkListView }
@@ -183,6 +183,13 @@ AbstractPage {
         manager: quickdditManager
         onVoteSuccess: linkModel.changeLikes(fullname, likes);
         onError: infoBanner.alert(errorString);
+    }
+
+    SaveManager {
+        id: linkSaveManager
+        manager: quickdditManager
+        onSuccess: linkModel.changeSaved(fullname, saved);
+        onError: infoBanner.warning(errorString);
     }
 
     QtObject {

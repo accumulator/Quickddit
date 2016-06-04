@@ -27,6 +27,7 @@ AbstractPage {
     property alias link: commentModel.link
     property alias linkPermalink: commentModel.permalink
     property VoteManager linkVoteManager
+    property SaveManager linkSaveManager
 
     /*readonly*/ property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
     property Component __textAreaDialogComponent
@@ -299,6 +300,14 @@ AbstractPage {
                         iconSource: "image://theme/icon-l-browser-main-view"
                         onClicked: globalUtils.openNonPreviewLink(link.url, link.permalink);
                     }
+
+                    Button {
+                        iconSource: (link.saved
+                                     ? "image://theme/icon-m-common-favorite-mark"
+                                     : "image://theme/icon-m-common-favorite-unmark") +
+                                    (theme.inverted ? "-inverse" : "")
+                        onClicked: linkSaveManager.save(link.fullname, !link.saved);
+                    }
                 }
 
                 Column {
@@ -366,7 +375,7 @@ AbstractPage {
             id: commentDelegate
             menu: Component { CommentMenu {} }
             onClicked: {
-                var p = {comment: model, linkPermalink: link.permalink, commentVoteManager: commentVoteManager};
+                var p = {comment: model, linkPermalink: link.permalink, commentVoteManager: commentVoteManager, commentSaveManager: commentSaveManager};
                 var dialog = showMenu(p);
                 dialog.showParent.connect(function() {
                     var parentIndex = commentModel.getParentIndex(index);
@@ -429,9 +438,21 @@ AbstractPage {
         onError: infoBanner.alert(errorString);
     }
 
+    SaveManager {
+        id: commentSaveManager
+        manager: quickdditManager
+        onSuccess: link.saved = save;
+        onError: infoBanner.warning(errorString);
+    }
+
     Connections {
         target: linkVoteManager
         onVoteSuccess: if (linkVoteManager != commentVoteManager) { commentModel.changeLinkLikes(fullname, likes); }
+    }
+
+    Connections {
+        target: linkSaveManager
+        onSuccess: if (linkSaveManager != commentSaveManager) { commentModel.changeLinkSaved(fullname, saved); }
     }
 
     CommentManager {

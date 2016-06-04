@@ -26,6 +26,7 @@ ContextMenu {
     property variant comment
     property string linkPermalink
     property VoteManager commentVoteManager
+    property SaveManager commentSaveManager
 
     // to ensure the dialog is destroy properly before position to parent
     property bool __showParentAtDestruction: false
@@ -54,6 +55,11 @@ ContextMenu {
             enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
             text: "Unvote"
             onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Unvote)
+        }
+        MenuItem {
+            enabled: quickdditManager.isSignedIn && !commentSaveManager.busy
+            text: comment.saved ? "Unsave" : "Save"
+            onClicked: commentSaveManager.save(comment.fullname, !comment.saved);
         }
         MenuItem {
             enabled: quickdditManager.isSignedIn
