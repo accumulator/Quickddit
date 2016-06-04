@@ -44,7 +44,7 @@ ListItem {
             Image {
                 source: model.isSelfPost
                         ? "image://theme/icon-s-sms" + (theme.inverted ? "-inverse" : "")
-                        : "image://theme/icon-l-browser-main-view" // TODO icon-l-browser-main-view
+                        : "image://theme/icon-l-browser-main-view"
                 width: 32
                 height: 32
                 anchors.verticalCenter: parent.verticalCenter
@@ -96,7 +96,7 @@ ListItem {
             topMargin: 5
             rightMargin: 5
         }
-        source: "image://theme/icon-s-common-favorite-mark"
+        source: "image://theme/icon-s-common-favorite-mark" + (theme.inverted ? "-inverse" : "")
     }
 
     Rectangle {

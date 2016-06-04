@@ -182,6 +182,23 @@ Item {
         }
 
         onClicked: commentDelegate.clicked();
+
+        Rectangle {
+            id: savedRect
+            anchors.fill: parent
+            color: constant.colorLight
+            opacity: model.saved ? 0.1 : 0.0
+        }
+
+        Image {
+            visible: model.saved
+            anchors {
+                right: parent.right
+                top: parent.top
+            }
+            source: "image://theme/icon-s-common-favorite-mark" + (theme.inverted ? "-inverse" : "")
+        }
+
     }
 
     Loader {

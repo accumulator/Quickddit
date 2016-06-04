@@ -97,7 +97,7 @@ Item {
                 topMargin: 5
                 rightMargin: 5
             }
-            source: "image://theme/icon-s-common-favorite-mark"
+            source: "image://theme/icon-s-common-favorite-mark" + (theme.inverted ? "-inverse" : "")
         }
 
         Rectangle {
