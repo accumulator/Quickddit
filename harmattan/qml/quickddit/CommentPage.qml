@@ -183,8 +183,11 @@ AbstractPage {
                             wrapMode: Text.Wrap
                             font.pixelSize: constant.fontSizeDefault
                             color: constant.colorMid
-                            text: "submitted " + link.created + " by " + link.author +
+                            textFormat: Text.RichText
+                            text: "submitted " + link.created + " by " +
+                                  "<a href=\"https://reddit.com/u/" + link.author.split(" ")[0] + "\">" + link.author + "</a>" +
                                   " to " + link.subreddit
+                            onLinkActivated: globalUtils.openLink(link);
                         }
 
                         Row {
