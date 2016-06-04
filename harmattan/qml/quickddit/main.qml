@@ -70,6 +70,8 @@ PageStackWindow {
                 return true;
             else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url))
                 return true;
+            else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.test(url))
+                return true;
             return false
         }
 
@@ -81,6 +83,9 @@ PageStackWindow {
                 var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
                 mainPage.refresh(subreddit);
                 pageStack.pop(mainPage);
+            } else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.test(url)) {
+                var username = /^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.exec(url)[3];
+                pageStack.push(Qt.resolvedUrl("UserPage.qml"), {username: username});
             } else
                 infoBanner.alert(qsTr("Unsupported reddit url"));
         }
