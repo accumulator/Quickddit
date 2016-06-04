@@ -116,6 +116,11 @@ AbstractPage {
                 onClicked: pageStack.push(Qt.resolvedUrl("MessagePage.qml"));
             }
             MenuItem {
+                text: "My Profile"
+                enabled: quickdditManager.isSignedIn
+                onClicked: pageStack.push(Qt.resolvedUrl("UserPage.qml"), {username: appSettings.redditUsername});
+            }
+            MenuItem {
                 text: "Search"
                 onClicked: dialogManager.createSearchDialog();
             }

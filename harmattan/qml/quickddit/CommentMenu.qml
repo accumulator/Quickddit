@@ -71,6 +71,12 @@ ContextMenu {
             onClicked: deleteClicked();
         }
         MenuItem {
+            text: "/u/" + comment.author.split(" ")[0]
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("UserPage.qml"), { username: comment.author.split(" ")[0] } );
+            }
+        }
+        MenuItem {
             text: "Permalink"
             onClicked: {
                 var link = QMLUtils.toAbsoluteUrl(linkPermalink + comment.fullname.substring(3));
