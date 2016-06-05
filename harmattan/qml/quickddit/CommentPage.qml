@@ -147,9 +147,46 @@ AbstractPage {
                     height: 1
                 }
 
-                Bubble {
-                    visible: link.flairText != ""
-                    text: link.flairText
+                Row {
+                    anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                    spacing: constant.paddingLarge
+
+                    Bubble {
+                        visible: link.flairText !== ""
+                        text: link.flairText
+                    }
+                    Bubble {
+                        color: "green"
+                        visible: !!link.isSticky
+                        text: "Sticky"
+                        font.bold: true
+                    }
+
+                    Bubble {
+                        color: "red"
+                        visible: !!link.isNSFW
+                        text: "NSFW"
+                        font.bold: true
+                    }
+
+                    Bubble {
+                        color: "green"
+                        visible: !!link.isPromoted
+                        text: "Promoted"
+                        font.bold: true
+                    }
+
+                    Bubble {
+                        visible: !!link.gilded
+                        text: "Gilded"
+                        color: "gold"
+                        font.bold: true
+                    }
+
+                    Bubble {
+                        visible: !!link.isArchived
+                        text: "Archived"
+                    }
                 }
 
                 Item {
@@ -218,24 +255,6 @@ AbstractPage {
                                 font.pixelSize: constant.fontSizeDefault
                                 color: constant.colorLight
                                 text: link.commentsCount + " comments"
-                            }
-
-                            Bubble {
-                                color: "green"
-                                visible: link.isSticky
-                                text: "Sticky"
-                            }
-
-                            Bubble {
-                                color: "red"
-                                visible: link.isNSFW
-                                text: "NSFW"
-                            }
-
-                            Bubble {
-                                color: "green"
-                                visible: link.isPromoted
-                                text: "Promoted"
                             }
                         }
                     }

@@ -103,8 +103,30 @@ Item {
                 left: parent.left; right: parent.right; margins: constant.paddingMedium
                 verticalCenter: parent.verticalCenter
             }
-            height: authorTextWrapper.height + commentBodyText.paintedHeight
             spacing: constant.paddingSmall
+
+            Row {
+                visible: model.isArchived || model.isStickied || model.gilded > 0
+                spacing: constant.paddingLarge
+
+                Bubble {
+                    visible: !!model.isArchived
+                    font.pixelSize: constant.fontSizeSmall
+                    text: "Archived"
+                }
+                Bubble {
+                    visible: !!model.isStickied
+                    font.pixelSize: constant.fontSizeSmall
+                    color: "green"
+                    text: "Stickied"
+                }
+                Bubble {
+                    visible: !!model.gilded > 0
+                    font.pixelSize: constant.fontSizeSmall
+                    color: "gold"
+                    text: "Gilded"
+                }
+            }
 
             Item {
                 id: authorTextWrapper
@@ -187,7 +209,8 @@ Item {
             id: savedRect
             anchors.fill: parent
             color: constant.colorLight
-            opacity: model.saved ? 0.1 : 0.0
+            visible: model.saved
+            opacity: 0.1
         }
 
         Image {
@@ -195,6 +218,8 @@ Item {
             anchors {
                 right: parent.right
                 top: parent.top
+                topMargin: 5
+                rightMargin: 5
             }
             source: "image://theme/icon-s-common-favorite-mark" + (theme.inverted ? "-inverse" : "")
         }
