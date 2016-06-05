@@ -80,7 +80,7 @@ AbstractPage {
         }
         ToolIcon {
             platformIconId: "toolbar-add"
-            enabled: quickdditManager.isSignedIn && !commentManager.busy && !!link
+            enabled: quickdditManager.isSignedIn && !commentManager.busy && !!link && !link.isArchived
             opacity: enabled ? 1 : 0.25
             onClicked: __createCommentDialog("Add Comment", link.fullname);
         }
@@ -111,6 +111,7 @@ AbstractPage {
         MenuLayout {
             MenuItem {
                 text: "Edit Post"
+                enabled: !link.isArchived
                 visible: link.author === appSettings.redditUsername && link.isSelfPost
                 onClicked: __createLinkTextDialog("Edit Post", link.fullname, link.rawText);
             }
@@ -278,8 +279,8 @@ AbstractPage {
                     Button {
                         iconSource: "image://theme/icon-m-toolbar-up" + (enabled ? "" : "-dimmed")
                                     + (appSettings.whiteTheme ? "" : "-white")
-                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
-                        checked: link.likes == 1
+                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
+                        checked: link.likes === 1
                         onClicked: {
                             if (checked)
                                 linkVoteManager.vote(link.fullname, VoteManager.Unvote)
@@ -291,8 +292,8 @@ AbstractPage {
                     Button {
                         iconSource: "image://theme/icon-m-toolbar-down" + (enabled ? "" : "-dimmed")
                                     + (appSettings.whiteTheme ? "" : "-white")
-                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
-                        checked: link.likes == -1
+                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
+                        checked: link.likes === -1
                         onClicked: {
                             if (checked)
                                 linkVoteManager.vote(link.fullname, VoteManager.Unvote)
