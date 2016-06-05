@@ -90,6 +90,11 @@ APIRequest *QuickdditManager::createRedditRequest(QObject *parent, APIRequest::H
 {
     APIRequest *request;
 
+    if (m_netManager->networkAccessible() == QNetworkAccessManager::NotAccessible) {
+        delete m_netManager;
+        m_netManager = new QNetworkAccessManager(this);
+    }
+
     if (m_settings->hasRefreshToken()) {
         request = new APIRequest(APIRequest::OAuthRequest, m_netManager, parent);
         request->setRequestMethod(method);
