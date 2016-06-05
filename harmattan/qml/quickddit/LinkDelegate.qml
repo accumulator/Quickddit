@@ -34,9 +34,46 @@ ListItem {
         height: childrenRect.height
         spacing: constant.paddingSmall
 
-        Bubble {
-            visible: model.flairText != ""
-            text: model.flairText
+        Row {
+            anchors { left: parent.left; right: parent.right }
+            spacing: constant.paddingLarge
+
+            Bubble {
+                visible: model.flairText !== ""
+                text: model.flairText
+            }
+            Bubble {
+                color: "green"
+                visible: !!model.isSticky
+                text: "Sticky"
+                font.bold: true
+            }
+
+            Bubble {
+                color: "red"
+                visible: !!model.isNSFW
+                text: "NSFW"
+                font.bold: true
+            }
+
+            Bubble {
+                color: "green"
+                visible: !!model.isPromoted
+                text: "Promoted"
+                font.bold: true
+            }
+
+            Bubble {
+                visible: model.gilded > 0
+                text: "Gilded"
+                color: "gold"
+                font.bold: true
+            }
+
+            Bubble {
+                visible: !!model.isArchived
+                text: "Archived"
+            }
         }
 
         Text {
@@ -91,24 +128,6 @@ ListItem {
                 color: constant.colorLight
                 text: model.commentsCount + " comments"
             }
-
-            Bubble {
-                color: "green"
-                visible: model.isSticky
-                text: "Sticky"
-            }
-
-            Bubble {
-                color: "red"
-                visible: model.isNSFW
-                text: "NSFW"
-            }
-
-            Bubble {
-                color: "green"
-                visible: model.isPromoted
-                text: "Promoted"
-            }
         }
     }
 
@@ -124,4 +143,24 @@ ListItem {
             onClicked: globalUtils.openLink(model.url)
         }
     }
+
+    Rectangle {
+        id: savedRect
+        anchors.fill: parent
+        color: constant.colorLight
+        visible: model.saved
+        opacity: 0.1
+    }
+
+    Image {
+        visible: model.saved
+        anchors {
+            right: parent.right
+            top: parent.top
+            topMargin: 5
+            rightMargin: 5
+        }
+        source: "image://theme/icon-s-common-favorite-mark" + (theme.inverted ? "-inverse" : "")
+    }
+
 }

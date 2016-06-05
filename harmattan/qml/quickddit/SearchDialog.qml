@@ -91,7 +91,7 @@ Sheet {
             errorHighlight: enabled && !acceptableInput
             placeholderText: "Enter subreddit name"
             inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
-            validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
+            validator: RegExpValidator { regExp: /^([A-Za-z0-9][A-Za-z0-9_]{2,20}|[a-z]{2})$/ }
             platformSipAttributes: SipAttributes {
                 actionKeyEnabled: searchDialog.acceptButton.enabled
                 actionKeyLabel: searchDialog.acceptButtonText

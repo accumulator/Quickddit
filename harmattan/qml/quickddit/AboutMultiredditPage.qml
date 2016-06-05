@@ -131,9 +131,8 @@ AbstractPage {
 
         Sheet {
             id: addSubredditSheet
-            acceptButtonText: "Add"
+            acceptButtonText: (subredditTextField.acceptableInput && subreddit.length > 0) ? "Add" : ""
             rejectButtonText: "Cancel"
-            acceptButton.enabled: subredditTextField.acceptableInput && subreddit.length > 0
 
             property alias subreddit: subredditTextField.text
 
@@ -157,7 +156,7 @@ AbstractPage {
                     anchors { left: parent.left; right: parent.right }
                     placeholderText: "Enter subreddit name"
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
-                    validator: RegExpValidator { regExp: /^[A-Za-z0-9][A-Za-z0-9_]{2,20}$/ }
+                    validator: RegExpValidator { regExp: /^([A-Za-z0-9][A-Za-z0-9_]{2,20}|[a-z]{2})$/ }
                     platformSipAttributes: SipAttributes {
                         actionKeyEnabled: addSubredditSheet.acceptButton.enabled
                         actionKeyLabel: addSubredditSheet.acceptButtonText
@@ -166,6 +165,8 @@ AbstractPage {
                 }
             }
         }
+
+        Component.onCompleted: subredditTextField.focus = true;
     }
 
     AboutMultiredditManager {

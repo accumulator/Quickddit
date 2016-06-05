@@ -43,6 +43,7 @@
 #include "src/inboxmanager.h"
 #include "src/usermanager.h"
 #include "src/userthingmodel.h"
+#include "src/savemanager.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -70,6 +71,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<InboxManager>("Quickddit.Core", 1, 0, "InboxManager");
     qmlRegisterType<UserManager>("Quickddit.Core", 1, 0, "UserManager");
     qmlRegisterType<UserThingModel>("Quickddit.Core", 1, 0, "UserThingModel");
+    qmlRegisterType<SaveManager>("Quickddit.Core", 1, 0, "SaveManager");
 
     QmlApplicationViewer viewer;
     viewer.rootContext()->setContextProperty("APP_VERSION", APP_VERSION);

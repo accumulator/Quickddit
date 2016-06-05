@@ -42,7 +42,8 @@ HEADERS += \
     ../src/usermanager.h \
     ../src/userobject.h \
     ../src/userthingmodel.h \
-    ../src/thing.h
+    ../src/thing.h \
+    ../src/savemanager.h
 
 SOURCES += main.cpp \
     app_adaptor.cpp \
@@ -78,7 +79,8 @@ SOURCES += main.cpp \
     ../src/usermanager.cpp \
     ../src/userobject.cpp \
     ../src/userthingmodel.cpp \
-    ../src/thing.cpp
+    ../src/thing.cpp \
+    ../src/savemanager.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h

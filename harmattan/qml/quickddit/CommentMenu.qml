@@ -26,6 +26,7 @@ ContextMenu {
     property variant comment
     property string linkPermalink
     property VoteManager commentVoteManager
+    property SaveManager commentSaveManager
 
     // to ensure the dialog is destroy properly before position to parent
     property bool __showParentAtDestruction: false
@@ -38,37 +39,48 @@ ContextMenu {
         MenuItem {
             id: upvoteButton
             visible: comment.likes != 1
-            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
+            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !comment.isArchived
             text: "Upvote"
             onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Upvote)
         }
         MenuItem {
             visible: comment.likes != -1
-            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
+            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !comment.isArchived
             text: "Downvote"
             platformStyle: MenuItemStyle { position: upvoteButton.visible ? "vertical-center" : "vertical-top" }
             onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Downvote)
         }
         MenuItem {
             visible: comment.likes != 0
-            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy
+            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !comment.isArchived
             text: "Unvote"
             onClicked: commentVoteManager.vote(comment.fullname, VoteManager.Unvote)
         }
         MenuItem {
-            enabled: quickdditManager.isSignedIn
+            enabled: quickdditManager.isSignedIn && !commentSaveManager.busy
+            text: comment.saved ? "Unsave" : "Save"
+            onClicked: commentSaveManager.save(comment.fullname, !comment.saved);
+        }
+        MenuItem {
+            enabled: quickdditManager.isSignedIn && !comment.isArchived
             text: "Reply"
             onClicked: replyClicked();
         }
         MenuItem {
-            visible: comment.isAuthor
+            visible: comment.isAuthor && !comment.isArchived
             text: "Edit"
             onClicked: editClicked();
         }
         MenuItem {
-            visible: comment.isAuthor
+            visible: comment.isAuthor && !comment.isArchived
             text: "Delete"
             onClicked: deleteClicked();
+        }
+        MenuItem {
+            text: "/u/" + comment.author.split(" ")[0]
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("UserPage.qml"), { username: comment.author.split(" ")[0] } );
+            }
         }
         MenuItem {
             text: "Permalink"

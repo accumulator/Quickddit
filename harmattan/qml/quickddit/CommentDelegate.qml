@@ -103,8 +103,30 @@ Item {
                 left: parent.left; right: parent.right; margins: constant.paddingMedium
                 verticalCenter: parent.verticalCenter
             }
-            height: authorTextWrapper.height + commentBodyText.paintedHeight
             spacing: constant.paddingSmall
+
+            Row {
+                visible: model.isArchived || model.isStickied || model.gilded > 0
+                spacing: constant.paddingLarge
+
+                Bubble {
+                    visible: !!model.isArchived
+                    font.pixelSize: constant.fontSizeSmall
+                    text: "Archived"
+                }
+                Bubble {
+                    visible: !!model.isStickied
+                    font.pixelSize: constant.fontSizeSmall
+                    color: "green"
+                    text: "Stickied"
+                }
+                Bubble {
+                    visible: !!model.gilded > 0
+                    font.pixelSize: constant.fontSizeSmall
+                    color: "gold"
+                    text: "Gilded"
+                }
+            }
 
             Item {
                 id: authorTextWrapper
@@ -182,6 +204,26 @@ Item {
         }
 
         onClicked: commentDelegate.clicked();
+
+        Rectangle {
+            id: savedRect
+            anchors.fill: parent
+            color: constant.colorLight
+            visible: model.saved
+            opacity: 0.1
+        }
+
+        Image {
+            visible: model.saved
+            anchors {
+                right: parent.right
+                top: parent.top
+                topMargin: 5
+                rightMargin: 5
+            }
+            source: "image://theme/icon-s-common-favorite-mark" + (theme.inverted ? "-inverse" : "")
+        }
+
     }
 
     Loader {
@@ -206,8 +248,8 @@ Item {
                         if (model.moreChildrenCount > 0) {
                             commentPage.loadMoreChildren(model.index, model.moreChildren);
                         } else {
-                            var link = QMLUtils.toAbsoluteUrl(linkPermalink + model.fullname.substring(3));
-                            globalUtils.openLink(link);
+                            var clink = QMLUtils.toAbsoluteUrl("/r/" + link.subreddit + "/comments/" + link.fullname.substring(3) + "//" + model.fullname.substring(3))
+                            globalUtils.openLink(clink);
                         }
                     }
                 }

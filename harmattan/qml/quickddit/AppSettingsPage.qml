@@ -84,6 +84,7 @@ AbstractPage {
                 Switch {
                     anchors.right: parent.right
                     checked: appSettings.pollUnread;
+                    enabled: quickdditManager.isSignedIn
                     onCheckedChanged: appSettings.pollUnread = checked;
                 }
             }

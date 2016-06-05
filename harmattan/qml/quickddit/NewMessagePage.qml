@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2016  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,15 +21,17 @@ import com.nokia.meego 1.0
 import Quickddit.Core 1.0
 
 AbstractPage {
-    id: newLinkPage
-    title: "New Post"
+    id: newMessagePage
+    title: "New Message"
 
-    property string subreddit
-    property QtObject linkManager
+    property string recipient
+    property alias subject: subjectField.text
+    property alias message: messageField.text
+    property QtObject messageManager
 
-    function submit() {
-        console.log("submitting link...");
-        linkManager.submit(subreddit, captcha.userInput, captchaManager.iden, linkTitle.text, selfLinkSwitch.checked ? "" : linkUrl.text, linkDescription.text);
+    function send() {
+        console.log("sending message...");
+        messageManager.send(recipient, subjectField.text, messageField.text, captcha.userInput, captchaManager.iden);
     }
 
     tools: ToolBarLayout {
@@ -47,53 +49,27 @@ AbstractPage {
         Column {
             id: mainContentColumn
             width: parent.width
-            spacing: constant.paddingLarge
+            spacing: constant.paddingMedium
 
             Label {
                 anchors {right: parent.right; rightMargin: constant.paddingLarge }
-                text: "/r/" + subreddit
+                text: "to " + (recipient.indexOf("/r") == 0 ? "moderators of " : "") + recipient
                 font.pixelSize: constant.fontSizeXSmall
-                color: constant.colorMid
+                color: constant.colorLight
             }
 
             TextField {
-                id: linkTitle
+                id: subjectField
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Post Title"
-            }
-
-            Row {
-                width: parent.width
-
-                Label {
-                    anchors.verticalCenter: selfLinkSwitch.verticalCenter
-                    text: "Self Post"
-                }
-
-                Switch {
-                    anchors.right: parent.right
-
-                    id: selfLinkSwitch
-                    checked: true
-                }
-            }
-
-            TextField {
-                id: linkUrl
-                anchors { left: parent.left; right: parent.right }
-                placeholderText: "Post URL"
-                enabled: !selfLinkSwitch.checked
-                visible: enabled
-                inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
-                validator: RegExpValidator { regExp: /^https?:\/\/.+/ }
-                errorHighlight: activeFocus && !acceptableInput
+                placeholderText: "Subject"
+                maximumLength: 100 // reddit constraint
+                focus: true
             }
 
             TextArea {
-                id: linkDescription
+                id: messageField
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Post Text"
-                enabled: selfLinkSwitch.checked
+                placeholderText: "Message"
                 visible: enabled
                 height: Math.max(implicitHeight, 300)
             }
@@ -105,12 +81,11 @@ AbstractPage {
             }
 
             Button {
-                text: "Submit"
+                text: "Send"
                 anchors.horizontalCenter: parent.horizontalCenter
-                enabled: linkTitle.text.length > 0 /* official limits? */
+                enabled: messageField.text.length > 0 && subjectField.text.length > 0
                          && (!captchaManager.captchaNeeded || captcha.userInput.length > 0)
-                         && ((selfLinkSwitch.checked && linkDescription.text.length > 0) || linkUrl.acceptableInput)
-                onClicked: submit()
+                onClicked: send()
             }
         }
     }

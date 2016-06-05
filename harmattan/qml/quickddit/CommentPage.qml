@@ -27,6 +27,7 @@ AbstractPage {
     property alias link: commentModel.link
     property alias linkPermalink: commentModel.permalink
     property VoteManager linkVoteManager
+    property SaveManager linkSaveManager
 
     /*readonly*/ property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
     property Component __textAreaDialogComponent
@@ -79,7 +80,7 @@ AbstractPage {
         }
         ToolIcon {
             platformIconId: "toolbar-add"
-            enabled: quickdditManager.isSignedIn && !commentManager.busy && !!link
+            enabled: quickdditManager.isSignedIn && !commentManager.busy && !!link && !link.isArchived
             opacity: enabled ? 1 : 0.25
             onClicked: __createCommentDialog("Add Comment", link.fullname);
         }
@@ -110,6 +111,7 @@ AbstractPage {
         MenuLayout {
             MenuItem {
                 text: "Edit Post"
+                enabled: !link.isArchived
                 visible: link.author === appSettings.redditUsername && link.isSelfPost
                 onClicked: __createLinkTextDialog("Edit Post", link.fullname, link.rawText);
             }
@@ -146,9 +148,46 @@ AbstractPage {
                     height: 1
                 }
 
-                Bubble {
-                    visible: link.flairText != ""
-                    text: link.flairText
+                Row {
+                    anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
+                    spacing: constant.paddingLarge
+
+                    Bubble {
+                        visible: link.flairText !== ""
+                        text: link.flairText
+                    }
+                    Bubble {
+                        color: "green"
+                        visible: !!link.isSticky
+                        text: "Sticky"
+                        font.bold: true
+                    }
+
+                    Bubble {
+                        color: "red"
+                        visible: !!link.isNSFW
+                        text: "NSFW"
+                        font.bold: true
+                    }
+
+                    Bubble {
+                        color: "green"
+                        visible: !!link.isPromoted
+                        text: "Promoted"
+                        font.bold: true
+                    }
+
+                    Bubble {
+                        visible: !!link.gilded
+                        text: "Gilded"
+                        color: "gold"
+                        font.bold: true
+                    }
+
+                    Bubble {
+                        visible: !!link.isArchived
+                        text: "Archived"
+                    }
                 }
 
                 Item {
@@ -183,8 +222,11 @@ AbstractPage {
                             wrapMode: Text.Wrap
                             font.pixelSize: constant.fontSizeDefault
                             color: constant.colorMid
-                            text: "submitted " + link.created + " by " + link.author +
+                            textFormat: Text.RichText
+                            text: "submitted " + link.created + " by " +
+                                  "<a href=\"https://reddit.com/u/" + link.author.split(" ")[0] + "\">" + link.author + "</a>" +
                                   " to " + link.subreddit
+                            onLinkActivated: globalUtils.openLink(link);
                         }
 
                         Row {
@@ -215,24 +257,6 @@ AbstractPage {
                                 color: constant.colorLight
                                 text: link.commentsCount + " comments"
                             }
-
-                            Bubble {
-                                color: "green"
-                                visible: link.isSticky
-                                text: "Sticky"
-                            }
-
-                            Bubble {
-                                color: "red"
-                                visible: link.isNSFW
-                                text: "NSFW"
-                            }
-
-                            Bubble {
-                                color: "green"
-                                visible: link.isPromoted
-                                text: "Promoted"
-                            }
                         }
                     }
 
@@ -255,8 +279,8 @@ AbstractPage {
                     Button {
                         iconSource: "image://theme/icon-m-toolbar-up" + (enabled ? "" : "-dimmed")
                                     + (appSettings.whiteTheme ? "" : "-white")
-                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
-                        checked: link.likes == 1
+                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
+                        checked: link.likes === 1
                         onClicked: {
                             if (checked)
                                 linkVoteManager.vote(link.fullname, VoteManager.Unvote)
@@ -268,8 +292,8 @@ AbstractPage {
                     Button {
                         iconSource: "image://theme/icon-m-toolbar-down" + (enabled ? "" : "-dimmed")
                                     + (appSettings.whiteTheme ? "" : "-white")
-                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy
-                        checked: link.likes == -1
+                        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
+                        checked: link.likes === -1
                         onClicked: {
                             if (checked)
                                 linkVoteManager.vote(link.fullname, VoteManager.Unvote)
@@ -295,6 +319,14 @@ AbstractPage {
                     Button {
                         iconSource: "image://theme/icon-l-browser-main-view"
                         onClicked: globalUtils.openNonPreviewLink(link.url, link.permalink);
+                    }
+
+                    Button {
+                        iconSource: (link.saved
+                                     ? "image://theme/icon-m-common-favorite-mark"
+                                     : "image://theme/icon-m-common-favorite-unmark") +
+                                    (theme.inverted ? "-inverse" : "")
+                        onClicked: linkSaveManager.save(link.fullname, !link.saved);
                     }
                 }
 
@@ -363,7 +395,7 @@ AbstractPage {
             id: commentDelegate
             menu: Component { CommentMenu {} }
             onClicked: {
-                var p = {comment: model, linkPermalink: link.permalink, commentVoteManager: commentVoteManager};
+                var p = {comment: model, linkPermalink: link.permalink, commentVoteManager: commentVoteManager, commentSaveManager: commentSaveManager};
                 var dialog = showMenu(p);
                 dialog.showParent.connect(function() {
                     var parentIndex = commentModel.getParentIndex(index);
@@ -426,9 +458,21 @@ AbstractPage {
         onError: infoBanner.alert(errorString);
     }
 
+    SaveManager {
+        id: commentSaveManager
+        manager: quickdditManager
+        onSuccess: link.saved = save;
+        onError: infoBanner.warning(errorString);
+    }
+
     Connections {
         target: linkVoteManager
         onVoteSuccess: if (linkVoteManager != commentVoteManager) { commentModel.changeLinkLikes(fullname, likes); }
+    }
+
+    Connections {
+        target: linkSaveManager
+        onSuccess: if (linkSaveManager != commentSaveManager) { commentModel.changeLinkSaved(fullname, saved); }
     }
 
     CommentManager {

@@ -35,6 +35,11 @@ PageStackWindow {
             infoBanner.text = text
             infoBanner.show()
         }
+
+        function warning(text) {
+            // TODO differentiate icon between alert/warning
+            alert(text);
+        }
     }
 
     QtObject {
@@ -49,6 +54,9 @@ PageStackWindow {
             // imgur url
             if (/^https?:\/\/((i|m)\.)?imgur\.com/.test(url))
                 return true;
+            // reddituploads
+            else if (/^https?:\/\/i.reddituploads.com\//.test(url))
+                return true;
             // direct image url with image format extension
             else if (/^https?:\/\/\S+\.(jpe?g|png|gif)/i.test(url))
                 return true;
@@ -59,6 +67,8 @@ PageStackWindow {
         function openImageViewPage(url) {
             if (/^https?:\/\/((i|m)\.)?imgur\.com/.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imgurUrl: url});
+            else if (/^https?:\/\/i.reddituploads.com\//.test(url))
+                pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
             else if (/^https?:\/\/\S+\.(jpe?g|png|gif)/i.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
             else
@@ -69,6 +79,10 @@ PageStackWindow {
             if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
                 return true;
             else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url))
+                return true;
+            else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.test(url))
+                return true;
+            else if (/^https?:\/\/(\w+\.)?reddit.com\/message\/compose\/?\?/.test(url))
                 return true;
             return false
         }
@@ -81,6 +95,19 @@ PageStackWindow {
                 var mainPage = pageStack.find(function(page) { return page.objectName == "mainPage"; });
                 mainPage.refresh(subreddit);
                 pageStack.pop(mainPage);
+            } else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.test(url)) {
+                var username = /^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.exec(url)[3];
+                pageStack.push(Qt.resolvedUrl("UserPage.qml"), {username: username});
+            } else if (/^https?:\/\/(\w+\.)?reddit.com\/message\/compose\/?\?(.*)/.test(url)) {
+                var urlparams = /^https?:\/\/(\w+\.)?reddit.com\/message\/compose\/?\?(.*)/.exec(url)[2].split("&");
+                var params = {}
+                for (var i=0; i < urlparams.length; i++) {
+                    var kvp = urlparams[i].split("=");
+                    params[kvp[0]] = kvp[1];
+                }
+                params["recipient"] = params["to"]
+                params["message"] = decodeURIComponent(params["message"])
+                pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), params);
             } else
                 infoBanner.alert(qsTr("Unsupported reddit url"));
         }
