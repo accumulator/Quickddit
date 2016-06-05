@@ -248,8 +248,8 @@ Item {
                         if (model.moreChildrenCount > 0) {
                             commentPage.loadMoreChildren(model.index, model.moreChildren);
                         } else {
-                            var link = QMLUtils.toAbsoluteUrl(linkPermalink + model.fullname.substring(3));
-                            globalUtils.openLink(link);
+                            var clink = QMLUtils.toAbsoluteUrl("/r/" + link.subreddit + "/comments/" + link.fullname.substring(3) + "//" + model.fullname.substring(3))
+                            globalUtils.openLink(clink);
                         }
                     }
                 }
