@@ -22,7 +22,7 @@ import Quickddit.Core 1.0
 
 AbstractPage {
     id: userPage
-    title: "User /u/" + username
+    title: "/u/" + username
 
     property string username;
 
@@ -87,31 +87,10 @@ AbstractPage {
 
             spacing: 20
 
-//            QuickdditPageHeader { title: (myself ? "My Profile" : "User Profile") + " - " + sectionModelMy[userThingModel.section] }
-
             // dummy item for top spacing
             Item {
                 anchors { left: parent.left; right: parent.right }
                 height: 1
-            }
-
-            Row {
-                visible: userThingModel.section === UserThingModel.OverviewSection
-                anchors.left: parent.left
-                anchors.margins: constant.paddingMedium
-
-//                Image {
-//                    source: "image://theme/icon-m-person"
-//                    anchors.verticalCenter: parent.verticalCenter
-//                }
-
-                Text {
-                    color: constant.colorLight
-                    font.pixelSize: constant.fontSizeLarge
-                    font.bold: true
-                    text: "/u/" + username
-                    anchors.verticalCenter: parent.verticalCenter
-                }
             }
 
             Row {

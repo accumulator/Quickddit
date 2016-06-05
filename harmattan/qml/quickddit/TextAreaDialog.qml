@@ -25,9 +25,8 @@ Sheet {
     property alias title: headerItemText.text
     property alias text: textArea.text
 
-    acceptButtonText: "Accept"
+    acceptButtonText: (text.length > 0 || textArea.platformPreedit.length > 0) ? "Accept" : ""
     rejectButtonText: "Cancel"
-    acceptButton.enabled: text.length > 0 || textArea.platformPreedit.length > 0
 
     onAccepted: textArea.parent.focus = true; // force commit of predictive text
 
