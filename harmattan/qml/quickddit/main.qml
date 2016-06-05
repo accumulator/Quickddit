@@ -35,6 +35,11 @@ PageStackWindow {
             infoBanner.text = text
             infoBanner.show()
         }
+
+        function warning(text) {
+            // TODO differentiate icon between alert/warning
+            alert(text);
+        }
     }
 
     QtObject {
