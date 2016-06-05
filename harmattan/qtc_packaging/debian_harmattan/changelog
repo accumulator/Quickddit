@@ -1,3 +1,8 @@
+quickddit (1.0.0) unstable; urgency=low
+  * bring functionality up to par with sailfish 1.0.0
+
+ -- Sander van Grieken <sander@outrightsolutions.nl>  Sun, 05 Jun 2016 12:59:59 +0100
+
 quickddit (0.8.0) unstable; urgency=low
   * added Inbox Notifications
 
