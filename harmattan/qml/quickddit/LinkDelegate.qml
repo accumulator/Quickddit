@@ -148,7 +148,8 @@ ListItem {
         id: savedRect
         anchors.fill: parent
         color: constant.colorLight
-        opacity: model.saved ? 0.1 : 0.0
+        visible: model.saved
+        opacity: 0.1
     }
 
     Image {
