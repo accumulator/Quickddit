@@ -89,7 +89,7 @@ ApplicationWindow {
             // imgur url
             if (/^https?:\/\/((i|m)\.)?imgur\.com\//.test(url))
                 return !(/^.*\.gifv$/.test(url));
-            // direct image url with image format extension
+            // reddituploads
             else if (/^https?:\/\/i.reddituploads.com\//.test(url))
                 return true;
             // direct image url with image format extension
