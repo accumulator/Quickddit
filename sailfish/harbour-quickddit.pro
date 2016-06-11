@@ -117,7 +117,7 @@ OTHER_FILES += \
     qml/cover/CoverPage.qml \
     qml/SubredditsBrowsePage.qml \
     qml/SubredditsPage.qml \
-    qml/SubredditDelegate.qml \
+    qml/SubredditBrowseDelegate.qml \
     qml/SignInPage.qml \
     qml/SelectionDialog.qml \
     qml/SearchPage.qml \
