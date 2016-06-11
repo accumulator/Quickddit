@@ -38,7 +38,9 @@ public:
     bool isSubscribed;
     SubredditObject::SubmissionType submissionType;
     bool isContributor;
-
+    bool isBanned;
+    bool isModerator;
+    bool isMuted;
 private:
     Q_DISABLE_COPY(SubredditObjectData)
 };
@@ -192,4 +194,34 @@ bool SubredditObject::isContributor() const
 void SubredditObject::setContributor(bool contributor)
 {
     d->isContributor = contributor;
+}
+
+bool SubredditObject::isBanned() const
+{
+    return d->isBanned;
+}
+
+void SubredditObject::setBanned(bool banned)
+{
+    d->isBanned = banned;
+}
+
+bool SubredditObject::isModerator() const
+{
+    return d->isModerator;
+}
+
+void SubredditObject::setModerator(bool moderator)
+{
+    d->isModerator = moderator;
+}
+
+bool SubredditObject::isMuted() const
+{
+    return d->isMuted;
+}
+
+void SubredditObject::setMuted(bool muted)
+{
+    d->isMuted = muted;
 }

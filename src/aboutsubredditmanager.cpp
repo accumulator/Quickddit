@@ -97,6 +97,21 @@ bool AboutSubredditManager::isContributor() const
     return m_subredditObject.isContributor();
 }
 
+bool AboutSubredditManager::isBanned() const
+{
+    return m_subredditObject.isBanned();
+}
+
+bool AboutSubredditManager::isModerator() const
+{
+    return m_subredditObject.isModerator();
+}
+
+bool AboutSubredditManager::isMuted() const
+{
+    return m_subredditObject.isMuted();
+}
+
 QString AboutSubredditManager::subreddit() const
 {
     return m_subreddit;

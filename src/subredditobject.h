@@ -75,6 +75,15 @@ public:
     bool isContributor() const;
     void setContributor(bool contributor);
 
+    bool isBanned() const;
+    void setBanned(bool banned);
+
+    bool isModerator() const;
+    void setModerator(bool moderator);
+
+    bool isMuted() const;
+    void setMuted(bool muted);
+
 private:
     QExplicitlySharedDataPointer<SubredditObjectData> d;
 };

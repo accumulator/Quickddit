@@ -309,6 +309,9 @@ SubredditObject parseSubredditThing(const QVariantMap &subredditThing)
     subreddit.setSubscribed(data.value("user_is_subscriber").toBool());
     subreddit.setSubmissionType(data.value("submission_type").toString());
     subreddit.setContributor(data.value("user_is_contributor").toBool());
+    subreddit.setBanned(data.value("user_is_banned").toBool());
+    subreddit.setModerator(data.value("user_is_moderator").toBool());
+    subreddit.setMuted(data.value("user_is_muted").toBool());
     return subreddit;
 }
 

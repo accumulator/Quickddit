@@ -38,7 +38,11 @@ public:
         LongDescriptionRole,
         SubscribersRole,
         ActiveUsersRole,
-        IsNSFWRole
+        IsNSFWRole,
+        IsContributorRole,
+        IsBannedRole,
+        IsModeratorRole,
+        IsMutedRole
     };
 
     enum Section {
