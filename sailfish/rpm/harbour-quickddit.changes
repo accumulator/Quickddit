@@ -5,6 +5,18 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Jun 11 2016 Sander van Grieken <sander@outrightsolutions.nl> 1.1.0-1
+- fix: crash receiving errors unexpectedly
+- fix: properly unescape flairtext
+- fix: workaround for network not available
+- chg: inbox timer cap reduced to 30 min
+- chg: swapped My Profile and Messages menu options
+- new: added internal webviewer
+- new: new dbus interface to open reddit URLs
+- new: support for streamable.com links
+- new: unsub from subredditspage
+- new: show user flags contributor, banned, moderator and muted on subreddit
+
 * Sat May 21 2016 Sander van Grieken <sander@outrightsolutions.nl> 1.0.0-1
 - 1.0 milestone reached
 - new: browse your own saved items, comments, posts, and up and downvoted items
