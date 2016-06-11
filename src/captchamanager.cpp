@@ -63,7 +63,7 @@ void CaptchaManager::onRequestFinished(QNetworkReply *reply)
             m_ready = true;
             emit readyChanged();
         } else {
-            error(reply->errorString());
+            emit error(reply->errorString());
         }
     }
 
@@ -95,7 +95,7 @@ void CaptchaManager::onCaptchaNeededFinished(QNetworkReply *reply)
                 qDebug() << "Captcha needed";
             }
         } else {
-            error(reply->errorString());
+            emit error(reply->errorString());
             m_captchaNeededState = Error;
         }
     }

@@ -108,7 +108,7 @@ void MessageManager::onFinished(QNetworkReply *reply)
             default: qFatal("MessageManager::onFinished(): Invalid m_action"); break;
             }
         } else {
-            error(reply->errorString());
+            emit error(reply->errorString());
         }
     }
 
