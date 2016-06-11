@@ -34,7 +34,7 @@ void VoteManager::vote(const QString &fullname, VoteManager::VoteType voteType)
     parameters["id"] = m_fullname;
     parameters["dir"] = QString::number(voteTypeToLikes(m_voteType));
 
-    doRequest(APIRequest::POST, "/api/vote", SLOT(onFinished(QNetworkReply*)));
+    doRequest(APIRequest::POST, "/api/vote", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void VoteManager::onFinished(QNetworkReply *reply)

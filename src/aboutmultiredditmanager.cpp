@@ -89,7 +89,7 @@ void AboutMultiredditManager::addSubreddit(const QString &subreddit)
     QHash<QString, QString> parameters;
     parameters.insert("model", QtJson::serializeStr(variantHash));
 
-    doRequest(APIRequest::PUT, "/api/multi" + m_multiredditObject.path() + "/r/" + subreddit, SLOT(onAddFinished(QNetworkReply*)));
+    doRequest(APIRequest::PUT, "/api/multi" + m_multiredditObject.path() + "/r/" + subreddit, SLOT(onAddFinished(QNetworkReply*)), parameters);
 }
 
 void AboutMultiredditManager::removeSubreddit(const QString &subreddit)
