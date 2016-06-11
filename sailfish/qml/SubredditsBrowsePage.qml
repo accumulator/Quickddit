@@ -60,7 +60,7 @@ AbstractPage {
 
         header: PageHeader { title: subredditsBrowsePage.title }
 
-        delegate: SubredditDelegate {
+        delegate: SubredditBrowseDelegate {
             onClicked: {
                 var mainPage = globalUtils.getMainPage();
                 mainPage.refresh(model.displayName);
