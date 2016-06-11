@@ -19,7 +19,7 @@
 #include "abstractlistmodelmanager.h"
 
 AbstractListModelManager::AbstractListModelManager(QObject *parent) :
-    QAbstractListModel(parent), m_busy(false), m_canLoadMore(true), m_manager(0)
+    QAbstractListModel(parent), m_busy(false), m_canLoadMore(true), m_manager(0), m_request(0)
 {
 }
 
