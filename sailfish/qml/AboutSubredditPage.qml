@@ -129,6 +129,24 @@ AbstractPage {
                     visible: aboutSubredditManager.isContributor
                     text: "Contributor"
                 }
+
+                Bubble {
+                    visible: aboutSubredditManager.isBanned
+                    text: "Banned"
+                    color: "red"
+                }
+
+                Bubble {
+                    visible: aboutSubredditManager.isModerator
+                    text: "Mod"
+                    color: "blue"
+                }
+
+                Bubble {
+                    visible: aboutSubredditManager.isMuted
+                    text: "Muted"
+                    color: "grey"
+                }
             }
 
             Separator {
