@@ -76,8 +76,10 @@ Item {
                 maximumLineCount: 2
                 elide: Text.ElideRight
                 text: isComment ? "in /r/" + model.subreddit + ", " + model.created
-                                : (isSentMessage ? "to " + model.destination
-                                                 : "from " + model.author) + ", " + model.created
+                                : (isSentMessage) ? "to " + model.destination
+                                                  : (model.author !== "")
+                                                    ? "from " + model.author + ", " + model.created
+                                                    : "/r/" + model.subreddit + ", " + model.created
             }
 
             Text {
