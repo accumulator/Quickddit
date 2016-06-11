@@ -40,7 +40,6 @@ private slots:
 private:
     QString m_fullname;
     bool m_save;
-    APIRequest *m_request;
 };
 
 #endif // SAVEMANAGER_H

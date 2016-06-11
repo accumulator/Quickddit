@@ -82,7 +82,6 @@ private:
     MultiredditModel *m_model;
 
     QString toBeRemoveSubreddit;
-    APIRequest *m_request;
 };
 
 #endif // ABOUTMULTIREDDITMANAGER_H

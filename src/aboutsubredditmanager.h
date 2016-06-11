@@ -100,8 +100,6 @@ private slots:
 private:
     QString m_subreddit;
     SubredditObject m_subredditObject;
-
-    APIRequest *m_request;
 };
 
 #endif // ABOUTSUBREDDITMANAGER_H

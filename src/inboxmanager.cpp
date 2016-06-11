@@ -33,7 +33,7 @@
  * 2. notifications. emit event on *new* unread message.
  */
 InboxManager::InboxManager(QObject *parent) :
-    AbstractManager(parent), m_request(0), m_enabled(true)
+    AbstractManager(parent), m_enabled(true)
 {
     m_pollTimer = new QTimer(this);
     m_pollTimer->setInterval(TIMER_INI_INTERVAL);
@@ -96,16 +96,11 @@ void InboxManager::request()
     if (!manager()->isSignedIn())
         return;
 
-    abortActiveReply();
-
     QHash<QString, QString> parameters;
     parameters["mark"] = "false";
     parameters["limit"] = "1";
 
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, "/message/unread", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onUnreadReceived(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::GET, "/message/unread", SLOT(onUnreadReceived(QNetworkReply*)), parameters);
 }
 
 void InboxManager::onUnreadReceived(QNetworkReply *reply)
@@ -123,11 +118,6 @@ void InboxManager::onUnreadReceived(QNetworkReply *reply)
         }
     }
 
-    m_request->deleteLater();
-    m_request = 0;
-
-    setBusy(false);
-
     if (hasUnread())
         checkNewUnread();
 }
@@ -138,10 +128,7 @@ void InboxManager::checkNewUnread()
     parameters["mark"] = "false";
     parameters["limit"] = "10";
 
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, "/message/inbox", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onInboxReceived(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::GET, "/message/inbox", SLOT(onInboxReceived(QNetworkReply*)), parameters);
 }
 
 void InboxManager::onInboxReceived(QNetworkReply *reply)
@@ -156,11 +143,6 @@ void InboxManager::onInboxReceived(QNetworkReply *reply)
             emit error(reply->errorString());
         }
     }
-
-    m_request->deleteLater();
-    m_request = 0;
-
-    setBusy(false);
 }
 
 void InboxManager::filterInbox(Listing<MessageObject> messages)
@@ -195,14 +177,4 @@ void InboxManager::filterInbox(Listing<MessageObject> messages)
     }
 
     manager()->settings()->setLastSeenMessage(newLastSeenMessageId);
-}
-
-void InboxManager::abortActiveReply()
-{
-    if (m_request != 0) {
-        qWarning("InboxManager::abortActiveReply(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
-    }
 }

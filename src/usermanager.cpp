@@ -23,18 +23,13 @@
 #include "utils.h"
 
 UserManager::UserManager(QObject *parent) :
-    AbstractManager(parent), m_request(0)
+    AbstractManager(parent)
 {
 }
 
 void UserManager::request(const QString &username)
 {
-    abortActiveReply();
-
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, "/user/" + username + "/about");
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::GET, "/user/" + username + "/about", SLOT(onFinished(QNetworkReply*)));
 }
 
 void UserManager::onFinished(QNetworkReply *reply)
@@ -47,10 +42,6 @@ void UserManager::onFinished(QNetworkReply *reply)
         } else
             emit error(reply->errorString());
     }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 }
 
 QVariantMap UserManager::user() {
@@ -71,14 +62,4 @@ QVariantMap UserManager::toLinkVariantMap(const UserObject &user)
     map["hasVerifiedEmail"] = user.hasVerifiedEmail();
     map["isFriend"] = user.isFriend();
     return map;
-}
-
-void UserManager::abortActiveReply()
-{
-    if (m_request != 0) {
-        qWarning("UserManager::request(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
-    }
 }

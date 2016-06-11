@@ -23,7 +23,7 @@
 #include "parser.h"
 
 CaptchaManager::CaptchaManager(QObject *parent) :
-    AbstractManager(parent), m_request(0)
+    AbstractManager(parent)
 {
     m_ready = false;
     m_iden = "";
@@ -38,15 +38,10 @@ void CaptchaManager::request()
         return;
     }
 
-    abortActiveReply();
-
     QHash<QString, QString> parameters;
     parameters.insert("api_type", "json");
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/new_captcha", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onRequestFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, "/api/new_captcha", SLOT(onRequestFinished(QNetworkReply*)), parameters);
 
     m_ready = false;
     m_iden = "";
@@ -66,20 +61,11 @@ void CaptchaManager::onRequestFinished(QNetworkReply *reply)
             emit error(reply->errorString());
         }
     }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 }
 
 void CaptchaManager::requestCaptchaNeeded()
 {
-    abortActiveReply();
-
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, "/api/needs_captcha");
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onCaptchaNeededFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::GET, "/api/needs_captcha", SLOT(onCaptchaNeededFinished(QNetworkReply*)));
 }
 
 void CaptchaManager::onCaptchaNeededFinished(QNetworkReply *reply)
@@ -101,10 +87,6 @@ void CaptchaManager::onCaptchaNeededFinished(QNetworkReply *reply)
     }
 
     emit captchaNeededChanged();
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 
     // since this slot is only reached as a step-out request-reply by request(), call it now that we have the captcha-needed state.
     // unless we don't need a captcha at all, of course.
@@ -133,14 +115,4 @@ QString CaptchaManager::iden()
 bool CaptchaManager::captchaNeeded()
 {
     return (m_captchaNeededState == True || m_captchaNeededState == Error);
-}
-
-void CaptchaManager::abortActiveReply()
-{
-    if (m_request != 0) {
-        qWarning("CaptchaManager::abortActiveReply(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
-    }
 }

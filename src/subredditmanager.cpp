@@ -16,13 +16,13 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-#include "subredditmanager.h"
-
 #include <QtNetwork/QNetworkReply>
 #include <QDebug>
 
+#include "subredditmanager.h"
+
 SubredditManager::SubredditManager(QObject *parent) :
-    AbstractManager(parent), m_model(0), m_request(0)
+    AbstractManager(parent), m_model(0)
 {
 }
 
@@ -48,8 +48,6 @@ void SubredditManager::unsubscribe(const QString &fullname)
 
 void SubredditManager::doSubscribe(const QString &fullname, bool subscribe)
 {
-    abortActiveReply();
-
     QHash<QString, QString> parameters;
     parameters["sr"] = fullname;
     if (subscribe)
@@ -60,10 +58,7 @@ void SubredditManager::doSubscribe(const QString &fullname, bool subscribe)
     m_subscribe = subscribe;
     m_fullname = fullname;
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/subscribe", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, "/api/subscribe", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void SubredditManager::onFinished(QNetworkReply *reply)
@@ -77,19 +72,5 @@ void SubredditManager::onFinished(QNetworkReply *reply)
         } else {
             emit error(reply->errorString());
         }
-    }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
-}
-
-void SubredditManager::abortActiveReply()
-{
-    if (m_request != 0) {
-        qWarning("SubredditManager::abortActiveReply(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
     }
 }

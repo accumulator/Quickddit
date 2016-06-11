@@ -16,24 +16,17 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-#include "votemanager.h"
-
 #include <QtNetwork/QNetworkReply>
 
+#include "votemanager.h"
+
 VoteManager::VoteManager(QObject *parent) :
-    AbstractManager(parent), m_request(0)
+    AbstractManager(parent)
 {
 }
 
 void VoteManager::vote(const QString &fullname, VoteManager::VoteType voteType)
 {
-    if (m_request != 0) {
-        qWarning("VoteManager::vote(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
-    }
-
     m_fullname = fullname;
     m_voteType = voteType;
 
@@ -41,10 +34,7 @@ void VoteManager::vote(const QString &fullname, VoteManager::VoteType voteType)
     parameters["id"] = m_fullname;
     parameters["dir"] = QString::number(voteTypeToLikes(m_voteType));
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/vote", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, "/api/vote", SLOT(onFinished(QNetworkReply*)));
 }
 
 void VoteManager::onFinished(QNetworkReply *reply)
@@ -55,10 +45,6 @@ void VoteManager::onFinished(QNetworkReply *reply)
         else
             emit error(reply->errorString());
     }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 }
 
 int VoteManager::voteTypeToLikes(VoteType voteType)

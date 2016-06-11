@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2016  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,9 +39,7 @@ public:
     void setLinkAuthor(const QString &linkAuthor);
 
     Q_INVOKABLE void addComment(const QString &replyTofullname, const QString &rawText);
-
     Q_INVOKABLE void editComment(const QString &fullname, const QString &rawText);
-
     Q_INVOKABLE void deleteComment(const QString &fullname);
 
 signals:
@@ -57,9 +56,6 @@ private:
     enum Action { Insert, Edit, Delete };
     Action m_action;
     QString m_fullname;
-    APIRequest *m_request;
-
-    void abortActiveReply();
 };
 
 #endif // COMMENTMANAGER_H

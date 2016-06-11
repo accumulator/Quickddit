@@ -48,7 +48,6 @@ private slots:
     void onCaptchaNeededFinished(QNetworkReply *reply);
 
 private:
-    APIRequest *m_request;
     bool m_ready;
     QString m_iden;
 
@@ -59,7 +58,6 @@ private:
     CaptchaNeededState m_captchaNeededState;
 
     void requestCaptchaNeeded();
-    void abortActiveReply();
 };
 
 #endif // CAPTCHAMANAGER_H

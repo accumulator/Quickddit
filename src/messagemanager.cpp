@@ -21,14 +21,12 @@
 #include <QtNetwork/QNetworkReply>
 
 MessageManager::MessageManager(QObject *parent) :
-    AbstractManager(parent), m_request(0)
+    AbstractManager(parent)
 {
 }
 
 void MessageManager::reply(const QString &fullname, const QString &rawText)
 {
-    abortActiveReply();
-
     QHash<QString, QString> parameters;
     parameters.insert("api_type", "json");
     parameters.insert("text", rawText);
@@ -36,16 +34,11 @@ void MessageManager::reply(const QString &fullname, const QString &rawText)
     m_fullname = fullname;
     m_action = Reply;
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/comment", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, "/api/comment", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void MessageManager::send(const QString &username, const QString &subject, const QString &rawText, const QString &captcha, const QString &iden)
 {
-    abortActiveReply();
-
     QHash<QString, QString> parameters;
     parameters.insert("api_type", "json");
     parameters.insert("subject", subject);
@@ -60,40 +53,27 @@ void MessageManager::send(const QString &username, const QString &subject, const
 
     m_action = Send;
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/compose", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, "/api/compose", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void MessageManager::markRead(const QString &fullname)
 {
-    abortActiveReply();
-
     QHash<QString, QString> parameters;
     parameters.insert("id", fullname);
     m_fullname = fullname;
     m_action = MarkRead;
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/read_message", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, "/api/read_message", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void MessageManager::markUnread(const QString &fullname)
 {
-    abortActiveReply();
-
     QHash<QString, QString> parameters;
     parameters.insert("id", fullname);
     m_fullname = fullname;
     m_action = MarkUnread;
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/unread_message", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, "/api/unread_message", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void MessageManager::onFinished(QNetworkReply *reply)
@@ -110,19 +90,5 @@ void MessageManager::onFinished(QNetworkReply *reply)
         } else {
             emit error(reply->errorString());
         }
-    }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
-}
-
-void MessageManager::abortActiveReply()
-{
-    if (m_request != 0) {
-        qWarning("MessageManager::abortActiveReply(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
     }
 }

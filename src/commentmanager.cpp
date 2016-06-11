@@ -25,7 +25,7 @@
 #include "parser.h"
 
 CommentManager::CommentManager(QObject *parent) :
-    AbstractManager(parent), m_model(0), m_request(0)
+    AbstractManager(parent), m_model(0)
 {
 }
 
@@ -51,8 +51,6 @@ void CommentManager::setLinkAuthor(const QString &linkAuthor)
 
 void CommentManager::addComment(const QString &replyTofullname, const QString &rawText)
 {
-    abortActiveReply();
-
     QHash<QString, QString> parameters;
     parameters.insert("api_type", "json");
     parameters.insert("text", rawText);
@@ -60,16 +58,11 @@ void CommentManager::addComment(const QString &replyTofullname, const QString &r
     m_action = Insert;
     m_fullname = replyTofullname;
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/comment", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, "/api/comment", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void CommentManager::editComment(const QString &fullname, const QString &rawText)
 {
-    abortActiveReply();
-
     QHash<QString, QString> parameters;
     parameters.insert("api_type", "json");
     parameters.insert("text", rawText);
@@ -77,25 +70,17 @@ void CommentManager::editComment(const QString &fullname, const QString &rawText
     m_action = Edit;
     m_fullname = fullname;
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/editusertext", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, "/api/editusertext", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void CommentManager::deleteComment(const QString &fullname)
 {
-    abortActiveReply();
-
     QHash<QString, QString> parameters;
     parameters.insert("id", fullname);
     m_action = Delete;
     m_fullname = fullname;
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/del", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, "/api/del", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void CommentManager::onFinished(QNetworkReply *reply)
@@ -131,17 +116,4 @@ void CommentManager::onFinished(QNetworkReply *reply)
     }
 
     m_fullname.clear();
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
-}
-
-void CommentManager::abortActiveReply()
-{
-    if (m_request != 0) {
-        qWarning("CommentManager::abortActiveReply(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
-    }
 }

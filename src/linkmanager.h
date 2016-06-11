@@ -51,15 +51,12 @@ private slots:
     void onFinished(QNetworkReply *reply);
 
 private:
-    APIRequest *m_request;
     enum Action { Submit, Edit };
     Action m_action;
     LinkModel *m_linkModel;
     CommentModel *m_commentModel;
     QString m_fullname;
     QString m_text;
-
-    void abortActiveReply();
 };
 
 #endif // LINKMANAGER_H

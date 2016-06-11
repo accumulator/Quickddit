@@ -16,14 +16,13 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-#include "aboutsubredditmanager.h"
-
 #include <QtNetwork/QNetworkReply>
 
+#include "aboutsubredditmanager.h"
 #include "parser.h"
 
 AboutSubredditManager::AboutSubredditManager(QObject *parent) :
-    AbstractManager(parent), m_request(0)
+    AbstractManager(parent)
 {
 }
 
@@ -127,31 +126,11 @@ void AboutSubredditManager::setSubreddit(const QString &subreddit)
 
 void AboutSubredditManager::refresh()
 {
-    if (m_request != 0) {
-        qWarning("AboutSubredditManager::refresh(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
-    }
-
-    QString relativeUrl = "/r/" + m_subreddit + "/about";
-
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, relativeUrl);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::GET, "/r/" + m_subreddit + "/about", SLOT(onFinished(QNetworkReply*)));
 }
 
 void AboutSubredditManager::subscribeOrUnsubscribe()
 {
-    if (m_request != 0) {
-        qWarning("AboutSubredditManager::subscribeOrUnsubscribe():"
-                 "Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
-    }
-
     QHash<QString, QString> parameters;
     parameters["sr"] = m_subredditObject.fullname();
     if (m_subredditObject.isSubscribed())
@@ -159,10 +138,7 @@ void AboutSubredditManager::subscribeOrUnsubscribe()
     else
         parameters["action"] = "sub";
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/subscribe", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onSubscribeFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, "/api/subscribe", SLOT(onSubscribeFinished(QNetworkReply*)), parameters);
 }
 
 void AboutSubredditManager::onFinished(QNetworkReply *reply)
@@ -176,10 +152,6 @@ void AboutSubredditManager::onFinished(QNetworkReply *reply)
             emit error(reply->errorString());
         }
     }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 }
 
 void AboutSubredditManager::onSubscribeFinished(QNetworkReply *reply)
@@ -193,8 +165,4 @@ void AboutSubredditManager::onSubscribeFinished(QNetworkReply *reply)
             emit error(reply->errorString());
         }
     }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 }

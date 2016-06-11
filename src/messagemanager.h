@@ -27,9 +27,6 @@ private:
     QString m_fullname;
     enum Action { Reply, Send, MarkRead, MarkUnread };
     Action m_action;
-
-    APIRequest *m_request;
-    void abortActiveReply();
 };
 
 #endif // MESSAGEMANAGER_H

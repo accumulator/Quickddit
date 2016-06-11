@@ -46,7 +46,6 @@ private slots:
 private:
     QString m_fullname;
     VoteType m_voteType;
-    APIRequest *m_request;
 
     static int voteTypeToLikes(VoteType voteType);
 };

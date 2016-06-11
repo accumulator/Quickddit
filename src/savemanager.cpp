@@ -16,12 +16,12 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-#include "savemanager.h"
-
 #include <QtNetwork/QNetworkReply>
 
+#include "savemanager.h"
+
 SaveManager::SaveManager(QObject *parent) :
-        AbstractManager(parent), m_request(0)
+        AbstractManager(parent)
 {
 
 }
@@ -33,23 +33,13 @@ void SaveManager::unsave(const QString &fullname)
 
 void SaveManager::save(const QString &fullname, bool save)
 {
-    if (m_request != 0) {
-        qWarning("SaveManager::save(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
-    }
-
     m_fullname = fullname;
     m_save = save;
 
     QHash<QString, QString> parameters;
     parameters["id"] = m_fullname;
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, save ? "/api/save" : "/api/unsave", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, save ? "/api/save" : "/api/unsave", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void SaveManager::onFinished(QNetworkReply *reply)
@@ -60,8 +50,4 @@ void SaveManager::onFinished(QNetworkReply *reply)
         else
             emit error(reply->errorString());
     }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 }

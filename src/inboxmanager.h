@@ -58,7 +58,6 @@ private slots:
     void pollTimeout();
 
 private:
-    APIRequest* m_request;
     bool m_hasUnread;
     bool m_enabled;
     QTimer* m_pollTimer;
@@ -67,8 +66,6 @@ private:
 
     void filterInbox(Listing<MessageObject> messages);
     void checkNewUnread();
-
-    void abortActiveReply();
 };
 
 #endif // INBOXMANAGER_H

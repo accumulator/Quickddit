@@ -25,7 +25,7 @@
 #include "utils.h"
 
 AboutMultiredditManager::AboutMultiredditManager(QObject *parent) :
-    AbstractManager(parent), m_model(0), m_request(0)
+    AbstractManager(parent), m_model(0)
 {
 }
 
@@ -84,42 +84,22 @@ void AboutMultiredditManager::setModel(MultiredditModel *model)
 
 void AboutMultiredditManager::addSubreddit(const QString &subreddit)
 {
-    abortActiveRequest();
-
-    QString url = "/api/multi" + m_multiredditObject.path() + "/r/" + subreddit;
-
     QVariantHash variantHash;
     variantHash.insert("name", subreddit);
     QHash<QString, QString> parameters;
     parameters.insert("model", QtJson::serializeStr(variantHash));
 
-    m_request = manager()->createRedditRequest(this, APIRequest::PUT, url, parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onAddFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::PUT, "/api/multi" + m_multiredditObject.path() + "/r/" + subreddit, SLOT(onAddFinished(QNetworkReply*)));
 }
 
 void AboutMultiredditManager::removeSubreddit(const QString &subreddit)
 {
-    abortActiveRequest();
-
-    toBeRemoveSubreddit = subreddit;
-    QString url = "/api/multi" + m_multiredditObject.path() + "/r/" + subreddit;
-    m_request = manager()->createRedditRequest(this, APIRequest::DELETE, url);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onRemoveFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::DELETE, "/api/multi" + m_multiredditObject.path() + "/r/" + subreddit, SLOT(onRemoveFinished(QNetworkReply*)));
 }
 
 void AboutMultiredditManager::getDescription()
 {
-    abortActiveRequest();
-
-    QString url = "/api/multi" + m_multiredditObject.path() + "/description";
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, url);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onDescriptionFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::GET, "/api/multi" + m_multiredditObject.path() + "/description", SLOT(onDescriptionFinished(QNetworkReply*)));
 }
 
 void AboutMultiredditManager::onDescriptionFinished(QNetworkReply *reply)
@@ -132,10 +112,6 @@ void AboutMultiredditManager::onDescriptionFinished(QNetworkReply *reply)
             emit error(reply->errorString());
         }
     }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 }
 
 void AboutMultiredditManager::onAddFinished(QNetworkReply *reply)
@@ -155,10 +131,6 @@ void AboutMultiredditManager::onAddFinished(QNetworkReply *reply)
             emit error(reply->errorString());
         }
     }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 }
 
 void AboutMultiredditManager::onRemoveFinished(QNetworkReply *reply)
@@ -179,18 +151,5 @@ void AboutMultiredditManager::onRemoveFinished(QNetworkReply *reply)
         } else {
             emit error(reply->errorString());
         }
-    }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
-}
-
-void AboutMultiredditManager::abortActiveRequest()
-{
-    if (m_request != 0) {
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
     }
 }

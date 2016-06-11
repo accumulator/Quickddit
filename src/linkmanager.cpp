@@ -16,15 +16,14 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-#include "linkmanager.h"
-
 #include <QtNetwork/QNetworkReply>
 
+#include "linkmanager.h"
 #include "linkmodel.h"
 #include "parser.h"
 
 LinkManager::LinkManager(QObject *parent) :
-    AbstractManager(parent), m_request(0), m_linkModel(0), m_commentModel(0)
+    AbstractManager(parent), m_linkModel(0), m_commentModel(0)
 {
 }
 
@@ -50,8 +49,6 @@ void LinkManager::setCommentModel(CommentModel *model)
 
 void LinkManager::submit(const QString &subreddit, const QString &captcha, const QString &iden, const QString &title, const QString& url, const QString& text)
 {
-    abortActiveReply();
-
     m_action = Submit;
 
     QHash<QString, QString> parameters;
@@ -70,16 +67,11 @@ void LinkManager::submit(const QString &subreddit, const QString &captcha, const
     parameters.insert("text", text);
     parameters.insert("title", title);
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/submit", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, "/api/submit", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void LinkManager::editLinkText(const QString &fullname, const QString &rawText)
 {
-    abortActiveReply();
-
     m_action = Edit;
 
     QHash<QString, QString> parameters;
@@ -89,10 +81,7 @@ void LinkManager::editLinkText(const QString &fullname, const QString &rawText)
     m_fullname = fullname;
     m_text = rawText;
 
-    m_request = manager()->createRedditRequest(this, APIRequest::POST, "/api/editusertext", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::POST, "/api/editusertext", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 
@@ -120,19 +109,5 @@ void LinkManager::onFinished(QNetworkReply *reply)
         } else {
             emit error(reply->errorString());
         }
-    }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
-}
-
-void LinkManager::abortActiveReply()
-{
-    if (m_request != 0) {
-        qWarning("LinkManager::abortActiveReply(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
     }
 }

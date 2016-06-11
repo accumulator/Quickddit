@@ -44,12 +44,10 @@ private slots:
 
 private:
     void doSubscribe(const QString &subreddit, bool subscribe);
-    void abortActiveReply();
 
     SubredditModel *m_model;
     bool m_subscribe;
     QString m_fullname;
-    APIRequest *m_request;
 };
 
 #endif // SUBREDDITMANAGER_H

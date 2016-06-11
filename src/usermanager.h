@@ -45,11 +45,9 @@ private slots:
     void onFinished(QNetworkReply *reply);
 
 private:
-    APIRequest *m_request;
     QVariantMap m_user;
 
     static QVariantMap toLinkVariantMap(const UserObject &user);
-    void abortActiveReply();
 };
 
 #endif // USERMANAGER_H
