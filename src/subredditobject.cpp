@@ -37,6 +37,7 @@ public:
     bool isNSFW;
     bool isSubscribed;
     SubredditObject::SubmissionType submissionType;
+    bool isContributor;
 
 private:
     Q_DISABLE_COPY(SubredditObjectData)
@@ -183,3 +184,12 @@ void SubredditObject::setSubmissionType(const QString &submissionTypeString)
         d->submissionType = Self;
 }
 
+bool SubredditObject::isContributor() const
+{
+    return d->isContributor;
+}
+
+void SubredditObject::setContributor(bool contributor)
+{
+    d->isContributor = contributor;
+}

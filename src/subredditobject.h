@@ -72,6 +72,9 @@ public:
     void setSubmissionType(SubmissionType submissionType);
     void setSubmissionType(const QString &submissionTypeString);
 
+    bool isContributor() const;
+    void setContributor(bool contributor);
+
 private:
     QExplicitlySharedDataPointer<SubredditObjectData> d;
 };

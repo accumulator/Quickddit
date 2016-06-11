@@ -308,6 +308,7 @@ SubredditObject parseSubredditThing(const QVariantMap &subredditThing)
     subreddit.setNSFW(data.value("over18").toBool());
     subreddit.setSubscribed(data.value("user_is_subscriber").toBool());
     subreddit.setSubmissionType(data.value("submission_type").toString());
+    subreddit.setContributor(data.value("user_is_contributor").toBool());
     return subreddit;
 }
 
