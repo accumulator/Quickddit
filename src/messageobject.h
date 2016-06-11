@@ -32,6 +32,13 @@ public:
     MessageObject &operator =(const MessageObject &other);
     ~MessageObject();
 
+    enum DistinguishedType {
+        NotDistinguished,
+        DistinguishedByModerator,
+        DistinguishedByAdmin,
+        DistinguishedBySpecial
+    };
+
     QString fullname() const;
     void setFullname(const QString &fullname);
 
@@ -70,6 +77,10 @@ public:
 
     bool isUnread() const;
     void setUnread(bool unread);
+
+    DistinguishedType distinguished() const;
+    void setDistinguished(DistinguishedType distinguished);
+    void setDistinguished(const QString &distinguishedString);
 
 private:
     QExplicitlySharedDataPointer<MessageObjectData> d;

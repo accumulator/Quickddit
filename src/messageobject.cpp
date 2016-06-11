@@ -23,7 +23,7 @@
 class MessageObjectData : public QSharedData
 {
 public:
-    MessageObjectData() {}
+    MessageObjectData() : distinguished(MessageObject::NotDistinguished) {}
 
     QString fullname;
     QString author;
@@ -37,6 +37,7 @@ public:
     QString context;
     bool isComment;
     bool isUnread;
+    MessageObject::DistinguishedType distinguished;
 
 private:
     Q_DISABLE_COPY(MessageObjectData)
@@ -180,4 +181,26 @@ bool MessageObject::isUnread() const
 void MessageObject::setUnread(bool unread)
 {
     d->isUnread = unread;
+}
+
+MessageObject::DistinguishedType MessageObject::distinguished() const
+{
+    return d->distinguished;
+}
+
+void MessageObject::setDistinguished(MessageObject::DistinguishedType distinguished)
+{
+    d->distinguished = distinguished;
+}
+
+void MessageObject::setDistinguished(const QString &distinguishedString)
+{
+    if (distinguishedString.isEmpty())
+        d->distinguished = NotDistinguished;
+    else if (distinguishedString == "moderator")
+        d->distinguished = DistinguishedByModerator;
+    else if (distinguishedString == "admin")
+        d->distinguished = DistinguishedByAdmin;
+    else if (distinguishedString == "special")
+        d->distinguished = DistinguishedBySpecial;
 }

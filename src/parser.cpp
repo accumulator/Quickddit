@@ -410,6 +410,7 @@ Listing<MessageObject> Parser::parseMessageList(const QByteArray &json)
         message.setContext(messageMap.value("context").toString());
         message.setComment(messageMap.value("was_comment").toBool());
         message.setUnread(messageMap.value("new").toBool());
+        message.setDistinguished(messageMap.value("distinguished").toString());
 
         messageList.append(message);
     }
