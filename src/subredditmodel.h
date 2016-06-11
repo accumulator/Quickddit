@@ -66,6 +66,8 @@ public:
 
     void refresh(bool refreshOlder);
 
+    void deleteSubreddit(const QString &subreddit);
+
 protected:
     QHash<int, QByteArray> customRoleNames() const;
 

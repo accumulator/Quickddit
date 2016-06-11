@@ -142,7 +142,6 @@ void SubredditModel::refresh(bool refreshOlder)
         }
     }
 
-
     m_request = manager()->createRedditRequest(this, APIRequest::GET, relativeUrl, parameters);
     connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
 
@@ -162,6 +161,27 @@ QHash<int, QByteArray> SubredditModel::customRoleNames() const
     roles[ActiveUsersRole] = "activeUsers";
     roles[IsNSFWRole]= "isNSFW";
     return roles;
+}
+
+void SubredditModel::deleteSubreddit(const QString &fullname)
+{
+    int deleteIndex = -1;
+
+    for (int i = 0; i < m_subredditList.count(); ++i) {
+        if (m_subredditList.at(i).fullname() == fullname) {
+            deleteIndex = i;
+            break;
+        }
+    }
+
+    if (deleteIndex == -1) {
+        qWarning("SubredditModel::deleteSubreddit: Unable to find the subreddit");
+        return;
+    }
+
+    beginRemoveRows(QModelIndex(), deleteIndex, deleteIndex);
+    m_subredditList.removeAt(deleteIndex);
+    endRemoveRows();
 }
 
 void SubredditModel::onFinished(QNetworkReply *reply)
