@@ -65,3 +65,30 @@ void AbstractListModelManager::setCanLoadMore(bool canLoadMore)
         emit canLoadMoreChanged();
     }
 }
+
+void AbstractListModelManager::doRequest(APIRequest::HttpMethod method, const QString &relativeUrl, const char* finishedHandler, const QHash<QString, QString> &parameters)
+{
+    if (m_request != 0) {
+        qWarning("Aborting active network request (Try to avoid!)");
+        m_request->disconnect();
+        m_request->deleteLater();
+        m_request = 0;
+    }
+
+    m_request = manager()->createRedditRequest(this, method, relativeUrl, parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onRequestFinished(QNetworkReply*)));
+    if (finishedHandler)
+        connect(m_request, SIGNAL(finished(QNetworkReply*)), finishedHandler);
+
+    setBusy(true);
+}
+
+void AbstractListModelManager::onRequestFinished(QNetworkReply* reply)
+{
+    Q_UNUSED(reply)
+
+    m_request->deleteLater();
+    m_request = 0;
+
+    setBusy(false);
+}

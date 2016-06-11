@@ -57,16 +57,21 @@ protected:
     void setBusy(bool busy);
     void setCanLoadMore(bool canLoadMore);
     virtual QHash<int, QByteArray> customRoleNames() const = 0;
+    void doRequest(APIRequest::HttpMethod method, const QString &relativeUrl, const char* finishedHandler = 0, const QHash<QString, QString> &parameters = QHash<QString,QString>());
 
 signals:
     void busyChanged();
     void canLoadMoreChanged();
     void error(const QString &errorString);
 
+private slots:
+    void onRequestFinished(QNetworkReply* reply);
+
 private:
     bool m_busy;
     bool m_canLoadMore;
     QuickdditManager *m_manager;
+    APIRequest *m_request;
 };
 
 #endif // ABSTRACTLISTMODELMANAGER_H
