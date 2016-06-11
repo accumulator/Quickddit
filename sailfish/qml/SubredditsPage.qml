@@ -147,6 +147,12 @@ AbstractPage {
             menu: Component {
                 ContextMenu {
                     MenuItem {
+                        text: "About"
+                        onClicked: {
+                            pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: model.displayName} );
+                        }
+                    }
+                    MenuItem {
                         text: "Unsubscribe"
                         onClicked: {
                             _unsubsub = model.displayName
