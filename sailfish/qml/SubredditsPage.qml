@@ -27,6 +27,8 @@ AbstractPage {
     readonly property string title: "Subreddits"
     property SubredditModel subredditModel
 
+    property string _unsubsub
+
     function showSubreddit(subreddit) {
         var mainPage = globalUtils.getMainPage();
         mainPage.refresh(subreddit);
@@ -139,6 +141,20 @@ AbstractPage {
             id: itemDelegate
             text: model.url
             onClicked: subredditsPage.showSubreddit(model.displayName);
+
+            showMenuOnPressAndHold: true
+
+            menu: Component {
+                ContextMenu {
+                    MenuItem {
+                        text: "Unsubscribe"
+                        onClicked: {
+                            _unsubsub = model.displayName
+                            subredditManager.unsubscribe(model.fullname);
+                        }
+                    }
+                }
+            }
         }
 
         footer: LoadingFooter {
@@ -178,6 +194,16 @@ AbstractPage {
         onSignedInChanged: {
             subredditModel = subredditModelComponent.createObject(subredditsPage);
         }
+    }
+
+    SubredditManager {
+        id: subredditManager
+        manager: quickdditManager
+        model: subredditModel
+        onSuccess: {
+            infoBanner.alert(qsTr("You have unsubscribed from %1").arg(_unsubsub))
+        }
+        onError: infoBanner.warning(errorString)
     }
 
 }
