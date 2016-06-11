@@ -62,7 +62,8 @@ HEADERS += \
     ../src/userobject.h \
     ../src/userthingmodel.h \
     ../src/thing.h \
-    ../src/savemanager.h
+    ../src/savemanager.h \
+    ../src/subredditmanager.h
 
 SOURCES += main.cpp \
     dbusapp.cpp \
@@ -99,7 +100,8 @@ SOURCES += main.cpp \
     ../src/userobject.cpp \
     ../src/userthingmodel.cpp \
     ../src/thing.cpp \
-    ../src/savemanager.cpp
+    ../src/savemanager.cpp \
+    ../src/subredditmanager.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h

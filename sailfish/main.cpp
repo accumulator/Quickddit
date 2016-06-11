@@ -48,6 +48,7 @@
 #include "src/usermanager.h"
 #include "src/userthingmodel.h"
 #include "src/savemanager.h"
+#include "src/subredditmanager.h"
 
 int main(int argc, char *argv[])
 {
@@ -78,6 +79,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<UserManager>("harbour.quickddit.Core", 1, 0, "UserManager");
     qmlRegisterType<UserThingModel>("harbour.quickddit.Core", 1, 0, "UserThingModel");
     qmlRegisterType<SaveManager>("harbour.quickddit.Core", 1, 0, "SaveManager");
+    qmlRegisterType<SubredditManager>("harbour.quickddit.Core", 1, 0, "SubredditManager");
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     view->rootContext()->setContextProperty("APP_VERSION", APP_VERSION);
