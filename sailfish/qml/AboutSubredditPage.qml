@@ -124,6 +124,11 @@ AbstractPage {
                     visible: aboutSubredditManager.submissionType !== AboutSubredditManager.Any
                     text: aboutSubredditManager.submissionType === AboutSubredditManager.Link ? "Links only" : "Self posts only"
                 }
+
+                Bubble {
+                    visible: aboutSubredditManager.isContributor
+                    text: "Contributor"
+                }
             }
 
             Separator {
