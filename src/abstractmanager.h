@@ -40,7 +40,7 @@ public:
 
 protected:
     void setBusy(bool busy);
-    void doRequest(APIRequest::HttpMethod method, const QString &relativeUrl, const char* finished = 0, const QHash<QString, QString> &parameters = QHash<QString,QString>());
+    void doRequest(APIRequest::HttpMethod method, const QString &relativeUrl, const char* finishedHandler = 0, const QHash<QString, QString> &parameters = QHash<QString,QString>());
 
 signals:
     void busyChanged();
