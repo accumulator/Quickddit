@@ -92,6 +92,11 @@ AboutSubredditManager::SubmissionType AboutSubredditManager::submissionType() co
     return Any;
 }
 
+bool AboutSubredditManager::isContributor() const
+{
+    return m_subredditObject.isContributor();
+}
+
 QString AboutSubredditManager::subreddit() const
 {
     return m_subreddit;

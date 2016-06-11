@@ -47,7 +47,7 @@ class AboutSubredditManager : public AbstractManager, public QQmlParserStatus
     Q_PROPERTY(bool isNSFW READ isNSFW NOTIFY dataChanged)
     Q_PROPERTY(bool isSubscribed READ isSubscribed NOTIFY dataChanged)
     Q_PROPERTY(SubmissionType submissionType READ submissionType NOTIFY dataChanged)
-
+    Q_PROPERTY(bool isContributor READ isContributor NOTIFY dataChanged)
     Q_PROPERTY(QString subreddit READ subreddit WRITE setSubreddit NOTIFY subredditChanged)
 public:
     enum SubmissionType {
@@ -71,6 +71,7 @@ public:
     bool isNSFW() const;
     bool isSubscribed() const;
     SubmissionType submissionType() const;
+    bool isContributor() const;
 
     QString subreddit() const;
     void setSubreddit(const QString &subreddit);
