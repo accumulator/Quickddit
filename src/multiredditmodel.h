@@ -50,7 +50,6 @@ private slots:
 
 private:
     QList<MultiredditObject> m_multiredditList;
-    APIRequest *m_request;
 };
 
 #endif // MULTIREDDITMODEL_H

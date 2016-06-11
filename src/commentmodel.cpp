@@ -37,7 +37,7 @@
 static QRegExp commentPermalinkRegExp("(/r/\\w+)?/comments/\\w+/\\w*/(\\w+/?)");
 
 CommentModel::CommentModel(QObject *parent) :
-    AbstractListModelManager(parent), m_link(0), m_sort(ConfidenceSort), m_commentPermalink(false), m_request(0)
+    AbstractListModelManager(parent), m_link(0), m_sort(ConfidenceSort), m_commentPermalink(false)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
@@ -445,13 +445,6 @@ void CommentModel::refresh(bool refreshOlder)
     Q_ASSERT(!m_permalink.isEmpty());
     Q_UNUSED(refreshOlder);
 
-    if (m_request != 0) {
-        qWarning("CommentModel::refresh(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
-    }
-
     if (!m_commentList.isEmpty()) {
         beginRemoveRows(QModelIndex(), 0, m_commentList.count() - 1);
         m_commentList.clear();
@@ -483,22 +476,12 @@ void CommentModel::refresh(bool refreshOlder)
     if (!m_commentPermalink && relativeUrl.contains(commentPermalinkRegExp))
         relativeUrl.remove(commentPermalinkRegExp.cap(2));
 
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, relativeUrl, parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::GET, relativeUrl, SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void CommentModel::moreComments(int index, const QVariant &children)
 {
     Q_ASSERT(!m_permalink.isEmpty());
-
-    if (m_request != 0) {
-        qWarning("CommentModel::moreComments(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
-    }
 
     if (!m_link.type() == QVariant::Map) {
         qWarning("CommentModel::moreComments(): link is not provided by CommentModel");
@@ -515,12 +498,7 @@ void CommentModel::moreComments(int index, const QVariant &children)
     parameters["link_id"] = linkMap.value("fullname").toString();
     parameters["children"] = children.toStringList().join(",");
 
-    qDebug() << "more comments params:" << parameters;
-
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, "/api/morechildren", parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onMoreCommentsFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::GET, "/api/morechildren", SLOT(onMoreCommentsFinished(QNetworkReply*)), parameters);
 }
 
 void CommentModel::onFinished(QNetworkReply *reply)
@@ -546,9 +524,6 @@ void CommentModel::onFinished(QNetworkReply *reply)
         }
     }
 
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
     emit commentLoaded();
 }
 
@@ -570,7 +545,4 @@ void CommentModel::onMoreCommentsFinished(QNetworkReply *reply) {
             emit error(reply->errorString());
         }
     }
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 }

@@ -43,7 +43,7 @@ QVariantMap MessageModel::toMessageVariantMap(const MessageObject &m)
 }
 
 MessageModel::MessageModel(QObject *parent) :
-    AbstractListModelManager(parent), m_section(AllSection), m_request(0)
+    AbstractListModelManager(parent), m_section(AllSection)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5,0,0))
     setRoleNames(customRoleNames());
@@ -103,13 +103,6 @@ void MessageModel::setSection(MessageModel::Section section)
 
 void MessageModel::refresh(bool refreshOlder)
 {
-    if (m_request != 0) {
-        qWarning("MessageModel::refresh(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
-    }
-
     QString relativeUrl = "/message";
     switch (m_section) {
     case AllSection: relativeUrl += "/inbox"; break;
@@ -136,10 +129,7 @@ void MessageModel::refresh(bool refreshOlder)
         }
     }
 
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, relativeUrl, parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::GET, relativeUrl, SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void MessageModel::changeIsUnread(const QString &fullname, bool isUnread)
@@ -190,8 +180,4 @@ void MessageModel::onFinished(QNetworkReply *reply)
             emit error(reply->errorString());
         }
     }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 }

@@ -24,7 +24,7 @@
 #include "appsettings.h"
 
 UserThingModel::UserThingModel(QObject *parent) :
-  AbstractListModelManager(parent), m_section(OverviewSection), m_request(0)
+  AbstractListModelManager(parent), m_section(OverviewSection)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
   setRoleNames(customRoleNames());
@@ -152,8 +152,6 @@ void UserThingModel::refresh(bool refreshOlder)
     if (m_username == "")
         return;
 
-    abortActiveReply();
-
     QHash<QString,QString> parameters;
     parameters["limit"] = "25";
 
@@ -180,10 +178,7 @@ void UserThingModel::refresh(bool refreshOlder)
     default: qCritical("UserThingModel::refresh(): Invalid section"); break;
     }
 
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, path, parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::GET, path, SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
 void UserThingModel::onFinished(QNetworkReply *reply)
@@ -204,25 +199,11 @@ void UserThingModel::onFinished(QNetworkReply *reply)
         else
             emit error(reply->errorString());
     }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 }
 
 void UserThingModel::clearThingList()
 {
     while(!m_thingList.isEmpty()) {
         delete m_thingList.takeLast();
-    }
-}
-
-void UserThingModel::abortActiveReply()
-{
-    if (m_request != 0) {
-        qWarning("UserThingModel::request(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
     }
 }

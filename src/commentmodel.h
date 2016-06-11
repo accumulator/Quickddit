@@ -125,7 +125,6 @@ private:
     QHash<QString, QList<CommentObject> > m_collapsedCommentLists;
 
     QList<CommentObject> m_commentList;
-    APIRequest *m_request;
 
     static QString getSortString(SortType sort);
 };

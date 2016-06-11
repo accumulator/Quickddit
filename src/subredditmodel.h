@@ -87,7 +87,6 @@ private:
     QString m_query;
 
     QList<SubredditObject> m_subredditList;
-    APIRequest *m_request;
 };
 
 #endif // SUBREDDITMODEL_H

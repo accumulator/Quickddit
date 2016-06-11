@@ -168,7 +168,6 @@ private:
     SearchTimeRange m_searchTimeRange;
 
     QList<LinkObject> m_linkList;
-    APIRequest *m_request;
 
     static QString getSectionString(Section section);
     static QString getSearchSortString(SearchSortType sort);

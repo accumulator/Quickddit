@@ -24,7 +24,7 @@
 #include "utils.h"
 
 MultiredditModel::MultiredditModel(QObject *parent) :
-    AbstractListModelManager(parent), m_request(0)
+    AbstractListModelManager(parent)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
@@ -63,22 +63,13 @@ void MultiredditModel::refresh(bool refreshOlder)
 {
     Q_UNUSED(refreshOlder)
 
-    if (m_request != 0) {
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
-    }
-
     if (!m_multiredditList.isEmpty()) {
         beginRemoveRows(QModelIndex(), 0, m_multiredditList.count() - 1);
         m_multiredditList.clear();
         endRemoveRows();
     }
 
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, "/api/multi/mine");
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
-
-    setBusy(true);
+    doRequest(APIRequest::GET, "/api/multi/mine", SLOT(onFinished(QNetworkReply*)));
 }
 
 MultiredditObject MultiredditModel::getMultireddit(const QString &name)
@@ -114,8 +105,4 @@ void MultiredditModel::onFinished(QNetworkReply *reply)
             emit error(reply->errorString());
         }
     }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 }

@@ -80,7 +80,6 @@ private slots:
 private:
     Section m_section;
     QList<MessageObject> m_messageList;
-    APIRequest *m_request;
 };
 
 #endif // MESSAGEMODEL_H

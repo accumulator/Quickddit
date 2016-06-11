@@ -60,7 +60,7 @@ QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
 
 LinkModel::LinkModel(QObject *parent) :
     AbstractListModelManager(parent), m_location(FrontPage), m_section(HotSection), m_searchSort(RelevanceSort),
-    m_searchTimeRange(AllTime), m_request(0)
+    m_searchTimeRange(AllTime)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
@@ -225,13 +225,6 @@ void LinkModel::setSearchTimeRange(LinkModel::SearchTimeRange timeRange)
 
 void LinkModel::refresh(bool refreshOlder)
 {
-    if (m_request != 0) {
-        qWarning("LinkModel::refresh(): Aborting active network request (Try to avoid!)");
-        m_request->disconnect();
-        m_request->deleteLater();
-        m_request = 0;
-    }
-
     QString relativeUrl;
     QHash<QString,QString> parameters;
     parameters["limit"] = "50";
@@ -273,13 +266,10 @@ void LinkModel::refresh(bool refreshOlder)
         }
     }
 
-
-    m_request = manager()->createRedditRequest(this, APIRequest::GET, relativeUrl, parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onFinished(QNetworkReply*)));
+    doRequest(APIRequest::GET, relativeUrl, SLOT(onFinished(QNetworkReply*)), parameters);
 
     m_title = relativeUrl;
     emit titleChanged();
-    setBusy(true);
 }
 
 void LinkModel::changeLikes(const QString &fullname, int likes)
@@ -384,10 +374,6 @@ void LinkModel::onFinished(QNetworkReply *reply)
             emit error(reply->errorString());
         }
     }
-
-    m_request->deleteLater();
-    m_request = 0;
-    setBusy(false);
 }
 
 QString LinkModel::getSectionString(Section section)

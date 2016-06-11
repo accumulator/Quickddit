@@ -80,13 +80,11 @@ private:
     QString m_username;
     Section m_section;
     Listing<Thing*> m_thingList;
-    APIRequest *m_request;
 
     QVariantMap commentData(const CommentObject* o) const;
     QVariantMap linkData(const LinkObject* o) const;
 
     void clearThingList();
-    void abortActiveReply();
 };
 
 #endif // USERTHINGMODEL_H
