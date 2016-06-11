@@ -22,6 +22,7 @@
 #include <QtCore/QObject>
 
 #include "quickdditmanager.h"
+#include "apirequest.h"
 
 class AbstractManager : public QObject
 {
@@ -35,16 +36,22 @@ public:
 
     QuickdditManager *manager();
     void setManager(QuickdditManager *manager);
+    APIRequest *req();
 
 protected:
     void setBusy(bool busy);
+    void doRequest(APIRequest::HttpMethod method, const QString &relativeUrl, const char* finished = 0, const QHash<QString, QString> &parameters = QHash<QString,QString>());
 
 signals:
     void busyChanged();
 
+private slots:
+    void onRequestFinished(QNetworkReply* reply);
+
 private:
     bool m_busy;
     QuickdditManager *m_manager;
+    APIRequest *m_request;
 };
 
 #endif // ABSTRACTMANAGER_H

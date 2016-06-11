@@ -16,10 +16,12 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
+#include <QtNetwork/QNetworkReply>
+
 #include "abstractmanager.h"
 
 AbstractManager::AbstractManager(QObject *parent) :
-    QObject(parent), m_busy(false), m_manager(0)
+    QObject(parent), m_busy(false), m_manager(0), m_request(0)
 {
 }
 
@@ -44,4 +46,37 @@ void AbstractManager::setBusy(bool busy)
         m_busy = busy;
         emit busyChanged();
     }
+}
+
+APIRequest* AbstractManager::req()
+{
+    return m_request;
+}
+
+void AbstractManager::doRequest(APIRequest::HttpMethod method, const QString &relativeUrl, const char* finishedHandler, const QHash<QString, QString> &parameters)
+{
+    if (m_request != 0) {
+        qWarning("Aborting active network request (Try to avoid!)");
+        m_request->disconnect();
+        m_request->deleteLater();
+        m_request = 0;
+    }
+
+    m_request = manager()->createRedditRequest(this, method, relativeUrl, parameters);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onRequestFinished(QNetworkReply*)));
+    if (finishedHandler)
+        connect(m_request, SIGNAL(finished(QNetworkReply*)), finishedHandler);
+
+    setBusy(true);
+}
+
+void AbstractManager::onRequestFinished(QNetworkReply* reply)
+{
+    Q_UNUSED(reply)
+    qDebug() << "abstract request finished event";
+
+    m_request->deleteLater();
+    m_request = 0;
+
+    setBusy(false);
 }
