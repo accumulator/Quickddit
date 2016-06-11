@@ -80,6 +80,8 @@ ApplicationWindow {
                 return true
             } else if (/^https?\:\/\/((i|m)\.)?imgur\.com\/.+\.gifv$/.test(url)) {
                 return true;
+            } else if (/^https?\:\/\/streamable\.com\/.+/.test(url)) {
+                return true;
             } else {
                 return false
             }
@@ -181,6 +183,9 @@ ApplicationWindow {
                     return
                 }
                 pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://" + match[1] + "/" + match[4] + ".mp4" });
+            } else if (/^https?\:\/\/streamable\.com\/.+/.test(url)) {
+                match = /^https?\:\/\/streamable\.com\/(.+)/.exec(url)
+                pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://cdn.streamable.com/video/mp4/" + match[1] + ".mp4" });
             } else
                 infoBanner.alert(qsTr("Unsupported video url"));
         }
