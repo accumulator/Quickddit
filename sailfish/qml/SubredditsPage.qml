@@ -137,9 +137,8 @@ AbstractPage {
 
         }
 
-        delegate: SimpleListItem {
+        delegate: SubredditDelegate {
             id: itemDelegate
-            text: model.url
             onClicked: subredditsPage.showSubreddit(model.displayName);
 
             showMenuOnPressAndHold: true

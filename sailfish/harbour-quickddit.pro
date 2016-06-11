@@ -116,8 +116,9 @@ OTHER_FILES += \
     iface/org.quickddit.xml \
     qml/cover/CoverPage.qml \
     qml/SubredditsBrowsePage.qml \
-    qml/SubredditsPage.qml \
     qml/SubredditBrowseDelegate.qml \
+    qml/SubredditsPage.qml \
+    qml/SubredditDelegate.qml \
     qml/SignInPage.qml \
     qml/SelectionDialog.qml \
     qml/SearchPage.qml \
