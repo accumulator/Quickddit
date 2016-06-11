@@ -73,7 +73,6 @@ void AbstractManager::doRequest(APIRequest::HttpMethod method, const QString &re
 void AbstractManager::onRequestFinished(QNetworkReply* reply)
 {
     Q_UNUSED(reply)
-    qDebug() << "abstract request finished event";
 
     m_request->deleteLater();
     m_request = 0;
