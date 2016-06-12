@@ -54,6 +54,11 @@ ApplicationWindow {
         WebViewer {}
     }
 
+    property QtObject subredditsPage
+    property Component __subredditsPage: Component {
+        SubredditsPage {}
+    }
+
     // A collections of global utility functions
     QtObject {
         id: globalUtils
@@ -69,6 +74,13 @@ ApplicationWindow {
                 webViewPage = __webViewPage.createObject(appWindow);
             }
             return webViewPage;
+        }
+
+        function getNavPage() {
+            if (subredditsPage == undefined) {
+                subredditsPage = __subredditsPage.createObject(appWindow);
+            }
+            return subredditsPage;
         }
 
         function previewableVideo(url) {

@@ -69,16 +69,11 @@ AbstractPage {
     }
 
     property bool __pushedAttached: false
-    property QtObject subredditsPage
-    property Component __subredditsPage: Component {
-        SubredditsPage {}
-    }
 
     onStatusChanged: {
         if (mainPage.status === PageStatus.Active && !__pushedAttached) {
-            if (subredditsPage == undefined)
-                subredditsPage = __subredditsPage.createObject(mainPage);
-            pageStack.pushAttached(subredditsPage);
+            // get subredditspage and push
+            pageStack.pushAttached(globalUtils.getNavPage());
             __pushedAttached = true;
         }
     }
