@@ -27,6 +27,7 @@
 #include <QtQuick/QQuickView>
 #include <sailfishapp.h>
 #include <dbusapp.h>
+#include <keepalive/displayblanking.h>
 
 #include "src/appsettings.h"
 #include "src/qmlutils.h"
@@ -80,6 +81,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<UserThingModel>("harbour.quickddit.Core", 1, 0, "UserThingModel");
     qmlRegisterType<SaveManager>("harbour.quickddit.Core", 1, 0, "SaveManager");
     qmlRegisterType<SubredditManager>("harbour.quickddit.Core", 1, 0, "SubredditManager");
+    qmlRegisterType<DisplayBlanking>("harbour.quickddit.Core", 1, 0, "DisplayBlanking");
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     view->rootContext()->setContextProperty("APP_VERSION", APP_VERSION);
