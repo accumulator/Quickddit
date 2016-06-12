@@ -55,19 +55,6 @@ AbstractPage {
         pageStack.push(Qt.resolvedUrl("NewLinkPage.qml"), p);
     }
 
-    property Component __multiredditModelComponent: Component {
-        MultiredditModel {
-            manager: quickdditManager
-            onError: infoBanner.warning(errorString);
-        }
-    }
-    property QtObject multiredditModel
-    function getMultiredditModel() {
-        if (!multiredditModel)
-            multiredditModel = __multiredditModelComponent.createObject(mainPage);
-        return multiredditModel;
-    }
-
     property bool __pushedAttached: false
 
     onStatusChanged: {
@@ -95,7 +82,7 @@ AbstractPage {
                         p = {subreddit: linkModel.subreddit};
                     } else {
                         page = Qt.resolvedUrl("AboutMultiredditPage.qml");
-                        p = {multireddit: linkModel.multireddit, model: multiredditModel};
+                        p = {multireddit: linkModel.multireddit};
                     }
                     pageStack.push(page, p);
                 }

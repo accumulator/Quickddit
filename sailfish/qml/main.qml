@@ -83,6 +83,10 @@ ApplicationWindow {
             return subredditsPage;
         }
 
+        function getMultiredditModel() {
+            return getNavPage().multiredditModel
+        }
+
         function previewableVideo(url) {
             if (/^https?:\/\/(www\.)?gfycat\.com\//.test(url)) {
                 return true

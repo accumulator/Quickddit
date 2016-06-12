@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2014  Sander van Grieken
+    Copyright (C) 2015-2016  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@ AbstractPage {
 
     readonly property string title: "Subreddits"
     property SubredditModel subredditModel
+    property MultiredditModel multiredditModel
 
     property string _unsubsub
 
@@ -45,6 +46,8 @@ AbstractPage {
         if (status === PageStatus.Active) {
             if (!subredditModel)
                 subredditModel = subredditModelComponent.createObject(subredditsPage);
+            if (!multiredditModel)
+                multiredditModel = multiredditModelComponent.createObject(subredditsPage);
         } else if (status === PageStatus.Inactive) {
             subredditListView.headerItem.resetTextField();
             subredditListView.positionViewAtBeginning();
@@ -194,10 +197,20 @@ AbstractPage {
         }
     }
 
+    Component {
+        id: multiredditModelComponent
+
+        MultiredditModel {
+            manager: quickdditManager
+            onError: infoBanner.warning(errorString);
+        }
+    }
+
     Connections {
         target: quickdditManager
         onSignedInChanged: {
             subredditModel = subredditModelComponent.createObject(subredditsPage);
+            multiredditModel = multiredditModelComponent.createObject(subredditsPage);
         }
     }
 
