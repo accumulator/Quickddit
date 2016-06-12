@@ -25,3 +25,4 @@ Makefile*
 *.autosave
 
 sailfish/rpm/harbour-quickddit.spec
+sailfish/rpm/harbour-quickddit.yaml
