@@ -23,7 +23,7 @@ CONFIG += sailfishapp link_pkgconfig
 # to force harbour compatibility.
 #CONFIG += harbour
 
-PKGCONFIG += sailfishapp nemonotifications-qt5 keepalive
+PKGCONFIG += sailfishapp nemonotifications-qt5
 
 INCLUDEPATH += ..
 
@@ -63,7 +63,8 @@ HEADERS += \
     ../src/userthingmodel.h \
     ../src/thing.h \
     ../src/savemanager.h \
-    ../src/subredditmanager.h
+    ../src/subredditmanager.h \
+    ../src/dummy.h
 
 SOURCES += main.cpp \
     dbusapp.cpp \
@@ -101,7 +102,8 @@ SOURCES += main.cpp \
     ../src/userthingmodel.cpp \
     ../src/thing.cpp \
     ../src/savemanager.cpp \
-    ../src/subredditmanager.cpp
+    ../src/subredditmanager.cpp \
+    ../src/dummy.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h
@@ -186,10 +188,19 @@ INSTALLS += icon108 icon128 icon256
 }
 
 harbour {
-    message("Harbour build")
-    message("Notification specification is excluded")
+    message("build: HARBOUR Compliant")
+    message("* Notification specification is excluded")
+    message("* Display blanking prevention is excluded")
+    system(diff rpm/harbour-quickddit-harbour.yaml rpm/harbour-quickddit.yaml || touch main.cpp)
+    system(ln -sf harbour-quickddit-harbour.yaml rpm/harbour-quickddit.yaml)
+    DEFINES += HARBOUR_COMPLIANCE
 } else {
-    message("Non-harbour build")
+    message("build: Unrestricted")
+    system(diff rpm/harbour-quickddit-nonharbour.yaml rpm/harbour-quickddit.yaml || touch main.cpp)
+    system(ln -sf harbour-quickddit-nonharbour.yaml rpm/harbour-quickddit.yaml)
+
+    PKGCONFIG += keepalive
+
     notification.files = notifications/harbour-quickddit.inbox.conf
     notification.path = /usr/share/lipstick/notificationcategories
 
