@@ -120,6 +120,10 @@ Item {
                 value: imageItem.status
             }
 
+            DisplayBlanking {
+                preventBlanking: imageItem.playing
+            }
+
             Component.onCompleted: console.log("Normal Image viewer used")
         }
     }
