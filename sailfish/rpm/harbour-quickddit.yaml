@@ -20,6 +20,7 @@ PkgConfigBR:
 - Qt5Network
 - sailfishapp
 - nemonotifications-qt5
+- keepalive
 Requires:
 - sailfishsilica-qt5
 - mapplauncherd-booster-silica-qt5

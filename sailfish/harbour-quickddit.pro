@@ -23,7 +23,7 @@ CONFIG += sailfishapp link_pkgconfig
 # to force harbour compatibility.
 #CONFIG += harbour
 
-PKGCONFIG += sailfishapp nemonotifications-qt5
+PKGCONFIG += sailfishapp nemonotifications-qt5 keepalive
 
 INCLUDEPATH += ..
 
