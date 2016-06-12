@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtMultimedia 5.0
+import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: videoViewPage
@@ -129,5 +130,9 @@ AbstractPage {
         onTriggered: {
             playPauseButton.opacity = 0
         }
+    }
+
+    DisplayBlanking {
+        preventBlanking: (mediaPlayer.playbackState !== MediaPlayer.StoppedState && mediaPlayer.playbackState !== MediaPlayer.PausedState)
     }
 }
