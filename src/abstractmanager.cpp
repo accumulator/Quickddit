@@ -63,14 +63,14 @@ void AbstractManager::doRequest(APIRequest::HttpMethod method, const QString &re
     }
 
     m_request = manager()->createRedditRequest(this, method, relativeUrl, parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(onRequestFinished(QNetworkReply*)));
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(__onRequestFinished(QNetworkReply*)));
     if (finishedHandler)
         connect(m_request, SIGNAL(finished(QNetworkReply*)), finishedHandler);
 
     setBusy(true);
 }
 
-void AbstractManager::onRequestFinished(QNetworkReply* reply)
+void AbstractManager::__onRequestFinished(QNetworkReply* reply)
 {
     Q_UNUSED(reply)
 

@@ -65,7 +65,7 @@ signals:
     void error(const QString &errorString);
 
 private slots:
-    void onRequestFinished(QNetworkReply* reply);
+    void __onRequestFinished(QNetworkReply* reply);
 
 private:
     bool m_busy;

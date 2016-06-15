@@ -46,7 +46,7 @@ signals:
     void busyChanged();
 
 private slots:
-    void onRequestFinished(QNetworkReply* reply);
+    void __onRequestFinished(QNetworkReply* reply);
 
 private:
     bool m_busy;
