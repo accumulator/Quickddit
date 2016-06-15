@@ -19,6 +19,7 @@ Features
 - Integrated image viewer
 - Integrated imgur album viewer
 - Integrated video player
+- Integrated webviewer
 - Search for posts and subreddits
 - Add, reply, edit and delete comments
 - Submit new links and self-posts
