@@ -43,9 +43,10 @@ ApplicationWindow {
     }
 
     // work around ugly animation of DockedPanel when orientation changes to portrait
-    onOrientationChanged: {
-        busyPanel._initialized = false
-    }
+    onOrientationChanged: busyPanel._initialized = false
+
+    // reset inbox poll timer when activating the application
+    onApplicationActiveChanged: if (applicationActive) inboxManager.resetTimer();
 
     InfoBanner { id: infoBanner }
 

@@ -174,7 +174,6 @@ AbstractPage {
         linkModel: linkModel
         onSuccess: {
             infoBanner.alert(message);
-            inboxManager.resetTimer();
             pageStack.pop();
         }
         onError: infoBanner.warning(errorString);

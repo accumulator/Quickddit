@@ -317,7 +317,6 @@ AbstractPage {
         linkAuthor: link ? link.author : ""
         onSuccess: {
             infoBanner.alert(message);
-            inboxManager.resetTimer();
         }
         onError: infoBanner.warning(errorString);
     }
@@ -328,7 +327,6 @@ AbstractPage {
         commentModel: commentModel
         onSuccess: {
             infoBanner.alert(message);
-            inboxManager.resetTimer();
         }
         onError: infoBanner.warning(errorString);
     }

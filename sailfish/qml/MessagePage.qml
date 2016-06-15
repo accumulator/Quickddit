@@ -115,6 +115,5 @@ AbstractPage {
 
     Component.onCompleted: {
         inboxManager.dismiss();
-        inboxManager.resetTimer();
     }
 }
