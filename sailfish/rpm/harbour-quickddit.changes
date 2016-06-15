@@ -5,6 +5,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Wed Jun 15 2016 Sander van Grieken <sander@outrightsolutions.nl> 1.1.1-1
+- fix: captcha regression
+- chg: inbox poll now resets when activating the application
+- new: wakelock the screen when playing video
+
 * Sat Jun 11 2016 Sander van Grieken <sander@outrightsolutions.nl> 1.1.0-1
 - fix: crash receiving errors unexpectedly
 - fix: properly unescape flairtext
