@@ -72,9 +72,6 @@ void InboxManager::setEnabled(bool enabled)
 
 void InboxManager::pollTimeout()
 {
-    if (isBusy())
-        return;
-
     int interval = m_pollTimer->interval();
     // exponential back-off to max interval
     interval = qMin(interval * 3, TIMER_MAX_INTERVAL);
@@ -83,11 +80,12 @@ void InboxManager::pollTimeout()
 
     m_pollTimer->setInterval(interval);
 
-    if (manager()->isSignedIn() && m_enabled)
+    if (m_enabled)
         request();
 }
 
 void InboxManager::resetTimer(){
+    qDebug();
     m_pollTimer->setInterval(TIMER_INI_INTERVAL);
 }
 
