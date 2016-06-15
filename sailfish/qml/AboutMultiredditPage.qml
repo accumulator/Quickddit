@@ -96,7 +96,7 @@ AbstractPage {
             MenuItem {
                 text: "Go to /r/" + subredditMenu.subreddit
                 onClicked: {
-                    var mainPage = pageStack.find(function(p) { return p.objectName == "mainPage"; });
+                    var mainPage = globalUtils.getMainPage();
                     mainPage.refresh(subredditMenu.subreddit);
                     pageStack.pop(mainPage);
                 }
