@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2016  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,8 +25,9 @@ AbstractPage {
     id: multiredditsPage
 
     readonly property string title: "Multireddits"
-    property alias multiredditModel: multiredditListView.model
     property string multiredditName
+
+    property MultiredditModel _model: globalUtils.getMultiredditModel()
 
     signal accepted
 
@@ -41,11 +43,13 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                enabled: !multiredditModel.busy
+                enabled: !_model.busy
                 text: "Refresh"
-                onClicked: multiredditModel.refresh(false);
+                onClicked: _model.refresh(false);
             }
         }
+
+        model: _model
 
         header: QuickdditPageHeader { title: multiredditsPage.title }
 
@@ -57,12 +61,9 @@ AbstractPage {
             }
         }
 
-        footer: LoadingFooter { visible: multiredditModel.busy; listViewItem: multiredditListView }
+        footer: LoadingFooter { visible: _model.busy; listViewItem: multiredditListView }
 
-        ViewPlaceholder { enabled: multiredditListView.count == 0 && !multiredditModel.busy; text: "Nothing here :(" }
+        ViewPlaceholder { enabled: multiredditListView.count == 0 && !_model.busy; text: "Nothing here :(" }
     }
 
-    Component.onCompleted: {
-        multiredditModel = globalUtils.getMainPage().getMultiredditModel();
-    }
 }

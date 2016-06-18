@@ -26,7 +26,6 @@ AbstractPage {
     busy: multiredditManager.busy
 
     property alias multireddit: multiredditManager.name
-    property alias model: multiredditManager.model
 
     SilicaFlickable {
         id: flickable
@@ -147,7 +146,9 @@ AbstractPage {
     AboutMultiredditManager {
         id: multiredditManager
         manager: quickdditManager
+        model: globalUtils.getMultiredditModel()
         onSuccess: infoBanner.alert(message);
         onError: infoBanner.warning(errorString);
     }
+
 }

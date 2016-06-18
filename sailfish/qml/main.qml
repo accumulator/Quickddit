@@ -55,6 +55,11 @@ ApplicationWindow {
         WebViewer {}
     }
 
+    property QtObject subredditsPage
+    property Component __subredditsPage: Component {
+        SubredditsPage {}
+    }
+
     // A collections of global utility functions
     QtObject {
         id: globalUtils
@@ -70,6 +75,17 @@ ApplicationWindow {
                 webViewPage = __webViewPage.createObject(appWindow);
             }
             return webViewPage;
+        }
+
+        function getNavPage() {
+            if (subredditsPage == undefined) {
+                subredditsPage = __subredditsPage.createObject(appWindow);
+            }
+            return subredditsPage;
+        }
+
+        function getMultiredditModel() {
+            return getNavPage().multiredditModel
         }
 
         function previewableVideo(url) {
@@ -119,9 +135,7 @@ ApplicationWindow {
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
             else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url)) {
                 var subreddit = /^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.exec(url)[2];
-                var mainPage = getMainPage();
-                mainPage.refresh(subreddit);
-                pageStack.pop(mainPage);
+                pageStack.push(Qt.resolvedUrl("MainPage.qml"), {subreddit: subreddit});
             } else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.test(url)) {
                 var username = /^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.exec(url)[3];
                 pageStack.push(Qt.resolvedUrl("UserPage.qml"), {username: username});

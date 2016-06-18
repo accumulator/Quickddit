@@ -27,18 +27,20 @@ AbstractPage {
     title: linkModel.title
     busy: linkVoteManager.busy
 
+    property string subreddit
+
     readonly property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top", "Promoted"]
 
-    function refresh(subreddit) {
-        if (subreddit !== undefined) {
+    function refresh(sr) {
+        if (sr !== undefined) {
             linkModel.subreddit = "";
-            if (subreddit === "") {
+            if (sr === "") {
                 linkModel.location = LinkModel.FrontPage;
-            } else if (String(subreddit).toLowerCase() === "all") {
+            } else if (String(sr).toLowerCase() === "all") {
                 linkModel.location = LinkModel.All;
             } else {
                 linkModel.location = LinkModel.Subreddit;
-                linkModel.subreddit = subreddit;
+                linkModel.subreddit = sr;
             }
         }
         linkModel.refresh(false);
@@ -55,30 +57,12 @@ AbstractPage {
         pageStack.push(Qt.resolvedUrl("NewLinkPage.qml"), p);
     }
 
-    property Component __multiredditModelComponent: Component {
-        MultiredditModel {
-            manager: quickdditManager
-            onError: infoBanner.warning(errorString);
-        }
-    }
-    property QtObject multiredditModel
-    function getMultiredditModel() {
-        if (!multiredditModel)
-            multiredditModel = __multiredditModelComponent.createObject(mainPage);
-        return multiredditModel;
-    }
-
     property bool __pushedAttached: false
-    property QtObject subredditsPage
-    property Component __subredditsPage: Component {
-        SubredditsPage {}
-    }
 
     onStatusChanged: {
         if (mainPage.status === PageStatus.Active && !__pushedAttached) {
-            if (subredditsPage == undefined)
-                subredditsPage = __subredditsPage.createObject(mainPage);
-            pageStack.pushAttached(subredditsPage);
+            // get subredditspage and push
+            pageStack.pushAttached(globalUtils.getNavPage());
             __pushedAttached = true;
         }
     }
@@ -100,7 +84,7 @@ AbstractPage {
                         p = {subreddit: linkModel.subreddit};
                     } else {
                         page = Qt.resolvedUrl("AboutMultiredditPage.qml");
-                        p = {multireddit: linkModel.multireddit, model: multiredditModel};
+                        p = {multireddit: linkModel.multireddit};
                     }
                     pageStack.push(page, p);
                 }
@@ -193,4 +177,9 @@ AbstractPage {
         onError: infoBanner.warning(errorString);
     }
 
+    Component.onCompleted: {
+        if (subreddit == undefined)
+            return;
+        refresh(subreddit);
+    }
 }
