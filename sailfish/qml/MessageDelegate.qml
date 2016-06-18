@@ -59,10 +59,13 @@ Item {
                 }
 
                 Text {
+                    width: parent.width - 32 - constant.paddingSmall
                     font.pixelSize: constant.fontSizeDefault
                     color: mainItem.highlighted ? Theme.highlightColor : constant.colorLight
                     font.bold: true
                     elide: Text.ElideRight
+                    wrapMode: Text.Wrap
+                    maximumLineCount: 2
                     text: isComment ? model.subject + " from " + model.author
                                     : model.subject
                 }
