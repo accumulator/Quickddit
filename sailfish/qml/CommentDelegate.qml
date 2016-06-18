@@ -152,7 +152,8 @@ Item {
                 Bubble {
                     visible: model.isStickied
                     font.pixelSize: constant.fontSizeSmaller
-                    text: "Stickied"
+                    text: "Sticky"
+                    color: "green"
                 }
                 Bubble {
                     visible: model.gilded > 0
