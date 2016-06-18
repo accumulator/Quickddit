@@ -30,6 +30,8 @@
 
 #ifndef HARBOUR_COMPLIANCE
 #include <keepalive/displayblanking.h>
+#else
+#include "src/dummy.h"
 #endif
 
 #include "src/appsettings.h"
@@ -53,7 +55,6 @@
 #include "src/userthingmodel.h"
 #include "src/savemanager.h"
 #include "src/subredditmanager.h"
-#include "src/dummy.h"
 
 int main(int argc, char *argv[])
 {
