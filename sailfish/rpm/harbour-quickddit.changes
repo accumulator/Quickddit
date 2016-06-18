@@ -5,6 +5,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Jun 18 2016 Sander van Grieken <sander@outrightsolutions.nl> 1.2.0-1
+- chg: subreddit page now stacks like the other pages
+- fix: some small UI bugs
+
 * Wed Jun 15 2016 Sander van Grieken <sander@outrightsolutions.nl> 1.1.1-1
 - fix: captcha regression
 - chg: inbox poll now resets when activating the application
