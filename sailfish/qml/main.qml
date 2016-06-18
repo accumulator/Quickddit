@@ -134,9 +134,7 @@ ApplicationWindow {
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
             else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url)) {
                 var subreddit = /^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.exec(url)[2];
-                var mainPage = getMainPage();
-                mainPage.refresh(subreddit);
-                pageStack.pop(mainPage);
+                pageStack.push(Qt.resolvedUrl("MainPage.qml"), {subreddit: subreddit});
             } else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.test(url)) {
                 var username = /^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.exec(url)[3];
                 pageStack.push(Qt.resolvedUrl("UserPage.qml"), {username: username});
