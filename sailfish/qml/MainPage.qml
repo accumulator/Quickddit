@@ -27,18 +27,20 @@ AbstractPage {
     title: linkModel.title
     busy: linkVoteManager.busy
 
+    property string subreddit
+
     readonly property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top", "Promoted"]
 
-    function refresh(subreddit) {
-        if (subreddit !== undefined) {
+    function refresh(sr) {
+        if (sr !== undefined) {
             linkModel.subreddit = "";
-            if (subreddit === "") {
+            if (sr === "") {
                 linkModel.location = LinkModel.FrontPage;
-            } else if (String(subreddit).toLowerCase() === "all") {
+            } else if (String(sr).toLowerCase() === "all") {
                 linkModel.location = LinkModel.All;
             } else {
                 linkModel.location = LinkModel.Subreddit;
-                linkModel.subreddit = subreddit;
+                linkModel.subreddit = sr;
             }
         }
         linkModel.refresh(false);
@@ -176,4 +178,9 @@ AbstractPage {
         onError: infoBanner.warning(errorString);
     }
 
+    Component.onCompleted: {
+        if (subreddit == undefined)
+            return;
+        refresh(subreddit);
+    }
 }
