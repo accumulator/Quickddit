@@ -56,7 +56,7 @@ APIRequest* AbstractManager::req()
 void AbstractManager::doRequest(APIRequest::HttpMethod method, const QString &relativeUrl, const char* finishedHandler, const QHash<QString, QString> &parameters)
 {
     if (m_request != 0) {
-        qWarning("Aborting active network request (Try to avoid!)");
+        qWarning() << QString("Aborting active network request in %0 (Try to avoid!)").arg(this->metaObject()->className());
         m_request->disconnect();
         m_request->deleteLater();
         m_request = 0;

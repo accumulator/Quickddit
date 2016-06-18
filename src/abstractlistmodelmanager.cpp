@@ -18,6 +18,8 @@
 
 #include "abstractlistmodelmanager.h"
 
+#include <QDebug>
+
 AbstractListModelManager::AbstractListModelManager(QObject *parent) :
     QAbstractListModel(parent), m_busy(false), m_canLoadMore(true), m_manager(0), m_request(0)
 {
@@ -69,7 +71,7 @@ void AbstractListModelManager::setCanLoadMore(bool canLoadMore)
 void AbstractListModelManager::doRequest(APIRequest::HttpMethod method, const QString &relativeUrl, const char* finishedHandler, const QHash<QString, QString> &parameters)
 {
     if (m_request != 0) {
-        qWarning("Aborting active network request (Try to avoid!)");
+        qWarning() << QString("Aborting active network request in %0 (Try to avoid!)").arg(this->metaObject()->className());
         m_request->disconnect();
         m_request->deleteLater();
         m_request = 0;
