@@ -94,7 +94,9 @@ Column {
         onLinkActivated: globalUtils.openLink(link)
         text: constant.richtextStyle + "submitted " + link.created + " by " +
                 (compact ? link.author : "<a href=\"https://reddit.com/u/" + link.author.split(" ")[0] + "\">" + link.author + "</a>") +
-                (showSubreddit ? " to " + link.subreddit : "")
+                (showSubreddit ?
+                     " to " + (compact ? link.subreddit : "<a href=\"https://reddit.com/r/" + link.subreddit + "\">" + link.subreddit + "</a>")
+                     : "")
     }
 
     // viewhack to render richtext wide again after orientation goes horizontal (?)
