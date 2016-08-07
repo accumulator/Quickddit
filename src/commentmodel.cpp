@@ -79,6 +79,7 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     roles[IsMoreChildrenRole] = "isMoreChildren";
     roles[MoreChildrenRole] = "moreChildren";
     roles[CollapsedRole] = "isCollapsed";
+    roles[ViewRole] = "view";
     roles[IsSavedRole] = "isSaved";
     roles[IsArchivedRole] = "isArchived";
     roles[IsStickiedRole] = "isStickied";
@@ -127,6 +128,7 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     case IsMoreChildrenRole: return comment.isMoreChildren();
     case MoreChildrenRole: return QVariant(comment.moreChildren());
     case CollapsedRole: return (comment.isCollapsed());
+    case ViewRole: return (comment.viewId());
     case IsArchivedRole: return (comment.isArchived());
     case IsStickiedRole: return (comment.isStickied());
     case GildedRole: return (comment.gilded());
@@ -356,6 +358,19 @@ void CommentModel::changeSaved(const QString &fullname, bool saved)
 
         if (comment.fullname() == fullname) {
             comment.setSaved(saved);
+            emit dataChanged(index(i), index(i));
+            break;
+        }
+    }
+}
+
+void CommentModel::setView(const QString &fullname, const QString &viewId)
+{
+    for (int i = 0; i < m_commentList.count(); ++i) {
+        CommentObject comment = m_commentList.at(i);
+
+        if (comment.fullname() == fullname) {
+            comment.setViewId(viewId);
             emit dataChanged(index(i), index(i));
             break;
         }
