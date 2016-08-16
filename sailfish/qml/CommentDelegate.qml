@@ -39,8 +39,8 @@ Item {
         mainItem.remorseAction(title, action, timeout);
     }
 
-    height: constant.paddingMedium + (mainItem.visible ? mainItem.height : 0)
-                                   + (moreChildrenLoader.visible ? moreChildrenLoader.height : 0)
+    height: (moreChildrenLoader.status == Loader.Null || model.view === "reply" ? mainItem.height : 0)
+            + (moreChildrenLoader.visible ? constant.paddingMedium + moreChildrenLoader.height : 0)
 
     ListView.onAdd: ParallelAnimation {
         NumberAnimation {
