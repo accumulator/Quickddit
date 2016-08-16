@@ -370,8 +370,10 @@ void CommentModel::setView(const QString &fullname, const QString &viewId)
         CommentObject comment = m_commentList.at(i);
 
         if (comment.fullname() == fullname) {
-            comment.setViewId(viewId);
-            emit dataChanged(index(i), index(i));
+            if (comment.viewId() != viewId) {
+                comment.setViewId(viewId);
+                emit dataChanged(index(i), index(i));
+            }
             break;
         }
     }
