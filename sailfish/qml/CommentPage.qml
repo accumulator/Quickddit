@@ -250,9 +250,13 @@ AbstractPage {
                     commentDelegate.ListView.view.currentIndex = parentIndex;
                     commentDelegate.ListView.view.currentItem.highlight();
                 })
-                dialog.replyClicked.connect(function() { __createCommentDialog("Reply Comment", model.fullname); });
+                dialog.replyClicked.connect(function() {
+                    //__createCommentDialog("Reply Comment", model.fullname); });
+                    commentModel.setView(model.fullname, "reply");
+                });
                 dialog.editClicked.connect(function() {
-                    __createCommentDialog("Edit Comment", model.fullname, model.rawBody, true);
+                    //__createCommentDialog("Edit Comment", model.fullname, model.rawBody, true);
+                    commentModel.setView(model.fullname, "edit");
                 });
                 dialog.deleteClicked.connect(function() {
                     commentDelegate.remorseAction("Deleting comment", function() {
