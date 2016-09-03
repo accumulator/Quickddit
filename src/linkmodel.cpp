@@ -158,6 +158,19 @@ void LinkModel::setSection(LinkModel::Section section)
     }
 }
 
+QString LinkModel::sectionPeriod() const
+{
+    return m_sectionPeriod;
+}
+
+void LinkModel::setSectionPeriod(const QString & sectionPeriod)
+{
+    if (m_sectionPeriod != sectionPeriod) {
+        m_sectionPeriod = sectionPeriod;
+        emit sectionPeriodChanged();
+    }
+}
+
 QString LinkModel::subreddit() const
 {
     return m_subreddit;
@@ -228,6 +241,9 @@ void LinkModel::refresh(bool refreshOlder)
     QString relativeUrl;
     QHash<QString,QString> parameters;
     parameters["limit"] = "50";
+    if (m_sectionPeriod != "") {
+        parameters["t"] = m_sectionPeriod;
+    }
 
     switch (m_location) {
     case FrontPage:
@@ -269,6 +285,9 @@ void LinkModel::refresh(bool refreshOlder)
     doRequest(APIRequest::GET, relativeUrl, SLOT(onFinished(QNetworkReply*)), parameters);
 
     m_title = relativeUrl;
+    if (m_section == LinkModel::TopSection || m_section == LinkModel::ControversialSection)
+        m_title += " (" + (m_sectionPeriod == "" ? "h" : m_sectionPeriod.left(1)) + ")";
+
     emit titleChanged();
 }
 
