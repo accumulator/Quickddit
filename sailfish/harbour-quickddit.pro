@@ -168,7 +168,8 @@ OTHER_FILES += \
     qml/NewMessagePage.qml \
     qml/ImageViewer.qml \
     qml/AltMarker.qml \
-    qml/WebViewer.qml
+    qml/WebViewer.qml \
+    qml/SectionSelectionDialog.qml
 
 icon108.files = icon108/$${TARGET}.png
 icon108.path = /usr/share/icons/hicolor/108x108/apps
@@ -206,4 +207,3 @@ harbour {
 
     INSTALLS += notification
 }
-
