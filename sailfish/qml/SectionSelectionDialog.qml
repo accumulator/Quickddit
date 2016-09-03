@@ -29,7 +29,7 @@ AbstractDialog {
 
     canAccept: false
 
-    readonly property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top", "Promoted"]
+    readonly property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top"]
 
     ListModel {
         id: periodModel
@@ -38,7 +38,7 @@ AbstractDialog {
         ListElement { label: "week"; qry: "week" }
         ListElement { label: "month"; qry: "month" }
         ListElement { label: "year"; qry: "year" }
-        ListElement { label: "alltime"; qry: "all" }
+        ListElement { label: "all time"; qry: "all" }
     }
 
     DialogHeader {
