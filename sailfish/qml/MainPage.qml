@@ -29,8 +29,6 @@ AbstractPage {
 
     property string subreddit
 
-    readonly property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top", "Promoted"]
-
     function refresh(sr) {
         if (sr !== undefined) {
             linkModel.subreddit = "";
@@ -55,6 +53,15 @@ AbstractPage {
     function newLink() {
         var p = {linkManager: linkManager, subreddit: linkModel.subreddit};
         pageStack.push(Qt.resolvedUrl("NewLinkPage.qml"), p);
+    }
+
+    function pushSectionDialog(title, selectedIndex, onAccepted) {
+        var p = {title: title, selectedIndex: selectedIndex}
+        var dialog = pageStack.push(Qt.resolvedUrl("SectionSelectionDialog.qml"), p);
+        dialog.accepted.connect(function() {
+            onAccepted(dialog.selectedIndex, dialog.periodQuery);
+        })
+
     }
 
     property bool __pushedAttached: false
@@ -98,11 +105,12 @@ AbstractPage {
             MenuItem {
                 text: "Section"
                 onClicked: {
-                    globalUtils.createSelectionDialog("Section", sectionModel, linkModel.section,
-                    function(selectedIndex) {
-                        linkModel.section = selectedIndex;
-                        linkModel.refresh(false);
-                    });
+                    pushSectionDialog("Section", linkModel.section,
+                        function(selectedIndex, periodQuery) {
+                            linkModel.section = selectedIndex;
+                            linkModel.sectionPeriod = periodQuery;
+                            linkModel.refresh(false);
+                        });
                 }
             }
             MenuItem {
