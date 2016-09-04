@@ -33,12 +33,12 @@ AbstractDialog {
 
     ListModel {
         id: periodModel
-        ListElement { label: "hour"; qry: "hour" }
-        ListElement { label: "day"; qry: "day" }
-        ListElement { label: "week"; qry: "week" }
-        ListElement { label: "month"; qry: "month" }
-        ListElement { label: "year"; qry: "year" }
-        ListElement { label: "all time"; qry: "all" }
+        ListElement { label: "Hour"; qry: "hour" }
+        ListElement { label: "Day"; qry: "day" }
+        ListElement { label: "Week"; qry: "week" }
+        ListElement { label: "Month"; qry: "month" }
+        ListElement { label: "Year"; qry: "year" }
+        ListElement { label: "All time"; qry: "all" }
     }
 
     DialogHeader {
