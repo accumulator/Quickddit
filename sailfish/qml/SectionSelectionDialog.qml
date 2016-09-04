@@ -33,7 +33,7 @@ AbstractDialog {
 
     ListModel {
         id: periodModel
-        ListElement { label: "hour"; qry: "" }
+        ListElement { label: "hour"; qry: "hour" }
         ListElement { label: "day"; qry: "day" }
         ListElement { label: "week"; qry: "week" }
         ListElement { label: "month"; qry: "month" }
@@ -74,7 +74,6 @@ AbstractDialog {
             Repeater {
                 model: periodModel
                 delegate: MenuItem {
-                    highlighted: periodQuery == qry
                     text: label
                     onClicked: {
                         selectionDialog.periodQuery = qry

@@ -285,8 +285,9 @@ void LinkModel::refresh(bool refreshOlder)
     doRequest(APIRequest::GET, relativeUrl, SLOT(onFinished(QNetworkReply*)), parameters);
 
     m_title = relativeUrl;
-    if (m_section == LinkModel::TopSection || m_section == LinkModel::ControversialSection)
-        m_title += " (" + (m_sectionPeriod == "" ? "h" : m_sectionPeriod.left(1)) + ")";
+    if ( (m_section == LinkModel::TopSection || m_section == LinkModel::ControversialSection)
+         && m_sectionPeriod != "" )
+        m_title += " (" + m_sectionPeriod.left(1) + ")";
 
     emit titleChanged();
 }
