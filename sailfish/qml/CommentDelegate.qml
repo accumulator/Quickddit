@@ -157,7 +157,8 @@ Item {
                 Bubble {
                     visible: model.gilded > 0
                     font.pixelSize: constant.fontSizeSmaller
-                    text: "Gilded"
+                    font.bold: true
+                    text: model.gilded > 1 ? "Gilded " + model.gilded + "x" : "Gilded"
                     color: "gold"
                 }
             }
