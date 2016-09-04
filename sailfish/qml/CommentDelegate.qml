@@ -102,7 +102,6 @@ Item {
         anchors { left: lineRow.right; right: parent.right }
         contentHeight: mainColumn.height + 2 * constant.paddingMedium
         showMenuOnPressAndHold: false
-        enabled: model.isValid
         visible: moreChildrenLoader.status == Loader.Null
 
         onPressAndHold: {
@@ -172,8 +171,8 @@ Item {
                     id: commentAuthorText
                     anchors { left: parent.left; verticalCenter: parent.verticalCenter }
                     font.pixelSize: constant.fontSizeDefault
-                    color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
-                                            : constant.colorDisabled
+                    color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                                               : constant.colorDisabled
                     font.bold: true
                     font.italic: model.author.split(" ").length > 1
                     text: model.author
@@ -192,6 +191,8 @@ Item {
                             color: {
                                 if (!mainItem.enabled)
                                     return constant.colorDisabled;
+                                if (!model.isValid)
+                                    return constant.colorDisabled;
                                 if (model.likes > 0)
                                     return constant.colorLikes;
                                 else if (model.likes < 0)
@@ -207,8 +208,8 @@ Item {
                         id: scoreHiddenComponent
                         Text {
                             font.pixelSize: constant.fontSizeDefault
-                            color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
-                                                    : constant.colorDisabled
+                            color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
+                                                                       : constant.colorDisabled
                             text: "[score hidden]"
                         }
                     }
@@ -222,8 +223,8 @@ Item {
                         margins: constant.paddingSmall
                     }
                     font.pixelSize: constant.fontSizeDefault
-                    color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
-                                            : constant.colorDisabled
+                    color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
+                                                               : constant.colorDisabled
                     elide: Text.ElideRight
                     text: " · " + model.created
                 }
