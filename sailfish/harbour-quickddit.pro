@@ -14,9 +14,11 @@ DEFINES += APP_VERSION=\\\"$$VERSION\\\" Q_OS_SAILFISH
 
 QT *= network dbus
 
-# auto-installs 86x86 icon, desktop file, qml/* is automatically installed by sailfishapp.prf
+# sailfishapp.prf auto-installs icons, desktop file, qml/*
 # (but IDE don't show these when not in OTHER_FILES, so we still need to list them :( )
 CONFIG += sailfishapp link_pkgconfig
+
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 
 # Harbour is quite strict about what it allows. Quickddit has features that would not allow it to pass
 # through QA. Add CONFIG+=harbour to the .pro file (uncomment below) or add it to the qmake command
@@ -170,15 +172,6 @@ OTHER_FILES += \
     qml/AltMarker.qml \
     qml/WebViewer.qml \
     qml/SectionSelectionDialog.qml
-
-icon108.files = icon108/$${TARGET}.png
-icon108.path = /usr/share/icons/hicolor/108x108/apps
-icon128.files = icon128/$${TARGET}.png
-icon128.path = /usr/share/icons/hicolor/128x128/apps
-icon256.files = icon256/$${TARGET}.png
-icon256.path = /usr/share/icons/hicolor/256x256/apps
-
-INSTALLS += icon108 icon128 icon256
 
 # hm, I prefer generating code directly to the build dir, and not including the
 # generated sources in the HEADERS and SOURCES lists.. Manually remove app_adaptor.h
