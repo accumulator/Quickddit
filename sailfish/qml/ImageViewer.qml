@@ -52,7 +52,7 @@ Item {
     }
 
     function _fitToScreen() {
-        fitScale = Math.min(flickable.width / image.width, flickable.height / image.height)
+        fitScale = Math.min(flickable.width / image.width, flickable.height / image.height) * 0.999 // rounding errors
         image.scale = fitScale
         prevScale = fitScale
         pinchArea.minScale = Math.min(fitScale, 1)
