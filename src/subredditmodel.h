@@ -39,6 +39,7 @@ public:
         SubscribersRole,
         ActiveUsersRole,
         IsNSFWRole,
+        IsSubscribedRole,
         IsContributorRole,
         IsBannedRole,
         IsModeratorRole,

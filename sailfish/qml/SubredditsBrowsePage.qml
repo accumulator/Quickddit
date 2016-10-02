@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2016  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,6 +29,9 @@ AbstractPage {
 
     property alias searchQuery: subredditModel.query
     property bool isSearch: searchQuery
+
+    property string _menusub
+    property string _action
 
     readonly property variant subredditsSectionModel: ["Popular Subreddits", "New Subreddits",
         "My Subreddits - Subscriber", "My Subreddits - Approved Submitter", "My Subreddits - Moderator"]
@@ -67,6 +71,37 @@ AbstractPage {
                 pageStack.pop(mainPage);
             }
 
+            showMenuOnPressAndHold: true
+
+            menu: Component {
+                ContextMenu {
+                    MenuItem {
+                        text: "About"
+                        onClicked: {
+                            pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: model.displayName} );
+                        }
+                    }
+                    MenuItem {
+                        text: "Subscribe"
+                        visible: !model.isSubscribed
+                        onClicked: {
+                            _menusub = model.displayName
+                            _action = "subscribed"
+                            subredditManager.subscribe(model.fullname);
+                        }
+                    }
+                    MenuItem {
+                        text: "Unsubscribe"
+                        visible: model.isSubscribed
+                        onClicked: {
+                            _menusub = model.displayName
+                            _action = "unsubscribed"
+                            subredditManager.unsubscribe(model.fullname);
+                        }
+                    }
+                }
+            }
+
             AltMarker { }
         }
 
@@ -88,4 +123,15 @@ AbstractPage {
         section: isSearch ? SubredditModel.SearchSection : SubredditModel.PopularSection
         onError: infoBanner.warning(errorString);
     }
+
+    SubredditManager {
+        id: subredditManager
+        manager: quickdditManager
+        model: subredditModel
+        onSuccess: {
+            infoBanner.alert(qsTr("You have %2 from %1").arg(_menusub).arg(_action))
+        }
+        onError: infoBanner.warning(errorString)
+    }
+
 }

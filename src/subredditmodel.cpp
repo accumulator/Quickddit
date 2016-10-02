@@ -63,6 +63,7 @@ QVariant SubredditModel::data(const QModelIndex &index, int role) const
     case SubscribersRole: return subreddit.subscribers();
     case ActiveUsersRole: return subreddit.activeUsers();
     case IsNSFWRole: return subreddit.isNSFW();
+    case IsSubscribedRole: return subreddit.isSubscribed();
     case IsContributorRole: return subreddit.isContributor();
     case IsBannedRole: return subreddit.isBanned();
     case IsModeratorRole: return subreddit.isModerator();
@@ -155,6 +156,7 @@ QHash<int, QByteArray> SubredditModel::customRoleNames() const
     roles[SubscribersRole] = "subscribers";
     roles[ActiveUsersRole] = "activeUsers";
     roles[IsNSFWRole]= "isNSFW";
+    roles[IsSubscribedRole] = "isSubscribed";
     roles[IsContributorRole] = "isContributor";
     roles[IsBannedRole] = "isBanned";
     roles[IsModeratorRole] = "isModerator";
