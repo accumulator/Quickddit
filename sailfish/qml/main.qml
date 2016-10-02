@@ -106,7 +106,7 @@ ApplicationWindow {
 
         function previewableImage(url) {
             // imgur url
-            if (/^https?:\/\/((i|m)\.)?imgur\.com\//.test(url))
+            if (/^https?:\/\/((i|m|www)\.)?imgur\.com\//.test(url))
                 return !(/^.*\.gifv$/.test(url));
             // reddituploads
             else if (/^https?:\/\/i.reddituploads.com\//.test(url))
@@ -154,7 +154,7 @@ ApplicationWindow {
         }
 
         function openImageViewPage(url) {
-            if (/^https?:\/\/((i|m)\.)?imgur\.com/.test(url))
+            if (/^https?:\/\/((i|m|www)\.)?imgur\.com/.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imgurUrl: url});
             else if (/^https?:\/\/\S+\.(jpe?g|png|gif)/i.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
