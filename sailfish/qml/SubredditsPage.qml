@@ -44,9 +44,9 @@ AbstractPage {
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
-            if (!subredditModel)
+            if (!subredditModel && quickdditManager.isSignedIn)
                 subredditModel = subredditModelComponent.createObject(subredditsPage);
-            if (!multiredditModel)
+            if (!multiredditModel && quickdditManager.isSignedIn)
                 multiredditModel = multiredditModelComponent.createObject(subredditsPage);
         } else if (status === PageStatus.Inactive) {
             subredditListView.headerItem.resetTextField();
@@ -209,8 +209,13 @@ AbstractPage {
     Connections {
         target: quickdditManager
         onSignedInChanged: {
-            subredditModel = subredditModelComponent.createObject(subredditsPage);
-            multiredditModel = multiredditModelComponent.createObject(subredditsPage);
+            if (quickdditManager.signedIn) {
+                subredditModel = subredditModelComponent.createObject(subredditsPage);
+                multiredditModel = multiredditModelComponent.createObject(subredditsPage);
+            } else {
+                subredditModel = null
+                multiredditModel = null
+            }
         }
     }
 
