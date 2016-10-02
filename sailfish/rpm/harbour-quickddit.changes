@@ -5,6 +5,17 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Oct 02 2016 Sander van Grieken <sander@outrightsolutions.nl> 1.3.1-1
+- chg: support even more imgur variants
+- chg: default font size set to Small
+- chg: thumbnail scale Auto is now a bit smarter taking into account also physical size of screen
+- fix: subscribed subreddit model handling on signin/signout/not signed in
+- fix: occasional image viewer issue not being able to navigate back on AquaFish/JollaC
+- fix: auto-focus search textfield
+- fix: properly unescape subreddit short-description
+- new: subreddits browse page aesthetic overhaul
+- new: subreddits browse page press&hold menu
+
 * Sun Sep 04 2016 Sander van Grieken <sander@outrightsolutions.nl> 1.3.0-1
 - chg: support more imgur variants
 - chg: remove Promoted section, never worked
