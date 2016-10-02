@@ -66,6 +66,8 @@ AbstractPage {
                 mainPage.refresh(model.displayName);
                 pageStack.pop(mainPage);
             }
+
+            AltMarker { }
         }
 
         footer: LoadingFooter { visible: subredditModel.busy; listViewItem: subredditsListView }

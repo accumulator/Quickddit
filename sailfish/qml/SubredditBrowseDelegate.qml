@@ -32,45 +32,50 @@ ListItem {
         height: childrenRect.height
         spacing: constant.paddingSmall
 
+        Row {
+            height: subredditText.height + anchors.topMargin + anchors.bottomMargin
+
+            Text {
+                id: titleText
+                font.pixelSize: constant.fontSizeSmall
+                color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorMid
+                text: "/r/"
+            }
+            Text {
+                id: subredditText
+                anchors.baseline: titleText.baseline
+                width: mainColumn.width - titleText.width - subImage.width // act as spacer for image
+                font.pixelSize: constant.fontSizeMedium
+                font.bold: true
+                color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorLight
+                text: model.displayName
+            }
+
+            Image {
+                id: subImage
+                source: model.headerImageUrl
+                asynchronous: true
+            }
+
+        }
+
         Text {
-            id: titleText
-            anchors { left: parent.left; right: parent.right }
+            anchors { left: parent.left; right: parent.right; leftMargin: constant.paddingMedium }
             font.pixelSize: constant.fontSizeDefault
-            color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorLight
-            font.bold: true
-            text: model.url
+            color: subredditDelegate.highlighted ? Theme.secondaryHighlightColor : constant.colorMid
+            wrapMode: Text.Wrap
+            text: model.subscribers + " subscribers"
         }
 
         Text {
             id: descriptionText
-            anchors { left: parent.left; right: parent.right }
+            anchors { left: parent.left; right: parent.right; leftMargin: constant.paddingMedium }
             font.pixelSize: constant.fontSizeDefault
-            color: subredditDelegate.highlighted ? Theme.secondaryHighlightColor : constant.colorMid
+            color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorLight
             wrapMode: Text.Wrap
             visible: text != ""
             text: model.shortDescription
         }
 
-        Row {
-            anchors { left: parent.left; right: parent.right }
-            spacing: constant.paddingMedium
-
-            Text {
-                anchors.verticalCenter: parent.verticalCenter
-                font.pixelSize: constant.fontSizeDefault
-                color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorLight
-                wrapMode: Text.Wrap
-                text: model.subscribers + " subscribers"
-            }
-
-            Bubble {
-                anchors.verticalCenter: parent.verticalCenter
-                color: "red"
-                visible: model.isNSFW
-                text: "NSFW"
-                font.bold: true
-            }
-
-        }
     }
 }
