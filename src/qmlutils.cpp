@@ -201,15 +201,23 @@ void QMLUtils::clearNotification()
 void QMLUtils::setPScale()
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+    // determine PPI relative to Jolla 1
     QGuiApplication* app = static_cast<QGuiApplication*>(parent());
     float ppi = app->primaryScreen()->physicalDotsPerInch();
     float rjolla = ppi / 242;
+
+    // available physical size weighs too, relative Jolla 1, but capped to 150%
+    float rpw = ((app->primaryScreen()->availableSize().width() / ppi) / (540.0/242.0));
+    if (rpw > 1.5)
+        rpw = 1.5;
+
+    // quantize in 1/4 steps
     float q = 0.25; // 25% quantizer (100%, 125%, 150%, ...)
-    int intermediate = (int)(rjolla / q);
+    int intermediate = (int)(rjolla * rpw/ q);
     cpScale = ((float)(intermediate)) * q;
     if (cpScale < 1.0)
         cpScale = 1.0;
-    qDebug() << "Device PPI =" << ppi << "scale = " << cpScale;
+    qDebug() << "Device PPI =" << ppi << "scale = " << cpScale << "rpw = " << rpw;
 #else
     cpScale = 1.0;
 #endif
