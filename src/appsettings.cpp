@@ -25,13 +25,13 @@ AppSettings::AppSettings(QObject *parent) :
     QObject(parent), m_settings(new QSettings(this))
 {
     m_whiteTheme = m_settings->value("whiteTheme", false).toBool();
-    m_fontSize = static_cast<FontSize>(m_settings->value("fontSize", 1).toInt());
+    m_fontSize = static_cast<FontSize>(m_settings->value("fontSize", AppSettings::SmallFontSize).toInt());
     m_redditUsername = m_settings->value("redditUsername").toString();
     m_refreshToken = m_settings->value("refreshToken").toByteArray();
-    m_orientationProfile = static_cast<OrientationProfile>(m_settings->value("orientationProfile", 0).toInt());
+    m_orientationProfile = static_cast<OrientationProfile>(m_settings->value("orientationProfile", AppSettings::DynamicProfile).toInt());
     m_lastSeenMessage = m_settings->value("lastSeenMessage").toString();
     m_pollUnread = m_settings->value("pollUnread", true).toBool();
-    m_thumbnailScale = static_cast<ThumbnailScale>(m_settings->value("thumbnailScale", 0).toInt());
+    m_thumbnailScale = static_cast<ThumbnailScale>(m_settings->value("thumbnailScale", AppSettings::ScaleAuto).toInt());
 }
 
 bool AppSettings::whiteTheme() const
