@@ -177,7 +177,8 @@ ApplicationWindow {
                 var xhr = new XMLHttpRequest()
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState == 4) {
-                        var videoUrl = JSON.parse(xhr.responseText)["gfyItem"]["mp4Url"]
+                        var cleantext = xhr.responseText.slice(xhr.responseText.indexOf("{"))
+                        var videoUrl = JSON.parse(cleantext)["gfyItem"]["mp4Url"]
                         pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: videoUrl });
                     }
                 }
