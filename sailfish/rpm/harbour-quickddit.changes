@@ -5,6 +5,9 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Wed Oct 05 2016 Sander van Grieken <sander@outrightsolutions.nl> 1.3.2-1
+- fix: work around gfycat issue
+
 * Sun Oct 02 2016 Sander van Grieken <sander@outrightsolutions.nl> 1.3.1-1
 - chg: support even more imgur variants
 - chg: default font size set to Small
