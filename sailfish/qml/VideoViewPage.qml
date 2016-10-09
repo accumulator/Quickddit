@@ -37,7 +37,10 @@ AbstractPage {
                 id: mediaPlayer
                 autoPlay: false
                 onStopped: playPauseButton.opacity = 1
-                onError: console.log(errorString)
+                onError: {
+                    infoBanner.warning(errorString);
+                    console.log(errorString);
+                }
 
                 onBufferProgressChanged: {
                     if (bufferProgress > 0.95)
