@@ -101,6 +101,7 @@ public:
     Q_INVOKABLE void collapse(int index);
     Q_INVOKABLE void expand(const QString &fullname);
     Q_INVOKABLE void setView(const QString &fullname, const QString &view);
+    Q_INVOKABLE void showNewComment();
 
 protected:
     QHash<int, QByteArray> customRoleNames() const;

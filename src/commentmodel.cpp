@@ -228,6 +228,13 @@ void CommentModel::insertComment(CommentObject comment, const QString &replyToFu
         }
     }
 
+    // remove non-backed new comment object
+    if (insertIndex == 0 && m_commentList.at(0).viewId() == "new") {
+        beginRemoveRows(QModelIndex(), 0, 0);
+        m_commentList.removeAt(0);
+        endRemoveRows();
+    }
+
     beginInsertRows(QModelIndex(), insertIndex, insertIndex);
     m_commentList.insert(insertIndex, comment);
     endInsertRows();
@@ -453,6 +460,18 @@ void CommentModel::expand(const QString &fullname)
     endInsertRows();
 
     m_collapsedCommentLists.remove(fullname);
+}
+
+void CommentModel::showNewComment()
+{
+    if (m_commentList.length() > 0 && m_commentList.at(0).viewId() == "new")
+        return;
+
+    CommentObject item;
+    item.setViewId("new");
+    beginInsertRows(QModelIndex(), 0, 0);
+    m_commentList.insert(0, item);
+    endInsertRows();
 }
 
 // network methods
