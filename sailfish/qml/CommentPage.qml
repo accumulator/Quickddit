@@ -40,16 +40,6 @@ AbstractPage {
 
     readonly property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
 
-    function __createCommentDialog(title, fullname, originalText, isEdit) {
-        var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {title: title, text: originalText || ""});
-        dialog.accepted.connect(function() {
-            if (isEdit) // edit
-                commentManager.editComment(fullname, dialog.text);
-            else // add
-                commentManager.addComment(fullname, dialog.text);
-        })
-    }
-
     function __createLinkTextDialog(title, fullname, originalText) {
         var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {linkManager: linkManager, title: title, text: originalText || ""});
         dialog.accepted.connect(function() {
@@ -89,7 +79,11 @@ AbstractPage {
             MenuItem {
                 enabled: quickdditManager.isSignedIn && !commentManager.busy && !link.isArchived
                 text: "Add comment"
-                onClicked: __createCommentDialog("Add Comment", link.fullname);
+                onClicked: {
+                    commentModel.showNewComment();
+                    commentListView.currentIndex = 0;
+                    commentListView.positionViewAtIndex(0, ListView.Beginning);
+                }
             }
 
             MenuItem {
@@ -251,10 +245,10 @@ AbstractPage {
                     commentDelegate.ListView.view.currentItem.highlight();
                 })
                 dialog.replyClicked.connect(function() {
-                    __createCommentDialog("Reply Comment", model.fullname);
+                    commentModel.setView(model.fullname, "reply");
                 });
                 dialog.editClicked.connect(function() {
-                    __createCommentDialog("Edit Comment", model.fullname, model.rawBody, true);
+                    commentModel.setView(model.fullname, "edit");
                 });
                 dialog.deleteClicked.connect(function() {
                     commentDelegate.remorseAction("Deleting comment", function() {

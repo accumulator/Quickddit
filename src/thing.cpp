@@ -29,6 +29,8 @@ public:
     QString fullname;
     bool saved;
 
+    QString viewId;
+
 private:
     Q_DISABLE_COPY(ThingData)
 };
@@ -84,3 +86,15 @@ void Thing::setSaved(const bool saved)
 {
     t->saved = saved;
 }
+
+
+QString Thing::viewId() const
+{
+    return t->viewId;
+}
+
+void Thing::setViewId(const QString &viewId)
+{
+    t->viewId = viewId;
+}
+

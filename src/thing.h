@@ -39,6 +39,9 @@ public:
     bool saved() const;
     void setSaved(const bool saved);
 
+    QString viewId() const;
+    void setViewId(const QString &viewId);
+
 protected:
     QExplicitlySharedDataPointer<ThingData> t;
 

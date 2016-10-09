@@ -43,8 +43,8 @@ public:
     Q_INVOKABLE void deleteComment(const QString &fullname);
 
 signals:
-    void success(const QString &message);
-    void error(const QString &errorString);
+    void success(const QString &message, const QString &fullname);
+    void error(const QString &errorString, const QString &fullname);
 
 private slots:
     void onFinished(QNetworkReply *reply);

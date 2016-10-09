@@ -91,7 +91,7 @@ void CommentManager::onFinished(QNetworkReply *reply)
 
             QList<QString> errors = Parser::parseErrors(json);
             if (errors.size() > 0) {
-                emit error(errors.takeFirst());
+                emit error(errors.takeFirst(), m_fullname);
             } else {
                 if (m_action == Insert || m_action == Edit) {
                     CommentObject comment = Parser::parseNewComment(json);
@@ -100,18 +100,18 @@ void CommentManager::onFinished(QNetworkReply *reply)
 
                     if (m_action == Insert) {
                         m_model->insertComment(comment, m_fullname);
-                        emit success(tr("The comment has been added"));
+                        emit success(tr("The comment has been added"), m_fullname);
                     } else {
                         m_model->editComment(comment);
-                        emit success(tr("The comment has been edited"));
+                        emit success(tr("The comment has been edited"), m_fullname);
                     }
                 } else if (m_action == Delete) {
                     m_model->deleteComment(m_fullname);
-                    emit success(tr("The comment has been deleted"));
+                    emit success(tr("The comment has been deleted"), m_fullname);
                 }
             }
         } else {
-            emit error(reply->errorString());
+            emit error(reply->errorString(), m_fullname);
         }
     }
 

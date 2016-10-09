@@ -79,6 +79,7 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     roles[IsMoreChildrenRole] = "isMoreChildren";
     roles[MoreChildrenRole] = "moreChildren";
     roles[CollapsedRole] = "isCollapsed";
+    roles[ViewRole] = "view";
     roles[IsSavedRole] = "isSaved";
     roles[IsArchivedRole] = "isArchived";
     roles[IsStickiedRole] = "isStickied";
@@ -127,6 +128,7 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     case IsMoreChildrenRole: return comment.isMoreChildren();
     case MoreChildrenRole: return QVariant(comment.moreChildren());
     case CollapsedRole: return (comment.isCollapsed());
+    case ViewRole: return (comment.viewId());
     case IsArchivedRole: return (comment.isArchived());
     case IsStickiedRole: return (comment.isStickied());
     case GildedRole: return (comment.gilded());
@@ -224,6 +226,13 @@ void CommentModel::insertComment(CommentObject comment, const QString &replyToFu
                 break;
             }
         }
+    }
+
+    // remove non-backed new comment object
+    if (insertIndex == 0 && m_commentList.at(0).viewId() == "new") {
+        beginRemoveRows(QModelIndex(), 0, 0);
+        m_commentList.removeAt(0);
+        endRemoveRows();
     }
 
     beginInsertRows(QModelIndex(), insertIndex, insertIndex);
@@ -362,6 +371,21 @@ void CommentModel::changeSaved(const QString &fullname, bool saved)
     }
 }
 
+void CommentModel::setView(const QString &fullname, const QString &viewId)
+{
+    for (int i = 0; i < m_commentList.count(); ++i) {
+        CommentObject comment = m_commentList.at(i);
+
+        if (comment.fullname() == fullname) {
+            if (comment.viewId() != viewId) {
+                comment.setViewId(viewId);
+                emit dataChanged(index(i), index(i));
+            }
+            break;
+        }
+    }
+}
+
 void CommentModel::collapse(int index)
 {
     Q_ASSERT(index < m_commentList.count());
@@ -436,6 +460,18 @@ void CommentModel::expand(const QString &fullname)
     endInsertRows();
 
     m_collapsedCommentLists.remove(fullname);
+}
+
+void CommentModel::showNewComment()
+{
+    if (m_commentList.length() > 0 && m_commentList.at(0).viewId() == "new")
+        return;
+
+    CommentObject item;
+    item.setViewId("new");
+    beginInsertRows(QModelIndex(), 0, 0);
+    m_commentList.insert(0, item);
+    endInsertRows();
 }
 
 // network methods

@@ -39,7 +39,8 @@ Item {
         mainItem.remorseAction(title, action, timeout);
     }
 
-    height: moreChildrenLoader.status == Loader.Null ? mainItem.height : moreChildrenLoader.height + constant.paddingMedium
+    height: (moreChildrenLoader.status == Loader.Null || model.view === "reply" ? mainItem.height : 0)
+            + (moreChildrenLoader.visible ? constant.paddingMedium + moreChildrenLoader.height : 0)
 
     ListView.onAdd: ParallelAnimation {
         NumberAnimation {
@@ -102,7 +103,7 @@ Item {
         anchors { left: lineRow.right; right: parent.right }
         contentHeight: mainColumn.height + 2 * constant.paddingMedium
         showMenuOnPressAndHold: false
-        visible: moreChildrenLoader.status == Loader.Null
+        visible: moreChildrenLoader.status == Loader.Null || model.view === "reply"
 
         onPressAndHold: {
             commentPage.morechildren_animation = true;
@@ -263,10 +264,18 @@ Item {
 
     Loader {
         id: moreChildrenLoader
-        anchors { left: lineRow.right; right: parent.right; top: parent.top; margins: constant.paddingMedium }
+        anchors {
+            left: lineRow.right;
+            right: parent.right;
+            top: (mainItem.visible ? mainItem.bottom : mainItem.top);
+            margins: constant.paddingMedium
+        }
+
         sourceComponent: model.isMoreChildren ? moreChildrenComponent
                          : model.isCollapsed ? collapsedChildrenComponent
+                         : model.view !== "" ? editComponent
                          : undefined
+        visible: sourceComponent != undefined
 
         Component {
             id: moreChildrenComponent
@@ -331,6 +340,85 @@ Item {
                 }
             }
         }
+
+        Component {
+            id: editComponent
+
+            Column {
+                id: editColumn
+                //height: childrenRect.height
+                spacing: 1
+
+                property real buttonScale: __buttonScale()
+
+                function __buttonScale() {
+                    switch (appSettings.fontSize) {
+                    case AppSettings.TinyFontSize: return 0.75;
+                    case AppSettings.SmallFontSize: return 0.90;
+                    default: return 1;
+                    }
+                }
+
+                SectionHeader {
+                    text: model.view === "edit" ? "Editing Comment" :
+                          model.view === "reply" ? "Comment Reply" :
+                          model.view === "new" ? "New Comment" :
+                          model.view
+                }
+
+                TextArea {
+                    id: editTextArea
+                    font.pixelSize: constant.fontSizeDefault
+                    anchors { left: parent.left; right: parent.right }
+
+                    textMargin: model.view === "reply" ? constant.paddingMedium : 0
+
+                    height: Math.max(implicitHeight, Theme.itemSizeLarge * 2)
+                    placeholderText: model.view === "reply" ? "Enter your reply here..." : "Enter your new comment here..."
+                    focus: true
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: Theme.highlightColor
+                        opacity: 0.05
+                    }
+                }
+
+                Row {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    scale: editColumn.buttonScale; transformOrigin: Item.Top
+
+                    Button {
+                        id: acceptButton
+                        anchors.leftMargin: constant.paddingLarge
+
+                        text: model.view === "edit" ? "Save" : "Add"
+                        enabled: !commentManager.busy
+
+                        onClicked: {
+                            if (model.view === "edit") {
+                                commentManager.editComment(model.fullname, editTextArea.text);
+                            } else if (model.view === "reply") {
+                                commentManager.addComment(model.fullname, editTextArea.text);
+                            } else if (model.view === "new") {
+                                commentManager.addComment(link.fullname, editTextArea.text);
+                            }
+                        }
+                    }
+                }
+
+                Connections {
+                    target: commentManager
+                    onSuccess: if (fullname === model.fullname) { commentModel.setView(model.fullname, "") }
+                }
+
+                Component.onCompleted: {
+                    if (model.view === "edit")
+                        editTextArea.text = model.rawBody
+                }
+            }
+        }
+
     }
 
 }
