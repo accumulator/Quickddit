@@ -43,7 +43,7 @@ AbstractPage {
     }
 
     onStatusChanged: {
-        if (status === PageStatus.Active) {
+        if (status === PageStatus.Activating) {
             if (!subredditModel && quickdditManager.isSignedIn)
                 subredditModel = subredditModelComponent.createObject(subredditsPage);
             if (!multiredditModel && quickdditManager.isSignedIn)
