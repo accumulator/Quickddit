@@ -60,7 +60,7 @@ AbstractPage {
         target: quickdditManager
         onAccessTokenSuccess: {
             signInPage.busy = false;
-            infoBanner.alert("Sign in successfully! Welcome! :)");
+            infoBanner.alert("Sign in successful! Welcome! :)");
             inboxManager.resetTimer();
             var mainPage = globalUtils.getMainPage();
             mainPage.refresh("");

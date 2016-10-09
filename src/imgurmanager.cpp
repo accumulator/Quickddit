@@ -107,7 +107,10 @@ void ImgurManager::refresh()
 
     QString requestUrl = "https://api.imgur.com/3";
 
-    const QString path = imgurUrl.path();
+    QString path = imgurUrl.path();
+    if (path.endsWith('/'))
+        path = path.left(path.length()-1);
+
     if (path.startsWith("/a/")) {
         QString id = QString(path).remove(0, 3);
         if (id.contains(NONE_WORD_REGEXP))
@@ -123,6 +126,13 @@ void ImgurManager::refresh()
         if (id.contains(NONE_WORD_REGEXP))
             id.truncate(id.indexOf(NONE_WORD_REGEXP));
         requestUrl += "/image/" + id;
+    } else if (path.startsWith("/topic/")) {
+        QRegExp topic("^/topic/([^/]+)/");
+        QString id = QString(path).remove(topic);
+        if (id.contains(NONE_WORD_REGEXP))
+            id.truncate(id.indexOf(NONE_WORD_REGEXP));
+        topic.indexIn(path);
+        requestUrl += "/topics/" + topic.cap(1) + "/" + id;
     } else if (path.lastIndexOf('/') == 0) {
         QString id = QString(path).remove(0, 1);
         if (id.contains(NONE_WORD_REGEXP))

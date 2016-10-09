@@ -37,6 +37,8 @@ class LinkModel : public AbstractListModelManager
     Q_PROPERTY(QString subreddit READ subreddit WRITE setSubreddit NOTIFY subredditChanged)
     Q_PROPERTY(QString multireddit READ multireddit WRITE setMultireddit NOTIFY multiredditChanged)
 
+    Q_PROPERTY(QString sectionPeriod READ sectionPeriod WRITE setSectionPeriod NOTIFY sectionPeriodChanged)
+
     // Only for Search
     Q_PROPERTY(QString searchQuery READ searchQuery WRITE setSearchQuery NOTIFY searchQueryChanged)
     Q_PROPERTY(SearchSortType searchSort READ searchSort WRITE setSearchSort NOTIFY searchSortChanged)
@@ -120,6 +122,9 @@ public:
     Section section() const;
     void setSection(Section section);
 
+    QString sectionPeriod() const;
+    void setSectionPeriod(const QString & sectionPeriod);
+
     QString subreddit() const;
     void setSubreddit(const QString &subreddit);
 
@@ -148,6 +153,7 @@ signals:
     void titleChanged();
     void locationChanged();
     void sectionChanged();
+    void sectionPeriodChanged();
     void subredditChanged();
     void multiredditChanged();
     void searchQueryChanged();
@@ -161,6 +167,7 @@ private:
     QString m_title;
     Location m_location;
     Section m_section;
+    QString m_sectionPeriod;
     QString m_subreddit;
     QString m_multireddit;
     QString m_searchQuery;

@@ -50,6 +50,7 @@ AbstractDialog {
             id: searchTextField
             anchors { left: parent.left; right: parent.right }
             placeholderText: "Enter search query"
+            focus: true
             labelVisible: false
             EnterKey.enabled: searchDialog.canAccept
             EnterKey.iconSource: "image://theme/icon-m-search"

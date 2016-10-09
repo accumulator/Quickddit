@@ -301,7 +301,7 @@ SubredditObject parseSubredditThing(const QVariantMap &subredditThing)
     subreddit.setDisplayName(data.value("display_name").toString());
     subreddit.setUrl(data.value("url").toString());
     subreddit.setHeaderImageUrl(QUrl(data.value("header_img").toString()));
-    subreddit.setShortDescription(data.value("public_description").toString());
+    subreddit.setShortDescription(unescapeHtml(data.value("public_description").toString()));
     subreddit.setLongDescription(unescapeHtml(data.value("description_html").toString()));
     subreddit.setSubscribers(data.value("subscribers").toInt());
     subreddit.setActiveUsers(data.value("accounts_active").toInt());

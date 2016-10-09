@@ -251,7 +251,7 @@ AbstractPage {
                     commentDelegate.ListView.view.currentItem.highlight();
                 })
                 dialog.replyClicked.connect(function() {
-                    //__createCommentDialog("Reply Comment", model.fullname); });
+                    //__createCommentDialog("Reply Comment", model.fullname);
                     commentModel.setView(model.fullname, "reply");
                 });
                 dialog.editClicked.connect(function() {
@@ -319,9 +319,7 @@ AbstractPage {
         manager: quickdditManager
         model: commentModel
         linkAuthor: link ? link.author : ""
-        onSuccess: {
-            infoBanner.alert(message);
-        }
+        onSuccess: infoBanner.alert(message);
         onError: infoBanner.warning(errorString);
     }
 
@@ -329,9 +327,7 @@ AbstractPage {
         id: linkManager
         manager: quickdditManager
         commentModel: commentModel
-        onSuccess: {
-            infoBanner.alert(message);
-        }
+        onSuccess: infoBanner.alert(message);
         onError: infoBanner.warning(errorString);
     }
 

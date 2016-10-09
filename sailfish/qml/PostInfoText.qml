@@ -59,8 +59,8 @@ Column {
         }
 
         Bubble {
-            visible: !!link.gilded
-            text: "Gilded"
+            visible: !!link.gilded && link.gilded > 0
+            text: link.gilded > 1 ? "Gilded " + link.gilded + "x" : "Gilded"
             color: "gold"
             font.bold: true
         }

@@ -97,8 +97,6 @@ ApplicationWindow {
                 return true
             } else if (/^https?\:\/\/((i|m)\.)?imgur\.com\/.+\.gifv$/.test(url)) {
                 return true;
-            } else if (/^https?\:\/\/streamable\.com\/.+/.test(url)) {
-                return true;
             } else {
                 return false
             }
@@ -106,7 +104,7 @@ ApplicationWindow {
 
         function previewableImage(url) {
             // imgur url
-            if (/^https?:\/\/((i|m)\.)?imgur\.com\//.test(url))
+            if (/^https?:\/\/((i|m|www)\.)?imgur\.com\//.test(url))
                 return !(/^.*\.gifv$/.test(url));
             // reddituploads
             else if (/^https?:\/\/i.reddituploads.com\//.test(url))
@@ -154,7 +152,7 @@ ApplicationWindow {
         }
 
         function openImageViewPage(url) {
-            if (/^https?:\/\/((i|m)\.)?imgur\.com/.test(url))
+            if (/^https?:\/\/((i|m|www)\.)?imgur\.com/.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imgurUrl: url});
             else if (/^https?:\/\/\S+\.(jpe?g|png|gif)/i.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
@@ -177,7 +175,8 @@ ApplicationWindow {
                 var xhr = new XMLHttpRequest()
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState == 4) {
-                        var videoUrl = JSON.parse(xhr.responseText)["gfyItem"]["mp4Url"]
+                        var cleantext = xhr.responseText.slice(xhr.responseText.indexOf("{"))
+                        var videoUrl = JSON.parse(cleantext)["gfyItem"]["mp4Url"]
                         pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: videoUrl });
                     }
                 }
@@ -198,9 +197,6 @@ ApplicationWindow {
                     return
                 }
                 pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://" + match[1] + "/" + match[4] + ".mp4" });
-            } else if (/^https?\:\/\/streamable\.com\/.+/.test(url)) {
-                match = /^https?\:\/\/streamable\.com\/(.+)/.exec(url)
-                pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://cdn.streamable.com/video/mp4/" + match[1] + ".mp4" });
             } else
                 infoBanner.alert(qsTr("Unsupported video url"));
         }

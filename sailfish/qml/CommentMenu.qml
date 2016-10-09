@@ -80,7 +80,7 @@ FancyContextMenu {
         }
 
         FancyMenuItem {
-            enabled: quickdditManager.isSignedIn && !comment.isArchived
+            enabled: quickdditManager.isSignedIn && !comment.isArchived && comment.isValid
             text: "Reply"
             onClicked: replyClicked();
         }
@@ -102,6 +102,8 @@ FancyContextMenu {
     }
 
     MenuItem {
+        visible: comment.isValid
+
         text: "/u/" + comment.author.split(" ")[0]
         onClicked: {
             pageStack.push(Qt.resolvedUrl("UserPage.qml"), { username: comment.author.split(" ")[0] } );

@@ -152,7 +152,10 @@ AbstractPage {
     ImgurManager {
         id: imgurManager
         manager: quickdditManager
-        onError: infoBanner.warning(errorString);
+        onError: {
+            infoBanner.warning(errorString);
+            console.log(errorString);
+        }
     }
 
     Binding {
