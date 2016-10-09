@@ -362,6 +362,7 @@ Item {
                 SectionHeader {
                     text: model.view === "edit" ? "Editing Comment" :
                           model.view === "reply" ? "Comment Reply" :
+                          model.view === "new" ? "New Comment" :
                           model.view
                 }
 
@@ -373,7 +374,7 @@ Item {
                     textMargin: model.view === "reply" ? constant.paddingMedium : 0
 
                     height: Math.max(implicitHeight, Theme.itemSizeLarge * 2)
-                    placeholderText: "Enter your reply here..."
+                    placeholderText: model.view === "reply" ? "Enter your reply here..." : "Enter your new comment here..."
                     focus: true
 
                     Rectangle {
@@ -399,6 +400,8 @@ Item {
                                 commentManager.editComment(model.fullname, editTextArea.text);
                             } else if (model.view === "reply") {
                                 commentManager.addComment(model.fullname, editTextArea.text);
+                            } else if (model.view === "new") {
+                                commentManager.addComment(link.fullname, editTextArea.text);
                             }
                         }
                     }
