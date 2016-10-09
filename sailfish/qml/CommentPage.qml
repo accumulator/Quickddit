@@ -250,7 +250,9 @@ AbstractPage {
                     commentDelegate.ListView.view.currentIndex = parentIndex;
                     commentDelegate.ListView.view.currentItem.highlight();
                 })
-                dialog.replyClicked.connect(function() { __createCommentDialog("Reply Comment", model.fullname); });
+                dialog.replyClicked.connect(function() {
+                    __createCommentDialog("Reply Comment", model.fullname);
+                });
                 dialog.editClicked.connect(function() {
                     __createCommentDialog("Edit Comment", model.fullname, model.rawBody, true);
                 });
@@ -315,9 +317,7 @@ AbstractPage {
         manager: quickdditManager
         model: commentModel
         linkAuthor: link ? link.author : ""
-        onSuccess: {
-            infoBanner.alert(message);
-        }
+        onSuccess: infoBanner.alert(message);
         onError: infoBanner.warning(errorString);
     }
 
@@ -325,9 +325,7 @@ AbstractPage {
         id: linkManager
         manager: quickdditManager
         commentModel: commentModel
-        onSuccess: {
-            infoBanner.alert(message);
-        }
+        onSuccess: infoBanner.alert(message);
         onError: infoBanner.warning(errorString);
     }
 
