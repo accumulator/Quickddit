@@ -121,7 +121,7 @@ ApplicationWindow {
                 return true;
             else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url))
                 return true;
-            else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.test(url))
+            else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/([A-Za-z0-9_-]+)\/?/.test(url))
                 return true;
             else if (/^https?:\/\/(\w+\.)?reddit.com\/message\/compose\/?\?/.test(url))
                 return true;
@@ -134,8 +134,8 @@ ApplicationWindow {
             else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url)) {
                 var subreddit = /^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.exec(url)[2];
                 pageStack.push(Qt.resolvedUrl("MainPage.qml"), {subreddit: subreddit});
-            } else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.test(url)) {
-                var username = /^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/(\w+)\/?/.exec(url)[3];
+            } else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/([A-Za-z0-9_-]+)\/?/.test(url)) {
+                var username = /^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/([A-Za-z0-9_-]+)\/?/.exec(url)[3];
                 pageStack.push(Qt.resolvedUrl("UserPage.qml"), {username: username});
             } else if (/^https?:\/\/(\w+\.)?reddit.com\/message\/compose\/?\?(.*)/.test(url)) {
                 var urlparams = /^https?:\/\/(\w+\.)?reddit.com\/message\/compose\/?\?(.*)/.exec(url)[2].split("&");
