@@ -67,6 +67,49 @@ ListItem {
             }
         }
 
+        Row {
+            anchors { left: parent.left; right: parent.right }
+            spacing: constant.paddingMedium
+
+            Bubble {
+                visible: model.flairText !== ""
+                text: model.flairText
+                font.pixelSize: constant.fontSizeSmaller
+            }
+
+            Bubble {
+                color: "green"
+                visible: !!model.isSticky
+                text: "Sticky"
+                font.bold: true
+                font.pixelSize: constant.fontSizeSmaller
+            }
+
+            Bubble {
+                color: "red"
+                visible: !!model.isNSFW
+                text: "NSFW"
+                font.bold: true
+                font.pixelSize: constant.fontSizeSmaller
+            }
+
+            Bubble {
+                color: "green"
+                visible: !!model.isPromoted
+                text: "Promoted"
+                font.bold: true
+                font.pixelSize: constant.fontSizeSmaller
+            }
+
+            Bubble {
+                visible: !!model.gilded && model.gilded > 0
+                text: model.gilded > 1 ? "Gilded " + model.gilded + "x" : "Gilded"
+                color: "gold"
+                font.bold: true
+                font.pixelSize: constant.fontSizeSmaller
+            }
+        }
+
         Text {
             width: parent.width
             font.pixelSize: constant.fontSizeSmaller
