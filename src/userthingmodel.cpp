@@ -98,6 +98,9 @@ QVariantMap UserThingModel::commentData(const CommentObject* o) const
     result.insert("linkTitle", QVariant(o->linkTitle()));
     result.insert("linkId", QVariant(o->linkId()));
     result.insert("saved", QVariant(o->saved()));
+    result.insert("isStickied", QVariant(o->isStickied()));
+    result.insert("gilded", QVariant(o->gilded()));
+
     return result;
 }
 
@@ -118,6 +121,12 @@ QVariantMap UserThingModel::linkData(const LinkObject* o) const
     result.insert("title", QVariant(o->title()));
     result.insert("isSelfPost", QVariant(o->isSelfPost()));
     result.insert("saved", QVariant(o->saved()));
+    result.insert("flairText", QVariant(o->flairText()));
+    result.insert("isSticky", QVariant(o->isSticky()));
+    result.insert("isNSFW", QVariant(o->isNSFW()));
+    result.insert("isPromoted", QVariant(o->isPromoted()));
+    result.insert("gilded", QVariant(o->gilded()));
+
     return result;
 }
 
