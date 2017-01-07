@@ -533,7 +533,7 @@ Listing<Thing*> Parser::parseUserThingList(const QByteArray &json)
 
     const QVariantList thingsJson = data.value("children").toList();
 
-    Listing<Thing*> commentList;
+    Listing<Thing*> thingList;
     foreach (const QVariant &thing, thingsJson) {
         const QVariantMap thingMap = thing.toMap();
         const QVariantMap thingData = thingMap.value("data").toMap();
@@ -541,19 +541,19 @@ Listing<Thing*> Parser::parseUserThingList(const QByteArray &json)
         if (thingMap.value("kind").toString() == "t1") {
             CommentObject* comment = new CommentObject;
             commentFromMap(*comment, thingData);
-            commentList.append(comment);
+            thingList.append(comment);
         }
         else if (thingMap.value("kind").toString() == "t3") {
             LinkObject* link = new LinkObject;
             linkFromMap(*link, thingData);
-            commentList.append(link);
+            thingList.append(link);
         }
         else
             qDebug() << "noncomment:" << thingMap;
     }
 
-    commentList.setHasMore(!data.value("after").isNull());
+    thingList.setHasMore(!data.value("after").isNull());
 
-    return commentList;
+    return thingList;
 }
 
