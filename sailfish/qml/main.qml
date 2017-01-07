@@ -151,6 +151,18 @@ ApplicationWindow {
                 infoBanner.alert(qsTr("Unsupported reddit url"));
         }
 
+        function parseRedditLink(url) {
+            var linkRe = /^(https?:\/\/(\w+\.)?reddit.com)?(\/[^?]*)(\?.*)?/.exec(url);
+
+            console.log(linkRe);
+            var link = {
+                path: linkRe[3].charAt(linkRe[3].length-1) === "/" ? linkRe[3].substring(0,linkRe[3].length-1) : linkRe[3],
+                query: linkRe[4] === undefined ? "" : linkRe[4].substring(1)
+            }
+            console.log(link.path + "|" + link.query);
+            return link
+        }
+
         function openImageViewPage(url) {
             if (/^https?:\/\/((i|m|www)\.)?imgur\.com/.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imgurUrl: url});

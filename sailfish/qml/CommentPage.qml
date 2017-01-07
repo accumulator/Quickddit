@@ -280,8 +280,8 @@ AbstractPage {
         permalink: link.permalink
         onError: infoBanner.warning(errorString)
         onCommentLoaded: {
-            var path = permalink.split("?")[0].split("/");
-            var post = path[path.length-1];
+            var rlink = globalUtils.parseRedditLink(permalink)
+            var post = rlink.path.split("/").pop()
             var postIndex = commentModel.getCommentIndex("t1_" + post);
             if (postIndex !== -1) {
                 commentListView.model = commentModel
