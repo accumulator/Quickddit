@@ -146,6 +146,8 @@ ApplicationWindow {
                 }
                 params["recipient"] = params["to"]
                 params["message"] = decodeURIComponent(params["message"])
+                if (params["subject"] !== null)
+                    params["subject"] = decodeURIComponent(params["subject"])
                 pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), params);
             } else
                 infoBanner.alert(qsTr("Unsupported reddit url"));
