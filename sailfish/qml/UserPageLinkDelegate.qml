@@ -78,11 +78,28 @@ ListItem {
             text: model.title
         }
 
-        WideText {
+        Text {
             visible: model.isSelfPost
-            width: parent.width
-            body: model.text
-            listItem: mainItem
+            width: parent.width - 25
+            x: 25
+            text: /(<p>(.*?)<\/p>).*/.exec(model.text)[2]
+            textFormat: Text.StyledText
+            font.pixelSize: constant.fontSizeSmaller
+            color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                    : constant.colorDisabled
+            linkColor: mainItem.enabled ? Theme.highlightColor : constant.colorDisabled
+            wrapMode: Text.WordWrap
+            elide: Text.ElideRight
+            maximumLineCount: 5
+
+            Rectangle {
+                x: -10
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                width: 5
+                color: constant.colorDisabled
+                opacity: 0.33
+            }
         }
 
     }
