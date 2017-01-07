@@ -44,10 +44,10 @@ AbstractPage {
 
     onStatusChanged: {
         if (status === PageStatus.Activating) {
-            if (!subredditModel && quickdditManager.isSignedIn)
-                subredditModel = subredditModelComponent.createObject(subredditsPage);
-            if (!multiredditModel && quickdditManager.isSignedIn)
-                multiredditModel = multiredditModelComponent.createObject(subredditsPage);
+            if (quickdditManager.isSignedIn) {
+                if (!subredditModel) subredditModel = subredditModelComponent.createObject(subredditsPage);
+                if (!multiredditModel) multiredditModel = multiredditModelComponent.createObject(subredditsPage);
+            }
         } else if (status === PageStatus.Inactive) {
             subredditListView.headerItem.resetTextField();
             subredditListView.positionViewAtBeginning();
