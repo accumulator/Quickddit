@@ -78,9 +78,9 @@ void AbstractListModelManager::doRequest(APIRequest::HttpMethod method, const QS
     }
 
     m_request = manager()->createRedditRequest(this, method, relativeUrl, parameters);
-    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(__onRequestFinished(QNetworkReply*)));
     if (finishedHandler)
         connect(m_request, SIGNAL(finished(QNetworkReply*)), finishedHandler);
+    connect(m_request, SIGNAL(finished(QNetworkReply*)), SLOT(__onRequestFinished(QNetworkReply*)));
 
     setBusy(true);
 }
