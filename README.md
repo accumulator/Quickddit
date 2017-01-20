@@ -40,14 +40,12 @@ Optionally you can also define `IMGUR_CLIENT_ID` with your own Imgur API client 
 
 TODO
 -----
-Below is the list of TODOs I planned for future release, before reaching the 1.0.0 milestone.
 
-- none!
-
-Additional TODOs after the 1.0.0 milestone
 - (Local) browse history
 - Multiple accounts
-- Reddit Live
+- Reddit Live and/or a method of 'live' following a post
+- youtube-dl integration
+- de-censor a-la ceddit
 
 Download
 --------
