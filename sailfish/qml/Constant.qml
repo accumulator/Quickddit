@@ -26,6 +26,7 @@ QtObject {
     readonly property color colorLight: Theme.primaryColor
     readonly property color colorMid: Theme.secondaryColor
     readonly property color colorDisabled: Qt.darker(colorMid, 1.5)
+    readonly property color colorHi: Qt.lighter(Theme.highlightColor, 1.1)
 
     property color colorLikes: "#FF8B60"
     property color colorDislikes: "#9494FF"
@@ -47,10 +48,13 @@ QtObject {
     property int fontSizeLarger: __fontSizeLargerF()
     property int orientationSetting: __orientationSettingF()
 
-    property string richtextStyle: "<style>del {text-decoration: line-through;} a { color: " + Theme.highlightColor + "; }</style>"
+    property string richtextStyle: contentStyle(true)
 
-    function commentStyle(enabled) {
-        return "<style>del {text-decoration: line-through;} a { color: " + (enabled ? Theme.highlightColor : constant.colorDisabled) + "; }</style>"
+    function contentStyle(enabled) {
+        return "<style>del {text-decoration: line-through;} h1 { font-size: x-large; } " +
+               "table { font-family: monospace; font-size: small; } thead { text-decoration: underline ; } td { padding-right: 20px; } " +
+               "a { color: " + (enabled ? Theme.highlightColor : colorDisabled) + "; } " +
+               "code { color: " + (enabled ? colorHi : colorDisabled) + "; } </style>"
     }
 
     function __fontSizeDefaultF() {

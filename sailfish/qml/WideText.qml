@@ -55,7 +55,7 @@ Item {
                                     : constant.colorDisabled
             wrapMode: Text.Wrap
             textFormat: Text.RichText
-            text: constant.commentStyle(listItem.enabled) + body
+            text: constant.contentStyle(listItem.enabled) + body
             onLinkActivated: globalUtils.openLink(link);
 
             Component.onCompleted: {
@@ -103,7 +103,7 @@ Item {
                                         : constant.colorDisabled
                 wrapMode: Text.Wrap
                 textFormat: Text.RichText
-                text: constant.commentStyle(listItem.enabled) + body
+                text: constant.contentStyle(listItem.enabled) + body
                 onLinkActivated: globalUtils.openLink(link);
             }
         }
