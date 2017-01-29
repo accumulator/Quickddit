@@ -33,97 +33,107 @@ AbstractDialog {
         pageStack.replace(globalUtils.getWebViewPage(), {url: url});
     }
 
-    Column {
-        anchors { top: parent.top; left: parent.left; right: parent.right }
-        spacing: constant.paddingLarge
+    DialogHeader {
+        id: dialogHeader
+    }
 
-        DialogHeader { }
+    Flickable {
+        id: flickable
+        anchors { top: dialogHeader.bottom; bottom: parent.bottom; left: parent.left; right: parent.right }
+        contentHeight: mainColumn.height
+        clip: true
 
-        Label {
-            anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
-            text: openLinkDialog.title
-            font.pixelSize: constant.fontSizeXXLarge
-            color: constant.colorLight
-        }
+        Column {
+            id: mainColumn
+            anchors { top: parent.top; left: parent.left; right: parent.right }
+            spacing: constant.paddingLarge
 
-        Label {
-            anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
-            horizontalAlignment: Text.AlignHCenter
-            color: Theme.highlightColor
-            wrapMode: Text.WrapAnywhere
-            maximumLineCount: 4
-            elide: Text.ElideRight
-            text: url
-        }
+            Label {
+                anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
+                text: openLinkDialog.title
+                font.pixelSize: constant.fontSizeXXLarge
+                color: constant.colorLight
+            }
 
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing: constant.paddingMedium
+            Label {
+                anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
+                horizontalAlignment: Text.AlignHCenter
+                color: Theme.highlightColor
+                wrapMode: Text.WrapAnywhere
+                maximumLineCount: 4
+                elide: Text.ElideRight
+                text: url
+            }
 
-            Button {
-                text: qsTr("Open in browser")
-                visible: url != ""
-                onClicked: {
-                    Qt.openUrlExternally(url);
-                    infoBanner.alert(qsTr("Launching web browser..."));
-                    openLinkDialog.reject();
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: constant.paddingMedium
+
+                Button {
+                    text: qsTr("Open in browser")
+                    visible: url != ""
+                    onClicked: {
+                        Qt.openUrlExternally(url);
+                        infoBanner.alert(qsTr("Launching web browser..."));
+                        openLinkDialog.reject();
+                    }
+                }
+
+                Button {
+                    text: qsTr("Copy URL")
+                    onClicked: {
+                        QMLUtils.copyToClipboard(url);
+                        infoBanner.alert(qsTr("URL copied to clipboard"));
+                        openLinkDialog.reject();
+                    }
                 }
             }
 
-            Button {
-                text: qsTr("Copy URL")
-                onClicked: {
-                    QMLUtils.copyToClipboard(url);
-                    infoBanner.alert(qsTr("URL copied to clipboard"));
-                    openLinkDialog.reject();
-                }
-            }
-        }
-
-        Label {
-            anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
-            text: "Source"
-            visible: source != ""
-            font.pixelSize: constant.fontSizeLarge
-            color: constant.colorLight
-        }
-
-        Label {
-            anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
-            horizontalAlignment: Text.AlignHCenter
-            color: Theme.highlightColor
-            wrapMode: Text.WrapAnywhere
-            maximumLineCount: 4
-            elide: Text.ElideRight
-            visible: source != ""
-            text: source
-        }
-
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing: constant.paddingMedium
-
-            Button {
-                text: qsTr("Open in browser")
+            Label {
+                anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
+                text: "Source"
                 visible: source != ""
-                onClicked: {
-                    Qt.openUrlExternally(source);
-                    infoBanner.alert(qsTr("Launching web browser..."));
-                    openLinkDialog.reject();
-                }
+                font.pixelSize: constant.fontSizeLarge
+                color: constant.colorLight
             }
 
-            Button {
-                text: qsTr("Copy URL")
+            Label {
+                anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
+                horizontalAlignment: Text.AlignHCenter
+                color: Theme.highlightColor
+                wrapMode: Text.WrapAnywhere
+                maximumLineCount: 4
+                elide: Text.ElideRight
                 visible: source != ""
-                onClicked: {
-                    QMLUtils.copyToClipboard(source);
-                    infoBanner.alert(qsTr("URL copied to clipboard"));
-                    openLinkDialog.reject();
+                text: source
+            }
+
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: constant.paddingMedium
+
+                Button {
+                    text: qsTr("Open in browser")
+                    visible: source != ""
+                    onClicked: {
+                        Qt.openUrlExternally(source);
+                        infoBanner.alert(qsTr("Launching web browser..."));
+                        openLinkDialog.reject();
+                    }
+                }
+
+                Button {
+                    text: qsTr("Copy URL")
+                    visible: source != ""
+                    onClicked: {
+                        QMLUtils.copyToClipboard(source);
+                        infoBanner.alert(qsTr("URL copied to clipboard"));
+                        openLinkDialog.reject();
+                    }
                 }
             }
-        }
 
+        }
     }
 
 }
