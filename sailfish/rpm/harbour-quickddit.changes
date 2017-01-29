@@ -5,6 +5,14 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Jan 29 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.4.1-1
+- fix: username regex
+- fix: message compose links decoding
+- fix: double fetch of data in infinite lists
+- chg: compact content in profile and message pages
+- chg: improve styling of profile and message pages
+- chg: improve styling of tables, headings and code elements in content
+
 * Sun Oct 09 2016 Sander van Grieken <sander@outrightsolutions.nl> 1.4.0-1
 - fix: some minor issues
 - chg: remove streamable.com handling
