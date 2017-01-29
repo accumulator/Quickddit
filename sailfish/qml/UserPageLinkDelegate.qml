@@ -25,13 +25,24 @@ ListItem {
     property variant model
     property bool markSaved: true
 
-    contentHeight: mainColumn.height + 2 * constant.paddingMedium
+    contentHeight: Math.max(mainColumn.height + 2 * constant.paddingMedium, thumb.height)
     showMenuOnPressAndHold: false
+
+    PostThumbnail {
+        id: thumb
+        anchors {
+            right: parent.right; margins: constant.paddingMedium
+            verticalCenter:  parent.verticalCenter
+        }
+        visible: !model.isSelfPost
+        enabled: visible
+        link: model
+    }
 
     Column {
         id: mainColumn
         anchors {
-            left: parent.left; right: parent.right; margins: constant.paddingMedium
+            left: parent.left; right: thumb.left; margins: constant.paddingMedium
             verticalCenter:  parent.verticalCenter
         }
 
@@ -83,7 +94,6 @@ ListItem {
         Row {
             width: parent.width
             spacing: constant.paddingSmall
-            clip: true
 
             Image {
                 source: model.isSelfPost ? "image://theme/icon-m-bubble-universal" : "image://theme/icon-m-link"
@@ -93,32 +103,33 @@ ListItem {
             }
 
             Text {
-                id: titleText
+                width: parent.width - 32
                 font.pixelSize: constant.fontSizeDefault
+                font.bold: true
                 color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
                                         : constant.colorDisabled
-                font.bold: true
-                text: model.isSelfPost ? "Self Post in /r/" + model.subreddit
-                                       : "Link in /r/" + model.subreddit
-            }
-            Text {
-                font.pixelSize: constant.fontSizeDefault
-                color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
-                                        : constant.colorDisabled
                 elide: Text.ElideRight
-                text: " · " + model.created
+                wrapMode: Text.WordWrap
+                maximumLineCount: 2
+                text: model.title
             }
         }
 
         Text {
-            width: parent.width
             font.pixelSize: constant.fontSizeSmaller
             color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
                                     : constant.colorDisabled
-            elide: Text.ElideRight
-            wrapMode: Text.WordWrap
-            maximumLineCount: 2
-            text: model.title
+            text: (model.isSelfPost ? "/r/" + model.subreddit
+                                    : "/r/" + model.subreddit) + " · " + model.created
+        }
+
+        Text {
+            visible: !model.isSelfPost
+            font.pixelSize: constant.fontSizeSmaller
+            font.bold: true
+            color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
+                                    : constant.colorDisabled
+            text: model.domain
         }
 
         Text {
@@ -127,21 +138,20 @@ ListItem {
             x: 25
             text: /(<p>(.*?)<\/p>).*/.exec(model.text)[2]
             textFormat: Text.StyledText
-            font.pixelSize: constant.fontSizeSmaller
+            font.pixelSize: constant.fontSizeDefault
             color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
                                     : constant.colorDisabled
             linkColor: mainItem.enabled ? Theme.highlightColor : constant.colorDisabled
             wrapMode: Text.WordWrap
             elide: Text.ElideRight
-            maximumLineCount: 5
+            maximumLineCount: 3
 
             Rectangle {
                 x: -25
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 width: 10
-                color: constant.colorDisabled
-                opacity: 0.33
+                color: Theme.secondaryHighlightColor
             }
         }
 

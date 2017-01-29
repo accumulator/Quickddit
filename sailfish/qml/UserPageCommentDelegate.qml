@@ -109,21 +109,20 @@ Item {
                 x: 25
                 text: /(<p>(.*?)<\/p>).*/.exec(model.body)[2]
                 textFormat: Text.StyledText
-                font.pixelSize: constant.fontSizeSmaller
+                font.pixelSize: constant.fontSizeDefault
                 color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
                                         : constant.colorDisabled
                 linkColor: mainItem.enabled ? Theme.highlightColor : constant.colorDisabled
                 wrapMode: Text.WordWrap
                 elide: Text.ElideRight
-                maximumLineCount: 5
+                maximumLineCount: 3
 
                 Rectangle {
                     x: -25
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     width: 10
-                    color: constant.colorDisabled
-                    opacity: 0.33
+                    color: Theme.secondaryHighlightColor
                 }
             }
 

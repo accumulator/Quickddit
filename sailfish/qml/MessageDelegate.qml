@@ -78,11 +78,11 @@ Item {
                 wrapMode: Text.Wrap
                 maximumLineCount: 2
                 elide: Text.ElideRight
-                text: isComment ? "in /r/" + model.subreddit + ", " + model.created
+                text: isComment ? "in /r/" + model.subreddit + " · " + model.created
                                 : (isSentMessage) ? "to " + model.destination
                                                   : (model.author !== "")
-                                                    ? "from " + model.author + ", " + model.created
-                                                    : "/r/" + model.subreddit + ", " + model.created
+                                                    ? "from " + model.author + " · " + model.created
+                                                    : "/r/" + model.subreddit + " · " + model.created
             }
 
             Text {
@@ -96,11 +96,36 @@ Item {
                 text: model.linkTitle
             }
 
+            Text {
+                visible: isComment
+                width: parent.width - x
+                x: 25
+                text: /(<p>(.*?)<\/p>).*/.exec(model.body)[2]
+                textFormat: Text.StyledText
+                font.pixelSize: constant.fontSizeDefault
+                color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                        : constant.colorDisabled
+                linkColor: mainItem.enabled ? Theme.highlightColor : constant.colorDisabled
+                wrapMode: Text.WordWrap
+                elide: Text.ElideRight
+                maximumLineCount: 3
+
+                Rectangle {
+                    x: -25
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    width: 10
+                    color: Theme.secondaryHighlightColor
+                }
+            }
+
             WideText {
+                visible: !isComment
                 width: parent.width
                 body: model.body
                 listItem: mainItem
                 onClicked: messageDelegate.clicked()
+                Component.onCompleted: if (isComment) { height = 0 }
             }
 
         }
