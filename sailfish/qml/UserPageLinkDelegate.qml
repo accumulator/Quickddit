@@ -38,36 +38,6 @@ ListItem {
         spacing: constant.paddingSmall
 
         Row {
-            width: parent.width
-            spacing: constant.paddingSmall
-            clip: true
-
-            Image {
-                source: model.isSelfPost ? "image://theme/icon-m-bubble-universal" : "image://theme/icon-m-link"
-                width: 32
-                height: 32
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            Text {
-                id: titleText
-                font.pixelSize: constant.fontSizeDefault
-                color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
-                                        : constant.colorDisabled
-                font.bold: true
-                text: model.isSelfPost ? "Self Post in /r/" + model.subreddit
-                                       : "Link in /r/" + model.subreddit
-            }
-            Text {
-                font.pixelSize: constant.fontSizeDefault
-                color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
-                                        : constant.colorDisabled
-                elide: Text.ElideRight
-                text: " · " + model.created
-            }
-        }
-
-        Row {
             anchors { left: parent.left; right: parent.right }
             spacing: constant.paddingMedium
 
@@ -110,6 +80,36 @@ ListItem {
             }
         }
 
+        Row {
+            width: parent.width
+            spacing: constant.paddingSmall
+            clip: true
+
+            Image {
+                source: model.isSelfPost ? "image://theme/icon-m-bubble-universal" : "image://theme/icon-m-link"
+                width: 32
+                height: 32
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            Text {
+                id: titleText
+                font.pixelSize: constant.fontSizeDefault
+                color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                        : constant.colorDisabled
+                font.bold: true
+                text: model.isSelfPost ? "Self Post in /r/" + model.subreddit
+                                       : "Link in /r/" + model.subreddit
+            }
+            Text {
+                font.pixelSize: constant.fontSizeDefault
+                color: mainItem.enabled ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
+                                        : constant.colorDisabled
+                elide: Text.ElideRight
+                text: " · " + model.created
+            }
+        }
+
         Text {
             width: parent.width
             font.pixelSize: constant.fontSizeSmaller
@@ -136,10 +136,10 @@ ListItem {
             maximumLineCount: 5
 
             Rectangle {
-                x: -10
+                x: -25
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                width: 5
+                width: 10
                 color: constant.colorDisabled
                 opacity: 0.33
             }

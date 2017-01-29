@@ -45,6 +45,27 @@ Item {
             spacing: constant.paddingSmall
 
             Row {
+                anchors { left: parent.left; right: parent.right }
+                spacing: constant.paddingMedium
+
+                Bubble {
+                    color: "green"
+                    visible: !!model.isStickied
+                    text: "Sticky"
+                    font.bold: true
+                    font.pixelSize: constant.fontSizeSmaller
+                }
+
+                Bubble {
+                    visible: !!model.gilded && model.gilded > 0
+                    text: model.gilded > 1 ? "Gilded " + model.gilded + "x" : "Gilded"
+                    color: "gold"
+                    font.bold: true
+                    font.pixelSize: constant.fontSizeSmaller
+                }
+            }
+
+            Row {
                 width: parent.width
                 spacing: constant.paddingSmall
                 clip: true
@@ -69,27 +90,6 @@ Item {
                                             : constant.colorDisabled
                     elide: Text.ElideRight
                     text: " · " + model.created
-                }
-            }
-
-            Row {
-                anchors { left: parent.left; right: parent.right }
-                spacing: constant.paddingMedium
-
-                Bubble {
-                    color: "green"
-                    visible: !!model.isStickied
-                    text: "Sticky"
-                    font.bold: true
-                    font.pixelSize: constant.fontSizeSmaller
-                }
-
-                Bubble {
-                    visible: !!model.gilded && model.gilded > 0
-                    text: model.gilded > 1 ? "Gilded " + model.gilded + "x" : "Gilded"
-                    color: "gold"
-                    font.bold: true
-                    font.pixelSize: constant.fontSizeSmaller
                 }
             }
 
@@ -118,10 +118,10 @@ Item {
                 maximumLineCount: 5
 
                 Rectangle {
-                    x: -10
+                    x: -25
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
-                    width: 5
+                    width: 10
                     color: constant.colorDisabled
                     opacity: 0.33
                 }
