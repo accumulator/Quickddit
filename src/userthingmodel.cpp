@@ -126,6 +126,9 @@ QVariantMap UserThingModel::linkData(const LinkObject* o) const
     result.insert("isNSFW", QVariant(o->isNSFW()));
     result.insert("isPromoted", QVariant(o->isPromoted()));
     result.insert("gilded", QVariant(o->gilded()));
+    result.insert("domain", QVariant(o->domain()));
+    result.insert("thumbnailUrl", QVariant(o->thumbnailUrl()));
+    result.insert("url", QVariant(o->url()));
 
     return result;
 }
