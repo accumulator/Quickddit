@@ -99,6 +99,7 @@ MouseArea {
     Rectangle {
         anchors.fill: parent
         color: Theme.highlightBackgroundColor
+        opacity: 0.95
     }
 
     Row {
