@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2017  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,22 +26,23 @@ ContextMenu {
 
     property variant link
     property VoteManager linkVoteManager
+    property SaveManager linkSaveManager
 
     MenuItem {
         id: upvoteButton
-        visible: link.likes != 1
+        visible: link.likes !== 1
         enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
         text: "Upvote"
         onClicked: linkVoteManager.vote(link.fullname, VoteManager.Upvote)
     }
     MenuItem {
-        visible: link.likes != -1
+        visible: link.likes !== -1
         enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
         text: "Downvote"
         onClicked: linkVoteManager.vote(link.fullname, VoteManager.Downvote)
     }
     MenuItem {
-        visible: link.likes != 0
+        visible: link.likes !== 0
         enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
         text: "Unvote"
         onClicked: linkVoteManager.vote(link.fullname, VoteManager.Unvote)
@@ -51,9 +53,14 @@ ContextMenu {
         onClicked: globalUtils.openImageViewPage(link.url);
     }
     MenuItem {
-        text: "View video"
-        visible: globalUtils.previewableVideo(link.url)
-        onClicked: globalUtils.openVideoViewPage(link.url);
+        text: "Save"
+        visible: !link.saved
+        onClicked: linkSaveManager.save(link.fullname)
+    }
+    MenuItem {
+        text: "Unsave"
+        visible: link.saved
+        onClicked: linkSaveManager.unsave(link.fullname)
     }
     MenuItem {
         text: "URL"
