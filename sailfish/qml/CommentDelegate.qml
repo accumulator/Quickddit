@@ -141,14 +141,9 @@ Item {
             spacing: constant.paddingSmall
 
             Row {
-                visible: model.isArchived || model.isStickied || model.gilded > 0
+                visible: model.isStickied || model.gilded > 0
                 spacing: constant.paddingMedium
 
-//                Bubble {
-//                    visible: model.isArchived
-//                    font.pixelSize: constant.fontSizeSmaller
-//                    text: "Archived"
-//                }
                 Bubble {
                     visible: model.isStickied
                     font.pixelSize: constant.fontSizeSmaller
