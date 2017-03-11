@@ -40,6 +40,7 @@ AbstractPage {
         id: flickable
         anchors.fill: parent
         contentHeight: header.height + columnWrapper.height
+        flickableDirection: Flickable.VerticalFlick
 
         QuickdditPageHeader { id: header; title: aboutPage.title }
 
