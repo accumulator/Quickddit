@@ -19,6 +19,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import org.nemomobile.dbus 2.0
 
 AbstractDialog {
     id: openLinkDialog
@@ -89,6 +90,36 @@ AbstractDialog {
                 }
             }
 
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                visible: kodiClient.canControl && /^https?:\/\/((www|m)\.)?youtube\.com\/watch\?v.+/.test(url)
+                width: itemRow.width + 2 * Theme.paddingMedium
+
+                onClicked: {
+                    kodiClient.openUrl(url);
+                    openLinkDialog.reject();
+                }
+
+                Row {
+                    id: itemRow
+                    anchors.centerIn: parent
+                    spacing: Theme.paddingMedium
+
+                    Image {
+                        anchors.verticalCenter: parent.verticalCenter
+                        source: "image://theme/harbour-kodimote"
+                        fillMode: Image.PreserveAspectFit
+                        height: parent.parent.height - 2 * Theme.paddingSmall
+                    }
+
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: qsTr("Open in Kodi")
+                        color: constant.colorLight
+                    }
+                }
+            }
+
             Label {
                 anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
                 text: "Source"
@@ -136,4 +167,21 @@ AbstractDialog {
         }
     }
 
+    DBusInterface {
+        id: kodiClient
+
+        property bool canControl: false
+
+        service: 'org.mpris.MediaPlayer2.kodimote'
+        path: '/org/mpris/MediaPlayer2'
+        iface: 'org.mpris.MediaPlayer2.Player'
+
+        function openUrl(url) {
+            console.log(call('OpenUri', url))
+        }
+
+        Component.onCompleted: {
+            canControl = (getProperty('CanControl') === true)
+        }
+    }
 }
