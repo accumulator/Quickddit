@@ -1,3 +1,6 @@
 [submodule "qt-json"]
 	path = qt-json
 	url = https://github.com/da4c30ff/qt-json.git
+[submodule "youtube-dl"]
+	path = youtube-dl
+	url = https://github.com/rg3/youtube-dl.git

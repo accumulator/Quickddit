@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2015-2017  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,12 +19,70 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import io.thp.pyotherside 1.4
 import harbour.quickddit.Core 1.0
 
 ApplicationWindow {
     id: appWindow
     initialPage: Component { MainPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml");
+
+    Python {
+        id: python
+
+        signal videoInfo
+        signal error
+
+        property variant info
+
+        Component.onCompleted: {
+            addImportPath(Qt.resolvedUrl('.'));
+            addImportPath(Qt.resolvedUrl('..'));
+
+            setHandler('log', function(msg) {
+                console.log('python: ' + msg)
+            })
+
+            importModule('ytdl_wrapper', function() {})
+        }
+
+        function requestVideoUrlFor(url) {
+            console.log("video url requested " + url)
+            call('ytdl_wrapper.retrieveVideoInfo', [url.toString()], function(result) {
+                if (result === undefined) {
+                    error()
+                    return;
+                }
+
+                console.log(JSON.stringify(result,null,4))
+                info = result
+                videoInfo()
+            })
+        }
+
+        function isUrlSupported(url) {
+            // TODO: now simply matches url against our own simple list. We should query YTDL itself.
+            console.log("testing ytdl support for url " + url)
+            if (/^https?:\/\/((www|m)\.)?youtube\.com\/.+/.test(url)) {
+                return true;
+            } else if (/^https?:\/\/((www|m)\.)?youtu\.be\/.+/.test(url)) {
+                return true;
+            } else if (/^https?:\/\/((www)\.)?streamable\.com\/.+/.test(url)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        onError: {
+            console.log('python error: ' + traceback);
+        }
+
+        onReceived: {
+            // asychronous messages from Python arrive here. if not explicitly handled
+            console.log('got message from python: ' + data);
+        }
+    }
 
     // Global busy indicator, it reads the 'busy' property from the current page
     DockedPanel {
@@ -91,11 +149,11 @@ ApplicationWindow {
         function previewableVideo(url) {
             if (/^https?:\/\/(www\.)?gfycat\.com\//.test(url)) {
                 return true
-            } else if (/^https?:\/\/mediacru\.sh/.test(url)) {
-                return true
             } else if (/^https?:\/\/\S+\.(mp4|avi|mkv|webm)/i.test(url)) {
                 return true
             } else if (/^https?\:\/\/((i|m)\.)?imgur\.com\/.+\.gifv$/.test(url)) {
+                return true;
+            } else if (python.isUrlSupported(url)) {
                 return true;
             } else {
                 return false
@@ -197,13 +255,6 @@ ApplicationWindow {
 
                 xhr.open("GET", "http://gfycat.com/cajax/get/" + match[2], true)
                 xhr.send()
-            } else if (/^https?:\/\/mediacru\.sh\/.+/.test(url)) {
-                match = /^https?\:\/\/mediacru\.sh\/(.+?)$/.exec(url)
-                if (match.length < 2) {
-                    infoBanner.warning("invalid mediacru.sh url: " + url)
-                    return
-                }
-                pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://mediacru.sh/" + match[1] + ".mp4" });
             } else if (/^https?:\/\/((i|m)\.)?imgur\.com\/.+/.test(url)) {
                 match = /^https?\:\/\/(((i|m)\.)?imgur\.com)\/(.+?).gifv$/.exec(url)
                 if (!match || match.length < 4) {
@@ -211,6 +262,8 @@ ApplicationWindow {
                     return
                 }
                 pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://" + match[1] + "/" + match[4] + ".mp4" });
+            } else if (python.isUrlSupported(url)) {
+                pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url });
             } else
                 infoBanner.alert(qsTr("Unsupported video url"));
         }
