@@ -5,6 +5,12 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Apr 01 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.0-1
+- fix: post button positioning when thumbnail is taller than text
+- chg: update qtjson submodule to latest
+- new: add Save/Unsave actions to post menu
+- new: initial youtube-dl integration - youtu.be, youtube.com, streamable.com, my.mixtape.moe, twitch.tv, livestream.com currently supported
+
 * Sun Jan 29 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.4.1-1
 - fix: username regex
 - fix: message compose links decoding

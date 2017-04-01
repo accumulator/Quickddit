@@ -44,7 +44,6 @@ TODO
 - (Local) browse history
 - Multiple accounts
 - Reddit Live and/or a method of 'live' following a post
-- youtube-dl integration
 - de-censor a-la ceddit
 
 Download
@@ -58,7 +57,7 @@ All files in this project are licensed under the GNU GPLv3+, unless otherwise st
 
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2013-2014  Dickson Leong
-    Copyright (C) 2015-2016  Sander van Grieken
+    Copyright (C) 2015-2017  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
