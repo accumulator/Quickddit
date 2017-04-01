@@ -102,7 +102,7 @@ AbstractPage {
 
         Slider {
             id: progressBar
-            enabled: mediaPlayer.seekable
+            enabled: mediaPlayer.seekable && opacity > 0
             opacity: playPauseButton.opacity
             anchors {
                 left: parent.left
