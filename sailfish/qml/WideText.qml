@@ -58,16 +58,7 @@ Item {
             text: constant.contentStyle(listItem.enabled) + body
             onLinkActivated: globalUtils.openLink(link);
 
-            // hack: paintedWidth event somehow is triggered twice. We're only interested in the second,
-            // correct one. The second event is not always sent, but in those cases we never exceed our
-            // bounds, so we don't need to select the wideCommentComponent anyway
-            property bool paintedWidthReceived: false
-
-            onPaintedWidthChanged: {
-                if (!paintedWidthReceived) {
-                    paintedWidthReceived = true
-                    return
-                }
+            Component.onCompleted: {
                 if (commentBodyTextInner.paintedWidth > listItem.width && commentLoader.sourceComponent != wideCommentComponent) {
                     commentLoader.sourceComponent = wideCommentComponent
                 }
