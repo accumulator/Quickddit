@@ -25,6 +25,7 @@ Requires:
 - sailfishsilica-qt5
 - mapplauncherd-booster-silica-qt5
 - qt5-plugin-imageformat-gif
+- pyotherside-qml-plugin-python3-qt5
 PkgBr:
 - nemo-qml-plugin-notifications-qt5-devel
 Files:

@@ -171,7 +171,8 @@ OTHER_FILES += \
     qml/ImageViewer.qml \
     qml/AltMarker.qml \
     qml/WebViewer.qml \
-    qml/SectionSelectionDialog.qml
+    qml/SectionSelectionDialog.qml \
+    qml/ytdl_wrapper.py
 
 # hm, I prefer generating code directly to the build dir, and not including the
 # generated sources in the HEADERS and SOURCES lists.. Manually remove app_adaptor.h
@@ -200,3 +201,8 @@ harbour {
 
     INSTALLS += notification
 }
+
+youtube-dl.files = ../youtube-dl/youtube_dl
+youtube-dl.path = /usr/share/$${TARGET}
+
+INSTALLS += youtube-dl
