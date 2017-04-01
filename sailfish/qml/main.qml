@@ -151,12 +151,12 @@ ApplicationWindow {
         function previewableVideo(url) {
             if (/^https?:\/\/(www\.)?gfycat\.com\//.test(url)) {
                 return true
-            } else if (/^https?:\/\/\S+\.(mp4|avi|mkv|webm)/i.test(url)) {
-                return true
             } else if (/^https?\:\/\/((i|m)\.)?imgur\.com\/.+\.gifv$/.test(url)) {
                 return true;
             } else if (python.isUrlSupported(url)) {
                 return true;
+            } else if (/^https?:\/\/\S+\.(mp4|avi|mkv|webm)/i.test(url)) {
+                return true
             } else {
                 return false
             }
@@ -238,9 +238,7 @@ ApplicationWindow {
 
         function openVideoViewPage(url) {
             var match
-            if ((/^https?:\/\/\S+\.(mp4|avi|mkv|webm)/i.test(url))) {
-                pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { videoUrl: url });
-            } else if (/^https?:\/\/(www\.)?gfycat\.com\/.+/.test(url)) {
+            if (/^https?:\/\/(www\.)?gfycat\.com\/.+/.test(url)) {
                 match = /^https?\:\/\/(www\.)?gfycat\.com\/(.+?)$/.exec(url)
                 if (match.length < 3) {
                     infoBanner.warning("invalid gfycat url: " + url)
@@ -266,6 +264,8 @@ ApplicationWindow {
                 pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://" + match[1] + "/" + match[4] + ".mp4" });
             } else if (python.isUrlSupported(url)) {
                 pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url });
+            } else if ((/^https?:\/\/\S+\.(mp4|avi|mkv|webm)/i.test(url))) {
+                pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { videoUrl: url });
             } else
                 infoBanner.alert(qsTr("Unsupported video url"));
         }
