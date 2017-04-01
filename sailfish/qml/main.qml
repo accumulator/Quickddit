@@ -69,6 +69,8 @@ ApplicationWindow {
                 return true;
             } else if (/^https?:\/\/((www)\.)?streamable\.com\/.+/.test(url)) {
                 return true;
+            } else if (/^https?:\/\/((www)\.)?livestream\.com\/.+/.test(url)) {
+                return true;
             } else {
                 return false;
             }
