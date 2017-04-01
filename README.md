@@ -7,6 +7,8 @@ of Reddit and is not affiliated with Reddit in any way.
 Quickddit is developed using Qt and currently available for MeeGo Harmattan (Qt 4.7.4) and Sailfish OS (Qt 5.2).
 The logic part is developed in C++ while the UI is developed in QML.
 
+The Harmattan port has been left at 1.0.0 feature level, and will not receive new features.
+
 Features
 ========
 - Sign in with your Reddit account or browse anonymously
