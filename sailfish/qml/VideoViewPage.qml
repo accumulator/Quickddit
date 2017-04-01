@@ -168,12 +168,12 @@ AbstractPage {
     Connections {
         target: python
         onVideoInfo: {
-            var url = python.info["formats"][0]["url"]
-            for (var i = 0; i < python.info["formats"].length; i++) {
-                var format = python.info["formats"][i]
-//                console.log("format_id: " + format["format_id"])
-//                console.log("ext: " + format["ext"])
-//                console.log("height: " + format["height"])
+            var format
+            var i
+            var formats = python.info["_type"] === "playlist" ? python.info["entries"][0]["formats"] : python.info["formats"]
+            console.log("checking on format_id")
+            for (i = 0; i < formats.length; i++) {
+                format = formats[i]
                 // mp4-mobile: 360p,streamable.com
                 // 18: 360p,mp4,acodec mp4a.40.2,vcodec avc1.42001E
                 // 22: 720p,mp4,acodec mp4a.40.2,vcodec avc1.64001F
@@ -183,7 +183,26 @@ AbstractPage {
                     return;
                 }
             }
-            console.log("default format selected")
+            console.log("not found. checking on ext=mp4 & height=360|480")
+            for (i = 0; i < formats.length; i++) {
+                format = formats[i]
+                if (~["mp4"].indexOf(format["ext"]) && ~[360,480].indexOf(format["height"])) {
+                    console.log("format selected: " + format["format_id"])
+                    mediaPlayer.source = format["url"]
+                    return;
+                }
+            }
+            console.log("not found. checking on ext=mp4 & height=720")
+            for (i = 0; i < formats.length; i++) {
+                format = formats[i]
+                if (~["mp4"].indexOf(format["ext"]) && ~[720].indexOf(format["height"])) {
+                    console.log("format selected: " + format["format_id"])
+                    mediaPlayer.source = format["url"]
+                    return;
+                }
+            }
+            console.log("not found. fallback: selecting first format")
+            var url = formats[0]["url"]
             mediaPlayer.source = url
         }
 
