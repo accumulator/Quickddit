@@ -71,6 +71,10 @@ ApplicationWindow {
                 return true;
             } else if (/^https?:\/\/((www)\.)?livestream\.com\/.+/.test(url)) {
                 return true;
+            } else if (/^https?:\/\/my\.mixtape\.moe\/.+/.test(url)) {
+                return true;
+            } else if (/^https?:\/\/((www)\.)?twitch.tv\/.+/.test(url)) {
+                return true;
             } else {
                 return false;
             }
