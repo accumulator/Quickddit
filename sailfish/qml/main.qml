@@ -19,7 +19,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import io.thp.pyotherside 1.4
+import io.thp.pyotherside 1.3
 import harbour.quickddit.Core 1.0
 
 ApplicationWindow {
@@ -74,6 +74,8 @@ ApplicationWindow {
             } else if (/^https?:\/\/my\.mixtape\.moe\/.+/.test(url)) {
                 return true;
             } else if (/^https?:\/\/((www)\.)?twitch.tv\/.+/.test(url)) {
+                return true;
+            } else if (/^https?:\/\/((www)\.)?vid.me\/.+/.test(url)) {
                 return true;
             } else {
                 return false;
