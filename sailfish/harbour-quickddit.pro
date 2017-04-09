@@ -174,6 +174,11 @@ OTHER_FILES += \
     qml/SectionSelectionDialog.qml \
     qml/ytdl_wrapper.py
 
+# Translations
+CONFIG += sailfishapp_i18n
+
+TRANSLATIONS = translations/harbour-quickddit.ts
+
 # hm, I prefer generating code directly to the build dir, and not including the
 # generated sources in the HEADERS and SOURCES lists.. Manually remove app_adaptor.h
 # to force rebuilding the dbus iface spec.
