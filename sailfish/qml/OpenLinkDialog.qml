@@ -122,7 +122,7 @@ AbstractDialog {
 
             Label {
                 anchors { left: parent.left; right: parent.right; margins: constant.paddingLarge }
-                text: "Source"
+                text: qsTr("Source")
                 visible: source != ""
                 font.pixelSize: constant.fontSizeLarge
                 color: constant.colorLight

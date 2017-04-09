@@ -23,7 +23,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: videoViewPage
-    title: "Video"
+    title: qsTr("Video")
 
     property string videoUrl
     property string origUrl
@@ -36,7 +36,7 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "URL"
+                text: qsTr("URL")
                 onClicked: globalUtils.createOpenLinkDialog(origUrl || videoUrl);
             }
         }
@@ -208,7 +208,7 @@ AbstractPage {
 
         onError: {
             error = true
-            infoBanner.warning("Problem finding stream URL");
+            infoBanner.warning(qsTr("Problem finding stream URL"));
         }
 
     }

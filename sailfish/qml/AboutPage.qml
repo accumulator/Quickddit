@@ -22,7 +22,7 @@ import Sailfish.Silica 1.0
 
 AbstractPage {
     id: aboutPage
-    title: "About"
+    title: qsTr("About")
 
     Image {
         anchors.horizontalCenter: parent.horizontalCenter
@@ -87,12 +87,12 @@ AbstractPage {
                     spacing: Theme.paddingLarge
 
                     Button {
-                        text: "Source"
+                        text: qsTr("Source")
                         onClicked: globalUtils.createOpenLinkDialog(QMLUtils.SOURCE_REPO_URL);
                     }
 
                     Button {
-                        text: "License"
+                        text: qsTr("License")
                         onClicked: globalUtils.createOpenLinkDialog(QMLUtils.GPL3_LICENSE_URL);
                     }
                 }

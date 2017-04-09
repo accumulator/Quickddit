@@ -32,38 +32,38 @@ ContextMenu {
         id: upvoteButton
         visible: link.likes !== 1
         enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
-        text: "Upvote"
+        text: qsTr("Upvote")
         onClicked: linkVoteManager.vote(link.fullname, VoteManager.Upvote)
     }
     MenuItem {
         visible: link.likes !== -1
         enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
-        text: "Downvote"
+        text: qsTr("Downvote")
         onClicked: linkVoteManager.vote(link.fullname, VoteManager.Downvote)
     }
     MenuItem {
         visible: link.likes !== 0
         enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
-        text: "Unvote"
+        text: qsTr("Unvote")
         onClicked: linkVoteManager.vote(link.fullname, VoteManager.Unvote)
     }
     MenuItem {
-        text: "View image"
+        text: qsTr("View image")
         visible: globalUtils.previewableImage(link.url)
         onClicked: globalUtils.openImageViewPage(link.url);
     }
     MenuItem {
-        text: "Save"
+        text: qsTr("Save")
         visible: !link.saved
         onClicked: linkSaveManager.save(link.fullname)
     }
     MenuItem {
-        text: "Unsave"
+        text: qsTr("Unsave")
         visible: link.saved
         onClicked: linkSaveManager.unsave(link.fullname)
     }
     MenuItem {
-        text: "URL"
+        text: qsTr("URL")
         onClicked: globalUtils.createOpenLinkDialog(link.url);
     }
 

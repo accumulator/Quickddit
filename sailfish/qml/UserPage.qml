@@ -28,8 +28,8 @@ AbstractPage {
 
     property bool myself: appSettings.redditUsername === username && username !== ""
 
-    readonly property variant sectionModel: ["Overview", "Comments", "Submitted"]
-    readonly property variant sectionModelMy: ["Overview", "Comments", "Submitted", "Upvoted", "Downvoted", "Saved Things"]
+    readonly property variant sectionModel: [qsTr("Overview"), qsTr("Comments"), qsTr("Submitted")]
+    readonly property variant sectionModelMy: [qsTr("Overview"), qsTr("Comments"), qsTr("Submitted"), qsTr("Upvoted"), qsTr("Downvoted"), qsTr("Saved Things")]
 
     SilicaListView {
         id: userItemsListView
@@ -38,9 +38,9 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "Section"
+                text: qsTr("Section")
                 onClicked: {
-                    globalUtils.createSelectionDialog("Section", myself ? sectionModelMy : sectionModel, userThingModel.section,
+                    globalUtils.createSelectionDialog(qsTr("Section"), myself ? sectionModelMy : sectionModel, userThingModel.section,
                     function(selectedIndex) {
                         userThingModel.section = selectedIndex;
                         userThingModel.refresh(false);
@@ -48,7 +48,7 @@ AbstractPage {
                 }
             }
             MenuItem {
-                text: "Send Message"
+                text: qsTr("Send Message")
                 visible: !myself
                 enabled: !messageManager.busy && quickdditManager.isSignedIn
                 onClicked: {
@@ -57,7 +57,7 @@ AbstractPage {
                 }
             }
             MenuItem {
-                text: "Refresh"
+                text: qsTr("Refresh")
                 enabled: !userManager.busy
                 onClicked: userThingModel.refresh(false);
             }
@@ -69,7 +69,7 @@ AbstractPage {
 
             spacing: 20
 
-            QuickdditPageHeader { title: (myself ? "My Profile" : "User Profile") + " - " + sectionModelMy[userThingModel.section] }
+            QuickdditPageHeader { title: (myself ? qsTr("My Profile") : qsTr("User Profile")) + " - " + sectionModelMy[userThingModel.section] }
 
             Row {
                 visible: userThingModel.section === UserThingModel.OverviewSection
@@ -100,23 +100,23 @@ AbstractPage {
                     color: "green"
                     visible: !!userManager.user.isFriend
                     font.bold: true
-                    text: "Friend"
+                    text: qsTr("Friend")
                 }
                 Bubble {
                     visible: !!userManager.user.isGold
-                    text: "Gold"
+                    text: qsTr("Gold")
                 }
                 Bubble {
                     visible: !!userManager.user.hasVerifiedEmail
-                    text: "Email Verified"
+                    text: qsTr("Email Verified")
                 }
                 Bubble {
                     visible: !!userManager.user.isMod
-                    text: "Mod"
+                    text: qsTr("Mod")
                 }
                 Bubble {
                     visible: !!userManager.user.isHideFromRobots
-                    text: "No Robots"
+                    text: qsTr("No Robots")
                 }
             }
 
@@ -221,7 +221,7 @@ AbstractPage {
                 userThingModel.refresh(true);
         }
 
-        ViewPlaceholder { enabled: userItemsListView.count == 0 && !userThingModel.busy; text: "Nothing here :(" }
+        ViewPlaceholder { enabled: userItemsListView.count == 0 && !userThingModel.busy; text: qsTr("Nothing here :(") }
 
         VerticalScrollDecorator {}
     }
@@ -249,7 +249,7 @@ AbstractPage {
         id: messageManager
         manager: quickdditManager
         onSendSuccess: {
-            infoBanner.alert("Message sent");
+            infoBanner.alert(qsTr("Message sent"));
             pageStack.pop();
         }
         onError: infoBanner.warning(errorString);

@@ -72,7 +72,7 @@ FancyContextMenu {
 
     FancyMenuItemRow {
         FancyMenuItem {
-            text: "Copy Comment"
+            text: qsTr("Copy Comment")
             onClicked: {
                 QMLUtils.copyToClipboard(comment.rawBody);
                 infoBanner.alert(qsTr("Comment copied to clipboard"));
@@ -81,7 +81,7 @@ FancyContextMenu {
 
         FancyMenuItem {
             enabled: quickdditManager.isSignedIn && !comment.isArchived && comment.isValid
-            text: "Reply"
+            text: qsTr("Reply")
             onClicked: replyClicked();
         }
     }
@@ -91,12 +91,12 @@ FancyContextMenu {
 
         FancyMenuItem {
             enabled: comment.isAuthor
-            text: "Edit"
+            text: qsTr("Edit")
             onClicked: editClicked();
         }
         FancyMenuItem {
             enabled: comment.isAuthor
-            text: "Delete"
+            text: qsTr("Delete")
             onClicked: deleteClicked();
         }
     }

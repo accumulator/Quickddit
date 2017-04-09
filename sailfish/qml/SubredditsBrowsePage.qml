@@ -33,8 +33,8 @@ AbstractPage {
     property string _menusub
     property string _action
 
-    readonly property variant subredditsSectionModel: ["Popular Subreddits", "New Subreddits",
-        "My Subreddits - Subscriber", "My Subreddits - Approved Submitter", "My Subreddits - Moderator"]
+    readonly property variant subredditsSectionModel: [qsTr("Popular Subreddits"), qsTr("New Subreddits"),
+        qsTr("My Subreddits - Subscriber"), qsTr("My Subreddits - Approved Submitter"), qsTr("My Subreddits - Moderator")]
 
     function refresh() {
         subredditModel.refresh(false);
@@ -47,9 +47,9 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "Section"
+                text: qsTr("Section")
                 onClicked: {
-                    globalUtils.createSelectionDialog("Section", subredditsSectionModel, subredditModel.section,
+                    globalUtils.createSelectionDialog(qsTr("Section"), subredditsSectionModel, subredditModel.section,
                     function(selectedIndex) {
                         subredditModel.section = selectedIndex;
                         subredditModel.refresh(false);
@@ -57,7 +57,7 @@ AbstractPage {
                 }
             }
             MenuItem {
-                text: "Refresh"
+                text: qsTr("Refresh")
                 onClicked: subredditModel.refresh(false);
             }
         }
@@ -76,13 +76,13 @@ AbstractPage {
             menu: Component {
                 ContextMenu {
                     MenuItem {
-                        text: "About"
+                        text: qsTr("About")
                         onClicked: {
                             pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: model.displayName} );
                         }
                     }
                     MenuItem {
-                        text: "Subscribe"
+                        text: qsTr("Subscribe")
                         visible: !model.isSubscribed
                         onClicked: {
                             _menusub = model.displayName
@@ -91,7 +91,7 @@ AbstractPage {
                         }
                     }
                     MenuItem {
-                        text: "Unsubscribe"
+                        text: qsTr("Unsubscribe")
                         visible: model.isSubscribed
                         onClicked: {
                             _menusub = model.displayName
@@ -112,7 +112,7 @@ AbstractPage {
                 subredditModel.refresh(true);
         }
 
-        ViewPlaceholder { enabled: subredditsListView.count == 0 && !subredditModel.busy; text: "Nothing here :(" }
+        ViewPlaceholder { enabled: subredditsListView.count == 0 && !subredditModel.busy; text: qsTr("Nothing here :(") }
 
         VerticalScrollDecorator {}
     }

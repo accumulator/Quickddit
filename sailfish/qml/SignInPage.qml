@@ -21,7 +21,7 @@ import Sailfish.Silica 1.0
 
 AbstractPage {
     id: signInPage
-    title: "Sign in to Reddit"
+    title: qsTr("Sign in to Reddit")
     busy: webView.loading
     backNavigation: webView.atXBeginning && webView.atXEnd && !webView.moving && !webView.pulleyMenuActive
 
@@ -41,14 +41,14 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "Cancel"
+                text: qsTr("Cancel")
                 onClicked: {
                     backNavigation = true;
                     pageStack.pop();
                 }
             }
             MenuItem {
-                text: "Reload"
+                text: qsTr("Reload")
                 onClicked: webView.reload();
             }
         }
@@ -60,7 +60,7 @@ AbstractPage {
         target: quickdditManager
         onAccessTokenSuccess: {
             signInPage.busy = false;
-            infoBanner.alert("Sign in successful! Welcome! :)");
+            infoBanner.alert(qsTr("Sign in successful! Welcome! :)"));
             inboxManager.resetTimer();
             var mainPage = globalUtils.getMainPage();
             mainPage.refresh("");

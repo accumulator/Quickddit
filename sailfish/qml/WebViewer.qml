@@ -22,7 +22,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: webViewPage
-    title: "WebViewer"
+    title: qsTr("WebViewer")
     property url url: webView.url
     property url _prevUrl: ""
 
@@ -42,25 +42,25 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "Copy URL"
+                text: qsTr("Copy URL")
                 onClicked: {
                     QMLUtils.copyToClipboard(url);
-                    infoBanner.alert("URL copied to clipboard");
+                    infoBanner.alert(qsTr("URL copied to clipboard"));
                 }
             }
             MenuItem {
-                text: "Open in browser"
+                text: qsTr("Open in browser")
                 onClicked: {
                     Qt.openUrlExternally(url);
                 }
             }
             MenuItem {
-                text: "Back"
+                text: qsTr("Back")
                 visible: webView.canGoBack
                 onClicked: webView.goBack()
             }
             MenuItem {
-                text: "Forward"
+                text: qsTr("Forward")
                 visible: webView.canGoForward
                 onClicked: webView.goForward()
             }

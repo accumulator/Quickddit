@@ -34,7 +34,7 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "Add Subreddit"
+                text: qsTr("Add Subreddit")
                 enabled: multiredditManager.canEdit && !multiredditManager.busy
                 onClicked: {
                     var dialog = pageStack.push(addSubredditDialogComponent);
@@ -52,7 +52,7 @@ AbstractPage {
 
             PageHeader { title: aboutMultiredditPage.title }
 
-            SectionHeader { text: "Description" }
+            SectionHeader { text: qsTr("Description") }
 
             Text {
                 id: descriptionText
@@ -62,11 +62,11 @@ AbstractPage {
                 wrapMode: Text.Wrap
                 textFormat: Text.RichText
                 font.italic: multiredditManager.description.length == 0
-                text: multiredditManager.description ? constant.richtextStyle + multiredditManager.description : "No description"
+                text: multiredditManager.description ? constant.richtextStyle + multiredditManager.description : qsTr("No description")
                 onLinkActivated: globalUtils.openLink(link);
             }
 
-            SectionHeader { text: "Subreddits" }
+            SectionHeader { text: qsTr("Subreddits") }
 
             Repeater {
                 id: subredditsRepeater
@@ -102,7 +102,7 @@ AbstractPage {
             }
 
             MenuItem {
-                text: "Remove"
+                text: qsTr("Remove")
                 enabled: multiredditManager.canEdit && !multiredditManager.busy
                 onClicked: multiredditManager.removeSubreddit(subredditMenu.subreddit);
             }
@@ -124,12 +124,12 @@ AbstractPage {
                 anchors { left: parent.left; right: parent.right }
                 spacing: constant.paddingMedium
 
-                DialogHeader { title: "Add Subreddit" }
+                DialogHeader { title: qsTr("Add Subreddit") }
 
                 TextField {
                     id: subredditTextField
                     anchors { left: parent.left; right: parent.right }
-                    placeholderText: "Enter subreddit name"
+                    placeholderText: qsTr("Enter subreddit name")
                     labelVisible: false
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                     validator: RegExpValidator { regExp: /^([A-Za-z0-9][A-Za-z0-9_]{2,20}|[a-z]{2})$/ }

@@ -22,7 +22,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: newLinkPage
-    title: "New Post"
+    title: qsTr("New Post")
 
     property string subreddit
     property QtObject linkManager
@@ -54,21 +54,21 @@ AbstractPage {
             TextField {
                 id: linkTitle
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Post Title"
+                placeholderText: qsTr("Post Title")
                 labelVisible: false
             }
 
             TextSwitch {
                 id: selfLinkSwitch
                 visible: aboutSubredditManager.submissionType === AboutSubredditManager.Any
-                text: "Self Post"
+                text: qsTr("Self Post")
                 checked: true
             }
 
             TextField {
                 id: linkUrl
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Post URL"
+                placeholderText: qsTr("Post URL")
                 enabled: !selfLinkSwitch.checked
                 visible: enabled
                 labelVisible: false
@@ -80,7 +80,7 @@ AbstractPage {
             TextArea {
                 id: linkDescription
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Post Text"
+                placeholderText: qsTr("Post Text")
                 enabled: selfLinkSwitch.checked
                 visible: enabled
                 height: Math.max(implicitHeight, Theme.itemSizeLarge * 3)
@@ -93,7 +93,7 @@ AbstractPage {
             }
 
             Button {
-                text: "Submit"
+                text: qsTr("Submit")
                 anchors.horizontalCenter: parent.horizontalCenter
                 enabled: linkTitle.text.length > 0 /* official limits? */
                          && (!captchaManager.captchaNeeded || captcha.userInput.length > 0)

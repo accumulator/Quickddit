@@ -40,21 +40,21 @@ Column {
         Bubble {
             color: "green"
             visible: !!link.isSticky
-            text: "Sticky"
+            text: qsTr("Sticky")
             font.bold: true
         }
 
         Bubble {
             color: "red"
             visible: !!link.isNSFW
-            text: "NSFW"
+            text: qsTr("NSFW")
             font.bold: true
         }
 
         Bubble {
             color: "green"
             visible: !!link.isPromoted
-            text: "Promoted"
+            text: qsTr("Promoted")
             font.bold: true
         }
 
@@ -67,7 +67,7 @@ Column {
 
         Bubble {
             visible: !!link.isArchived
-            text: "Archived"
+            text: qsTr("Archived")
         }
     }
 

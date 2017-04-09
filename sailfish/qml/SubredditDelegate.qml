@@ -55,24 +55,24 @@ ListItem {
                 Bubble {
                     font.pixelSize: constant.fontSizeSmall
                     visible: model.isContributor
-                    text: "Contributor"
+                    text: qsTr("Contributor")
                 }
                 Bubble {
                     font.pixelSize: constant.fontSizeSmall
                     visible: model.isBanned
-                    text: "Banned"
+                    text: qsTr("Banned")
                     color: "red"
                 }
                 Bubble {
                     font.pixelSize: constant.fontSizeSmall
                     visible: model.isModerator
-                    text: "Mod"
+                    text: qsTr("Mod")
                     color: "blue"
                 }
                 Bubble {
                     font.pixelSize: constant.fontSizeSmall
                     visible: model.isMuted
-                    text: "Muted"
+                    text: qsTr("Muted")
                     color: "grey"
                 }
             }

@@ -58,7 +58,7 @@ Item {
 
         Label {
             visible: listViewItem.count > 0
-            text: "Load More..."
+            text: qsTr("Load More...")
             color: constant.colorMid
         }
 

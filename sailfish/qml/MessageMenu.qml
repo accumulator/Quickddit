@@ -11,7 +11,7 @@ ContextMenu {
 
     MenuItem {
         enabled: enableMarkRead && !messageManager.busy
-        text: message.isUnread ? "Mark As Read" : "Mark As Unread"
+        text: message.isUnread ? qsTr("Mark As Read") : qsTr("Mark As Unread")
         onClicked: message.isUnread ? messageManager.markRead(message.fullname)
                                     : messageManager.markUnread(message.fullname);
     }

@@ -61,7 +61,7 @@ ListItem {
             Bubble {
                 color: "green"
                 visible: !!model.isSticky
-                text: "Sticky"
+                text: qsTr("Sticky")
                 font.bold: true
                 font.pixelSize: constant.fontSizeSmaller
             }
@@ -69,7 +69,7 @@ ListItem {
             Bubble {
                 color: "red"
                 visible: !!model.isNSFW
-                text: "NSFW"
+                text: qsTr("NSFW")
                 font.bold: true
                 font.pixelSize: constant.fontSizeSmaller
             }
@@ -77,7 +77,7 @@ ListItem {
             Bubble {
                 color: "green"
                 visible: !!model.isPromoted
-                text: "Promoted"
+                text: qsTr("Promoted")
                 font.bold: true
                 font.pixelSize: constant.fontSizeSmaller
             }

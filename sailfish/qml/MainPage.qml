@@ -97,15 +97,15 @@ AbstractPage {
                 }
             }
             MenuItem {
-                text: "New Post"
+                text: qsTr("New Post")
                 visible: linkModel.location == LinkModel.Subreddit
                 enabled: quickdditManager.isSignedIn
                 onClicked: newLink();
             }
             MenuItem {
-                text: "Section"
+                text: qsTr("Section")
                 onClicked: {
-                    pushSectionDialog("Section", linkModel.section,
+                    pushSectionDialog(qsTr("Section"), linkModel.section,
                         function(selectedIndex, periodQuery) {
                             linkModel.section = selectedIndex;
                             linkModel.sectionPeriod = periodQuery;
@@ -114,11 +114,11 @@ AbstractPage {
                 }
             }
             MenuItem {
-                text: "Search"
+                text: qsTr("Search")
                 onClicked: pageStack.push(Qt.resolvedUrl("SearchDialog.qml"), {subreddit: linkModel.subreddit});
             }
             MenuItem {
-                text: "Refresh"
+                text: qsTr("Refresh")
                 onClicked: linkModel.refresh(false);
             }
         }

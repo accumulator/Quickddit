@@ -32,7 +32,7 @@ AbstractPage {
         inboxManager.dismiss();
     }
 
-    readonly property variant sectionModel: ["All", "Unread", "Message", "Comment Replies", "Post Replies", "Sent"]
+    readonly property variant sectionModel: [qsTr("All"), qsTr("Unread"), qsTr("Message"), qsTr("Comment Replies"), qsTr("Post Replies"), qsTr("Sent")]
 
     SilicaListView {
         id: messageListView
@@ -41,9 +41,9 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "Section"
+                text: qsTr("Section")
                 onClicked: {
-                    globalUtils.createSelectionDialog("Section", sectionModel, messageModel.section,
+                    globalUtils.createSelectionDialog(qsTr("Section"), sectionModel, messageModel.section,
                     function(selectedIndex) {
                         messageModel.section = selectedIndex;
                         messagePage.refresh();
@@ -51,7 +51,7 @@ AbstractPage {
                 }
             }
             MenuItem {
-                text: "Refresh"
+                text: qsTr("Refresh")
                 enabled: !messageModel.busy
                 onClicked: messagePage.refresh();
             }
@@ -73,7 +73,7 @@ AbstractPage {
                 if (model.isComment) {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
                 } else if (!isSentMessage) {
-                    var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {title: "Reply Message"});
+                    var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {title: qsTr("Reply Message")});
                     dialog.accepted.connect(function() {
                         messageManager.reply(model.fullname, dialog.text);
                     });
@@ -94,7 +94,7 @@ AbstractPage {
                 messageModel.refresh(true);
         }
 
-        ViewPlaceholder { enabled: messageListView.count == 0 && !messageModel.busy; text: "Nothing here :(" }
+        ViewPlaceholder { enabled: messageListView.count == 0 && !messageModel.busy; text: qsTr("Nothing here :(") }
 
         VerticalScrollDecorator {}
     }
@@ -108,7 +108,7 @@ AbstractPage {
     MessageManager {
         id: messageManager
         manager: quickdditManager
-        onReplySuccess: infoBanner.alert("Message sent");
+        onReplySuccess: infoBanner.alert(qsTr("Message sent"));
         onMarkReadStatusSuccess: messageModel.changeIsUnread(fullname, isUnread);
         onError: infoBanner.warning(errorString);
     }

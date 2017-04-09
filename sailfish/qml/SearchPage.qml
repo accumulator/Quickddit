@@ -28,9 +28,9 @@ AbstractPage {
     property alias searchQuery: searchModel.searchQuery
     property alias subreddit: searchModel.subreddit
 
-    readonly property variant sortModel: ["Relevance", "New", "Hot", "Top", "Comments"]
-    readonly property variant timeRangeModel: ["All time", "This hour", "Today", "This week",
-        "This month", "This year"]
+    readonly property variant sortModel: [qsTr("Relevance"), qsTr("New"), qsTr("Hot"), qsTr("Top"), qsTr("Comments")]
+    readonly property variant timeRangeModel: [qsTr("All time"), qsTr("This hour"), qsTr("Today"), qsTr("This week"),
+        qsTr("This month"), qsTr("This year")]
 
     function refresh() {
         searchModel.refresh(false);
@@ -43,9 +43,9 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "Time Range"
+                text: qsTr("Time Range")
                 onClicked: {
-                    globalUtils.createSelectionDialog("Time Range", timeRangeModel, searchModel.searchTimeRange,
+                    globalUtils.createSelectionDialog(qsTr("Time Range"), timeRangeModel, searchModel.searchTimeRange,
                     function(selectedIndex) {
                         searchModel.searchTimeRange = selectedIndex;
                         searchModel.refresh(false);
@@ -54,9 +54,9 @@ AbstractPage {
             }
 
             MenuItem {
-                text: "Sort"
+                text: qsTr("Sort")
                 onClicked: {
-                    globalUtils.createSelectionDialog("Sort", sortModel, searchModel.searchSort,
+                    globalUtils.createSelectionDialog(qsTr("Sort"), sortModel, searchModel.searchSort,
                     function(selectedIndex) {
                         searchModel.searchSort = selectedIndex;
                         searchModel.refresh(false);
@@ -64,7 +64,7 @@ AbstractPage {
                 }
             }
             MenuItem {
-                text: "Refresh"
+                text: qsTr("Refresh")
                 onClicked: searchModel.refresh(false);
             }
         }

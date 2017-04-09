@@ -23,7 +23,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: appSettingsPage
-    title: "App Settings"
+    title: qsTr("App Settings")
 
     Flickable {
         id: settingFlickable
@@ -37,10 +37,10 @@ AbstractPage {
 
             QuickdditPageHeader { title: appSettingsPage.title }
 
-            SectionHeader { text: "Display" }
+            SectionHeader { text: qsTr("Display") }
 
             ComboBox {
-                label: "Font Size"
+                label: qsTr("Font Size")
                 currentIndex:  {
                     switch (appSettings.fontSize) {
                     case AppSettings.TinyFontSize: return 0;
@@ -50,10 +50,10 @@ AbstractPage {
                     }
                 }
                 menu: ContextMenu {
-                    MenuItem { text: "Tiny" }
-                    MenuItem { text: "Small" }
-                    MenuItem { text: "Medium" }
-                    MenuItem { text: "Large" }
+                    MenuItem { text: qsTr("Tiny") }
+                    MenuItem { text: qsTr("Small") }
+                    MenuItem { text: qsTr("Medium") }
+                    MenuItem { text: qsTr("Large") }
                 }
                 onCurrentIndexChanged: {
                     switch (currentIndex) {
@@ -66,7 +66,7 @@ AbstractPage {
             }
 
             ComboBox {
-                label: "Device Orientation"
+                label: qsTr("Device Orientation")
                 currentIndex:  {
                     switch (appSettings.orientationProfile) {
                     case AppSettings.DynamicProfile: return 0;
@@ -75,9 +75,9 @@ AbstractPage {
                     }
                 }
                 menu: ContextMenu {
-                    MenuItem { text: "Automatic" }
-                    MenuItem { text: "Portrait only" }
-                    MenuItem { text: "Landscape only" }
+                    MenuItem { text: qsTr("Automatic") }
+                    MenuItem { text: qsTr("Portrait only") }
+                    MenuItem { text: qsTr("Landscape only") }
                 }
                 onCurrentIndexChanged: {
                     switch (currentIndex) {
@@ -89,7 +89,7 @@ AbstractPage {
             }
 
             ComboBox {
-                label: "Thumbnail Size"
+                label: qsTr("Thumbnail Size")
                 currentIndex:  {
                     switch (appSettings.thumbnailScale) {
                     case AppSettings.ScaleAuto: return 0;
@@ -101,7 +101,7 @@ AbstractPage {
                     }
                 }
                 menu: ContextMenu {
-                    MenuItem { text: "Auto" }
+                    MenuItem { text: qsTr("Auto") }
                     MenuItem { text: "x1" }
                     MenuItem { text: "x1.25" }
                     MenuItem { text: "x1.5" }
@@ -120,10 +120,28 @@ AbstractPage {
                 }
             }
 
-            SectionHeader { text: "Notifications" }
+            ComboBox {
+                label: qsTr("Language")
+                currentIndex:  {
+                    // TODO: return indexOf appsetting in model
+                    return 0;
+                }
+                menu: ContextMenu {
+                    MenuItem { text: "Default" }
+                    MenuItem { text: "English" }
+                    MenuItem { text: "Dutch" }
+                }
+                onCurrentIndexChanged: {
+                    switch (currentIndex) {
+                        // TODO : set appsettings language to lang_id at index in model
+                    }
+                }
+            }
+
+            SectionHeader { text: qsTr("Notifications") }
 
             TextSwitch {
-                text: "Check Messages"
+                text: qsTr("Check Messages")
                 checked: appSettings.pollUnread;
                 enabled: quickdditManager.isSignedIn
                 onCheckedChanged: {
@@ -131,7 +149,7 @@ AbstractPage {
                 }
             }
 
-            SectionHeader { text: "Account" }
+            SectionHeader { text: qsTr("Account") }
 
             Text {
                 anchors { left: parent.left; right: parent.right }
@@ -139,7 +157,7 @@ AbstractPage {
                 color: constant.colorLight
                 visible: quickdditManager.isSignedIn
                 horizontalAlignment: Text.AlignHCenter
-                text: "Signed in to Reddit as"
+                text: qsTr("Signed in to Reddit as")
             }
 
             Text {
@@ -158,11 +176,11 @@ AbstractPage {
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: quickdditManager.isSignedIn ? "Sign out" : "Sign in to Reddit"
+                text: quickdditManager.isSignedIn ? qsTr("Sign out") : qsTr("Sign in to Reddit")
                 onClicked: {
                     if (quickdditManager.isSignedIn) {
                         quickdditManager.signOut();
-                        infoBanner.alert("You have signed out from Reddit");
+                        infoBanner.alert(qsTr("You have signed out from Reddit"));
                      } else {
                         pageStack.push(Qt.resolvedUrl("SignInPage.qml"));
                     }

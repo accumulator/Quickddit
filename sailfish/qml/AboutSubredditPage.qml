@@ -34,7 +34,7 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "Message Moderators"
+                text: qsTr("Message Moderators")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), {recipient: aboutSubredditManager.url});
                 }
@@ -122,29 +122,29 @@ AbstractPage {
 
                 Bubble {
                     visible: aboutSubredditManager.submissionType !== AboutSubredditManager.Any
-                    text: aboutSubredditManager.submissionType === AboutSubredditManager.Link ? "Links only" : "Self posts only"
+                    text: aboutSubredditManager.submissionType === AboutSubredditManager.Link ? qsTr("Links only") : qsTr("Self posts only")
                 }
 
                 Bubble {
                     visible: aboutSubredditManager.isContributor
-                    text: "Contributor"
+                    text: qsTr("Contributor")
                 }
 
                 Bubble {
                     visible: aboutSubredditManager.isBanned
-                    text: "Banned"
+                    text: qsTr("Banned")
                     color: "red"
                 }
 
                 Bubble {
                     visible: aboutSubredditManager.isModerator
-                    text: "Mod"
+                    text: qsTr("Mod")
                     color: "blue"
                 }
 
                 Bubble {
                     visible: aboutSubredditManager.isMuted
-                    text: "Muted"
+                    text: qsTr("Muted")
                     color: "grey"
                 }
             }

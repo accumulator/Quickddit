@@ -23,7 +23,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: commentPage
-    title: "Comments"
+    title: qsTr("Comments")
     busy: (commentModel.busy && commentListView.count > 0) || commentVoteManager.busy || commentManager.busy || linkVoteManager.busy
 
     property alias link: commentModel.link
@@ -38,7 +38,7 @@ AbstractPage {
         commentModel.refresh(refreshOlder);
     }
 
-    readonly property variant commentSortModel: ["Best", "Top", "New", "Hot", "Controversial", "Old"]
+    readonly property variant commentSortModel: [qsTr("Best"), qsTr("Top"), qsTr("New"), qsTr("Hot"), qsTr("Controversial"), qsTr("Old")]
 
     function __createLinkTextDialog(title, fullname, originalText) {
         var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {linkManager: linkManager, title: title, text: originalText || ""});
@@ -61,15 +61,15 @@ AbstractPage {
             MenuItem {
                 visible: link.author === appSettings.redditUsername && link.isSelfPost
                 enabled: !link.isArchived
-                text: "Edit Post"
+                text: qsTr("Edit Post")
                 onClicked: {
-                    __createLinkTextDialog("Edit Post", link.fullname, link.rawText);
+                    __createLinkTextDialog(qsTr("Edit Post"), link.fullname, link.rawText);
                 }
             }
 
             MenuItem {
-                text: "Sort"
-                onClicked: globalUtils.createSelectionDialog("Sort", commentSortModel, commentModel.sort,
+                text: qsTr("Sort")
+                onClicked: globalUtils.createSelectionDialog(qsTr("Sort"), commentSortModel, commentModel.sort,
                 function (selectedIndex) {
                     commentModel.sort = selectedIndex;
                     refresh(false);
@@ -78,7 +78,7 @@ AbstractPage {
 
             MenuItem {
                 enabled: quickdditManager.isSignedIn && !commentManager.busy && !link.isArchived
-                text: "Add comment"
+                text: qsTr("Add comment")
                 onClicked: {
                     commentModel.showNewComment();
                     commentListView.currentIndex = 0;
@@ -88,7 +88,7 @@ AbstractPage {
 
             MenuItem {
                 enabled: !commentModel.busy
-                text: "Refresh"
+                text: qsTr("Refresh")
                 onClicked: refresh(false);
             }
         }
@@ -221,12 +221,12 @@ AbstractPage {
                             wrapMode: Text.Wrap
                             font.bold: true
                             horizontalAlignment: Text.AlignHCenter
-                            text: "Viewing a single comment's thread"
+                            text: qsTr("Viewing a single comment's thread")
                         }
 
                         Button {
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: "View All Comments"
+                            text: qsTr("View All Comments")
                             onClicked: {
                                 commentModel.commentPermalink = false;
                                 refresh(false);
@@ -258,7 +258,7 @@ AbstractPage {
                     commentModel.setView(model.fullname, "edit");
                 });
                 dialog.deleteClicked.connect(function() {
-                    commentDelegate.remorseAction("Deleting comment", function() {
+                    commentDelegate.remorseAction(qsTr("Deleting comment"), function() {
                         commentManager.deleteComment(model.fullname);
                     })
                 });

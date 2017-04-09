@@ -147,7 +147,7 @@ Item {
                 Bubble {
                     visible: model.isStickied
                     font.pixelSize: constant.fontSizeSmaller
-                    text: "Sticky"
+                    text: qsTr("Sticky")
                     color: "green"
                 }
                 Bubble {
@@ -207,7 +207,7 @@ Item {
                             font.pixelSize: constant.fontSizeDefault
                             color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
                                                                        : constant.colorDisabled
-                            text: "[score hidden]"
+                            text: qsTr("[score hidden]")
                         }
                     }
                 }
@@ -355,9 +355,9 @@ Item {
                 }
 
                 SectionHeader {
-                    text: model.view === "edit" ? "Editing Comment" :
-                          model.view === "reply" ? "Comment Reply" :
-                          model.view === "new" ? "New Comment" :
+                    text: model.view === "edit" ? qsTr("Editing Comment") :
+                          model.view === "reply" ? qsTr("Comment Reply") :
+                          model.view === "new" ? qsTr("New Comment") :
                           model.view
                 }
 
@@ -369,7 +369,7 @@ Item {
                     textMargin: model.view === "reply" ? constant.paddingMedium : 0
 
                     height: Math.max(implicitHeight, Theme.itemSizeLarge * 2)
-                    placeholderText: model.view === "reply" ? "Enter your reply here..." : "Enter your new comment here..."
+                    placeholderText: model.view === "reply" ? qsTr("Enter your reply here...") : qsTr("Enter your new comment here...")
                     focus: true
 
                     Rectangle {
@@ -387,7 +387,7 @@ Item {
                         id: acceptButton
                         anchors.leftMargin: constant.paddingLarge
 
-                        text: model.view === "edit" ? "Save" : "Add"
+                        text: model.view === "edit" ? qsTr("Save") : qsTr("Add")
                         enabled: !commentManager.busy
 
                         onClicked: {

@@ -24,7 +24,7 @@ import harbour.quickddit.Core 1.0
 AbstractPage {
     id: subredditsPage
 
-    readonly property string title: "Subreddits"
+    readonly property string title: qsTr("Subreddits")
     property SubredditModel subredditModel
     property MultiredditModel multiredditModel
 
@@ -61,24 +61,24 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "About Quickddit"
+                text: qsTr("About Quickddit")
                 onClicked: replacePage(Qt.resolvedUrl("AboutPage.qml"))
             }
 
             MenuItem {
-                text: "Settings"
+                text: qsTr("Settings")
                 onClicked: replacePage(Qt.resolvedUrl("AppSettingsPage.qml"))
             }
 
             MenuItem {
                 enabled: quickdditManager.isSignedIn
-                text: "My Profile"
+                text: qsTr("My Profile")
                 onClicked: replacePage(Qt.resolvedUrl("UserPage.qml"), {username: appSettings.redditUsername});
             }
 
             MenuItem {
                 enabled: quickdditManager.isSignedIn
-                text: "Messages"
+                text: qsTr("Messages")
                 onClicked: replacePage(Qt.resolvedUrl("MessagePage.qml"));
             }
         }
@@ -96,7 +96,7 @@ AbstractPage {
             TextField {
                 id: subredditTextField
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Go to a specific subreddit"
+                placeholderText: qsTr("Go to a specific subreddit")
                 labelVisible: false
                 errorHighlight: activeFocus && !acceptableInput
                 inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
@@ -110,7 +110,7 @@ AbstractPage {
             Repeater {
                 id: mainOptionRepeater
                 anchors { left: parent.left; right: parent.right }
-                model: ["Front Page", "All", "Browse for Subreddits...", "Multireddits"]
+                model: [qsTr("Front Page"), qsTr("All"), qsTr("Browse for Subreddits..."), qsTr("Multireddits")]
 
                 SimpleListItem {
                     width: mainOptionRepeater.width
@@ -130,7 +130,7 @@ AbstractPage {
             SectionHeader {
                 id: sectionheader
                 visible: quickdditManager.isSignedIn
-                text: "Subscribed Subreddits"
+                text: qsTr("Subscribed Subreddits")
 
                 MouseArea {
                     anchors.fill: sectionheader
@@ -149,13 +149,13 @@ AbstractPage {
             menu: Component {
                 ContextMenu {
                     MenuItem {
-                        text: "About"
+                        text: qsTr("About")
                         onClicked: {
                             pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: model.displayName} );
                         }
                     }
                     MenuItem {
-                        text: "Unsubscribe"
+                        text: qsTr("Unsubscribe")
                         onClicked: {
                             _unsubsub = model.displayName
                             subredditManager.unsubscribe(model.fullname);

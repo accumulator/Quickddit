@@ -24,7 +24,7 @@ import harbour.quickddit.Core 1.0
 AbstractPage {
     id: multiredditsPage
 
-    readonly property string title: "Multireddits"
+    readonly property string title: qsTr("Multireddits")
     property string multiredditName
 
     property MultiredditModel _model: globalUtils.getMultiredditModel()
@@ -44,7 +44,7 @@ AbstractPage {
         PullDownMenu {
             MenuItem {
                 enabled: !_model.busy
-                text: "Refresh"
+                text: qsTr("Refresh")
                 onClicked: _model.refresh(false);
             }
         }
@@ -63,7 +63,7 @@ AbstractPage {
 
         footer: LoadingFooter { visible: _model.busy; listViewItem: multiredditListView }
 
-        ViewPlaceholder { enabled: multiredditListView.count == 0 && !_model.busy; text: "Nothing here :(" }
+        ViewPlaceholder { enabled: multiredditListView.count == 0 && !_model.busy; text: qsTr("Nothing here :(") }
     }
 
 }

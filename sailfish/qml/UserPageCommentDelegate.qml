@@ -51,7 +51,7 @@ Item {
                 Bubble {
                     color: "green"
                     visible: !!model.isStickied
-                    text: "Sticky"
+                    text: qsTr("Sticky")
                     font.bold: true
                     font.pixelSize: constant.fontSizeSmaller
                 }

@@ -23,7 +23,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: imageViewPage
-    title: "Image"
+    title: qsTr("Image")
 
     property alias imageUrl: viewer.source
     property alias imgurUrl: imgurManager.imgurUrl
@@ -43,11 +43,11 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "Save Image"
+                text: qsTr("Save Image")
                 onClicked: QMLUtils.saveImage(imageUrl.toString());
             }
             MenuItem {
-                text: "URL"
+                text: qsTr("URL")
                 onClicked: globalUtils.createOpenLinkDialog(imgurUrl || imageUrl.toString());
             }
         }
@@ -100,7 +100,7 @@ AbstractPage {
             }
         }
 
-        Component { id: failedLoading; Label { text: "Error loading image" } }
+        Component { id: failedLoading; Label { text: qsTr("Error loading image") } }
     }
 
     ListView {
@@ -167,7 +167,7 @@ AbstractPage {
 
     Connections {
         target: QMLUtils
-        onSaveImageSucceeded: infoBanner.alert("Image saved to gallery");
-        onSaveImageFailed: infoBanner.warning("Image save failed!");
+        onSaveImageSucceeded: infoBanner.alert(qsTr("Image saved to gallery"));
+        onSaveImageFailed: infoBanner.warning(qsTr("Image save failed!"));
     }
 }

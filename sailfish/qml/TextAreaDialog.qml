@@ -47,7 +47,7 @@ AbstractDialog {
             font.pixelSize: constant.fontSizeDefault
             anchors { left: parent.left; right: parent.right }
             height: Math.max(implicitHeight, Theme.itemSizeLarge * 3)
-            placeholderText: verticallyChallenged ? textAreaDialog.title : "Enter your comment here..."
+            placeholderText: verticallyChallenged ? textAreaDialog.title : qsTr("Enter your comment here...")
             focus: true
         }
     }

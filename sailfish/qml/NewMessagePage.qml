@@ -22,7 +22,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: newMessagePage
-    title: "New Message"
+    title: qsTr("New Message")
 
     property string recipient
     property alias subject: subjectField.text
@@ -56,7 +56,7 @@ AbstractPage {
             TextField {
                 id: subjectField
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Subject"
+                placeholderText: qsTr("Subject")
                 maximumLength: 100 // reddit constraint
                 labelVisible: false
                 focus: true
@@ -65,7 +65,7 @@ AbstractPage {
             TextArea {
                 id: messageField
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: "Message"
+                placeholderText: qsTr("Message")
                 visible: enabled
                 height: Math.max(implicitHeight, Theme.itemSizeLarge * 3)
             }
@@ -77,7 +77,7 @@ AbstractPage {
             }
 
             Button {
-                text: "Send"
+                text: qsTr("Send")
                 anchors.horizontalCenter: parent.horizontalCenter
                 enabled: messageField.text.length > 0 && subjectField.text.length > 0
                          && (!captchaManager.captchaNeeded || captcha.userInput.length > 0)

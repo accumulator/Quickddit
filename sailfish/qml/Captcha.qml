@@ -76,7 +76,7 @@ Rectangle {
 
         Text {
             id: description
-            text: "Enter the Captcha text below"
+            text: qsTr("Enter the Captcha text below")
             font.pixelSize: constant.fontSizeXSmall
             color: constant.colorLight
             anchors.horizontalCenter: parent.horizontalCenter

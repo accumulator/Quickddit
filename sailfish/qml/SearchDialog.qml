@@ -22,7 +22,7 @@ import Sailfish.Silica 1.0
 AbstractDialog {
     id: searchDialog
 
-    readonly property string title: "Search"
+    readonly property string title: qsTr("Search")
     property alias subreddit: subredditTextField.text
 
     acceptDestination: Qt.resolvedUrl("SearchPage.qml")
@@ -49,7 +49,7 @@ AbstractDialog {
         TextField {
             id: searchTextField
             anchors { left: parent.left; right: parent.right }
-            placeholderText: "Enter search query"
+            placeholderText: qsTr("Enter search query")
             focus: true
             labelVisible: false
             EnterKey.enabled: searchDialog.canAccept
@@ -60,10 +60,10 @@ AbstractDialog {
         ComboBox {
             id: searchTypeComboBox
             anchors { left: parent.left; right: parent.right }
-            label: "Search for"
+            label: qsTr("Search for")
             menu: ContextMenu {
-                MenuItem { text: "Posts" }
-                MenuItem { text: "Subreddits" }
+                MenuItem { text: qsTr("Posts") }
+                MenuItem { text: qsTr("Subreddits") }
             }
             onCurrentIndexChanged: {
                 if (currentIndex == 0) {
@@ -80,7 +80,7 @@ AbstractDialog {
             id: searchSubredditSwitch
             anchors { left: parent.left; right: parent.right }
             enabled: searchTypeComboBox.currentIndex == 0
-            text: "Search within this subreddit:"
+            text: qsTr("Search within this subreddit:")
         }
 
         TextField {
@@ -89,7 +89,7 @@ AbstractDialog {
             enabled: searchSubredditSwitch.enabled && searchSubredditSwitch.checked
             opacity: enabled ? 1 : 0.4
             errorHighlight: enabled && !acceptableInput
-            placeholderText: "Enter subreddit name"
+            placeholderText: qsTr("Enter subreddit name")
             labelVisible: false
             inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
             validator: RegExpValidator { regExp: /^([A-Za-z0-9][A-Za-z0-9_]{2,20}|[a-z]{2})$/ }

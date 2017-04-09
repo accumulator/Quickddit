@@ -29,16 +29,16 @@ AbstractDialog {
 
     canAccept: false
 
-    readonly property variant sectionModel: ["Hot", "New", "Rising", "Controversial", "Top"]
+    readonly property variant sectionModel: [qsTr("Hot"), qsTr("New"), qsTr("Rising"), qsTr("Controversial"), qsTr("Top")]
 
     ListModel {
         id: periodModel
-        ListElement { label: "Hour"; qry: "hour" }
-        ListElement { label: "Day"; qry: "day" }
-        ListElement { label: "Week"; qry: "week" }
-        ListElement { label: "Month"; qry: "month" }
-        ListElement { label: "Year"; qry: "year" }
-        ListElement { label: "All time"; qry: "all" }
+        ListElement { label: qsTr("Hour"); qry: "hour" }
+        ListElement { label: qsTr("Day"); qry: "day" }
+        ListElement { label: qsTr("Week"); qry: "week" }
+        ListElement { label: qsTr("Month"); qry: "month" }
+        ListElement { label: qsTr("Year"); qry: "year" }
+        ListElement { label: qsTr("All time"); qry: "all" }
     }
 
     DialogHeader {
