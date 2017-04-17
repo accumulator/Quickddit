@@ -239,7 +239,7 @@ AbstractPage {
 
         delegate: CommentDelegate {
             id: commentDelegate
-            width: parent.width
+            width: ListView.view.width
             menu: Component { CommentMenu {} }
 
             onClicked: {
