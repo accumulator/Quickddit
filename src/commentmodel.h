@@ -124,6 +124,7 @@ private:
     bool m_commentPermalink;
     int m_index;
     int m_depth;
+    QList<QString> m_moremoreComments;
 
     QHash<QString, QList<CommentObject> > m_collapsedCommentLists;
 

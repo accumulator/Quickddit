@@ -532,7 +532,9 @@ void CommentModel::moreComments(int index, const QVariant &children)
     QHash<QString, QString> parameters;
     parameters["sort"] = getSortString(m_sort);
     parameters["link_id"] = linkMap.value("fullname").toString();
-    parameters["children"] = children.toStringList().join(",");
+    QStringList limitedChildrenList(children.toStringList().mid(0,50));
+    m_moremoreComments = children.toStringList().mid(50);
+    parameters["children"] = limitedChildrenList.join(",");
 
     doRequest(APIRequest::GET, "/api/morechildren", SLOT(onMoreCommentsFinished(QNetworkReply*)), parameters);
 }
@@ -572,11 +574,27 @@ void CommentModel::onMoreCommentsFinished(QNetworkReply *reply) {
             beginRemoveRows(QModelIndex(), m_index, m_index);
             m_commentList.removeAt(m_index);
             endRemoveRows();
+
+            if (commentList.length() == 0)
+                return;
+
             beginInsertRows(QModelIndex(), m_index, m_index + commentList.length() - 1);
             foreach(const CommentObject comment, commentList) {
                 m_commentList.insert(index++, comment);
             }
             endInsertRows();
+
+            if (m_moremoreComments.size() > 0) {
+                beginInsertRows(QModelIndex(), m_index + commentList.length(), m_index + commentList.length());
+                CommentObject remaining;
+                remaining.setIsMoreChildren(true);
+                remaining.setMoreChildrenCount(m_moremoreComments.size());
+                remaining.setMoreChildren(QStringList(m_moremoreComments));
+                remaining.setDepth(m_depth);
+                remaining.setViewId("");
+                m_commentList.insert(index++, remaining);
+                endInsertRows();
+            }
         } else {
             emit error(reply->errorString());
         }
