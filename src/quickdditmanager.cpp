@@ -62,7 +62,7 @@ void QuickdditManager::setBusy(const bool busy)
 
 bool QuickdditManager::isSignedIn() const
 {
-    return m_settings->hasRefreshToken();
+    return m_settings->hasRefreshToken() && !m_accessToken.isEmpty();
 }
 
 AppSettings *QuickdditManager::settings() const
@@ -250,6 +250,14 @@ void QuickdditManager::onAccessTokenRequestFinished(QNetworkReply *reply)
             m_settings->setRefreshToken(QByteArray());
             emit signedInChanged();
         }
+
+        if (reply->error() == QNetworkReply::AuthenticationRequiredError) {
+            // bad/missing OAuth app credentials
+            qWarning() << "Server requires app registration. Make sure you compiled Quickddit with REDDIT_CLIENT_ID defined.";
+            emit accessTokenFailure(0, "Application Error. Check the logs");
+            return;
+        }
+
         qDebug() << "onAccessTokenRequestFinished error" << reply->error() << ":" << reply->errorString();
         emit accessTokenFailure(reply->error(), reply->errorString());
     }
