@@ -73,7 +73,7 @@ ApplicationWindow {
                 return true;
             } else if (/^https?:\/\/my\.mixtape\.moe\/.+/.test(url)) {
                 return true;
-            } else if (/^https?:\/\/((www)\.)?twitch.tv\/.+/.test(url)) {
+            } else if (/^https?:\/\/(.+\.)?twitch.tv\/.+/.test(url)) {
                 return true;
             } else if (/^https?:\/\/((www)\.)?vid.me\/.+/.test(url)) {
                 return true;
