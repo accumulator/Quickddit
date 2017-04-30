@@ -201,6 +201,15 @@ AbstractPage {
                     return;
                 }
             }
+            console.log("not found. checking on ext=mp4")
+            for (i = 0; i < formats.length; i++) {
+                format = formats[i]
+                if (~["mp4"].indexOf(format["ext"])) {
+                    console.log("format selected: " + format["format_id"])
+                    mediaPlayer.source = format["url"]
+                    return;
+                }
+            }
             console.log("not found. fallback: selecting first format")
             var url = formats[0]["url"]
             mediaPlayer.source = url
