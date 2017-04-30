@@ -5,6 +5,13 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Apr 30 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.1-1
+- fix: properly handle large amounts of hidden comments
+- chg: update youtube-dl submodule to latest
+- chg: improve video format selection
+- new: added ytdl support for vimeo.com, vid.me
+- new: play with kodi(mote) feature
+
 * Sat Apr 01 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.0-1
 - fix: post button positioning when thumbnail is taller than text
 - chg: update qtjson submodule to latest

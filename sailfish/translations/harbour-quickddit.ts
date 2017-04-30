@@ -1224,12 +1224,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="99"/>
+        <location filename="../qml/VideoViewPage.qml" line="100"/>
         <source>Error loading video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="211"/>
+        <location filename="../qml/VideoViewPage.qml" line="221"/>
         <source>Problem finding stream URL</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1270,42 +1270,42 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="219"/>
+        <location filename="../qml/main.qml" line="221"/>
         <source>Unsupported reddit url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="242"/>
+        <location filename="../qml/main.qml" line="244"/>
         <source>Unsupported image url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="276"/>
+        <location filename="../qml/main.qml" line="253"/>
         <source>Unsupported video url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="325"/>
+        <location filename="../qml/main.qml" line="302"/>
         <source>Please log in again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="360"/>
+        <location filename="../qml/main.qml" line="337"/>
         <source> and %1 other</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="368"/>
+        <location filename="../qml/main.qml" line="345"/>
         <source>Message from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="378"/>
+        <location filename="../qml/main.qml" line="355"/>
         <source>New message from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="379"/>
+        <location filename="../qml/main.qml" line="356"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation type="unfinished">
