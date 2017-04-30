@@ -77,6 +77,12 @@ ApplicationWindow {
                 return true;
             } else if (/^https?:\/\/((www)\.)?vid.me\/.+/.test(url)) {
                 return true;
+            } else if (/^https?:\/\/((www)\.)?vimeo.com\/.+/.test(url)) {
+                return true;
+            } else if (/^https?:\/\/(www\.)?gfycat\.com\/.+/.test(url)) {
+                return true;
+            } else if (/^https?\:\/\/((i|m)\.)?imgur\.com\/.+\.gifv$/.test(url)) {
+                return true;
             } else {
                 return false;
             }
@@ -155,11 +161,7 @@ ApplicationWindow {
         }
 
         function previewableVideo(url) {
-            if (/^https?:\/\/(www\.)?gfycat\.com\//.test(url)) {
-                return true
-            } else if (/^https?\:\/\/((i|m)\.)?imgur\.com\/.+\.gifv$/.test(url)) {
-                return true;
-            } else if (python.isUrlSupported(url)) {
+            if (python.isUrlSupported(url)) {
                 return true;
             } else if (/^https?:\/\/\S+\.(mp4|avi|mkv|webm)/i.test(url)) {
                 return true
@@ -243,32 +245,7 @@ ApplicationWindow {
         }
 
         function openVideoViewPage(url) {
-            var match
-            if (/^https?:\/\/(www\.)?gfycat\.com\/.+/.test(url)) {
-                match = /^https?\:\/\/(www\.)?gfycat\.com\/(.+?)$/.exec(url)
-                if (match.length < 3) {
-                    infoBanner.warning("invalid gfycat url: " + url)
-                    return
-                }
-                var xhr = new XMLHttpRequest()
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4) {
-                        var cleantext = xhr.responseText.slice(xhr.responseText.indexOf("{"))
-                        var videoUrl = JSON.parse(cleantext)["gfyItem"]["mp4Url"]
-                        pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: videoUrl });
-                    }
-                }
-
-                xhr.open("GET", "http://gfycat.com/cajax/get/" + match[2], true)
-                xhr.send()
-            } else if (/^https?:\/\/((i|m)\.)?imgur\.com\/.+/.test(url)) {
-                match = /^https?\:\/\/(((i|m)\.)?imgur\.com)\/(.+?).gifv$/.exec(url)
-                if (!match || match.length < 4) {
-                    infoBanner.warning("invalid imgur.com url: " + url)
-                    return
-                }
-                pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url, videoUrl: "https://" + match[1] + "/" + match[4] + ".mp4" });
-            } else if (python.isUrlSupported(url)) {
+            if (python.isUrlSupported(url)) {
                 pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { origUrl: url });
             } else if ((/^https?:\/\/\S+\.(mp4|avi|mkv|webm)/i.test(url))) {
                 pageStack.push(Qt.resolvedUrl("VideoViewPage.qml"), { videoUrl: url });
