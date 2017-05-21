@@ -209,8 +209,12 @@ ApplicationWindow {
             if (/^(\/r\/\w+)?\/comments\/\w+/.test(redditLink.path))
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
             else if (/^\/r\/(\w+)/.test(redditLink.path)) {
-                var subreddit = redditLink.path.split("/")[2];
-                pageStack.push(Qt.resolvedUrl("MainPage.qml"), {subreddit: subreddit});
+                var path = redditLink.path.split("/");
+                var params = {}
+                params["subreddit"] = path[2];
+                if (path[3] !== "")
+                    params["section"] = path[3];
+                pageStack.push(Qt.resolvedUrl("MainPage.qml"), params);
             } else if (/^\/u(ser)?\/([A-Za-z0-9_-]+)/.test(redditLink.path)) {
                 var username = redditLink.path.split("/")[2];
                 pageStack.push(Qt.resolvedUrl("UserPage.qml"), {username: username});

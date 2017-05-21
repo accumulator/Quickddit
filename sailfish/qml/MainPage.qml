@@ -28,6 +28,7 @@ AbstractPage {
     busy: linkVoteManager.busy
 
     property string subreddit
+    property string section
 
     function refresh(sr) {
         if (sr !== undefined) {
@@ -188,6 +189,11 @@ AbstractPage {
     Component.onCompleted: {
         if (subreddit == undefined)
             return;
+        if (section !== undefined) {
+            var si = ["hot", "new", "rising", "controversial", "top", "ads"].indexOf(section);
+            if (si !== -1)
+                linkModel.section = si;
+        }
         refresh(subreddit);
     }
 }
