@@ -162,7 +162,7 @@ Item {
             Item {
                 id: authorTextWrapper
                 anchors { left: parent.left; right: parent.right }
-                height: scoreLoader.height
+                height: scoreText.height
 
                 Text {
                     id: commentAuthorText
@@ -175,46 +175,26 @@ Item {
                     text: model.author
                 }
 
-                Loader {
-                    id: scoreLoader
+                Text {
+                    id: scoreText
                     anchors { left: commentAuthorText.right; leftMargin: constant.paddingSmall }
-                    sourceComponent: model.isScoreHidden ? scoreHiddenComponent : scoreValueComponent
-
-                    Component {
-                        id: scoreValueComponent
-
-                        Text {
-                            font.pixelSize: constant.fontSizeDefault
-                            color: {
-                                if (!mainItem.enabled)
-                                    return constant.colorDisabled;
-                                if (!model.isValid)
-                                    return constant.colorDisabled;
-                                if (model.likes > 0)
-                                    return constant.colorLikes;
-                                else if (model.likes < 0)
-                                    return constant.colorDislikes;
-                                else
-                                    return mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid;
-                            }
-                            text: model.score + " pts"
-                        }
-                    }
-
-                    Component {
-                        id: scoreHiddenComponent
-                        Text {
-                            font.pixelSize: constant.fontSizeDefault
-                            color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
-                                                                       : constant.colorDisabled
-                            text: qsTr("[score hidden]")
-                        }
+                    font.pixelSize: constant.fontSizeDefault
+                    text: model.isScoreHidden ? qsTr("[score hidden]") : model.score + " pts"
+                    color: {
+                        if (!mainItem.enabled || !model.isValid)
+                            return constant.colorDisabled;
+                        if (model.likes > 0)
+                            return constant.colorLikes;
+                        else if (model.likes < 0)
+                            return constant.colorDislikes;
+                        else
+                            return mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid;
                     }
                 }
 
                 Text {
                     anchors {
-                        left: scoreLoader.right
+                        left: scoreText.right
                         right: parent.right
                         verticalCenter: parent.verticalCenter
                         margins: constant.paddingSmall
