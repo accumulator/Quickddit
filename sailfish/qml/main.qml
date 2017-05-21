@@ -185,37 +185,42 @@ ApplicationWindow {
         }
 
         function redditLink(url) {
-            if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
+            var redditLink = parseRedditLink(url);
+            if (redditLink === null)
+                return false;
+
+            if (/^(\/r\/\w+)?\/comments\/\w+/.test(redditLink.path))
                 return true;
-            else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url))
+            else if (/^\/r\/(\w+)/.test(redditLink.path))
                 return true;
-            else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/([A-Za-z0-9_-]+)\/?/.test(url))
+            else if (/^\/u(ser)?\/([A-Za-z0-9_-]+)/.test(redditLink.path))
                 return true;
-            else if (/^https?:\/\/(\w+\.)?reddit.com\/message\/compose\/?\?/.test(url))
+            else if (/^\/message\/compose/.test(redditLink.path))
                 return true;
             return false
         }
 
         function openRedditLink(url) {
-            if (/^https?:\/\/(\w+\.)?reddit.com(\/r\/\w+)?\/comments\/\w+/.test(url))
+            if (!/^https?:\/\/(\w+\.)?reddit.com\/.+/.test(url)) {
+                console.log("Not a reddit link: " + url);
+                return;
+            }
+            var redditLink = parseRedditLink(url);
+            if (/^(\/r\/\w+)?\/comments\/\w+/.test(redditLink.path))
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
-            else if (/^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.test(url)) {
-                var subreddit = /^https?:\/\/(\w+\.)?reddit.com\/r\/(\w+)\/?/.exec(url)[2];
+            else if (/^\/r\/(\w+)/.test(redditLink.path)) {
+                var subreddit = redditLink.path.split("/")[2];
                 pageStack.push(Qt.resolvedUrl("MainPage.qml"), {subreddit: subreddit});
-            } else if (/^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/([A-Za-z0-9_-]+)\/?/.test(url)) {
-                var username = /^https?:\/\/(\w+\.)?reddit.com\/u(ser)?\/([A-Za-z0-9_-]+)\/?/.exec(url)[3];
+            } else if (/^\/u(ser)?\/([A-Za-z0-9_-]+)/.test(redditLink.path)) {
+                var username = redditLink.path.split("/")[2];
                 pageStack.push(Qt.resolvedUrl("UserPage.qml"), {username: username});
-            } else if (/^https?:\/\/(\w+\.)?reddit.com\/message\/compose\/?\?(.*)/.test(url)) {
-                var urlparams = /^https?:\/\/(\w+\.)?reddit.com\/message\/compose\/?\?(.*)/.exec(url)[2].split("&");
+            } else if (/^\/message\/compose/.test(redditLink.path)) {
                 var params = {}
-                for (var i=0; i < urlparams.length; i++) {
-                    var kvp = urlparams[i].split("=");
-                    params[kvp[0]] = kvp[1];
-                }
-                params["recipient"] = params["to"]
-                params["message"] = decodeURIComponent(params["message"])
-                if (params["subject"] !== null)
-                    params["subject"] = decodeURIComponent(params["subject"])
+                params["recipient"] = redditLink.queryMap["to"]
+                if (redditLink.queryMap["message"] !== null)
+                    params["message"] = redditLink.queryMap["message"]
+                if (redditLink.queryMap["subject"] !== null)
+                    params["subject"] = redditLink.queryMap["subject"]
                 pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), params);
             } else
                 infoBanner.alert(qsTr("Unsupported reddit url"));
@@ -223,6 +228,8 @@ ApplicationWindow {
 
         function parseRedditLink(url) {
             var linkRe = /^(https?:\/\/(\w+\.)?reddit.com)?(\/[^?]*)(\?.*)?/.exec(url);
+            if (linkRe === null)
+                return null;
 
             console.log(linkRe);
             var link = {
@@ -230,6 +237,14 @@ ApplicationWindow {
                 query: linkRe[4] === undefined ? "" : linkRe[4].substring(1)
             }
             console.log(link.path + "|" + link.query);
+            if (link.query !== "") {
+                link.queryMap = {}
+                var urlparams = link.query.split("&")
+                for (var i=0; i < urlparams.length; i++) {
+                    var kvp = urlparams[i].split("=");
+                    link.queryMap[kvp[0]] = decodeURIComponent(kvp[1]);
+                }
+            }
             return link
         }
 
