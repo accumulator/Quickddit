@@ -202,6 +202,8 @@ ApplicationWindow {
                 return true;
             if (/^\/message\/compose/.test(redditLink.path))
                 return true;
+            if (/^\/search/.test(redditLink.path))
+                return true;
 
             return false
         }
@@ -218,6 +220,14 @@ ApplicationWindow {
                 var path = redditLink.path.split("/");
                 var params = {}
                 params["subreddit"] = path[2];
+
+                if (path[3] === "search") {
+                    if (redditLink.queryMap["q"] !== undefined)
+                        params["query"] = redditLink.queryMap["q"]
+                    pageStack.push(Qt.resolvedUrl("SearchDialog.qml"), params);
+                    return;
+                }
+
                 if (path[3] !== "")
                     params["section"] = path[3];
                 pageStack.push(Qt.resolvedUrl("MainPage.qml"), params);
@@ -232,6 +242,11 @@ ApplicationWindow {
                 if (redditLink.queryMap["subject"] !== null)
                     params["subject"] = redditLink.queryMap["subject"]
                 pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), params);
+            } else if (/^\/search/.test(redditLink.path)) {
+                var params = {}
+                if (redditLink.queryMap["q"] !== undefined)
+                    params["query"] = redditLink.queryMap["q"]
+                pageStack.push(Qt.resolvedUrl("SearchDialog.qml"), params);
             } else
                 infoBanner.alert(qsTr("Unsupported reddit url"));
         }
@@ -247,8 +262,8 @@ ApplicationWindow {
                 query: linkRe[4] === undefined ? "" : linkRe[4].substring(1)
             }
             console.log(link.path + "|" + link.query);
+            link.queryMap = {}
             if (link.query !== "") {
-                link.queryMap = {}
                 var urlparams = link.query.split("&")
                 for (var i=0; i < urlparams.length; i++) {
                     var kvp = urlparams[i].split("=");

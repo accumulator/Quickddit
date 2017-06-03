@@ -24,6 +24,7 @@ AbstractDialog {
 
     readonly property string title: qsTr("Search")
     property alias subreddit: subredditTextField.text
+    property alias query: searchTextField.text
 
     acceptDestination: Qt.resolvedUrl("SearchPage.qml")
     acceptDestinationAction: PageStackAction.Replace
