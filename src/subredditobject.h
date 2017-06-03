@@ -33,6 +33,14 @@ public:
         Self
     };
 
+    enum SubredditType {
+        Public,
+        Private,
+        Restricted,
+        GoldRestricted,
+        Archived
+    };
+
     SubredditObject();
     SubredditObject(const SubredditObject &other);
     SubredditObject &operator=(const SubredditObject &other);
@@ -83,6 +91,10 @@ public:
 
     bool isMuted() const;
     void setMuted(bool muted);
+
+    SubredditType subredditType() const;
+    void setSubredditType(SubredditType subredditType);
+    void setSubredditType(const QString &subredditTypeString);
 
 private:
     QExplicitlySharedDataPointer<SubredditObjectData> d;

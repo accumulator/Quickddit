@@ -51,13 +51,23 @@ class AboutSubredditManager : public AbstractManager, public QQmlParserStatus
     Q_PROPERTY(bool isBanned READ isBanned NOTIFY dataChanged)
     Q_PROPERTY(bool isModerator READ isModerator NOTIFY dataChanged)
     Q_PROPERTY(bool isMuted READ isMuted NOTIFY dataChanged)
+    Q_PROPERTY(SubredditType subredditType READ subredditType NOTIFY dataChanged)
 
     Q_PROPERTY(QString subreddit READ subreddit WRITE setSubreddit NOTIFY subredditChanged)
 public:
+    // TODO: factor out duplicated enums from SubredditObject
     enum SubmissionType {
         Any,
         Link,
         Self
+    };
+
+    enum SubredditType {
+        Public,
+        Private,
+        Restricted,
+        GoldRestricted,
+        Archived
     };
 
     explicit AboutSubredditManager(QObject *parent = 0);
@@ -79,6 +89,7 @@ public:
     bool isBanned() const;
     bool isModerator() const;
     bool isMuted() const;
+    SubredditType subredditType() const;
 
     QString subreddit() const;
     void setSubreddit(const QString &subreddit);

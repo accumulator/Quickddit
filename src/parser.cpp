@@ -312,6 +312,8 @@ SubredditObject parseSubredditThing(const QVariantMap &subredditThing)
     subreddit.setBanned(data.value("user_is_banned").toBool());
     subreddit.setModerator(data.value("user_is_moderator").toBool());
     subreddit.setMuted(data.value("user_is_muted").toBool());
+    subreddit.setSubredditType(data.value("subreddit_type").toString());
+
     return subreddit;
 }
 

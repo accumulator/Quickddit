@@ -111,6 +111,18 @@ bool AboutSubredditManager::isMuted() const
     return m_subredditObject.isMuted();
 }
 
+AboutSubredditManager::SubredditType AboutSubredditManager::subredditType() const
+{
+    switch (m_subredditObject.subredditType()) {
+    case Public: return Public;
+    case Private: return Private;
+    case Restricted: return Restricted;
+    case GoldRestricted: return GoldRestricted;
+    case Archived: return Archived;
+    }
+    return Public;
+}
+
 QString AboutSubredditManager::subreddit() const
 {
     return m_subreddit;

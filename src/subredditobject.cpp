@@ -41,6 +41,7 @@ public:
     bool isBanned;
     bool isModerator;
     bool isMuted;
+    SubredditObject::SubredditType subredditType;
 private:
     Q_DISABLE_COPY(SubredditObjectData)
 };
@@ -224,4 +225,28 @@ bool SubredditObject::isMuted() const
 void SubredditObject::setMuted(bool muted)
 {
     d->isMuted = muted;
+}
+
+SubredditObject::SubredditType SubredditObject::subredditType() const
+{
+    return d->subredditType;
+}
+
+void SubredditObject::setSubredditType(SubredditType subredditType)
+{
+    d->subredditType = subredditType;
+}
+
+void SubredditObject::setSubredditType(const QString &subredditTypeString)
+{
+    if (subredditTypeString == "public")
+        d->subredditType = Public;
+    else if (subredditTypeString == "private")
+        d->subredditType = Private;
+    else if (subredditTypeString == "restricted")
+        d->subredditType = Restricted;
+    else if (subredditTypeString == "gold_restricted")
+        d->subredditType = GoldRestricted;
+    else if (subredditTypeString == "archived")
+        d->subredditType = Archived;
 }
