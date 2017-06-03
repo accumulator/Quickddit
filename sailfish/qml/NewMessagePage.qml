@@ -24,14 +24,14 @@ AbstractPage {
     id: newMessagePage
     title: qsTr("New Message")
 
-    property string recipient
+    property string recipient: ""
     property alias subject: subjectField.text
     property alias message: messageField.text
     property QtObject messageManager
 
-    function send() {
-        console.log("sending message...");
-        messageManager.send(recipient, subjectField.text, messageField.text, captcha.userInput, captchaManager.iden);
+    function send(msgRecipient) {
+        console.log("sending message to " + msgRecipient + "...");
+        messageManager.send(msgRecipient, subjectField.text, messageField.text, captcha.userInput, captchaManager.iden);
     }
 
     Flickable {
@@ -46,11 +46,22 @@ AbstractPage {
 
             QuickdditPageHeader { title: newMessagePage.title }
 
+            TextField {
+                id: recipientField
+                visible: recipient === ""
+                anchors { left: parent.left; right: parent.right }
+                placeholderText: qsTr("Recipient")
+                maximumLength: 100 // reddit constraint
+                labelVisible: false
+                focus: visible
+            }
+
             Label {
                 anchors {right: parent.right; rightMargin: Theme.paddingLarge }
                 text: "to " + (recipient.indexOf("/r") == 0 ? "moderators of " : "") + recipient
                 font.pixelSize: constant.fontSizeXSmall
                 color: Theme.highlightColor
+                visible : recipient !== ""
             }
 
             TextField {
@@ -59,7 +70,7 @@ AbstractPage {
                 placeholderText: qsTr("Subject")
                 maximumLength: 100 // reddit constraint
                 labelVisible: false
-                focus: true
+                focus: !recipientField.visible
             }
 
             TextArea {
@@ -80,8 +91,9 @@ AbstractPage {
                 text: qsTr("Send")
                 anchors.horizontalCenter: parent.horizontalCenter
                 enabled: messageField.text.length > 0 && subjectField.text.length > 0
+                         && (recipient !== "" || recipientField.text.length > 0)
                          && (!captchaManager.captchaNeeded || captcha.userInput.length > 0)
-                onClicked: send()
+                onClicked: send(recipient === "" ? recipientField.text : recipient)
             }
         }
     }

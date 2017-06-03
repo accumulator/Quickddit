@@ -41,6 +41,10 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
+                text: qsTr("New Message")
+                onClicked: pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), {messageManager: messageManager});
+            }
+            MenuItem {
                 text: qsTr("Section")
                 onClicked: {
                     globalUtils.createSelectionDialog(qsTr("Section"), sectionModel, messageModel.section,
