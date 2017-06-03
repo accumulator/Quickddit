@@ -37,6 +37,7 @@ class AboutSubredditManager : public AbstractManager, public QQmlParserStatus
     Q_OBJECT
     DECL_QMLPARSERSTATUS_INTERFACE
     Q_ENUMS(SubmissionType)
+    Q_ENUMS(SubredditType)
     Q_PROPERTY(bool isValid READ isValid NOTIFY dataChanged)
     Q_PROPERTY(QString url READ url NOTIFY dataChanged)
     Q_PROPERTY(QUrl headerImageUrl READ headerImageUrl NOTIFY dataChanged)
