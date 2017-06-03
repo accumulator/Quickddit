@@ -189,14 +189,20 @@ ApplicationWindow {
             if (redditLink === null)
                 return false;
 
+            if (/\.rss$/.test(redditLink.path)) // don't handle RSS links in-app
+                return false;
+            if (/^\/r\/\w+\/wiki(\/\w+)?/.test(redditLink.path)) // don't handle /r/sub/wiki links in-app
+                return false;
+
             if (/^(\/r\/\w+)?\/comments\/\w+/.test(redditLink.path))
                 return true;
-            else if (/^\/r\/(\w+)/.test(redditLink.path))
+            if (/^\/r\/(\w+)/.test(redditLink.path))
                 return true;
-            else if (/^\/u(ser)?\/([A-Za-z0-9_-]+)/.test(redditLink.path))
+            if (/^\/u(ser)?\/([A-Za-z0-9_-]+)/.test(redditLink.path))
                 return true;
-            else if (/^\/message\/compose/.test(redditLink.path))
+            if (/^\/message\/compose/.test(redditLink.path))
                 return true;
+
             return false
         }
 
