@@ -52,7 +52,8 @@ public:
         IsSavedRole,
         IsArchivedRole,
         IsStickiedRole,
-        GildedRole
+        GildedRole,
+        AuthorFlairTextRole
     };
 
     enum SortType {

@@ -49,6 +49,7 @@ public:
     bool archived;
     bool stickied;
     int gilded;
+    QString authorFlairText;
 
 private:
     Q_DISABLE_COPY(CommentObjectData)
@@ -297,3 +298,14 @@ void CommentObject::setGilded(int gilded)
 {
     d->gilded = gilded;
 }
+
+QString CommentObject::authorFlairText() const
+{
+    return d->authorFlairText;
+}
+
+void CommentObject::setAuthorFlairText(const QString &authorFlairText)
+{
+    d->authorFlairText = authorFlairText;
+}
+

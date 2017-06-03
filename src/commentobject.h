@@ -107,6 +107,8 @@ public:
     int gilded() const;
     void setGilded(int gilded);
 
+    QString authorFlairText() const;
+    void setAuthorFlairText(const QString &authorFlairText);
 
 private:
     QExplicitlySharedDataPointer<CommentObjectData> d;

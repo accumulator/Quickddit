@@ -98,6 +98,7 @@ void commentFromMap(CommentObject &comment, const QVariantMap &commentMap)
     comment.setStickied(commentMap.value("stickied").toBool());
     comment.setGilded(commentMap.value("gilded").toInt());
     comment.setSaved(commentMap.value("saved").toBool());
+    comment.setAuthorFlairText(unescapeHtml(commentMap.value("author_flair_text").toString()));
 }
 
 void linkFromMap(LinkObject &link, const QVariantMap &linkMap)

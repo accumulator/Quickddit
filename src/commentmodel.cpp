@@ -85,6 +85,7 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     roles[IsStickiedRole] = "isStickied";
     roles[GildedRole] = "gilded";
     roles[IsSavedRole] = "saved";
+    roles[AuthorFlairTextRole] = "authorFlairText";
 
     return roles;
 }
@@ -133,6 +134,7 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     case IsStickiedRole: return (comment.isStickied());
     case GildedRole: return (comment.gilded());
     case IsSavedRole: return (comment.saved());
+    case AuthorFlairTextRole: return (comment.authorFlairText());
     default:
         qCritical("CommentModel::data(): Invalid role");
         return QVariant();
