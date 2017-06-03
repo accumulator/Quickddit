@@ -17,7 +17,7 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.quickddit.Core 1.0
 
@@ -159,51 +159,90 @@ Item {
                 }
             }
 
-            Item {
-                id: authorTextWrapper
+            Flow {
                 anchors { left: parent.left; right: parent.right }
-                height: scoreText.height
+                spacing: constant.paddingSmall
+                bottomPadding: constant.paddingSmall
 
-                Text {
-                    id: commentAuthorText
-                    anchors { left: parent.left; verticalCenter: parent.verticalCenter }
-                    font.pixelSize: constant.fontSizeDefault
-                    color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
-                                                               : constant.colorDisabled
-                    font.bold: true
-                    font.italic: model.author.split(" ").length > 1
-                    text: model.author
-                }
-
-                Text {
-                    id: scoreText
-                    anchors { left: commentAuthorText.right; leftMargin: constant.paddingSmall }
-                    font.pixelSize: constant.fontSizeDefault
-                    text: model.isScoreHidden ? qsTr("[score hidden]") : model.score + " pts"
-                    color: {
-                        if (!mainItem.enabled || !model.isValid)
-                            return constant.colorDisabled;
-                        if (model.likes > 0)
-                            return constant.colorLikes;
-                        else if (model.likes < 0)
-                            return constant.colorDislikes;
-                        else
-                            return mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid;
+                Item {
+                    width: author.width
+                    height: author.height - constant.paddingSmall
+                    Text {
+                        id: author
+                        font.pixelSize: constant.fontSizeDefault
+                        color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                                                   : constant.colorDisabled
+                        font.bold: true
+                        font.italic: model.author.split(" ").length > 1
+                        text: model.author
                     }
                 }
 
-                Text {
-                    anchors {
-                        left: scoreText.right
-                        right: parent.right
-                        verticalCenter: parent.verticalCenter
-                        margins: constant.paddingSmall
+                Item {
+                    width: bubble.width + 2 * constant.paddingSmall
+                    height: bubble.height - constant.paddingSmall
+                    visible: model.authorFlairText !== ""
+                    Bubble {
+                        id : bubble
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: model.authorFlairText
                     }
-                    font.pixelSize: constant.fontSizeDefault
-                    color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
-                                                               : constant.colorDisabled
-                    elide: Text.ElideRight
-                    text: " · " + model.created
+                }
+
+                Item {
+                    width: dot1.width
+                    height: dot1.height - constant.paddingSmall
+                    Text {
+                        id: dot1
+                        font.pixelSize: constant.fontSizeDefault
+                        color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
+                                                                   : constant.colorDisabled
+                        text: "·"
+                    }
+                }
+
+                Item {
+                    width: score.width
+                    height: score.height - constant.paddingSmall
+                    Text {
+                        id: score
+                        font.pixelSize: constant.fontSizeDefault
+                        text: model.isScoreHidden ? qsTr("[score hidden]") : model.score + " pts"
+                        color: {
+                            if (!mainItem.enabled || !model.isValid)
+                                return constant.colorDisabled;
+                            if (model.likes > 0)
+                                return constant.colorLikes;
+                            else if (model.likes < 0)
+                                return constant.colorDislikes;
+                            else
+                                return mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid;
+                        }
+                    }
+                }
+
+                Item {
+                    width: dot2.width
+                    height: dot2.height - constant.paddingSmall
+                    Text {
+                        id: dot2
+                        font.pixelSize: constant.fontSizeDefault
+                        color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
+                                                                   : constant.colorDisabled
+                        text: "·"
+                    }
+                }
+
+                Item {
+                    width: created.width
+                    height: created.height - constant.paddingSmall
+                    Text {
+                        id: created
+                        font.pixelSize: constant.fontSizeDefault
+                        color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
+                                                                   : constant.colorDisabled
+                        text: model.created
+                    }
                 }
             }
 
