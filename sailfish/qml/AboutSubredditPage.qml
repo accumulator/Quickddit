@@ -121,6 +121,13 @@ AbstractPage {
                 }
 
                 Bubble {
+                    visible: aboutSubredditManager.subredditType !== AboutSubredditManager.Public
+                    text: aboutSubredditManager.subredditType === AboutSubredditManager.Private ? qsTr("Private") :
+                          aboutSubredditManager.subredditType === AboutSubredditManager.Restricted ? qsTr("Restricted") :
+                          aboutSubredditManager.subredditType === AboutSubredditManager.GoldRestricted ? qsTr("GoldRestricted") : qsTr("Archived")
+                }
+
+                Bubble {
                     visible: aboutSubredditManager.submissionType !== AboutSubredditManager.Any
                     text: aboutSubredditManager.submissionType === AboutSubredditManager.Link ? qsTr("Links only") : qsTr("Self posts only")
                 }
