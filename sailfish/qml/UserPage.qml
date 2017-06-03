@@ -90,9 +90,10 @@ AbstractPage {
                 }
             }
 
-            Row {
+            Flow {
                 visible: userThingModel.section === UserThingModel.OverviewSection
                 anchors.left: parent.left
+                anchors.right: parent.right
                 anchors.margins: constant.paddingMedium
                 spacing: 20
 

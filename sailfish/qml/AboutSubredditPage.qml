@@ -109,9 +109,10 @@ AbstractPage {
                       + " active users"
             }
 
-            Row {
+            Flow {
                 spacing: constant.paddingMedium
                 anchors.left: parent.left
+                anchors.right: parent.right
                 anchors.margins: constant.paddingMedium
 
                 Bubble {

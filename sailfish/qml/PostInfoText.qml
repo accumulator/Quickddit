@@ -28,7 +28,7 @@ Column {
 
     spacing: constant.paddingMedium
 
-    Row {
+    Flow {
         anchors { left: parent.left; right: parent.right }
         spacing: constant.paddingMedium
 
