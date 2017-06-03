@@ -133,6 +133,12 @@ AbstractPage {
                 }
 
                 Bubble {
+                    visible: aboutSubredditManager.isNSFW
+                    text: qsTr("NSFW")
+                    color: "red"
+                }
+
+                Bubble {
                     visible: aboutSubredditManager.isContributor
                     text: qsTr("Contributor")
                 }

@@ -54,6 +54,12 @@ ListItem {
 
                 Bubble {
                     font.pixelSize: constant.fontSizeSmall
+                    visible: model.isNSFW
+                    text: qsTr("NSFW")
+                    color: "red"
+                }
+                Bubble {
+                    font.pixelSize: constant.fontSizeSmall
                     visible: model.isContributor
                     text: qsTr("Contributor")
                 }
