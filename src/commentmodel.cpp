@@ -86,7 +86,7 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     roles[GildedRole] = "gilded";
     roles[IsSavedRole] = "saved";
     roles[AuthorFlairTextRole] = "authorFlairText";
-
+    roles[DistinguishedRole] = "distinguished";
     return roles;
 }
 
@@ -135,6 +135,17 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     case GildedRole: return (comment.gilded());
     case IsSavedRole: return (comment.saved());
     case AuthorFlairTextRole: return (comment.authorFlairText());
+    case DistinguishedRole: {
+        DistinguishedType distinguished;
+        switch (comment.distinguished()) {
+        case CommentObject::DistinguishedByAdmin: distinguished = DistinguishedByAdmin;
+        case CommentObject::DistinguishedByModerator: distinguished = DistinguishedByModerator;
+        case CommentObject::DistinguishedBySpecial: distinguished = DistinguishedBySpecial;
+        default: distinguished = NotDistinguished;
+        }
+        return distinguished;
+    }
+
     default:
         qCritical("CommentModel::data(): Invalid role");
         return QVariant();

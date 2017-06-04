@@ -27,6 +27,7 @@ class CommentModel : public AbstractListModelManager
 {
     Q_OBJECT
     Q_ENUMS(SortType)
+    Q_ENUMS(DistinguishedType)
     Q_PROPERTY(QVariant link READ link WRITE setLink NOTIFY linkChanged)
     Q_PROPERTY(QString permalink READ permalink WRITE setPermalink NOTIFY permalinkChanged)
     Q_PROPERTY(SortType sort READ sort WRITE setSort NOTIFY sortChanged)
@@ -53,7 +54,8 @@ public:
         IsArchivedRole,
         IsStickiedRole,
         GildedRole,
-        AuthorFlairTextRole
+        AuthorFlairTextRole,
+        DistinguishedRole
     };
 
     enum SortType {
@@ -63,6 +65,13 @@ public:
         HotSort,
         ControversialSort,
         OldSort
+    };
+
+    enum DistinguishedType {
+        NotDistinguished,
+        DistinguishedByModerator,
+        DistinguishedByAdmin,
+        DistinguishedBySpecial
     };
 
     explicit CommentModel(QObject *parent = 0);
