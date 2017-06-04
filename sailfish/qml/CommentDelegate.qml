@@ -58,9 +58,9 @@ Item {
             easing.type: Easing.InOutQuad
         }
         NumberAnimation {
-            target: commentDelegate
+            target: bodyText
             properties: "height"
-            from: 0; to: commentDelegate.height
+            from: 0; to: bodyText.height
             duration: commentPage.morechildren_animation ? 500 : 0
             easing.type: Easing.InOutQuad
         }
@@ -68,7 +68,7 @@ Item {
 
     ListView.onRemove: RemoveAnimation {
         target: commentDelegate
-        duration: commentPage.morechildren_animation ? 500 : 0
+        duration: commentPage.morechildren_animation ? 400 : 0
     }
 
     Row {
@@ -137,7 +137,7 @@ Item {
                 left: parent.left; right: parent.right; margins: constant.paddingMedium
                 verticalCenter: parent.verticalCenter
             }
-            height: childrenRect.height
+            //height: childrenRect.height
             spacing: constant.paddingSmall
 
             Row {
@@ -165,6 +165,7 @@ Item {
                 bottomPadding: constant.paddingSmall
 
                 Item {
+                    id: authorItem
                     width: author.width
                     height: author.height - constant.paddingSmall
                     Text {
@@ -179,13 +180,31 @@ Item {
                 }
 
                 Item {
+                    width: authorExtra.width
+                    height: authorExtra.height - constant.paddingSmall
+                    visible: model.distinguished === CommentModel.NotDistinguised
+                    Text {
+                        id: authorExtra
+                        font.pixelSize: constant.fontSizeDefault
+                        color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                                                   : constant.colorDisabled
+                        font.bold: true
+                        text: model.distinguished === CommentModel.DistinguishedByAdmin ? "{A}" :
+                              model.distinguished === CommentModel.DistinguishedByMod ? "{M}" :
+                              model.distinguished === CommentModel.DistinguishedBySpecial ? "{special}" : ""
+                    }
+                }
+
+                Item {
                     width: bubble.width + 2 * constant.paddingSmall
-                    height: bubble.height - constant.paddingSmall
+                    height: Math.max(authorItem.height + constant.paddingSmall, bubble.height)
                     visible: model.authorFlairText !== ""
                     Bubble {
                         id : bubble
                         anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
                         text: model.authorFlairText
+                        font.pixelSize: constant.fontSizeSmaller
                     }
                 }
 
@@ -247,6 +266,7 @@ Item {
             }
 
             WideText {
+                id: bodyText
                 body: model.body
                 listItem: mainItem
                 width: parent.width
@@ -273,7 +293,8 @@ Item {
         id: savedRect
         anchors.fill: parent
         color: Theme.highlightColor
-        opacity: model.saved ? 0.1 : 0.0
+        visible: model.saved
+        opacity: 0.1
     }
 
     Loader {
@@ -289,6 +310,7 @@ Item {
                          : model.isCollapsed ? collapsedChildrenComponent
                          : model.view !== "" ? editComponent
                          : undefined
+
         visible: sourceComponent != undefined
 
         Component {
@@ -297,7 +319,6 @@ Item {
             Column {
                 id: morechildrencolumn
                 height: childrenRect.height
-
                 property real buttonScale: __buttonScale()
 
                 function __buttonScale() {
@@ -360,7 +381,7 @@ Item {
 
             Column {
                 id: editColumn
-                //height: childrenRect.height
+                height: childrenRect.height
                 spacing: 1
 
                 property real buttonScale: __buttonScale()
