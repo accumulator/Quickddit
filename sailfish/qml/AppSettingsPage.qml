@@ -121,6 +121,7 @@ AbstractPage {
             }
 
             ComboBox {
+                visible: false // not functional yet
                 label: qsTr("Language")
                 currentIndex:  {
                     // TODO: return indexOf appsetting in model
