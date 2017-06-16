@@ -26,6 +26,7 @@ QtObject {
     readonly property color colorLight: Theme.primaryColor
     readonly property color colorMid: Theme.secondaryColor
     readonly property color colorDisabled: Qt.darker(colorMid, 1.5)
+    readonly property color colorMidLight: Qt.darker(colorLight, 1.2)
     readonly property color colorHi: Qt.lighter(Theme.highlightColor, 1.1)
 
     property color colorLikes: "#FF8B60"
