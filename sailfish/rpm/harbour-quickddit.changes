@@ -5,6 +5,18 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Fri Jun 16 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.2-1
+- fix: match all subdomains of twitch.tv
+- fix: show URL page for reddit wiki and rss links instead of opening the subreddit
+- chg: scale-in animation in commentlist had to be dropped due to issue with Flow component
+- new: various UI improvements
+- new: handle reddit search query links
+- new: handle subreddit section for reddit links
+- new: add New Message option from menu and allow specifying recipient
+- new: show subreddit type on about page
+- new: user flair in comments
+- new: disabled captcha, apparently not needed anymore, and API fails
+
 * Sat Apr 30 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.1-1
 - fix: properly handle large amounts of hidden comments
 - chg: update youtube-dl submodule to latest
