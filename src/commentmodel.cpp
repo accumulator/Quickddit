@@ -75,6 +75,7 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     roles[IsScoreHiddenRole] = "isScoreHidden";
     roles[IsValidRole] = "isValid";
     roles[IsAuthorRole] = "isAuthor";
+    roles[IsSubmitterRole] = "isSubmitter";
     roles[MoreChildrenCountRole] = "moreChildrenCount";
     roles[IsMoreChildrenRole] = "isMoreChildren";
     roles[MoreChildrenRole] = "moreChildren";
@@ -98,18 +99,7 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case FullnameRole: return comment.fullname();
-    case AuthorRole: {
-        QString author = comment.author();
-        if (comment.isSubmitter())
-            author += " [S]";
-        switch (comment.distinguished()) {
-        case CommentObject::DistinguishedByModerator: author += " [M]"; break;
-        case CommentObject::DistinguishedByAdmin: author += " [A]"; break;
-        case CommentObject::DistinguishedBySpecial: author += " [?]"; break;
-        default: break;
-        }
-        return author;
-    }
+    case AuthorRole: return comment.author();
     case BodyRole: return comment.body();
     case RawBodyRole: return comment.rawBody();
     case ScoreRole: return comment.score();
@@ -125,6 +115,7 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     case IsScoreHiddenRole: return comment.isScoreHidden();
     case IsValidRole: return comment.author() != "[deleted]";
     case IsAuthorRole: return comment.author() == manager()->settings()->redditUsername();
+    case IsSubmitterRole: return comment.isSubmitter();
     case MoreChildrenCountRole: return comment.moreChildrenCount();
     case IsMoreChildrenRole: return comment.isMoreChildren();
     case MoreChildrenRole: return QVariant(comment.moreChildren());
@@ -136,14 +127,12 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
     case IsSavedRole: return (comment.saved());
     case AuthorFlairTextRole: return (comment.authorFlairText());
     case DistinguishedRole: {
-        DistinguishedType distinguished;
         switch (comment.distinguished()) {
-        case CommentObject::DistinguishedByAdmin: distinguished = DistinguishedByAdmin;
-        case CommentObject::DistinguishedByModerator: distinguished = DistinguishedByModerator;
-        case CommentObject::DistinguishedBySpecial: distinguished = DistinguishedBySpecial;
-        default: distinguished = NotDistinguished;
+        case CommentObject::DistinguishedByAdmin: return DistinguishedByAdmin;
+        case CommentObject::DistinguishedByModerator: return DistinguishedByModerator;
+        case CommentObject::DistinguishedBySpecial: return DistinguishedBySpecial;
+        default: return NotDistinguished;
         }
-        return distinguished;
     }
 
     default:

@@ -45,6 +45,7 @@ public:
         IsScoreHiddenRole,
         IsValidRole,
         IsAuthorRole,
+        IsSubmitterRole,
         MoreChildrenCountRole,
         IsMoreChildrenRole,
         MoreChildrenRole,
