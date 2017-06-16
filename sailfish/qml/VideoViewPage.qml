@@ -69,7 +69,7 @@ AbstractPage {
                         pause();
                 }
 
-                onSourceChanged: console.log("media player source url: " + url)
+                onSourceChanged: console.log("media player source url: " + source)
             }
 
             Item {
