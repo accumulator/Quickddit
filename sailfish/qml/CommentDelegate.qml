@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2015-2017  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -53,22 +53,15 @@ Item {
         NumberAnimation {
             target: commentDelegate
             properties: "x"
-            from: commentDelegate.x + commentDelegate.width / 2; to: commentDelegate.x
+            from: commentDelegate.x + commentDelegate.width * 0.5; to: commentDelegate.x
             duration: commentPage.morechildren_animation ? 400 : 0
-            easing.type: Easing.InOutQuad
-        }
-        NumberAnimation {
-            target: bodyText
-            properties: "height"
-            from: 0; to: bodyText.height
-            duration: commentPage.morechildren_animation ? 500 : 0
             easing.type: Easing.InOutQuad
         }
     }
 
     ListView.onRemove: RemoveAnimation {
         target: commentDelegate
-        duration: commentPage.morechildren_animation ? 400 : 0
+        duration: (commentPage.morechildren_animation && !(model.isMoreChildren || model.isCollapsed)) ? 400 : 0
     }
 
     Row {
@@ -134,13 +127,15 @@ Item {
         Column {
             id: mainColumn
             anchors {
-                left: parent.left; right: parent.right; margins: constant.paddingMedium
+                left: parent.left; margins: constant.paddingMedium
                 verticalCenter: parent.verticalCenter
             }
-            //height: childrenRect.height
+            height: childrenRect.height
+            width: commentDelegate.width - lineRow.width - 2 * constant.paddingMedium
             spacing: constant.paddingSmall
 
             Row {
+                id: bubbleRow
                 visible: model.isStickied || model.gilded > 0
                 spacing: constant.paddingMedium
 
@@ -160,7 +155,9 @@ Item {
             }
 
             Flow {
+                id: flowItem
                 anchors { left: parent.left; right: parent.right }
+                width: parent.width
                 spacing: constant.paddingSmall
                 bottomPadding: constant.paddingSmall
 
@@ -171,7 +168,7 @@ Item {
                     Text {
                         id: author
                         font.pixelSize: constant.fontSizeDefault
-                        color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                        color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.highlightColor : constant.colorMidLight)
                                                                    : constant.colorDisabled
                         font.bold: true
                         font.italic: model.author.split(" ").length > 1
@@ -180,24 +177,38 @@ Item {
                 }
 
                 Item {
-                    width: authorExtra.width
-                    height: authorExtra.height - constant.paddingSmall
-                    visible: model.distinguished === CommentModel.NotDistinguised
+                    width: submitter.width
+                    height: author.height
+                    visible: model.isSubmitter
                     Text {
-                        id: authorExtra
-                        font.pixelSize: constant.fontSizeDefault
+                        id: submitter
+                        font.pixelSize: constant.fontSizeSmaller
                         color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
                                                                    : constant.colorDisabled
                         font.bold: true
-                        text: model.distinguished === CommentModel.DistinguishedByAdmin ? "{A}" :
-                              model.distinguished === CommentModel.DistinguishedByMod ? "{M}" :
-                              model.distinguished === CommentModel.DistinguishedBySpecial ? "{special}" : ""
+                        text: "[S]"
+                    }
+                }
+
+                Item {
+                    width: authorExtra.width
+                    height: distinguished.height
+                    visible: model.distinguished !== CommentModel.NotDistinguised
+                    Text {
+                        id: distinguished
+                        font.pixelSize: constant.fontSizeSmaller
+                        color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
+                                                                   : constant.colorDisabled
+                        font.bold: true
+                        text: model.distinguished === CommentModel.DistinguishedByAdmin ? "[A]" :
+                              model.distinguished === CommentModel.DistinguishedByMod ? "[M]" :
+                              model.distinguished === CommentModel.DistinguishedBySpecial ? "[!]" : ""
                     }
                 }
 
                 Item {
                     width: bubble.width + 2 * constant.paddingSmall
-                    height: Math.max(authorItem.height + constant.paddingSmall, bubble.height)
+                    height: Math.max(author.height, bubble.height)
                     visible: model.authorFlairText !== ""
                     Bubble {
                         id : bubble
@@ -210,10 +221,11 @@ Item {
 
                 Item {
                     width: dot1.width
-                    height: dot1.height - constant.paddingSmall
+                    height: author.height
                     Text {
                         id: dot1
-                        font.pixelSize: constant.fontSizeDefault
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.pixelSize: constant.fontSizeSmaller
                         color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
                                                                    : constant.colorDisabled
                         text: "·"
@@ -222,10 +234,11 @@ Item {
 
                 Item {
                     width: score.width
-                    height: score.height - constant.paddingSmall
+                    height: author.height
                     Text {
                         id: score
-                        font.pixelSize: constant.fontSizeDefault
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.pixelSize: constant.fontSizeSmaller
                         text: model.isScoreHidden ? qsTr("[score hidden]") : model.score + " pts"
                         color: {
                             if (!mainItem.enabled || !model.isValid)
@@ -242,10 +255,11 @@ Item {
 
                 Item {
                     width: dot2.width
-                    height: dot2.height - constant.paddingSmall
+                    height: author.height
                     Text {
                         id: dot2
-                        font.pixelSize: constant.fontSizeDefault
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.pixelSize: constant.fontSizeSmaller
                         color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
                                                                    : constant.colorDisabled
                         text: "·"
@@ -254,10 +268,11 @@ Item {
 
                 Item {
                     width: created.width
-                    height: created.height - constant.paddingSmall
+                    height: author.height
                     Text {
                         id: created
-                        font.pixelSize: constant.fontSizeDefault
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.pixelSize: constant.fontSizeSmaller
                         color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.secondaryHighlightColor : constant.colorMid)
                                                                    : constant.colorDisabled
                         text: model.created
