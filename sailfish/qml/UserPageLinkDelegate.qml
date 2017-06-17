@@ -136,7 +136,12 @@ ListItem {
             visible: model.isSelfPost
             width: parent.width - 25
             x: 25
-            text: /(<p>(.*?)<\/p>).*/.exec(model.text)[2]
+            text: {
+                var intro = /(<p>(.*?)<\/p>).*/.exec(model.body)[2]
+                intro = intro.replace(/&#39;/g,"'") // $#39 not shown when using StyledText?
+                console.log(intro);
+                return intro
+            }
             textFormat: Text.StyledText
             font.pixelSize: constant.fontSizeDefault
             color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
