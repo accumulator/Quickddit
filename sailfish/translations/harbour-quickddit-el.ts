@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="sv" sourcelanguage="en">
+<TS version="2.1" language="el" sourcelanguage="en">
 <context>
     <name>AboutMultiredditPage</name>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="37"/>
         <location filename="../qml/AboutMultiredditPage.qml" line="127"/>
         <source>Add Subreddit</source>
-        <translation>Lägg till Subreddit</translation>
+        <translation>Προσθήκη Υπό-reddit</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="55"/>
         <source>Description</source>
-        <translation>Beskrivning</translation>
+        <translation>Περιγραφή</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="65"/>
         <source>No description</source>
-        <translation>Ingen beskrivning</translation>
+        <translation>Χωρίς περιγραφή</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="69"/>
         <source>Subreddits</source>
-        <translation>Subredditar</translation>
+        <translation>Υπό-reddits</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="105"/>
         <source>Remove</source>
-        <translation>Ta bort</translation>
+        <translation>Αφαίρεση</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="132"/>
         <source>Enter subreddit name</source>
-        <translation>Ange subreddit-namn</translation>
+        <translation>Εισαγάγετε το όνομα του υπό-reddit</translation>
     </message>
 </context>
 <context>
@@ -40,17 +40,17 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="25"/>
         <source>About</source>
-        <translation>Om</translation>
+        <translation>Περί</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="120"/>
         <source>Source</source>
-        <translation>Källkod</translation>
+        <translation>Πηγή</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="125"/>
         <source>License</source>
-        <translation>Licens</translation>
+        <translation>Άδεια χρήσης</translation>
     </message>
 </context>
 <context>
@@ -58,67 +58,67 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="38"/>
         <source>Moderators</source>
-        <translation>Moderatorer</translation>
+        <translation>Συντονιστές</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="45"/>
         <source>Message Moderators</source>
-        <translation>Meddela moderatorerna</translation>
+        <translation>Συντονιστές μηνυμάτων</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="52"/>
         <source>Unsubscribe</source>
-        <translation>Sluta prenumerera</translation>
+        <translation>Ακύρωση συνδρομής</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="52"/>
         <source>Subscribe</source>
-        <translation>Prenumerera</translation>
+        <translation>Συνδρομή</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="100"/>
         <source>This subreddit is Not Safe For Work</source>
-        <translation>Denna subreddit är inte arbetsplatssäker (NSFW)</translation>
+        <translation>Αυτό το υπό-reddit δεν είναι ασφαλές στην εργασία (NSFW)</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="129"/>
         <source>Subscribed</source>
-        <translation>Prenumererad</translation>
+        <translation>Με συνδρομή</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="129"/>
         <source>Not Subscribed</source>
-        <translation>Ej prenumererad</translation>
+        <translation>Χωρίς συνδρομή</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="134"/>
         <source>Private</source>
-        <translation>Privat</translation>
+        <translation>Ιδιωτικό</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="135"/>
         <source>Restricted</source>
-        <translation>Begränsad</translation>
+        <translation>Με περιορισμούς</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="136"/>
         <source>GoldRestricted</source>
-        <translation>Guldbegränsad</translation>
+        <translation>Με χρυσούς περιορισμούς</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="136"/>
         <source>Archived</source>
-        <translation>Arkiverad</translation>
+        <translation>Αρχειοθετημένο</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="141"/>
         <source>Links only</source>
-        <translation>Endast länkar</translation>
+        <translation>Μόνον σύνδεσμοι</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="141"/>
         <source>Self posts only</source>
-        <translation>Endast egna inlägg</translation>
+        <translation>Μόνον προσωπικές αναρτήσεις</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="146"/>
@@ -128,32 +128,32 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="152"/>
         <source>Contributor</source>
-        <translation>Medverkande</translation>
+        <translation>Συντελεστής</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="157"/>
         <source>Banned</source>
-        <translation>Bannlyst</translation>
+        <translation>Αποκλεισμένος</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="163"/>
         <source>Mod</source>
-        <translation>Mod</translation>
+        <translation>Συντονιστής</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="169"/>
         <source>Muted</source>
-        <translation>Tystad</translation>
+        <translation>Σε σίγαση</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="199"/>
         <source>You have subscribed to %1</source>
-        <translation>Du har prenumererat på %1</translation>
+        <translation>Ενεγράφητε στο %1</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="201"/>
         <source>You have unsubscribed from %1</source>
-        <translation>Du har slutat prenumerera på %1</translation>
+        <translation>Ακυρώσατε την συνδρομή από το %1</translation>
     </message>
 </context>
 <context>
@@ -161,137 +161,137 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="26"/>
         <source>App Settings</source>
-        <translation>Programinställningar</translation>
+        <translation>Ρυθμίσεις εφαρμογής</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="40"/>
         <source>Display</source>
-        <translation>Skärm</translation>
+        <translation>Εμφάνιση</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="43"/>
         <source>Font Size</source>
-        <translation>Teckenstorlek</translation>
+        <translation>Μέγεθος γραμματοσειράς</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="53"/>
         <source>Tiny</source>
-        <translation>Mycket liten</translation>
+        <translation>Μικροσκοπική</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="54"/>
         <source>Small</source>
-        <translation>Liten</translation>
+        <translation>Μικρή</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="55"/>
         <source>Medium</source>
-        <translation>Medium</translation>
+        <translation>Μεσαία</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="56"/>
         <source>Large</source>
-        <translation>Stor</translation>
+        <translation>Μεγάλη</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="69"/>
         <source>Device Orientation</source>
-        <translation>Enhetsorientering</translation>
+        <translation>Προσανατολισμός της συσκευής</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="78"/>
         <source>Automatic</source>
-        <translation>Auto</translation>
+        <translation>Αυτόματο</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="79"/>
         <source>Portrait only</source>
-        <translation>Endast stående</translation>
+        <translation>Μόνο πορτραίτο</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="80"/>
         <source>Landscape only</source>
-        <translation>Endast liggande</translation>
+        <translation>Μόνο τοπίο</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="92"/>
         <source>Thumbnail Size</source>
-        <translation>Miniatyrstorlek</translation>
+        <translation>Μέγεθος εικόνων επισκόπησης</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="105"/>
         <source>Auto</source>
-        <translation>Auto</translation>
+        <translation>Αυτόματο</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="128"/>
         <source>Language</source>
-        <translation>Språk</translation>
+        <translation>Γλώσσα</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="145"/>
         <source>Notifications</source>
-        <translation>Aviseringar</translation>
+        <translation>Ειδοποιήσεις</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="148"/>
         <source>Check Messages</source>
-        <translation>Läs meddelanden</translation>
+        <translation>Έλεγχος μηνυμάτων</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="156"/>
         <source>Media</source>
-        <translation>Media</translation>
+        <translation>Πολυμέσα</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="159"/>
         <source>Preferred Video Size</source>
-        <translation>Föredragen videostorlek</translation>
+        <translation>Προτιμώμενο μέγεθος βίντεο</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="179"/>
         <source>Loop Videos</source>
-        <translation>Loopa videor</translation>
+        <translation>Αναπαραγωγή βίντεο σε βρόχο</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="186"/>
         <source>Connection</source>
-        <translation>Anslutning</translation>
+        <translation>Σύνδεση</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="189"/>
         <source>Use Tor</source>
-        <translation>Använd Tor</translation>
+        <translation>Χρήση του Tor</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="190"/>
         <source>When enabled, please make sure Tor is installed and active.</source>
-        <translation>Tillse att Tor är installerad och startad, vid aktivering.</translation>
+        <translation>Όντας ενεργοποιημένο, σιγουρευτείτε ότι το Tor είναι εγκατεστημένο και ενεργό.</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="197"/>
         <source>Account</source>
-        <translation>Konto</translation>
+        <translation>Λογαριασμός</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="205"/>
         <source>Signed in to Reddit as</source>
-        <translation>Inloggad på Reddit som</translation>
+        <translation>Έχετε συνδεθεί στο Reddit ως</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="224"/>
         <source>Sign out</source>
-        <translation>Logga ut</translation>
+        <translation>Αποσύνδεση</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="224"/>
         <source>Sign in to Reddit</source>
-        <translation>Logga in på Reddit</translation>
+        <translation>Συνδεθείτε στο Reddit</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="228"/>
         <source>You have signed out from Reddit</source>
-        <translation>Du har loggat ut från Reddit</translation>
+        <translation>Έχετε αποσυνδεθεί από το Reddit</translation>
     </message>
 </context>
 <context>
@@ -299,7 +299,7 @@
     <message>
         <location filename="../qml/Captcha.qml" line="79"/>
         <source>Enter the Captcha text below</source>
-        <translation>Ange captcha-texten nedan</translation>
+        <translation>Εισαγάγετε το κείμενο Captcha κατωτέρω</translation>
     </message>
 </context>
 <context>
@@ -307,68 +307,68 @@
     <message>
         <location filename="../qml/CommentDelegate.qml" line="145"/>
         <source>Sticky</source>
-        <translation>Klistrad</translation>
+        <translation>Κολλημένο</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="244"/>
         <source>[score hidden]</source>
-        <translation>[poäng dolda]</translation>
+        <translation>[κρυφή καταμέτρηση]</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/CommentDelegate.qml" line="352"/>
         <source>Load %n hidden comments</source>
         <translation>
-            <numerusform>Läs in %n dold kommentar</numerusform>
-            <numerusform>Läs in %n dolda kommentarer</numerusform>
+            <numerusform>Φόρτωση %n κρυφών σχολίων</numerusform>
+            <numerusform>Φόρτωση %n κρυφών σχολίων</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="352"/>
         <source>Continue this thread</source>
-        <translation>Fortsätt denna tråd</translation>
+        <translation>Συνέχιση του νήματος</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/CommentDelegate.qml" line="386"/>
         <source>Show %n collapsed comments</source>
         <translation>
-            <numerusform>Visa %n komprimerad kommentar</numerusform>
-            <numerusform>Visa %n komprimerade kommentarer</numerusform>
+            <numerusform>Εμφάνιση %n συνεπτυγμένων σχολίων</numerusform>
+            <numerusform>Εμφάνιση %n συνεπτυγμένων σχολίων</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="415"/>
         <source>Editing Comment</source>
-        <translation>Redigera kommentar</translation>
+        <translation>Επεξεργασία σχολίου</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="416"/>
         <source>Comment Reply</source>
-        <translation>Kommentarssvar</translation>
+        <translation>Σχόλιο απάντησης</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="417"/>
         <source>New Comment</source>
-        <translation>Ny kommentar</translation>
+        <translation>Νέο σχόλιο</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="429"/>
         <source>Enter your reply here...</source>
-        <translation>Ange ditt svar här...</translation>
+        <translation>Εισαγάγετε την απάντησή σας εδώ...</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="429"/>
         <source>Enter your new comment here...</source>
-        <translation>Ange din nya kommentar här...</translation>
+        <translation>Εισαγάγετε το νέο σας σχόλιο εδώ...</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="447"/>
         <source>Save</source>
-        <translation>Spara</translation>
+        <translation>Αποθήκευση</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="447"/>
         <source>Add</source>
-        <translation>Lägg till</translation>
+        <translation>Προσθήκη</translation>
     </message>
 </context>
 <context>
@@ -376,27 +376,27 @@
     <message>
         <location filename="../qml/CommentMenu.qml" line="76"/>
         <source>Copy Comment</source>
-        <translation>Kopiera kommentar</translation>
+        <translation>Αντιγραφή σχολίου</translation>
     </message>
     <message>
         <location filename="../qml/CommentMenu.qml" line="79"/>
         <source>Comment copied to clipboard</source>
-        <translation>Kommentar kopierad till urklipp</translation>
+        <translation>Το σχόλιο αντεγράφη στο πρόχειρο</translation>
     </message>
     <message>
         <location filename="../qml/CommentMenu.qml" line="85"/>
         <source>Reply</source>
-        <translation>Svara</translation>
+        <translation>Απάντηση</translation>
     </message>
     <message>
         <location filename="../qml/CommentMenu.qml" line="95"/>
         <source>Edit</source>
-        <translation>Redigera</translation>
+        <translation>Επεξεργασία</translation>
     </message>
     <message>
         <location filename="../qml/CommentMenu.qml" line="100"/>
         <source>Delete</source>
-        <translation>Ta bort</translation>
+        <translation>Διαγραφή</translation>
     </message>
 </context>
 <context>
@@ -404,73 +404,73 @@
     <message>
         <location filename="../qml/CommentPage.qml" line="26"/>
         <source>Comments</source>
-        <translation>Kommentarer</translation>
+        <translation>Σχόλια</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>Best</source>
-        <translation>Bäst</translation>
+        <translation>Άριστο</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>Top</source>
-        <translation>Högsta poäng</translation>
+        <translation>Κορυφή</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>New</source>
-        <translation>Nya</translation>
+        <translation>Νέο</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>Hot</source>
-        <translation>Heta</translation>
+        <translation>Καυτό</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>Controversial</source>
-        <translation>Kontroversiella</translation>
+        <translation>Επίμαχο</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>Old</source>
-        <translation>Äldst</translation>
+        <translation>Παλιό</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="57"/>
         <source>Edit Post</source>
-        <translation>Redigera inlägg</translation>
+        <translation>Επεξεργασία ανάρτησης</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="65"/>
         <location filename="../qml/CommentPage.qml" line="66"/>
         <source>Sort</source>
-        <translation>Sortera</translation>
+        <translation>Ταξινόμηση</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="76"/>
         <source>Add comment</source>
-        <translation>Lägg till kommentar</translation>
+        <translation>Προσθήκη σχολίου</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="86"/>
         <source>Refresh</source>
-        <translation>Uppdatera</translation>
+        <translation>Ανανέωση</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="218"/>
         <source>Viewing a single comment&apos;s thread</source>
-        <translation>Visar en enskild kommentarstråd</translation>
+        <translation>Προβολή νήματος ενός σχολίου</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="223"/>
         <source>View All Comments</source>
-        <translation>Visa alla kommentarer</translation>
+        <translation>Προβολή όλων των σχολίων</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="255"/>
         <source>Deleting comment</source>
-        <translation>Ta bort kommentar</translation>
+        <translation>Διαγραφή σχολίου</translation>
     </message>
 </context>
 <context>
@@ -478,32 +478,32 @@
     <message>
         <location filename="../qml/ImageViewPage.qml" line="26"/>
         <source>Image</source>
-        <translation>Bild</translation>
+        <translation>Εικόνα</translation>
     </message>
     <message>
         <location filename="../qml/ImageViewPage.qml" line="46"/>
         <source>Save Image</source>
-        <translation>Spara bild</translation>
+        <translation>Αποθήκευση εικόνας</translation>
     </message>
     <message>
         <location filename="../qml/ImageViewPage.qml" line="50"/>
         <source>URL</source>
-        <translation>Länk</translation>
+        <translation>URL</translation>
     </message>
     <message>
         <location filename="../qml/ImageViewPage.qml" line="103"/>
         <source>Error loading image</source>
-        <translation>Kunde inte läsa in bild</translation>
+        <translation>Σφάλμα φόρτωσης της εικόνας</translation>
     </message>
     <message>
         <location filename="../qml/ImageViewPage.qml" line="170"/>
         <source>Image saved to gallery</source>
-        <translation>Bild sparad i Galleri</translation>
+        <translation>Η εικόνα αποθηκεύτηκε στην πινακοθήκη</translation>
     </message>
     <message>
         <location filename="../qml/ImageViewPage.qml" line="171"/>
         <source>Image save failed!</source>
-        <translation>Kunde inte spara bild!</translation>
+        <translation>Η αποθήκευση της εικόνας απέτυχε!</translation>
     </message>
 </context>
 <context>
@@ -511,42 +511,42 @@
     <message>
         <location filename="../qml/LinkMenu.qml" line="37"/>
         <source>Upvote</source>
-        <translation>Rösta upp</translation>
+        <translation>Υπερψηφίζω</translation>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="43"/>
         <source>Downvote</source>
-        <translation>Rösta ner</translation>
+        <translation>Καταψηφίζω</translation>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="49"/>
         <source>Unvote</source>
-        <translation>Ta bort röstning</translation>
+        <translation>Αναίρεση ψήφου</translation>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="53"/>
         <source>View image</source>
-        <translation>Visa bild</translation>
+        <translation>Προβολή εικόνας</translation>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="58"/>
         <source>Save</source>
-        <translation>Spara</translation>
+        <translation>Αποθήκευση</translation>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="63"/>
         <source>Unsave</source>
-        <translation>Ångra spara</translation>
+        <translation>Αναίρεση αποθήκευσης</translation>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="68"/>
         <source>URL</source>
-        <translation>Länk</translation>
+        <translation>URL</translation>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="72"/>
         <source>Delete</source>
-        <translation>Ta bort</translation>
+        <translation>Διαγραφή</translation>
     </message>
 </context>
 <context>
@@ -554,7 +554,7 @@
     <message>
         <location filename="../qml/LoadingFooter.qml" line="61"/>
         <source>Load More...</source>
-        <translation>Läs in mer...</translation>
+        <translation>Φόρτωση περισσοτέρων...</translation>
     </message>
 </context>
 <context>
@@ -562,28 +562,28 @@
     <message>
         <location filename="../qml/MainPage.qml" line="99"/>
         <source>New Post</source>
-        <translation>Nytt inlägg</translation>
+        <translation>Νέα ανάρτηση</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="105"/>
         <location filename="../qml/MainPage.qml" line="107"/>
         <source>Section</source>
-        <translation>Sektion</translation>
+        <translation>Ενότητα</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="117"/>
         <source>Search</source>
-        <translation>Sök</translation>
+        <translation>Αναζήτηση</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="121"/>
         <source>Refresh</source>
-        <translation>Uppdatera</translation>
+        <translation>Ανανέωση</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="143"/>
         <source>Delete link</source>
-        <translation>Ta bort länk</translation>
+        <translation>Διαγραφή δεσμού</translation>
     </message>
 </context>
 <context>
@@ -591,12 +591,12 @@
     <message>
         <location filename="../qml/MessageMenu.qml" line="33"/>
         <source>Mark As Read</source>
-        <translation>Markera som läst</translation>
+        <translation>Σημείωση ως αναγνωσμένο</translation>
     </message>
     <message>
         <location filename="../qml/MessageMenu.qml" line="33"/>
         <source>Mark As Unread</source>
-        <translation>Markera som oläst</translation>
+        <translation>Σήμανση ως μη αναγνωσμένο</translation>
     </message>
 </context>
 <context>
@@ -604,64 +604,64 @@
     <message>
         <location filename="../qml/MessagePage.qml" line="27"/>
         <source>Messages</source>
-        <translation>Meddelanden</translation>
+        <translation>Μηνύματα</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>All</source>
-        <translation>Alla</translation>
+        <translation>Όλα</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Unread</source>
-        <translation>Oläst</translation>
+        <translation>Μη αναγνωσμένα</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Message</source>
-        <translation>Meddelande</translation>
+        <translation>Μήνυμα</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Comment Replies</source>
-        <translation>Kommentarssvar</translation>
+        <translation>Απαντήσεις σχολίου</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Post Replies</source>
-        <translation>Inläggssvar</translation>
+        <translation>Απαντήσεις αναρτήσεως</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Sent</source>
-        <translation>Skickat</translation>
+        <translation>Εστάλη</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="44"/>
         <source>New Message</source>
-        <translation>Nytt meddelande</translation>
+        <translation>Νέο μήνυμα</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="48"/>
         <location filename="../qml/MessagePage.qml" line="50"/>
         <source>Section</source>
-        <translation>Sektion</translation>
+        <translation>Ενότητα</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="58"/>
         <source>Refresh</source>
-        <translation>Uppdatera</translation>
+        <translation>Ανανέωση</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="99"/>
         <source>Nothing here :(</source>
-        <translation>Inget här :(</translation>
+        <translation>Δεν υπάρχει τίποτα εδώ :(</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="114"/>
         <location filename="../qml/MessagePage.qml" line="118"/>
         <source>Message sent</source>
-        <translation>Meddelande skickat</translation>
+        <translation>To μήνυμα εστάλη</translation>
     </message>
 </context>
 <context>
@@ -669,7 +669,7 @@
     <message>
         <location filename="../qml/ModeratorListPage.qml" line="25"/>
         <source>Moderators</source>
-        <translation>Moderatorer</translation>
+        <translation>Συντονιστές</translation>
     </message>
 </context>
 <context>
@@ -677,17 +677,17 @@
     <message>
         <location filename="../qml/MultiredditsPage.qml" line="27"/>
         <source>Multireddits</source>
-        <translation>Multiredditar</translation>
+        <translation>Πολλαπλά reddit</translation>
     </message>
     <message>
         <location filename="../qml/MultiredditsPage.qml" line="54"/>
         <source>Refresh</source>
-        <translation>Uppdatera</translation>
+        <translation>Ανανέωση</translation>
     </message>
     <message>
         <location filename="../qml/MultiredditsPage.qml" line="73"/>
         <source>Nothing here :(</source>
-        <translation>Inget här :(</translation>
+        <translation>Δεν υπάρχει τίποτα εδώ :(</translation>
     </message>
 </context>
 <context>
@@ -695,41 +695,41 @@
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="27"/>
         <source>Open URL</source>
-        <translation>Öppna länk</translation>
+        <translation>Άνοιγμα του URL</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="74"/>
         <location filename="../qml/OpenLinkDialog.qml" line="147"/>
         <source>Open in browser</source>
-        <translation>Öppna i webbläsare</translation>
+        <translation>Άνοιγμα στον φυλλομετρητή</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="78"/>
         <location filename="../qml/OpenLinkDialog.qml" line="151"/>
         <source>Launching web browser...</source>
-        <translation>Startar webbläsaren...</translation>
+        <translation>Εκκίνηση φυλλομετρητή...</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="84"/>
         <location filename="../qml/OpenLinkDialog.qml" line="157"/>
         <source>Copy URL</source>
-        <translation>Kopiera länk</translation>
+        <translation>Αντιγραφή URL</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="87"/>
         <location filename="../qml/OpenLinkDialog.qml" line="161"/>
         <source>URL copied to clipboard</source>
-        <translation>Länk kopierad till urklipp</translation>
+        <translation>Το URL αντεγράφη στο πρόχειρο</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="117"/>
         <source>Open in Kodi</source>
-        <translation>Öppna i Kodi</translation>
+        <translation>Άνοιγμα στο Kodi</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="125"/>
         <source>Source</source>
-        <translation>Källa</translation>
+        <translation>Πηγή</translation>
     </message>
 </context>
 <context>
@@ -737,7 +737,7 @@
     <message>
         <location filename="../qml/PostInfoText.qml" line="43"/>
         <source>Sticky</source>
-        <translation>Klistrad</translation>
+        <translation>Κολλημένο</translation>
     </message>
     <message>
         <location filename="../qml/PostInfoText.qml" line="50"/>
@@ -747,17 +747,17 @@
     <message>
         <location filename="../qml/PostInfoText.qml" line="57"/>
         <source>Promoted</source>
-        <translation>Sponsrad</translation>
+        <translation>Προαχθέν</translation>
     </message>
     <message>
         <location filename="../qml/PostInfoText.qml" line="71"/>
         <source>Archived</source>
-        <translation>Arkiverad</translation>
+        <translation>Αρχειοθετημένο</translation>
     </message>
     <message>
         <location filename="../qml/PostInfoText.qml" line="78"/>
         <source>Locked</source>
-        <translation>Låst</translation>
+        <translation>Κλειδωμένο</translation>
     </message>
 </context>
 <context>
@@ -765,37 +765,37 @@
     <message>
         <location filename="../qml/SearchDialog.qml" line="25"/>
         <source>Search</source>
-        <translation>Sök</translation>
+        <translation>Αναζήτηση</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="53"/>
         <source>Enter search query</source>
-        <translation>Ange sökord</translation>
+        <translation>Εισαγάγετε το αίτημα αναζήτησης</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="64"/>
         <source>Search for</source>
-        <translation>Sök efter</translation>
+        <translation>Αναζήτηση για</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="66"/>
         <source>Posts</source>
-        <translation>Inlägg</translation>
+        <translation>Αναρτήσεις</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="67"/>
         <source>Subreddits</source>
-        <translation>Underredditar</translation>
+        <translation>Υπό-reddits</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="84"/>
         <source>Search within this subreddit:</source>
-        <translation>Sök i denna underreddit:</translation>
+        <translation>Αναζήτηση σε αυτό το υπό-reddit:</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="93"/>
         <source>Enter subreddit name</source>
-        <translation>Ange underredditens namn</translation>
+        <translation>Εισαγάγετε το όνομα του υπό-reddit</translation>
     </message>
 </context>
 <context>
@@ -803,74 +803,74 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>Relevance</source>
-        <translation>Relevans</translation>
+        <translation>Συνάφεια</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>New</source>
-        <translation>Nya</translation>
+        <translation>Νέο</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>Hot</source>
-        <translation>Heta</translation>
+        <translation>Καυτό</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>Top</source>
-        <translation>Högsta poäng</translation>
+        <translation>Κορυφή</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>Comments</source>
-        <translation>Kommentarer</translation>
+        <translation>Σχόλια</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="32"/>
         <source>All time</source>
-        <translation>All tid</translation>
+        <translation>Όλες τις ώρες</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="32"/>
         <source>This hour</source>
-        <translation>Denna timma</translation>
+        <translation>Αυτήν την ώρα</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="32"/>
         <source>Today</source>
-        <translation>I dag</translation>
+        <translation>Σήμερα</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="32"/>
         <source>This week</source>
-        <translation>Denna vecka</translation>
+        <translation>Αυτήν την εβδομάδα</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="33"/>
         <source>This month</source>
-        <translation>Denna månad</translation>
+        <translation>Αυτόν τον μήνα</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="33"/>
         <source>This year</source>
-        <translation>Detta år</translation>
+        <translation>Εφέτος</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="46"/>
         <location filename="../qml/SearchPage.qml" line="48"/>
         <source>Time Range</source>
-        <translation>Tidsintervall</translation>
+        <translation>Χρονικό διάστημα</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="57"/>
         <location filename="../qml/SearchPage.qml" line="59"/>
         <source>Sort</source>
-        <translation>Sortera</translation>
+        <translation>Ταξινόμηση</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="67"/>
         <source>Refresh</source>
-        <translation>Uppdatera</translation>
+        <translation>Ανανέωση</translation>
     </message>
 </context>
 <context>
@@ -878,57 +878,57 @@
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
         <source>Hot</source>
-        <translation>Heta</translation>
+        <translation>Καυτό</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
         <source>New</source>
-        <translation>Nya</translation>
+        <translation>Νέο</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
         <source>Rising</source>
-        <translation>Stigande</translation>
+        <translation>Ανοδικό</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
         <source>Controversial</source>
-        <translation>Kontroversiella</translation>
+        <translation>Επίμαχο</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
         <source>Top</source>
-        <translation>Högsta poäng</translation>
+        <translation>Κορυφή</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
         <source>Hour</source>
-        <translation>Timma</translation>
+        <translation>Ώρα</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="37"/>
         <source>Day</source>
-        <translation>Dag</translation>
+        <translation>Ημέρα</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="38"/>
         <source>Week</source>
-        <translation>Vecka</translation>
+        <translation>Εβδομάδα</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Month</source>
-        <translation>Månad</translation>
+        <translation>Μήνας</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="40"/>
         <source>Year</source>
-        <translation>År</translation>
+        <translation>Έτος</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="41"/>
         <source>All time</source>
-        <translation>All tid</translation>
+        <translation>Όλη</translation>
     </message>
 </context>
 <context>
@@ -936,42 +936,42 @@
     <message>
         <location filename="../qml/SendLinkPage.qml" line="25"/>
         <source>New Post</source>
-        <translation>Nytt inlägg</translation>
+        <translation>Νέα ανάρτηση</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="25"/>
         <source>Edit Post</source>
-        <translation>Redigera inlägg</translation>
+        <translation>Επεξεργασία αναρτήσεως</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="65"/>
         <source>Post Title</source>
-        <translation>Inläggsrubrik</translation>
+        <translation>Τίτλος αναρτήσεως</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="73"/>
         <source>Self Post</source>
-        <translation>Egeninlägg</translation>
+        <translation>Προσωπική ανάρτηση</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="80"/>
         <source>Post URL</source>
-        <translation>Inläggets URL</translation>
+        <translation>Ανάρτηση URL</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="92"/>
         <source>Post Text</source>
-        <translation>Inläggstext</translation>
+        <translation>Ανάρτηση κειμένου</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="99"/>
         <source>Submit</source>
-        <translation>Skicka</translation>
+        <translation>Υποβολή</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="99"/>
         <source>Save</source>
-        <translation>Spara</translation>
+        <translation>Αποθήκευση</translation>
     </message>
 </context>
 <context>
@@ -979,42 +979,42 @@
     <message>
         <location filename="../qml/SendMessagePage.qml" line="25"/>
         <source>New Message</source>
-        <translation>Nytt meddelande</translation>
+        <translation>Νέο μήνυμα</translation>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="25"/>
         <source>Reply Message</source>
-        <translation>Svarsmeddelande</translation>
+        <translation>Απάντηση στο μήνυμα</translation>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="58"/>
         <source>Recipient</source>
-        <translation>Mottagare</translation>
+        <translation>Παραλήπτης</translation>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="66"/>
         <source>to moderators of</source>
-        <translation>till moderator för</translation>
+        <translation>στους συντονιστές του</translation>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="66"/>
         <source>to</source>
-        <translation>till</translation>
+        <translation>προς</translation>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="75"/>
         <source>Subject</source>
-        <translation>Ämne</translation>
+        <translation>Θέμα</translation>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="85"/>
         <source>Message</source>
-        <translation>Meddelande</translation>
+        <translation>Μήνυμα</translation>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="91"/>
         <source>Send</source>
-        <translation>Skicka</translation>
+        <translation>Αποστολή</translation>
     </message>
 </context>
 <context>
@@ -1022,22 +1022,22 @@
     <message>
         <location filename="../qml/SignInPage.qml" line="24"/>
         <source>Sign in to Reddit</source>
-        <translation>Logga in på reddit</translation>
+        <translation>Συνδεθείτε στο Reddit</translation>
     </message>
     <message>
         <location filename="../qml/SignInPage.qml" line="52"/>
         <source>Cancel</source>
-        <translation>Avbryt</translation>
+        <translation>Ακύρωση</translation>
     </message>
     <message>
         <location filename="../qml/SignInPage.qml" line="59"/>
         <source>Reload</source>
-        <translation>Uppdatera</translation>
+        <translation>Επαναφόρτωση</translation>
     </message>
     <message>
         <location filename="../qml/SignInPage.qml" line="71"/>
         <source>Sign in successful! Welcome! :)</source>
-        <translation>Inloggning klar! Välkommen! :)</translation>
+        <translation>Η σύνδεση ήταν επιτυχής! Καλώς ήλθατε! :)</translation>
     </message>
 </context>
 <context>
@@ -1050,12 +1050,12 @@
     <message>
         <location filename="../qml/SubredditDelegate.qml" line="64"/>
         <source>Contributor</source>
-        <translation>Användare</translation>
+        <translation>Συντελεστής</translation>
     </message>
     <message>
         <location filename="../qml/SubredditDelegate.qml" line="69"/>
         <source>Banned</source>
-        <translation>Blockerad</translation>
+        <translation>Αποκλεισμένος</translation>
     </message>
     <message>
         <location filename="../qml/SubredditDelegate.qml" line="75"/>
@@ -1065,7 +1065,7 @@
     <message>
         <location filename="../qml/SubredditDelegate.qml" line="81"/>
         <source>Muted</source>
-        <translation>Tystad</translation>
+        <translation>Σε σίγαση</translation>
     </message>
 </context>
 <context>
@@ -1073,63 +1073,63 @@
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="36"/>
         <source>Popular Subreddits</source>
-        <translation>Populära underredditar</translation>
+        <translation>Δημοφιλή υπό-reddits</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="36"/>
         <source>New Subreddits</source>
-        <translation>Nya underredditar</translation>
+        <translation>Νέα υπό-reddits</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="37"/>
         <source>My Subreddits - Subscriber</source>
-        <translation>Mina underredditar - Prenumerant</translation>
+        <translation>Το υπό-reddits μου - Συνδρομητής</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="37"/>
         <source>My Subreddits - Approved Submitter</source>
-        <translation>Mina underredditar - Godkänd inläggspostare</translation>
+        <translation>Το υπό-reddits μου - Εγκεκριμένος συνδρομητής</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="37"/>
         <source>My Subreddits - Moderator</source>
-        <translation>Mina underredditar - Moderator</translation>
+        <translation>Το υπό-reddits μου - Συντονιστής</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="57"/>
         <location filename="../qml/SubredditsBrowsePage.qml" line="59"/>
         <source>Section</source>
-        <translation>Sektion</translation>
+        <translation>Ενότητα</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="67"/>
         <source>Refresh</source>
-        <translation>Uppdatera</translation>
+        <translation>Ανανέωση</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="86"/>
         <source>About</source>
-        <translation>Om</translation>
+        <translation>Σχετικά</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="92"/>
         <source>Subscribe</source>
-        <translation>Prenumerera</translation>
+        <translation>Συνδρομή</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="101"/>
         <source>Unsubscribe</source>
-        <translation>Avsluta prenumeration</translation>
+        <translation>Ακύρωση συνδρομής</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="122"/>
         <source>Nothing here :(</source>
-        <translation>Inget här :(</translation>
+        <translation>Δεν υπάρχει τίποτα εδώ :(</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="139"/>
         <source>You have %2 from %1</source>
-        <translation>Du har %2 från %1</translation>
+        <translation>Έχετε %2 από %1</translation>
     </message>
 </context>
 <context>
@@ -1137,77 +1137,77 @@
     <message>
         <location filename="../qml/SubredditsPage.qml" line="28"/>
         <source>Subreddits</source>
-        <translation>Underredditar</translation>
+        <translation>Υπό-reddits</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="61"/>
         <source>About Quickddit</source>
-        <translation>Om Quickddit</translation>
+        <translation>Περί του Quickddit</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="66"/>
         <source>Settings</source>
-        <translation>Inställningar</translation>
+        <translation>Ρυθμίσεις</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="72"/>
         <source>My Profile</source>
-        <translation>Min profil</translation>
+        <translation>Η ταυτότητά μου</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="78"/>
         <source>Messages</source>
-        <translation>Meddelanden</translation>
+        <translation>Μηνύματα</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="96"/>
         <source>Go to a specific subreddit</source>
-        <translation>Gå till en specifik underreddit</translation>
+        <translation>Μετάβαση σε ένα υπό-reddit</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="110"/>
         <source>Front Page</source>
-        <translation>Startsida</translation>
+        <translation>Πρωτοσέλιδο</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="110"/>
         <source>All</source>
-        <translation>Alla</translation>
+        <translation>Όλα</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="110"/>
         <source>Browse for Subreddits...</source>
-        <translation>Bläddra efter underredditar...</translation>
+        <translation>Περιήγηση στα Υπό-reddits...</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="110"/>
         <source>Multireddits</source>
-        <translation>Multiredditar</translation>
+        <translation>Πολλαπλά reddit</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="110"/>
         <source>Popular</source>
-        <translation>Heta</translation>
+        <translation>Δημοφιλή</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="131"/>
         <source>Subscribed Subreddits</source>
-        <translation>Prenumererade underredditar</translation>
+        <translation>Υπό-reddits με συνδρομή</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="150"/>
         <source>About</source>
-        <translation>Om</translation>
+        <translation>Σχετικά</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="156"/>
         <source>Unsubscribe</source>
-        <translation>Avsluta prenumeration</translation>
+        <translation>Ακύρωση συνδρομής</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="216"/>
         <source>You have unsubscribed from %1</source>
-        <translation>Du har avslutat prenumerationen på %1</translation>
+        <translation>Ακυρώσατε την συνδρομή από το %1</translation>
     </message>
 </context>
 <context>
@@ -1215,7 +1215,7 @@
     <message>
         <location filename="../qml/TextAreaDialog.qml" line="50"/>
         <source>Enter your comment here...</source>
-        <translation>Ange din kommentar här...</translation>
+        <translation>Εισαγάγετε το σχόλιό σας εδώ...</translation>
     </message>
 </context>
 <context>
@@ -1224,105 +1224,105 @@
         <location filename="../qml/UserPage.qml" line="31"/>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Overview</source>
-        <translation>Översikt</translation>
+        <translation>Επισκόπηση</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="31"/>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Comments</source>
-        <translation>Kommentarer</translation>
+        <translation>Σχόλια</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="31"/>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Submitted</source>
-        <translation>Postade</translation>
+        <translation>Εστάλη</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Upvoted</source>
-        <translation>Uppröstat</translation>
+        <translation>Υπερψηφισμένο</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Downvoted</source>
-        <translation>Nerröstat</translation>
+        <translation>Καταψηφισμένο</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Saved Things</source>
-        <translation>Sparade saker</translation>
+        <translation>Αποθηκευμένα αντικείμενα</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="41"/>
         <location filename="../qml/UserPage.qml" line="43"/>
         <source>Section</source>
-        <translation>Sektion</translation>
+        <translation>Ενότητα</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="51"/>
         <source>Send Message</source>
-        <translation>Skicka meddelande</translation>
+        <translation>Αποστολή μηνύματος</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="60"/>
         <source>Refresh</source>
-        <translation>Uppdatera</translation>
+        <translation>Ανανέωση</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="72"/>
         <source>My Profile</source>
-        <translation>Min profil</translation>
+        <translation>Η ταυτότητά μου</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="72"/>
         <source>User Profile</source>
-        <translation>Användarprofil</translation>
+        <translation>Ταυτότητα χρήστη</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="104"/>
         <source>Friend</source>
-        <translation>Vän</translation>
+        <translation>Φίλος</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="108"/>
         <source>Gold</source>
-        <translation>Guld</translation>
+        <translation>Χρυσός</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="112"/>
         <source>Email Verified</source>
-        <translation>E-post verifierad</translation>
+        <translation>Εξακριβωμένη ηλ. αλληλογραφία</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="116"/>
         <source>Mod</source>
-        <translation>Mod</translation>
+        <translation>Συντονιστής</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="120"/>
         <source>No Robots</source>
-        <translation>Inga robotar</translation>
+        <translation>Όχι ρομπότ</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="209"/>
         <source>Delete</source>
-        <translation>Ta bort</translation>
+        <translation>Διαγραφή</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="226"/>
         <source>Delete link</source>
-        <translation>Ta bort länk</translation>
+        <translation>Διαγραφή συνδέσμου</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="247"/>
         <source>Nothing here :(</source>
-        <translation>Inget här :(</translation>
+        <translation>Δεν υπάρχει τίποτα εδώ :(</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="283"/>
         <source>Message sent</source>
-        <translation>Meddelande skickat</translation>
+        <translation>Το μήνυμα εστάλη</translation>
     </message>
 </context>
 <context>
@@ -1330,7 +1330,7 @@
     <message>
         <location filename="../qml/UserPageCommentDelegate.qml" line="54"/>
         <source>Sticky</source>
-        <translation>Klistrig</translation>
+        <translation>Κολλημένο</translation>
     </message>
 </context>
 <context>
@@ -1338,7 +1338,7 @@
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="64"/>
         <source>Sticky</source>
-        <translation>Klistrig</translation>
+        <translation>Κολλημένο</translation>
     </message>
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="72"/>
@@ -1348,12 +1348,12 @@
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="80"/>
         <source>Promoted</source>
-        <translation>Sponsrad</translation>
+        <translation>Προαχθέν</translation>
     </message>
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="96"/>
         <source>Locked</source>
-        <translation>Låst</translation>
+        <translation>Κλειδωμένο</translation>
     </message>
 </context>
 <context>
@@ -1361,22 +1361,22 @@
     <message>
         <location filename="../qml/VideoViewPage.qml" line="26"/>
         <source>Video</source>
-        <translation>Video</translation>
+        <translation>Βίντεο</translation>
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="39"/>
         <source>URL</source>
-        <translation>Länk</translation>
+        <translation>URL</translation>
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="111"/>
         <source>Error loading video</source>
-        <translation>Kunde inte läsa in video</translation>
+        <translation>Σφάλμα φόρτωσης του βίντεο</translation>
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="251"/>
         <source>Problem finding stream URL</source>
-        <translation>Kunde inte hitta strömningslänk</translation>
+        <translation>Πρόβλημα εύρεσης της ροής του URL</translation>
     </message>
 </context>
 <context>
@@ -1384,32 +1384,32 @@
     <message>
         <location filename="../qml/WebViewer.qml" line="25"/>
         <source>WebViewer</source>
-        <translation>Webbvisare</translation>
+        <translation>Προβολέας Ιστού</translation>
     </message>
     <message>
         <location filename="../qml/WebViewer.qml" line="45"/>
         <source>Copy URL</source>
-        <translation>Kopiera länk</translation>
+        <translation>Αντιγραφή URL</translation>
     </message>
     <message>
         <location filename="../qml/WebViewer.qml" line="48"/>
         <source>URL copied to clipboard</source>
-        <translation>Länk kopierad till urklipp</translation>
+        <translation>Το URL αντιγράφτηκε στο πρόχειρο</translation>
     </message>
     <message>
         <location filename="../qml/WebViewer.qml" line="52"/>
         <source>Open in browser</source>
-        <translation>Öppna i webbläsaren</translation>
+        <translation>Άνοιγμα στον φυλλομετρητή</translation>
     </message>
     <message>
         <location filename="../qml/WebViewer.qml" line="58"/>
         <source>Back</source>
-        <translation>Tillbaka</translation>
+        <translation>Πίσω</translation>
     </message>
     <message>
         <location filename="../qml/WebViewer.qml" line="63"/>
         <source>Forward</source>
-        <translation>Framåt</translation>
+        <translation>Εμπρός</translation>
     </message>
 </context>
 <context>
@@ -1417,46 +1417,46 @@
     <message>
         <location filename="../qml/main.qml" line="307"/>
         <source>Unsupported reddit url</source>
-        <translation>reddit-länken stöds inte</translation>
+        <translation>Μη υποστηριζόμενο url reddit</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="349"/>
         <source>Unsupported image url</source>
-        <translation>Bildlänken stöds inte</translation>
+        <translation>Μη υποστηριζόμενο url εικόνας</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="358"/>
         <source>Unsupported video url</source>
-        <translation>Videolänken stöds inte</translation>
+        <translation>Μη υποστηριζόμενο url βίντεο</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="418"/>
         <source>Please log in again</source>
-        <translation>Logga in igen</translation>
+        <translation>Παρακαλώ συνδεθείτε ξανά</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="453"/>
         <source> and %1 other</source>
-        <translation> och %1 andra</translation>
+        <translation> και %1 ακόμα</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="462"/>
         <location filename="../qml/main.qml" line="463"/>
         <source>Message from %1</source>
-        <translation>Meddelande från %1</translation>
+        <translation>Μήνυμα από τον/την %1</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="473"/>
         <source>New message from %1</source>
-        <translation>Nytt meddelande från %1</translation>
+        <translation>Νέο μήνυμα από τον/την %1</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/main.qml" line="474"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation>
-            <numerusform>%n nytt meddelande</numerusform>
-            <numerusform>%n nya meddelanden</numerusform>
+            <numerusform>%n νέα μηνύματα</numerusform>
+            <numerusform>%n νέα μηνύματα</numerusform>
         </translation>
     </message>
 </context>

@@ -178,7 +178,7 @@ OTHER_FILES += \
 # Translations
 CONFIG += sailfishapp_i18n
 
-TRANSLATIONS = translations/harbour-quickddit.ts
+include(translations/translations.pri)
 
 # hm, I prefer generating code directly to the build dir, and not including the
 # generated sources in the HEADERS and SOURCES lists.. Manually remove app_adaptor.h
