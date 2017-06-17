@@ -56,6 +56,15 @@ AbstractPage {
             source: MediaPlayer {
                 id: mediaPlayer
                 autoPlay: false
+                onDurationChanged: {
+                    // clamp number of loops so we loop for 1 minute max (holy holy battery)
+                    if (duration < 0)
+                        return
+                    if (duration == 0)
+                        loops = 1
+                    else
+                        loops = Math.max(1, Math.round(60000/duration))
+                }
                 onStopped: playPauseButton.opacity = 1
                 onError: {
                     infoBanner.warning(errorString);
