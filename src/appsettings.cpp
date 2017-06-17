@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2015-2017  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@ AppSettings::AppSettings(QObject *parent) :
     m_lastSeenMessage = m_settings->value("lastSeenMessage").toString();
     m_pollUnread = m_settings->value("pollUnread", true).toBool();
     m_thumbnailScale = static_cast<ThumbnailScale>(m_settings->value("thumbnailScale", AppSettings::ScaleAuto).toInt());
+    m_filteredSubreddits = m_settings->value("filteredSubreddits").toStringList();
 }
 
 bool AppSettings::whiteTheme() const
@@ -150,5 +151,10 @@ void AppSettings::setThumbnailScale(const AppSettings::ThumbnailScale scale)
         m_settings->setValue("thumbnailScale", m_thumbnailScale);
         emit thumbnailScaleChanged();
     }
+}
+
+QStringList AppSettings::filteredSubreddits() const
+{
+    return m_filteredSubreddits;
 }
 

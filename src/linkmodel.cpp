@@ -23,6 +23,7 @@
 #include <QtCore/QUrl>
 #include <QtNetwork/QNetworkReply>
 
+#include "appsettings.h"
 #include "utils.h"
 #include "parser.h"
 
@@ -379,6 +380,16 @@ void LinkModel::onFinished(QNetworkReply *reply)
                     QMutableListIterator<LinkObject> i(links);
                     while (i.hasNext()) {
                         if (m_linkList.contains(i.next()))
+                            i.remove();
+                    }
+                }
+                // remove filtered
+                if (m_location == All) {
+                    QMutableListIterator<LinkObject> i(links);
+                    QStringList filteredSubreddits = manager()->settings()->filteredSubreddits();
+                    qDebug() << "filtered subreddits:" << filteredSubreddits;
+                    while (i.hasNext()) {
+                        if (filteredSubreddits.contains(i.next().subreddit(), Qt::CaseInsensitive))
                             i.remove();
                     }
                 }

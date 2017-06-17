@@ -86,6 +86,8 @@ public:
     ThumbnailScale thumbnailScale() const;
     void setThumbnailScale(const ThumbnailScale scale);
 
+    QStringList filteredSubreddits() const;
+
 signals:
     void whiteThemeChanged();
     void fontSizeChanged();
@@ -104,6 +106,7 @@ private:
     QString m_lastSeenMessage;
     bool m_pollUnread;
     ThumbnailScale m_thumbnailScale;
+    QStringList m_filteredSubreddits;
 };
 
 #endif // APPSETTINGS_H
