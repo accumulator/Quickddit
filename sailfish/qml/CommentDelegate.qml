@@ -182,6 +182,7 @@ Item {
                     visible: model.isSubmitter
                     Text {
                         id: submitter
+                        anchors.verticalCenter: parent.verticalCenter
                         font.pixelSize: constant.fontSizeSmaller
                         color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
                                                                    : constant.colorDisabled
@@ -191,11 +192,12 @@ Item {
                 }
 
                 Item {
-                    width: authorExtra.width
-                    height: distinguished.height
+                    width: distinguished.width
+                    height: author.height
                     visible: model.distinguished !== CommentModel.NotDistinguised
                     Text {
                         id: distinguished
+                        anchors.verticalCenter: parent.verticalCenter
                         font.pixelSize: constant.fontSizeSmaller
                         color: (mainItem.enabled && model.isValid) ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
                                                                    : constant.colorDisabled
