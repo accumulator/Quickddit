@@ -329,6 +329,17 @@ ApplicationWindow {
             var dialog = pageStack.push(Qt.resolvedUrl("SelectionDialog.qml"), p);
             dialog.accepted.connect(function() { onAccepted(dialog.selectedIndex); })
         }
+
+        function formatDuration(seconds) {
+            var date = new Date(null);
+            if (seconds < 0)
+                seconds = 0
+            date.setSeconds(seconds);
+            var durationString = date.toISOString().substr(11, 8);
+            if (durationString.indexOf("00") === 0)
+                durationString = durationString.substr(3)
+            return durationString
+        }
     }
 
     Constant { id: constant }

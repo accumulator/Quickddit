@@ -129,6 +129,19 @@ AbstractPage {
             }
         }
 
+        Text {
+            anchors {
+                right: progressBar.right
+                bottom: progressBar.top
+                rightMargin: progressBar.rightMargin
+                bottomMargin: -progressBar._extraPadding
+            }
+            text: globalUtils.formatDuration(Math.floor(mediaPlayer.duration/1000))
+            font.pixelSize: constant.fontSizeLarge
+            color: constant.colorLight
+            opacity: playPauseButton.opacity
+        }
+
         Image {
             id: playPauseButton
             source: "image://theme/icon-l-" + (mediaPlayer.playbackState === MediaPlayer.PlayingState ? "pause" : "play")
