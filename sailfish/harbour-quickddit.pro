@@ -118,6 +118,7 @@ OTHER_FILES += \
     $${TARGET}.desktop \
     $${TARGET}.png \
     iface/org.quickddit.xml \
+    qml/ytdl_wrapper.py \
     qml/cover/CoverPage.qml \
     qml/SubredditsBrowsePage.qml \
     qml/SubredditBrowseDelegate.qml \
@@ -171,8 +172,7 @@ OTHER_FILES += \
     qml/ImageViewer.qml \
     qml/AltMarker.qml \
     qml/WebViewer.qml \
-    qml/SectionSelectionDialog.qml \
-    qml/ytdl_wrapper.py
+    qml/SectionSelectionDialog.qml
 
 # Translations
 CONFIG += sailfishapp_i18n

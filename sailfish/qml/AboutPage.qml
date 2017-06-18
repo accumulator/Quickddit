@@ -76,7 +76,7 @@ AbstractPage {
                     font.pixelSize: constant.fontSizeSmall
                     color: constant.colorLight
                     wrapMode: Text.Wrap
-                    text: "Copyright (c) 2015-2016 Sander van Grieken\n" +
+                    text: "Copyright (c) 2015-2017 Sander van Grieken\n" +
                           "Copyright (c) 2013-2014 Dickson Leong\n\n" +
                           "App icon by Andrew Zhilin\n\n" +
                           "Licensed under GNU GPLv3+\n"
