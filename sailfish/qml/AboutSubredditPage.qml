@@ -37,7 +37,7 @@ AbstractPage {
             MenuItem {
                 text: qsTr("Message Moderators")
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), {recipient: aboutSubredditManager.url});
+                    pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"), {recipient: aboutSubredditManager.url});
                 }
             }
 

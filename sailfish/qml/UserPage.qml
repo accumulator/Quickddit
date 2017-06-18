@@ -53,7 +53,7 @@ AbstractPage {
                 enabled: !messageManager.busy && quickdditManager.isSignedIn
                 onClicked: {
                     var p = {messageManager: messageManager, recipient: username};
-                    pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), p);
+                    pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"), p);
                 }
             }
             MenuItem {

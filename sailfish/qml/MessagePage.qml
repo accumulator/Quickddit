@@ -42,7 +42,7 @@ AbstractPage {
         PullDownMenu {
             MenuItem {
                 text: qsTr("New Message")
-                onClicked: pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), {messageManager: messageManager});
+                onClicked: pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"), {messageManager: messageManager});
             }
             MenuItem {
                 text: qsTr("Section")
@@ -77,7 +77,7 @@ AbstractPage {
                 if (model.isComment) {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
                 } else if (!isSentMessage) {
-                    pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"),
+                    pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"),
                                    {messageManager: messageManager, replyTo: model.fullname, recipient: model.author, subject: "re: " + model.subject});
                 }
             }

@@ -168,7 +168,7 @@ OTHER_FILES += \
     qml/WideText.qml \
     qml/UserPageCommentDelegate.qml \
     qml/UserPageLinkDelegate.qml \
-    qml/NewMessagePage.qml \
+    qml/SendMessagePage.qml \
     qml/ImageViewer.qml \
     qml/AltMarker.qml \
     qml/WebViewer.qml \

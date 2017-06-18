@@ -241,7 +241,7 @@ ApplicationWindow {
                     params["message"] = redditLink.queryMap["message"]
                 if (redditLink.queryMap["subject"] !== null)
                     params["subject"] = redditLink.queryMap["subject"]
-                pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"), params);
+                pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"), params);
             } else if (/^\/search/.test(redditLink.path)) {
                 var params = {}
                 if (redditLink.queryMap["q"] !== undefined)
