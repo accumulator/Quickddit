@@ -31,7 +31,7 @@ AbstractPage {
 
     function send(msgRecipient) {
         console.log("sending message to " + msgRecipient + "...");
-        messageManager.send(msgRecipient, subjectField.text, messageField.text, captcha.userInput, captchaManager.iden);
+        messageManager.send(msgRecipient, subjectField.text, messageField.text, "", "");
     }
 
     Flickable {
@@ -81,18 +81,11 @@ AbstractPage {
                 height: Math.max(implicitHeight, Theme.itemSizeLarge * 3)
             }
 
-            Captcha {
-                id: captcha
-                visible: captchaManager.captchaNeeded
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-
             Button {
                 text: qsTr("Send")
                 anchors.horizontalCenter: parent.horizontalCenter
                 enabled: messageField.text.length > 0 && subjectField.text.length > 0
                          && (recipient !== "" || recipientField.text.length > 0)
-                         && (!captchaManager.captchaNeeded || captcha.userInput.length > 0)
                 onClicked: send(recipient === "" ? recipientField.text : recipient)
             }
         }

@@ -86,17 +86,10 @@ AbstractPage {
                 height: Math.max(implicitHeight, Theme.itemSizeLarge * 3)
             }
 
-//            Captcha {
-//                id: captcha
-//                visible: captchaManager.captchaNeeded
-//                anchors.horizontalCenter: parent.horizontalCenter
-//            }
-
             Button {
                 text: qsTr("Submit")
                 anchors.horizontalCenter: parent.horizontalCenter
                 enabled: linkTitle.text.length > 0 /* official limits? */
-                         /*&& (!captchaManager.captchaNeeded || captcha.userInput.length > 0) */
                          && ((selfLinkSwitch.checked && linkDescription.text.length > 0) || linkUrl.acceptableInput)
                 onClicked: submit()
             }
