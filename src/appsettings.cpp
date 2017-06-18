@@ -32,6 +32,7 @@ AppSettings::AppSettings(QObject *parent) :
     m_lastSeenMessage = m_settings->value("lastSeenMessage").toString();
     m_pollUnread = m_settings->value("pollUnread", true).toBool();
     m_thumbnailScale = static_cast<ThumbnailScale>(m_settings->value("thumbnailScale", AppSettings::ScaleAuto).toInt());
+    m_loopVideos = m_settings->value("loopVideos", false).toBool();
     m_filteredSubreddits = m_settings->value("filteredSubreddits").toStringList();
 }
 
@@ -150,6 +151,20 @@ void AppSettings::setThumbnailScale(const AppSettings::ThumbnailScale scale)
         m_thumbnailScale = scale;
         m_settings->setValue("thumbnailScale", m_thumbnailScale);
         emit thumbnailScaleChanged();
+    }
+}
+
+bool AppSettings::loopVideos() const
+{
+    return m_loopVideos;
+}
+
+void AppSettings::setLoopVideos(const bool loopVideos)
+{
+    if (m_loopVideos != loopVideos) {
+        m_loopVideos = loopVideos;
+        m_settings->setValue("loopVideos", m_loopVideos);
+        emit loopVideosChanged();
     }
 }
 
