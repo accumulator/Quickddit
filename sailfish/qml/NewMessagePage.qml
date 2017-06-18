@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2016  Sander van Grieken
+    Copyright (C) 2016-2017  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,16 +22,21 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: newMessagePage
-    title: qsTr("New Message")
+    title: replyTo === "" ? qsTr("New Message") : qsTr("Reply Message")
 
     property string recipient: ""
     property alias subject: subjectField.text
     property alias message: messageField.text
+    property string replyTo: ""
     property QtObject messageManager
 
     function send(msgRecipient) {
         console.log("sending message to " + msgRecipient + "...");
-        messageManager.send(msgRecipient, subjectField.text, messageField.text, "", "");
+        if (replyTo === "") {
+            messageManager.send(msgRecipient, subjectField.text, messageField.text, "", "");
+        } else {
+            messageManager.reply(replyTo, messageField.text);
+        }
     }
 
     Flickable {
@@ -58,7 +63,7 @@ AbstractPage {
 
             Label {
                 anchors {right: parent.right; rightMargin: Theme.paddingLarge }
-                text: "to " + (recipient.indexOf("/r") == 0 ? "moderators of " : "") + recipient
+                text: (recipient.indexOf("/r") == 0 ? qsTr("to moderators of") : qsTr("to")) + " " + recipient
                 font.pixelSize: constant.fontSizeXSmall
                 color: Theme.highlightColor
                 visible : recipient !== ""
@@ -71,6 +76,7 @@ AbstractPage {
                 maximumLength: 100 // reddit constraint
                 labelVisible: false
                 focus: !recipientField.visible
+                enabled: replyTo === ""
             }
 
             TextArea {
@@ -84,7 +90,7 @@ AbstractPage {
             Button {
                 text: qsTr("Send")
                 anchors.horizontalCenter: parent.horizontalCenter
-                enabled: messageField.text.length > 0 && subjectField.text.length > 0
+                enabled: messageField.text.length > 0 && (subjectField.text.length > 0 || replyTo != "")
                          && (recipient !== "" || recipientField.text.length > 0)
                 onClicked: send(recipient === "" ? recipientField.text : recipient)
             }

@@ -24,7 +24,7 @@ import harbour.quickddit.Core 1.0
 AbstractPage {
     id: messagePage
     objectName: "messagePage"
-    title: "Messages - " + sectionModel[messageModel.section]
+    title: qsTr("Messages") + " - " + sectionModel[messageModel.section]
     busy: messageManager.busy
 
     function refresh() {
@@ -77,10 +77,8 @@ AbstractPage {
                 if (model.isComment) {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
                 } else if (!isSentMessage) {
-                    var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {title: qsTr("Reply Message")});
-                    dialog.accepted.connect(function() {
-                        messageManager.reply(model.fullname, dialog.text);
-                    });
+                    pageStack.push(Qt.resolvedUrl("NewMessagePage.qml"),
+                                   {messageManager: messageManager, replyTo: model.fullname, recipient: model.author, subject: "re: " + model.subject});
                 }
             }
 
@@ -112,7 +110,14 @@ AbstractPage {
     MessageManager {
         id: messageManager
         manager: quickdditManager
-        onReplySuccess: infoBanner.alert(qsTr("Message sent"));
+        onReplySuccess: {
+            infoBanner.alert(qsTr("Message sent"));
+            pageStack.pop();
+        }
+        onSendSuccess: {
+            infoBanner.alert(qsTr("Message sent"));
+            pageStack.pop();
+        }
         onMarkReadStatusSuccess: messageModel.changeIsUnread(fullname, isUnread);
         onError: infoBanner.warning(errorString);
     }
