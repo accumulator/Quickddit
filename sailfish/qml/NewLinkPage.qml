@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2015-2017  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,14 +22,22 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: newLinkPage
-    title: qsTr("New Post")
+    title: editPost === "" ? qsTr("New Post") : qsTr("Edit Post")
 
     property string subreddit
+    property string editPost: ""
+    property alias text: linkDescription.text
+    property alias postTitle: linkTitle.text
     property QtObject linkManager
 
     function submit() {
-        console.log("submitting link...");
-        linkManager.submit(subreddit, "", "", linkTitle.text, selfLinkSwitch.checked ? "" : linkUrl.text, linkDescription.text);
+        if (editPost === "") {
+            console.log("submitting post...");
+            linkManager.submit(subreddit, "", "", linkTitle.text, selfLinkSwitch.checked ? "" : linkUrl.text, linkDescription.text);
+        } else {
+            console.log("saving post...");
+            linkManager.editLinkText(editPost, text);
+        }
     }
 
     Flickable {
@@ -56,11 +64,12 @@ AbstractPage {
                 anchors { left: parent.left; right: parent.right }
                 placeholderText: qsTr("Post Title")
                 labelVisible: false
+                enabled: editPost === ""
             }
 
             TextSwitch {
                 id: selfLinkSwitch
-                visible: aboutSubredditManager.submissionType === AboutSubredditManager.Any
+                visible: aboutSubredditManager.submissionType === AboutSubredditManager.Any && editPost === ""
                 text: qsTr("Self Post")
                 checked: true
             }
@@ -87,9 +96,9 @@ AbstractPage {
             }
 
             Button {
-                text: qsTr("Submit")
+                text: editPost === "" ? qsTr("Submit") : qsTr("Save")
                 anchors.horizontalCenter: parent.horizontalCenter
-                enabled: linkTitle.text.length > 0 /* official limits? */
+                enabled: (editPost != "" || linkTitle.text.length > 0) /* official limits? */
                          && ((selfLinkSwitch.checked && linkDescription.text.length > 0) || linkUrl.acceptableInput)
                 onClicked: submit()
             }

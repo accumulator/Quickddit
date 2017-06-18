@@ -40,13 +40,6 @@ AbstractPage {
 
     readonly property variant commentSortModel: [qsTr("Best"), qsTr("Top"), qsTr("New"), qsTr("Hot"), qsTr("Controversial"), qsTr("Old")]
 
-    function __createLinkTextDialog(title, fullname, originalText) {
-        var dialog = pageStack.push(Qt.resolvedUrl("TextAreaDialog.qml"), {linkManager: linkManager, title: title, text: originalText || ""});
-        dialog.accepted.connect(function() {
-            linkManager.editLinkText(fullname, dialog.text);
-        })
-    }
-
     function loadMoreChildren(index, children) {
         morechildren_animation = true
         commentModel.moreComments(index, children);
@@ -63,7 +56,8 @@ AbstractPage {
                 enabled: !link.isArchived
                 text: qsTr("Edit Post")
                 onClicked: {
-                    __createLinkTextDialog(qsTr("Edit Post"), link.fullname, link.rawText);
+                    pageStack.push(Qt.resolvedUrl("NewLinkPage.qml"),
+                                   { linkManager: linkManager, text: link.rawText || "", editPost: link.fullname, subreddit: commentModel.link.subreddit, postTitle: commentModel.link.title});
                 }
             }
 
@@ -326,7 +320,10 @@ AbstractPage {
         id: linkManager
         manager: quickdditManager
         commentModel: commentModel
-        onSuccess: infoBanner.alert(message);
+        onSuccess: {
+            infoBanner.alert(message);
+            pageStack.pop();
+        }
         onError: infoBanner.warning(errorString);
     }
 
