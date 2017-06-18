@@ -5,6 +5,14 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Jun 18 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.3-1
+- fix: workaround apostrophe not shown in titles (closes #29)
+- fix: fix remaining captcha issues
+- fix: avoid losing submissions when errors occur (closes #24)
+- new: add filteredSubreddits config file property to filter out subreddits from /r/all (closes #31)
+- new: add loop videos option (closes #14)
+- new: show video duration
+
 * Fri Jun 16 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.2-1
 - fix: match all subdomains of twitch.tv
 - fix: show URL page for reddit wiki and rss links instead of opening the subreddit
