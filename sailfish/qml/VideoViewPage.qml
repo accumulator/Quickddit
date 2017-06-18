@@ -60,6 +60,8 @@ AbstractPage {
                     // clamp number of loops so we loop for 1 minute max (holy holy battery)
                     if (duration < 0)
                         return
+                    if (!appSettings.loopVideos)
+                        return
                     if (duration == 0)
                         loops = 1
                     else

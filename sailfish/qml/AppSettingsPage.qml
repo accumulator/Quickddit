@@ -150,6 +150,16 @@ AbstractPage {
                 }
             }
 
+            SectionHeader { text: qsTr("Videos") }
+
+            TextSwitch {
+                text: qsTr("Loop Videos")
+                checked: appSettings.loopVideos;
+                onCheckedChanged: {
+                    appSettings.loopVideos = checked;
+                }
+            }
+
             SectionHeader { text: qsTr("Account") }
 
             Text {
