@@ -155,7 +155,7 @@ OTHER_FILES += \
     qml/VideoViewPage.qml \
     qml/AbstractDialog.qml \
     qml/Captcha.qml \
-    qml/NewLinkPage.qml \
+    qml/SendLinkPage.qml \
     qml/PostThumbnail.qml \
     qml/PostInfoText.qml \
     qml/PostButtonRow.qml \

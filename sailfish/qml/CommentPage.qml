@@ -56,7 +56,7 @@ AbstractPage {
                 enabled: !link.isArchived
                 text: qsTr("Edit Post")
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("NewLinkPage.qml"),
+                    pageStack.push(Qt.resolvedUrl("SendLinkPage.qml"),
                                    { linkManager: linkManager, text: link.rawText || "", editPost: link.fullname, subreddit: commentModel.link.subreddit, postTitle: commentModel.link.title});
                 }
             }

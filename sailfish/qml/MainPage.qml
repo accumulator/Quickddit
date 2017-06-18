@@ -53,7 +53,7 @@ AbstractPage {
 
     function newLink() {
         var p = {linkManager: linkManager, subreddit: linkModel.subreddit};
-        pageStack.push(Qt.resolvedUrl("NewLinkPage.qml"), p);
+        pageStack.push(Qt.resolvedUrl("SendLinkPage.qml"), p);
     }
 
     function pushSectionDialog(title, selectedIndex, onAccepted) {
