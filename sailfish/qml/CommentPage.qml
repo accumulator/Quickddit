@@ -330,7 +330,12 @@ AbstractPage {
     SaveManager {
         id: commentSaveManager
         manager: quickdditManager
-        onSuccess: commentModel.changeSaved(fullname, saved);
+        onSuccess: {
+            if (fullname.indexOf("t1") === 0) // comment
+                commentModel.changeSaved(fullname, saved);
+            else if (fullname.indexOf("t3") === 0) // link
+                commentModel.changeLinkSaved(fullname, saved);
+        }
         onError: infoBanner.warning(errorString);
     }
 
@@ -345,7 +350,11 @@ AbstractPage {
     }
 
     Component.onCompleted: {
+        // if we didn't get vote and save managers passed (for updating models in the calling page),
+        // we use the local managers
         if (!linkVoteManager)
             linkVoteManager = commentVoteManager;
+        if (!linkSaveManager)
+            linkSaveManager = commentSaveManager;
     }
 }
