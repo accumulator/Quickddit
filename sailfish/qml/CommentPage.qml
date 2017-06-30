@@ -100,10 +100,9 @@ AbstractPage {
 
                 Item {
                     anchors { left: parent.left; right: parent.right }
-                    height: constant.paddingMedium +
-                            (buttonItem.buttonsFitLeftOfThumb || !buttonItem.thumbOverflows)
-                            ? Math.max(postInfoText.height + postButtonRow.height, thumbnail.height)
-                            : Math.max(postInfoText.height, thumbnail.height + postButtonRow.height)
+                    height: (buttonItem.buttonsFitLeftOfThumb || !buttonItem.thumbOverflows)
+                            ? Math.max(postInfoText.height + postButtonRow.height, constant.paddingMedium + thumbnail.height)
+                            : Math.max(postInfoText.height, constant.paddingMedium + thumbnail.height + postButtonRow.height)
 
                     PostInfoText {
                         id: postInfoText
