@@ -66,6 +66,7 @@ AbstractPage {
                 onClicked: globalUtils.createSelectionDialog(qsTr("Sort"), commentSortModel, commentModel.sort,
                 function (selectedIndex) {
                     commentModel.sort = selectedIndex;
+                    appSettings.commentSort = selectedIndex;
                     refresh(false);
                 });
             }
