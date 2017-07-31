@@ -34,6 +34,7 @@ AppSettings::AppSettings(QObject *parent) :
     m_thumbnailScale = static_cast<ThumbnailScale>(m_settings->value("thumbnailScale", AppSettings::ScaleAuto).toInt());
     m_loopVideos = m_settings->value("loopVideos", false).toBool();
     m_subredditSection = m_settings->value("subredditSection", 0).toInt();
+    m_commentSort = m_settings->value("commentSort", 0).toInt();
     m_filteredSubreddits = m_settings->value("filteredSubreddits").toStringList();
 }
 
@@ -180,6 +181,20 @@ void AppSettings::setSubredditSection(const int subredditSection)
         m_subredditSection = subredditSection;
         m_settings->setValue("subredditSection", m_subredditSection);
         emit subredditSectionChanged();
+    }
+}
+
+int AppSettings::commentSort() const
+{
+    return m_commentSort;
+}
+
+void AppSettings::setCommentSort(const int commentSort)
+{
+    if (m_commentSort != commentSort) {
+        m_commentSort = commentSort;
+        m_settings->setValue("commentSort", m_commentSort);
+        emit commentSortChanged();
     }
 }
 

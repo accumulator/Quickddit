@@ -38,6 +38,8 @@ class AppSettings : public QObject
     Q_PROPERTY(ThumbnailScale thumbnailScale READ thumbnailScale WRITE setThumbnailScale NOTIFY thumbnailScaleChanged)
     Q_PROPERTY(bool loopVideos READ loopVideos WRITE setLoopVideos NOTIFY loopVideosChanged)
     Q_PROPERTY(int subredditSection READ subredditSection WRITE setSubredditSection NOTIFY subredditSectionChanged)
+    Q_PROPERTY(int commentSort READ commentSort WRITE setCommentSort NOTIFY commentSortChanged)
+
 public:
     enum FontSize {
         TinyFontSize = -1,
@@ -94,6 +96,9 @@ public:
     int subredditSection() const;
     void setSubredditSection(const int subredditSection);
 
+    int commentSort() const;
+    void setCommentSort(const int commentSort);
+
     QStringList filteredSubreddits() const;
 
 signals:
@@ -104,6 +109,7 @@ signals:
     void thumbnailScaleChanged();
     void loopVideosChanged();
     void subredditSectionChanged();
+    void commentSortChanged();
 
 private:
     QSettings *m_settings;
@@ -119,6 +125,7 @@ private:
     bool m_loopVideos;
     QStringList m_filteredSubreddits;
     int m_subredditSection;
+    int m_commentSort;
 };
 
 #endif // APPSETTINGS_H
