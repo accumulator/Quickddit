@@ -65,7 +65,8 @@ public:
         NewSort,
         HotSort,
         ControversialSort,
-        OldSort
+        OldSort,
+        UndefinedSort = 100 // internal only
     };
 
     enum DistinguishedType {

@@ -37,7 +37,7 @@
 static QRegExp commentPermalinkRegExp("(/r/\\w+)?/comments/\\w+/\\w*/(\\w+/?)");
 
 CommentModel::CommentModel(QObject *parent) :
-    AbstractListModelManager(parent), m_link(0), m_sort(ConfidenceSort), m_commentPermalink(false)
+    AbstractListModelManager(parent), m_link(0), m_sort(UndefinedSort), m_commentPermalink(false)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
@@ -150,6 +150,7 @@ QString CommentModel::getSortString(CommentModel::SortType sort)
     case HotSort: return "hot";
     case ControversialSort: return "controversial";
     case OldSort: return "old";
+    case UndefinedSort: return "";
     }
 }
 
@@ -493,6 +494,9 @@ void CommentModel::refresh(bool refreshOlder)
     }
 
     QHash<QString, QString> parameters;
+    if (m_sort == UndefinedSort) {
+        setSort((SortType)manager()->settings()->commentSort());
+    }
     parameters["sort"] = getSortString(m_sort);
 
     QUrl permalinkUrl(m_permalink);
