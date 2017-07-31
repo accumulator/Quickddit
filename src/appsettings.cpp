@@ -33,6 +33,7 @@ AppSettings::AppSettings(QObject *parent) :
     m_pollUnread = m_settings->value("pollUnread", true).toBool();
     m_thumbnailScale = static_cast<ThumbnailScale>(m_settings->value("thumbnailScale", AppSettings::ScaleAuto).toInt());
     m_loopVideos = m_settings->value("loopVideos", false).toBool();
+    m_subredditSection = m_settings->value("subredditSection", 0).toInt();
     m_filteredSubreddits = m_settings->value("filteredSubreddits").toStringList();
 }
 
@@ -168,8 +169,21 @@ void AppSettings::setLoopVideos(const bool loopVideos)
     }
 }
 
+int AppSettings::subredditSection() const
+{
+    return m_subredditSection;
+}
+
+void AppSettings::setSubredditSection(const int subredditSection)
+{
+    if (m_subredditSection != subredditSection) {
+        m_subredditSection = subredditSection;
+        m_settings->setValue("subredditSection", m_subredditSection);
+        emit subredditSectionChanged();
+    }
+}
+
 QStringList AppSettings::filteredSubreddits() const
 {
     return m_filteredSubreddits;
 }
-
