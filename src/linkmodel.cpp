@@ -60,7 +60,7 @@ QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
 }
 
 LinkModel::LinkModel(QObject *parent) :
-    AbstractListModelManager(parent), m_location(FrontPage), m_section(HotSection), m_searchSort(RelevanceSort),
+    AbstractListModelManager(parent), m_location(FrontPage), m_section(UndefinedSection), m_searchSort(RelevanceSort),
     m_searchTimeRange(AllTime)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
@@ -233,7 +233,7 @@ void LinkModel::setSearchTimeRange(LinkModel::SearchTimeRange timeRange)
 {
     if (m_searchTimeRange != timeRange) {
         m_searchTimeRange = timeRange;
-        emit  searchTimeRangeChanged();
+        emit searchTimeRangeChanged();
     }
 }
 
@@ -246,20 +246,25 @@ void LinkModel::refresh(bool refreshOlder)
         parameters["t"] = m_sectionPeriod;
     }
 
+    if (m_section == UndefinedSection) {
+        setSection((Section)manager()->settings()->subredditSection());
+    }
+    QString sectionString = getSectionString(m_section);
+
     switch (m_location) {
     case FrontPage:
-        relativeUrl += "/" + getSectionString(m_section);
+        relativeUrl += "/" + sectionString;
         break;
     case All:
-        relativeUrl += "/r/all/" + getSectionString(m_section);
+        relativeUrl += "/r/all/" + sectionString;
         break;
     case Subreddit:
         if (m_subreddit.isEmpty() || m_subreddit.compare("all", Qt::CaseInsensitive) == 0)
             qWarning("LinkModel::refresh(): Set location to FrontPage or All instead");
-        relativeUrl += "/r/" + m_subreddit + "/" + getSectionString(m_section);
+        relativeUrl += "/r/" + m_subreddit + "/" + sectionString;
         break;
     case Multireddit:
-        relativeUrl += "/me/m/" + m_multireddit + "/" + getSectionString(m_section);
+        relativeUrl += "/me/m/" + m_multireddit + "/" + sectionString;
         break;
     case Search:
         parameters["q"] = m_searchQuery;
@@ -416,6 +421,7 @@ QString LinkModel::getSectionString(Section section)
     case ControversialSection: return "controversial";
     case TopSection: return "top";
     case PromotedSection: return "ads";
+    case UndefinedSection: return "";
     default:
         qWarning("LinkModel::getSectionString(): Invalid section");
         return "";

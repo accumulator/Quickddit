@@ -84,7 +84,8 @@ public:
         RisingSection,
         ControversialSection,
         TopSection,
-        PromotedSection
+        PromotedSection,
+        UndefinedSection = 100 // internal only
     };
 
     enum SearchSortType {
