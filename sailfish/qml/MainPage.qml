@@ -110,6 +110,7 @@ AbstractPage {
                         function(selectedIndex, periodQuery) {
                             linkModel.section = selectedIndex;
                             linkModel.sectionPeriod = periodQuery;
+                            appSettings.subredditSection = selectedIndex;
                             linkModel.refresh(false);
                         });
                 }
