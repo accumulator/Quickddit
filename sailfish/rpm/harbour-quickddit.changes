@@ -5,6 +5,12 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Tue Aug 01 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.4-1
+- fix: not being able to save posts when commentpage is not reached from linkpage
+- fix: post header height calculation in commentpage
+- new: remember post section
+- new: remember comment sorting
+
 * Sun Jun 18 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.3-1
 - fix: workaround apostrophe not shown in titles (closes #29)
 - fix: fix remaining captcha issues
