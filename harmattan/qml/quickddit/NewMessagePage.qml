@@ -31,7 +31,7 @@ AbstractPage {
 
     function send() {
         console.log("sending message...");
-        messageManager.send(recipient, subjectField.text, messageField.text, captcha.userInput, captchaManager.iden);
+        messageManager.send(recipient, subjectField.text, messageField.text, "", "");
     }
 
     tools: ToolBarLayout {
@@ -74,17 +74,10 @@ AbstractPage {
                 height: Math.max(implicitHeight, 300)
             }
 
-            Captcha {
-                id: captcha
-                visible: captchaManager.captchaNeeded
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-
             Button {
                 text: "Send"
                 anchors.horizontalCenter: parent.horizontalCenter
                 enabled: messageField.text.length > 0 && subjectField.text.length > 0
-                         && (!captchaManager.captchaNeeded || captcha.userInput.length > 0)
                 onClicked: send()
             }
         }
