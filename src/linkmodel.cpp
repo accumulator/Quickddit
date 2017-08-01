@@ -22,6 +22,7 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QUrl>
 #include <QtNetwork/QNetworkReply>
+#include <QDebug>
 
 #include "appsettings.h"
 #include "utils.h"

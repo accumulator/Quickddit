@@ -21,6 +21,7 @@
 #define APPSETTINGS_H
 
 #include <QtCore/QObject>
+#include <QtCore/QStringList>
 
 class QSettings;
 

@@ -17,6 +17,7 @@
 */
 
 #include <QtNetwork/QNetworkReply>
+#include <QDebug>
 
 #include "abstractmanager.h"
 
