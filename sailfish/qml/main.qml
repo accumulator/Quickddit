@@ -83,6 +83,8 @@ ApplicationWindow {
                 return true;
             } else if (/^https?\:\/\/((i|m)\.)?imgur\.com\/.+\.gifv$/.test(url)) {
                 return true;
+            } else if (/^https?\:\/\/v\.redd\.it\/.+/.test(url)) {
+                return true;
             } else {
                 return false;
             }
