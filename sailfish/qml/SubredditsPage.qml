@@ -25,8 +25,6 @@ AbstractPage {
     id: subredditsPage
 
     readonly property string title: qsTr("Subreddits")
-    property SubredditModel subredditModel
-    property MultiredditModel multiredditModel
 
     property string _unsubsub
 
@@ -44,10 +42,8 @@ AbstractPage {
 
     onStatusChanged: {
         if (status === PageStatus.Activating) {
-            if (quickdditManager.isSignedIn) {
-                if (!subredditModel) subredditModel = subredditModelComponent.createObject(subredditsPage);
-                if (!multiredditModel) multiredditModel = multiredditModelComponent.createObject(subredditsPage);
-            }
+            if (subredditModel.rowCount() === 0)
+                subredditModel.refresh(false)
         } else if (status === PageStatus.Inactive) {
             subredditListView.headerItem.resetTextField();
             subredditListView.positionViewAtBeginning();
@@ -121,7 +117,7 @@ AbstractPage {
                         case 0: subredditsPage.showSubreddit(""); break;
                         case 1: subredditsPage.showSubreddit("all"); break;
                         case 2: pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml")); break;
-                        case 3: pageStack.push(Qt.resolvedUrl("MultiredditsPage.qml")); break;
+                        case 3: pageStack.push(Qt.resolvedUrl("MultiredditsPage.qml"), { _model: multiredditModel }); break;
                         }
                     }
                 }
@@ -187,34 +183,25 @@ AbstractPage {
         VerticalScrollDecorator {}
     }
 
-    Component {
-        id: subredditModelComponent
-
-        SubredditModel {
-            manager: quickdditManager
-            section: SubredditModel.UserAsSubscriberSection
-            onError: infoBanner.warning(errorString);
-        }
+    SubredditModel {
+        id: subredditModel
+        manager: quickdditManager
+        section: SubredditModel.UserAsSubscriberSection
+        onError: infoBanner.warning(errorString);
     }
 
-    Component {
-        id: multiredditModelComponent
-
-        MultiredditModel {
-            manager: quickdditManager
-            onError: infoBanner.warning(errorString);
-        }
+    MultiredditModel {
+        id: multiredditModel
+        manager: quickdditManager
+        onError: infoBanner.warning(errorString);
     }
 
     Connections {
         target: quickdditManager
         onSignedInChanged: {
             if (quickdditManager.signedIn) {
-                subredditModel = subredditModelComponent.createObject(subredditsPage);
-                multiredditModel = multiredditModelComponent.createObject(subredditsPage);
-            } else {
-                subredditModel = null
-                multiredditModel = null
+                subredditModel.refresh(false)
+                multiredditModel.refresh(false)
             }
         }
     }

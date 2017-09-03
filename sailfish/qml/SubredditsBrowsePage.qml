@@ -36,6 +36,13 @@ AbstractPage {
     readonly property variant subredditsSectionModel: [qsTr("Popular Subreddits"), qsTr("New Subreddits"),
         qsTr("My Subreddits - Subscriber"), qsTr("My Subreddits - Approved Submitter"), qsTr("My Subreddits - Moderator")]
 
+    onStatusChanged: {
+        if (status === PageStatus.Activating) {
+            if (subredditModel.rowCount() === 0)
+                subredditModel.refresh(false)
+        }
+    }
+
     function refresh() {
         subredditModel.refresh(false);
     }
@@ -133,5 +140,4 @@ AbstractPage {
         }
         onError: infoBanner.warning(errorString)
     }
-
 }

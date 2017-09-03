@@ -27,7 +27,14 @@ AbstractPage {
     readonly property string title: qsTr("Multireddits")
     property string multiredditName
 
-    property MultiredditModel _model: globalUtils.getMultiredditModel()
+    property MultiredditModel _model
+
+    onStatusChanged: {
+        if (status === PageStatus.Activating) {
+            if (_model.rowCount() === 0)
+                _model.refresh(false)
+        }
+    }
 
     signal accepted
 
