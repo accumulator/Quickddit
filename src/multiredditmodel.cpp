@@ -38,7 +38,7 @@ void MultiredditModel::classBegin()
 
 void MultiredditModel::componentComplete()
 {
-    refresh(false);
+//    refresh(false);
 }
 
 int MultiredditModel::rowCount(const QModelIndex &parent) const

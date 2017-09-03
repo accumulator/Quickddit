@@ -40,7 +40,7 @@ void SubredditModel::componentComplete()
     if (m_section == SearchSection && m_query.isEmpty())
         return;
 
-    refresh(false);
+//    refresh(false);
 }
 
 int SubredditModel::rowCount(const QModelIndex &parent) const
