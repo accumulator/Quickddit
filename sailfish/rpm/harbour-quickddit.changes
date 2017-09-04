@@ -5,6 +5,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Mon Sep 04 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.5-1
+- fix: subreddit picker page glitch, sometimes empty and not reloadable
+- chg: upgrade youtube-dl to 2017.08.27.1
+- new: add v.redd.it domain for videos
+
 * Tue Aug 01 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.4-1
 - fix: not being able to save posts when commentpage is not reached from linkpage
 - fix: post header height calculation in commentpage
