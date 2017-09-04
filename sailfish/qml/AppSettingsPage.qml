@@ -160,6 +160,16 @@ AbstractPage {
                 }
             }
 
+            SectionHeader { text: qsTr("Connection") }
+
+            TextSwitch {
+                text: qsTr("Use Tor")
+                checked: appSettings.useTor;
+                onCheckedChanged: {
+                    appSettings.useTor = checked;
+                }
+            }
+
             SectionHeader { text: qsTr("Account") }
 
             Text {
