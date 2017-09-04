@@ -40,6 +40,7 @@ class AppSettings : public QObject
     Q_PROPERTY(bool loopVideos READ loopVideos WRITE setLoopVideos NOTIFY loopVideosChanged)
     Q_PROPERTY(int subredditSection READ subredditSection WRITE setSubredditSection NOTIFY subredditSectionChanged)
     Q_PROPERTY(int commentSort READ commentSort WRITE setCommentSort NOTIFY commentSortChanged)
+    Q_PROPERTY(bool useTor READ useTor WRITE setUseTor NOTIFY useTorChanged)
 
 public:
     enum FontSize {
@@ -100,6 +101,9 @@ public:
     int commentSort() const;
     void setCommentSort(const int commentSort);
 
+    bool useTor() const;
+    void setUseTor(const bool useTor);
+
     QStringList filteredSubreddits() const;
 
 signals:
@@ -111,6 +115,7 @@ signals:
     void loopVideosChanged();
     void subredditSectionChanged();
     void commentSortChanged();
+    void useTorChanged();
 
 private:
     QSettings *m_settings;
@@ -127,6 +132,7 @@ private:
     QStringList m_filteredSubreddits;
     int m_subredditSection;
     int m_commentSort;
+    bool m_useTor;
 };
 
 #endif // APPSETTINGS_H

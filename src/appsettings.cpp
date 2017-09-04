@@ -35,6 +35,7 @@ AppSettings::AppSettings(QObject *parent) :
     m_loopVideos = m_settings->value("loopVideos", false).toBool();
     m_subredditSection = m_settings->value("subredditSection", 0).toInt();
     m_commentSort = m_settings->value("commentSort", 0).toInt();
+    m_useTor = m_settings->value("useTor", false).toBool();
     m_filteredSubreddits = m_settings->value("filteredSubreddits").toStringList();
 }
 
@@ -195,6 +196,20 @@ void AppSettings::setCommentSort(const int commentSort)
         m_commentSort = commentSort;
         m_settings->setValue("commentSort", m_commentSort);
         emit commentSortChanged();
+    }
+}
+
+bool AppSettings::useTor() const
+{
+    return m_useTor;
+}
+
+void AppSettings::setUseTor(const bool useTor)
+{
+    if (m_useTor != useTor) {
+        m_useTor = useTor;
+        m_settings->setValue("useTor", m_useTor);
+        emit useTorChanged();
     }
 }
 
