@@ -20,6 +20,7 @@
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkProxy>
 #include <QDebug>
 
 #include <qt-json/json.h>
@@ -73,6 +74,7 @@ AppSettings *QuickdditManager::settings() const
 void QuickdditManager::setSettings(AppSettings *settings)
 {
     m_settings = settings;
+    connect(m_settings, SIGNAL(useTorChanged()), SLOT(onUseTorChanged()));
 }
 
 APIRequest *QuickdditManager::createGetRequest(QObject *parent, const QUrl &url, const QByteArray &authHeader)
@@ -316,4 +318,17 @@ void QuickdditManager::onUserInfoFinished(QNetworkReply *reply)
 
     m_userInfoReply->deleteLater();
     m_userInfoReply = 0;
+}
+
+void QuickdditManager::onUseTorChanged()
+{
+    QNetworkProxy proxy;
+    if (m_settings->useTor()) {
+        proxy.setType(QNetworkProxy::Socks5Proxy);
+        proxy.setHostName("localhost");
+        proxy.setPort(9050);
+    } else {
+        proxy.setType(QNetworkProxy::NoProxy);
+    }
+    QNetworkProxy::setApplicationProxy(proxy);
 }

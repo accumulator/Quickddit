@@ -88,6 +88,7 @@ private slots:
     void onAccessTokenRequestFinished(QNetworkReply *reply);
     void onRefreshTokenFinished();
     void onUserInfoFinished(QNetworkReply *reply);
+    void onUseTorChanged();
 
 private:
     QNetworkAccessManager *m_netManager;
