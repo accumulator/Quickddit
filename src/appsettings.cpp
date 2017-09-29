@@ -35,6 +35,7 @@ AppSettings::AppSettings(QObject *parent) :
     m_loopVideos = m_settings->value("loopVideos", false).toBool();
     m_subredditSection = m_settings->value("subredditSection", 0).toInt();
     m_commentSort = m_settings->value("commentSort", 0).toInt();
+    m_preferredVideoSize = static_cast<VideoSize>(m_settings->value("preferredVideoSize", AppSettings::VS360).toInt());
     m_filteredSubreddits = m_settings->value("filteredSubreddits").toStringList();
 }
 
@@ -195,6 +196,20 @@ void AppSettings::setCommentSort(const int commentSort)
         m_commentSort = commentSort;
         m_settings->setValue("commentSort", m_commentSort);
         emit commentSortChanged();
+    }
+}
+
+AppSettings::VideoSize AppSettings::preferredVideoSize() const
+{
+    return m_preferredVideoSize;
+}
+
+void AppSettings::setPreferredVideoSize(const AppSettings::VideoSize preferredVideoSize)
+{
+    if (m_preferredVideoSize != preferredVideoSize) {
+        m_preferredVideoSize = preferredVideoSize;
+        m_settings->setValue("preferredVideoSize", m_preferredVideoSize);
+        emit preferredVideoSizeChanged();
     }
 }
 
