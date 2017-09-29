@@ -193,6 +193,7 @@ AbstractPage {
     Connections {
         target: python
         onVideoInfo: {
+            var urls = {}
             var format
             var i
             var formats = python.info["_type"] === "playlist" ? python.info["entries"][0]["formats"] : python.info["formats"]
@@ -204,40 +205,45 @@ AbstractPage {
                 // 22: 720p,mp4,acodec mp4a.40.2,vcodec avc1.64001F
                 if (~["mp4-mobile","18"].indexOf(format["format_id"])) {
                     console.log("format selected: " + format["format_id"])
-                    mediaPlayer.source = format["url"]
-                    return;
+                    urls["360"] = format["url"]
+                }
+                if (~["22"].indexOf(format["format_id"])) {
+                    console.log("format selected: " + format["format_id"])
+                    urls["720"] = format["url"]
                 }
             }
-            console.log("not found. checking on ext=mp4 & height=360|480")
+            console.log("checking on ext=mp4 & height=360|480")
             for (i = 0; i < formats.length; i++) {
                 format = formats[i]
                 if (~["mp4"].indexOf(format["ext"]) && ~[360,480].indexOf(format["height"])) {
                     console.log("format selected: " + format["format_id"])
-                    mediaPlayer.source = format["url"]
-                    return;
+                    urls["360"] = format["url"]
                 }
             }
-            console.log("not found. checking on ext=mp4 & height=720")
+            console.log("checking on ext=mp4 & height=720")
             for (i = 0; i < formats.length; i++) {
                 format = formats[i]
                 if (~["mp4"].indexOf(format["ext"]) && ~[720].indexOf(format["height"])) {
                     console.log("format selected: " + format["format_id"])
-                    mediaPlayer.source = format["url"]
-                    return;
+                    urls["720"] = format["url"]
                 }
             }
-            console.log("not found. checking on ext=mp4")
+            console.log("checking on ext=mp4")
             for (i = 0; i < formats.length; i++) {
                 format = formats[i]
                 if (~["mp4"].indexOf(format["ext"])) {
                     console.log("format selected: " + format["format_id"])
-                    mediaPlayer.source = format["url"]
-                    return;
+                    urls["other"] = format["url"]
                 }
             }
-            console.log("not found. fallback: selecting first format")
-            var url = formats[0]["url"]
-            mediaPlayer.source = url
+            if (urls["other"] === undefined)
+                urls["other"] = formats[0]["url"]
+
+            if (appSettings.preferredVideoSize === AppSettings.VS360) {
+                mediaPlayer.source = urls["360"] !== undefined ? urls["360"] : urls["720"] !== undefined ? urls["720"] : urls["other"]
+            } else {
+                mediaPlayer.source = urls["720"] !== undefined ? urls["720"] : urls["360"] !== undefined ? urls["360"] : urls["other"]
+            }
         }
 
         onError: {
