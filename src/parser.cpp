@@ -527,6 +527,22 @@ UserObject Parser::parseUserAbout(const QByteArray &json)
     return userObject;
 }
 
+QStringList Parser::parseListOfNames(const QByteArray &json)
+{
+    bool ok;
+    const QVariantList list = QtJson::parse(json, ok).toMap().value("data").toMap().value("children").toList();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    QStringList userList;
+    foreach (const QVariant userJson, list) {
+        const QVariantMap data = userJson.toMap();
+        userList.append(data.value("name").toString());
+    }
+
+    return userList;
+}
+
 Listing<Thing*> Parser::parseUserThingList(const QByteArray &json)
 {
     bool ok;

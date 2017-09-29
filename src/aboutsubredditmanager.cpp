@@ -136,21 +136,16 @@ void AboutSubredditManager::setSubreddit(const QString &subreddit)
     }
 }
 
+QStringListModel* AboutSubredditManager::moderators()
+{
+    QStringListModel *moderatorsModel = new QStringListModel();
+    moderatorsModel->setStringList(m_moderatorList);
+    return moderatorsModel;
+}
+
 void AboutSubredditManager::refresh()
 {
     doRequest(APIRequest::GET, "/r/" + m_subreddit + "/about", SLOT(onFinished(QNetworkReply*)));
-}
-
-void AboutSubredditManager::subscribeOrUnsubscribe()
-{
-    QHash<QString, QString> parameters;
-    parameters["sr"] = m_subredditObject.fullname();
-    if (m_subredditObject.isSubscribed())
-        parameters["action"] = "unsub";
-    else
-        parameters["action"] = "sub";
-
-    doRequest(APIRequest::POST, "/api/subscribe", SLOT(onSubscribeFinished(QNetworkReply*)), parameters);
 }
 
 void AboutSubredditManager::onFinished(QNetworkReply *reply)
@@ -166,6 +161,18 @@ void AboutSubredditManager::onFinished(QNetworkReply *reply)
     }
 }
 
+void AboutSubredditManager::subscribeOrUnsubscribe()
+{
+    QHash<QString, QString> parameters;
+    parameters["sr"] = m_subredditObject.fullname();
+    if (m_subredditObject.isSubscribed())
+        parameters["action"] = "unsub";
+    else
+        parameters["action"] = "sub";
+
+    doRequest(APIRequest::POST, "/api/subscribe", SLOT(onSubscribeFinished(QNetworkReply*)), parameters);
+}
+
 void AboutSubredditManager::onSubscribeFinished(QNetworkReply *reply)
 {
     if (reply != 0) {
@@ -173,6 +180,24 @@ void AboutSubredditManager::onSubscribeFinished(QNetworkReply *reply)
             m_subredditObject.setSubscribed(!m_subredditObject.isSubscribed());
             emit dataChanged();
             emit subscribeSuccess();
+        } else {
+            emit error(reply->errorString());
+        }
+    }
+}
+
+void AboutSubredditManager::getModerators()
+{
+    doRequest(APIRequest::GET, "/r/" + m_subreddit + "/about/moderators", SLOT(onGetModeratorsFinished(QNetworkReply*)));
+}
+
+void AboutSubredditManager::onGetModeratorsFinished(QNetworkReply *reply)
+{
+    if (reply != 0) {
+        if (reply->error() == QNetworkReply::NoError) {
+            m_moderatorList = Parser::parseListOfNames(reply->readAll());
+            qDebug() << "got" << m_moderatorList.length() << "moderators in list";
+            emit moderatorsChanged();
         } else {
             emit error(reply->errorString());
         }

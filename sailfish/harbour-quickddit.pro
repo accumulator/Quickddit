@@ -172,7 +172,8 @@ OTHER_FILES += \
     qml/ImageViewer.qml \
     qml/AltMarker.qml \
     qml/WebViewer.qml \
-    qml/SectionSelectionDialog.qml
+    qml/SectionSelectionDialog.qml \
+    qml/ModeratorListPage.qml
 
 # Translations
 CONFIG += sailfishapp_i18n

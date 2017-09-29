@@ -35,6 +35,13 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
+                text: qsTr("Moderators")
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("ModeratorListPage.qml"), {manager: aboutSubredditManager});
+                }
+            }
+
+            MenuItem {
                 text: qsTr("Message Moderators")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"), {recipient: aboutSubredditManager.url});
