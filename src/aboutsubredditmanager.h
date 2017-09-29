@@ -29,8 +29,11 @@
   #define DECL_QMLPARSERSTATUS_INTERFACE Q_INTERFACES(QDeclarativeParserStatus)
 #endif
 
+#include <QStringListModel>
+
 #include "abstractmanager.h"
 #include "subredditobject.h"
+#include "userobject.h"
 
 class AboutSubredditManager : public AbstractManager, public QQmlParserStatus
 {
@@ -53,8 +56,9 @@ class AboutSubredditManager : public AbstractManager, public QQmlParserStatus
     Q_PROPERTY(bool isModerator READ isModerator NOTIFY dataChanged)
     Q_PROPERTY(bool isMuted READ isMuted NOTIFY dataChanged)
     Q_PROPERTY(SubredditType subredditType READ subredditType NOTIFY dataChanged)
-
     Q_PROPERTY(QString subreddit READ subreddit WRITE setSubreddit NOTIFY subredditChanged)
+    Q_PROPERTY(QStringListModel* moderators READ moderators NOTIFY moderatorsChanged)
+
 public:
     // TODO: factor out duplicated enums from SubredditObject
     enum SubmissionType {
@@ -91,27 +95,31 @@ public:
     bool isModerator() const;
     bool isMuted() const;
     SubredditType subredditType() const;
+    QStringListModel* moderators() ;
 
     QString subreddit() const;
     void setSubreddit(const QString &subreddit);
 
     Q_INVOKABLE void refresh();
-
     Q_INVOKABLE void subscribeOrUnsubscribe();
+    Q_INVOKABLE void getModerators();
 
 signals:
     void dataChanged();
     void subredditChanged();
     void subscribeSuccess();
+    void moderatorsChanged();
     void error(const QString &errorString);
 
 private slots:
     void onFinished(QNetworkReply *reply);
     void onSubscribeFinished(QNetworkReply *reply);
+    void onGetModeratorsFinished(QNetworkReply * reply);
 
 private:
     QString m_subreddit;
     SubredditObject m_subredditObject;
+    QStringList m_moderatorList;
 };
 
 #endif // ABOUTSUBREDDITMANAGER_H
