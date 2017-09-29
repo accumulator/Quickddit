@@ -40,6 +40,8 @@ AbstractPage {
             id: item
             width: ListView.view.width
 
+            onClicked: pageStack.push(Qt.resolvedUrl("UserPage.qml"), { username: display });
+
             Column {
                 id: mainColumn
                 anchors {
