@@ -164,6 +164,7 @@ AbstractPage {
 
             TextSwitch {
                 text: qsTr("Use Tor")
+                description: qsTr("When enabled, please make sure Tor is installed and active.")
                 checked: appSettings.useTor;
                 onCheckedChanged: {
                     appSettings.useTor = checked;
