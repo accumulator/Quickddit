@@ -150,7 +150,27 @@ AbstractPage {
                 }
             }
 
-            SectionHeader { text: qsTr("Videos") }
+            SectionHeader { text: qsTr("Media") }
+
+            ComboBox {
+                label: qsTr("Preferred Video Size")
+                currentIndex:  {
+                    switch (appSettings.preferredVideoSize) {
+                    case AppSettings.VS360: return 0;
+                    case AppSettings.VS720: return 1;
+                    }
+                }
+                menu: ContextMenu {
+                    MenuItem { text: "360p" }
+                    MenuItem { text: "720p" }
+                }
+                onCurrentIndexChanged: {
+                    switch (currentIndex) {
+                    case 0: appSettings.preferredVideoSize = AppSettings.VS360; break;
+                    case 1: appSettings.preferredVideoSize = AppSettings.VS720; break;
+                    }
+                }
+            }
 
             TextSwitch {
                 text: qsTr("Loop Videos")

@@ -31,6 +31,7 @@ class AppSettings : public QObject
     Q_ENUMS(FontSize)
     Q_ENUMS(OrientationProfile)
     Q_ENUMS(ThumbnailScale)
+    Q_ENUMS(VideoSize)
     Q_PROPERTY(bool whiteTheme READ whiteTheme WRITE setWhiteTheme NOTIFY whiteThemeChanged)
     Q_PROPERTY(FontSize fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
     Q_PROPERTY(QString redditUsername READ redditUsername CONSTANT)
@@ -41,6 +42,7 @@ class AppSettings : public QObject
     Q_PROPERTY(int subredditSection READ subredditSection WRITE setSubredditSection NOTIFY subredditSectionChanged)
     Q_PROPERTY(int commentSort READ commentSort WRITE setCommentSort NOTIFY commentSortChanged)
     Q_PROPERTY(bool useTor READ useTor WRITE setUseTor NOTIFY useTorChanged)
+    Q_PROPERTY(VideoSize preferredVideoSize READ preferredVideoSize WRITE setPreferredVideoSize NOTIFY preferredVideoSizeChanged)
 
 public:
     enum FontSize {
@@ -63,6 +65,11 @@ public:
         Scale150,
         Scale175,
         Scale200
+    };
+
+    enum VideoSize {
+        VS360,
+        VS720
     };
 
     explicit AppSettings(QObject *parent = 0);
@@ -104,6 +111,9 @@ public:
     bool useTor() const;
     void setUseTor(const bool useTor);
 
+    VideoSize preferredVideoSize() const;
+    void setPreferredVideoSize(const VideoSize preferredVideoSize);
+
     QStringList filteredSubreddits() const;
 
 signals:
@@ -116,6 +126,7 @@ signals:
     void subredditSectionChanged();
     void commentSortChanged();
     void useTorChanged();
+    void preferredVideoSizeChanged();
 
 private:
     QSettings *m_settings;
@@ -133,6 +144,7 @@ private:
     int m_subredditSection;
     int m_commentSort;
     bool m_useTor;
+    VideoSize m_preferredVideoSize;
 };
 
 #endif // APPSETTINGS_H

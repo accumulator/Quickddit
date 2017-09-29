@@ -36,6 +36,7 @@ AppSettings::AppSettings(QObject *parent) :
     m_subredditSection = m_settings->value("subredditSection", 0).toInt();
     m_commentSort = m_settings->value("commentSort", 0).toInt();
     m_useTor = m_settings->value("useTor", false).toBool();
+    m_preferredVideoSize = static_cast<VideoSize>(m_settings->value("preferredVideoSize", AppSettings::VS360).toInt());
     m_filteredSubreddits = m_settings->value("filteredSubreddits").toStringList();
 }
 
@@ -210,6 +211,20 @@ void AppSettings::setUseTor(const bool useTor)
         m_useTor = useTor;
         m_settings->setValue("useTor", m_useTor);
         emit useTorChanged();
+    }
+}
+
+AppSettings::VideoSize AppSettings::preferredVideoSize() const
+{
+    return m_preferredVideoSize;
+}
+
+void AppSettings::setPreferredVideoSize(const AppSettings::VideoSize preferredVideoSize)
+{
+    if (m_preferredVideoSize != preferredVideoSize) {
+        m_preferredVideoSize = preferredVideoSize;
+        m_settings->setValue("preferredVideoSize", m_preferredVideoSize);
+        emit preferredVideoSizeChanged();
     }
 }
 
