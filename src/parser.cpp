@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2015-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -146,7 +146,7 @@ Listing<LinkObject> Parser::parseLinkList(const QByteArray &json)
     foreach (const QVariant &linkObjectJson, linkListJson) {
         QVariantMap linkMap = linkObjectJson.toMap().value("data").toMap();
         if (!logged) {
-            qDebug() << "link item =" << linkMap;
+            //qDebug() << "link item =" << linkMap;
             logged = true;
         }
         LinkObject link;
@@ -583,3 +583,26 @@ Listing<Thing*> Parser::parseUserThingList(const QByteArray &json)
     return thingList;
 }
 
+QVariantList Parser::parseList(const QByteArray &json)
+{
+    qDebug() << "list:" << json;
+
+    bool ok;
+    const QVariantList variantList = QtJson::parse(json, ok).toList();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    return variantList;
+}
+
+QVariantMap Parser::parseMap(const QByteArray &json)
+{
+    qDebug() << "map:" << json;
+
+    bool ok;
+    const QVariantMap variantMap = QtJson::parse(json, ok).toMap();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    return variantMap;
+}
