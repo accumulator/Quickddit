@@ -69,6 +69,11 @@ Column {
             visible: !!link.isArchived
             text: qsTr("Archived")
         }
+
+        Bubble {
+            visible: !!link.isLocked
+            text: qsTr("Locked")
+        }
     }
 
     Text {

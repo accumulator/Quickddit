@@ -72,7 +72,7 @@ AbstractPage {
             }
 
             MenuItem {
-                enabled: quickdditManager.isSignedIn && !commentManager.busy && !link.isArchived
+                enabled: quickdditManager.isSignedIn && !commentManager.busy && !link.isArchived && !link.isLocked
                 text: qsTr("Add comment")
                 onClicked: {
                     commentModel.showNewComment();
@@ -237,7 +237,7 @@ AbstractPage {
             menu: Component { CommentMenu {} }
 
             onClicked: {
-                var p = {comment: model, linkPermalink: link.permalink, commentVoteManager: commentVoteManager, commentSaveManager: commentSaveManager};
+                var p = {comment: model, post: link, commentVoteManager: commentVoteManager, commentSaveManager: commentSaveManager};
                 var dialog = showMenu(p);
                 dialog.showParent.connect(function() {
                     var parentIndex = commentModel.getParentIndex(index);

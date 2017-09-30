@@ -25,7 +25,7 @@ FancyContextMenu {
     id: commentMenu
 
     property variant comment
-    property string linkPermalink
+    property variant post
     property VoteManager commentVoteManager
     property SaveManager commentSaveManager
 
@@ -60,7 +60,7 @@ FancyContextMenu {
         FancyMenuImage {
             icon: "image://theme/icon-m-link"
             onClicked: {
-                var link = QMLUtils.toAbsoluteUrl(linkPermalink + comment.fullname.substring(3));
+                var link = QMLUtils.toAbsoluteUrl(post.permalink + comment.fullname.substring(3));
                 globalUtils.createOpenLinkDialog(link);
             }
         }
@@ -81,7 +81,7 @@ FancyContextMenu {
         }
 
         FancyMenuItem {
-            enabled: quickdditManager.isSignedIn && !comment.isArchived && comment.isValid
+            enabled: quickdditManager.isSignedIn && !comment.isArchived && comment.isValid && !post.isLocked
             text: qsTr("Reply")
             onClicked: replyClicked();
         }
