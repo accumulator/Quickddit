@@ -129,6 +129,7 @@ void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
     link.setArchived(linkMap.value("archived").toBool());
     link.setGilded(linkMap.value("gilded").toBool());
     link.setSaved(linkMap.value("saved").toBool());
+    link.setLocked(linkMap.value("locked").toBool());
 }
 
 Listing<LinkObject> Parser::parseLinkList(const QByteArray &json)

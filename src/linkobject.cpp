@@ -46,8 +46,13 @@ public:
     bool isNSFW;
     bool isPromoted;
     QString flairText;
-    bool archived;
+    bool isArchived;
     int gilded;
+    bool isLocked;
+    // int num_crossposts
+    // int num_reports
+    // bool pinned
+    // bool spoiler
 
 private:
     Q_DISABLE_COPY(LinkObjectData)
@@ -269,12 +274,12 @@ void LinkObject::setFlairText(const QString &flairText)
 
 bool LinkObject::isArchived() const
 {
-    return d->archived;
+    return d->isArchived;
 }
 
 void LinkObject::setArchived(bool archived)
 {
-    d->archived = archived;
+    d->isArchived = archived;
 }
 
 int LinkObject::gilded() const
@@ -285,6 +290,16 @@ int LinkObject::gilded() const
 void LinkObject::setGilded(int gilded)
 {
     d->gilded = gilded;
+}
+
+bool LinkObject::isLocked() const
+{
+    return d->isLocked;
+}
+
+void LinkObject::setLocked(bool locked)
+{
+    d->isLocked = locked;
 }
 
 bool LinkObject::isSelfPost() const

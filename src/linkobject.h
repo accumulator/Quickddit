@@ -176,6 +176,9 @@ public:
     int gilded() const;
     void setGilded(int gilded);
 
+    bool isLocked() const;
+    void setLocked(bool locked);
+
 
     bool isSelfPost() const;
 
