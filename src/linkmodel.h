@@ -67,7 +67,8 @@ public:
         IsSelfPostRole,
         IsSavedRole,
         IsArchivedRole,
-        GildedRole
+        GildedRole,
+        IsLockedRole
     };
 
     enum Location {

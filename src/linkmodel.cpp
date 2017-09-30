@@ -56,6 +56,7 @@ QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
     map["isArchived"] = link.isArchived();
     map["gilded"] = link.gilded();
     map["saved"] = link.saved();
+    map["isLocked"] = link.isLocked();
 
     return map;
 }
@@ -122,6 +123,7 @@ QVariant LinkModel::data(const QModelIndex &index, int role) const
     case IsArchivedRole: return link.isArchived();
     case GildedRole: return link.gilded();
     case IsSavedRole: return link.saved();
+    case IsLockedRole: return link.isLocked();
 
     default:
         qCritical("LinkModel::data(): Invalid role");
@@ -372,6 +374,7 @@ QHash<int, QByteArray> LinkModel::customRoleNames() const
     roles[IsArchivedRole] = "isArchived";
     roles[GildedRole] = "gilded";
     roles[IsSavedRole] = "saved";
+    roles[IsLockedRole] = "isLocked";
     return roles;
 }
 
