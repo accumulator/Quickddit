@@ -5,6 +5,13 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Sep 30 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.6.0-1
+- chg: links to comments now retrieve 8 levels of context instead of 3
+- new: support for TOR
+- new: list of moderators option from about-subreddit page
+- new: video format preference setting (360p and 720p)
+- new: show and use 'locked' state for posts
+
 * Mon Sep 04 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.5-1
 - fix: subreddit picker page glitch, sometimes empty and not reloadable
 - chg: upgrade youtube-dl to 2017.08.27.1

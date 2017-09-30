@@ -57,96 +57,101 @@
     <name>AboutSubredditPage</name>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="38"/>
+        <source>Moderators</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutSubredditPage.qml" line="45"/>
         <source>Message Moderators</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="45"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="52"/>
         <source>Unsubscribe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="45"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="52"/>
         <source>Subscribe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="93"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="100"/>
         <source>This subreddit is Not Safe For Work</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="122"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="129"/>
         <source>Subscribed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="122"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="129"/>
         <source>Not Subscribed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="127"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="134"/>
         <source>Private</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="128"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="135"/>
         <source>Restricted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="129"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="136"/>
         <source>GoldRestricted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="129"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="136"/>
         <source>Archived</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="134"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="141"/>
         <source>Links only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="134"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="141"/>
         <source>Self posts only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="139"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="146"/>
         <source>NSFW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="145"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="152"/>
         <source>Contributor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="150"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="157"/>
         <source>Banned</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="156"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="163"/>
         <source>Mod</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="162"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="169"/>
         <source>Muted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="192"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="199"/>
         <source>You have subscribed to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="194"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="201"/>
         <source>You have unsubscribed from %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -235,36 +240,56 @@
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="153"/>
-        <source>Videos</source>
+        <source>Media</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="156"/>
+        <source>Preferred Video Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="176"/>
         <source>Loop Videos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="163"/>
-        <source>Account</source>
+        <location filename="../qml/AppSettingsPage.qml" line="183"/>
+        <source>Connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="171"/>
-        <source>Signed in to Reddit as</source>
+        <location filename="../qml/AppSettingsPage.qml" line="186"/>
+        <source>Use Tor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="190"/>
-        <source>Sign out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="190"/>
-        <source>Sign in to Reddit</source>
+        <location filename="../qml/AppSettingsPage.qml" line="187"/>
+        <source>When enabled, please make sure Tor is installed and active.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="194"/>
+        <source>Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="202"/>
+        <source>Signed in to Reddit as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="221"/>
+        <source>Sign out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="221"/>
+        <source>Sign in to Reddit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="225"/>
         <source>You have signed out from Reddit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -349,27 +374,27 @@
 <context>
     <name>CommentMenu</name>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="76"/>
+        <location filename="../qml/CommentMenu.qml" line="77"/>
         <source>Copy Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="79"/>
+        <location filename="../qml/CommentMenu.qml" line="80"/>
         <source>Comment copied to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="85"/>
+        <location filename="../qml/CommentMenu.qml" line="86"/>
         <source>Reply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="95"/>
+        <location filename="../qml/CommentMenu.qml" line="96"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="100"/>
+        <location filename="../qml/CommentMenu.qml" line="101"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -630,6 +655,14 @@
     </message>
 </context>
 <context>
+    <name>ModeratorListPage</name>
+    <message>
+        <location filename="../qml/ModeratorListPage.qml" line="25"/>
+        <source>Moderators</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MultiredditsPage</name>
     <message>
         <location filename="../qml/MultiredditsPage.qml" line="27"/>
@@ -709,6 +742,11 @@
     <message>
         <location filename="../qml/PostInfoText.qml" line="70"/>
         <source>Archived</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/PostInfoText.qml" line="75"/>
+        <source>Locked</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1306,7 +1344,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="245"/>
+        <location filename="../qml/VideoViewPage.qml" line="251"/>
         <source>Problem finding stream URL</source>
         <translation type="unfinished"></translation>
     </message>
