@@ -140,9 +140,14 @@ Listing<LinkObject> Parser::parseLinkList(const QByteArray &json)
 
     const QVariantList linkListJson = data.value("children").toList();
 
+    bool logged = false;
     Listing<LinkObject> linkList;
     foreach (const QVariant &linkObjectJson, linkListJson) {
         QVariantMap linkMap = linkObjectJson.toMap().value("data").toMap();
+        if (!logged) {
+            qDebug() << "link item =" << linkMap;
+            logged = true;
+        }
         LinkObject link;
         linkFromMap(link, linkMap);
         linkList.append(link);
