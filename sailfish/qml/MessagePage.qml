@@ -78,7 +78,7 @@ AbstractPage {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
                 } else if (!isSentMessage) {
                     pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"),
-                                   {messageManager: messageManager, replyTo: model.fullname, recipient: model.author, subject: "re: " + model.subject});
+                                   {messageManager: messageManager, replyTo: model.fullname, recipient: model.author !== "" ? model.author : "/r/" + model.subreddit, subject: "re: " + model.subject});
                 }
             }
 

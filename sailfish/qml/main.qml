@@ -395,7 +395,9 @@ ApplicationWindow {
             for (var i=0; i < messages.length; i++) {
                 if (messages[i].isComment === false) {
                     QMLUtils.publishNotification(
-                            qsTr("Message from %1").arg(messages[i].author),
+                            messages[i].author !== ""
+                                ? qsTr("Message from %1").arg(messages[i].author)
+                                : qsTr("Message from %1").arg("r/" + messages[i].subreddit),
                             messages[i].rawBody,
                             1);
                 }
