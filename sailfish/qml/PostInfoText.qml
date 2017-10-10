@@ -66,13 +66,17 @@ Column {
         }
 
         Bubble {
+            color: constant.colorDisabled
             visible: !!link.isArchived
             text: qsTr("Archived")
+            font.bold: true
         }
 
         Bubble {
+            color: Qt.lighter("purple", 1.5)
             visible: !!link.isLocked
             text: qsTr("Locked")
+            font.bold: true
         }
     }
 

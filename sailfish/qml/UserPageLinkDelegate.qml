@@ -89,6 +89,15 @@ ListItem {
                 font.bold: true
                 font.pixelSize: constant.fontSizeSmaller
             }
+
+            Bubble {
+                color: Qt.lighter("purple", 1.5)
+                visible: !!model.isLocked
+                text: qsTr("Locked")
+                font.bold: true
+                font.pixelSize: constant.fontSizeSmaller
+            }
+
         }
 
         Row {
