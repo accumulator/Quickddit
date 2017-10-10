@@ -129,6 +129,7 @@ QVariantMap UserThingModel::linkData(const LinkObject* o) const
     result.insert("domain", QVariant(o->domain()));
     result.insert("thumbnailUrl", QVariant(o->thumbnailUrl()));
     result.insert("url", QVariant(o->url()));
+    result.insert("isLocked", QVariant(o->isLocked()));
 
     return result;
 }
