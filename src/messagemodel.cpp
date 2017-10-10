@@ -39,6 +39,8 @@ QVariantMap MessageModel::toMessageVariantMap(const MessageObject &m)
     map["context"] = m.context();
     map["isComment"] = m.isComment();
     map["isUnread"] = m.isUnread();
+    map["distinguished"] = m.distinguished();
+
     return map;
 }
 
