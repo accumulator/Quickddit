@@ -25,15 +25,45 @@ AbstractPage {
     title: qsTr("About")
 
     Image {
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
+        id: backgroundImage
         width: aboutPage.width * 0.8
         height: aboutPage.height * 0.8
 
         fillMode: Image.PreserveAspectFit
         source: "./cover/background.png"
-        opacity: 0.1
+        visible: false
         smooth: true
+    }
+
+    ShaderEffect {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: aboutPage.top
+        anchors.topMargin: (aboutPage.height/2 - height/2) - flickable.contentY/3
+
+        width: backgroundImage.paintedWidth; height: backgroundImage.paintedHeight
+        property variant source: backgroundImage
+        property real frequency: 5
+        property real amplitude: 0.02
+        property real time: 0.0
+        property real myopacity: 0.15
+
+        NumberAnimation on time {
+            from: 0; to: Math.PI*2; duration: 3000; loops: Animation.Infinite
+        }
+
+        fragmentShader: "
+            varying highp vec2 qt_TexCoord0;
+            uniform sampler2D source;
+            uniform lowp float qt_Opacity;
+            uniform highp float frequency;
+            uniform highp float amplitude;
+            uniform highp float time;
+            uniform lowp float myopacity;
+            void main() {
+                highp vec2 pulse = sin(time - frequency * qt_TexCoord0);
+                highp vec2 coord = vec2(-amplitude, -amplitude) + qt_TexCoord0 * (1.0 + 2.0 * amplitude) + amplitude * vec2(pulse.x, -pulse.x);
+                gl_FragColor = texture2D(source, coord) * myopacity;
+            }"
     }
 
     Flickable {
