@@ -27,9 +27,14 @@ CoverBackground {
         source: "./background.png"
         anchors {
             left: parent.left
-            leftMargin: - (width / 3)
+            leftMargin: - (parent.width / 3)
             top: parent.top
-            topMargin: - (height / 4)
+            topMargin: - (parent.height / 4)
+
+            right: parent.right
+            rightMargin: (parent.width / 4)
+            bottom: parent.bottom
+            bottomMargin: (parent.height / 2)
         }
         fillMode: Image.PreserveAspectFit
         opacity: 0.2
