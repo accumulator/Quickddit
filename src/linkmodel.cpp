@@ -349,6 +349,29 @@ void LinkModel::editLink(const LinkObject &link)
     emit dataChanged(index(editIndex), index(editIndex));
 }
 
+void LinkModel::deleteLink(const QString &fullname)
+{
+    int deleteIndex = -1;
+
+    for (int i = 0; i < m_linkList.count(); ++i) {
+        if (m_linkList.at(i).fullname() == fullname) {
+            deleteIndex = i;
+            break;
+        }
+    }
+
+    if (deleteIndex == -1) {
+        qWarning("LinkModel::deleteLink(): Unable to find the link");
+        return;
+    }
+
+    beginRemoveRows(QModelIndex(), deleteIndex, deleteIndex);
+    m_linkList.removeAt(deleteIndex);
+    endRemoveRows();
+
+    emit dataChanged(index(deleteIndex), index(deleteIndex));
+}
+
 QHash<int, QByteArray> LinkModel::customRoleNames() const
 {
     QHash<int, QByteArray> roles;

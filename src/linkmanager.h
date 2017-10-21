@@ -18,6 +18,7 @@
 
 #include "linkmodel.h"
 #include "commentmodel.h"
+#include "userthingmodel.h"
 #include "abstractmanager.h"
 
 #ifndef LINKMANAGER_H
@@ -28,6 +29,7 @@ class LinkManager : public AbstractManager
     Q_OBJECT
     Q_PROPERTY(LinkModel* linkModel READ linkModel WRITE setLinkModel)
     Q_PROPERTY(CommentModel* commentModel READ commentModel WRITE setCommentModel)
+    Q_PROPERTY(UserThingModel* userThingModel READ userThingModel WRITE setUserThingModel)
 public:
     explicit LinkManager(QObject *parent = 0);
 
@@ -37,8 +39,12 @@ public:
     CommentModel *commentModel() const;
     void setCommentModel(CommentModel *model);
 
+    UserThingModel *userThingModel() const;
+    void setUserThingModel(UserThingModel *model);
+
     Q_INVOKABLE void submit(const QString &subreddit, const QString &captcha, const QString &iden, const QString &title, const QString& url, const QString& text);
     Q_INVOKABLE void editLinkText(const QString &fullname, const QString &rawText);
+    Q_INVOKABLE void deleteLink(const QString &fullname);
 
 signals:
     void success(const QString &message);
@@ -51,10 +57,11 @@ private slots:
     void onFinished(QNetworkReply *reply);
 
 private:
-    enum Action { Submit, Edit };
+    enum Action { Submit, Edit, Delete };
     Action m_action;
     LinkModel *m_linkModel;
     CommentModel *m_commentModel;
+    UserThingModel *m_userThingModel;
     QString m_fullname;
     QString m_text;
 };

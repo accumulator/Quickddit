@@ -20,10 +20,11 @@
 
 #include "linkmanager.h"
 #include "linkmodel.h"
+#include "userthingmodel.h"
 #include "parser.h"
 
 LinkManager::LinkManager(QObject *parent) :
-    AbstractManager(parent), m_linkModel(0), m_commentModel(0)
+    AbstractManager(parent), m_linkModel(0), m_commentModel(0), m_userThingModel(0)
 {
 }
 
@@ -45,6 +46,16 @@ CommentModel *LinkManager::commentModel() const
 void LinkManager::setCommentModel(CommentModel *model)
 {
     m_commentModel = model;
+}
+
+UserThingModel *LinkManager::userThingModel() const
+{
+    return m_userThingModel;
+}
+
+void LinkManager::setUserThingModel(UserThingModel *model)
+{
+    m_userThingModel = model;
 }
 
 void LinkManager::submit(const QString &subreddit, const QString &captcha, const QString &iden, const QString &title, const QString& url, const QString& text)
@@ -84,6 +95,17 @@ void LinkManager::editLinkText(const QString &fullname, const QString &rawText)
     doRequest(APIRequest::POST, "/api/editusertext", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
+void LinkManager::deleteLink(const QString &fullname)
+{
+    m_action = Delete;
+
+    QHash<QString, QString> parameters;
+    parameters.insert("api_type", "json");
+    parameters.insert("id", fullname);
+    m_fullname = fullname;
+
+    doRequest(APIRequest::POST, "/api/del", SLOT(onFinished(QNetworkReply*)), parameters);
+}
 
 void LinkManager::onFinished(QNetworkReply *reply)
 {
@@ -96,7 +118,7 @@ void LinkManager::onFinished(QNetworkReply *reply)
                 } else {
                     emit error("Error:" + errors.first());
                 }
-            } else {
+            } else if (m_action == Edit) {
                 LinkObject link = Parser::parseLinkEditResponse(reply->readAll());
                 emit success(tr("The link text has been changed"));
                 // update both occurrences of a Link. Bit ugly to have to refer to two models,
@@ -105,6 +127,12 @@ void LinkManager::onFinished(QNetworkReply *reply)
                     m_linkModel->editLink(link);
                 if (m_commentModel)
                     m_commentModel->setLink(LinkModel::toLinkVariantMap(link));
+            } else {
+                if (m_userThingModel)
+                    m_userThingModel->deleteThing(m_fullname);
+                if (m_linkModel)
+                    m_linkModel->deleteLink(m_fullname);
+                qDebug() << "delete" << reply->readAll();
             }
         } else {
             emit error(reply->errorString());

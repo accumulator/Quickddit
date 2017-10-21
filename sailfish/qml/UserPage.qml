@@ -169,13 +169,13 @@ AbstractPage {
                 property variant item: model
                 property int listIndex: index
 
-                sourceComponent: model.kind === "t1" ? commentDelegate
-                                                     : model.kind === "t3" ? linkDelegate : undefined
+                sourceComponent: model.kind === "t1" ? commentDelegateComponent
+                                                     : model.kind === "t3" ? linkDelegateComponent : undefined
             }
         }
 
         Component {
-            id: commentDelegate
+            id: commentDelegateComponent
             UserPageCommentDelegate {
                 property int index: listIndex
 
@@ -194,10 +194,23 @@ AbstractPage {
         }
 
         Component {
-            id: linkDelegate
+            id: linkDelegateComponent
             UserPageLinkDelegate {
+                id: linkDelegate
                 property int index: listIndex
 
+                menu: Component {
+                    ContextMenu {
+                        property variant link
+                        onLinkChanged: console.log(link.author);
+                        signal deleteLink
+                        MenuItem {
+                            enabled: quickdditManager.isSignedIn && !userThingModel.busy && !link.isArchived && link.author === appSettings.redditUsername
+                            text: qsTr("Delete")
+                            onClicked: deleteLink()
+                        }
+                    }
+                }
                 model: !!item ? item.link : undefined
                 markSaved: userThingModel.section !== UserThingModel.SavedSection
                 onClicked: {
@@ -205,6 +218,15 @@ AbstractPage {
                                        linkPermalink: "/r/" + model.subreddit + "/comments/" + model.fullname.substring(3),
                                        linkSaveManager: linkSaveManager
                                    });
+                }
+
+                onPressAndHold: {
+                    var dialog = showMenu({link: model});
+                    dialog.deleteLink.connect(function() {
+                        linkDelegate.remorseAction(qsTr("Delete link"), function() {
+                            linkManager.deleteLink(model.fullname);
+                        })
+                    });
                 }
 
                 AltMarker { }
@@ -243,6 +265,14 @@ AbstractPage {
         id: userThingModel
         manager: quickdditManager
         section: myself ? UserThingModel.SavedSection : UserThingModel.OverviewSection
+        onError: infoBanner.warning(errorString);
+    }
+
+    LinkManager {
+        id: linkManager
+        manager: quickdditManager
+        userThingModel: userThingModel
+        onSuccess: infoBanner.alert(message);
         onError: infoBanner.warning(errorString);
     }
 

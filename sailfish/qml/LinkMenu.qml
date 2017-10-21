@@ -28,6 +28,8 @@ ContextMenu {
     property VoteManager linkVoteManager
     property SaveManager linkSaveManager
 
+    signal deleteLink
+
     MenuItem {
         id: upvoteButton
         visible: link.likes !== 1
@@ -65,6 +67,11 @@ ContextMenu {
     MenuItem {
         text: qsTr("URL")
         onClicked: globalUtils.createOpenLinkDialog(link.url);
+    }
+    MenuItem {
+        text: qsTr("Delete")
+        visible: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived && link.author === appSettings.redditUsername
+        onClicked: deleteLink()
     }
 
 }

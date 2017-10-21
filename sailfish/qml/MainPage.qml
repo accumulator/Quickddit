@@ -128,14 +128,25 @@ AbstractPage {
         header: QuickdditPageHeader { title: mainPage.title }
 
         delegate: LinkDelegate {
+            id: linkDelegate
+
             menu: Component { LinkMenu {} }
             showMenuOnPressAndHold: false
             showSubreddit: linkModel.location != LinkModel.Subreddit
+
             onClicked: {
                 var p = { link: model, linkVoteManager: linkVoteManager, linkSaveManager: linkSaveManager };
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);
             }
-            onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager, linkSaveManager: linkSaveManager});
+
+            onPressAndHold: {
+                var dialog = showMenu({link: model, linkVoteManager: linkVoteManager, linkSaveManager: linkSaveManager});
+                dialog.deleteLink.connect(function() {
+                    linkDelegate.remorseAction(qsTr("Delete link"), function() {
+                        linkManager.deleteLink(model.fullname);
+                    })
+                });
+            }
 
             AltMarker { }
         }

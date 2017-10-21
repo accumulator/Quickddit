@@ -147,6 +147,7 @@ public:
     Q_INVOKABLE void changeSaved(const QString &fullname, bool saved);
 
     void editLink(const LinkObject &link);
+    void deleteLink(const QString &fullname);
 
 protected:
     QHash<int, QByteArray> customRoleNames() const;

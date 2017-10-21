@@ -64,6 +64,8 @@ public:
     Section section() const;
     void setSection(Section section);
 
+    void deleteThing(const QString &fullname);
+
 signals:
     void usernameChanged();
     void sectionChanged();

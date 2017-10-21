@@ -130,6 +130,7 @@ QVariantMap UserThingModel::linkData(const LinkObject* o) const
     result.insert("thumbnailUrl", QVariant(o->thumbnailUrl()));
     result.insert("url", QVariant(o->url()));
     result.insert("isLocked", QVariant(o->isLocked()));
+    result.insert("isArchived", QVariant(o->isArchived()));
 
     return result;
 }
@@ -212,6 +213,28 @@ void UserThingModel::onFinished(QNetworkReply *reply)
         else
             emit error(reply->errorString());
     }
+}
+
+void UserThingModel::deleteThing(const QString &fullname)
+{
+    int deleteIndex = -1;
+    qDebug() << "deleting thing from model";
+
+    for (int i = 0; i < m_thingList.count(); ++i) {
+        if (m_thingList.at(i)->fullname() == fullname) {
+            deleteIndex = i;
+            break;
+        }
+    }
+
+    if (deleteIndex == -1) {
+        qWarning("UserThingModel::deleteThing(): Unable to find the thing");
+        return;
+    }
+
+    beginRemoveRows(QModelIndex(), deleteIndex, deleteIndex);
+    m_thingList.removeAt(deleteIndex);
+    endRemoveRows();
 }
 
 void UserThingModel::clearThingList()
