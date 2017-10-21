@@ -5,6 +5,13 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Oct 21 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.6.1-1
+- fix: reply to subreddit moderator message
+- fix: moderator message not shown correctly in notification
+- fix: some device independent scaling improvements
+- new: delete own link functionality
+- new: link locked status in userpage
+
 * Sat Sep 30 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.6.0-1
 - chg: links to comments now retrieve 8 levels of context instead of 3
 - new: support for TOR
