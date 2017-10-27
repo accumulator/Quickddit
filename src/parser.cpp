@@ -226,7 +226,8 @@ QList<CommentObject> Parser::parseMoreChildren(const QByteArray &json, const QSt
 
     QList<CommentObject> commentList;
 
-    const QVariantList childrenList = root.value("jquery").toList().last().toList().last().toList().first().toList();
+    const QVariantList commentsListNode = root.value("jquery").toList().at(10).toList();
+    const QVariantList childrenList = commentsListNode.last().toList().first().toList();
 
     foreach (const QVariant &commentJson, childrenList) {
         const QString kind = commentJson.toMap().value("kind").toString();
