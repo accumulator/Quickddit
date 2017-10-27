@@ -86,15 +86,11 @@ AbstractPage {
                                                                             : "/m/" + linkModel.multireddit)
                 visible: linkModel.location == LinkModel.Subreddit || linkModel.location == LinkModel.Multireddit
                 onClicked: {
-                    var page = "", p = {};
                     if (linkModel.location == LinkModel.Subreddit) {
-                        page = Qt.resolvedUrl("AboutSubredditPage.qml");
-                        p = {subreddit: linkModel.subreddit};
+                        pageStack.push(Qt.resolvedUrl("AboutSubredditPage.qml"), {subreddit: linkModel.subreddit});
                     } else {
-                        page = Qt.resolvedUrl("AboutMultiredditPage.qml");
-                        p = {multireddit: linkModel.multireddit};
+                        pageStack.push(Qt.resolvedUrl("AboutMultiredditPage.qml"), {multireddit: linkModel.multireddit});
                     }
-                    pageStack.push(page, p);
                 }
             }
             MenuItem {
