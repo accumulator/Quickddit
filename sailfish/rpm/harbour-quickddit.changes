@@ -5,6 +5,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Fri Oct 27 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.6.2-1
+- fix: reddit API change made Quickddit crash on parsing hidden comments
+- new: 2.5x scale option in settings, for higher DPI devices
+
 * Sat Oct 21 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.6.1-1
 - fix: reply to subreddit moderator message
 - fix: moderator message not shown correctly in notification
