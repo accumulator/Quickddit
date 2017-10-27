@@ -64,7 +64,8 @@ public:
         Scale125,
         Scale150,
         Scale175,
-        Scale200
+        Scale200,
+        Scale250
     };
 
     enum VideoSize {

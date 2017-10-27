@@ -98,6 +98,7 @@ AbstractPage {
                     case AppSettings.Scale150: return 3;
                     case AppSettings.Scale175: return 4;
                     case AppSettings.Scale200: return 5;
+                    case AppSettings.Scale250: return 6;
                     }
                 }
                 menu: ContextMenu {
@@ -107,6 +108,7 @@ AbstractPage {
                     MenuItem { text: "x1.5" }
                     MenuItem { text: "x1.75" }
                     MenuItem { text: "x2" }
+                    MenuItem { text: "x2.5" }
                 }
                 onCurrentIndexChanged: {
                     switch (currentIndex) {
@@ -116,6 +118,7 @@ AbstractPage {
                     case 3: appSettings.thumbnailScale = AppSettings.Scale150; break;
                     case 4: appSettings.thumbnailScale = AppSettings.Scale175; break;
                     case 5: appSettings.thumbnailScale = AppSettings.Scale200; break;
+                    case 6: appSettings.thumbnailScale = AppSettings.Scale250; break;
                     }
                 }
             }

@@ -46,13 +46,17 @@ Image {
     }
 
     function applyScale() {
-        if (appSettings.thumbnailScale === AppSettings.ScaleAuto) {
-            width = sourceSize.width * QMLUtils.pScale
-            height = sourceSize.height * QMLUtils.pScale
-        } else {
-            var scale = 1 + ((appSettings.thumbnailScale - 1) * 0.25) // naughty
-            width = sourceSize.width * scale
-            height = sourceSize.height * scale
+        var scale = QMLUtils.pScale // ScaleAuto
+        switch (appSettings.thumbnailScale) {
+        case AppSettings.Scale100: scale = 1; break;
+        case AppSettings.Scale125: scale = 1.25; break;
+        case AppSettings.Scale150: scale = 1.5; break;
+        case AppSettings.Scale175: scale = 1.75; break;
+        case AppSettings.Scale200: scale = 2; break;
+        case AppSettings.Scale250: scale = 2.5; break;
         }
+
+        width = sourceSize.width * scale
+        height = sourceSize.height * scale
     }
 }
