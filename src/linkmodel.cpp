@@ -261,9 +261,12 @@ void LinkModel::refresh(bool refreshOlder)
     case All:
         relativeUrl += "/r/all/" + sectionString;
         break;
+    case Popular:
+        relativeUrl += "/r/popular/" + sectionString;
+        break;
     case Subreddit:
-        if (m_subreddit.isEmpty() || m_subreddit.compare("all", Qt::CaseInsensitive) == 0)
-            qWarning("LinkModel::refresh(): Set location to FrontPage or All instead");
+        if (m_subreddit.isEmpty() || m_subreddit.compare("all", Qt::CaseInsensitive) == 0 || m_subreddit.compare("popular", Qt::CaseInsensitive) == 0)
+            qWarning("LinkModel::refresh(): Set location to FrontPage, Popular or All instead");
         relativeUrl += "/r/" + m_subreddit + "/" + sectionString;
         break;
     case Multireddit:
@@ -416,7 +419,7 @@ void LinkModel::onFinished(QNetworkReply *reply)
                     }
                 }
                 // remove filtered
-                if (m_location == All) {
+                if (m_location == All || m_location == Popular) {
                     QMutableListIterator<LinkObject> i(links);
                     QStringList filteredSubreddits = manager()->settings()->filteredSubreddits();
                     qDebug() << "filtered subreddits:" << filteredSubreddits;

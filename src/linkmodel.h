@@ -74,6 +74,7 @@ public:
     enum Location {
         FrontPage,
         All,
+        Popular,
         Subreddit,
         Multireddit,
         Search

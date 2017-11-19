@@ -37,6 +37,8 @@ AbstractPage {
                 linkModel.location = LinkModel.FrontPage;
             } else if (String(sr).toLowerCase() === "all") {
                 linkModel.location = LinkModel.All;
+            } else if (String(sr).toLowerCase() === "popular") {
+                linkModel.location = LinkModel.Popular;
             } else {
                 linkModel.location = LinkModel.Subreddit;
                 linkModel.subreddit = sr;

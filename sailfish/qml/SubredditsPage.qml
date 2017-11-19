@@ -106,7 +106,7 @@ AbstractPage {
             Repeater {
                 id: mainOptionRepeater
                 anchors { left: parent.left; right: parent.right }
-                model: [qsTr("Front Page"), qsTr("All"), qsTr("Browse for Subreddits..."), qsTr("Multireddits")]
+                model: [qsTr("Front Page"), qsTr("Popular"), qsTr("All"), qsTr("Browse for Subreddits..."), qsTr("Multireddits")]
 
                 SimpleListItem {
                     width: mainOptionRepeater.width
@@ -115,9 +115,10 @@ AbstractPage {
                     onClicked: {
                         switch (index) {
                         case 0: subredditsPage.showSubreddit(""); break;
-                        case 1: subredditsPage.showSubreddit("all"); break;
-                        case 2: pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml")); break;
-                        case 3: pageStack.push(Qt.resolvedUrl("MultiredditsPage.qml"), { _model: multiredditModel }); break;
+                        case 1: subredditsPage.showSubreddit("popular"); break;
+                        case 2: subredditsPage.showSubreddit("all"); break;
+                        case 3: pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml")); break;
+                        case 4: pageStack.push(Qt.resolvedUrl("MultiredditsPage.qml"), { _model: multiredditModel }); break;
                         }
                     }
                 }
