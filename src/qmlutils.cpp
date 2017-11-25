@@ -72,16 +72,26 @@ QString QMLUtils::clipboardText() const
 void QMLUtils::onClipboardChanged()
 {
     qDebug() << "clipboard changed event";
-    // ignore event?
+    // so many workarounds here. Due to Qt's strange clipboard event triggers
+    // we have almost have to build a state machine around it :(
+    // 1. ignore first changed even when application starts
+    // 2. ignore changed event when we write to clipboard (ok this is normal)
+    // 3. ignore spurious changed event when application activates
+
+    // ignore first event?
     if (m_clipIgnore) {
         m_clipIgnore = false;
         return;
     }
 
+    // ignore event after we write to clipboard
     if (clipboardText() == m_myclip)
         return;
     if (clipboardText().isEmpty())
         return;
+
+    // ignore event when application activates when we already have received it before
+    m_myclip = clipboardText();
 
     emit clipboardChanged();
 }
