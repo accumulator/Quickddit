@@ -135,14 +135,16 @@ ApplicationWindow {
 
             IconButton {
                 icon.source: "image://theme/icon-m-clipboard"
+                scale: 0.8
                 highlighted: true
             }
 
             Label {
-                text: "Reddit link on clipboard"
+                text: globalUtils.parseRedditLink(QMLUtils.clipboardText).path.slice(1)
                 width: parent.width - 3 * goButton.width + 6 * contentRow.spacing
                 anchors.verticalCenter: parent.verticalCenter
                 truncationMode: TruncationMode.Fade
+                color: Theme.highlightColor
             }
 
             IconButton {
