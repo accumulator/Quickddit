@@ -116,8 +116,60 @@ ApplicationWindow {
         }
     }
 
-    // work around ugly animation of DockedPanel when orientation changes to portrait
-    onOrientationChanged: busyPanel._initialized = false
+    DockedPanel {
+        id: clipboardNotifier
+        width: parent.width
+        height: contentRow.height + constant.paddingMedium
+        open: false
+        dock: Dock.Bottom
+
+        Row {
+            id: contentRow
+            width: parent.width
+            anchors.centerIn: parent
+
+            Rectangle {
+                height: 1
+                width: contentRow.spacing
+            }
+
+            IconButton {
+                icon.source: "image://theme/icon-m-clipboard"
+                highlighted: true
+            }
+
+            Label {
+                text: "Reddit link on clipboard"
+                width: parent.width - 3 * goButton.width + 6 * contentRow.spacing
+                anchors.verticalCenter: parent.verticalCenter
+                truncationMode: TruncationMode.Fade
+            }
+
+            IconButton {
+                id: goButton
+                icon.source: "image://theme/icon-m-forward"
+                onClicked: {
+                    if (globalUtils.redditLink(QMLUtils.clipboardText)) {
+                        clipboardNotifier.hide();
+                        globalUtils.openRedditLink(QMLUtils.clipboardText);
+                    }
+                }
+            }
+
+            IconButton {
+                icon.source: "image://theme/icon-m-close"
+                onClicked: clipboardNotifier.hide()
+            }
+        }
+    }
+
+    bottomMargin: clipboardNotifier.expanded ? clipboardNotifier.visibleSize : 0
+
+    // work around ugly animation of DockedPanels when orientation changes to portrait
+    onOrientationChanged: {
+        busyPanel._initialized = false
+        clipboardNotifier._initialized = false
+    }
 
     // reset inbox poll timer when activating the application
     onApplicationActiveChanged: if (applicationActive) inboxManager.resetTimer();
@@ -217,7 +269,7 @@ ApplicationWindow {
             }
             var redditLink = parseRedditLink(url);
             if (/^(\/r\/\w+)?\/comments\/\w+/.test(redditLink.path))
-                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
+                pushOrReplace(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
             else if (/^\/r\/(\w+)/.test(redditLink.path)) {
                 var path = redditLink.path.split("/");
                 var params = {}
@@ -226,16 +278,16 @@ ApplicationWindow {
                 if (path[3] === "search") {
                     if (redditLink.queryMap["q"] !== undefined)
                         params["query"] = redditLink.queryMap["q"]
-                    pageStack.push(Qt.resolvedUrl("SearchDialog.qml"), params);
+                    pushOrReplace(Qt.resolvedUrl("SearchDialog.qml"), params);
                     return;
                 }
 
                 if (path[3] !== "")
                     params["section"] = path[3];
-                pageStack.push(Qt.resolvedUrl("MainPage.qml"), params);
+                pushOrReplace(Qt.resolvedUrl("MainPage.qml"), params);
             } else if (/^\/u(ser)?\/([A-Za-z0-9_-]+)/.test(redditLink.path)) {
                 var username = redditLink.path.split("/")[2];
-                pageStack.push(Qt.resolvedUrl("UserPage.qml"), {username: username});
+                pushOrReplace(Qt.resolvedUrl("UserPage.qml"), {username: username});
             } else if (/^\/message\/compose/.test(redditLink.path)) {
                 var params = {}
                 params["recipient"] = redditLink.queryMap["to"]
@@ -243,14 +295,24 @@ ApplicationWindow {
                     params["message"] = redditLink.queryMap["message"]
                 if (redditLink.queryMap["subject"] !== null)
                     params["subject"] = redditLink.queryMap["subject"]
-                pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"), params);
+                pushOrReplace(Qt.resolvedUrl("SendMessagePage.qml"), params);
             } else if (/^\/search/.test(redditLink.path)) {
                 var params = {}
                 if (redditLink.queryMap["q"] !== undefined)
                     params["query"] = redditLink.queryMap["q"]
-                pageStack.push(Qt.resolvedUrl("SearchDialog.qml"), params);
+                pushOrReplace(Qt.resolvedUrl("SearchDialog.qml"), params);
             } else
                 infoBanner.alert(qsTr("Unsupported reddit url"));
+        }
+
+        function pushOrReplace(page, params) {
+            if (pageStack.currentPage.objectName === "subredditsPage") {
+                var mainPage = globalUtils.getMainPage();
+                mainPage.__pushedAttached = false;
+                pageStack.replaceAbove(mainPage, page, params);
+            } else {
+                pageStack.push(page, params)
+            }
         }
 
         function parseRedditLink(url) {
@@ -435,6 +497,15 @@ ApplicationWindow {
                 globalUtils.openRedditLink(url);
                 appWindow.activate();
             }
+        }
+    }
+
+    Connections {
+        target: QMLUtils
+        onClipboardChanged : {
+            console.log("clip changed");
+            if (globalUtils.redditLink(QMLUtils.clipboardText))
+                clipboardNotifier.show()
         }
     }
 

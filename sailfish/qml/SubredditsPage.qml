@@ -23,6 +23,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: subredditsPage
+    objectName: "subredditsPage"
 
     readonly property string title: qsTr("Subreddits")
 

@@ -25,12 +25,19 @@
 #include <QNetworkReply>
 #include <QFile>
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+  #include <QtGui/QGuiApplication>
+#else
+  #include <QtGui/QApplication>
+#endif
+
 class QMLUtils : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString SOURCE_REPO_URL READ sourceRepoUrl CONSTANT)
     Q_PROPERTY(QString GPL3_LICENSE_URL READ gpl3LicenseUrl CONSTANT)
     Q_PROPERTY(float pScale READ pScale CONSTANT)
+    Q_PROPERTY(QString clipboardText READ clipboardText NOTIFY clipboardChanged)
 public:
     static const QString SOURCE_REPO_URL;
     static QString sourceRepoUrl() { return SOURCE_REPO_URL; }
@@ -38,9 +45,10 @@ public:
     static const QString GPL3_LICENSE_URL;
     static QString gpl3LicenseUrl() { return GPL3_LICENSE_URL; }
 
-    float pScale() { return cpScale; }
-
     explicit QMLUtils(QObject *parent = 0);
+
+    float pScale() { return cpScale; }
+    QString clipboardText() const;
 
     // Copy text to system clipboard
     Q_INVOKABLE void copyToClipboard(const QString &text);
@@ -69,15 +77,21 @@ public:
 
 private slots:
     void onSaveImageFinished();
+    void onClipboardChanged();
 
 signals:
     void saveImageSucceeded(const QString &name);
     void saveImageFailed(const QString &name);
+    void clipboardChanged();
 
 private:
     QNetworkAccessManager m_manager;
     QNetworkReply* m_reply;
     QFile *m_imageFile;
+    QClipboard *m_clipboard;
+    bool m_clipIgnore;
+    QString m_myclip;
+
     float cpScale;
     void setPScale();
 };

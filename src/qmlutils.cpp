@@ -26,10 +26,8 @@
 #include <QDebug>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-  #include <QtGui/QGuiApplication>
   #include <QStandardPaths>
 #else
-  #include <QtGui/QApplication>
   #include <QDesktopServices>
 #endif
 
@@ -49,19 +47,43 @@ QMLUtils::QMLUtils(QObject *parent) :
     QObject(parent)
 {
     setPScale();
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+    m_clipIgnore = true;
+    m_clipboard = QGuiApplication::clipboard();
+#else
+    m_clipboard = QApplication::clipboard();
+#endif
+    connect(m_clipboard, SIGNAL(dataChanged()), this, SLOT(onClipboardChanged()));
 }
 
 void QMLUtils::copyToClipboard(const QString &text)
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-    QClipboard *clipboard = QGuiApplication::clipboard();
-#else
-    QClipboard *clipboard = QApplication::clipboard();
-#endif
-    clipboard->setText(text);
-#ifdef Q_WS_SIMULATOR
+    m_myclip = text;
+    m_clipboard->setText(text);
     qDebug("Text copied to clipboard: %s", qPrintable(text));
-#endif
+}
+
+QString QMLUtils::clipboardText() const
+{
+    return m_clipboard->text();
+}
+
+void QMLUtils::onClipboardChanged()
+{
+    qDebug() << "clipboard changed event";
+    // ignore event?
+    if (m_clipIgnore) {
+        m_clipIgnore = false;
+        return;
+    }
+
+    if (clipboardText() == m_myclip)
+        return;
+    if (clipboardText().isEmpty())
+        return;
+
+    emit clipboardChanged();
 }
 
 void QMLUtils::shareUrl(const QString &url, const QString &title)
