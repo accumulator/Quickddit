@@ -5,6 +5,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Fri Dec 14 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.6.3-1
+- fix: scale icons in user page to device dpi
+- new: add r/popular
+- new: monitor clipboard for reddit links
+
 * Fri Oct 27 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.6.2-1
 - fix: reddit API change made Quickddit crash on parsing hidden comments
 - new: 2.5x scale option in settings, for higher DPI devices
