@@ -105,21 +105,22 @@ ListItem {
             spacing: constant.paddingSmall
 
             Image {
+                id: itemIcon
                 source: model.isSelfPost ? "image://theme/icon-m-bubble-universal" : "image://theme/icon-m-link"
-                width: 32
-                height: 32
+                width: 32 * QMLUtils.pScale
+                height: 32 * QMLUtils.pScale
                 anchors.verticalCenter: parent.verticalCenter
             }
 
             Text {
-                width: parent.width - 32
+                width: mainColumn.width - itemIcon.width
                 font.pixelSize: constant.fontSizeDefault
                 font.bold: true
                 color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
                                         : constant.colorDisabled
                 elide: Text.ElideRight
                 wrapMode: Text.WordWrap
-                maximumLineCount: 2
+                maximumLineCount: 3
                 text: model.title
             }
         }

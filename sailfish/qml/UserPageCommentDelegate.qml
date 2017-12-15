@@ -72,8 +72,8 @@ Item {
 
                 Image {
                     source: "image://theme/icon-m-chat"
-                    width: 32
-                    height: 32
+                    width: 32 * QMLUtils.pScale
+                    height: 32 * QMLUtils.pScale
                     anchors.verticalCenter: parent.verticalCenter
                 }
 
