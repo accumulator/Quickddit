@@ -89,7 +89,6 @@ private:
     QNetworkReply* m_reply;
     QFile *m_imageFile;
     QClipboard *m_clipboard;
-    bool m_clipIgnore;
     QString m_myclip;
 
     float cpScale;
