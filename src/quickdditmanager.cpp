@@ -148,6 +148,8 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
     // if m_state is empty means generateAuthorizationUrl() is not called first
     Q_ASSERT(!m_state.isEmpty());
 
+    qDebug() << "getting access token from url:" << signedInUrl;
+
     if (m_accessTokenRequest != 0) {
         qWarning("QuickdditManager::getAccessToken(): Aborting active network request (Try to avoid!)");
         m_accessTokenRequest->disconnect();
@@ -246,22 +248,21 @@ void QuickdditManager::onAccessTokenRequestFinished(QNetworkReply *reply)
                    "Unable to get access token from the following data:\n%s", qPrintable(replyString));
         }
     } else {
-        if (reply->error() == QNetworkReply::UnknownContentError) {
+        if (reply->error() == QNetworkReply::UnknownContentError || reply->error() == QNetworkReply::ProtocolInvalidOperationError) {
             // something's wrong with the refresh token
             qDebug() << "Bad Request using our refresh token, resetting";
             m_settings->setRefreshToken(QByteArray());
+            m_settings->setRedditUsername(QString());
             emit signedInChanged();
-        }
-
-        if (reply->error() == QNetworkReply::AuthenticationRequiredError) {
-            // bad/missing OAuth app credentials
+            emit accessTokenFailure(0, "OAuth token invalid, please log in again");
+        } else if (reply->error() == QNetworkReply::AuthenticationRequiredError) {
+            // missing OAuth app credentials
             qWarning() << "Server requires app registration. Make sure you compiled Quickddit with REDDIT_CLIENT_ID defined.";
             emit accessTokenFailure(0, "Application Error. Check the logs");
-            return;
+        } else {
+            qDebug() << "onAccessTokenRequestFinished error" << reply->error() << ":" << reply->errorString();
+            emit accessTokenFailure(reply->error(), reply->errorString());
         }
-
-        qDebug() << "onAccessTokenRequestFinished error" << reply->error() << ":" << reply->errorString();
-        emit accessTokenFailure(reply->error(), reply->errorString());
     }
 
     m_accessTokenRequest->deleteLater();

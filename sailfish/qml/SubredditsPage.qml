@@ -111,7 +111,7 @@ AbstractPage {
 
                 SimpleListItem {
                     width: mainOptionRepeater.width
-                    enabled: index == 3 ? quickdditManager.isSignedIn : true
+                    enabled: index == 4 ? quickdditManager.isSignedIn : true
                     text: modelData
                     onClicked: {
                         switch (index) {
