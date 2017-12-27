@@ -55,6 +55,7 @@
 #include "src/userthingmodel.h"
 #include "src/savemanager.h"
 #include "src/subredditmanager.h"
+#include "src/friendmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -86,6 +87,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<UserThingModel>("harbour.quickddit.Core", 1, 0, "UserThingModel");
     qmlRegisterType<SaveManager>("harbour.quickddit.Core", 1, 0, "SaveManager");
     qmlRegisterType<SubredditManager>("harbour.quickddit.Core", 1, 0, "SubredditManager");
+    qmlRegisterType<FriendModel>("harbour.quickddit.Core", 1, 0, "FriendModel");
 
 #ifndef HARBOUR_COMPLIANCE
     qmlRegisterType<DisplayBlanking>("harbour.quickddit.Core", 1, 0, "DisplayBlanking");

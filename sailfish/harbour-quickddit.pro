@@ -66,7 +66,9 @@ HEADERS += \
     ../src/thing.h \
     ../src/savemanager.h \
     ../src/subredditmanager.h \
-    ../src/dummy.h
+    ../src/dummy.h \
+    ../src/friendmodel.h \
+    ../src/friendobject.h
 
 SOURCES += main.cpp \
     dbusapp.cpp \
@@ -105,7 +107,9 @@ SOURCES += main.cpp \
     ../src/thing.cpp \
     ../src/savemanager.cpp \
     ../src/subredditmanager.cpp \
-    ../src/dummy.cpp
+    ../src/dummy.cpp \
+    ../src/friendmodel.cpp \
+    ../src/friendobject.cpp
 
 # Qt-Json
 HEADERS += ../qt-json/json.h

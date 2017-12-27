@@ -33,6 +33,7 @@ class SubredditObject;
 class MultiredditObject;
 class MessageObject;
 class UserObject;
+class FriendObject;
 
 template<typename T>
 class Listing : public QList<T>
@@ -72,6 +73,8 @@ LinkObject parseLinkEditResponse(const QByteArray &json);
 UserObject parseUserAbout(const QByteArray &json);
 QStringList parseListOfNames(const QByteArray &json);
 Listing<Thing*> parseUserThingList(const QByteArray &json);
+
+Listing<FriendObject> parseFriendList(const QByteArray &json);
 }
 
 #endif // PARSER_H

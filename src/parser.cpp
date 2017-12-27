@@ -31,6 +31,7 @@
 #include "multiredditobject.h"
 #include "messageobject.h"
 #include "userobject.h"
+#include "friendobject.h"
 #include "utils.h"
 
 QString unescapeHtml(const QString &html)
@@ -583,3 +584,29 @@ Listing<Thing*> Parser::parseUserThingList(const QByteArray &json)
     return thingList;
 }
 
+Listing<FriendObject> Parser::parseFriendList(const QByteArray &json)
+{
+    bool ok;
+    const QVariantMap data = QtJson::parse(json, ok).toMap().value("data").toMap();
+
+    qDebug() << "friend data:" << data;
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    const QVariantList friendListJson = data.value("children").toList();
+
+    Listing<FriendObject> friendList;
+    foreach (const QVariant &friendJson, friendListJson) {
+        const QVariantMap friendMap = friendJson.toMap();
+
+        FriendObject friendObject;
+        friendObject.setFullname(friendMap.value("id").toString());
+        friendObject.setName(friendMap.value("name").toString());
+        friendObject.setComment(friendMap.value("note").toString());
+        friendObject.setDate(QDateTime::fromTime_t(friendMap.value("date").toInt()));
+        friendList.append(friendObject);
+    }
+    friendList.setHasMore(!data.value("after").isNull());
+
+    return friendList;
+}
