@@ -82,6 +82,14 @@ AbstractPage {
                 text: qsTr("Messages")
                 onClicked: replacePage(Qt.resolvedUrl("MessagePage.qml"));
             }
+
+            MenuItem {
+                enabled: quickdditManager.isSignedIn
+                text: qsTr("Friends")
+                onClicked: {
+                    friendModel.refresh(false);
+                }
+            }
         }
 
         header: Column {
@@ -225,4 +233,8 @@ AbstractPage {
         onError: infoBanner.warning(errorString)
     }
 
+    FriendModel {
+        id: friendModel
+        manager: quickdditManager
+    }
 }
