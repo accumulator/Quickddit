@@ -22,7 +22,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: aboutMultiredditPage
-    title: "About /m/" + multiredditManager.name
+    title: qsTr("About %1").arg("/m/" + multiredditManager.name)
     busy: multiredditManager.busy
 
     property alias multireddit: multiredditManager.name
@@ -93,7 +93,7 @@ AbstractPage {
             property string subreddit
 
             MenuItem {
-                text: "Go to /r/" + subredditMenu.subreddit
+                text: qsTr("Go to %1").arg("/r/" + subredditMenu.subreddit)
                 onClicked: {
                     var mainPage = globalUtils.getMainPage();
                     mainPage.refresh(subredditMenu.subreddit);
