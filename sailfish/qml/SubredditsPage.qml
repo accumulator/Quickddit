@@ -41,6 +41,10 @@ AbstractPage {
         pageStack.replaceAbove(mainPage, newpage, parms);
     }
 
+    function getMultiredditModel() {
+        return multiredditModel
+    }
+
     onStatusChanged: {
         if (status === PageStatus.Activating) {
             if (subredditModel.rowCount() === 0)

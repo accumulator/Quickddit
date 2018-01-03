@@ -213,7 +213,7 @@ ApplicationWindow {
         }
 
         function getMultiredditModel() {
-            return getNavPage().multiredditModel
+            return getNavPage().getMultiredditModel()
         }
 
         function previewableVideo(url) {
