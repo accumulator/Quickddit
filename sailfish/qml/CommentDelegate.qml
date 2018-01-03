@@ -149,7 +149,7 @@ Item {
                     visible: model.gilded > 0
                     font.pixelSize: constant.fontSizeSmaller
                     font.bold: true
-                    text: model.gilded > 1 ? "Gilded " + model.gilded + "x" : "Gilded"
+                    text: model.gilded > 1 ? qsTr("Gilded") + " " + model.gilded + "x" : qsTr("Gilded")
                     color: "gold"
                 }
             }
@@ -241,7 +241,7 @@ Item {
                         id: score
                         anchors.verticalCenter: parent.verticalCenter
                         font.pixelSize: constant.fontSizeSmaller
-                        text: model.isScoreHidden ? qsTr("[score hidden]") : model.score + " pts"
+                        text: model.isScoreHidden ? qsTr("[score hidden]") : qsTr("%n pts", "", model.score)
                         color: {
                             if (!mainItem.enabled || !model.isValid)
                                 return constant.colorDisabled;
