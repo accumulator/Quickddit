@@ -4,6 +4,11 @@
 <context>
     <name>AboutMultiredditPage</name>
     <message>
+        <location filename="../qml/AboutMultiredditPage.qml" line="25"/>
+        <source>About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="37"/>
         <location filename="../qml/AboutMultiredditPage.qml" line="127"/>
         <source>Add Subreddit</source>
@@ -25,6 +30,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/AboutMultiredditPage.qml" line="96"/>
+        <source>Go to %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="105"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
@@ -43,18 +53,53 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="120"/>
+        <location filename="../qml/AboutPage.qml" line="99"/>
+        <source>Quickddit - A free and open source Reddit client for mobile phones</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="111"/>
+        <source>App icon by Andrew Zhilin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="112"/>
+        <source>_translator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="112"/>
+        <source>Current language translation by %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="113"/>
+        <source>Licensed under GNU GPLv3+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="121"/>
         <source>Source</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="125"/>
+        <location filename="../qml/AboutPage.qml" line="126"/>
         <source>License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="133"/>
+        <source>Translations</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AboutSubredditPage</name>
+    <message>
+        <location filename="../qml/AboutSubredditPage.qml" line="26"/>
+        <source>About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="38"/>
         <source>Moderators</source>
@@ -79,6 +124,22 @@
         <location filename="../qml/AboutSubredditPage.qml" line="100"/>
         <source>This subreddit is Not Safe For Work</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/AboutSubredditPage.qml" line="116"/>
+        <source>%n subscribers</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/AboutSubredditPage.qml" line="117"/>
+        <source>%n active users</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="129"/>
@@ -310,9 +371,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/CommentDelegate.qml" line="152"/>
+        <source>Gilded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/CommentDelegate.qml" line="244"/>
         <source>[score hidden]</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/CommentDelegate.qml" line="244"/>
+        <source>%n pts</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/CommentDelegate.qml" line="352"/>
@@ -560,6 +634,11 @@
 <context>
     <name>MainPage</name>
     <message>
+        <location filename="../qml/MainPage.qml" line="87"/>
+        <source>About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/MainPage.qml" line="99"/>
         <source>New Post</source>
         <translation type="unfinished"></translation>
@@ -583,6 +662,34 @@
     <message>
         <location filename="../qml/MainPage.qml" line="143"/>
         <source>Delete link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/MainPage.qml" line="163"/>
+        <source>Nothing here :(</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MessageDelegate</name>
+    <message>
+        <location filename="../qml/MessageDelegate.qml" line="70"/>
+        <source>%1 from %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/MessageDelegate.qml" line="82"/>
+        <source>in %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/MessageDelegate.qml" line="83"/>
+        <source>to %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/MessageDelegate.qml" line="85"/>
+        <source>from %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -750,6 +857,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/PostInfoText.qml" line="63"/>
+        <source>Gilded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/PostInfoText.qml" line="71"/>
         <source>Archived</source>
         <translation type="unfinished"></translation>
@@ -758,6 +870,32 @@
         <location filename="../qml/PostInfoText.qml" line="78"/>
         <source>Locked</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/PostInfoText.qml" line="104"/>
+        <source>submitted %1 by %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/PostInfoText.qml" line="107"/>
+        <source>to %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/PostInfoText.qml" line="135"/>
+        <source>%n points</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/PostInfoText.qml" line="147"/>
+        <source>%n comments</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -800,6 +938,11 @@
 </context>
 <context>
     <name>SearchPage</name>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="25"/>
+        <source>Search Result: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>Relevance</source>
@@ -1025,19 +1168,30 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="44"/>
+        <location filename="../qml/SignInPage.qml" line="52"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="51"/>
+        <location filename="../qml/SignInPage.qml" line="59"/>
         <source>Reload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="63"/>
+        <location filename="../qml/SignInPage.qml" line="71"/>
         <source>Sign in successful! Welcome! :)</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SubredditBrowseDelegate</name>
+    <message numerus="yes">
+        <location filename="../qml/SubredditBrowseDelegate.qml" line="68"/>
+        <source>%n subscribers</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -1070,6 +1224,11 @@
 </context>
 <context>
     <name>SubredditsBrowsePage</name>
+    <message>
+        <location filename="../qml/SubredditsBrowsePage.qml" line="27"/>
+        <source>Subreddits Search: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="36"/>
         <source>Popular Subreddits</source>
@@ -1221,6 +1380,11 @@
 <context>
     <name>UserPage</name>
     <message>
+        <location filename="../qml/UserPage.qml" line="25"/>
+        <source>User %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/UserPage.qml" line="31"/>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Overview</source>
@@ -1305,6 +1469,21 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/UserPage.qml" line="139"/>
+        <source>%1 link karma</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/UserPage.qml" line="145"/>
+        <source>%1 comment karma</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/UserPage.qml" line="151"/>
+        <source>created %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/UserPage.qml" line="209"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
@@ -1332,6 +1511,16 @@
         <source>Sticky</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../qml/UserPageCommentDelegate.qml" line="61"/>
+        <source>Gilded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/UserPageCommentDelegate.qml" line="85"/>
+        <source>Comment in %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>UserPageLinkDelegate</name>
@@ -1348,6 +1537,11 @@
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="80"/>
         <source>Promoted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/UserPageLinkDelegate.qml" line="87"/>
+        <source>Gilded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
