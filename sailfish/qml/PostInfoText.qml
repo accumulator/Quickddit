@@ -60,7 +60,7 @@ Column {
 
         Bubble {
             visible: !!link.gilded && link.gilded > 0
-            text: link.gilded > 1 ? "Gilded " + link.gilded + "x" : "Gilded"
+            text: link.gilded > 1 ? qsTr("Gilded") + " " + link.gilded + "x" : qsTr("Gilded")
             color: "gold"
             font.bold: true
         }
@@ -101,11 +101,11 @@ Column {
         font.pixelSize: constant.fontSizeDefault
         color: highlighted ? Theme.secondaryHighlightColor : constant.colorMid
         onLinkActivated: globalUtils.openLink(link)
-        text: constant.richtextStyle + "submitted " + link.created + " by " +
+        text: constant.richtextStyle + qsTr("submitted %1 by %2").arg(link.created).arg(
                 (compact ? link.author : "<a href=\"https://reddit.com/u/" + link.author.split(" ")[0] + "\">" + link.author + "</a>") +
                 (showSubreddit ?
-                     " to " + (compact ? link.subreddit : "<a href=\"https://reddit.com/r/" + link.subreddit + "\">" + link.subreddit + "</a>")
-                     : "")
+                     " " + qsTr("to %1").arg((compact ? link.subreddit : "<a href=\"https://reddit.com/r/" + link.subreddit + "\">" + link.subreddit + "</a>"))
+                     : ""))
     }
 
     // viewhack to render richtext wide again after orientation goes horizontal (?)
@@ -132,7 +132,7 @@ Column {
                 else
                     return highlighted ? Theme.highlightColor : constant.colorLight;
             }
-            text: link.score + " points"
+            text: qsTr("%n points", "", link.score)
         }
 
         Text {
@@ -144,7 +144,7 @@ Column {
         Text {
             font.pixelSize: constant.fontSizeDefault
             color: highlighted ? Theme.highlightColor : constant.colorLight
-            text: link.commentsCount + " comments"
+            text: qsTr("%n comments", "", link.commentsCount)
         }
 
     }

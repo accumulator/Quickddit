@@ -84,7 +84,7 @@ ListItem {
 
             Bubble {
                 visible: !!model.gilded && model.gilded > 0
-                text: model.gilded > 1 ? "Gilded " + model.gilded + "x" : "Gilded"
+                text: model.gilded > 1 ? qsTr("Gilded") + " " + model.gilded + "x" : qsTr("Gilded")
                 color: "gold"
                 font.bold: true
                 font.pixelSize: constant.fontSizeSmaller

@@ -67,7 +67,7 @@ Item {
                     elide: Text.ElideRight
                     wrapMode: Text.Wrap
                     maximumLineCount: 2
-                    text: isComment ? model.subject + " from " + model.author
+                    text: isComment ? qsTr("%1 from %2").arg(model.subject).arg(model.author)
                                     : model.subject
                 }
             }
@@ -79,10 +79,10 @@ Item {
                 wrapMode: Text.Wrap
                 maximumLineCount: 2
                 elide: Text.ElideRight
-                text: isComment ? "in /r/" + model.subreddit + " · " + model.created
-                                : (isSentMessage) ? "to " + model.destination
+                text: isComment ? qsTr("in %1").arg("/r/" + model.subreddit) + " · " + model.created
+                                : (isSentMessage) ? qsTr("to %1").arg(model.destination)
                                                   : (model.author !== "")
-                                                    ? "from " + model.author + " · " + model.created
+                                                    ? qsTr("from %1").arg(model.author) + " · " + model.created
                                                     : "/r/" + model.subreddit + " · " + model.created
             }
 

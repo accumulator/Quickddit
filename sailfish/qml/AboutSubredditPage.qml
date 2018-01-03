@@ -23,7 +23,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: aboutSubredditPage
-    title: "About " + (aboutSubredditManager.url || "Subreddit")
+    title: qsTr("About %1").arg(aboutSubredditManager.url || "Subreddit")
     busy: aboutSubredditManager.busy
 
     property alias subreddit: aboutSubredditManager.subreddit
@@ -113,8 +113,8 @@ AbstractPage {
                 anchors { left: parent.left; right: parent.right; margins: constant.paddingMedium }
                 font.pixelSize: constant.fontSizeDefault
                 color: constant.colorLight
-                text: aboutSubredditManager.subscribers + " subscribers · " + aboutSubredditManager.activeUsers
-                      + " active users"
+                text: qsTr("%n subscribers", "", aboutSubredditManager.subscribers) + " · " +
+                      qsTr("%n active users", "", aboutSubredditManager.activeUsers)
             }
 
             Flow {

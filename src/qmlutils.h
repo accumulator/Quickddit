@@ -36,6 +36,7 @@ class QMLUtils : public QObject
     Q_OBJECT
     Q_PROPERTY(QString SOURCE_REPO_URL READ sourceRepoUrl CONSTANT)
     Q_PROPERTY(QString GPL3_LICENSE_URL READ gpl3LicenseUrl CONSTANT)
+    Q_PROPERTY(QString TRANSLATIONS_URL READ translationsUrl CONSTANT)
     Q_PROPERTY(float pScale READ pScale CONSTANT)
     Q_PROPERTY(QString clipboardText READ clipboardText NOTIFY clipboardChanged)
 public:
@@ -44,6 +45,9 @@ public:
 
     static const QString GPL3_LICENSE_URL;
     static QString gpl3LicenseUrl() { return GPL3_LICENSE_URL; }
+
+    static const QString TRANSLATIONS_URL;
+    static QString translationsUrl() { return TRANSLATIONS_URL; }
 
     explicit QMLUtils(QObject *parent = 0);
 

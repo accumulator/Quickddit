@@ -65,7 +65,7 @@ ListItem {
             font.pixelSize: constant.fontSizeDefault
             color: subredditDelegate.highlighted ? Theme.secondaryHighlightColor : constant.colorMid
             wrapMode: Text.Wrap
-            text: model.subscribers + " subscribers"
+            text: qsTr("%n subscribers", "", model.subscribers)
         }
 
         Text {

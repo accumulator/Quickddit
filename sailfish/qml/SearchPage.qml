@@ -22,7 +22,7 @@ import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: searchPage
-    title: "Search Result: " + searchModel.searchQuery
+    title: qsTr("Search Result: %1").arg(searchModel.searchQuery)
     busy: linkVoteManager.busy
 
     property alias searchQuery: searchModel.searchQuery

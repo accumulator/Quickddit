@@ -24,7 +24,7 @@ import harbour.quickddit.Core 1.0
 AbstractPage {
     id: subredditsBrowsePage
     title: subredditModel.section == SubredditModel.SearchSection
-           ? "Subreddits Search: " + searchQuery
+           ? qsTr("Subreddits Search: %1").arg(searchQuery)
            : subredditsSectionModel[subredditModel.section]
 
     property alias searchQuery: subredditModel.query

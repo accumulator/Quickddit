@@ -439,7 +439,7 @@
     <message>
         <location filename="../qml/CommentPage.qml" line="57"/>
         <source>Edit Post</source>
-        <translation>Redigera post</translation>
+        <translation>Redigera inlägg</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="65"/>
@@ -780,7 +780,7 @@
     <message>
         <location filename="../qml/SearchDialog.qml" line="66"/>
         <source>Posts</source>
-        <translation>Poster</translation>
+        <translation>Inlägg</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="67"/>
@@ -946,22 +946,22 @@
     <message>
         <location filename="../qml/SendLinkPage.qml" line="65"/>
         <source>Post Title</source>
-        <translation>Inläggstitel</translation>
+        <translation>Inläggsrubrik</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="73"/>
         <source>Self Post</source>
-        <translation>Självinlägg</translation>
+        <translation>Egeninlägg</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="80"/>
         <source>Post URL</source>
-        <translation>Posta länk</translation>
+        <translation>Inläggets URL</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="92"/>
         <source>Post Text</source>
-        <translation>Posta textinlägg</translation>
+        <translation>Inläggstext</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="99"/>
@@ -994,7 +994,7 @@
     <message>
         <location filename="../qml/SendMessagePage.qml" line="66"/>
         <source>to moderators of</source>
-        <translation>till moderatorer för</translation>
+        <translation>till moderator för</translation>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="66"/>
@@ -1025,17 +1025,17 @@
         <translation>Logga in på reddit</translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="44"/>
+        <location filename="../qml/SignInPage.qml" line="52"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="51"/>
+        <location filename="../qml/SignInPage.qml" line="59"/>
         <source>Reload</source>
         <translation>Uppdatera</translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="63"/>
+        <location filename="../qml/SignInPage.qml" line="71"/>
         <source>Sign in successful! Welcome! :)</source>
         <translation>Inloggning klar! Välkommen! :)</translation>
     </message>
@@ -1187,7 +1187,7 @@
     <message>
         <location filename="../qml/SubredditsPage.qml" line="110"/>
         <source>Popular</source>
-        <translation>Populära</translation>
+        <translation>Heta</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="131"/>

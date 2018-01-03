@@ -42,6 +42,7 @@
 
 const QString QMLUtils::SOURCE_REPO_URL = "https://github.com/accumulator/Quickddit";
 const QString QMLUtils::GPL3_LICENSE_URL = "http://www.gnu.org/licenses/gpl-3.0.html";
+const QString QMLUtils::TRANSLATIONS_URL = "https://www.transifex.com/outright-solutions/quickddit/";
 
 QMLUtils::QMLUtils(QObject *parent) :
     QObject(parent)
