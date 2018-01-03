@@ -84,8 +84,8 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                text: "About " + (linkModel.location == LinkModel.Subreddit ? "/r/" + linkModel.subreddit
-                                                                            : "/m/" + linkModel.multireddit)
+                text: qsTr("About %1").arg(linkModel.location == LinkModel.Subreddit ? "/r/" + linkModel.subreddit
+                                                                                     : "/m/" + linkModel.multireddit)
                 visible: linkModel.location == LinkModel.Subreddit || linkModel.location == LinkModel.Multireddit
                 onClicked: {
                     if (linkModel.location == LinkModel.Subreddit) {
@@ -160,7 +160,7 @@ AbstractPage {
                 linkModel.refresh(true);
         }
 
-        ViewPlaceholder { enabled: linkListView.count == 0 && !linkModel.busy; text: "Nothing here :(" }
+        ViewPlaceholder { enabled: linkListView.count == 0 && !linkModel.busy; text: qsTr("Nothing here :(") }
 
         VerticalScrollDecorator {}
     }
