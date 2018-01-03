@@ -96,8 +96,8 @@ AbstractPage {
                     font.pixelSize: constant.fontSizeMedium
                     color: Theme.highlightColor
                     wrapMode: Text.Wrap
-                    text: "Quickddit - A free and open source Reddit client for mobile phones\n" +
-                          "v" + APP_VERSION
+                    text: qsTr("Quickddit - A free and open source Reddit client for mobile phones") +
+                          "\nv" + APP_VERSION
                 }
 
                 Text {
@@ -106,10 +106,11 @@ AbstractPage {
                     font.pixelSize: constant.fontSizeSmall
                     color: constant.colorLight
                     wrapMode: Text.Wrap
-                    text: "Copyright (c) 2015-2017 Sander van Grieken\n" +
+                    text: "Copyright (c) 2015-2018 Sander van Grieken\n" +
                           "Copyright (c) 2013-2014 Dickson Leong\n\n" +
-                          "App icon by Andrew Zhilin\n\n" +
-                          "Licensed under GNU GPLv3+\n"
+                          qsTr("App icon by Andrew Zhilin") + "\n\n" +
+                          (qsTr("_translator") !== "_translator" ? qsTr("Current language translation by %1").arg(qsTr("_translator")) + "\n\n" : "") +
+                          qsTr("Licensed under GNU GPLv3+")
                 }
 
                 Row {
@@ -125,6 +126,12 @@ AbstractPage {
                         text: qsTr("License")
                         onClicked: globalUtils.createOpenLinkDialog(QMLUtils.GPL3_LICENSE_URL);
                     }
+                }
+
+                Button {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: qsTr("Translations")
+                    onClicked: globalUtils.createOpenLinkDialog(QMLUtils.TRANSLATIONS_URL);
                 }
             }
         }
