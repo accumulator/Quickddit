@@ -58,7 +58,7 @@ Item {
 
                 Bubble {
                     visible: !!model.gilded && model.gilded > 0
-                    text: model.gilded > 1 ? "Gilded " + model.gilded + "x" : "Gilded"
+                    text: model.gilded > 1 ? qsTr("Gilded") + " " + model.gilded + "x" : qsTr("Gilded")
                     color: "gold"
                     font.bold: true
                     font.pixelSize: constant.fontSizeSmaller
@@ -82,7 +82,7 @@ Item {
                     color: mainItem.enabled ? (mainItem.highlighted ? Theme.highlightColor : constant.colorLight)
                                             : constant.colorDisabled
                     font.bold: true
-                    text: "Comment in /r/" + model.subreddit
+                    text: qsTr("Comment in %1").arg("/r/" + model.subreddit)
                 }
                 Text {
                     font.pixelSize: constant.fontSizeDefault
