@@ -88,6 +88,8 @@ AbstractPage {
                 Image {
                     anchors.horizontalCenter: parent.horizontalCenter
                     source: "image://theme/harbour-quickddit"
+                    height: sourceSize.height * QMLUtils.pScale
+                    width: sourceSize.width * QMLUtils.pScale
                 }
 
                 Text {
