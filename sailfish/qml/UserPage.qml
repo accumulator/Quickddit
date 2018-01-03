@@ -136,19 +136,19 @@ AbstractPage {
                 function object_or(o,d) { return (!!o ? o : d) }
 
                 Text {
-                    text: qsTr("%1 link karma", aboutColumn.object_or(userManager.user.linkKarma,0))
+                    text: qsTr("%1 link karma").arg(aboutColumn.object_or(userManager.user.linkKarma,0))
                     color: constant.colorLight
                     font.pixelSize: constant.fontSizeDefault
                 }
 
                 Text {
-                    text: qsTr("%1 comment karma", aboutColumn.object_or(userManager.user.commentKarma,0))
+                    text: qsTr("%1 comment karma").arg(aboutColumn.object_or(userManager.user.commentKarma,0))
                     color: constant.colorLight
                     font.pixelSize: constant.fontSizeDefault
                 }
 
                 Text {
-                    text: qsTr("created %1", aboutColumn.object_or(userManager.user.created,"?"))
+                    text: qsTr("created %1").arg(aboutColumn.object_or(userManager.user.created,"?"))
                     color: constant.colorLight
                     font.pixelSize: constant.fontSizeDefault
                 }
