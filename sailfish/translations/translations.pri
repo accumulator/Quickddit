@@ -1,3 +1,5 @@
+TRANSLATION_SOURCES += ../src
+
 TRANSLATIONS = translations/harbour-quickddit-en_GB.ts \
     translations/harbour-quickddit-nl.ts \
     translations/harbour-quickddit-sv.ts \
