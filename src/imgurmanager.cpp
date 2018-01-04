@@ -139,7 +139,7 @@ void ImgurManager::refresh()
             id.truncate(id.indexOf(NONE_WORD_REGEXP));
         requestUrl += "/image/" + id;
     } else {
-        emit error("Unable to get Imgur ID from the url: " + m_imgurUrl);
+        emit error(tr("Unable to get Imgur ID from the url: %1").arg(m_imgurUrl));
         return;
     }
 
@@ -172,7 +172,7 @@ void ImgurManager::onFinished(QNetworkReply *reply)
             } else if (m_imageAndThumbUrlList.count() == 1) {
                 m_imageUrl = m_imageAndThumbUrlList.first().first;
             } else {
-                emit error("Imgur API return no image");
+                emit error(tr("Imgur API returns no image"));
             }
 
             emit imageUrlChanged();

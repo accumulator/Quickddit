@@ -125,7 +125,7 @@ void AboutMultiredditManager::onAddFinished(QNetworkReply *reply)
                 Utils::sortCaseInsensitively(&subreddits);
                 m_multiredditObject.setSubreddits(subreddits);
                 emit multiredditChanged();
-                emit success("/r/" + addedSubreddit + " has been added to /m/" + m_name);
+                emit success(tr("%1 has been added to %2").arg("/r/" + addedSubreddit).arg("/m/" + m_name));
             }
         } else {
             emit error(reply->errorString());
@@ -146,7 +146,7 @@ void AboutMultiredditManager::onRemoveFinished(QNetworkReply *reply)
             }
             m_multiredditObject.setSubreddits(subreddits);
             emit multiredditChanged();
-            emit success("/r/" + toBeRemoveSubreddit + " has been removed from /m/" + m_name);
+            emit success(tr("%1 has been removed from %2").arg("/r/" + toBeRemoveSubreddit).arg("/m/" + m_name));
             toBeRemoveSubreddit.clear();
         } else {
             emit error(reply->errorString());
