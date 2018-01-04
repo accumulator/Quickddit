@@ -132,7 +132,7 @@ Column {
                 else
                     return highlighted ? Theme.highlightColor : constant.colorLight;
             }
-            text: qsTr("%n points", "", link.score)
+            text: (link.score < 0 ? "-" : "") + qsTr("%n points", "", Math.abs(link.score))
         }
 
         Text {

@@ -241,7 +241,8 @@ Item {
                         id: score
                         anchors.verticalCenter: parent.verticalCenter
                         font.pixelSize: constant.fontSizeSmaller
-                        text: model.isScoreHidden ? qsTr("[score hidden]") : qsTr("%n pts", "", model.score)
+                        text: model.isScoreHidden ? qsTr("[score hidden]")
+                                                  : (model.score < 0 ? "-" : "") + qsTr("%n pts", "", Math.abs(model.score))
                         color: {
                             if (!mainItem.enabled || !model.isValid)
                                 return constant.colorDisabled;
