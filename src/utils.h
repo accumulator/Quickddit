@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,6 +20,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <QCoreApplication>
+
 class QString;
 class QStringList;
 class QDateTime;
@@ -26,14 +29,14 @@ class QByteArray;
 template <class Key, class T> class QHash;
 class QUrl;
 
-namespace Utils
+class Utils
 {
-QString getTimeDiff(const QDateTime &created);
-
-void sortCaseInsensitively(QStringList *stringList);
-
-QByteArray toEncodedQuery(const QHash<QString, QString> &parameters);
-void setUrlQuery(QUrl *url, const QHash<QString, QString> &parameters);
-}
+    Q_DECLARE_TR_FUNCTIONS(Utils)
+public:
+    static QString getTimeDiff(const QDateTime &created);
+    static void sortCaseInsensitively(QStringList *stringList);
+    static QByteArray toEncodedQuery(const QHash<QString, QString> &parameters);
+    static void setUrlQuery(QUrl *url, const QHash<QString, QString> &parameters);
+};
 
 #endif // UTILS_H

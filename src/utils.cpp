@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,32 +33,32 @@ QString Utils::getTimeDiff(const QDateTime &created)
     int diff = QDateTime::currentDateTime().toTime_t() - localTime.toTime_t(); // seconds
 
     if (diff <= 0)
-        return "Now";
+        return tr("Now");
     else if (diff < 60)
-        return "Just now";
+        return tr("Just now");
 
     diff /= 60; // minutes
 
     if (diff < 60)
-        return QString::number(diff) + " mins ago";
+        return tr("%n mins ago", "", diff);
 
     diff /= 60; // hours
 
     if (diff < 24)
-        return QString::number(diff) + " hours ago";
+        return tr("%n hours ago", "", diff);
 
     diff /= 24; // days
 
     if (diff < 30)
-        return QString::number(diff) + " days ago";
+        return tr("%n days ago", "", diff);
 
     diff /= 30; // months
 
     if (diff < 12)
-        return QString::number(diff) + " months ago";
+        return tr("%n months ago", "", diff);
 
     diff /= 12; // years
-    return QString::number(diff) + " years ago";
+    return tr("%n years ago", "", diff);
 }
 
 bool caseInsensitiveLessThan(const QString &s1, const QString &s2)
