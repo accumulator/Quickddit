@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en" sourcelanguage="en">
 <context>
+    <name>AboutMultiredditManager</name>
+    <message>
+        <location filename="../../src/aboutmultiredditmanager.cpp" line="128"/>
+        <source>%1 has been added to %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/aboutmultiredditmanager.cpp" line="149"/>
+        <source>%1 has been removed from %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AboutMultiredditPage</name>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="25"/>
@@ -53,42 +66,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="99"/>
+        <location filename="../qml/AboutPage.qml" line="101"/>
         <source>Quickddit - A free and open source Reddit client for mobile phones</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="111"/>
+        <location filename="../qml/AboutPage.qml" line="113"/>
         <source>App icon by Andrew Zhilin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="112"/>
+        <location filename="../qml/AboutPage.qml" line="114"/>
         <source>_translator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="112"/>
+        <location filename="../qml/AboutPage.qml" line="114"/>
         <source>Current language translation by %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="113"/>
+        <location filename="../qml/AboutPage.qml" line="115"/>
         <source>Licensed under GNU GPLv3+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="121"/>
+        <location filename="../qml/AboutPage.qml" line="123"/>
         <source>Source</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="126"/>
+        <location filename="../qml/AboutPage.qml" line="128"/>
         <source>License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="133"/>
+        <location filename="../qml/AboutPage.qml" line="135"/>
         <source>Translations</source>
         <translation type="unfinished"></translation>
     </message>
@@ -381,7 +394,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="244"/>
+        <location filename="../qml/CommentDelegate.qml" line="245"/>
         <source>%n pts</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -389,7 +402,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="352"/>
+        <location filename="../qml/CommentDelegate.qml" line="353"/>
         <source>Load %n hidden comments</source>
         <translation type="unfinished">
             <numerusform>Load %n hidden comment</numerusform>
@@ -397,12 +410,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="352"/>
+        <location filename="../qml/CommentDelegate.qml" line="353"/>
         <source>Continue this thread</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="386"/>
+        <location filename="../qml/CommentDelegate.qml" line="387"/>
         <source>Show %n collapsed comments</source>
         <translation type="unfinished">
             <numerusform>Show %n collapsed comment</numerusform>
@@ -410,38 +423,56 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="415"/>
+        <location filename="../qml/CommentDelegate.qml" line="416"/>
         <source>Editing Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="416"/>
+        <location filename="../qml/CommentDelegate.qml" line="417"/>
         <source>Comment Reply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="417"/>
+        <location filename="../qml/CommentDelegate.qml" line="418"/>
         <source>New Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="429"/>
+        <location filename="../qml/CommentDelegate.qml" line="430"/>
         <source>Enter your reply here...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="429"/>
+        <location filename="../qml/CommentDelegate.qml" line="430"/>
         <source>Enter your new comment here...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="447"/>
+        <location filename="../qml/CommentDelegate.qml" line="448"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="447"/>
+        <location filename="../qml/CommentDelegate.qml" line="448"/>
         <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CommentManager</name>
+    <message>
+        <location filename="../../src/commentmanager.cpp" line="103"/>
+        <source>The comment has been added</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/commentmanager.cpp" line="106"/>
+        <source>The comment has been edited</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/commentmanager.cpp" line="110"/>
+        <source>The comment has been deleted</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -577,6 +608,32 @@
     <message>
         <location filename="../qml/ImageViewPage.qml" line="171"/>
         <source>Image save failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgurManager</name>
+    <message>
+        <location filename="../../src/imgurmanager.cpp" line="142"/>
+        <source>Unable to get Imgur ID from the url: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/imgurmanager.cpp" line="175"/>
+        <source>Imgur API returns no image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LinkManager</name>
+    <message>
+        <location filename="../../src/linkmanager.cpp" line="117"/>
+        <source>The link has been added</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/linkmanager.cpp" line="123"/>
+        <source>The link text has been changed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1299,72 +1356,72 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="61"/>
+        <location filename="../qml/SubredditsPage.qml" line="65"/>
         <source>About Quickddit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="66"/>
+        <location filename="../qml/SubredditsPage.qml" line="70"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="72"/>
+        <location filename="../qml/SubredditsPage.qml" line="76"/>
         <source>My Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="78"/>
+        <location filename="../qml/SubredditsPage.qml" line="82"/>
         <source>Messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="96"/>
+        <location filename="../qml/SubredditsPage.qml" line="100"/>
         <source>Go to a specific subreddit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="110"/>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Front Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="110"/>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="110"/>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Browse for Subreddits...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="110"/>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Multireddits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="110"/>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Popular</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="131"/>
+        <location filename="../qml/SubredditsPage.qml" line="135"/>
         <source>Subscribed Subreddits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="150"/>
+        <location filename="../qml/SubredditsPage.qml" line="154"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="156"/>
+        <location filename="../qml/SubredditsPage.qml" line="160"/>
         <source>Unsubscribe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="216"/>
+        <location filename="../qml/SubredditsPage.qml" line="220"/>
         <source>You have unsubscribed from %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1548,6 +1605,59 @@
         <location filename="../qml/UserPageLinkDelegate.qml" line="96"/>
         <source>Locked</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Utils</name>
+    <message>
+        <location filename="../../src/utils.cpp" line="36"/>
+        <source>Now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils.cpp" line="38"/>
+        <source>Just now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/utils.cpp" line="43"/>
+        <source>%n mins ago</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/utils.cpp" line="48"/>
+        <source>%n hours ago</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/utils.cpp" line="53"/>
+        <source>%n days ago</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/utils.cpp" line="58"/>
+        <source>%n months ago</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/utils.cpp" line="61"/>
+        <source>%n years ago</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
