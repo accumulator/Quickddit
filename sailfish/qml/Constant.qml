@@ -96,8 +96,8 @@ QtObject {
 
     // Quickddit specific
     readonly property int commentRepliesIndentWidth: 20
-    readonly property variant commentRepliesColor: ["green", "orange", "purple", "yellow",
-                                                    "royalblue", "pink", "indigo", "gold",
+    readonly property variant commentRepliesColor: ["green", "orange", "#9B30FF", "yellow",
+                                                    "royalblue", "pink", "#836FFF", "gold",
                                                     "red", colorLight];
 
 }

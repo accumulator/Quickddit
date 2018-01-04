@@ -77,7 +77,7 @@ Item {
 
                 Rectangle {
                     anchors { top: parent.top; bottom: parent.bottom; horizontalCenter: parent.horizontalCenter }
-                    width: 2
+                    width: Math.floor(2 * QMLUtils.pScale)
                     color: {
                         switch (index) {
                         case 0: case 1: case 2: case 3: case 4:
