@@ -265,11 +265,12 @@ ApplicationWindow {
         }
 
         function openRedditLink(url) {
-            if (!/^https?:\/\/(\w+\.)?reddit.com\/.+/.test(url)) {
+            var redditLink = parseRedditLink(url);
+            if (redditLink === null) {
                 console.log("Not a reddit link: " + url);
                 return;
             }
-            var redditLink = parseRedditLink(url);
+
             if (/^(\/r\/\w+)?\/comments\/\w+/.test(redditLink.path))
                 pushOrReplace(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
             else if (/^\/r\/(\w+)/.test(redditLink.path)) {
@@ -318,13 +319,23 @@ ApplicationWindow {
         }
 
         function parseRedditLink(url) {
+            var shortLinkRe = /^https?:\/\/redd.it\/([^/]+)\/?/.exec(url);
             var linkRe = /^(https?:\/\/(\w+\.)?reddit.com)?(\/[^?]*)(\?.*)?/.exec(url);
-            if (linkRe === null)
+            if (linkRe === null && shortLinkRe === null) {
                 return null;
+            }
 
-            var link = {
-                path: linkRe[3].charAt(linkRe[3].length-1) === "/" ? linkRe[3].substring(0,linkRe[3].length-1) : linkRe[3],
-                query: linkRe[4] === undefined ? "" : linkRe[4].substring(1)
+            var link = {}
+            if (shortLinkRe !== null) {
+                link = {
+                    path: "/comments/" + shortLinkRe[1],
+                    query: ""
+                }
+            } else {
+                link = {
+                    path: linkRe[3].charAt(linkRe[3].length-1) === "/" ? linkRe[3].substring(0,linkRe[3].length-1) : linkRe[3],
+                    query: linkRe[4] === undefined ? "" : linkRe[4].substring(1)
+                }
             }
             console.log(link.path + "|" + link.query);
             link.queryMap = {}

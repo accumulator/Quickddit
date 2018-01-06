@@ -35,6 +35,7 @@
 #include "linkmodel.h"
 
 static QRegExp commentPermalinkRegExp("(/r/\\w+)?/comments/\\w+/\\w*/(\\w+/?)");
+static QRegExp shortPermalinkRegExp("^/[^/]+$");
 
 CommentModel::CommentModel(QObject *parent) :
     AbstractListModelManager(parent), m_link(0), m_sort(UndefinedSort), m_commentPermalink(false)
@@ -517,6 +518,8 @@ void CommentModel::refresh(bool refreshOlder)
     QString relativeUrl = permalinkUrl.path();
     if (!m_commentPermalink && relativeUrl.contains(commentPermalinkRegExp))
         relativeUrl.remove(commentPermalinkRegExp.cap(2));
+    if (relativeUrl.contains(shortPermalinkRegExp))
+        relativeUrl = "/comments" + relativeUrl;
 
     doRequest(APIRequest::GET, relativeUrl, SLOT(onFinished(QNetworkReply*)), parameters);
 }
