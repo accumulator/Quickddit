@@ -76,32 +76,33 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="114"/>
+        <location filename="../qml/AboutPage.qml" line="115"/>
         <source>_translator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/AboutPage.qml" line="114"/>
-        <source>Current language translation by %1</source>
+        <extracomment>_translator is used as a placeholder for the name of the translator (you :)</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="115"/>
+        <source>Current language translation by %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="116"/>
         <source>Licensed under GNU GPLv3+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="123"/>
+        <location filename="../qml/AboutPage.qml" line="124"/>
         <source>Source</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="128"/>
+        <location filename="../qml/AboutPage.qml" line="129"/>
         <source>License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="135"/>
+        <location filename="../qml/AboutPage.qml" line="136"/>
         <source>Translations</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1719,43 +1720,43 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="307"/>
+        <location filename="../qml/main.qml" line="308"/>
         <source>Unsupported reddit url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="349"/>
+        <location filename="../qml/main.qml" line="360"/>
         <source>Unsupported image url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="358"/>
+        <location filename="../qml/main.qml" line="369"/>
         <source>Unsupported video url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="418"/>
+        <location filename="../qml/main.qml" line="429"/>
         <source>Please log in again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="453"/>
+        <location filename="../qml/main.qml" line="464"/>
         <source> and %1 other</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="462"/>
-        <location filename="../qml/main.qml" line="463"/>
+        <location filename="../qml/main.qml" line="473"/>
+        <location filename="../qml/main.qml" line="474"/>
         <source>Message from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="473"/>
+        <location filename="../qml/main.qml" line="484"/>
         <source>New message from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="474"/>
+        <location filename="../qml/main.qml" line="485"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation type="unfinished">

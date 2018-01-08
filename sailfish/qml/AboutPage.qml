@@ -111,6 +111,7 @@ AbstractPage {
                     text: "Copyright (c) 2015-2018 Sander van Grieken\n" +
                           "Copyright (c) 2013-2014 Dickson Leong\n\n" +
                           qsTr("App icon by Andrew Zhilin") + "\n\n" +
+                          //: _translator is used as a placeholder for the name of the translator (you :)
                           (qsTr("_translator") !== "_translator" ? qsTr("Current language translation by %1").arg(qsTr("_translator")) + "\n\n" : "") +
                           qsTr("Licensed under GNU GPLv3+")
                 }
