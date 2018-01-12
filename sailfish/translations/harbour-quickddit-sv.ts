@@ -1,8 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sv" sourcelanguage="en">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" sourcelanguage="en" version="2.1">
+<context>
+    <name>AboutMultiredditManager</name>
+    <message>
+        <location filename="../../src/aboutmultiredditmanager.cpp" line="128"/>
+        <source>%1 has been added to %2</source>
+        <translation>%1 har lagts till i %2</translation>
+    </message>
+    <message>
+        <location filename="../../src/aboutmultiredditmanager.cpp" line="149"/>
+        <source>%1 has been removed from %2</source>
+        <translation>%1 har tagits bort från %2</translation>
+    </message>
+</context>
 <context>
     <name>AboutMultiredditPage</name>
+    <message>
+        <location filename="../qml/AboutMultiredditPage.qml" line="25"/>
+        <source>About %1</source>
+        <translation>Om %1</translation>
+    </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="37"/>
         <location filename="../qml/AboutMultiredditPage.qml" line="127"/>
@@ -25,6 +41,11 @@
         <translation>Subredditar</translation>
     </message>
     <message>
+        <location filename="../qml/AboutMultiredditPage.qml" line="96"/>
+        <source>Go to %1</source>
+        <translation>Gå till %1</translation>
+    </message>
+    <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="105"/>
         <source>Remove</source>
         <translation>Ta bort</translation>
@@ -43,18 +64,54 @@
         <translation>Om</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="120"/>
+        <location filename="../qml/AboutPage.qml" line="101"/>
+        <source>Quickddit - A free and open source Reddit client for mobile phones</source>
+        <translation>Quickddit - En Reddit-klient för mobiltelefoner, som fri och öppen källkod</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="113"/>
+        <source>App icon by Andrew Zhilin</source>
+        <translation>App-ikon av Andrew Zhilin</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="115"/>
+        <source>_translator</source>
+        <extracomment>_translator is used as a placeholder for the name of the translator (you :)</extracomment>
+        <translation>Åke Engelbrektson</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="115"/>
+        <source>Current language translation by %1</source>
+        <translation>Aktuell översättning av %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="116"/>
+        <source>Licensed under GNU GPLv3+</source>
+        <translation>Licensierad under GNU GPLv3+</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="124"/>
         <source>Source</source>
         <translation>Källkod</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="125"/>
+        <location filename="../qml/AboutPage.qml" line="129"/>
         <source>License</source>
         <translation>Licens</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="136"/>
+        <source>Translations</source>
+        <translation>Översättningar</translation>
     </message>
 </context>
 <context>
     <name>AboutSubredditPage</name>
+    <message>
+        <location filename="../qml/AboutSubredditPage.qml" line="26"/>
+        <source>About %1</source>
+        <translation>Om %1</translation>
+    </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="38"/>
         <source>Moderators</source>
@@ -79,6 +136,16 @@
         <location filename="../qml/AboutSubredditPage.qml" line="100"/>
         <source>This subreddit is Not Safe For Work</source>
         <translation>Denna subreddit är inte arbetsplatssäker (NSFW)</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/AboutSubredditPage.qml" line="116"/>
+        <source>%n subscribers</source>
+        <translation><numerusform>%n prenumerant</numerusform><numerusform>%n prenumeranter</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/AboutSubredditPage.qml" line="117"/>
+        <source>%n active users</source>
+        <translation><numerusform>%n aktiv användare</numerusform><numerusform>%n aktiva användare</numerusform></translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="129"/>
@@ -310,65 +377,87 @@
         <translation>Klistrad</translation>
     </message>
     <message>
+        <location filename="../qml/CommentDelegate.qml" line="152"/>
+        <source>Gilded</source>
+        <translation>Förgyllda</translation>
+    </message>
+    <message>
         <location filename="../qml/CommentDelegate.qml" line="244"/>
         <source>[score hidden]</source>
         <translation>[poäng dolda]</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="352"/>
+        <location filename="../qml/CommentDelegate.qml" line="245"/>
+        <source>%n pts</source>
+        <translation><numerusform>%n p</numerusform><numerusform>%n p</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/CommentDelegate.qml" line="353"/>
         <source>Load %n hidden comments</source>
-        <translation>
-            <numerusform>Läs in %n dold kommentar</numerusform>
-            <numerusform>Läs in %n dolda kommentarer</numerusform>
-        </translation>
+        <translation><numerusform>Läs in %n dold kommentar</numerusform><numerusform>Läs in %n dolda kommentarer</numerusform></translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="352"/>
+        <location filename="../qml/CommentDelegate.qml" line="353"/>
         <source>Continue this thread</source>
         <translation>Fortsätt denna tråd</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="386"/>
+        <location filename="../qml/CommentDelegate.qml" line="387"/>
         <source>Show %n collapsed comments</source>
-        <translation>
-            <numerusform>Visa %n komprimerad kommentar</numerusform>
-            <numerusform>Visa %n komprimerade kommentarer</numerusform>
-        </translation>
+        <translation><numerusform>Visa %n komprimerad kommentar</numerusform><numerusform>Visa %n komprimerade kommentarer</numerusform></translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="415"/>
+        <location filename="../qml/CommentDelegate.qml" line="416"/>
         <source>Editing Comment</source>
         <translation>Redigera kommentar</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="416"/>
+        <location filename="../qml/CommentDelegate.qml" line="417"/>
         <source>Comment Reply</source>
         <translation>Kommentarssvar</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="417"/>
+        <location filename="../qml/CommentDelegate.qml" line="418"/>
         <source>New Comment</source>
         <translation>Ny kommentar</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="429"/>
+        <location filename="../qml/CommentDelegate.qml" line="430"/>
         <source>Enter your reply here...</source>
         <translation>Ange ditt svar här...</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="429"/>
+        <location filename="../qml/CommentDelegate.qml" line="430"/>
         <source>Enter your new comment here...</source>
         <translation>Ange din nya kommentar här...</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="447"/>
+        <location filename="../qml/CommentDelegate.qml" line="448"/>
         <source>Save</source>
         <translation>Spara</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="447"/>
+        <location filename="../qml/CommentDelegate.qml" line="448"/>
         <source>Add</source>
         <translation>Lägg till</translation>
+    </message>
+</context>
+<context>
+    <name>CommentManager</name>
+    <message>
+        <location filename="../../src/commentmanager.cpp" line="103"/>
+        <source>The comment has been added</source>
+        <translation>Kommentaren har lagts till</translation>
+    </message>
+    <message>
+        <location filename="../../src/commentmanager.cpp" line="106"/>
+        <source>The comment has been edited</source>
+        <translation>Kommentaren har redigerats</translation>
+    </message>
+    <message>
+        <location filename="../../src/commentmanager.cpp" line="110"/>
+        <source>The comment has been deleted</source>
+        <translation>Kommentaren har tagits bort</translation>
     </message>
 </context>
 <context>
@@ -507,6 +596,32 @@
     </message>
 </context>
 <context>
+    <name>ImgurManager</name>
+    <message>
+        <location filename="../../src/imgurmanager.cpp" line="142"/>
+        <source>Unable to get Imgur ID from the url: %1</source>
+        <translation>Kunde inte hämta Imgur-ID från URL: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/imgurmanager.cpp" line="175"/>
+        <source>Imgur API returns no image</source>
+        <translation>Imgur API skickar ingen bild</translation>
+    </message>
+</context>
+<context>
+    <name>LinkManager</name>
+    <message>
+        <location filename="../../src/linkmanager.cpp" line="117"/>
+        <source>The link has been added</source>
+        <translation>Länken har lagts till</translation>
+    </message>
+    <message>
+        <location filename="../../src/linkmanager.cpp" line="123"/>
+        <source>The link text has been changed</source>
+        <translation>Länktexten har ändrats</translation>
+    </message>
+</context>
+<context>
     <name>LinkMenu</name>
     <message>
         <location filename="../qml/LinkMenu.qml" line="37"/>
@@ -560,6 +675,11 @@
 <context>
     <name>MainPage</name>
     <message>
+        <location filename="../qml/MainPage.qml" line="87"/>
+        <source>About %1</source>
+        <translation>Om %1</translation>
+    </message>
+    <message>
         <location filename="../qml/MainPage.qml" line="99"/>
         <source>New Post</source>
         <translation>Nytt inlägg</translation>
@@ -584,6 +704,34 @@
         <location filename="../qml/MainPage.qml" line="143"/>
         <source>Delete link</source>
         <translation>Ta bort länk</translation>
+    </message>
+    <message>
+        <location filename="../qml/MainPage.qml" line="163"/>
+        <source>Nothing here :(</source>
+        <translation>Inget här :(</translation>
+    </message>
+</context>
+<context>
+    <name>MessageDelegate</name>
+    <message>
+        <location filename="../qml/MessageDelegate.qml" line="70"/>
+        <source>%1 from %2</source>
+        <translation>%1 från %2</translation>
+    </message>
+    <message>
+        <location filename="../qml/MessageDelegate.qml" line="82"/>
+        <source>in %1</source>
+        <translation>i %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/MessageDelegate.qml" line="83"/>
+        <source>to %1</source>
+        <translation>till %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/MessageDelegate.qml" line="85"/>
+        <source>from %1</source>
+        <translation>från %1</translation>
     </message>
 </context>
 <context>
@@ -750,6 +898,11 @@
         <translation>Sponsrad</translation>
     </message>
     <message>
+        <location filename="../qml/PostInfoText.qml" line="63"/>
+        <source>Gilded</source>
+        <translation>Förgyllda</translation>
+    </message>
+    <message>
         <location filename="../qml/PostInfoText.qml" line="71"/>
         <source>Archived</source>
         <translation>Arkiverad</translation>
@@ -758,6 +911,26 @@
         <location filename="../qml/PostInfoText.qml" line="78"/>
         <source>Locked</source>
         <translation>Låst</translation>
+    </message>
+    <message>
+        <location filename="../qml/PostInfoText.qml" line="104"/>
+        <source>submitted %1 by %2</source>
+        <translation>postade %1 av %2</translation>
+    </message>
+    <message>
+        <location filename="../qml/PostInfoText.qml" line="107"/>
+        <source>to %1</source>
+        <translation>till %1</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/PostInfoText.qml" line="135"/>
+        <source>%n points</source>
+        <translation><numerusform>%n poäng</numerusform><numerusform>%n poäng</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/PostInfoText.qml" line="147"/>
+        <source>%n comments</source>
+        <translation><numerusform>%n kommentar</numerusform><numerusform>%n kommentarer</numerusform></translation>
     </message>
 </context>
 <context>
@@ -800,6 +973,11 @@
 </context>
 <context>
     <name>SearchPage</name>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="25"/>
+        <source>Search Result: %1</source>
+        <translation>Sökresultat: %1</translation>
+    </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>Relevance</source>
@@ -1041,6 +1219,14 @@
     </message>
 </context>
 <context>
+    <name>SubredditBrowseDelegate</name>
+    <message numerus="yes">
+        <location filename="../qml/SubredditBrowseDelegate.qml" line="68"/>
+        <source>%n subscribers</source>
+        <translation><numerusform>%n prenumerant</numerusform><numerusform>%n prenumeranter</numerusform></translation>
+    </message>
+</context>
+<context>
     <name>SubredditDelegate</name>
     <message>
         <location filename="../qml/SubredditDelegate.qml" line="58"/>
@@ -1070,6 +1256,11 @@
 </context>
 <context>
     <name>SubredditsBrowsePage</name>
+    <message>
+        <location filename="../qml/SubredditsBrowsePage.qml" line="27"/>
+        <source>Subreddits Search: %1</source>
+        <translation>Underredditsök: %1</translation>
+    </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="36"/>
         <source>Popular Subreddits</source>
@@ -1140,72 +1331,72 @@
         <translation>Underredditar</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="61"/>
+        <location filename="../qml/SubredditsPage.qml" line="65"/>
         <source>About Quickddit</source>
         <translation>Om Quickddit</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="66"/>
+        <location filename="../qml/SubredditsPage.qml" line="70"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="72"/>
+        <location filename="../qml/SubredditsPage.qml" line="76"/>
         <source>My Profile</source>
         <translation>Min profil</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="78"/>
+        <location filename="../qml/SubredditsPage.qml" line="82"/>
         <source>Messages</source>
         <translation>Meddelanden</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="96"/>
+        <location filename="../qml/SubredditsPage.qml" line="100"/>
         <source>Go to a specific subreddit</source>
         <translation>Gå till en specifik underreddit</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="110"/>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Front Page</source>
         <translation>Startsida</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="110"/>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>All</source>
         <translation>Alla</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="110"/>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Browse for Subreddits...</source>
         <translation>Bläddra efter underredditar...</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="110"/>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Multireddits</source>
         <translation>Multiredditar</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="110"/>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Popular</source>
         <translation>Heta</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="131"/>
+        <location filename="../qml/SubredditsPage.qml" line="135"/>
         <source>Subscribed Subreddits</source>
         <translation>Prenumererade underredditar</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="150"/>
+        <location filename="../qml/SubredditsPage.qml" line="154"/>
         <source>About</source>
         <translation>Om</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="156"/>
+        <location filename="../qml/SubredditsPage.qml" line="160"/>
         <source>Unsubscribe</source>
         <translation>Avsluta prenumeration</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="216"/>
+        <location filename="../qml/SubredditsPage.qml" line="220"/>
         <source>You have unsubscribed from %1</source>
         <translation>Du har avslutat prenumerationen på %1</translation>
     </message>
@@ -1220,6 +1411,11 @@
 </context>
 <context>
     <name>UserPage</name>
+    <message>
+        <location filename="../qml/UserPage.qml" line="25"/>
+        <source>User %1</source>
+        <translation>Användare %1</translation>
+    </message>
     <message>
         <location filename="../qml/UserPage.qml" line="31"/>
         <location filename="../qml/UserPage.qml" line="32"/>
@@ -1236,7 +1432,7 @@
         <location filename="../qml/UserPage.qml" line="31"/>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Submitted</source>
-        <translation>Postade</translation>
+        <translation>Postad</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="32"/>
@@ -1305,6 +1501,21 @@
         <translation>Inga robotar</translation>
     </message>
     <message>
+        <location filename="../qml/UserPage.qml" line="139"/>
+        <source>%1 link karma</source>
+        <translation>%1 länkkarma</translation>
+    </message>
+    <message>
+        <location filename="../qml/UserPage.qml" line="145"/>
+        <source>%1 comment karma</source>
+        <translation>%1 kommentarskarma</translation>
+    </message>
+    <message>
+        <location filename="../qml/UserPage.qml" line="151"/>
+        <source>created %1</source>
+        <translation>skapad %1</translation>
+    </message>
+    <message>
         <location filename="../qml/UserPage.qml" line="209"/>
         <source>Delete</source>
         <translation>Ta bort</translation>
@@ -1332,13 +1543,23 @@
         <source>Sticky</source>
         <translation>Klistrig</translation>
     </message>
+    <message>
+        <location filename="../qml/UserPageCommentDelegate.qml" line="61"/>
+        <source>Gilded</source>
+        <translation>Förgyllda</translation>
+    </message>
+    <message>
+        <location filename="../qml/UserPageCommentDelegate.qml" line="85"/>
+        <source>Comment in %1</source>
+        <translation>Kommentar i %1</translation>
+    </message>
 </context>
 <context>
     <name>UserPageLinkDelegate</name>
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="64"/>
         <source>Sticky</source>
-        <translation>Klistrig</translation>
+        <translation>Klistrad</translation>
     </message>
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="72"/>
@@ -1351,9 +1572,52 @@
         <translation>Sponsrad</translation>
     </message>
     <message>
+        <location filename="../qml/UserPageLinkDelegate.qml" line="87"/>
+        <source>Gilded</source>
+        <translation>Förgyllda</translation>
+    </message>
+    <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="96"/>
         <source>Locked</source>
         <translation>Låst</translation>
+    </message>
+</context>
+<context>
+    <name>Utils</name>
+    <message>
+        <location filename="../../src/utils.cpp" line="36"/>
+        <source>Now</source>
+        <translation>Nu</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils.cpp" line="38"/>
+        <source>Just now</source>
+        <translation>Just nu</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/utils.cpp" line="43"/>
+        <source>%n mins ago</source>
+        <translation><numerusform>%n minut sedan</numerusform><numerusform>%n minuter sedan</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/utils.cpp" line="48"/>
+        <source>%n hours ago</source>
+        <translation><numerusform>%n timma sedan</numerusform><numerusform>%n timmar sedan</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/utils.cpp" line="53"/>
+        <source>%n days ago</source>
+        <translation><numerusform>%n dag sedan</numerusform><numerusform>%n dagar sedan</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/utils.cpp" line="58"/>
+        <source>%n months ago</source>
+        <translation><numerusform>%n månad sedan</numerusform><numerusform>%n månader sedan</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/utils.cpp" line="61"/>
+        <source>%n years ago</source>
+        <translation><numerusform>%n år sedan</numerusform><numerusform>%n år sedan</numerusform></translation>
     </message>
 </context>
 <context>
@@ -1415,49 +1679,46 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="307"/>
+        <location filename="../qml/main.qml" line="308"/>
         <source>Unsupported reddit url</source>
-        <translation>reddit-länken stöds inte</translation>
+        <translation>Reddit-länken stöds inte</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="349"/>
+        <location filename="../qml/main.qml" line="360"/>
         <source>Unsupported image url</source>
         <translation>Bildlänken stöds inte</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="358"/>
+        <location filename="../qml/main.qml" line="369"/>
         <source>Unsupported video url</source>
         <translation>Videolänken stöds inte</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="418"/>
+        <location filename="../qml/main.qml" line="429"/>
         <source>Please log in again</source>
         <translation>Logga in igen</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="453"/>
+        <location filename="../qml/main.qml" line="464"/>
         <source> and %1 other</source>
         <translation> och %1 andra</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="462"/>
-        <location filename="../qml/main.qml" line="463"/>
+        <location filename="../qml/main.qml" line="473"/>
+        <location filename="../qml/main.qml" line="474"/>
         <source>Message from %1</source>
         <translation>Meddelande från %1</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="473"/>
+        <location filename="../qml/main.qml" line="484"/>
         <source>New message from %1</source>
         <translation>Nytt meddelande från %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="474"/>
+        <location filename="../qml/main.qml" line="485"/>
         <source>%n new messages</source>
         <comment>0</comment>
-        <translation>
-            <numerusform>%n nytt meddelande</numerusform>
-            <numerusform>%n nya meddelanden</numerusform>
-        </translation>
+        <translation><numerusform>%n nytt meddelande</numerusform><numerusform>%n nya meddelanden</numerusform></translation>
     </message>
 </context>
 </TS>
