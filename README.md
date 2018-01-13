@@ -28,7 +28,7 @@ Features
 - Edit your posts and comments
 - Inbox Notifications to the event screen
 - Browse user's profile
-- Captcha support
+- Watches clipboard for reddit links
 
 Reddit API client id and secret
 ----------------------------------
