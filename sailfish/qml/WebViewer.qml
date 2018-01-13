@@ -36,6 +36,9 @@ AbstractPage {
         id: webView
         anchors.fill: parent
 
+        experimental.overview: true
+        experimental.customLayoutWidth: webViewPage.width / (0.5 + QMLUtils.pScale)
+
         onLoadingChanged: {
             busy = loading
         }
