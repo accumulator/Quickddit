@@ -43,7 +43,7 @@
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="96"/>
         <source>Go to %1</source>
-        <translation>Aller à %1</translation>
+        <translation>Aller vers %1</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="105"/>
@@ -82,7 +82,7 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="115"/>
         <source>Current language translation by %1</source>
-        <translation>Langue actuelle traduit par %1</translation>
+        <translation>Langue actuelle traduite par %1</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="116"/>
@@ -135,7 +135,7 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="100"/>
         <source>This subreddit is Not Safe For Work</source>
-        <translation>Ce subreddit n&apos;est pas approprié pour une consultation au travail - Not Safe For Work</translation>
+        <translation>Ce Subreddit n&apos;est pas approprié pour une consultation au travail - Not Safe For Work</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/AboutSubredditPage.qml" line="116"/>
@@ -333,7 +333,7 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="190"/>
         <source>When enabled, please make sure Tor is installed and active.</source>
-        <translation>Si activé, assurez-vous que Tor est installé et actif.</translation>
+        <translation>Si activé, assurez-vous que Tor est installé et bien actif.</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="197"/>
@@ -920,7 +920,7 @@
     <message>
         <location filename="../qml/PostInfoText.qml" line="107"/>
         <source>to %1</source>
-        <translation>à %1</translation>
+        <translation>pour %1</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/PostInfoText.qml" line="135"/>
@@ -963,12 +963,12 @@
     <message>
         <location filename="../qml/SearchDialog.qml" line="84"/>
         <source>Search within this subreddit:</source>
-        <translation>Chercher dans ce subreddit :</translation>
+        <translation>Chercher dans ce Subreddit :</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="93"/>
         <source>Enter subreddit name</source>
-        <translation>Entrer le nom du subreddit</translation>
+        <translation>Entrer le nom du Subreddit</translation>
     </message>
 </context>
 <context>
@@ -1192,7 +1192,7 @@
     <message>
         <location filename="../qml/SendMessagePage.qml" line="91"/>
         <source>Send</source>
-        <translation>Envoyé</translation>
+        <translation>Envoyer</translation>
     </message>
 </context>
 <context>
@@ -1203,17 +1203,17 @@
         <translation>Se connecter à Reddit</translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="52"/>
+        <location filename="../qml/SignInPage.qml" line="47"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="59"/>
+        <location filename="../qml/SignInPage.qml" line="54"/>
         <source>Reload</source>
         <translation>Recharger</translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="71"/>
+        <location filename="../qml/SignInPage.qml" line="66"/>
         <source>Sign in successful! Welcome! :)</source>
         <translation>Connexion réussie ! Bienvenue ! :)</translation>
     </message>
@@ -1284,7 +1284,7 @@
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="37"/>
         <source>My Subreddits - Moderator</source>
-        <translation>Mes Subreddit - Modérateur</translation>
+        <translation>Mes Subreddits - Modérateur</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="57"/>
@@ -1353,7 +1353,7 @@
     <message>
         <location filename="../qml/SubredditsPage.qml" line="100"/>
         <source>Go to a specific subreddit</source>
-        <translation>Aller à un subreddit spécifique</translation>
+        <translation>Aller vers un Subreddit spécifique</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
@@ -1651,27 +1651,27 @@
         <translation>WebViewer</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="45"/>
+        <location filename="../qml/WebViewer.qml" line="48"/>
         <source>Copy URL</source>
         <translation>Copier l&apos;URL</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="48"/>
+        <location filename="../qml/WebViewer.qml" line="51"/>
         <source>URL copied to clipboard</source>
         <translation>URL copiée dans le presse-papier</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="52"/>
+        <location filename="../qml/WebViewer.qml" line="55"/>
         <source>Open in browser</source>
         <translation>Ouvrir dans le navigateur</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="58"/>
+        <location filename="../qml/WebViewer.qml" line="61"/>
         <source>Back</source>
         <translation>Retour</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="63"/>
+        <location filename="../qml/WebViewer.qml" line="66"/>
         <source>Forward</source>
         <translation>Transférer</translation>
     </message>

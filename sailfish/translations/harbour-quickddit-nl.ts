@@ -1203,17 +1203,17 @@
         <translation>Inloggen bij Reddit</translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="52"/>
+        <location filename="../qml/SignInPage.qml" line="47"/>
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="59"/>
+        <location filename="../qml/SignInPage.qml" line="54"/>
         <source>Reload</source>
         <translation>Herladen</translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="71"/>
+        <location filename="../qml/SignInPage.qml" line="66"/>
         <source>Sign in successful! Welcome! :)</source>
         <translation>Je bent ingelogd! Welkom! :)</translation>
     </message>
@@ -1651,27 +1651,27 @@
         <translation>Webweergave</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="45"/>
+        <location filename="../qml/WebViewer.qml" line="48"/>
         <source>Copy URL</source>
         <translation>URL kopiëren</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="48"/>
+        <location filename="../qml/WebViewer.qml" line="51"/>
         <source>URL copied to clipboard</source>
         <translation>URL gekopieerd naar klembord</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="52"/>
+        <location filename="../qml/WebViewer.qml" line="55"/>
         <source>Open in browser</source>
         <translation>Openen in browser</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="58"/>
+        <location filename="../qml/WebViewer.qml" line="61"/>
         <source>Back</source>
         <translation>Terug</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="63"/>
+        <location filename="../qml/WebViewer.qml" line="66"/>
         <source>Forward</source>
         <translation>Vooruit</translation>
     </message>
