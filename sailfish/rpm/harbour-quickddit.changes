@@ -5,6 +5,9 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Jan 29 2018 Sander van Grieken <sander@outrightsolutions.nl> 1.7.1-1
+- new: Polish translation (thanks Maciej Wereski!)
+
 * Sat Jan 13 2018 Sander van Grieken <sander@outrightsolutions.nl> 1.7.0-1
 - fix: handle invalid refresh token more gracefully
 - fix: multireddit contents retrieve crash
