@@ -82,7 +82,7 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="115"/>
         <source>Current language translation by %1</source>
-        <translation>Langue actuelle traduite par %1</translation>
+        <translation>Traduction française : %1</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="116"/>
@@ -215,12 +215,12 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="199"/>
         <source>You have subscribed to %1</source>
-        <translation>Vous vous êtes abonné à %1</translation>
+        <translation>Vous vous êtes abonné(e) à %1</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="201"/>
         <source>You have unsubscribed from %1</source>
-        <translation>Vous vous êtes désabonné de %1</translation>
+        <translation>Vous vous êtes désabonné(e) de %1</translation>
     </message>
 </context>
 <context>
@@ -343,7 +343,7 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="205"/>
         <source>Signed in to Reddit as</source>
-        <translation>Connecté à Reddit en tant que</translation>
+        <translation>Connecté(e) à Reddit en tant que</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="224"/>
@@ -358,7 +358,7 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="228"/>
         <source>You have signed out from Reddit</source>
-        <translation>Vous vous êtes déconnecté de Reddit</translation>
+        <translation>Vous vous êtes déconnecté(e) de Reddit</translation>
     </message>
 </context>
 <context>
@@ -409,7 +409,7 @@
     <message>
         <location filename="../qml/CommentDelegate.qml" line="416"/>
         <source>Editing Comment</source>
-        <translation>Édition du commentaire</translation>
+        <translation>Modification du commentaire</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="417"/>
@@ -452,7 +452,7 @@
     <message>
         <location filename="../../src/commentmanager.cpp" line="106"/>
         <source>The comment has been edited</source>
-        <translation>Le commentaire a été édité</translation>
+        <translation>Le commentaire a été modifié</translation>
     </message>
     <message>
         <location filename="../../src/commentmanager.cpp" line="110"/>
@@ -480,7 +480,7 @@
     <message>
         <location filename="../qml/CommentMenu.qml" line="95"/>
         <source>Edit</source>
-        <translation>Éditer</translation>
+        <translation>Modifier</translation>
     </message>
     <message>
         <location filename="../qml/CommentMenu.qml" line="100"/>
@@ -528,7 +528,7 @@
     <message>
         <location filename="../qml/CommentPage.qml" line="57"/>
         <source>Edit Post</source>
-        <translation>Éditer le post</translation>
+        <translation>Modifier le post</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="65"/>
@@ -651,7 +651,7 @@
     <message>
         <location filename="../qml/LinkMenu.qml" line="63"/>
         <source>Unsave</source>
-        <translation>Ne pas enregistrer</translation>
+        <translation>Ne plus conserver</translation>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="68"/>
@@ -739,12 +739,12 @@
     <message>
         <location filename="../qml/MessageMenu.qml" line="33"/>
         <source>Mark As Read</source>
-        <translation>Marqué comme lu</translation>
+        <translation>Marquer comme lu</translation>
     </message>
     <message>
         <location filename="../qml/MessageMenu.qml" line="33"/>
         <source>Mark As Unread</source>
-        <translation>Marque comme non lu</translation>
+        <translation>Marquer comme non lu</translation>
     </message>
 </context>
 <context>
@@ -920,7 +920,7 @@
     <message>
         <location filename="../qml/PostInfoText.qml" line="107"/>
         <source>to %1</source>
-        <translation>pour %1</translation>
+        <translation>à %1</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/PostInfoText.qml" line="135"/>
@@ -943,12 +943,12 @@
     <message>
         <location filename="../qml/SearchDialog.qml" line="53"/>
         <source>Enter search query</source>
-        <translation>Entrer la recherche</translation>
+        <translation>Entrer les éléments à rechercher</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="64"/>
         <source>Search for</source>
-        <translation>Chercher</translation>
+        <translation>Chercher dans les</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="66"/>
@@ -1119,7 +1119,7 @@
     <message>
         <location filename="../qml/SendLinkPage.qml" line="25"/>
         <source>Edit Post</source>
-        <translation>Éditer le post</translation>
+        <translation>Modifier le post</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="65"/>
@@ -1398,7 +1398,7 @@
     <message>
         <location filename="../qml/SubredditsPage.qml" line="220"/>
         <source>You have unsubscribed from %1</source>
-        <translation>Vous vous êtes désabonné de %1</translation>
+        <translation>Vous vous êtes désabonné(e) de %1</translation>
     </message>
 </context>
 <context>
@@ -1488,7 +1488,7 @@
     <message>
         <location filename="../qml/UserPage.qml" line="112"/>
         <source>Email Verified</source>
-        <translation>Email vérifié</translation>
+        <translation>E-mail vérifié</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="116"/>
@@ -1681,17 +1681,17 @@
     <message>
         <location filename="../qml/main.qml" line="308"/>
         <source>Unsupported reddit url</source>
-        <translation>URL reddit non supportée</translation>
+        <translation>URL Reddit non supportée</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="360"/>
         <source>Unsupported image url</source>
-        <translation>URL image non supportée</translation>
+        <translation>URL Image non supportée</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="369"/>
         <source>Unsupported video url</source>
-        <translation>URL vidéo non supportée</translation>
+        <translation>URL Vidéo non supportée</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="429"/>
