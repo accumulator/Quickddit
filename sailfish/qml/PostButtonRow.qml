@@ -64,12 +64,12 @@ Row {
         icon.width: Theme.iconSizeLarge - constant.paddingMedium
         icon.source: {
             return globalUtils.previewableVideo(link.url) ? "image://theme/icon-m-video"
-                   : globalUtils.redditLink(link.url) ? "image://theme/icon-m-forward" //m-chat
+                   : globalUtils.redditLink(link.url) ? "image://theme/icon-m-forward"
                    : "image://theme/icon-m-image";
         }
         enabled: globalUtils.previewableImage(link.url)
                  || globalUtils.previewableVideo(link.url)
-                 || (globalUtils.redditLink(link.url) && !link.isSelfPost)
+                 || (globalUtils.redditLink(link.url) && link.permalink.indexOf(globalUtils.parseRedditLink(link.url).path) === -1) // self-post, but not this one
         onClicked: {
             if (globalUtils.previewableImage(link.url)) {
                 globalUtils.openImageViewPage(link.url);
