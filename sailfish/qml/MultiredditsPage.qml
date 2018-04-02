@@ -31,7 +31,7 @@ AbstractPage {
 
     onStatusChanged: {
         if (status === PageStatus.Activating) {
-            if (_model.rowCount() === 0)
+            if (_model.rowCount() === 0 && quickdditManager.isSignedIn)
                 _model.refresh(false)
         }
     }

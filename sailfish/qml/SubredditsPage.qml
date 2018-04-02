@@ -47,7 +47,7 @@ AbstractPage {
 
     onStatusChanged: {
         if (status === PageStatus.Activating) {
-            if (subredditModel.rowCount() === 0)
+            if (subredditModel.rowCount() === 0 && quickdditManager.isSignedIn)
                 subredditModel.refresh(false)
         } else if (status === PageStatus.Inactive) {
             subredditListView.headerItem.resetTextField();
