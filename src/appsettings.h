@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2015-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ class AppSettings : public QObject
     Q_ENUMS(VideoSize)
     Q_PROPERTY(bool whiteTheme READ whiteTheme WRITE setWhiteTheme NOTIFY whiteThemeChanged)
     Q_PROPERTY(FontSize fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
-    Q_PROPERTY(QString redditUsername READ redditUsername CONSTANT)
+    Q_PROPERTY(QString redditUsername READ redditUsername NOTIFY usernameChanged)
     Q_PROPERTY(OrientationProfile orientationProfile READ orientationProfile WRITE setOrientationProfile NOTIFY orientationProfileChanged)
     Q_PROPERTY(bool pollUnread READ pollUnread WRITE setPollUnread NOTIFY pollUnreadChanged)
     Q_PROPERTY(ThumbnailScale thumbnailScale READ thumbnailScale WRITE setThumbnailScale NOTIFY thumbnailScaleChanged)
@@ -43,7 +43,7 @@ class AppSettings : public QObject
     Q_PROPERTY(int commentSort READ commentSort WRITE setCommentSort NOTIFY commentSortChanged)
     Q_PROPERTY(bool useTor READ useTor WRITE setUseTor NOTIFY useTorChanged)
     Q_PROPERTY(VideoSize preferredVideoSize READ preferredVideoSize WRITE setPreferredVideoSize NOTIFY preferredVideoSizeChanged)
-    Q_PROPERTY(QList<QPair<QString, QByteArray>> accounts READ accounts WRITE setAccounts NOTIFY accountsChanged)
+    Q_PROPERTY(QStringList accountNames READ accountNames NOTIFY accountsChanged)
 
 public:
     enum FontSize {
@@ -117,13 +117,16 @@ public:
     void setPreferredVideoSize(const VideoSize preferredVideoSize);
 
     QList<QPair<QString, QByteArray>> accounts() const;
+    QStringList accountNames() const;
     void setAccounts(const QList<QPair<QString, QByteArray>> accounts);
+    void removeAccount(const QString& accountName);
 
     QStringList filteredSubreddits() const;
 
 signals:
     void whiteThemeChanged();
     void fontSizeChanged();
+    void usernameChanged();
     void orientationProfileChanged();
     void pollUnreadChanged();
     void thumbnailScaleChanged();

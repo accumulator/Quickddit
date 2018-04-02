@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -357,3 +358,19 @@ void QuickdditManager::saveOrAddAccountInfo()
 
     m_settings->setAccounts(accountlist);
 }
+
+void QuickdditManager::selectAccount(QString accountName)
+{
+    QList<QPair<QString, QByteArray>> accountlist = m_settings->accounts();
+    for (int i=0; i < accountlist.size(); ++i) {
+        if (accountlist.at(i).first == accountName) {
+            signOut();
+            m_settings->setRefreshToken(accountlist.at(i).second);
+            m_settings->setRedditUsername(accountlist.at(i).first);
+            m_accessToken.clear();
+            refreshAccessToken();
+            break;
+        }
+    }
+}
+

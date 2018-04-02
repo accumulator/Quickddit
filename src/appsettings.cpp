@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015-2017  Sander van Grieken
+    Copyright (C) 2015-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@
 #include "appsettings.h"
 
 #include <QtCore/QSettings>
+#include <QDebug>
 
 AppSettings::AppSettings(QObject *parent) :
     QObject(parent), m_settings(new QSettings(this))
@@ -44,7 +45,7 @@ AppSettings::AppSettings(QObject *parent) :
     int size = m_settings->beginReadArray("accounts");
     for (int i = 0; i < size; ++i) {
         m_settings->setArrayIndex(i);
-        m_accounts.append(QPair<QString, QByteArray>(m_settings->value("username").toString(), m_settings->value("refreshToken").toByteArray()));
+        m_accounts.append(QPair<QString, QByteArray>(m_settings->value("acctUsername").toString(), m_settings->value("acctRefreshToken").toByteArray()));
     }
     m_settings->endArray();
 
@@ -91,12 +92,14 @@ QString AppSettings::redditUsername() const
 
 void AppSettings::setRedditUsername(const QString &username)
 {
-    m_redditUsername = username;
-
-    if (!m_redditUsername.isEmpty())
-        m_settings->setValue("redditUsername", m_redditUsername);
-    else
-        m_settings->remove("redditUsername");
+    if (m_redditUsername != username) {
+        m_redditUsername = username;
+        if (!m_redditUsername.isEmpty())
+            m_settings->setValue("redditUsername", m_redditUsername);
+        else
+            m_settings->remove("redditUsername");
+        emit usernameChanged();
+    }
 }
 
 QByteArray AppSettings::refreshToken() const
@@ -249,6 +252,15 @@ QList<QPair<QString, QByteArray>> AppSettings::accounts() const
     return m_accounts;
 }
 
+QStringList AppSettings::accountNames() const
+{
+    QStringList result;
+    for (int i = 0; i < m_accounts.size(); ++i) {
+        result.append(m_accounts.at(i).first);
+    }
+    return result;
+}
+
 void AppSettings::setAccounts(const QList<QPair<QString, QByteArray>> accounts)
 {
     if (m_accounts != accounts) {
@@ -257,11 +269,23 @@ void AppSettings::setAccounts(const QList<QPair<QString, QByteArray>> accounts)
         m_settings->beginWriteArray("accounts");
         for (int i = 0; i < m_accounts.size(); ++i) {
             m_settings->setArrayIndex(i);
-            m_settings->setValue("username", m_accounts.at(i).first);
-            m_settings->setValue("refreshToken", m_accounts.at(i).second);
+            m_settings->setValue("acctUsername", m_accounts.at(i).first);
+            m_settings->setValue("acctRefreshToken", m_accounts.at(i).second);
         }
         m_settings->endArray();
         emit accountsChanged();
+    }
+}
+
+void AppSettings::removeAccount(const QString& accountName)
+{
+    QList<QPair<QString, QByteArray>> accountlist = accounts();
+    for (int i = 0; i < accountlist.size(); ++i) {
+        if (accountlist.at(i).first == accountName) {
+            accountlist.removeAt(i);
+            setAccounts(accountlist);
+            break;
+        }
     }
 }
 

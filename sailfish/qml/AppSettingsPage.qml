@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015-2017  Sander van Grieken
+    Copyright (C) 2015-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,12 +25,13 @@ AbstractPage {
     id: appSettingsPage
     title: qsTr("App Settings")
 
-    Flickable {
+    SilicaListView {
         id: settingFlickable
         anchors.fill: parent
-        contentHeight: settingColumn.height
 
-        Column {
+        Component.onCompleted: settingFlickable.positionViewAtBeginning();
+
+        header: Column {
             id: settingColumn
             anchors { left: parent.left; right: parent.right }
             height: childrenRect.height
@@ -228,6 +229,67 @@ AbstractPage {
                         infoBanner.alert(qsTr("You have signed out from Reddit"));
                      } else {
                         pageStack.push(Qt.resolvedUrl("SignInPage.qml"));
+                    }
+                }
+            }
+
+            Rectangle {
+                color: "transparent"
+                height: 10
+            }
+        }
+
+        model: appSettings.accountNames
+
+        delegate: ListItem {
+            id: listItem
+            enabled: modelData !== appSettings.redditUsername
+
+            Row {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.leftMargin: constant.paddingMedium
+
+                IconButton {
+                    icon.source: "image://theme/icon-m-person"
+                    highlighted: listItem.highlighted
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
+                Text {
+                    color: listItem.highlighted ? Theme.highlightColor : constant.colorLight
+                    font.pixelSize: constant.fontSizeLarger
+                    font.bold: true
+                    text: modelData
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+
+            showMenuOnPressAndHold: false
+            onClicked: {
+                var dialog = showMenu({item: modelData});
+                dialog.removeAccount.connect(function() {
+                    listItem.remorseAction(qsTr("Remove %1 account").arg(modelData), function() {
+                        appSettings.removeAccount(modelData);
+                    })
+                });
+                dialog.activateAccount.connect(function() {
+                    quickdditManager.selectAccount(modelData);
+                });
+            }
+
+            menu: Component {
+                ContextMenu {
+                    property string item
+                    signal removeAccount
+                    signal activateAccount
+
+                    MenuItem {
+                        text: qsTr("Activate")
+                        onClicked: activateAccount()
+                    }
+                    MenuItem {
+                        text: qsTr("Remove")
+                        onClicked: removeAccount()
                     }
                 }
             }
