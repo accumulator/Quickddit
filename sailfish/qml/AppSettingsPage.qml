@@ -251,12 +251,12 @@ AbstractPage {
 
                 IconButton {
                     icon.source: "image://theme/icon-m-person"
-                    highlighted: listItem.highlighted
+                    highlighted: listItem.highlighted || appSettings.redditUsername === modelData
                     anchors.verticalCenter: parent.verticalCenter
                 }
 
                 Text {
-                    color: listItem.highlighted ? Theme.highlightColor : constant.colorLight
+                    color: listItem.highlighted || appSettings.redditUsername === modelData ? Theme.highlightColor : constant.colorLight
                     font.pixelSize: constant.fontSizeLarger
                     font.bold: true
                     text: modelData
