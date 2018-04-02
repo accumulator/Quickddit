@@ -343,30 +343,37 @@ void QuickdditManager::saveOrAddAccountInfo()
 {
     qDebug() << "saveRefreshToken" << m_settings->refreshToken() << m_settings->redditUsername();
 
+    AppSettings::AccountData data;
+    data.accountName = m_settings->redditUsername();
+    data.refreshToken = m_settings->refreshToken();
+    data.lastSeenMessage = m_settings->lastSeenMessage();
+
     bool found = false;
-    QList<QPair<QString, QByteArray>> accountlist = m_settings->accounts();
+    QList<AppSettings::AccountData> accountlist = m_settings->accounts();
     for (int i=0; i < accountlist.size(); ++i) {
-        if (accountlist.at(i).first == m_settings->redditUsername()) {
+        if (accountlist.at(i).accountName == m_settings->redditUsername()) {
             found = true;
-            accountlist.replace(i, QPair<QString, QByteArray>(m_settings->redditUsername(), m_settings->refreshToken()));
+            accountlist.replace(i, data);
             break;
         }
     }
 
-    if (!found)
-        accountlist.append(QPair<QString, QByteArray>(m_settings->redditUsername(), m_settings->refreshToken()));
+    if (!found) {
+        accountlist.append(data);
+    }
 
     m_settings->setAccounts(accountlist);
 }
 
 void QuickdditManager::selectAccount(QString accountName)
 {
-    QList<QPair<QString, QByteArray>> accountlist = m_settings->accounts();
+    QList<AppSettings::AccountData> accountlist = m_settings->accounts();
     for (int i=0; i < accountlist.size(); ++i) {
-        if (accountlist.at(i).first == accountName) {
+        if (accountlist.at(i).accountName == accountName) {
             signOut();
-            m_settings->setRefreshToken(accountlist.at(i).second);
-            m_settings->setRedditUsername(accountlist.at(i).first);
+            m_settings->setRefreshToken(accountlist.at(i).refreshToken);
+            m_settings->setRedditUsername(accountlist.at(i).accountName);
+            m_settings->setLastSeenMessage(accountlist.at(i).lastSeenMessage);
             m_accessToken.clear();
             refreshAccessToken();
             break;

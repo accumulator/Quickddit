@@ -74,6 +74,12 @@ public:
         VS720
     };
 
+    struct AccountData {
+        QString accountName;
+        QByteArray refreshToken;
+        QString lastSeenMessage;
+    };
+
     explicit AppSettings(QObject *parent = 0);
 
     bool whiteTheme() const;
@@ -116,9 +122,9 @@ public:
     VideoSize preferredVideoSize() const;
     void setPreferredVideoSize(const VideoSize preferredVideoSize);
 
-    QList<QPair<QString, QByteArray>> accounts() const;
+    QList<AccountData> accounts() const;
     QStringList accountNames() const;
-    void setAccounts(const QList<QPair<QString, QByteArray>> accounts);
+    void setAccounts(const QList<AccountData> accounts);
     void removeAccount(const QString& accountName);
 
     QStringList filteredSubreddits() const;
@@ -154,7 +160,7 @@ private:
     int m_commentSort;
     bool m_useTor;
     VideoSize m_preferredVideoSize;
-    QList<QPair<QString, QByteArray>> m_accounts;
+    QList<AccountData> m_accounts;
 };
 
 #endif // APPSETTINGS_H

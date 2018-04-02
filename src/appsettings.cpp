@@ -41,18 +41,26 @@ AppSettings::AppSettings(QObject *parent) :
     m_filteredSubreddits = m_settings->value("filteredSubreddits").toStringList();
 
     // read accounts
-    m_accounts = QList<QPair<QString, QByteArray>>();
+    m_accounts = QList<AccountData>();
     int size = m_settings->beginReadArray("accounts");
     for (int i = 0; i < size; ++i) {
         m_settings->setArrayIndex(i);
-        m_accounts.append(QPair<QString, QByteArray>(m_settings->value("acctUsername").toString(), m_settings->value("acctRefreshToken").toByteArray()));
+        AccountData data;
+        data.accountName = m_settings->value("acctUsername").toString();
+        data.refreshToken = m_settings->value("acctRefreshToken").toByteArray();
+        data.lastSeenMessage = m_settings->value("acctLastSeenMessage").toString();
+        m_accounts.append(data);
     }
     m_settings->endArray();
 
     // if no account list yet, initialize with current account, if set.
     if (m_accounts.size() == 0 && !m_refreshToken.isEmpty()) {
-        QList<QPair<QString, QByteArray>> initial_accounts = QList<QPair<QString, QByteArray>>();
-        initial_accounts.append(QPair<QString, QByteArray>(m_redditUsername, m_refreshToken));
+        QList<AccountData> initial_accounts = QList<AccountData>();
+        AccountData data;
+        data.accountName = m_redditUsername;
+        data.refreshToken = m_refreshToken;
+        data.lastSeenMessage = m_lastSeenMessage;
+        initial_accounts.append(data);
         setAccounts(initial_accounts);
     }
 }
@@ -247,7 +255,7 @@ void AppSettings::setPreferredVideoSize(const AppSettings::VideoSize preferredVi
     }
 }
 
-QList<QPair<QString, QByteArray>> AppSettings::accounts() const
+QList<AppSettings::AccountData> AppSettings::accounts() const
 {
     return m_accounts;
 }
@@ -256,32 +264,31 @@ QStringList AppSettings::accountNames() const
 {
     QStringList result;
     for (int i = 0; i < m_accounts.size(); ++i) {
-        result.append(m_accounts.at(i).first);
+        result.append(m_accounts.at(i).accountName);
     }
     return result;
 }
 
-void AppSettings::setAccounts(const QList<QPair<QString, QByteArray>> accounts)
+void AppSettings::setAccounts(const QList<AppSettings::AccountData> accounts)
 {
-    if (m_accounts != accounts) {
-        m_accounts = accounts;
+    m_accounts = accounts;
 
-        m_settings->beginWriteArray("accounts");
-        for (int i = 0; i < m_accounts.size(); ++i) {
-            m_settings->setArrayIndex(i);
-            m_settings->setValue("acctUsername", m_accounts.at(i).first);
-            m_settings->setValue("acctRefreshToken", m_accounts.at(i).second);
-        }
-        m_settings->endArray();
-        emit accountsChanged();
+    m_settings->beginWriteArray("accounts");
+    for (int i = 0; i < m_accounts.size(); ++i) {
+        m_settings->setArrayIndex(i);
+        m_settings->setValue("acctUsername", m_accounts.at(i).accountName);
+        m_settings->setValue("acctRefreshToken", m_accounts.at(i).refreshToken);
+        m_settings->setValue("acctLastSeenMessage", m_accounts.at(i).lastSeenMessage);
     }
+    m_settings->endArray();
+    emit accountsChanged();
 }
 
 void AppSettings::removeAccount(const QString& accountName)
 {
-    QList<QPair<QString, QByteArray>> accountlist = accounts();
+    QList<AccountData> accountlist = accounts();
     for (int i = 0; i < accountlist.size(); ++i) {
-        if (accountlist.at(i).first == accountName) {
+        if (accountlist.at(i).accountName == accountName) {
             accountlist.removeAt(i);
             setAccounts(accountlist);
             break;
