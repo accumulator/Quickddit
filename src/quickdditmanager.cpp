@@ -265,8 +265,12 @@ void QuickdditManager::onAccessTokenRequestFinished(QNetworkReply *reply)
     m_accessTokenRequest->deleteLater();
     m_accessTokenRequest = 0;
 
-    if (!m_accessToken.isEmpty() && m_settings->redditUsername().isEmpty())
-        updateRedditUsername();
+    if (!m_accessToken.isEmpty()) {
+        if (m_settings->redditUsername().isEmpty())
+            updateRedditUsername();
+        else
+            saveOrAddAccountInfo();
+    }
 
     setBusy(false);
 }
@@ -314,6 +318,8 @@ void QuickdditManager::onUserInfoFinished(QNetworkReply *reply)
         qDebug("QuickdditManager::onUserInfoFinished(): Network error: %s", qPrintable(reply->errorString()));
     }
 
+    saveOrAddAccountInfo();
+
     m_userInfoReply->deleteLater();
     m_userInfoReply = 0;
 }
@@ -329,4 +335,25 @@ void QuickdditManager::onUseTorChanged()
         proxy.setType(QNetworkProxy::NoProxy);
     }
     QNetworkProxy::setApplicationProxy(proxy);
+}
+
+// update the account info
+void QuickdditManager::saveOrAddAccountInfo()
+{
+    qDebug() << "saveRefreshToken" << m_settings->refreshToken() << m_settings->redditUsername();
+
+    bool found = false;
+    QList<QPair<QString, QByteArray>> accountlist = m_settings->accounts();
+    for (int i=0; i < accountlist.size(); ++i) {
+        if (accountlist.at(i).first == m_settings->redditUsername()) {
+            found = true;
+            accountlist.replace(i, QPair<QString, QByteArray>(m_settings->redditUsername(), m_settings->refreshToken()));
+            break;
+        }
+    }
+
+    if (!found)
+        accountlist.append(QPair<QString, QByteArray>(m_settings->redditUsername(), m_settings->refreshToken()));
+
+    m_settings->setAccounts(accountlist);
 }

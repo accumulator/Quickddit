@@ -94,18 +94,19 @@ private:
     QNetworkAccessManager *m_netManager;
     AppSettings *m_settings;
 
+    bool m_busy;
+
     QString m_state;
     APIRequest *m_accessTokenRequest;
     QString m_accessToken;
     QTime m_accessTokenExpiry;
 
     APIRequest *m_pendingRequest;
+    APIRequest *m_userInfoReply;
 
     void refreshAccessToken();
     void updateRedditUsername();
-    APIRequest *m_userInfoReply;
-
-    bool m_busy;
+    void saveOrAddAccountInfo();
 };
 
 #endif // QUICKDDITMANAGER_H
