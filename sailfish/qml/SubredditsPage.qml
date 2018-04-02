@@ -208,6 +208,9 @@ AbstractPage {
             if (quickdditManager.signedIn) {
                 subredditModel.refresh(false)
                 multiredditModel.refresh(false)
+            } else {
+                subredditModel.clear();
+                multiredditModel.clear();
             }
         }
     }

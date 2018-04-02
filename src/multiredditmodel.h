@@ -39,6 +39,7 @@ public:
     QVariant data(const QModelIndex &index, int role) const;
 
     void refresh(bool refreshOlder);
+    Q_INVOKABLE void clear();
 
     MultiredditObject getMultireddit(const QString &name);
 

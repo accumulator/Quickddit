@@ -38,7 +38,6 @@ void MultiredditModel::classBegin()
 
 void MultiredditModel::componentComplete()
 {
-//    refresh(false);
 }
 
 int MultiredditModel::rowCount(const QModelIndex &parent) const
@@ -70,6 +69,14 @@ void MultiredditModel::refresh(bool refreshOlder)
     }
 
     doRequest(APIRequest::GET, "/api/multi/mine", SLOT(onFinished(QNetworkReply*)));
+}
+
+void MultiredditModel::clear()
+{
+    beginRemoveRows(QModelIndex(), 0, m_multiredditList.count() - 1);
+    m_multiredditList.clear();
+    endRemoveRows();
+    setCanLoadMore(false);
 }
 
 MultiredditObject MultiredditModel::getMultireddit(const QString &name)

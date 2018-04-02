@@ -159,12 +159,16 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
 
     // check state
     QString state;
+    QString code;
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
     QUrlQuery signedInUrlQuery(signedInUrl.query());
     state = signedInUrlQuery.queryItemValue("state");
+    code = signedInUrlQuery.queryItemValue("code");
 #else
     state = signedInUrl.queryItemValue("state");
+    code = signedInUrl.queryItemValue("code");
 #endif
+
     if (m_state != state) {
         qCritical("QuickdditManager::getAccessToken(): (OAuth2) state is not matched");
         emit accessTokenFailure(0, "Error: state not match");
@@ -172,13 +176,6 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
     }
 
     m_state.clear();
-
-    QString code;
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-    code = signedInUrlQuery.queryItemValue("code");
-#else
-    code = signedInUrl.queryItemValue("code");
-#endif
 
     m_accessTokenRequest = new APIRequest(APIRequest::AccessTokenRequest, m_netManager, this);
     m_accessTokenRequest->setClientId(REDDIT_CLIENT_ID);

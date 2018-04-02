@@ -39,8 +39,6 @@ void SubredditModel::componentComplete()
 {
     if (m_section == SearchSection && m_query.isEmpty())
         return;
-
-//    refresh(false);
 }
 
 int SubredditModel::rowCount(const QModelIndex &parent) const
@@ -142,6 +140,14 @@ void SubredditModel::refresh(bool refreshOlder)
     }
 
     doRequest(APIRequest::GET, relativeUrl, SLOT(onFinished(QNetworkReply*)), parameters);
+}
+
+void SubredditModel::clear()
+{
+    beginRemoveRows(QModelIndex(), 0, m_subredditList.count() - 1);
+    m_subredditList.clear();
+    endRemoveRows();
+    setCanLoadMore(false);
 }
 
 QHash<int, QByteArray> SubredditModel::customRoleNames() const

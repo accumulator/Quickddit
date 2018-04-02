@@ -70,6 +70,7 @@ public:
     void setQuery(const QString &query);
 
     void refresh(bool refreshOlder);
+    Q_INVOKABLE void clear();
 
     void deleteSubreddit(const QString &subreddit);
 
