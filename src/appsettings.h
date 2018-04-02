@@ -43,6 +43,7 @@ class AppSettings : public QObject
     Q_PROPERTY(int commentSort READ commentSort WRITE setCommentSort NOTIFY commentSortChanged)
     Q_PROPERTY(bool useTor READ useTor WRITE setUseTor NOTIFY useTorChanged)
     Q_PROPERTY(VideoSize preferredVideoSize READ preferredVideoSize WRITE setPreferredVideoSize NOTIFY preferredVideoSizeChanged)
+    Q_PROPERTY(QList<QPair<QString, QByteArray>> accounts READ accounts WRITE setAccounts NOTIFY accountsChanged)
 
 public:
     enum FontSize {
@@ -115,6 +116,9 @@ public:
     VideoSize preferredVideoSize() const;
     void setPreferredVideoSize(const VideoSize preferredVideoSize);
 
+    QList<QPair<QString, QByteArray>> accounts() const;
+    void setAccounts(const QList<QPair<QString, QByteArray>> accounts);
+
     QStringList filteredSubreddits() const;
 
 signals:
@@ -128,6 +132,7 @@ signals:
     void commentSortChanged();
     void useTorChanged();
     void preferredVideoSizeChanged();
+    void accountsChanged();
 
 private:
     QSettings *m_settings;
@@ -146,6 +151,7 @@ private:
     int m_commentSort;
     bool m_useTor;
     VideoSize m_preferredVideoSize;
+    QList<QPair<QString, QByteArray>> m_accounts;
 };
 
 #endif // APPSETTINGS_H

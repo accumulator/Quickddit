@@ -38,6 +38,22 @@ AppSettings::AppSettings(QObject *parent) :
     m_useTor = m_settings->value("useTor", false).toBool();
     m_preferredVideoSize = static_cast<VideoSize>(m_settings->value("preferredVideoSize", AppSettings::VS360).toInt());
     m_filteredSubreddits = m_settings->value("filteredSubreddits").toStringList();
+
+    // read accounts
+    m_accounts = QList<QPair<QString, QByteArray>>();
+    int size = m_settings->beginReadArray("accounts");
+    for (int i = 0; i < size; ++i) {
+        m_settings->setArrayIndex(i);
+        m_accounts.append(QPair<QString, QByteArray>(m_settings->value("username").toString(), m_settings->value("refreshToken").toByteArray()));
+    }
+    m_settings->endArray();
+
+    // if no account list yet, initialize with current account, if set.
+    if (m_accounts.size() == 0 && !m_refreshToken.isEmpty()) {
+        QList<QPair<QString, QByteArray>> initial_accounts = QList<QPair<QString, QByteArray>>();
+        initial_accounts.append(QPair<QString, QByteArray>(m_redditUsername, m_refreshToken));
+        setAccounts(initial_accounts);
+    }
 }
 
 bool AppSettings::whiteTheme() const
@@ -225,6 +241,27 @@ void AppSettings::setPreferredVideoSize(const AppSettings::VideoSize preferredVi
         m_preferredVideoSize = preferredVideoSize;
         m_settings->setValue("preferredVideoSize", m_preferredVideoSize);
         emit preferredVideoSizeChanged();
+    }
+}
+
+QList<QPair<QString, QByteArray>> AppSettings::accounts() const
+{
+    return m_accounts;
+}
+
+void AppSettings::setAccounts(const QList<QPair<QString, QByteArray>> accounts)
+{
+    if (m_accounts != accounts) {
+        m_accounts = accounts;
+
+        m_settings->beginWriteArray("accounts");
+        for (int i = 0; i < m_accounts.size(); ++i) {
+            m_settings->setArrayIndex(i);
+            m_settings->setValue("username", m_accounts.at(i).first);
+            m_settings->setValue("refreshToken", m_accounts.at(i).second);
+        }
+        m_settings->endArray();
+        emit accountsChanged();
     }
 }
 
