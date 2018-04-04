@@ -544,7 +544,7 @@
     <message>
         <location filename="../qml/CommentPage.qml" line="86"/>
         <source>Refresh</source>
-        <translation>Verversen</translation>
+        <translation>Vernieuwen</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="218"/>
@@ -698,7 +698,7 @@
     <message>
         <location filename="../qml/MainPage.qml" line="121"/>
         <source>Refresh</source>
-        <translation>Verversen</translation>
+        <translation>Vernieuwen</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="143"/>
@@ -798,7 +798,7 @@
     <message>
         <location filename="../qml/MessagePage.qml" line="58"/>
         <source>Refresh</source>
-        <translation>Verversen</translation>
+        <translation>Vernieuwen</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="99"/>
@@ -830,7 +830,7 @@
     <message>
         <location filename="../qml/MultiredditsPage.qml" line="54"/>
         <source>Refresh</source>
-        <translation>Verversen</translation>
+        <translation>Vernieuwen</translation>
     </message>
     <message>
         <location filename="../qml/MultiredditsPage.qml" line="73"/>
@@ -1048,7 +1048,7 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="67"/>
         <source>Refresh</source>
-        <translation>Verversen</translation>
+        <translation>Vernieuwen</translation>
     </message>
 </context>
 <context>
@@ -1295,7 +1295,7 @@
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="67"/>
         <source>Refresh</source>
-        <translation>Verversen</translation>
+        <translation>Vernieuwen</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="86"/>
@@ -1463,7 +1463,7 @@
     <message>
         <location filename="../qml/UserPage.qml" line="60"/>
         <source>Refresh</source>
-        <translation>Verversen</translation>
+        <translation>Vernieuwen</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="72"/>

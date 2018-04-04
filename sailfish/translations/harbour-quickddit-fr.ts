@@ -66,7 +66,7 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="101"/>
         <source>Quickddit - A free and open source Reddit client for mobile phones</source>
-        <translation>Quickddit - un client Reddit pour mobile, gratuit et open source.</translation>
+        <translation>Un client Reddit pour Sailfish OS.</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="113"/>
@@ -135,7 +135,7 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="100"/>
         <source>This subreddit is Not Safe For Work</source>
-        <translation>Ce Subreddit n&apos;est pas approprié pour une consultation au travail - Not Safe For Work</translation>
+        <translation>Ce Sub est &quot;Not Safe For Work&quot; !</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/AboutSubredditPage.qml" line="116"/>
@@ -215,12 +215,12 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="199"/>
         <source>You have subscribed to %1</source>
-        <translation>Vous vous êtes abonné(e) à %1</translation>
+        <translation>Vous vous êtes abonné à %1</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="201"/>
         <source>You have unsubscribed from %1</source>
-        <translation>Vous vous êtes désabonné(e) de %1</translation>
+        <translation>Vous vous êtes désabonné de %1</translation>
     </message>
 </context>
 <context>
@@ -228,7 +228,7 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="26"/>
         <source>App Settings</source>
-        <translation>Préférences de l&apos;appli</translation>
+        <translation>Paramètres de l&apos;appli</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="40"/>
@@ -308,7 +308,7 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="156"/>
         <source>Media</source>
-        <translation>Médias</translation>
+        <translation>Média</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="159"/>
@@ -333,7 +333,7 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="190"/>
         <source>When enabled, please make sure Tor is installed and active.</source>
-        <translation>Si activé, assurez-vous que Tor est installé et bien actif.</translation>
+        <translation>Si sélectionné, assurez-vous que l&apos;application Tor soit installée et bien active.</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="197"/>
@@ -343,7 +343,7 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="205"/>
         <source>Signed in to Reddit as</source>
-        <translation>Connecté(e) à Reddit en tant que</translation>
+        <translation>Connecté à Reddit en tant que</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="224"/>
@@ -358,7 +358,7 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="228"/>
         <source>You have signed out from Reddit</source>
-        <translation>Vous vous êtes déconnecté(e) de Reddit</translation>
+        <translation>Vous vous êtes déconnecté de Reddit</translation>
     </message>
 </context>
 <context>
@@ -366,7 +366,7 @@
     <message>
         <location filename="../qml/Captcha.qml" line="79"/>
         <source>Enter the Captcha text below</source>
-        <translation>Entrer le texte du Captcha ci-dessous</translation>
+        <translation>Entrer le texte du captcha ci-dessous</translation>
     </message>
 </context>
 <context>
@@ -429,7 +429,7 @@
     <message>
         <location filename="../qml/CommentDelegate.qml" line="430"/>
         <source>Enter your new comment here...</source>
-        <translation>Entrez votre nouveau commentaire ici...</translation>
+        <translation>Entrez votre commentaire ici...</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="448"/>
@@ -587,7 +587,7 @@
     <message>
         <location filename="../qml/ImageViewPage.qml" line="170"/>
         <source>Image saved to gallery</source>
-        <translation>Image enregistrée dans la Galerie</translation>
+        <translation>Image enregistrée dans la galerie</translation>
     </message>
     <message>
         <location filename="../qml/ImageViewPage.qml" line="171"/>
@@ -605,7 +605,7 @@
     <message>
         <location filename="../../src/imgurmanager.cpp" line="175"/>
         <source>Imgur API returns no image</source>
-        <translation>L&apos;API Imgur ne renvoie pas d&apos;image</translation>
+        <translation>L&apos;API Imgur ne renvoie aucune image</translation>
     </message>
 </context>
 <context>
@@ -693,7 +693,7 @@
     <message>
         <location filename="../qml/MainPage.qml" line="117"/>
         <source>Search</source>
-        <translation>Recherche</translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="121"/>
@@ -943,12 +943,12 @@
     <message>
         <location filename="../qml/SearchDialog.qml" line="53"/>
         <source>Enter search query</source>
-        <translation>Entrer les éléments à rechercher</translation>
+        <translation>Indiquez ici les éléments à rechercher</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="64"/>
         <source>Search for</source>
-        <translation>Chercher dans les</translation>
+        <translation>Résultats parmi les</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="66"/>
@@ -976,7 +976,7 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="25"/>
         <source>Search Result: %1</source>
-        <translation>Résultat de la recherche : %1</translation>
+        <translation>Résultats de la recherche : %1</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
@@ -1215,7 +1215,7 @@
     <message>
         <location filename="../qml/SignInPage.qml" line="66"/>
         <source>Sign in successful! Welcome! :)</source>
-        <translation>Connexion réussie ! Bienvenue ! :)</translation>
+        <translation>Connexion réussie, bienvenue ! :)</translation>
     </message>
 </context>
 <context>
@@ -1338,7 +1338,7 @@
     <message>
         <location filename="../qml/SubredditsPage.qml" line="70"/>
         <source>Settings</source>
-        <translation>Préférences</translation>
+        <translation>Paramètres</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="76"/>
@@ -1398,7 +1398,7 @@
     <message>
         <location filename="../qml/SubredditsPage.qml" line="220"/>
         <source>You have unsubscribed from %1</source>
-        <translation>Vous vous êtes désabonné(e) de %1</translation>
+        <translation>Vous vous êtes désabonné de %1</translation>
     </message>
 </context>
 <context>
@@ -1503,17 +1503,17 @@
     <message>
         <location filename="../qml/UserPage.qml" line="139"/>
         <source>%1 link karma</source>
-        <translation>%1 lien karma</translation>
+        <translation>%1 lien(s) karma</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="145"/>
         <source>%1 comment karma</source>
-        <translation>%1 commentaire karma</translation>
+        <translation>%1 commentaire(s) karma</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="151"/>
         <source>created %1</source>
-        <translation>créé %1</translation>
+        <translation>inscrit %1</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="209"/>

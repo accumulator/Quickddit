@@ -239,133 +239,148 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="40"/>
+        <location filename="../qml/AppSettingsPage.qml" line="41"/>
         <source>Display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="43"/>
+        <location filename="../qml/AppSettingsPage.qml" line="44"/>
         <source>Font Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="53"/>
+        <location filename="../qml/AppSettingsPage.qml" line="54"/>
         <source>Tiny</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="54"/>
+        <location filename="../qml/AppSettingsPage.qml" line="55"/>
         <source>Small</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="55"/>
+        <location filename="../qml/AppSettingsPage.qml" line="56"/>
         <source>Medium</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="56"/>
+        <location filename="../qml/AppSettingsPage.qml" line="57"/>
         <source>Large</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="69"/>
+        <location filename="../qml/AppSettingsPage.qml" line="70"/>
         <source>Device Orientation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="78"/>
+        <location filename="../qml/AppSettingsPage.qml" line="79"/>
         <source>Automatic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="79"/>
+        <location filename="../qml/AppSettingsPage.qml" line="80"/>
         <source>Portrait only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="80"/>
+        <location filename="../qml/AppSettingsPage.qml" line="81"/>
         <source>Landscape only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="92"/>
+        <location filename="../qml/AppSettingsPage.qml" line="93"/>
         <source>Thumbnail Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="105"/>
+        <location filename="../qml/AppSettingsPage.qml" line="106"/>
         <source>Auto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="128"/>
+        <location filename="../qml/AppSettingsPage.qml" line="129"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="145"/>
+        <location filename="../qml/AppSettingsPage.qml" line="146"/>
         <source>Notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="148"/>
+        <location filename="../qml/AppSettingsPage.qml" line="149"/>
         <source>Check Messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="156"/>
+        <location filename="../qml/AppSettingsPage.qml" line="157"/>
         <source>Media</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="159"/>
+        <location filename="../qml/AppSettingsPage.qml" line="160"/>
         <source>Preferred Video Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="179"/>
+        <location filename="../qml/AppSettingsPage.qml" line="180"/>
         <source>Loop Videos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="186"/>
+        <location filename="../qml/AppSettingsPage.qml" line="187"/>
         <source>Connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="189"/>
+        <location filename="../qml/AppSettingsPage.qml" line="190"/>
         <source>Use Tor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="190"/>
+        <location filename="../qml/AppSettingsPage.qml" line="191"/>
         <source>When enabled, please make sure Tor is installed and active.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="197"/>
+        <location filename="../qml/AppSettingsPage.qml" line="198"/>
         <source>Account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="205"/>
+        <location filename="../qml/AppSettingsPage.qml" line="206"/>
         <source>Signed in to Reddit as</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="224"/>
+        <location filename="../qml/AppSettingsPage.qml" line="225"/>
         <source>Sign out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="224"/>
+        <location filename="../qml/AppSettingsPage.qml" line="225"/>
         <source>Sign in to Reddit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="228"/>
+        <location filename="../qml/AppSettingsPage.qml" line="229"/>
         <source>You have signed out from Reddit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="287"/>
+        <source>Activate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="291"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="271"/>
+        <source>Remove %1 account</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1226,17 +1241,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="47"/>
+        <location filename="../qml/SignInPage.qml" line="48"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="54"/>
+        <location filename="../qml/SignInPage.qml" line="55"/>
         <source>Reload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="66"/>
+        <location filename="../qml/SignInPage.qml" line="67"/>
         <source>Sign in successful! Welcome! :)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1422,7 +1437,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="220"/>
+        <location filename="../qml/SubredditsPage.qml" line="223"/>
         <source>You have unsubscribed from %1</source>
         <translation type="unfinished"></translation>
     </message>

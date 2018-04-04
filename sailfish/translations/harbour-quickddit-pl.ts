@@ -82,7 +82,7 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="115"/>
         <source>Current language translation by %1</source>
-        <translation>Tłumaczenie na aktualny język: %1</translation>
+        <translation>Tłumaczenie na język polski: %1</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="116"/>
@@ -925,7 +925,7 @@
     <message numerus="yes">
         <location filename="../qml/PostInfoText.qml" line="135"/>
         <source>%n points</source>
-        <translation><numerusform>%n punkt</numerusform><numerusform>%n puntky</numerusform><numerusform>%n punktów</numerusform><numerusform>%n punktów</numerusform></translation>
+        <translation><numerusform>%n punkt</numerusform><numerusform>%n punkty</numerusform><numerusform>%n punktów</numerusform><numerusform>%n punktów</numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/PostInfoText.qml" line="147"/>
@@ -1551,7 +1551,7 @@
     <message>
         <location filename="../qml/UserPageCommentDelegate.qml" line="85"/>
         <source>Comment in %1</source>
-        <translation>Komentuj w %1</translation>
+        <translation>Komentarz w %1</translation>
     </message>
 </context>
 <context>
