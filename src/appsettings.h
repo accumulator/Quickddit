@@ -125,7 +125,7 @@ public:
     QList<AccountData> accounts() const;
     QStringList accountNames() const;
     void setAccounts(const QList<AccountData> accounts);
-    void removeAccount(const QString& accountName);
+    Q_INVOKABLE void removeAccount(const QString& accountName);
 
     QStringList filteredSubreddits() const;
 

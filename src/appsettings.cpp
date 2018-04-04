@@ -273,7 +273,7 @@ void AppSettings::setAccounts(const QList<AppSettings::AccountData> accounts)
 {
     m_accounts = accounts;
 
-    m_settings->beginWriteArray("accounts");
+    m_settings->beginWriteArray("accounts", m_accounts.size());
     for (int i = 0; i < m_accounts.size(); ++i) {
         m_settings->setArrayIndex(i);
         m_settings->setValue("acctUsername", m_accounts.at(i).accountName);
