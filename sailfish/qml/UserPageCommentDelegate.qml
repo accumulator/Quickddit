@@ -105,6 +105,7 @@ Item {
             }
 
             Text {
+                id: commentText
                 width: parent.width - x
                 x: 25
                 text: {
@@ -120,9 +121,20 @@ Item {
                 maximumLineCount: 3
 
                 Rectangle {
+                    id: textIndicator
                     x: -25
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
+                    width: 10
+                    color: Theme.secondaryHighlightColor
+                }
+
+                Rectangle {
+                    visible: commentText.truncated
+                    x: -25
+                    anchors.top: textIndicator.bottom
+                    anchors.topMargin: 10
+                    height: 10
                     width: 10
                     color: Theme.secondaryHighlightColor
                 }

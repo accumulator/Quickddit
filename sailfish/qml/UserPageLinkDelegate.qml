@@ -143,6 +143,7 @@ ListItem {
         }
 
         Text {
+            id: linkText
             visible: model.isSelfPost
             width: parent.width - 25
             x: 25
@@ -159,9 +160,20 @@ ListItem {
             maximumLineCount: 6
 
             Rectangle {
+                id: textIndicator
                 x: -25
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
+                width: 10
+                color: Theme.secondaryHighlightColor
+            }
+
+            Rectangle {
+                visible: linkText.truncated
+                x: -25
+                anchors.top: textIndicator.bottom
+                anchors.topMargin: 10
+                height: 10
                 width: 10
                 color: Theme.secondaryHighlightColor
             }
