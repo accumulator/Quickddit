@@ -144,7 +144,7 @@ ListItem {
 
         Text {
             id: linkText
-            visible: model.isSelfPost
+            visible: model.isSelfPost && model.text !== ""
             width: parent.width - 25
             x: 25
             text: {
