@@ -416,6 +416,26 @@ ApplicationWindow {
                 durationString = durationString.substr(3)
             return durationString
         }
+
+        // StyledText has severe limitations, but can be elided unlike RichText
+        // we pick off a few <p> paragraphs and return a simplified, cropped representation
+        function formatForStyledText(text) {
+            var result = ""
+            var re = /(<p>(.*?)<\/p>)/g
+            re.lastIndex = 0 // QT bug, lastIndex not always initialized to 0
+            var match = re.exec(text)
+            while (result.length < 1000 && match !== null) {
+                if (result.length != 0)
+                    result += "<br/><br/>"
+                result += match[2]
+                console.log(result);
+                match = re.exec(text)
+            }
+            if (result.length == 0)
+                result = text
+            result = result.replace(/&#39;/g,"'") // $#39 not shown when using StyledText?
+            return result
+        }
     }
 
     Constant { id: constant }

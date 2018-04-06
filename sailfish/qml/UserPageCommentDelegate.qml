@@ -108,10 +108,7 @@ Item {
                 width: parent.width - x
                 x: 25
                 text: {
-                    var intro = /(<p>(.*?)<\/p>).*/.exec(model.body)[2]
-                    intro = intro.replace(/&#39;/g,"'") // $#39 not shown when using StyledText?
-                    console.log(intro);
-                    return intro
+                    return globalUtils.formatForStyledText(model.body)
                 }
                 textFormat: Text.StyledText
                 font.pixelSize: constant.fontSizeDefault

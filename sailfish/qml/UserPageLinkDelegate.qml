@@ -147,10 +147,7 @@ ListItem {
             width: parent.width - 25
             x: 25
             text: {
-                var intro = /(<p>(.*?)<\/p>).*/.exec(model.body)[2]
-                intro = intro.replace(/&#39;/g,"'") // $#39 not shown when using StyledText?
-                console.log(intro);
-                return intro
+                return globalUtils.formatForStyledText(model.text)
             }
             textFormat: Text.StyledText
             font.pixelSize: constant.fontSizeDefault
@@ -159,7 +156,7 @@ ListItem {
             linkColor: mainItem.enabled ? Theme.highlightColor : constant.colorDisabled
             wrapMode: Text.WordWrap
             elide: Text.ElideRight
-            maximumLineCount: 3
+            maximumLineCount: 6
 
             Rectangle {
                 x: -25
