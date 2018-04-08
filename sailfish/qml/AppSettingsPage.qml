@@ -29,7 +29,16 @@ AbstractPage {
         id: settingFlickable
         anchors.fill: parent
 
-        Component.onCompleted: settingFlickable.positionViewAtBeginning();
+        property bool _completed: false
+
+        Component.onCompleted: _completed = true
+        Binding {
+            // late-bind model as SilicaListView stubbornly positions view at first item otherwise.
+            when: settingFlickable._completed
+            target: settingFlickable
+            property: "model"
+            value: appSettings.accountNames
+        }
 
         header: Column {
             id: settingColumn
@@ -238,8 +247,6 @@ AbstractPage {
                 height: 10
             }
         }
-
-        model: appSettings.accountNames
 
         delegate: ListItem {
             id: listItem
