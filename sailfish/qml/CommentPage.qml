@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015-2017  Sander van Grieken
+    Copyright (C) 2015-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                visible: link.author === appSettings.redditUsername //&& link.isSelfPost
+                visible: link.author === appSettings.redditUsername
                 enabled: !link.isArchived
                 text: qsTr("Edit Post")
                 onClicked: {
@@ -330,13 +330,6 @@ AbstractPage {
             else if (fullname.indexOf("t3") === 0) // link
                 commentModel.changeLinkLikes(fullname, likes);
         }
-        onError: infoBanner.warning(errorString);
-    }
-
-    FlairManager {
-        id: flairManager
-        manager: quickdditManager
-        subreddit: link.subreddit
         onError: infoBanner.warning(errorString);
     }
 
