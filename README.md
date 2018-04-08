@@ -12,6 +12,7 @@ The Harmattan port has been left at 1.0.0 feature level, and will not receive ne
 Features
 ========
 - Sign in with your Reddit account or browse anonymously
+- Multi Account
 - Very quick navigation through content
 - Threaded comments view
 - Browse your private messages, comment and post  replies, sent messages
@@ -44,7 +45,6 @@ TODO
 -----
 
 - (Local) browse history
-- Multiple accounts
 - Reddit Live and/or a method of 'live' following a post
 - de-censor a-la ceddit
 
@@ -59,7 +59,7 @@ All files in this project are licensed under the GNU GPLv3+, unless otherwise st
 
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2013-2014  Dickson Leong
-    Copyright (C) 2015-2017  Sander van Grieken
+    Copyright (C) 2015-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
