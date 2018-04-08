@@ -5,6 +5,13 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Apr 08 2018 Sander van Grieken <sander@outrightsolutions.nl> 1.8.0-1
+- fix: fix nav button enable for self-posts
+- chg: remove all obsolete captcha code
+- chg: improvements in preview of content in userpage
+- new: support multiple accounts
+- new: support setting post flair
+
 * Sun Jan 29 2018 Sander van Grieken <sander@outrightsolutions.nl> 1.7.1-1
 - new: Polish translation (thanks Maciej Wereski!)
 

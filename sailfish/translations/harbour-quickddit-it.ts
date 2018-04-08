@@ -385,14 +385,6 @@
     </message>
 </context>
 <context>
-    <name>Captcha</name>
-    <message>
-        <location filename="../qml/Captcha.qml" line="79"/>
-        <source>Enter the Captcha text below</source>
-        <translation>Inserisci il testo del Captcha qui sotto</translation>
-    </message>
-</context>
-<context>
     <name>CommentDelegate</name>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="145"/>
@@ -1760,23 +1752,23 @@
         <translation>Per favore accedi di nuovo</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="484"/>
+        <location filename="../qml/main.qml" line="479"/>
         <source> and %1 other</source>
         <translation>e %1 altri</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="493"/>
-        <location filename="../qml/main.qml" line="494"/>
+        <location filename="../qml/main.qml" line="488"/>
+        <location filename="../qml/main.qml" line="489"/>
         <source>Message from %1</source>
         <translation>Messaggio da %1</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="504"/>
+        <location filename="../qml/main.qml" line="499"/>
         <source>New message from %1</source>
         <translation>Nuovo messaggio da %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="505"/>
+        <location filename="../qml/main.qml" line="500"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation>
