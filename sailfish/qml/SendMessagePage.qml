@@ -33,7 +33,7 @@ AbstractPage {
     function send(msgRecipient) {
         console.log("sending message to " + msgRecipient + "...");
         if (replyTo === "") {
-            messageManager.send(msgRecipient, subjectField.text, messageField.text, "", "");
+            messageManager.send(msgRecipient, subjectField.text, messageField.text);
         } else {
             messageManager.reply(replyTo, messageField.text);
         }

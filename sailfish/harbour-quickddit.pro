@@ -58,7 +58,6 @@ HEADERS += \
     ../src/messagemanager.h \
     ../src/apirequest.h \
     ../src/aboutmultiredditmanager.h \
-    ../src/captchamanager.h \
     ../src/inboxmanager.h \
     ../src/usermanager.h \
     ../src/userobject.h \
@@ -98,7 +97,6 @@ SOURCES += main.cpp \
     ../src/messagemanager.cpp \
     ../src/apirequest.cpp \
     ../src/aboutmultiredditmanager.cpp \
-    ../src/captchamanager.cpp \
     ../src/inboxmanager.cpp \
     ../src/usermanager.cpp \
     ../src/userobject.cpp \
@@ -156,7 +154,6 @@ OTHER_FILES += \
     qml/Bubble.qml \
     qml/VideoViewPage.qml \
     qml/AbstractDialog.qml \
-    qml/Captcha.qml \
     qml/SendLinkPage.qml \
     qml/PostThumbnail.qml \
     qml/PostInfoText.qml \

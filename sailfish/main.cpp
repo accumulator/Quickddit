@@ -48,7 +48,6 @@
 #include "src/imgurmanager.h"
 #include "src/votemanager.h"
 #include "src/commentmanager.h"
-#include "src/captchamanager.h"
 #include "src/linkmanager.h"
 #include "src/inboxmanager.h"
 #include "src/usermanager.h"
@@ -80,7 +79,6 @@ int main(int argc, char *argv[])
     qmlRegisterType<ImgurManager>("harbour.quickddit.Core", 1, 0, "ImgurManager");
     qmlRegisterType<VoteManager>("harbour.quickddit.Core", 1, 0, "VoteManager");
     qmlRegisterType<CommentManager>("harbour.quickddit.Core", 1, 0, "CommentManager");
-    qmlRegisterType<CaptchaManager>("harbour.quickddit.Core", 1, 0, "CaptchaManager");
     qmlRegisterType<LinkManager>("harbour.quickddit.Core", 1, 0, "LinkManager");
     qmlRegisterType<InboxManager>("harbour.quickddit.Core", 1, 0, "InboxManager");
     qmlRegisterType<UserManager>("harbour.quickddit.Core", 1, 0, "UserManager");

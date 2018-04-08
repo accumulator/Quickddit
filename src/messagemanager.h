@@ -12,7 +12,7 @@ public:
     Q_INVOKABLE void reply(const QString &fullname, const QString &rawText);
     Q_INVOKABLE void markRead(const QString &fullname);
     Q_INVOKABLE void markUnread(const QString &fullname);
-    Q_INVOKABLE void send(const QString &username, const QString &subject, const QString &rawText, const QString &captcha, const QString &iden);
+    Q_INVOKABLE void send(const QString &username, const QString &subject, const QString &rawText);
 
 signals:
     void replySuccess();

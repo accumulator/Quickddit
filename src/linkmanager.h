@@ -49,7 +49,6 @@ public:
 signals:
     void success(const QString &message);
     void error(const QString &errorString);
-    void recaptcha();
 
 public slots:
 

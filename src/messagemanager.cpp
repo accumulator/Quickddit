@@ -37,19 +37,13 @@ void MessageManager::reply(const QString &fullname, const QString &rawText)
     doRequest(APIRequest::POST, "/api/comment", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
-void MessageManager::send(const QString &username, const QString &subject, const QString &rawText, const QString &captcha, const QString &iden)
+void MessageManager::send(const QString &username, const QString &subject, const QString &rawText)
 {
     QHash<QString, QString> parameters;
     parameters.insert("api_type", "json");
     parameters.insert("subject", subject);
     parameters.insert("text", rawText);
     parameters.insert("to", username);
-    // captcha, if defined
-    if (captcha != "") {
-        parameters.insert("captcha", captcha);
-        parameters.insert("iden", iden);
-    }
-    //parameters.insert("from_sr", from subreddit);
 
     m_action = Send;
 
