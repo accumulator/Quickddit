@@ -42,7 +42,7 @@ public:
     UserThingModel *userThingModel() const;
     void setUserThingModel(UserThingModel *model);
 
-    Q_INVOKABLE void submit(const QString &subreddit, const QString &captcha, const QString &iden, const QString &title, const QString& url, const QString& text);
+    Q_INVOKABLE void submit(const QString &subreddit, const QString &title, const QString& url, const QString& text, const QString& flairId);
     Q_INVOKABLE void editLinkText(const QString &fullname, const QString &rawText);
     Q_INVOKABLE void deleteLink(const QString &fullname);
 

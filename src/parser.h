@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2015-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@
 #include <QtCore/QList>
 #include <QtCore/QPair>
 #include <QtCore/QByteArray>
+#include <QtCore/QVariantList>
 #include <QString>
 
 #include "thing.h"
@@ -72,6 +73,9 @@ LinkObject parseLinkEditResponse(const QByteArray &json);
 UserObject parseUserAbout(const QByteArray &json);
 QStringList parseListOfNames(const QByteArray &json);
 Listing<Thing*> parseUserThingList(const QByteArray &json);
+
+QVariantList parseList(const QByteArray &json);
+QVariantMap parseMap(const QByteArray &json);
 }
 
 #endif // PARSER_H

@@ -52,12 +52,18 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                visible: link.author === appSettings.redditUsername && link.isSelfPost
+                visible: link.author === appSettings.redditUsername //&& link.isSelfPost
                 enabled: !link.isArchived
                 text: qsTr("Edit Post")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SendLinkPage.qml"),
-                                   { linkManager: linkManager, text: link.rawText || "", editPost: link.fullname, subreddit: commentModel.link.subreddit, postTitle: commentModel.link.title});
+                                   { linkManager: linkManager,
+                                     text: link.rawText || "",
+                                     editPost: link.fullname,
+                                     subreddit: link.subreddit,
+                                     postTitle: link.title,
+                                     postUrl: link.isSelfPost ? "" : link.url
+                                   });
                 }
             }
 
@@ -295,18 +301,6 @@ AbstractPage {
         }
     }
 
-    VoteManager {
-        id: commentVoteManager
-        manager: quickdditManager
-        onVoteSuccess: {
-            if (fullname.indexOf("t1") === 0) // comment
-                commentModel.changeLikes(fullname, likes);
-            else if (fullname.indexOf("t3") === 0) // link
-                commentModel.changeLinkLikes(fullname, likes);
-        }
-        onError: infoBanner.warning(errorString);
-    }
-
     CommentManager {
         id: commentManager
         manager: quickdditManager
@@ -324,6 +318,25 @@ AbstractPage {
             infoBanner.alert(message);
             pageStack.pop();
         }
+        onError: infoBanner.warning(errorString);
+    }
+
+    VoteManager {
+        id: commentVoteManager
+        manager: quickdditManager
+        onVoteSuccess: {
+            if (fullname.indexOf("t1") === 0) // comment
+                commentModel.changeLikes(fullname, likes);
+            else if (fullname.indexOf("t3") === 0) // link
+                commentModel.changeLinkLikes(fullname, likes);
+        }
+        onError: infoBanner.warning(errorString);
+    }
+
+    FlairManager {
+        id: flairManager
+        manager: quickdditManager
+        subreddit: link.subreddit
         onError: infoBanner.warning(errorString);
     }
 

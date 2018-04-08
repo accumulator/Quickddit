@@ -58,21 +58,18 @@ void LinkManager::setUserThingModel(UserThingModel *model)
     m_userThingModel = model;
 }
 
-void LinkManager::submit(const QString &subreddit, const QString &captcha, const QString &iden, const QString &title, const QString& url, const QString& text)
+void LinkManager::submit(const QString &subreddit, const QString &title, const QString& url, const QString& text, const QString& flairId)
 {
     m_action = Submit;
 
     QHash<QString, QString> parameters;
     parameters.insert("api_type", "json");
-    // captcha, if defined
-    if (captcha != "") {
-        parameters.insert("captcha", captcha);
-        parameters.insert("iden", iden);
-    }
     // self?
     parameters.insert("kind", url.isEmpty() ? "self" : "link");
     if (!url.isEmpty())
         parameters.insert("url", url);
+    if (!flairId.isEmpty())
+        parameters.insert("flair_id", flairId);
     // basic
     parameters.insert("sr", subreddit);
     parameters.insert("text", text);
