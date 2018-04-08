@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" sourcelanguage="en" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fr" sourcelanguage="en">
 <context>
     <name>AboutMultiredditManager</name>
     <message>
@@ -140,12 +142,18 @@
     <message numerus="yes">
         <location filename="../qml/AboutSubredditPage.qml" line="116"/>
         <source>%n subscribers</source>
-        <translation><numerusform>%n abonné</numerusform><numerusform>%n abonnés</numerusform></translation>
+        <translation>
+            <numerusform>%n abonné</numerusform>
+            <numerusform>%n abonnés</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/AboutSubredditPage.qml" line="117"/>
         <source>%n active users</source>
-        <translation><numerusform>%n utilisateur actif</numerusform><numerusform>%n utilisateurs actifs</numerusform></translation>
+        <translation>
+            <numerusform>%n utilisateur actif</numerusform>
+            <numerusform>%n utilisateurs actifs</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="129"/>
@@ -231,134 +239,149 @@
         <translation>Paramètres de l&apos;appli</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="40"/>
+        <location filename="../qml/AppSettingsPage.qml" line="50"/>
         <source>Display</source>
         <translation>Affichage</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="43"/>
+        <location filename="../qml/AppSettingsPage.qml" line="53"/>
         <source>Font Size</source>
         <translation>Taille de la police</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="53"/>
+        <location filename="../qml/AppSettingsPage.qml" line="63"/>
         <source>Tiny</source>
         <translation>Minuscule</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="54"/>
+        <location filename="../qml/AppSettingsPage.qml" line="64"/>
         <source>Small</source>
         <translation>Petit</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="55"/>
+        <location filename="../qml/AppSettingsPage.qml" line="65"/>
         <source>Medium</source>
         <translation>Moyen</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="56"/>
+        <location filename="../qml/AppSettingsPage.qml" line="66"/>
         <source>Large</source>
         <translation>Grand</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="69"/>
+        <location filename="../qml/AppSettingsPage.qml" line="79"/>
         <source>Device Orientation</source>
         <translation>Orientation de l&apos;appareil</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="78"/>
+        <location filename="../qml/AppSettingsPage.qml" line="88"/>
         <source>Automatic</source>
         <translation>Automatique</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="79"/>
+        <location filename="../qml/AppSettingsPage.qml" line="89"/>
         <source>Portrait only</source>
         <translation>Portrait uniquement</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="80"/>
+        <location filename="../qml/AppSettingsPage.qml" line="90"/>
         <source>Landscape only</source>
         <translation>Paysage uniquement</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="92"/>
+        <location filename="../qml/AppSettingsPage.qml" line="102"/>
         <source>Thumbnail Size</source>
         <translation>Taille de la vignette</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="105"/>
+        <location filename="../qml/AppSettingsPage.qml" line="115"/>
         <source>Auto</source>
         <translation>Auto</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="128"/>
+        <location filename="../qml/AppSettingsPage.qml" line="138"/>
         <source>Language</source>
         <translation>Langue</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="145"/>
+        <location filename="../qml/AppSettingsPage.qml" line="155"/>
         <source>Notifications</source>
         <translation>Notifications</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="148"/>
+        <location filename="../qml/AppSettingsPage.qml" line="158"/>
         <source>Check Messages</source>
         <translation>Vérifier les messages</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="156"/>
+        <location filename="../qml/AppSettingsPage.qml" line="166"/>
         <source>Media</source>
         <translation>Média</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="159"/>
+        <location filename="../qml/AppSettingsPage.qml" line="169"/>
         <source>Preferred Video Size</source>
         <translation>Qualité vidéo souhaitée</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="179"/>
+        <location filename="../qml/AppSettingsPage.qml" line="189"/>
         <source>Loop Videos</source>
         <translation>Vidéos en boucle</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="186"/>
+        <location filename="../qml/AppSettingsPage.qml" line="196"/>
         <source>Connection</source>
         <translation>Connexion</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="189"/>
+        <location filename="../qml/AppSettingsPage.qml" line="199"/>
         <source>Use Tor</source>
         <translation>Utiliser Tor</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="190"/>
+        <location filename="../qml/AppSettingsPage.qml" line="200"/>
         <source>When enabled, please make sure Tor is installed and active.</source>
         <translation>Si sélectionné, assurez-vous que l&apos;application Tor soit installée et bien active.</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="197"/>
+        <location filename="../qml/AppSettingsPage.qml" line="207"/>
         <source>Account</source>
         <translation>Compte</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="205"/>
+        <location filename="../qml/AppSettingsPage.qml" line="215"/>
         <source>Signed in to Reddit as</source>
         <translation>Connecté à Reddit en tant que</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="224"/>
+        <location filename="../qml/AppSettingsPage.qml" line="234"/>
         <source>Sign out</source>
         <translation>Déconnexion</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="224"/>
+        <location filename="../qml/AppSettingsPage.qml" line="234"/>
         <source>Sign in to Reddit</source>
         <translation>Connexion à Reddit</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="228"/>
+        <location filename="../qml/AppSettingsPage.qml" line="238"/>
         <source>You have signed out from Reddit</source>
         <translation>Vous vous êtes déconnecté de Reddit</translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="294"/>
+        <source>Activate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="298"/>
+        <source>Remove</source>
+        <translation type="unfinished">Retirer</translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="278"/>
+        <source>Remove %1 account</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -389,12 +412,18 @@
     <message numerus="yes">
         <location filename="../qml/CommentDelegate.qml" line="245"/>
         <source>%n pts</source>
-        <translation><numerusform>%n pt</numerusform><numerusform>%n pts</numerusform></translation>
+        <translation>
+            <numerusform>%n pt</numerusform>
+            <numerusform>%n pts</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/CommentDelegate.qml" line="353"/>
         <source>Load %n hidden comments</source>
-        <translation><numerusform>Charger %n commentaire masqué</numerusform><numerusform>Charger %n commentaires masqués</numerusform></translation>
+        <translation>
+            <numerusform>Charger %n commentaire masqué</numerusform>
+            <numerusform>Charger %n commentaires masqués</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="353"/>
@@ -404,7 +433,10 @@
     <message numerus="yes">
         <location filename="../qml/CommentDelegate.qml" line="387"/>
         <source>Show %n collapsed comments</source>
-        <translation><numerusform>Montrer %n commentaire réduit</numerusform><numerusform>Montrer %n commentaires réduits</numerusform></translation>
+        <translation>
+            <numerusform>Montrer %n commentaire réduit</numerusform>
+            <numerusform>Montrer %n commentaires réduits</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="416"/>
@@ -531,33 +563,33 @@
         <translation>Modifier le post</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="65"/>
-        <location filename="../qml/CommentPage.qml" line="66"/>
+        <location filename="../qml/CommentPage.qml" line="71"/>
+        <location filename="../qml/CommentPage.qml" line="72"/>
         <source>Sort</source>
         <translation>Trier</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="76"/>
+        <location filename="../qml/CommentPage.qml" line="82"/>
         <source>Add comment</source>
         <translation>Ajouter un commentaire</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="86"/>
+        <location filename="../qml/CommentPage.qml" line="92"/>
         <source>Refresh</source>
         <translation>Rafraîchir</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="218"/>
+        <location filename="../qml/CommentPage.qml" line="224"/>
         <source>Viewing a single comment&apos;s thread</source>
         <translation>Visualisation d&apos;un seul commentaire de la discussion</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="223"/>
+        <location filename="../qml/CommentPage.qml" line="229"/>
         <source>View All Comments</source>
         <translation>Voir tous les commentaires</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="255"/>
+        <location filename="../qml/CommentPage.qml" line="261"/>
         <source>Deleting comment</source>
         <translation>Suppression du commentaire</translation>
     </message>
@@ -611,12 +643,12 @@
 <context>
     <name>LinkManager</name>
     <message>
-        <location filename="../../src/linkmanager.cpp" line="117"/>
+        <location filename="../../src/linkmanager.cpp" line="114"/>
         <source>The link has been added</source>
         <translation>Le lien a été ajouté</translation>
     </message>
     <message>
-        <location filename="../../src/linkmanager.cpp" line="123"/>
+        <location filename="../../src/linkmanager.cpp" line="120"/>
         <source>The link text has been changed</source>
         <translation>Le texte du lien a été modifié</translation>
     </message>
@@ -925,12 +957,18 @@
     <message numerus="yes">
         <location filename="../qml/PostInfoText.qml" line="135"/>
         <source>%n points</source>
-        <translation><numerusform>%n point</numerusform><numerusform>%n points</numerusform></translation>
+        <translation>
+            <numerusform>%n point</numerusform>
+            <numerusform>%n points</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/PostInfoText.qml" line="147"/>
         <source>%n comments</source>
-        <translation><numerusform>%n commentaire</numerusform><numerusform>%n commentaires</numerusform></translation>
+        <translation>
+            <numerusform>%n commentaire</numerusform>
+            <numerusform>%n commentaires</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -1122,32 +1160,37 @@
         <translation>Modifier le post</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="65"/>
+        <location filename="../qml/SendLinkPage.qml" line="77"/>
         <source>Post Title</source>
         <translation>Titre du post</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="73"/>
+        <location filename="../qml/SendLinkPage.qml" line="85"/>
         <source>Self Post</source>
         <translation>Post personnel</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="80"/>
+        <location filename="../qml/SendLinkPage.qml" line="92"/>
         <source>Post URL</source>
         <translation>Lien du post</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="92"/>
+        <location filename="../qml/SendLinkPage.qml" line="104"/>
         <source>Post Text</source>
         <translation>Texte du post</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="99"/>
+        <location filename="../qml/SendLinkPage.qml" line="112"/>
+        <source>Flair</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SendLinkPage.qml" line="127"/>
         <source>Submit</source>
         <translation>Soumettre</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="99"/>
+        <location filename="../qml/SendLinkPage.qml" line="127"/>
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
@@ -1223,7 +1266,10 @@
     <message numerus="yes">
         <location filename="../qml/SubredditBrowseDelegate.qml" line="68"/>
         <source>%n subscribers</source>
-        <translation><numerusform>%n abonné</numerusform><numerusform>%n abonnés</numerusform></translation>
+        <translation>
+            <numerusform>%n abonné</numerusform>
+            <numerusform>%n abonnés</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -1396,7 +1442,7 @@
         <translation>Se désabonner</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="220"/>
+        <location filename="../qml/SubredditsPage.qml" line="223"/>
         <source>You have unsubscribed from %1</source>
         <translation>Vous vous êtes désabonné de %1</translation>
     </message>
@@ -1597,27 +1643,42 @@
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="43"/>
         <source>%n mins ago</source>
-        <translation><numerusform>il y a %n minute</numerusform><numerusform>il y a %n minutes</numerusform></translation>
+        <translation>
+            <numerusform>il y a %n minute</numerusform>
+            <numerusform>il y a %n minutes</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="48"/>
         <source>%n hours ago</source>
-        <translation><numerusform>il y a %n heure</numerusform><numerusform>il y a %n heures</numerusform></translation>
+        <translation>
+            <numerusform>il y a %n heure</numerusform>
+            <numerusform>il y a %n heures</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="53"/>
         <source>%n days ago</source>
-        <translation><numerusform>il y a %n jour</numerusform><numerusform>il y a %n jours</numerusform></translation>
+        <translation>
+            <numerusform>il y a %n jour</numerusform>
+            <numerusform>il y a %n jours</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="58"/>
         <source>%n months ago</source>
-        <translation><numerusform>il y a %n mois</numerusform><numerusform>il y a %n mois</numerusform></translation>
+        <translation>
+            <numerusform>il y a %n mois</numerusform>
+            <numerusform>il y a %n mois</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="61"/>
         <source>%n years ago</source>
-        <translation><numerusform>il y a %n an</numerusform><numerusform>il y a %n ans</numerusform></translation>
+        <translation>
+            <numerusform>il y a %n an</numerusform>
+            <numerusform>il y a %n ans</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -1694,31 +1755,34 @@
         <translation>URL Vidéo non supportée</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="429"/>
+        <location filename="../qml/main.qml" line="449"/>
         <source>Please log in again</source>
         <translation>Merci de vous connecter à nouveau</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="464"/>
+        <location filename="../qml/main.qml" line="484"/>
         <source> and %1 other</source>
         <translation>et %1 autres</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="473"/>
-        <location filename="../qml/main.qml" line="474"/>
+        <location filename="../qml/main.qml" line="493"/>
+        <location filename="../qml/main.qml" line="494"/>
         <source>Message from %1</source>
         <translation>Message de %1</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="484"/>
+        <location filename="../qml/main.qml" line="504"/>
         <source>New message from %1</source>
         <translation>Nouveau message de %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="485"/>
+        <location filename="../qml/main.qml" line="505"/>
         <source>%n new messages</source>
         <comment>0</comment>
-        <translation><numerusform>%n nouveau message</numerusform><numerusform>%n nouveaux messages</numerusform></translation>
+        <translation>
+            <numerusform>%n nouveau message</numerusform>
+            <numerusform>%n nouveaux messages</numerusform>
+        </translation>
     </message>
 </context>
 </TS>
