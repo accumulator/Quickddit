@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2015-2017  Sander van Grieken
+    Copyright (C) 2015-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,15 +28,27 @@ AbstractPage {
     property string editPost: ""
     property alias text: linkDescription.text
     property alias postTitle: linkTitle.text
+    property alias postUrl: linkUrl.text
     property QtObject linkManager
+
+    property string origText: ""
+    property string origFlair: ""
 
     function submit() {
         if (editPost === "") {
             console.log("submitting post...");
-            linkManager.submit(subreddit, "", "", linkTitle.text, selfLinkSwitch.checked ? "" : linkUrl.text, linkDescription.text);
+            var flairId = ""
+            if (flairCombo.currentIndex !== 0)
+                flairId = flairManager.subredditFlairs[flairCombo.currentIndex - 1].id
+            linkManager.submit(subreddit, linkTitle.text, selfLinkSwitch.checked ? "" : linkUrl.text, linkDescription.text, flairId);
         } else {
             console.log("saving post...");
-            linkManager.editLinkText(editPost, text);
+            if (origText !== text) {
+                linkManager.editLinkText(editPost, text);
+            }
+            if (origFlair !== flairManager.subredditFlairs[flairCombo.currentIndex - 1].text) {
+                flairManager.selectFlair(linkManager.commentModel.link.fullname, flairManager.subredditFlairs[flairCombo.currentIndex - 1].id)
+            }
         }
     }
 
@@ -71,15 +83,15 @@ AbstractPage {
                 id: selfLinkSwitch
                 visible: aboutSubredditManager.submissionType === AboutSubredditManager.Any && editPost === ""
                 text: qsTr("Self Post")
-                checked: true
+                checked: linkUrl.text === ""
             }
 
             TextField {
                 id: linkUrl
                 anchors { left: parent.left; right: parent.right }
                 placeholderText: qsTr("Post URL")
-                enabled: !selfLinkSwitch.checked
-                visible: enabled
+                enabled: !selfLinkSwitch.checked && editPost === ""
+                visible: !selfLinkSwitch.checked
                 labelVisible: false
                 inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                 validator: RegExpValidator { regExp: /^https?:\/\/.+/ }
@@ -95,11 +107,27 @@ AbstractPage {
                 height: Math.max(implicitHeight, Theme.itemSizeLarge * 3)
             }
 
+            ComboBox {
+                id: flairCombo
+                label: qsTr("Flair")
+                enabled: flairManager.subredditFlairs.length > 0
+                visible: enabled
+                menu: ContextMenu {
+                    MenuItem { text: "" }
+                    Repeater {
+                        model: flairManager.subredditFlairs
+                        MenuItem {
+                            text: flairManager.subredditFlairs[index].text
+                        }
+                    }
+                }
+            }
+
             Button {
                 text: editPost === "" ? qsTr("Submit") : qsTr("Save")
                 anchors.horizontalCenter: parent.horizontalCenter
                 enabled: (editPost != "" || linkTitle.text.length > 0) /* official limits? */
-                         && ((selfLinkSwitch.checked && linkDescription.text.length > 0) || linkUrl.acceptableInput)
+                         && ((selfLinkSwitch.checked && linkDescription.text.length > 0) || (linkUrl.acceptableInput && flairManager.subredditFlairs.length > 0))
                 onClicked: submit()
             }
         }
@@ -113,8 +141,30 @@ AbstractPage {
         onDataChanged: {
             if (submissionType === AboutSubredditManager.Link)
                 selfLinkSwitch.checked = false
+            flairManager.getSubredditFlair();
         }
     }
 
-    Component.onCompleted: aboutSubredditManager.refresh();
+    Component.onCompleted: {
+        origText = newLinkPage.text
+        aboutSubredditManager.refresh();
+    }
+
+    FlairManager {
+        id: flairManager
+        manager: quickdditManager
+        subreddit: newLinkPage.subreddit
+        onError: infoBanner.warning(errorString);
+        onSubredditFlairsChanged: {
+            if (newLinkPage.editPost === "")
+                return
+            for (var index = 0;index < subredditFlairs.length; index++) {
+                if (linkManager.commentModel.link.flairText === subredditFlairs[index].text) {
+                    flairCombo.currentIndex = index + 1
+                    origFlair = subredditFlairs[index].text
+                }
+            }
+        }
+
+    }
 }
