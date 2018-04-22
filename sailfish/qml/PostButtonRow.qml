@@ -71,10 +71,10 @@ Row {
                  || globalUtils.previewableVideo(link.url)
                  || (globalUtils.redditLink(link.url) && link.permalink.indexOf(globalUtils.parseRedditLink(link.url).path) === -1) // self-post, but not this one
         onClicked: {
-            if (globalUtils.previewableImage(link.url)) {
-                globalUtils.openImageViewPage(link.url);
-            } else if (globalUtils.previewableVideo(link.url)) {
+            if (globalUtils.previewableVideo(link.url)) {
                 globalUtils.openVideoViewPage(link.url);
+            } else if (globalUtils.previewableImage(link.url)) {
+                globalUtils.openImageViewPage(link.url);
             } else if (globalUtils.redditLink(link.url)) {
                 globalUtils.openRedditLink(link.url);
             }
