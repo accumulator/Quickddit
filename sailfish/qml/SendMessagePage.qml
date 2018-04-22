@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2016-2017  Sander van Grieken
+    Copyright (C) 2016-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,6 +39,16 @@ AbstractPage {
         }
     }
 
+    Component.onCompleted: {
+        // set focus
+        if (recipient === "") {
+            recipientField.focus = true
+        } else if (replyTo === "" && subject === "") {
+            subjectField.focus = true
+        } else
+            messageField.focus = true
+    }
+
     Flickable {
         id: flickable
         anchors.fill: parent
@@ -58,7 +68,6 @@ AbstractPage {
                 placeholderText: qsTr("Recipient")
                 maximumLength: 100 // reddit constraint
                 labelVisible: false
-                focus: visible
             }
 
             Label {
@@ -75,7 +84,6 @@ AbstractPage {
                 placeholderText: qsTr("Subject")
                 maximumLength: 100 // reddit constraint
                 labelVisible: false
-                focus: !recipientField.visible
                 enabled: replyTo === ""
             }
 
