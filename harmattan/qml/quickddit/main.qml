@@ -199,11 +199,6 @@ PageStackWindow {
         }
     }
 
-    CaptchaManager {
-        id: captchaManager
-        manager: quickdditManager
-    }
-
     InboxManager {
         id: inboxManager
         manager: quickdditManager

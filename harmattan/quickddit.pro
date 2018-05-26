@@ -36,7 +36,6 @@ HEADERS += \
     ../src/messagemanager.h \
     ../src/apirequest.h \
     ../src/aboutmultiredditmanager.h \
-    ../src/captchamanager.h \
     ../src/linkmanager.h \
     ../src/inboxmanager.h \
     ../src/usermanager.h \
@@ -73,7 +72,6 @@ SOURCES += main.cpp \
     ../src/messagemanager.cpp \
     ../src/apirequest.cpp \
     ../src/aboutmultiredditmanager.cpp \
-    ../src/captchamanager.cpp \
     ../src/linkmanager.cpp \
     ../src/inboxmanager.cpp \
     ../src/usermanager.cpp \
