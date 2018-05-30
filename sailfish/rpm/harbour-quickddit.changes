@@ -5,6 +5,13 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Wed May 30 2018 Sander van Grieken <sander@outrightsolutions.nl> 1.8.1-1
+- fix: set focus correctly in SendMessagePage, depending on which fields are shown
+- fix: corner case where video link is opened as image
+- chg: upgrade youtube-dl to 2018.05.30
+- new: nl_BE translation (thanks Nathan Follens!)
+- new: pt_BR translation (thanks Caio2k!)
+
 * Sun Apr 08 2018 Sander van Grieken <sander@outrightsolutions.nl> 1.8.0-1
 - fix: fix nav button enable for self-posts
 - chg: remove all obsolete captcha code
