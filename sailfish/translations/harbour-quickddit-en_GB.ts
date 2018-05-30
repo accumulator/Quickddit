@@ -1174,7 +1174,7 @@
     <message>
         <location filename="../qml/SendLinkPage.qml" line="112"/>
         <source>Flair</source>
-        <translation type="unfinished"></translation>
+        <translation>Flair</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="127"/>
@@ -1200,32 +1200,32 @@
         <translation>Reply Message</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="58"/>
+        <location filename="../qml/SendMessagePage.qml" line="68"/>
         <source>Recipient</source>
         <translation>Recipient</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="66"/>
+        <location filename="../qml/SendMessagePage.qml" line="75"/>
         <source>to moderators of</source>
         <translation>to moderators of</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="66"/>
+        <location filename="../qml/SendMessagePage.qml" line="75"/>
         <source>to</source>
         <translation>to</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="75"/>
+        <location filename="../qml/SendMessagePage.qml" line="84"/>
         <source>Subject</source>
         <translation>Subject</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="85"/>
+        <location filename="../qml/SendMessagePage.qml" line="93"/>
         <source>Message</source>
         <translation>Message</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="91"/>
+        <location filename="../qml/SendMessagePage.qml" line="99"/>
         <source>Send</source>
         <translation>Send</translation>
     </message>

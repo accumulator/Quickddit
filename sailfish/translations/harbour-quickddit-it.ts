@@ -1200,32 +1200,32 @@
         <translation>Rispondi Al Messaggio</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="58"/>
+        <location filename="../qml/SendMessagePage.qml" line="68"/>
         <source>Recipient</source>
         <translation>Destinatario</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="66"/>
+        <location filename="../qml/SendMessagePage.qml" line="75"/>
         <source>to moderators of</source>
         <translation>ai moderatori di</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="66"/>
+        <location filename="../qml/SendMessagePage.qml" line="75"/>
         <source>to</source>
         <translation>a</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="75"/>
+        <location filename="../qml/SendMessagePage.qml" line="84"/>
         <source>Subject</source>
         <translation>Oggetto</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="85"/>
+        <location filename="../qml/SendMessagePage.qml" line="93"/>
         <source>Message</source>
         <translation>Messaggio</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="91"/>
+        <location filename="../qml/SendMessagePage.qml" line="99"/>
         <source>Send</source>
         <translation>Invia</translation>
     </message>

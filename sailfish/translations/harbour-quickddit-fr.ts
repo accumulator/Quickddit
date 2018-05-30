@@ -371,17 +371,17 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="294"/>
         <source>Activate</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="298"/>
         <source>Remove</source>
-        <translation type="unfinished">Retirer</translation>
+        <translation>Enlever</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="278"/>
         <source>Remove %1 account</source>
-        <translation type="unfinished"></translation>
+        <translation>Enlever %1 compte</translation>
     </message>
 </context>
 <context>
@@ -1174,7 +1174,7 @@
     <message>
         <location filename="../qml/SendLinkPage.qml" line="112"/>
         <source>Flair</source>
-        <translation type="unfinished"></translation>
+        <translation>Flair</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="127"/>
@@ -1200,32 +1200,32 @@
         <translation>Réponse</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="58"/>
+        <location filename="../qml/SendMessagePage.qml" line="68"/>
         <source>Recipient</source>
         <translation>Destinataire</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="66"/>
+        <location filename="../qml/SendMessagePage.qml" line="75"/>
         <source>to moderators of</source>
         <translation>aux modérateurs de</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="66"/>
+        <location filename="../qml/SendMessagePage.qml" line="75"/>
         <source>to</source>
         <translation>à</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="75"/>
+        <location filename="../qml/SendMessagePage.qml" line="84"/>
         <source>Subject</source>
         <translation>Sujet</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="85"/>
+        <location filename="../qml/SendMessagePage.qml" line="93"/>
         <source>Message</source>
         <translation>Message</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="91"/>
+        <location filename="../qml/SendMessagePage.qml" line="99"/>
         <source>Send</source>
         <translation>Envoyer</translation>
     </message>

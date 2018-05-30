@@ -1207,32 +1207,32 @@
         <translation>Odpowiedz</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="58"/>
+        <location filename="../qml/SendMessagePage.qml" line="68"/>
         <source>Recipient</source>
         <translation>Odbiorca</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="66"/>
+        <location filename="../qml/SendMessagePage.qml" line="75"/>
         <source>to moderators of</source>
         <translation>do moderatorów</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="66"/>
+        <location filename="../qml/SendMessagePage.qml" line="75"/>
         <source>to</source>
         <translation>do</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="75"/>
+        <location filename="../qml/SendMessagePage.qml" line="84"/>
         <source>Subject</source>
         <translation>Temat</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="85"/>
+        <location filename="../qml/SendMessagePage.qml" line="93"/>
         <source>Message</source>
         <translation>Wiadomość</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="91"/>
+        <location filename="../qml/SendMessagePage.qml" line="99"/>
         <source>Send</source>
         <translation>Wyślij</translation>
     </message>

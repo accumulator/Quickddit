@@ -1174,7 +1174,7 @@
     <message>
         <location filename="../qml/SendLinkPage.qml" line="112"/>
         <source>Flair</source>
-        <translation type="unfinished"></translation>
+        <translation>Flair</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="127"/>
@@ -1200,32 +1200,32 @@
         <translation>Bericht beantwoorden</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="58"/>
+        <location filename="../qml/SendMessagePage.qml" line="68"/>
         <source>Recipient</source>
         <translation>Ontvanger</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="66"/>
+        <location filename="../qml/SendMessagePage.qml" line="75"/>
         <source>to moderators of</source>
         <translation>aan de moderators van</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="66"/>
+        <location filename="../qml/SendMessagePage.qml" line="75"/>
         <source>to</source>
         <translation>aan</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="75"/>
+        <location filename="../qml/SendMessagePage.qml" line="84"/>
         <source>Subject</source>
         <translation>Onderwerp</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="85"/>
+        <location filename="../qml/SendMessagePage.qml" line="93"/>
         <source>Message</source>
         <translation>Bericht</translation>
     </message>
     <message>
-        <location filename="../qml/SendMessagePage.qml" line="91"/>
+        <location filename="../qml/SendMessagePage.qml" line="99"/>
         <source>Send</source>
         <translation>Verzenden</translation>
     </message>
@@ -1645,7 +1645,7 @@
         <source>%n hours ago</source>
         <translation>
             <numerusform>%n uur geleden</numerusform>
-            <numerusform>%n uur geleden</numerusform>
+            <numerusform>%n uren geleden</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1661,7 +1661,7 @@
         <source>%n months ago</source>
         <translation>
             <numerusform>%n maand geleden</numerusform>
-            <numerusform>%n maand geleden</numerusform>
+            <numerusform>%n maanden geleden</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1669,7 +1669,7 @@
         <source>%n years ago</source>
         <translation>
             <numerusform>%n jaar geleden</numerusform>
-            <numerusform>%n jaar geleden</numerusform>
+            <numerusform>%n jaren geleden</numerusform>
         </translation>
     </message>
 </context>
