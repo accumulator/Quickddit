@@ -2,12 +2,15 @@ TRANSLATION_SOURCES += ../src
 
 TRANSLATIONS = translations/harbour-quickddit-en_GB.ts \
     translations/harbour-quickddit-nl.ts \
+    translations/harbour-quickddit-nl_BE.ts \
     translations/harbour-quickddit-sv.ts \
     translations/harbour-quickddit-el.ts \
     translations/harbour-quickddit-de.ts \
     translations/harbour-quickddit-fr.ts \
     translations/harbour-quickddit-it.ts \
-    translations/harbour-quickddit-pl.ts
+    translations/harbour-quickddit-pl.ts \
+    translations/harbour-quickddit-pt_BR.ts
+
 
 updateqm.input = TRANSLATIONS
 updateqm.output = translations/${QMAKE_FILE_BASE}.qm
