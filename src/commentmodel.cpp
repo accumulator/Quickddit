@@ -545,6 +545,8 @@ void CommentModel::moreComments(int index, const QVariant &children)
     QStringList const limitedChildrenList = childrenList.mid(0,50);
     if (childrenList.size() > 50) {
         m_moremoreComments = childrenList.mid(50);
+    } else {
+        m_moremoreComments.clear();
     }
     parameters["children"] = limitedChildrenList.join(",");
 
