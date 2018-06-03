@@ -1,3 +1,10 @@
+quickddit (1.0.1) unstable; urgency=low
+  * remove captcha controls
+  * fix crash when requesting more comments
+  * fix auto-load subreddit list and multireddit list on first access
+
+ -- Sander van Grieken <sander@outrightsolutions.nl>  Sun, 03 Jun 2018 10:56:13 +0100
+
 quickddit (1.0.0) unstable; urgency=low
   * bring functionality up to par with sailfish 1.0.0
 
