@@ -31,7 +31,7 @@ AbstractPage {
 
     function send() {
         console.log("sending message...");
-        messageManager.send(recipient, subjectField.text, messageField.text, "", "");
+        messageManager.send(recipient, subjectField.text, messageField.text);
     }
 
     tools: ToolBarLayout {

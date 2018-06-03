@@ -29,7 +29,7 @@ AbstractPage {
 
     function submit() {
         console.log("submitting link...");
-        linkManager.submit(subreddit, "", "", linkTitle.text, selfLinkSwitch.checked ? "" : linkUrl.text, linkDescription.text);
+        linkManager.submit(subreddit, linkTitle.text, selfLinkSwitch.checked ? "" : linkUrl.text, linkDescription.text, "");
     }
 
     tools: ToolBarLayout {
