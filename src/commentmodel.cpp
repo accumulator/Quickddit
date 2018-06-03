@@ -541,8 +541,13 @@ void CommentModel::moreComments(int index, const QVariant &children)
     QHash<QString, QString> parameters;
     parameters["sort"] = getSortString(m_sort);
     parameters["link_id"] = linkMap.value("fullname").toString();
-    QStringList limitedChildrenList(children.toStringList().mid(0,50));
-    m_moremoreComments = children.toStringList().mid(50);
+    QStringList const childrenList = children.toStringList();
+    QStringList const limitedChildrenList = childrenList.mid(0,50);
+    if (childrenList.size() > 50) {
+        m_moremoreComments = childrenList.mid(50);
+    } else {
+        m_moremoreComments.clear();
+    }
     parameters["children"] = limitedChildrenList.join(",");
 
     doRequest(APIRequest::GET, "/api/morechildren", SLOT(onMoreCommentsFinished(QNetworkReply*)), parameters);
