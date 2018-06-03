@@ -87,5 +87,11 @@ Sheet {
         footer: LoadingFooter { visible: multiredditModel.busy; listViewItem: multiredditListView }
 
         ViewPlaceholder { enabled: multiredditListView.count == 0 && !multiredditModel.busy }
+
+        Component.onCompleted: {
+            multiredditListView.positionViewAtBeginning();
+            if (!!multiredditModel && count === 0)
+                multiredditModel.refresh(false);
+        }
     }
 }

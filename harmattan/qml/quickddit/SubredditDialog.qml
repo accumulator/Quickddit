@@ -152,6 +152,10 @@ Sheet {
 
         ScrollDecorator { flickableItem: subredditListView }
 
-        Component.onCompleted: subredditListView.positionViewAtBeginning();
+        Component.onCompleted: {
+            subredditListView.positionViewAtBeginning();
+            if (!!subredditModel && count === 0)
+                subredditModel.refresh(false);
+        }
     }
 }
