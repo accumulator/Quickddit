@@ -23,49 +23,79 @@ import harbour.quickddit.Core 1.0
 AbstractPage {
     id: webViewPage
     title: qsTr("WebViewer")
-    property url url: webView.url
-    property url _prevUrl: ""
 
-    onUrlChanged: {
-        if (url != _prevUrl)
-            webView.url = url
-        _prevUrl = url
+    property url url
+
+    states: [
+        State {
+            name: ""
+            PropertyChanges { target: pageLoader; sourceComponent: placeholderComponent }
+        },
+        State {
+            name: "active"
+            when: status === PageStatus.Active || status === PageStatus.Deactivating
+            PropertyChanges { target: pageLoader; sourceComponent: webViewComponent }
+        }
+    ]
+
+    onStateChanged: console.log("state:"+state)
+
+    Loader {
+        id: pageLoader
+        anchors.fill: parent
+        sourceComponent: placeholderComponent
+        onStatusChanged: {
+            if (pageLoader.status == Loader.Ready) {
+                if (sourceComponent === webViewComponent)
+                    item.url = url
+            }
+        }
     }
 
-    SilicaWebView {
-        id: webView
-        anchors.fill: parent
-
-        experimental.overview: true
-        experimental.customLayoutWidth: webViewPage.width / (0.5 + QMLUtils.pScale)
-
-        onLoadingChanged: {
-            busy = loading
+    Component {
+        id: placeholderComponent
+        Rectangle {
+            color: "white"
         }
+    }
 
-        PullDownMenu {
-            MenuItem {
-                text: qsTr("Copy URL")
-                onClicked: {
-                    QMLUtils.copyToClipboard(url);
-                    infoBanner.alert(qsTr("URL copied to clipboard"));
+    Component {
+        id: webViewComponent
+
+        SilicaWebView {
+            id: webView
+
+            experimental.overview: true
+            experimental.customLayoutWidth: webViewPage.width / (0.5 + QMLUtils.pScale)
+
+            onLoadingChanged: {
+                busy = loading
+            }
+
+            PullDownMenu {
+                MenuItem {
+                    text: qsTr("Copy URL")
+                    onClicked: {
+                        QMLUtils.copyToClipboard(url);
+                        infoBanner.alert(qsTr("URL copied to clipboard"));
+                    }
                 }
-            }
-            MenuItem {
-                text: qsTr("Open in browser")
-                onClicked: {
-                    Qt.openUrlExternally(url);
+                MenuItem {
+                    text: qsTr("Open in browser")
+                    onClicked: {
+                        Qt.openUrlExternally(url);
+                    }
                 }
-            }
-            MenuItem {
-                text: qsTr("Back")
-                visible: webView.canGoBack
-                onClicked: webView.goBack()
-            }
-            MenuItem {
-                text: qsTr("Forward")
-                visible: webView.canGoForward
-                onClicked: webView.goForward()
+                MenuItem {
+                    text: qsTr("Back")
+                    visible: webView.canGoBack
+                    onClicked: webView.goBack()
+                }
+                MenuItem {
+                    text: qsTr("Forward")
+                    visible: webView.canGoForward
+                    onClicked: webView.goForward()
+                }
             }
         }
     }
@@ -73,7 +103,7 @@ AbstractPage {
     Rectangle {
         id: overlay
         visible: busy
-        anchors.fill: webView
+        anchors.fill: pageLoader
         color: "black"
         opacity: 0.5
     }
