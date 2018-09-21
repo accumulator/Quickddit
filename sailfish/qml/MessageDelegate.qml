@@ -98,6 +98,7 @@ Item {
             }
 
             Text {
+                id: bodyText
                 visible: isComment
                 width: parent.width - x
                 x: 25
@@ -112,9 +113,19 @@ Item {
                 maximumLineCount: 3
 
                 Rectangle {
+                    id: textIndicator
                     x: -25
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
+                    width: 10
+                    color: Theme.secondaryHighlightColor
+                }
+                Rectangle {
+                    visible: bodyText.truncated
+                    x: -25
+                    anchors.top: textIndicator.bottom
+                    anchors.topMargin: 10
+                    height: 10
                     width: 10
                     color: Theme.secondaryHighlightColor
                 }
