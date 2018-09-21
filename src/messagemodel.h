@@ -49,7 +49,8 @@ public:
         MessageSection,
         CommentRepliesSection,
         PostRepliesSection,
-        SentSection
+        SentSection,
+        UndefinedSection = 100 // internal only
     };
 
     static QVariantMap toMessageVariantMap(const MessageObject &m);

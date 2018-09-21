@@ -40,6 +40,7 @@ class AppSettings : public QObject
     Q_PROPERTY(ThumbnailScale thumbnailScale READ thumbnailScale WRITE setThumbnailScale NOTIFY thumbnailScaleChanged)
     Q_PROPERTY(bool loopVideos READ loopVideos WRITE setLoopVideos NOTIFY loopVideosChanged)
     Q_PROPERTY(int subredditSection READ subredditSection WRITE setSubredditSection NOTIFY subredditSectionChanged)
+    Q_PROPERTY(int messageSection READ messageSection WRITE setMessageSection NOTIFY messageSectionChanged)
     Q_PROPERTY(int commentSort READ commentSort WRITE setCommentSort NOTIFY commentSortChanged)
     Q_PROPERTY(bool useTor READ useTor WRITE setUseTor NOTIFY useTorChanged)
     Q_PROPERTY(VideoSize preferredVideoSize READ preferredVideoSize WRITE setPreferredVideoSize NOTIFY preferredVideoSizeChanged)
@@ -113,6 +114,9 @@ public:
     int subredditSection() const;
     void setSubredditSection(const int subredditSection);
 
+    int messageSection() const;
+    void setMessageSection(const int messageSection);
+
     int commentSort() const;
     void setCommentSort(const int commentSort);
 
@@ -138,6 +142,7 @@ signals:
     void thumbnailScaleChanged();
     void loopVideosChanged();
     void subredditSectionChanged();
+    void messageSectionChanged();
     void commentSortChanged();
     void useTorChanged();
     void preferredVideoSizeChanged();
@@ -157,6 +162,7 @@ private:
     bool m_loopVideos;
     QStringList m_filteredSubreddits;
     int m_subredditSection;
+    int m_messageSection;
     int m_commentSort;
     bool m_useTor;
     VideoSize m_preferredVideoSize;

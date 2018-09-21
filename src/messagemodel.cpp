@@ -23,6 +23,7 @@
 
 #include "utils.h"
 #include "parser.h"
+#include "appsettings.h"
 
 QVariantMap MessageModel::toMessageVariantMap(const MessageObject &m)
 {
@@ -45,7 +46,7 @@ QVariantMap MessageModel::toMessageVariantMap(const MessageObject &m)
 }
 
 MessageModel::MessageModel(QObject *parent) :
-    AbstractListModelManager(parent), m_section(AllSection)
+    AbstractListModelManager(parent), m_section(UndefinedSection)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5,0,0))
     setRoleNames(customRoleNames());
@@ -58,6 +59,9 @@ void MessageModel::classBegin()
 
 void MessageModel::componentComplete()
 {
+    if (m_section == UndefinedSection) {
+        setSection((Section)manager()->settings()->messageSection());
+    }
     refresh(false);
 }
 

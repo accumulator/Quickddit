@@ -35,6 +35,7 @@ AppSettings::AppSettings(QObject *parent) :
     m_thumbnailScale = static_cast<ThumbnailScale>(m_settings->value("thumbnailScale", AppSettings::ScaleAuto).toInt());
     m_loopVideos = m_settings->value("loopVideos", false).toBool();
     m_subredditSection = m_settings->value("subredditSection", 0).toInt();
+    m_messageSection = m_settings->value("messageSection", 0).toInt();
     m_commentSort = m_settings->value("commentSort", 0).toInt();
     m_useTor = m_settings->value("useTor", false).toBool();
     m_preferredVideoSize = static_cast<VideoSize>(m_settings->value("preferredVideoSize", AppSettings::VS360).toInt());
@@ -210,6 +211,20 @@ void AppSettings::setSubredditSection(const int subredditSection)
         m_subredditSection = subredditSection;
         m_settings->setValue("subredditSection", m_subredditSection);
         emit subredditSectionChanged();
+    }
+}
+
+int AppSettings::messageSection() const
+{
+    return m_messageSection;
+}
+
+void AppSettings::setMessageSection(const int messageSection)
+{
+    if (m_messageSection != messageSection) {
+        m_messageSection = messageSection;
+        m_settings->setValue("messageSection", m_messageSection);
+        emit messageSectionChanged();
     }
 }
 

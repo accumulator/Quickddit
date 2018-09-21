@@ -32,7 +32,7 @@ AbstractPage {
         inboxManager.dismiss();
     }
 
-    readonly property variant sectionModel: [qsTr("All"), qsTr("Unread"), qsTr("Message"), qsTr("Comment Replies"), qsTr("Post Replies"), qsTr("Sent")]
+    readonly property variant sectionModel: [qsTr("All"), qsTr("Unread"), qsTr("Messages"), qsTr("Comment Replies"), qsTr("Post Replies"), qsTr("Sent")]
 
     SilicaListView {
         id: messageListView
@@ -50,6 +50,7 @@ AbstractPage {
                     globalUtils.createSelectionDialog(qsTr("Section"), sectionModel, messageModel.section,
                     function(selectedIndex) {
                         messageModel.section = selectedIndex;
+                        appSettings.messageSection = selectedIndex;
                         messagePage.refresh();
                     });
                 }
