@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -68,6 +69,7 @@ public:
 
     void refresh(bool refreshOlder);
     Q_INVOKABLE void changeIsUnread(const QString &fullname, bool isUnread);
+    Q_INVOKABLE void del(const QString &fullname);
 
 signals:
     void sectionChanged();

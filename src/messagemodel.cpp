@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -148,6 +149,21 @@ void MessageModel::changeIsUnread(const QString &fullname, bool isUnread)
             emit dataChanged(index(changedIndex), index(changedIndex));
             break;
         }
+    }
+}
+
+void MessageModel::del(const QString &fullname)
+{
+    int pos=0;
+    QList<MessageObject>::iterator i;
+    for (i = m_messageList.begin(); i != m_messageList.end(); ++i) {
+        if (i->fullname() == fullname) {
+            beginRemoveRows(QModelIndex(), pos, pos);
+            m_messageList.removeAt(pos);
+            endRemoveRows();
+            break;
+        }
+        pos++;
     }
 }
 

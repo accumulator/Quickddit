@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2017  Sander van Grieken
+    Copyright (C) 2017-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,6 +27,14 @@ ContextMenu {
     property variant message
     property MessageManager messageManager
     property bool enableMarkRead: true
+
+    signal deleteClicked
+
+    MenuItem {
+        enabled: !messageManager.busy
+        text: qsTr("Delete")
+        onClicked: deleteClicked()
+    }
 
     MenuItem {
         enabled: enableMarkRead && !messageManager.busy

@@ -31,6 +31,19 @@ Item {
 
     height: mainItem.height
 
+    function showMenu(properties) {
+        return mainItem.showMenu(properties);
+    }
+
+    function remorseAction(title, action, timeout) {
+        mainItem.remorseAction(title, action, timeout);
+    }
+
+    ListView.onRemove: RemoveAnimation {
+        target: messageDelegate
+        duration: 400
+    }
+
     ListItem {
         id: mainItem
         contentHeight: messageColumn.height + 2 * constant.paddingMedium

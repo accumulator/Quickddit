@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -70,6 +71,16 @@ void MessageManager::markUnread(const QString &fullname)
     doRequest(APIRequest::POST, "/api/unread_message", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
+void MessageManager::del(const QString &fullname)
+{
+    QHash<QString, QString> parameters;
+    parameters.insert("id", fullname);
+    m_fullname = fullname;
+    m_action = Delete;
+
+    doRequest(APIRequest::POST, "/api/del_msg", SLOT(onFinished(QNetworkReply*)), parameters);
+}
+
 void MessageManager::onFinished(QNetworkReply *reply)
 {
     if (reply != 0) {
@@ -79,6 +90,7 @@ void MessageManager::onFinished(QNetworkReply *reply)
             case Send: emit sendSuccess(); break;
             case MarkRead: emit markReadStatusSuccess(m_fullname, false); break;
             case MarkUnread: emit markReadStatusSuccess(m_fullname, true); break;
+            case Delete: emit delSuccess(m_fullname); break;
             default: qFatal("MessageManager::onFinished(): Invalid m_action"); break;
             }
         } else {

@@ -65,13 +65,21 @@ AbstractPage {
         header: QuickdditPageHeader { title: messagePage.title }
 
         delegate: MessageDelegate {
+            id: messageDelegate
             width: parent.width
 
             isSentMessage: messageModel.section == MessageModel.SentSection
 
             listItem.menu: Component { MessageMenu {} }
             listItem.showMenuOnPressAndHold: false
-            listItem.onPressAndHold: listItem.showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
+            listItem.onPressAndHold: {
+                var dialog = showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
+                dialog.deleteClicked.connect(function() {
+                    messageDelegate.remorseAction(qsTr("Deleting message"), function() {
+                        messageManager.del(model.fullname);
+                    })
+                });
+            }
 
             onClicked: {
                 messageManager.markRead(model.fullname)
@@ -120,6 +128,7 @@ AbstractPage {
             pageStack.pop();
         }
         onMarkReadStatusSuccess: messageModel.changeIsUnread(fullname, isUnread);
+        onDelSuccess: messageModel.del(fullname);
         onError: infoBanner.warning(errorString);
     }
 
