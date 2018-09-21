@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt_BR" sourcelanguage="en">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="hu" sourcelanguage="en" version="2.1">
 <context>
     <name>AboutMultiredditManager</name>
     <message>
         <location filename="../../src/aboutmultiredditmanager.cpp" line="128"/>
         <source>%1 has been added to %2</source>
-        <translation>%1 adicionado ao %2</translation>
+        <translation>%1 hozzáadva ehhez: %2</translation>
     </message>
     <message>
         <location filename="../../src/aboutmultiredditmanager.cpp" line="149"/>
         <source>%1 has been removed from %2</source>
-        <translation>%1 removido do %2</translation>
+        <translation>%1 eltávolítva innen: %2</translation>
     </message>
 </context>
 <context>
@@ -19,43 +17,43 @@
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="25"/>
         <source>About %1</source>
-        <translation>Sobre %1</translation>
+        <translation>Az %1-ról</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="37"/>
         <location filename="../qml/AboutMultiredditPage.qml" line="127"/>
         <source>Add Subreddit</source>
-        <translation>Adicionar Subreddit</translation>
+        <translation>Alreddit hozzáadása</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="55"/>
         <source>Description</source>
-        <translation>Descrição</translation>
+        <translation>Leírás</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="65"/>
         <source>No description</source>
-        <translation>Sem descrição</translation>
+        <translation>Nincs leírás</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="69"/>
         <source>Subreddits</source>
-        <translation>Subreddits</translation>
+        <translation>Alredditek</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="96"/>
         <source>Go to %1</source>
-        <translation>Ir para %1</translation>
+        <translation>Ugrás ide: %1</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="105"/>
         <source>Remove</source>
-        <translation>Remover</translation>
+        <translation>Eltávolítás</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="132"/>
         <source>Enter subreddit name</source>
-        <translation>Insira o nome do Subreddit</translation>
+        <translation>Alreddit név beírása</translation>
     </message>
 </context>
 <context>
@@ -63,48 +61,48 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="25"/>
         <source>About</source>
-        <translation>Sobre</translation>
+        <translation>Súgó</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="101"/>
         <source>Quickddit - A free and open source Reddit client for mobile phones</source>
-        <translation>Quickddit - Um cliente Reddit software livre e open source para celulares</translation>
+        <translation>Quickddit - Egy ingyenes és nyílt forráskódú Reddit kliens mobiltelefonra</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="113"/>
         <source>App icon by Andrew Zhilin</source>
-        <translation>Design do ícone por Andrew Zhilin</translation>
+        <translation>Alkalmazás-ikon: Andrew Zhilin</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="115"/>
         <source>_translator</source>
         <extracomment>_translator is used as a placeholder for the name of the translator (you :)</extracomment>
-        <translation>caio2k</translation>
+        <translation>leoka - Szabó G.</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="115"/>
         <source>Current language translation by %1</source>
-        <translation>Traduzido por %1</translation>
+        <translation>Jelen nyelvi fordítás: %1</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="116"/>
         <source>Licensed under GNU GPLv3+</source>
-        <translation>Licença sob a GNU GPLv3+</translation>
+        <translation>Megjelent a GNU GPLv3+ licenc alatt</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="124"/>
         <source>Source</source>
-        <translation>Código fonte</translation>
+        <translation>Forrás</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="129"/>
         <source>License</source>
-        <translation>Licença</translation>
+        <translation>Licenc</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="136"/>
         <source>Translations</source>
-        <translation>Traduções</translation>
+        <translation>Fordítások</translation>
     </message>
 </context>
 <context>
@@ -112,88 +110,82 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="26"/>
         <source>About %1</source>
-        <translation>Sobre %1</translation>
+        <translation>%1-ról</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="38"/>
         <source>Moderators</source>
-        <translation>Moderadores</translation>
+        <translation>Moderátorok</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="45"/>
         <source>Message Moderators</source>
-        <translation>Enviar mensagem à moderação</translation>
+        <translation>Üzenet moderátorok</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="52"/>
         <source>Unsubscribe</source>
-        <translation>Desinscrever</translation>
+        <translation>Leíratkozás</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="52"/>
         <source>Subscribe</source>
-        <translation>Inscrever</translation>
+        <translation>Feliratkozás</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="100"/>
         <source>This subreddit is Not Safe For Work</source>
-        <translation>Este subreddit Não é Seguro para o Trabalho</translation>
+        <translation>Ez az alreddit nyilvánosságban nem biztonságos</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/AboutSubredditPage.qml" line="116"/>
         <source>%n subscribers</source>
-        <translation>
-            <numerusform>%n inscrito</numerusform>
-            <numerusform>%n inscritos</numerusform>
-        </translation>
+        <translation><numerusform>%</numerusform><numerusform>%n feliratkozó</numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/AboutSubredditPage.qml" line="117"/>
         <source>%n active users</source>
-        <translation>
-            <numerusform>%n usuário ativo</numerusform>
-            <numerusform>%n usuários ativos</numerusform>
-        </translation>
+        <translation><numerusform>%n aktív felhasználó</numerusform><numerusform>%n aktív felhasználó</numerusform></translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="129"/>
         <source>Subscribed</source>
-        <translation>Inscrito</translation>
+        <translation>Feliratkozva</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="129"/>
         <source>Not Subscribed</source>
-        <translation>Não inscrito</translation>
+        <translation>Nincs feliratkozva</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="134"/>
         <source>Private</source>
-        <translation>Privado</translation>
+        <translation>Ptivát</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="135"/>
         <source>Restricted</source>
-        <translation>Restrito</translation>
+        <translation>Tiltva</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="136"/>
         <source>GoldRestricted</source>
-        <translation>Restrito a Gold</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="136"/>
         <source>Archived</source>
-        <translation>Arquivado</translation>
+        <translation>Archiválva</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="141"/>
         <source>Links only</source>
-        <translation>Somente links</translation>
+        <translation>Csak hivatkozások</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="141"/>
         <source>Self posts only</source>
-        <translation>Somente postagens de texto</translation>
+        <translation>Csak saját posztok</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="146"/>
@@ -203,12 +195,12 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="152"/>
         <source>Contributor</source>
-        <translation>Colaborador</translation>
+        <translation>Közreműködő</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="157"/>
         <source>Banned</source>
-        <translation>Banido</translation>
+        <translation>Bannolva</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="163"/>
@@ -218,17 +210,17 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="169"/>
         <source>Muted</source>
-        <translation>Mudo</translation>
+        <translation>Némítva</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="199"/>
         <source>You have subscribed to %1</source>
-        <translation>Inscrito no %1</translation>
+        <translation>Feliratkoztál ide: %1</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="201"/>
         <source>You have unsubscribed from %1</source>
-        <translation>Desinscrito do %1</translation>
+        <translation>Leiratkoztál innen: %1</translation>
     </message>
 </context>
 <context>
@@ -236,152 +228,152 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="26"/>
         <source>App Settings</source>
-        <translation>Configurações do Aplicativo</translation>
+        <translation>Alkalmazásbeállítások</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="50"/>
         <source>Display</source>
-        <translation>Visualização</translation>
+        <translation>Kijelző</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="53"/>
         <source>Font Size</source>
-        <translation>Tamanho da fonte</translation>
+        <translation>Betűméret</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="63"/>
         <source>Tiny</source>
-        <translation>Minúsculo</translation>
+        <translation>Icipici</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="64"/>
         <source>Small</source>
-        <translation>Pequeno</translation>
+        <translation>Kicsi</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="65"/>
         <source>Medium</source>
-        <translation>Médio</translation>
+        <translation>Közepes</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="66"/>
         <source>Large</source>
-        <translation>Grande</translation>
+        <translation>Nagy</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="79"/>
         <source>Device Orientation</source>
-        <translation>Orientação</translation>
+        <translation>Készülékorientáció</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="88"/>
         <source>Automatic</source>
-        <translation>Dinâmica</translation>
+        <translation>Automatikus</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="89"/>
         <source>Portrait only</source>
-        <translation>Retrato</translation>
+        <translation>Csak függőleges</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="90"/>
         <source>Landscape only</source>
-        <translation>Paisagem</translation>
+        <translation>Csak vízszintes</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="102"/>
         <source>Thumbnail Size</source>
-        <translation>Tamanho da miniatura</translation>
+        <translation>Miniatűrök mérete</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="115"/>
         <source>Auto</source>
-        <translation>Automático</translation>
+        <translation>Automatikus</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="138"/>
         <source>Language</source>
-        <translation>Língua</translation>
+        <translation>Nyelv</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="155"/>
         <source>Notifications</source>
-        <translation>Notificações</translation>
+        <translation>Értesítések</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="158"/>
         <source>Check Messages</source>
-        <translation>Verificar mensagens</translation>
+        <translation>Üzenetek ellenőrzése</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="166"/>
         <source>Media</source>
-        <translation>Mídia</translation>
+        <translation>Média</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="169"/>
         <source>Preferred Video Size</source>
-        <translation>Resolução de vídeo</translation>
+        <translation>Preferált videóméret</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="189"/>
         <source>Loop Videos</source>
-        <translation>Repetir vídeo</translation>
+        <translation>Videók végtelelnítése</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="196"/>
         <source>Connection</source>
-        <translation>Conexão</translation>
+        <translation>Kapcsolat</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="199"/>
         <source>Use Tor</source>
-        <translation>Usar Tor</translation>
+        <translation>Tor használata</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="200"/>
         <source>When enabled, please make sure Tor is installed and active.</source>
-        <translation>Quando habilitado verificar se Tor está instalado e ativo.</translation>
+        <translation>Ha engedélyezve van, bizonyosodj meg, hogy a Tor telepítve van és aktív.</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="207"/>
         <source>Account</source>
-        <translation>Conta</translation>
+        <translation>Fiók</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="215"/>
         <source>Signed in to Reddit as</source>
-        <translation>Logado no Reddit como</translation>
+        <translation>Bejelentkeztél a Reddit-be mint</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="234"/>
         <source>Sign out</source>
-        <translation>Fazer logout</translation>
+        <translation>Kijelentkezés</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="234"/>
         <source>Sign in to Reddit</source>
-        <translation>Fazer login no Reddit</translation>
+        <translation>Bejelentkezés a Reddit-be</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="238"/>
         <source>You have signed out from Reddit</source>
-        <translation>Logout do Reddit feito</translation>
+        <translation>Kijelentkeztél a Reddit-ből</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="294"/>
         <source>Activate</source>
-        <translation>Ativar</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="298"/>
         <source>Remove</source>
-        <translation>Remover</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="278"/>
         <source>Remove %1 account</source>
-        <translation>Remover conta %1</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -389,81 +381,72 @@
     <message>
         <location filename="../qml/CommentDelegate.qml" line="145"/>
         <source>Sticky</source>
-        <translation>Fixo</translation>
+        <translation>Ragadós</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="152"/>
         <source>Gilded</source>
-        <translation>Dourado</translation>
+        <translation>Aranyozott</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="244"/>
         <source>[score hidden]</source>
-        <translation>[pontuação oculta]</translation>
+        <translation type="unfinished"/>
     </message>
     <message numerus="yes">
         <location filename="../qml/CommentDelegate.qml" line="245"/>
         <source>%n pts</source>
-        <translation>
-            <numerusform>%n ponto</numerusform>
-            <numerusform>%n pontos</numerusform>
-        </translation>
+        <translation><numerusform>%n pont</numerusform><numerusform>%n pont</numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/CommentDelegate.qml" line="353"/>
         <source>Load %n hidden comments</source>
-        <translation>
-            <numerusform>Carregar %n comentário oculto</numerusform>
-            <numerusform>Carregar %n comentários ocultos</numerusform>
-        </translation>
+        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform></translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="353"/>
         <source>Continue this thread</source>
-        <translation>Continuar discussão</translation>
+        <translation type="unfinished"/>
     </message>
     <message numerus="yes">
         <location filename="../qml/CommentDelegate.qml" line="387"/>
         <source>Show %n collapsed comments</source>
-        <translation>
-            <numerusform>Mostrar comentário agrupado</numerusform>
-            <numerusform>Mostrar %n comentários agrupados</numerusform>
-        </translation>
+        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform></translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="416"/>
         <source>Editing Comment</source>
-        <translation>Editar Comentário</translation>
+        <translation>Hozzászólás szerkesztése</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="417"/>
         <source>Comment Reply</source>
-        <translation>Comentar Resposta</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="418"/>
         <source>New Comment</source>
-        <translation>Novo Comentário</translation>
+        <translation>Új hozzászólás</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="430"/>
         <source>Enter your reply here...</source>
-        <translation>Insira sua resposta aqui...</translation>
+        <translation>Írd ide a válaszodat...</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="430"/>
         <source>Enter your new comment here...</source>
-        <translation>Insira seu comentário aqui...</translation>
+        <translation>Írd ide az új hozzászólásodat...</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="448"/>
         <source>Save</source>
-        <translation>Salvar</translation>
+        <translation>Mentés</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="448"/>
         <source>Add</source>
-        <translation>Adicionar</translation>
+        <translation>Hozzásadás</translation>
     </message>
 </context>
 <context>
@@ -471,17 +454,17 @@
     <message>
         <location filename="../../src/commentmanager.cpp" line="103"/>
         <source>The comment has been added</source>
-        <translation>Comentário adicionado</translation>
+        <translation>Hozzászólás hozzáadva</translation>
     </message>
     <message>
         <location filename="../../src/commentmanager.cpp" line="106"/>
         <source>The comment has been edited</source>
-        <translation>Comentário editado</translation>
+        <translation>Hozzászólás szerkesztve</translation>
     </message>
     <message>
         <location filename="../../src/commentmanager.cpp" line="110"/>
         <source>The comment has been deleted</source>
-        <translation>Comentário apagado</translation>
+        <translation>Hozzászólás törölve</translation>
     </message>
 </context>
 <context>
@@ -489,27 +472,27 @@
     <message>
         <location filename="../qml/CommentMenu.qml" line="76"/>
         <source>Copy Comment</source>
-        <translation>Copiar comentário</translation>
+        <translation>Hozzászólás másolása</translation>
     </message>
     <message>
         <location filename="../qml/CommentMenu.qml" line="79"/>
         <source>Comment copied to clipboard</source>
-        <translation>Comentário copiado para a área de transferência</translation>
+        <translation>Hozzászólás a vágólapra másolva</translation>
     </message>
     <message>
         <location filename="../qml/CommentMenu.qml" line="85"/>
         <source>Reply</source>
-        <translation>Responder</translation>
+        <translation>Válasz</translation>
     </message>
     <message>
         <location filename="../qml/CommentMenu.qml" line="95"/>
         <source>Edit</source>
-        <translation>Editar</translation>
+        <translation>Szerkesztés</translation>
     </message>
     <message>
         <location filename="../qml/CommentMenu.qml" line="100"/>
         <source>Delete</source>
-        <translation>Apagar</translation>
+        <translation>Törlés</translation>
     </message>
 </context>
 <context>
@@ -517,73 +500,73 @@
     <message>
         <location filename="../qml/CommentPage.qml" line="26"/>
         <source>Comments</source>
-        <translation>Comentários</translation>
+        <translation>Hozzászólások</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>Best</source>
-        <translation>Melhores</translation>
+        <translation>Legjobb</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>Top</source>
-        <translation>No topo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>New</source>
-        <translation>Novos</translation>
+        <translation>Új</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>Hot</source>
-        <translation>Populares</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>Controversial</source>
-        <translation>Controversos</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>Old</source>
-        <translation>Antigos</translation>
+        <translation>Régi</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="57"/>
         <source>Edit Post</source>
-        <translation>Editar postagem</translation>
+        <translation>Poszt szerkesztése</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="71"/>
         <location filename="../qml/CommentPage.qml" line="72"/>
         <source>Sort</source>
-        <translation>Ordenar comentários por</translation>
+        <translation>Rendezés</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="82"/>
         <source>Add comment</source>
-        <translation>Adicionar Comentário</translation>
+        <translation>Hozzászólás hozzáadása</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="92"/>
         <source>Refresh</source>
-        <translation>Atualizar</translation>
+        <translation>Frissítés</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="225"/>
+        <location filename="../qml/CommentPage.qml" line="224"/>
         <source>Viewing a single comment&apos;s thread</source>
-        <translation>Vendo somente uma discussão</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="230"/>
+        <location filename="../qml/CommentPage.qml" line="229"/>
         <source>View All Comments</source>
-        <translation>Ver todos os Comentários</translation>
+        <translation>Minden hozzászólás megtekintése</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="262"/>
+        <location filename="../qml/CommentPage.qml" line="261"/>
         <source>Deleting comment</source>
-        <translation>Apagar Comentário</translation>
+        <translation>Hozzászólás törlése</translation>
     </message>
 </context>
 <context>
@@ -591,32 +574,32 @@
     <message>
         <location filename="../qml/ImageViewPage.qml" line="26"/>
         <source>Image</source>
-        <translation>Imagem</translation>
+        <translation>Kép</translation>
     </message>
     <message>
         <location filename="../qml/ImageViewPage.qml" line="46"/>
         <source>Save Image</source>
-        <translation>Salvar Imagem</translation>
+        <translation>Kép mentése</translation>
     </message>
     <message>
         <location filename="../qml/ImageViewPage.qml" line="50"/>
         <source>URL</source>
-        <translation>Endereço</translation>
+        <translation>URL</translation>
     </message>
     <message>
         <location filename="../qml/ImageViewPage.qml" line="103"/>
         <source>Error loading image</source>
-        <translation>Erro ao carregar imagem</translation>
+        <translation>Hiba a kép betöltésekor</translation>
     </message>
     <message>
         <location filename="../qml/ImageViewPage.qml" line="170"/>
         <source>Image saved to gallery</source>
-        <translation>Imagem salva na galeria</translation>
+        <translation>Kép mentve a glériába</translation>
     </message>
     <message>
         <location filename="../qml/ImageViewPage.qml" line="171"/>
         <source>Image save failed!</source>
-        <translation>Erro ao salvar imagem!</translation>
+        <translation>Kép mentése sikertelen!</translation>
     </message>
 </context>
 <context>
@@ -624,12 +607,12 @@
     <message>
         <location filename="../../src/imgurmanager.cpp" line="142"/>
         <source>Unable to get Imgur ID from the url: %1</source>
-        <translation>Impossível obter Imgur ID do endereço %1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/imgurmanager.cpp" line="175"/>
         <source>Imgur API returns no image</source>
-        <translation>Imgur API não encontrou imagem</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -637,12 +620,12 @@
     <message>
         <location filename="../../src/linkmanager.cpp" line="115"/>
         <source>The link has been added</source>
-        <translation>Link adicionado</translation>
+        <translation>A hivatkozás hozzáadva</translation>
     </message>
     <message>
         <location filename="../../src/linkmanager.cpp" line="121"/>
         <source>The link text has been changed</source>
-        <translation>Texto do link atualizado</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -650,42 +633,42 @@
     <message>
         <location filename="../qml/LinkMenu.qml" line="37"/>
         <source>Upvote</source>
-        <translation>Cimavoto</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="43"/>
         <source>Downvote</source>
-        <translation>Baixovoto</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="49"/>
         <source>Unvote</source>
-        <translation>Desvotar</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="53"/>
         <source>View image</source>
-        <translation>Ver imagem</translation>
+        <translation>Kép megtekintése</translation>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="58"/>
         <source>Save</source>
-        <translation>Salvar</translation>
+        <translation>Mentés</translation>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="63"/>
         <source>Unsave</source>
-        <translation>Não salvar</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="68"/>
         <source>URL</source>
-        <translation>Endereço</translation>
+        <translation>URL</translation>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="72"/>
         <source>Delete</source>
-        <translation>Apagar</translation>
+        <translation>Törlés</translation>
     </message>
 </context>
 <context>
@@ -693,7 +676,7 @@
     <message>
         <location filename="../qml/LoadingFooter.qml" line="61"/>
         <source>Load More...</source>
-        <translation>Carregar mais...</translation>
+        <translation>Több betöltése...</translation>
     </message>
 </context>
 <context>
@@ -701,38 +684,38 @@
     <message>
         <location filename="../qml/MainPage.qml" line="87"/>
         <source>About %1</source>
-        <translation>Sobre %1</translation>
+        <translation>Az %1-ról</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="99"/>
         <source>New Post</source>
-        <translation>Novo Postagem</translation>
+        <translation>Új poszt</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="105"/>
         <location filename="../qml/MainPage.qml" line="107"/>
         <source>Section</source>
-        <translation>Seção</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="117"/>
         <source>Search</source>
-        <translation>Buscar</translation>
+        <translation>Keresés</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="121"/>
         <source>Refresh</source>
-        <translation>Atualizar</translation>
+        <translation>Frissítés</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="143"/>
         <source>Delete link</source>
-        <translation>Apagar link</translation>
+        <translation>Hivatkozás törlése</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="163"/>
         <source>Nothing here :(</source>
-        <translation>Nada aqui :(</translation>
+        <translation>Semmi újság :(</translation>
     </message>
 </context>
 <context>
@@ -740,22 +723,22 @@
     <message>
         <location filename="../qml/MessageDelegate.qml" line="83"/>
         <source>%1 from %2</source>
-        <translation>%1 de %2</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/MessageDelegate.qml" line="95"/>
         <source>in %1</source>
-        <translation>em %1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/MessageDelegate.qml" line="96"/>
         <source>to %1</source>
-        <translation>para %1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/MessageDelegate.qml" line="98"/>
         <source>from %1</source>
-        <translation>de %1</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -763,17 +746,17 @@
     <message>
         <location filename="../qml/MessageMenu.qml" line="35"/>
         <source>Delete</source>
-        <translation type="unfinished">Apagar</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/MessageMenu.qml" line="41"/>
         <source>Mark As Read</source>
-        <translation>Marcar como lido</translation>
+        <translation>Megjelölés olvasottként</translation>
     </message>
     <message>
         <location filename="../qml/MessageMenu.qml" line="41"/>
         <source>Mark As Unread</source>
-        <translation>Marcar como não lido</translation>
+        <translation>Megjelölés olvasatlanként</translation>
     </message>
 </context>
 <context>
@@ -782,64 +765,64 @@
         <location filename="../qml/MessagePage.qml" line="27"/>
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Messages</source>
-        <translation>Mensagens</translation>
+        <translation>Üzenetek</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>All</source>
-        <translation>Tudo</translation>
+        <translation>Mind</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Unread</source>
-        <translation>Não lido</translation>
+        <translation>Olvasatlan</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Comment Replies</source>
-        <translation>Respostas ao Comentário</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Post Replies</source>
-        <translation>Respostas à Postagem</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Sent</source>
-        <translation>Enviado</translation>
+        <translation>Elküldve</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="44"/>
         <source>New Message</source>
-        <translation>Nova Mensagem</translation>
+        <translation>Új üzenet</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="48"/>
         <location filename="../qml/MessagePage.qml" line="50"/>
         <source>Section</source>
-        <translation>Seção</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="59"/>
         <source>Refresh</source>
-        <translation>Atualizar</translation>
+        <translation>Frissítés</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="78"/>
         <source>Deleting message</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="108"/>
         <source>Nothing here :(</source>
-        <translation>Nada aqui :(</translation>
+        <translation>Semmi újság :(</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="123"/>
         <location filename="../qml/MessagePage.qml" line="127"/>
         <source>Message sent</source>
-        <translation>Mensagem enviada</translation>
+        <translation>Üzenet elküldve</translation>
     </message>
 </context>
 <context>
@@ -847,7 +830,7 @@
     <message>
         <location filename="../qml/ModeratorListPage.qml" line="25"/>
         <source>Moderators</source>
-        <translation>Moderadores</translation>
+        <translation>Moderátorok</translation>
     </message>
 </context>
 <context>
@@ -855,17 +838,17 @@
     <message>
         <location filename="../qml/MultiredditsPage.qml" line="27"/>
         <source>Multireddits</source>
-        <translation>Multireddits</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/MultiredditsPage.qml" line="54"/>
         <source>Refresh</source>
-        <translation>Atualizar</translation>
+        <translation>Frissítés</translation>
     </message>
     <message>
         <location filename="../qml/MultiredditsPage.qml" line="73"/>
         <source>Nothing here :(</source>
-        <translation>Nada aqui :(</translation>
+        <translation>Semmi újság :(</translation>
     </message>
 </context>
 <context>
@@ -873,41 +856,41 @@
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="27"/>
         <source>Open URL</source>
-        <translation>Navegar para</translation>
+        <translation>URL megnyitása</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="74"/>
         <location filename="../qml/OpenLinkDialog.qml" line="147"/>
         <source>Open in browser</source>
-        <translation>Abrir no navegador</translation>
+        <translation>Megnyitás böngészőben</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="78"/>
         <location filename="../qml/OpenLinkDialog.qml" line="151"/>
         <source>Launching web browser...</source>
-        <translation>Abrindo navegador...</translation>
+        <translation>Böngésző indítása...</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="84"/>
         <location filename="../qml/OpenLinkDialog.qml" line="157"/>
         <source>Copy URL</source>
-        <translation>Copiar endereço</translation>
+        <translation>URL másolása</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="87"/>
         <location filename="../qml/OpenLinkDialog.qml" line="161"/>
         <source>URL copied to clipboard</source>
-        <translation>Endereço copiado para a área de transferência</translation>
+        <translation>URL a vágólapra másolva</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="117"/>
         <source>Open in Kodi</source>
-        <translation>Abrir no Kodi</translation>
+        <translation>Megnyitás Kodi-ban</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="125"/>
         <source>Source</source>
-        <translation>Fonte</translation>
+        <translation>Forrás</translation>
     </message>
 </context>
 <context>
@@ -915,7 +898,7 @@
     <message>
         <location filename="../qml/PostInfoText.qml" line="43"/>
         <source>Sticky</source>
-        <translation>Fixo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/PostInfoText.qml" line="50"/>
@@ -925,48 +908,42 @@
     <message>
         <location filename="../qml/PostInfoText.qml" line="57"/>
         <source>Promoted</source>
-        <translation>Promovido</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/PostInfoText.qml" line="63"/>
         <source>Gilded</source>
-        <translation>Dourado</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/PostInfoText.qml" line="71"/>
         <source>Archived</source>
-        <translation>Arquivado</translation>
+        <translation>Archiválva</translation>
     </message>
     <message>
         <location filename="../qml/PostInfoText.qml" line="78"/>
         <source>Locked</source>
-        <translation>Bloqueado</translation>
+        <translation>Zárolva</translation>
     </message>
     <message>
         <location filename="../qml/PostInfoText.qml" line="104"/>
         <source>submitted %1 by %2</source>
-        <translation>postado por %2 há %1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/PostInfoText.qml" line="107"/>
         <source>to %1</source>
-        <translation>no %1</translation>
+        <translation type="unfinished"/>
     </message>
     <message numerus="yes">
         <location filename="../qml/PostInfoText.qml" line="135"/>
         <source>%n points</source>
-        <translation>
-            <numerusform>%n ponto</numerusform>
-            <numerusform>%n pontos</numerusform>
-        </translation>
+        <translation><numerusform>%n pont</numerusform><numerusform>%n pont</numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/PostInfoText.qml" line="147"/>
         <source>%n comments</source>
-        <translation>
-            <numerusform>%n comentário</numerusform>
-            <numerusform>%n comentários</numerusform>
-        </translation>
+        <translation><numerusform>%n hozzászólás</numerusform><numerusform>%n hozzászólás</numerusform></translation>
     </message>
 </context>
 <context>
@@ -974,37 +951,37 @@
     <message>
         <location filename="../qml/SearchDialog.qml" line="25"/>
         <source>Search</source>
-        <translation>Buscar</translation>
+        <translation>Keresés</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="53"/>
         <source>Enter search query</source>
-        <translation>Insira palavras-chave</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="64"/>
         <source>Search for</source>
-        <translation>Buscar por</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="66"/>
         <source>Posts</source>
-        <translation>Postagens</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="67"/>
         <source>Subreddits</source>
-        <translation>Subreddits</translation>
+        <translation>Alredditek</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="84"/>
         <source>Search within this subreddit:</source>
-        <translation>Buscar neste subreddit:</translation>
+        <translation>Keresés ebben az alredditben:</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="93"/>
         <source>Enter subreddit name</source>
-        <translation>Insira o nome do subreddit</translation>
+        <translation>Alreddit név beírása</translation>
     </message>
 </context>
 <context>
@@ -1012,79 +989,79 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="25"/>
         <source>Search Result: %1</source>
-        <translation>Resultado da busca: %1</translation>
+        <translation>Keresési eredmény: %1</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>Relevance</source>
-        <translation>Relevância</translation>
+        <translation>Relevancia</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>New</source>
-        <translation>Novo</translation>
+        <translation>Új</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>Hot</source>
-        <translation>Popular</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>Top</source>
-        <translation>No topo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>Comments</source>
-        <translation>Comentários</translation>
+        <translation>Hozzászólások</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="32"/>
         <source>All time</source>
-        <translation>Desde sempre</translation>
+        <translation>Állandóan</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="32"/>
         <source>This hour</source>
-        <translation>Esta hora</translation>
+        <translation>Ebben az órában</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="32"/>
         <source>Today</source>
-        <translation>Hoje</translation>
+        <translation>Ma</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="32"/>
         <source>This week</source>
-        <translation>Esta semana</translation>
+        <translation>Ezen a héten</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="33"/>
         <source>This month</source>
-        <translation>Este mês</translation>
+        <translation>Ebben a hónapban</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="33"/>
         <source>This year</source>
-        <translation>Este ano</translation>
+        <translation>Ebben az évben</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="46"/>
         <location filename="../qml/SearchPage.qml" line="48"/>
         <source>Time Range</source>
-        <translation>Período</translation>
+        <translation>Időtartomány</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="57"/>
         <location filename="../qml/SearchPage.qml" line="59"/>
         <source>Sort</source>
-        <translation>Ordenar</translation>
+        <translation>Rendezés</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="67"/>
         <source>Refresh</source>
-        <translation>Atualizar</translation>
+        <translation>Frissítés</translation>
     </message>
 </context>
 <context>
@@ -1092,57 +1069,57 @@
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
         <source>Hot</source>
-        <translation>Popular</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
         <source>New</source>
-        <translation>Novo</translation>
+        <translation>Új</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
         <source>Rising</source>
-        <translation>Subindo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
         <source>Controversial</source>
-        <translation>Controverso</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
         <source>Top</source>
-        <translation>No topo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
         <source>Hour</source>
-        <translation>Hora</translation>
+        <translation>Óra</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="37"/>
         <source>Day</source>
-        <translation>Dia</translation>
+        <translation>Nap</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="38"/>
         <source>Week</source>
-        <translation>Semana</translation>
+        <translation>Hét</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Month</source>
-        <translation>Mês</translation>
+        <translation>Hónap</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="40"/>
         <source>Year</source>
-        <translation>Ano</translation>
+        <translation>Év</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="41"/>
         <source>All time</source>
-        <translation>Desde sempre</translation>
+        <translation>Állandóan</translation>
     </message>
 </context>
 <context>
@@ -1150,47 +1127,47 @@
     <message>
         <location filename="../qml/SendLinkPage.qml" line="25"/>
         <source>New Post</source>
-        <translation>Nova Postagem</translation>
+        <translation>Új poszt</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="25"/>
         <source>Edit Post</source>
-        <translation>Editar Postagem</translation>
+        <translation>Poszt szerkesztése</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="77"/>
         <source>Post Title</source>
-        <translation>Título da Postagem</translation>
+        <translation>Poszt címe</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="85"/>
         <source>Self Post</source>
-        <translation>Postagem Própria</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="92"/>
         <source>Post URL</source>
-        <translation>Postar Endereço web</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="104"/>
         <source>Post Text</source>
-        <translation>Postar Texto</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="112"/>
         <source>Flair</source>
-        <translation>Charme</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="127"/>
         <source>Submit</source>
-        <translation>Enviar</translation>
+        <translation>Beküldés</translation>
     </message>
     <message>
         <location filename="../qml/SendLinkPage.qml" line="127"/>
         <source>Save</source>
-        <translation>Salvar</translation>
+        <translation>Mentés</translation>
     </message>
 </context>
 <context>
@@ -1198,42 +1175,42 @@
     <message>
         <location filename="../qml/SendMessagePage.qml" line="25"/>
         <source>New Message</source>
-        <translation>Nova Mensagem</translation>
+        <translation>Új üzenet</translation>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="25"/>
         <source>Reply Message</source>
-        <translation>Responder Mensagem</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="68"/>
         <source>Recipient</source>
-        <translation>Destinatários</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="75"/>
         <source>to moderators of</source>
-        <translation>para moderadores do</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="75"/>
         <source>to</source>
-        <translation>para</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="84"/>
         <source>Subject</source>
-        <translation>Assunto</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="93"/>
         <source>Message</source>
-        <translation>Mensagem</translation>
+        <translation>Üzenet</translation>
     </message>
     <message>
         <location filename="../qml/SendMessagePage.qml" line="99"/>
         <source>Send</source>
-        <translation>Enviar</translation>
+        <translation>Küldés</translation>
     </message>
 </context>
 <context>
@@ -1241,22 +1218,22 @@
     <message>
         <location filename="../qml/SignInPage.qml" line="24"/>
         <source>Sign in to Reddit</source>
-        <translation>Fazer login no Reddit</translation>
+        <translation>Bejelentkezés a Reddit-be</translation>
     </message>
     <message>
         <location filename="../qml/SignInPage.qml" line="47"/>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation>Mégse</translation>
     </message>
     <message>
         <location filename="../qml/SignInPage.qml" line="54"/>
         <source>Reload</source>
-        <translation>Atualizar</translation>
+        <translation>Újratöltés</translation>
     </message>
     <message>
         <location filename="../qml/SignInPage.qml" line="66"/>
         <source>Sign in successful! Welcome! :)</source>
-        <translation>Login realizado com sucesso! Bem-vindo! :)</translation>
+        <translation>A belépés sikeres! Üdvözlünk! :)</translation>
     </message>
 </context>
 <context>
@@ -1264,10 +1241,7 @@
     <message numerus="yes">
         <location filename="../qml/SubredditBrowseDelegate.qml" line="68"/>
         <source>%n subscribers</source>
-        <translation>
-            <numerusform>%n inscrito</numerusform>
-            <numerusform>%n inscritos</numerusform>
-        </translation>
+        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform></translation>
     </message>
 </context>
 <context>
@@ -1280,22 +1254,22 @@
     <message>
         <location filename="../qml/SubredditDelegate.qml" line="64"/>
         <source>Contributor</source>
-        <translation>Colaborador</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SubredditDelegate.qml" line="69"/>
         <source>Banned</source>
-        <translation>Banido</translation>
+        <translation>Bannolva</translation>
     </message>
     <message>
         <location filename="../qml/SubredditDelegate.qml" line="75"/>
         <source>Mod</source>
-        <translation>Mod</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SubredditDelegate.qml" line="81"/>
         <source>Muted</source>
-        <translation>Mudo</translation>
+        <translation>Némítva</translation>
     </message>
 </context>
 <context>
@@ -1303,68 +1277,68 @@
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="27"/>
         <source>Subreddits Search: %1</source>
-        <translation>Subreddits encontrados: %1</translation>
+        <translation>Alredditek keresése: %1</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="36"/>
         <source>Popular Subreddits</source>
-        <translation>Subreddits Populares</translation>
+        <translation>Népszerű alredditek</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="36"/>
         <source>New Subreddits</source>
-        <translation>Novos Subreddits</translation>
+        <translation>Új alredditek</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="37"/>
         <source>My Subreddits - Subscriber</source>
-        <translation>Meus Subreddits - Inscrever</translation>
+        <translation>Saját alredditek - Feliratkozó</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="37"/>
         <source>My Subreddits - Approved Submitter</source>
-        <translation>Meus Subreddits - Editor aprovado</translation>
+        <translation>Saját alredditek - Jóváhagyott beküldő</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="37"/>
         <source>My Subreddits - Moderator</source>
-        <translation>Meus Subreddits - Moderador</translation>
+        <translation>Saját alredditek - Moderátor</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="57"/>
         <location filename="../qml/SubredditsBrowsePage.qml" line="59"/>
         <source>Section</source>
-        <translation>Seção</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="67"/>
         <source>Refresh</source>
-        <translation>Atualizar</translation>
+        <translation>Frissítés</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="86"/>
         <source>About</source>
-        <translation>Sobre</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="92"/>
         <source>Subscribe</source>
-        <translation>Inscrever-se</translation>
+        <translation>Feliratkozás</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="101"/>
         <source>Unsubscribe</source>
-        <translation>Desinscrever-se</translation>
+        <translation>Leíratkozás</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="122"/>
         <source>Nothing here :(</source>
-        <translation>Nada aqui :(</translation>
+        <translation>Semmi újság :(</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="139"/>
         <source>You have %2 from %1</source>
-        <translation>Você tem %2 de %1</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1372,77 +1346,77 @@
     <message>
         <location filename="../qml/SubredditsPage.qml" line="28"/>
         <source>Subreddits</source>
-        <translation>Subreddits</translation>
+        <translation>Alredditek</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="65"/>
         <source>About Quickddit</source>
-        <translation>Sobre Quickddit</translation>
+        <translation>A Quickddit-ről</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="70"/>
         <source>Settings</source>
-        <translation>Configurações</translation>
+        <translation>Beállítások</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="76"/>
         <source>My Profile</source>
-        <translation>Meu Perfil</translation>
+        <translation>Saját profil</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="82"/>
         <source>Messages</source>
-        <translation>Mensagens</translation>
+        <translation>Üzenetek</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="100"/>
         <source>Go to a specific subreddit</source>
-        <translation>Insira o subreddit aqui</translation>
+        <translation>Ugrás egy adott alreddithez</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Front Page</source>
-        <translation>Página Inicial</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>All</source>
-        <translation>Todos</translation>
+        <translation>Mind</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Browse for Subreddits...</source>
-        <translation>Listar Subreddits...</translation>
+        <translation>Alredditek böngészése...</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Multireddits</source>
-        <translation>Multireddits</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Popular</source>
-        <translation>Popular</translation>
+        <translation>Népszerű</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="135"/>
         <source>Subscribed Subreddits</source>
-        <translation>Subreddits inscritos</translation>
+        <translation>Jegyzett alredditek</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="154"/>
         <source>About</source>
-        <translation>Sobre</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="160"/>
         <source>Unsubscribe</source>
-        <translation>Desinscrever-se</translation>
+        <translation>Leíratkozás</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="223"/>
         <source>You have unsubscribed from %1</source>
-        <translation>Desinscrito do %1</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1450,7 +1424,7 @@
     <message>
         <location filename="../qml/TextAreaDialog.qml" line="50"/>
         <source>Enter your comment here...</source>
-        <translation>Insira seu comentário aqui</translation>
+        <translation>Írd ide a hozzászólásodat...</translation>
     </message>
 </context>
 <context>
@@ -1458,81 +1432,81 @@
     <message>
         <location filename="../qml/UserPage.qml" line="25"/>
         <source>User %1</source>
-        <translation>Usuário %1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="31"/>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Overview</source>
-        <translation>Resumo</translation>
+        <translation>Áttekintés</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="31"/>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Comments</source>
-        <translation>Comentários</translation>
+        <translation>Hozászólások</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="31"/>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Submitted</source>
-        <translation>Enviado</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Upvoted</source>
-        <translation>Cimavotou</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Downvoted</source>
-        <translation>Baixovotou</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="32"/>
         <source>Saved Things</source>
-        <translation>Coisas Salvas</translation>
+        <translation>Mentett dolgok</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="41"/>
         <location filename="../qml/UserPage.qml" line="43"/>
         <source>Section</source>
-        <translation>Seção</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="51"/>
         <source>Send Message</source>
-        <translation>Enviar Mensagem</translation>
+        <translation>Üzenet küldése</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="60"/>
         <source>Refresh</source>
-        <translation>Atualizar</translation>
+        <translation>Frissítés</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="72"/>
         <source>My Profile</source>
-        <translation>Meu Perfil</translation>
+        <translation>Saját profil</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="72"/>
         <source>User Profile</source>
-        <translation>Perfil do Usuário</translation>
+        <translation>Felhasználói profil</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="104"/>
         <source>Friend</source>
-        <translation>Amigo</translation>
+        <translation>Barát</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="108"/>
         <source>Gold</source>
-        <translation>Com Gold</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="112"/>
         <source>Email Verified</source>
-        <translation>Email Verificado</translation>
+        <translation>Email ellenőrizve</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="116"/>
@@ -1542,42 +1516,42 @@
     <message>
         <location filename="../qml/UserPage.qml" line="120"/>
         <source>No Robots</source>
-        <translation>Não Robô</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="139"/>
         <source>%1 link karma</source>
-        <translation>%1 karma de Links</translation>
+        <translation>%1 link karma</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="145"/>
         <source>%1 comment karma</source>
-        <translation>%1 karma de Comentários</translation>
+        <translation>%1 hozzászólás karma</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="151"/>
         <source>created %1</source>
-        <translation>conta criada %1</translation>
+        <translation>létrehozva %1</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="209"/>
         <source>Delete</source>
-        <translation>Apagar</translation>
+        <translation>Törlés</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="226"/>
         <source>Delete link</source>
-        <translation>Apagar link</translation>
+        <translation>Hivatkozás törlése</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="247"/>
         <source>Nothing here :(</source>
-        <translation>Nada aqui :(</translation>
+        <translation>Semmi újság :(</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="283"/>
         <source>Message sent</source>
-        <translation>Mensagem enviada</translation>
+        <translation>Üzenet elküldve</translation>
     </message>
 </context>
 <context>
@@ -1585,17 +1559,17 @@
     <message>
         <location filename="../qml/UserPageCommentDelegate.qml" line="54"/>
         <source>Sticky</source>
-        <translation>Fixo</translation>
+        <translation>Ragadós</translation>
     </message>
     <message>
         <location filename="../qml/UserPageCommentDelegate.qml" line="61"/>
         <source>Gilded</source>
-        <translation>Dourado</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/UserPageCommentDelegate.qml" line="85"/>
         <source>Comment in %1</source>
-        <translation>Comentário em %1</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1603,7 +1577,7 @@
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="64"/>
         <source>Sticky</source>
-        <translation>Fixo</translation>
+        <translation>Ragadós</translation>
     </message>
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="72"/>
@@ -1613,17 +1587,17 @@
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="80"/>
         <source>Promoted</source>
-        <translation>Promovido</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="87"/>
         <source>Gilded</source>
-        <translation>Dourado</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="96"/>
         <source>Locked</source>
-        <translation>Bloqueado</translation>
+        <translation>Zárolva</translation>
     </message>
 </context>
 <context>
@@ -1631,52 +1605,37 @@
     <message>
         <location filename="../../src/utils.cpp" line="36"/>
         <source>Now</source>
-        <translation>Agora</translation>
+        <translation>Most</translation>
     </message>
     <message>
         <location filename="../../src/utils.cpp" line="38"/>
         <source>Just now</source>
-        <translation>Agora mesmo</translation>
+        <translation>Épp most</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="43"/>
         <source>%n mins ago</source>
-        <translation>
-            <numerusform>%n minuto atrás</numerusform>
-            <numerusform>%n minutos</numerusform>
-        </translation>
+        <translation><numerusform>%n perccel ezelőtt</numerusform><numerusform>%n mins ago</numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="48"/>
         <source>%n hours ago</source>
-        <translation>
-            <numerusform>%n hora atrás</numerusform>
-            <numerusform>%n horas</numerusform>
-        </translation>
+        <translation><numerusform>%n hours ago</numerusform><numerusform>%n órával ezelőtt</numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="53"/>
         <source>%n days ago</source>
-        <translation>
-            <numerusform>ontem</numerusform>
-            <numerusform>%n dias</numerusform>
-        </translation>
+        <translation><numerusform>%n nappal ezelőtt</numerusform><numerusform>%n nappal ezelőtt</numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="58"/>
         <source>%n months ago</source>
-        <translation>
-            <numerusform>mês passado</numerusform>
-            <numerusform>%n meses</numerusform>
-        </translation>
+        <translation><numerusform>%n hónappal ezelőtt</numerusform><numerusform>%n hónappal ezelőtt</numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="61"/>
         <source>%n years ago</source>
-        <translation>
-            <numerusform>ano passado</numerusform>
-            <numerusform>%n anos</numerusform>
-        </translation>
+        <translation><numerusform>%n évvel ezelőtt</numerusform><numerusform>%n évvel ezelőtt</numerusform></translation>
     </message>
 </context>
 <context>
@@ -1684,22 +1643,22 @@
     <message>
         <location filename="../qml/VideoViewPage.qml" line="26"/>
         <source>Video</source>
-        <translation>Vídeo</translation>
+        <translation>Videó</translation>
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="39"/>
         <source>URL</source>
-        <translation>Endereço</translation>
+        <translation>URL</translation>
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="111"/>
         <source>Error loading video</source>
-        <translation>Erro ao carregar vídeo</translation>
+        <translation>Hiba a videó betöltésekor</translation>
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="251"/>
         <source>Problem finding stream URL</source>
-        <translation>Erro ao encontrar endereço para stream</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1707,32 +1666,32 @@
     <message>
         <location filename="../qml/WebViewer.qml" line="25"/>
         <source>WebViewer</source>
-        <translation>WebViewer</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/WebViewer.qml" line="77"/>
         <source>Copy URL</source>
-        <translation>Copiar endereço</translation>
+        <translation>URL másolása</translation>
     </message>
     <message>
         <location filename="../qml/WebViewer.qml" line="80"/>
         <source>URL copied to clipboard</source>
-        <translation>Endereço copiado para a área de transferência</translation>
+        <translation>URL a vágólapra másolva</translation>
     </message>
     <message>
         <location filename="../qml/WebViewer.qml" line="84"/>
         <source>Open in browser</source>
-        <translation>Abrir no navegador</translation>
+        <translation>Megnyitás böngészőben</translation>
     </message>
     <message>
         <location filename="../qml/WebViewer.qml" line="90"/>
         <source>Back</source>
-        <translation>Voltar</translation>
+        <translation>Vissza</translation>
     </message>
     <message>
         <location filename="../qml/WebViewer.qml" line="95"/>
         <source>Forward</source>
-        <translation>Avançar</translation>
+        <translation>Előre</translation>
     </message>
 </context>
 <context>
@@ -1740,47 +1699,44 @@
     <message>
         <location filename="../qml/main.qml" line="308"/>
         <source>Unsupported reddit url</source>
-        <translation>Endereço de reddit não suportado</translation>
+        <translation>Nem támogatott reddit-hivatkozás</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="359"/>
+        <location filename="../qml/main.qml" line="360"/>
         <source>Unsupported image url</source>
-        <translation>Endereço de imagem não suportado</translation>
+        <translation>Nem támogatott képhivatkozás</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="368"/>
+        <location filename="../qml/main.qml" line="369"/>
         <source>Unsupported video url</source>
-        <translation>Endereço de vídeo não suportado</translation>
+        <translation>Nem támogatott videóhivatkozás</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="448"/>
+        <location filename="../qml/main.qml" line="449"/>
         <source>Please log in again</source>
-        <translation>Favor fazer login novamente</translation>
+        <translation>Kérlek lépj be újra</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="478"/>
+        <location filename="../qml/main.qml" line="479"/>
         <source> and %1 other</source>
-        <translation>e %1 outros</translation>
+        <translation> és %1 más</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="487"/>
         <location filename="../qml/main.qml" line="488"/>
+        <location filename="../qml/main.qml" line="489"/>
         <source>Message from %1</source>
-        <translation>Mensagem de %1</translation>
+        <translation>Üzenet innen: %1</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="498"/>
+        <location filename="../qml/main.qml" line="499"/>
         <source>New message from %1</source>
-        <translation>Nova mensagem de %1</translation>
+        <translation>Új üzenet innen: %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="499"/>
+        <location filename="../qml/main.qml" line="500"/>
         <source>%n new messages</source>
         <comment>0</comment>
-        <translation>
-            <numerusform>%n nova mensagem</numerusform>
-            <numerusform>%n novas mensagens</numerusform>
-        </translation>
+        <translation><numerusform>%n új üzenet</numerusform><numerusform>%n új üzenet</numerusform></translation>
     </message>
 </context>
 </TS>

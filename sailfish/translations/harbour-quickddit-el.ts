@@ -571,17 +571,17 @@
         <translation>Ανανέωση</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="224"/>
+        <location filename="../qml/CommentPage.qml" line="225"/>
         <source>Viewing a single comment&apos;s thread</source>
         <translation>Προβολή νήματος ενός σχολίου</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="229"/>
+        <location filename="../qml/CommentPage.qml" line="230"/>
         <source>View All Comments</source>
         <translation>Προβολή όλων των σχολίων</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="261"/>
+        <location filename="../qml/CommentPage.qml" line="262"/>
         <source>Deleting comment</source>
         <translation>Διαγραφή σχολίου</translation>
     </message>
@@ -635,12 +635,12 @@
 <context>
     <name>LinkManager</name>
     <message>
-        <location filename="../../src/linkmanager.cpp" line="114"/>
+        <location filename="../../src/linkmanager.cpp" line="115"/>
         <source>The link has been added</source>
         <translation>Ο σύνδεσμος προστέθηκε</translation>
     </message>
     <message>
-        <location filename="../../src/linkmanager.cpp" line="120"/>
+        <location filename="../../src/linkmanager.cpp" line="121"/>
         <source>The link text has been changed</source>
         <translation>Το κείμενο του συνδέσμου τροποποιήθηκε</translation>
     </message>
@@ -738,22 +738,22 @@
 <context>
     <name>MessageDelegate</name>
     <message>
-        <location filename="../qml/MessageDelegate.qml" line="70"/>
+        <location filename="../qml/MessageDelegate.qml" line="83"/>
         <source>%1 from %2</source>
         <translation>%1 από %2</translation>
     </message>
     <message>
-        <location filename="../qml/MessageDelegate.qml" line="82"/>
+        <location filename="../qml/MessageDelegate.qml" line="95"/>
         <source>in %1</source>
         <translation>σε %1</translation>
     </message>
     <message>
-        <location filename="../qml/MessageDelegate.qml" line="83"/>
+        <location filename="../qml/MessageDelegate.qml" line="96"/>
         <source>to %1</source>
         <translation>προς %1</translation>
     </message>
     <message>
-        <location filename="../qml/MessageDelegate.qml" line="85"/>
+        <location filename="../qml/MessageDelegate.qml" line="98"/>
         <source>from %1</source>
         <translation>από %1</translation>
     </message>
@@ -761,12 +761,17 @@
 <context>
     <name>MessageMenu</name>
     <message>
-        <location filename="../qml/MessageMenu.qml" line="33"/>
+        <location filename="../qml/MessageMenu.qml" line="35"/>
+        <source>Delete</source>
+        <translation type="unfinished">Διαγραφή</translation>
+    </message>
+    <message>
+        <location filename="../qml/MessageMenu.qml" line="41"/>
         <source>Mark As Read</source>
         <translation>Σημείωση ως αναγνωσμένο</translation>
     </message>
     <message>
-        <location filename="../qml/MessageMenu.qml" line="33"/>
+        <location filename="../qml/MessageMenu.qml" line="41"/>
         <source>Mark As Unread</source>
         <translation>Σήμανση ως μη αναγνωσμένο</translation>
     </message>
@@ -775,6 +780,7 @@
     <name>MessagePage</name>
     <message>
         <location filename="../qml/MessagePage.qml" line="27"/>
+        <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Messages</source>
         <translation>Μηνύματα</translation>
     </message>
@@ -787,11 +793,6 @@
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Unread</source>
         <translation>Μη αναγνωσμένα</translation>
-    </message>
-    <message>
-        <location filename="../qml/MessagePage.qml" line="35"/>
-        <source>Message</source>
-        <translation>Μήνυμα</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="35"/>
@@ -820,18 +821,23 @@
         <translation>Ενότητα</translation>
     </message>
     <message>
-        <location filename="../qml/MessagePage.qml" line="58"/>
+        <location filename="../qml/MessagePage.qml" line="59"/>
         <source>Refresh</source>
         <translation>Ανανέωση</translation>
     </message>
     <message>
-        <location filename="../qml/MessagePage.qml" line="99"/>
+        <location filename="../qml/MessagePage.qml" line="78"/>
+        <source>Deleting message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/MessagePage.qml" line="108"/>
         <source>Nothing here :(</source>
         <translation>Δεν υπάρχει τίποτα εδώ :(</translation>
     </message>
     <message>
-        <location filename="../qml/MessagePage.qml" line="114"/>
-        <location filename="../qml/MessagePage.qml" line="118"/>
+        <location filename="../qml/MessagePage.qml" line="123"/>
+        <location filename="../qml/MessagePage.qml" line="127"/>
         <source>Message sent</source>
         <translation>To μήνυμα εστάλη</translation>
     </message>
@@ -1704,27 +1710,27 @@
         <translation>Προβολέας Ιστού</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="48"/>
+        <location filename="../qml/WebViewer.qml" line="77"/>
         <source>Copy URL</source>
         <translation>Αντιγραφή URL</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="51"/>
+        <location filename="../qml/WebViewer.qml" line="80"/>
         <source>URL copied to clipboard</source>
         <translation>Το URL αντιγράφτηκε στο πρόχειρο</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="55"/>
+        <location filename="../qml/WebViewer.qml" line="84"/>
         <source>Open in browser</source>
         <translation>Άνοιγμα στον φυλλομετρητή</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="61"/>
+        <location filename="../qml/WebViewer.qml" line="90"/>
         <source>Back</source>
         <translation>Πίσω</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="66"/>
+        <location filename="../qml/WebViewer.qml" line="95"/>
         <source>Forward</source>
         <translation>Εμπρός</translation>
     </message>
@@ -1737,38 +1743,38 @@
         <translation>Μη υποστηριζόμενο url reddit</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="360"/>
+        <location filename="../qml/main.qml" line="359"/>
         <source>Unsupported image url</source>
         <translation>Μη υποστηριζόμενο url εικόνας</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="369"/>
+        <location filename="../qml/main.qml" line="368"/>
         <source>Unsupported video url</source>
         <translation>Μη υποστηριζόμενο url βίντεο</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="449"/>
+        <location filename="../qml/main.qml" line="448"/>
         <source>Please log in again</source>
         <translation>Παρακαλώ συνδεθείτε ξανά</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="479"/>
+        <location filename="../qml/main.qml" line="478"/>
         <source> and %1 other</source>
         <translation> και %1 ακόμα</translation>
     </message>
     <message>
+        <location filename="../qml/main.qml" line="487"/>
         <location filename="../qml/main.qml" line="488"/>
-        <location filename="../qml/main.qml" line="489"/>
         <source>Message from %1</source>
         <translation>Μήνυμα από τον/την %1</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="499"/>
+        <location filename="../qml/main.qml" line="498"/>
         <source>New message from %1</source>
         <translation>Νέο μήνυμα από τον/την %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="500"/>
+        <location filename="../qml/main.qml" line="499"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation>

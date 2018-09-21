@@ -571,17 +571,17 @@
         <translation>Rafraîchir</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="224"/>
+        <location filename="../qml/CommentPage.qml" line="225"/>
         <source>Viewing a single comment&apos;s thread</source>
         <translation>Visualisation d&apos;un seul commentaire de la discussion</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="229"/>
+        <location filename="../qml/CommentPage.qml" line="230"/>
         <source>View All Comments</source>
         <translation>Voir tous les commentaires</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="261"/>
+        <location filename="../qml/CommentPage.qml" line="262"/>
         <source>Deleting comment</source>
         <translation>Suppression du commentaire</translation>
     </message>
@@ -635,12 +635,12 @@
 <context>
     <name>LinkManager</name>
     <message>
-        <location filename="../../src/linkmanager.cpp" line="114"/>
+        <location filename="../../src/linkmanager.cpp" line="115"/>
         <source>The link has been added</source>
         <translation>Le lien a été ajouté</translation>
     </message>
     <message>
-        <location filename="../../src/linkmanager.cpp" line="120"/>
+        <location filename="../../src/linkmanager.cpp" line="121"/>
         <source>The link text has been changed</source>
         <translation>Le texte du lien a été modifié</translation>
     </message>
@@ -738,22 +738,22 @@
 <context>
     <name>MessageDelegate</name>
     <message>
-        <location filename="../qml/MessageDelegate.qml" line="70"/>
+        <location filename="../qml/MessageDelegate.qml" line="83"/>
         <source>%1 from %2</source>
         <translation>%1 de %2</translation>
     </message>
     <message>
-        <location filename="../qml/MessageDelegate.qml" line="82"/>
+        <location filename="../qml/MessageDelegate.qml" line="95"/>
         <source>in %1</source>
         <translation>dans %1</translation>
     </message>
     <message>
-        <location filename="../qml/MessageDelegate.qml" line="83"/>
+        <location filename="../qml/MessageDelegate.qml" line="96"/>
         <source>to %1</source>
         <translation>à %1</translation>
     </message>
     <message>
-        <location filename="../qml/MessageDelegate.qml" line="85"/>
+        <location filename="../qml/MessageDelegate.qml" line="98"/>
         <source>from %1</source>
         <translation>de %1</translation>
     </message>
@@ -761,12 +761,17 @@
 <context>
     <name>MessageMenu</name>
     <message>
-        <location filename="../qml/MessageMenu.qml" line="33"/>
+        <location filename="../qml/MessageMenu.qml" line="35"/>
+        <source>Delete</source>
+        <translation type="unfinished">Supprimer</translation>
+    </message>
+    <message>
+        <location filename="../qml/MessageMenu.qml" line="41"/>
         <source>Mark As Read</source>
         <translation>Marquer comme lu</translation>
     </message>
     <message>
-        <location filename="../qml/MessageMenu.qml" line="33"/>
+        <location filename="../qml/MessageMenu.qml" line="41"/>
         <source>Mark As Unread</source>
         <translation>Marquer comme non lu</translation>
     </message>
@@ -775,6 +780,7 @@
     <name>MessagePage</name>
     <message>
         <location filename="../qml/MessagePage.qml" line="27"/>
+        <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Messages</source>
         <translation>Messages</translation>
     </message>
@@ -787,11 +793,6 @@
         <location filename="../qml/MessagePage.qml" line="35"/>
         <source>Unread</source>
         <translation>Non lus</translation>
-    </message>
-    <message>
-        <location filename="../qml/MessagePage.qml" line="35"/>
-        <source>Message</source>
-        <translation>Message</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="35"/>
@@ -820,18 +821,23 @@
         <translation>Section</translation>
     </message>
     <message>
-        <location filename="../qml/MessagePage.qml" line="58"/>
+        <location filename="../qml/MessagePage.qml" line="59"/>
         <source>Refresh</source>
         <translation>Rafraîchir</translation>
     </message>
     <message>
-        <location filename="../qml/MessagePage.qml" line="99"/>
+        <location filename="../qml/MessagePage.qml" line="78"/>
+        <source>Deleting message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/MessagePage.qml" line="108"/>
         <source>Nothing here :(</source>
         <translation>Il n&apos;y a rien ici :(</translation>
     </message>
     <message>
-        <location filename="../qml/MessagePage.qml" line="114"/>
-        <location filename="../qml/MessagePage.qml" line="118"/>
+        <location filename="../qml/MessagePage.qml" line="123"/>
+        <location filename="../qml/MessagePage.qml" line="127"/>
         <source>Message sent</source>
         <translation>Message envoyé</translation>
     </message>
@@ -1704,27 +1710,27 @@
         <translation>WebViewer</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="48"/>
+        <location filename="../qml/WebViewer.qml" line="77"/>
         <source>Copy URL</source>
         <translation>Copier l&apos;URL</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="51"/>
+        <location filename="../qml/WebViewer.qml" line="80"/>
         <source>URL copied to clipboard</source>
         <translation>URL copiée dans le presse-papier</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="55"/>
+        <location filename="../qml/WebViewer.qml" line="84"/>
         <source>Open in browser</source>
         <translation>Ouvrir dans le navigateur</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="61"/>
+        <location filename="../qml/WebViewer.qml" line="90"/>
         <source>Back</source>
         <translation>Retour</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="66"/>
+        <location filename="../qml/WebViewer.qml" line="95"/>
         <source>Forward</source>
         <translation>Transférer</translation>
     </message>
@@ -1737,38 +1743,38 @@
         <translation>URL Reddit non supportée</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="360"/>
+        <location filename="../qml/main.qml" line="359"/>
         <source>Unsupported image url</source>
         <translation>URL Image non supportée</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="369"/>
+        <location filename="../qml/main.qml" line="368"/>
         <source>Unsupported video url</source>
         <translation>URL Vidéo non supportée</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="449"/>
+        <location filename="../qml/main.qml" line="448"/>
         <source>Please log in again</source>
         <translation>Merci de vous connecter à nouveau</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="479"/>
+        <location filename="../qml/main.qml" line="478"/>
         <source> and %1 other</source>
         <translation>et %1 autres</translation>
     </message>
     <message>
+        <location filename="../qml/main.qml" line="487"/>
         <location filename="../qml/main.qml" line="488"/>
-        <location filename="../qml/main.qml" line="489"/>
         <source>Message from %1</source>
         <translation>Message de %1</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="499"/>
+        <location filename="../qml/main.qml" line="498"/>
         <source>New message from %1</source>
         <translation>Nouveau message de %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="500"/>
+        <location filename="../qml/main.qml" line="499"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation>
