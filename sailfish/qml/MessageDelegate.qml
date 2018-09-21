@@ -54,8 +54,8 @@ Item {
 
                 Image {
                     source: isComment ? "image://theme/icon-m-chat" : "image://theme/icon-m-mail"
-                    width: 32
-                    height: 32
+                    width: 32 * QMLUtils.pScale
+                    height: 32 * QMLUtils.pScale
                     anchors.verticalCenter: parent.verticalCenter
                 }
 
