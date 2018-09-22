@@ -337,7 +337,6 @@ ApplicationWindow {
                     query: linkRe[4] === undefined ? "" : linkRe[4].substring(1)
                 }
             }
-            console.log(link.path + "|" + link.query);
             link.queryMap = {}
             if (link.query !== "") {
                 var urlparams = link.query.split("&")
