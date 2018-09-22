@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2015-2018  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@ Image {
 
     property variant link
     property bool enabled: true
+    property bool showLinkTypeIndicator: true
 
     source: link.thumbnailUrl
     asynchronous: true
@@ -58,5 +59,35 @@ Image {
 
         width = sourceSize.width * scale
         height = sourceSize.height * scale
+    }
+
+    Rectangle {
+        color: "black"
+        opacity: 0.5
+        visible: linkTypeIndicator.visible
+        width: linkTypeIndicator.width/2
+        height: linkTypeIndicator.height/2
+        anchors {
+            bottom: thumbnail.bottom
+            left: thumbnail.left
+        }
+    }
+
+    Image {
+        id: linkTypeIndicator
+        opacity: 0.8
+        visible: showLinkTypeIndicator && thumbnail.status === Image.Ready
+        width: 24 * QMLUtils.pScale
+        height: 24 * QMLUtils.pScale
+        source: globalUtils.previewableImage(link.url) ? "image://theme/icon-m-image?" + Theme.primaryColor
+                : globalUtils.previewableVideo(link.url) ? "image://theme/icon-m-video?" + Theme.primaryColor
+                : globalUtils.redditLink(link.url) ? "image://theme/icon-m-forward?" + Theme.primaryColor
+                : "image://theme/icon-m-link?" + Theme.primaryColor
+        anchors {
+            bottom: thumbnail.bottom
+            left: thumbnail.left
+            bottomMargin: -12 * QMLUtils.pScale
+            leftMargin: -12 * QMLUtils.pScale
+        }
     }
 }

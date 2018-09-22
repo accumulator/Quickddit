@@ -125,6 +125,7 @@ AbstractPage {
                     PostThumbnail {
                         id: thumbnail
                         link: commentModel.link
+                        showLinkTypeIndicator: false
 
                         function scaleToText() {
                             var scale = (postInfoText.height + postButtonRow.height) / thumbnail.sourceSize.height;
