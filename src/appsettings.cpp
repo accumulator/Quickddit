@@ -33,6 +33,7 @@ AppSettings::AppSettings(QObject *parent) :
     m_lastSeenMessage = m_settings->value("lastSeenMessage").toString();
     m_pollUnread = m_settings->value("pollUnread", true).toBool();
     m_thumbnailScale = static_cast<ThumbnailScale>(m_settings->value("thumbnailScale", AppSettings::ScaleAuto).toInt());
+    m_showLinkType = m_settings->value("showLinkType", false).toBool();
     m_loopVideos = m_settings->value("loopVideos", false).toBool();
     m_subredditSection = m_settings->value("subredditSection", 0).toInt();
     m_messageSection = m_settings->value("messageSection", 0).toInt();
@@ -183,6 +184,20 @@ void AppSettings::setThumbnailScale(const AppSettings::ThumbnailScale scale)
         m_thumbnailScale = scale;
         m_settings->setValue("thumbnailScale", m_thumbnailScale);
         emit thumbnailScaleChanged();
+    }
+}
+
+bool AppSettings::showLinkType() const
+{
+    return m_showLinkType;
+}
+
+void AppSettings::setShowLinkType(const bool showLinkType)
+{
+    if (m_showLinkType != showLinkType) {
+        m_showLinkType = showLinkType;
+        m_settings->setValue("showLinkType", m_showLinkType);
+        emit showLinkTypeChanged();
     }
 }
 

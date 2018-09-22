@@ -38,6 +38,7 @@ class AppSettings : public QObject
     Q_PROPERTY(OrientationProfile orientationProfile READ orientationProfile WRITE setOrientationProfile NOTIFY orientationProfileChanged)
     Q_PROPERTY(bool pollUnread READ pollUnread WRITE setPollUnread NOTIFY pollUnreadChanged)
     Q_PROPERTY(ThumbnailScale thumbnailScale READ thumbnailScale WRITE setThumbnailScale NOTIFY thumbnailScaleChanged)
+    Q_PROPERTY(bool showLinkType READ showLinkType WRITE setShowLinkType NOTIFY showLinkTypeChanged)
     Q_PROPERTY(bool loopVideos READ loopVideos WRITE setLoopVideos NOTIFY loopVideosChanged)
     Q_PROPERTY(int subredditSection READ subredditSection WRITE setSubredditSection NOTIFY subredditSectionChanged)
     Q_PROPERTY(int messageSection READ messageSection WRITE setMessageSection NOTIFY messageSectionChanged)
@@ -108,6 +109,9 @@ public:
     ThumbnailScale thumbnailScale() const;
     void setThumbnailScale(const ThumbnailScale scale);
 
+    bool showLinkType() const;
+    void setShowLinkType(const bool showLinkType);
+
     bool loopVideos() const;
     void setLoopVideos(const bool loopVideos);
 
@@ -140,6 +144,7 @@ signals:
     void orientationProfileChanged();
     void pollUnreadChanged();
     void thumbnailScaleChanged();
+    void showLinkTypeChanged();
     void loopVideosChanged();
     void subredditSectionChanged();
     void messageSectionChanged();
@@ -159,6 +164,7 @@ private:
     QString m_lastSeenMessage;
     bool m_pollUnread;
     ThumbnailScale m_thumbnailScale;
+    bool m_showLinkType;
     bool m_loopVideos;
     QStringList m_filteredSubreddits;
     int m_subredditSection;

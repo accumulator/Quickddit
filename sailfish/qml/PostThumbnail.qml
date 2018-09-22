@@ -76,7 +76,7 @@ Image {
     Image {
         id: linkTypeIndicator
         opacity: 0.8
-        visible: showLinkTypeIndicator && thumbnail.status === Image.Ready
+        visible: appSettings.showLinkType && showLinkTypeIndicator && thumbnail.status === Image.Ready
         width: 24 * QMLUtils.pScale
         height: 24 * QMLUtils.pScale
         source: globalUtils.previewableImage(link.url) ? "image://theme/icon-m-image?" + Theme.primaryColor

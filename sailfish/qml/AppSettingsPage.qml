@@ -133,6 +133,14 @@ AbstractPage {
                 }
             }
 
+            TextSwitch {
+                text: qsTr("Thumbnail Link Type Indicator")
+                checked: appSettings.showLinkType;
+                onCheckedChanged: {
+                    appSettings.showLinkType = checked;
+                }
+            }
+
             ComboBox {
                 visible: false // not functional yet
                 label: qsTr("Language")
