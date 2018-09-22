@@ -141,25 +141,6 @@ AbstractPage {
                 }
             }
 
-            ComboBox {
-                visible: false // not functional yet
-                label: qsTr("Language")
-                currentIndex:  {
-                    // TODO: return indexOf appsetting in model
-                    return 0;
-                }
-                menu: ContextMenu {
-                    MenuItem { text: "Default" }
-                    MenuItem { text: "English" }
-                    MenuItem { text: "Dutch" }
-                }
-                onCurrentIndexChanged: {
-                    switch (currentIndex) {
-                        // TODO : set appsettings language to lang_id at index in model
-                    }
-                }
-            }
-
             SectionHeader { text: qsTr("Notifications") }
 
             TextSwitch {
