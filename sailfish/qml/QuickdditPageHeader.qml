@@ -13,6 +13,17 @@ PageHeader {
         visible: inboxManager.hasUnseenUnread
         highlighted: false
 
+        onVisibleChanged: {
+            var item = parent
+            while (item) {
+                if (item.hasOwnProperty('__silica_page')) {
+                    item.showNavigationIndicator = !visible
+                    break;
+                }
+                item = item.parent
+            }
+        }
+
         onClicked: {
             if (pageStack.currentPage.objectName === "messagePage") {
                 pageStack.currentPage.refresh();
