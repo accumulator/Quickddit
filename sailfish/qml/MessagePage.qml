@@ -27,6 +27,8 @@ AbstractPage {
     title: qsTr("Messages") + " - " + sectionModel[messageModel.section]
     busy: messageManager.busy
 
+    property alias section: messageModel.section
+
     function refresh() {
         messageModel.refresh(false);
         inboxManager.dismiss();
