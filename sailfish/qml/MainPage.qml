@@ -144,6 +144,11 @@ AbstractPage {
                         linkManager.deleteLink(model.fullname);
                     })
                 });
+                dialog.hideLink.connect(function() {
+                    linkDelegate.remorseAction(qsTr("Hide link"), function() {
+                        linkManager.hideLink(model.fullname);
+                    })
+                });
             }
 
             AltMarker { }

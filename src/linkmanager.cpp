@@ -105,6 +105,18 @@ void LinkManager::deleteLink(const QString &fullname)
     doRequest(APIRequest::POST, "/api/del", SLOT(onFinished(QNetworkReply*)), parameters);
 }
 
+void LinkManager::hideLink(const QString &fullname)
+{
+    m_action = Delete;
+
+    QHash<QString, QString> parameters;
+    parameters.insert("api_type", "json");
+    parameters.insert("id", fullname);
+    m_fullname = fullname;
+
+    doRequest(APIRequest::POST, "/api/hide", SLOT(onFinished(QNetworkReply*)), parameters);
+}
+
 void LinkManager::onFinished(QNetworkReply *reply)
 {
     if (reply != 0) {

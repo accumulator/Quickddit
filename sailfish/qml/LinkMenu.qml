@@ -29,6 +29,7 @@ ContextMenu {
     property SaveManager linkSaveManager
 
     signal deleteLink
+    signal hideLink
 
     MenuItem {
         id: upvoteButton
@@ -72,6 +73,11 @@ ContextMenu {
         text: qsTr("Delete")
         visible: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived && link.author === appSettings.redditUsername
         onClicked: deleteLink()
+    }
+    MenuItem {
+        text: qsTr("Hide")
+        visible: quickdditManager.isSignedIn && !linkVoteManager.busy
+        onClicked: hideLink()
     }
 
 }

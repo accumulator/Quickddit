@@ -45,6 +45,7 @@ public:
     Q_INVOKABLE void submit(const QString &subreddit, const QString &title, const QString& url, const QString& text, const QString& flairId);
     Q_INVOKABLE void editLinkText(const QString &fullname, const QString &rawText);
     Q_INVOKABLE void deleteLink(const QString &fullname);
+    Q_INVOKABLE void hideLink(const QString &fullname);
 
 signals:
     void success(const QString &message);
