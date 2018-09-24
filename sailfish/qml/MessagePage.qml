@@ -78,6 +78,11 @@ AbstractPage {
             listItem.showMenuOnPressAndHold: false
             listItem.onPressAndHold: {
                 var dialog = showMenu({message: model, messageManager: messageManager})
+                dialog.replyClicked.connect(function() {
+                    if (model.author !== appSettings.redditUsername) {
+                        messageDelegate.doReply()
+                    }
+                });
                 dialog.deleteClicked.connect(function() {
                     messageDelegate.remorseAction(qsTr("Deleting message"), function() {
                         animateRemove = true
@@ -87,16 +92,26 @@ AbstractPage {
             }
 
             onClicked: {
+                if (model.isComment) {
+                    doOpenComment()
+                } else if (model.author !== appSettings.redditUsername) {
+                    doReply()
+                }
+            }
+
+            function doOpenComment() {
                 if (model.isUnread) {
                     messageManager.markRead(model.fullname)
                 }
+                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
+            }
 
-                if (model.isComment) {
-                    pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
-                } else if (model.author !== appSettings.redditUsername) {
-                    pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"),
-                                   {messageManager: messageManager, replyTo: model.fullname, recipient: model.author !== "" ? model.author : "/r/" + model.subreddit, subject: "re: " + model.subject});
+            function doReply() {
+                if (model.isUnread) {
+                    messageManager.markRead(model.fullname)
                 }
+                pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"),
+                               {messageManager: messageManager, replyTo: model.fullname, recipient: model.author !== "" ? model.author : "/r/" + model.subreddit, subject: "re: " + model.subject});
             }
 
             AltMarker { }

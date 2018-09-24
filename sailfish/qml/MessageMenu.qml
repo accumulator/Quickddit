@@ -28,7 +28,15 @@ ContextMenu {
     property MessageManager messageManager
     property bool enableMarkRead: (!message.isComment && message.author !== appSettings.redditUsername)
 
+    signal replyClicked
     signal deleteClicked
+
+    MenuItem {
+        visible: !message.isComment
+        enabled: !messageManager.busy && message.author !== appSettings.redditUsername && !message.isComment
+        text: qsTr("Reply")
+        onClicked: replyClicked()
+    }
 
     MenuItem {
         enabled: !messageManager.busy
