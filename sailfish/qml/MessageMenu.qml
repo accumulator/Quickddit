@@ -26,7 +26,7 @@ ContextMenu {
 
     property variant message
     property MessageManager messageManager
-    property bool enableMarkRead: true
+    property bool enableMarkRead: (!message.isComment && message.author !== appSettings.redditUsername)
 
     signal deleteClicked
 

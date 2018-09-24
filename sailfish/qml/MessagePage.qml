@@ -29,12 +29,15 @@ AbstractPage {
 
     property alias section: messageModel.section
 
+    property bool animateRemove: true
+
     function refresh() {
+        animateRemove = false
         messageModel.refresh(false);
         inboxManager.dismiss();
     }
 
-    readonly property variant sectionModel: [qsTr("All"), qsTr("Unread"), qsTr("Messages"), qsTr("Comment Replies"), qsTr("Post Replies"), qsTr("Sent")]
+    readonly property variant sectionModel: [qsTr("All"), qsTr("Unread"), qsTr("Messages"), qsTr("Comment Replies"), qsTr("Post Replies"), qsTr("Sent"), qsTr("Username Mentions")]
 
     SilicaListView {
         id: messageListView
@@ -69,25 +72,28 @@ AbstractPage {
         delegate: MessageDelegate {
             id: messageDelegate
             width: parent.width
-
-            isSentMessage: messageModel.section == MessageModel.SentSection
+            animateRemove: messagePage.animateRemove
 
             listItem.menu: Component { MessageMenu {} }
             listItem.showMenuOnPressAndHold: false
             listItem.onPressAndHold: {
-                var dialog = showMenu({message: model, messageManager: messageManager, enableMarkRead: !isSentMessage})
+                var dialog = showMenu({message: model, messageManager: messageManager})
                 dialog.deleteClicked.connect(function() {
                     messageDelegate.remorseAction(qsTr("Deleting message"), function() {
+                        animateRemove = true
                         messageManager.del(model.fullname);
                     })
                 });
             }
 
             onClicked: {
-                messageManager.markRead(model.fullname)
+                if (model.isUnread) {
+                    messageManager.markRead(model.fullname)
+                }
+
                 if (model.isComment) {
                     pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
-                } else if (!isSentMessage) {
+                } else if (model.author !== appSettings.redditUsername) {
                     pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"),
                                    {messageManager: messageManager, replyTo: model.fullname, recipient: model.author !== "" ? model.author : "/r/" + model.subreddit, subject: "re: " + model.subject});
                 }

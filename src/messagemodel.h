@@ -51,6 +51,7 @@ public:
         CommentRepliesSection,
         PostRepliesSection,
         SentSection,
+        MentionSection,
         UndefinedSection = 100 // internal only
     };
 

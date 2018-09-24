@@ -23,9 +23,8 @@ import Sailfish.Silica 1.0
 Item {
     id: messageDelegate
 
-    property bool isSentMessage: false
-
     property alias listItem: mainItem
+    property bool animateRemove: false
 
     signal clicked
 
@@ -41,7 +40,7 @@ Item {
 
     ListView.onRemove: RemoveAnimation {
         target: messageDelegate
-        duration: 400
+        duration: animateRemove ? 400 : 0
     }
 
     ListItem {
@@ -93,10 +92,11 @@ Item {
                 maximumLineCount: 2
                 elide: Text.ElideRight
                 text: isComment ? qsTr("in %1").arg("/r/" + model.subreddit) + " · " + model.created
-                                : (isSentMessage) ? qsTr("to %1").arg(model.destination)
-                                                  : (model.author !== "")
-                                                    ? qsTr("from %1").arg(model.author) + " · " + model.created
-                                                    : "/r/" + model.subreddit + " · " + model.created
+                                : (model.author === appSettings.redditUsername)
+                                  ? qsTr("to %1").arg(model.destination)
+                                  : (model.author !== "")
+                                    ? qsTr("from %1").arg(model.author) + " · " + model.created
+                                    : "/r/" + model.subreddit + " · " + model.created
             }
 
             Text {

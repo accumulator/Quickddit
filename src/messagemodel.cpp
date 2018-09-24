@@ -118,6 +118,7 @@ void MessageModel::refresh(bool refreshOlder)
     case CommentRepliesSection: relativeUrl += "/comments"; break;
     case PostRepliesSection: relativeUrl += "/selfreply"; break;
     case SentSection: relativeUrl += "/sent"; break;
+    case MentionSection: relativeUrl += "/mentions"; break;
     default: qCritical("MessageModel::refresh(): Invalid section"); break;
     }
 
