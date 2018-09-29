@@ -5,6 +5,18 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Sep 29 2018 Sander van Grieken <sander@outrightsolutions.nl> 1.9.0-1
+- fix: device dependent icon scaling in messages view
+- fix: don't keep webview instance around, it often drains battery (#45)
+- chg: disable navigation markers when new message icon is shown
+- new: remember messages section
+- new: truncated indicator in messages view
+- new: message delete
+- new: link type indicator on thumbnails
+- new: add hide function on post context menu (#44)
+- new: username mentions section in messages view
+- new: reply-to option in messages context menu
+
 * Wed May 30 2018 Sander van Grieken <sander@outrightsolutions.nl> 1.8.1-1
 - fix: set focus correctly in SendMessagePage, depending on which fields are shown
 - fix: corner case where video link is opened as image
