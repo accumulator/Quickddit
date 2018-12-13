@@ -197,7 +197,8 @@ AbstractPage {
             var format
             var i
             var formats = python.info["_type"] === "playlist" ? python.info["entries"][0]["formats"] : python.info["formats"]
-            console.log("checking on ext=mp4 & height=360|480")
+            if (formats === undefined)
+                fail(qsTr("Problem finding stream URL"))
             for (i = 0; i < formats.length; i++) {
                 format = formats[i]
                 if (~["mp4"].indexOf(format["ext"]) && ~[360,480].indexOf(format["height"])) {
@@ -205,7 +206,6 @@ AbstractPage {
                     urls["360"] = format["url"]
                 }
             }
-            console.log("checking on ext=mp4 & height=720")
             for (i = 0; i < formats.length; i++) {
                 format = formats[i]
                 if (~["mp4"].indexOf(format["ext"]) && ~[720].indexOf(format["height"])) {
@@ -213,7 +213,6 @@ AbstractPage {
                     urls["720"] = format["url"]
                 }
             }
-            console.log("checking on format_id")
             for (i = 0; i < formats.length; i++) {
                 format = formats[i]
                 // mp4-mobile: 360p (streamable.com)
@@ -230,7 +229,6 @@ AbstractPage {
                     urls["720"] = format["url"]
                 }
             }
-            console.log("checking on vcodec")
             for (i = 0; i < formats.length; i++) {
                 format = formats[i]
                 // avc1.42001e: 320p/288p (v.redd.it)
@@ -262,11 +260,19 @@ AbstractPage {
             } else {
                 mediaPlayer.source = urls["720"] !== undefined ? urls["720"] : urls["360"] !== undefined ? urls["360"] : urls["other"]
             }
+
+            if (mediaPlayer.source === undefined)
+                fail(qsTr("Problem finding stream URL"))
         }
 
         onError: {
             error = true
-            infoBanner.warning(qsTr("Problem finding stream URL"));
+            infoBanner.warning(qsTr("youtube-dl error: %1").arg(traceback));
+        }
+
+        onFail: {
+            error = true
+            infoBanner.warning(reason);
         }
 
     }

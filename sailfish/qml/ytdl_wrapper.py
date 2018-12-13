@@ -31,9 +31,12 @@ def setDownloadDir(dir):
     downloaddir = dir
 
 def retrieveVideoInfo(url):
-    logger.debug('retrieveVideoUrl ' + str(url))
-    info = ytdl_info.extract_info(url, download=False)
-    return info
+    try:
+        logger.debug('retrieveVideoUrl ' + str(url))
+        info = ytdl_info.extract_info(url, download=False)
+        return info
+    except youtube_dl.utils.DownloadError as e:
+        pyotherside.send('fail', ','.join(e.args))
 
 def downloadVideo(url):
     logger.debug('downloadVideo ' + str(url))

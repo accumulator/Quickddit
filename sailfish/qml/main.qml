@@ -19,7 +19,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import io.thp.pyotherside 1.3
+import io.thp.pyotherside 1.5
 import harbour.quickddit.Core 1.0
 
 ApplicationWindow {
@@ -31,7 +31,7 @@ ApplicationWindow {
         id: python
 
         signal videoInfo
-        signal error
+        signal fail(string reason)
 
         property variant info
 
@@ -43,6 +43,11 @@ ApplicationWindow {
                 console.log('python: ' + msg)
             })
 
+            setHandler('fail', function(msg) {
+                console.log('fail signal: ' + msg)
+                fail(msg)
+            })
+
             importModule('ytdl_wrapper', function() {})
         }
 
@@ -50,7 +55,6 @@ ApplicationWindow {
             console.log("video url requested " + url)
             call('ytdl_wrapper.retrieveVideoInfo', [url.toString()], function(result) {
                 if (result === undefined) {
-                    error()
                     return;
                 }
 
@@ -62,7 +66,7 @@ ApplicationWindow {
 
         function isUrlSupported(url) {
             // TODO: now simply matches url against our own simple list. We should query YTDL itself.
-            console.log("testing ytdl support for url " + url)
+            //console.log("testing ytdl support for url " + url)
             if (/^https?:\/\/((www|m)\.)?youtube\.com\/.+/.test(url)) {
                 return true;
             } else if (/^https?:\/\/((www|m)\.)?youtu\.be\/.+/.test(url)) {
@@ -75,15 +79,21 @@ ApplicationWindow {
                 return true;
             } else if (/^https?:\/\/(.+\.)?twitch.tv\/.+/.test(url)) {
                 return true;
-            } else if (/^https?:\/\/((www)\.)?vid.me\/.+/.test(url)) {
-                return true;
             } else if (/^https?:\/\/((www)\.)?vimeo.com\/.+/.test(url)) {
                 return true;
             } else if (/^https?:\/\/(www\.)?gfycat\.com\/.+/.test(url)) {
                 return true;
-            } else if (/^https?\:\/\/((i|m)\.)?imgur\.com\/.+\.gifv$/.test(url)) {
+            } else if (/^https?:\/\/((i|m)\.)?imgur\.com\/.+\.gifv$/.test(url)) {
                 return true;
-            } else if (/^https?\:\/\/v\.redd\.it\/.+/.test(url)) {
+            } else if (/^https?:\/\/v\.redd\.it\/.+/.test(url)) {
+                return true;
+            } else if (/^https?:\/\/(www\.)?pornhub\.com\/view_video\.php.+/.test(url)) {
+                return true;
+            } else if (/^https?:\/\/(www\.)?hooktube\.com\/.+/.test(url)) {
+                return true;
+            } else if (/^https?:\/\/(www\.)?dailymotion\.com\/.+/.test(url)) {
+                return true;
+            } else if (/^https?:\/\/(www\.)?bitchute\.com\/.+/.test(url)) {
                 return true;
             } else {
                 return false;
