@@ -301,7 +301,7 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="137"/>
         <source>Thumbnail Link Type Indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Indicateur</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="144"/>
@@ -690,7 +690,7 @@
     <message>
         <location filename="../qml/LinkMenu.qml" line="78"/>
         <source>Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Masquer</translation>
     </message>
 </context>
 <context>
@@ -737,7 +737,7 @@
     <message>
         <location filename="../qml/MainPage.qml" line="148"/>
         <source>Hide link</source>
-        <translation type="unfinished"></translation>
+        <translation>Masquer le lien</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="168"/>
@@ -773,12 +773,12 @@
     <message>
         <location filename="../qml/MessageMenu.qml" line="37"/>
         <source>Reply</source>
-        <translation type="unfinished">Répondre</translation>
+        <translation>Répondre</translation>
     </message>
     <message>
         <location filename="../qml/MessageMenu.qml" line="43"/>
         <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <location filename="../qml/MessageMenu.qml" line="49"/>
@@ -827,7 +827,7 @@
     <message>
         <location filename="../qml/MessagePage.qml" line="40"/>
         <source>Username Mentions</source>
-        <translation type="unfinished"></translation>
+        <translation>Mentions</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="49"/>
@@ -848,7 +848,7 @@
     <message>
         <location filename="../qml/MessagePage.qml" line="87"/>
         <source>Deleting message</source>
-        <translation type="unfinished"></translation>
+        <translation>Suppression du message</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="131"/>
@@ -1426,6 +1426,11 @@
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
+        <source>Popular</source>
+        <translation>Populaire</translation>
+    </message>
+    <message>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>All</source>
         <translation>Tous</translation>
     </message>
@@ -1438,11 +1443,6 @@
         <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Multireddits</source>
         <translation>Multireddits</translation>
-    </message>
-    <message>
-        <location filename="../qml/SubredditsPage.qml" line="114"/>
-        <source>Popular</source>
-        <translation>Populaire</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="135"/>
@@ -1717,7 +1717,7 @@
         <translation>Erreur lors du chargement de la vidéo</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="251"/>
+        <location filename="../qml/VideoViewPage.qml" line="270"/>
         <source>Problem finding stream URL</source>
         <translation>Problème pour trouver l&apos;URL de flux</translation>
     </message>

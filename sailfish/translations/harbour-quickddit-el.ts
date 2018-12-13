@@ -1426,6 +1426,11 @@
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
+        <source>Popular</source>
+        <translation>Δημοφιλή</translation>
+    </message>
+    <message>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>All</source>
         <translation>Όλα</translation>
     </message>
@@ -1438,11 +1443,6 @@
         <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Multireddits</source>
         <translation>Πολλαπλά reddit</translation>
-    </message>
-    <message>
-        <location filename="../qml/SubredditsPage.qml" line="114"/>
-        <source>Popular</source>
-        <translation>Δημοφιλή</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="135"/>
@@ -1717,7 +1717,7 @@
         <translation>Σφάλμα φόρτωσης του βίντεο</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="251"/>
+        <location filename="../qml/VideoViewPage.qml" line="270"/>
         <source>Problem finding stream URL</source>
         <translation>Πρόβλημα εύρεσης της ροής του URL</translation>
     </message>

@@ -301,7 +301,7 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="137"/>
         <source>Thumbnail Link Type Indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Thumbnail Link Type Indicator</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="144"/>
@@ -690,7 +690,7 @@
     <message>
         <location filename="../qml/LinkMenu.qml" line="78"/>
         <source>Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Hide</translation>
     </message>
 </context>
 <context>
@@ -737,7 +737,7 @@
     <message>
         <location filename="../qml/MainPage.qml" line="148"/>
         <source>Hide link</source>
-        <translation type="unfinished"></translation>
+        <translation>Hide link</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="168"/>
@@ -773,7 +773,7 @@
     <message>
         <location filename="../qml/MessageMenu.qml" line="37"/>
         <source>Reply</source>
-        <translation type="unfinished">Reply</translation>
+        <translation>Reply</translation>
     </message>
     <message>
         <location filename="../qml/MessageMenu.qml" line="43"/>
@@ -827,7 +827,7 @@
     <message>
         <location filename="../qml/MessagePage.qml" line="40"/>
         <source>Username Mentions</source>
-        <translation type="unfinished"></translation>
+        <translation>Username Mentions</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="49"/>
@@ -1426,6 +1426,11 @@
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
+        <source>Popular</source>
+        <translation>Popular</translation>
+    </message>
+    <message>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>All</source>
         <translation>All</translation>
     </message>
@@ -1438,11 +1443,6 @@
         <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Multireddits</source>
         <translation>Multireddits</translation>
-    </message>
-    <message>
-        <location filename="../qml/SubredditsPage.qml" line="114"/>
-        <source>Popular</source>
-        <translation>Popular</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="135"/>
@@ -1717,7 +1717,7 @@
         <translation>Error loading video</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="251"/>
+        <location filename="../qml/VideoViewPage.qml" line="270"/>
         <source>Problem finding stream URL</source>
         <translation>Problem finding stream URL</translation>
     </message>

@@ -1426,6 +1426,11 @@
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
+        <source>Popular</source>
+        <translation>Popolari</translation>
+    </message>
+    <message>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>All</source>
         <translation>Tutti</translation>
     </message>
@@ -1438,11 +1443,6 @@
         <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Multireddits</source>
         <translation>Multireddit</translation>
-    </message>
-    <message>
-        <location filename="../qml/SubredditsPage.qml" line="114"/>
-        <source>Popular</source>
-        <translation>Popolari</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="135"/>
@@ -1717,7 +1717,7 @@
         <translation>Errore nel caricamento del video</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="251"/>
+        <location filename="../qml/VideoViewPage.qml" line="270"/>
         <source>Problem finding stream URL</source>
         <translation>Problema nel trovare l&apos;URL dello stream</translation>
     </message>

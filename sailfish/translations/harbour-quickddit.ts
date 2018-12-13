@@ -1717,7 +1717,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="251"/>
+        <location filename="../qml/VideoViewPage.qml" line="270"/>
         <source>Problem finding stream URL</source>
         <translation type="unfinished"></translation>
     </message>

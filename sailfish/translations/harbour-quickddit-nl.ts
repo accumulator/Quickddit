@@ -301,7 +301,7 @@
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="137"/>
         <source>Thumbnail Link Type Indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijzingstype-indicator voor miniaturen</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="144"/>
@@ -690,7 +690,7 @@
     <message>
         <location filename="../qml/LinkMenu.qml" line="78"/>
         <source>Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbergen</translation>
     </message>
 </context>
 <context>
@@ -737,7 +737,7 @@
     <message>
         <location filename="../qml/MainPage.qml" line="148"/>
         <source>Hide link</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijzing verbergen</translation>
     </message>
     <message>
         <location filename="../qml/MainPage.qml" line="168"/>
@@ -773,7 +773,7 @@
     <message>
         <location filename="../qml/MessageMenu.qml" line="37"/>
         <source>Reply</source>
-        <translation type="unfinished">Reageren</translation>
+        <translation>Reageren</translation>
     </message>
     <message>
         <location filename="../qml/MessageMenu.qml" line="43"/>
@@ -827,7 +827,7 @@
     <message>
         <location filename="../qml/MessagePage.qml" line="40"/>
         <source>Username Mentions</source>
-        <translation type="unfinished"></translation>
+        <translation>Vermeldingen van gebruikersnaam</translation>
     </message>
     <message>
         <location filename="../qml/MessagePage.qml" line="49"/>
@@ -1426,6 +1426,11 @@
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
+        <source>Popular</source>
+        <translation>Populair</translation>
+    </message>
+    <message>
+        <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>All</source>
         <translation>Alles</translation>
     </message>
@@ -1438,11 +1443,6 @@
         <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Multireddits</source>
         <translation>Multireddits</translation>
-    </message>
-    <message>
-        <location filename="../qml/SubredditsPage.qml" line="114"/>
-        <source>Popular</source>
-        <translation>Populair</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="135"/>
@@ -1717,7 +1717,7 @@
         <translation>Fout bij laden van video</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="251"/>
+        <location filename="../qml/VideoViewPage.qml" line="270"/>
         <source>Problem finding stream URL</source>
         <translation>Kon stream-URL niet vinden</translation>
     </message>
