@@ -51,11 +51,6 @@ ContextMenu {
         onClicked: linkVoteManager.vote(link.fullname, VoteManager.Unvote)
     }
     MenuItem {
-        text: qsTr("View image")
-        visible: globalUtils.previewableImage(link.url)
-        onClicked: globalUtils.openImageViewPage(link.url);
-    }
-    MenuItem {
         text: qsTr("Save")
         visible: !link.saved
         onClicked: linkSaveManager.save(link.fullname)
