@@ -43,6 +43,13 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
+                text: qsTr("Search Again")
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("SearchDialog.qml"), {query: searchQuery, subreddit: subreddit});
+                }
+            }
+
+            MenuItem {
                 text: qsTr("Time Range")
                 onClicked: {
                     globalUtils.createSelectionDialog(qsTr("Time Range"), timeRangeModel, searchModel.searchTimeRange,
