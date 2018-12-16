@@ -62,7 +62,7 @@ Image {
     }
 
     Rectangle {
-        color: "black"
+        color: Theme.colorScheme ? "white" : "black"
         opacity: 0.5
         visible: linkTypeIndicator.visible
         width: linkTypeIndicator.width/2
