@@ -23,6 +23,7 @@
 #include <QtGui/QClipboard>
 #include <QNetworkRequest>
 #include <QScreen>
+#include <QDir>
 #include <QDebug>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
@@ -139,6 +140,10 @@ void QMLUtils::saveImage(const QString &url)
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
     QString picturesLocation = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+    QString appPicturesLocation = picturesLocation + QDir::separator() + "Quickddit";
+    QDir targetDir(picturesLocation);
+    if (targetDir.mkpath("Quickddit"))
+        picturesLocation = appPicturesLocation;
 #else
     QString picturesLocation = QDesktopServices::storageLocation(QDesktopServices::PicturesLocation);
 #endif
