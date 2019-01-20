@@ -1389,52 +1389,52 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="100"/>
+        <location filename="../qml/SubredditsPage.qml" line="101"/>
         <source>Go to a specific subreddit</source>
         <translation>Přejděte na konkrétní subreddit</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="114"/>
+        <location filename="../qml/SubredditsPage.qml" line="115"/>
         <source>Front Page</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="114"/>
+        <location filename="../qml/SubredditsPage.qml" line="115"/>
         <source>Popular</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="114"/>
+        <location filename="../qml/SubredditsPage.qml" line="115"/>
         <source>All</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="114"/>
+        <location filename="../qml/SubredditsPage.qml" line="115"/>
         <source>Browse for Subreddits...</source>
         <translation>Hledat subreddity...</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="114"/>
+        <location filename="../qml/SubredditsPage.qml" line="115"/>
         <source>Multireddits</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="135"/>
+        <location filename="../qml/SubredditsPage.qml" line="136"/>
         <source>Subscribed Subreddits</source>
         <translation>Abonnované subreddity</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="154"/>
+        <location filename="../qml/SubredditsPage.qml" line="155"/>
         <source>About</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="160"/>
+        <location filename="../qml/SubredditsPage.qml" line="161"/>
         <source>Unsubscribe</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="223"/>
+        <location filename="../qml/SubredditsPage.qml" line="224"/>
         <source>You have unsubscribed from %1</source>
         <translation>Vy jste se odhlásil od %1</translation>
     </message>
@@ -1676,8 +1676,14 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="251"/>
+        <location filename="../qml/VideoViewPage.qml" line="201"/>
+        <location filename="../qml/VideoViewPage.qml" line="265"/>
         <source>Problem finding stream URL</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../qml/VideoViewPage.qml" line="270"/>
+        <source>youtube-dl error: %1</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -1717,43 +1723,43 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="308"/>
+        <location filename="../qml/main.qml" line="318"/>
         <source>Unsupported reddit url</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="359"/>
+        <location filename="../qml/main.qml" line="369"/>
         <source>Unsupported image url</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="368"/>
+        <location filename="../qml/main.qml" line="378"/>
         <source>Unsupported video url</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="448"/>
+        <location filename="../qml/main.qml" line="458"/>
         <source>Please log in again</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="478"/>
+        <location filename="../qml/main.qml" line="488"/>
         <source> and %1 other</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="487"/>
-        <location filename="../qml/main.qml" line="488"/>
+        <location filename="../qml/main.qml" line="497"/>
+        <location filename="../qml/main.qml" line="498"/>
         <source>Message from %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="498"/>
+        <location filename="../qml/main.qml" line="508"/>
         <source>New message from %1</source>
         <translation type="unfinished"/>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="499"/>
+        <location filename="../qml/main.qml" line="509"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>

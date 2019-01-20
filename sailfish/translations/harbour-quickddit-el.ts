@@ -125,22 +125,22 @@
         <translation>Συντονιστές μηνυμάτων</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="52"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="53"/>
         <source>Unsubscribe</source>
         <translation>Ακύρωση συνδρομής</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="52"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="53"/>
         <source>Subscribe</source>
         <translation>Συνδρομή</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="100"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="101"/>
         <source>This subreddit is Not Safe For Work</source>
         <translation>Αυτό το υπό-reddit δεν είναι ασφαλές στην εργασία (NSFW)</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/AboutSubredditPage.qml" line="116"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="117"/>
         <source>%n subscribers</source>
         <translation>
             <numerusform>%n συνδρομητές</numerusform>
@@ -148,7 +148,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/AboutSubredditPage.qml" line="117"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="118"/>
         <source>%n active users</source>
         <translation>
             <numerusform>%n ενεργοί χρήστες</numerusform>
@@ -156,77 +156,77 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="129"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="130"/>
         <source>Subscribed</source>
         <translation>Με συνδρομή</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="129"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="130"/>
         <source>Not Subscribed</source>
         <translation>Χωρίς συνδρομή</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="134"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="135"/>
         <source>Private</source>
         <translation>Ιδιωτικό</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="135"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="136"/>
         <source>Restricted</source>
         <translation>Με περιορισμούς</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="136"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="137"/>
         <source>GoldRestricted</source>
         <translation>Με χρυσούς περιορισμούς</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="136"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="137"/>
         <source>Archived</source>
         <translation>Αρχειοθετημένο</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="141"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="142"/>
         <source>Links only</source>
         <translation>Μόνον σύνδεσμοι</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="141"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="142"/>
         <source>Self posts only</source>
         <translation>Μόνον προσωπικές αναρτήσεις</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="146"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="147"/>
         <source>NSFW</source>
         <translation>NSFW</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="152"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="153"/>
         <source>Contributor</source>
         <translation>Συντελεστής</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="157"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="158"/>
         <source>Banned</source>
         <translation>Αποκλεισμένος</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="163"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="164"/>
         <source>Mod</source>
         <translation>Συντονιστής</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="169"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="170"/>
         <source>Muted</source>
         <translation>Σε σίγαση</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="199"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="200"/>
         <source>You have subscribed to %1</source>
         <translation>Ενεγράφητε στο %1</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="201"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="202"/>
         <source>You have unsubscribed from %1</source>
         <translation>Ακυρώσατε την συνδρομή από το %1</translation>
     </message>
@@ -561,27 +561,27 @@
         <translation>Ταξινόμηση</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="82"/>
+        <location filename="../qml/CommentPage.qml" line="83"/>
         <source>Add comment</source>
         <translation>Προσθήκη σχολίου</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="92"/>
+        <location filename="../qml/CommentPage.qml" line="93"/>
         <source>Refresh</source>
         <translation>Ανανέωση</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="225"/>
+        <location filename="../qml/CommentPage.qml" line="226"/>
         <source>Viewing a single comment&apos;s thread</source>
         <translation>Προβολή νήματος ενός σχολίου</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="230"/>
+        <location filename="../qml/CommentPage.qml" line="231"/>
         <source>View All Comments</source>
         <translation>Προβολή όλων των σχολίων</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="262"/>
+        <location filename="../qml/CommentPage.qml" line="263"/>
         <source>Deleting comment</source>
         <translation>Διαγραφή σχολίου</translation>
     </message>
@@ -664,31 +664,26 @@
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="54"/>
-        <source>View image</source>
-        <translation>Προβολή εικόνας</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="59"/>
         <source>Save</source>
         <translation>Αποθήκευση</translation>
     </message>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="64"/>
+        <location filename="../qml/LinkMenu.qml" line="60"/>
         <source>Unsave</source>
         <translation>Αναίρεση αποθήκευσης</translation>
     </message>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="69"/>
+        <location filename="../qml/LinkMenu.qml" line="66"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="73"/>
+        <location filename="../qml/LinkMenu.qml" line="70"/>
         <source>Delete</source>
         <translation>Διαγραφή</translation>
     </message>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="78"/>
+        <location filename="../qml/LinkMenu.qml" line="76"/>
         <source>Hide</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1091,18 +1086,23 @@
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="46"/>
-        <location filename="../qml/SearchPage.qml" line="48"/>
+        <source>Search Again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="53"/>
+        <location filename="../qml/SearchPage.qml" line="55"/>
         <source>Time Range</source>
         <translation>Χρονικό διάστημα</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="57"/>
-        <location filename="../qml/SearchPage.qml" line="59"/>
+        <location filename="../qml/SearchPage.qml" line="64"/>
+        <location filename="../qml/SearchPage.qml" line="66"/>
         <source>Sort</source>
         <translation>Ταξινόμηση</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="67"/>
+        <location filename="../qml/SearchPage.qml" line="74"/>
         <source>Refresh</source>
         <translation>Ανανέωση</translation>
     </message>
@@ -1717,9 +1717,15 @@
         <translation>Σφάλμα φόρτωσης του βίντεο</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="270"/>
+        <location filename="../qml/VideoViewPage.qml" line="201"/>
+        <location filename="../qml/VideoViewPage.qml" line="265"/>
         <source>Problem finding stream URL</source>
         <translation>Πρόβλημα εύρεσης της ροής του URL</translation>
+    </message>
+    <message>
+        <location filename="../qml/VideoViewPage.qml" line="270"/>
+        <source>youtube-dl error: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1758,43 +1764,43 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="308"/>
+        <location filename="../qml/main.qml" line="318"/>
         <source>Unsupported reddit url</source>
         <translation>Μη υποστηριζόμενο url reddit</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="359"/>
+        <location filename="../qml/main.qml" line="369"/>
         <source>Unsupported image url</source>
         <translation>Μη υποστηριζόμενο url εικόνας</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="368"/>
+        <location filename="../qml/main.qml" line="378"/>
         <source>Unsupported video url</source>
         <translation>Μη υποστηριζόμενο url βίντεο</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="448"/>
+        <location filename="../qml/main.qml" line="458"/>
         <source>Please log in again</source>
         <translation>Παρακαλώ συνδεθείτε ξανά</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="478"/>
+        <location filename="../qml/main.qml" line="488"/>
         <source> and %1 other</source>
         <translation> και %1 ακόμα</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="487"/>
-        <location filename="../qml/main.qml" line="488"/>
+        <location filename="../qml/main.qml" line="497"/>
+        <location filename="../qml/main.qml" line="498"/>
         <source>Message from %1</source>
         <translation>Μήνυμα από τον/την %1</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="498"/>
+        <location filename="../qml/main.qml" line="508"/>
         <source>New message from %1</source>
         <translation>Νέο μήνυμα από τον/την %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="499"/>
+        <location filename="../qml/main.qml" line="509"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation>

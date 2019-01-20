@@ -125,22 +125,22 @@
         <translation>Napisz do Moderatorów</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="52"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="53"/>
         <source>Unsubscribe</source>
         <translation>Wypisz</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="52"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="53"/>
         <source>Subscribe</source>
         <translation>Subskrybuj</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="100"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="101"/>
         <source>This subreddit is Not Safe For Work</source>
         <translation>Ten subreddit może być nieodpowiedni do przeglądania w pracy.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/AboutSubredditPage.qml" line="116"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="117"/>
         <source>%n subscribers</source>
         <translation>
             <numerusform>%n subskrybent</numerusform>
@@ -149,7 +149,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/AboutSubredditPage.qml" line="117"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="118"/>
         <source>%n active users</source>
         <translation>
             <numerusform>%n aktywny użytkownik</numerusform>
@@ -158,77 +158,77 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="129"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="130"/>
         <source>Subscribed</source>
         <translation>Subskrybujesz</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="129"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="130"/>
         <source>Not Subscribed</source>
         <translation>Nie Subskrybujesz</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="134"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="135"/>
         <source>Private</source>
         <translation>Prywatny</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="135"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="136"/>
         <source>Restricted</source>
         <translation>Zastrzeżony</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="136"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="137"/>
         <source>GoldRestricted</source>
         <translation>Zastrzeżony dla posiadaczy złota</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="136"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="137"/>
         <source>Archived</source>
         <translation>Zarchiwizowany</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="141"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="142"/>
         <source>Links only</source>
         <translation>Tylko linki</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="141"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="142"/>
         <source>Self posts only</source>
         <translation>Tylko posty tekstowe</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="146"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="147"/>
         <source>NSFW</source>
         <translation>NSFW</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="152"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="153"/>
         <source>Contributor</source>
         <translation>Kontrybutor</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="157"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="158"/>
         <source>Banned</source>
         <translation>Zbanowany</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="163"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="164"/>
         <source>Mod</source>
         <translation>Moderator</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="169"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="170"/>
         <source>Muted</source>
         <translation>Wyciszony</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="199"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="200"/>
         <source>You have subscribed to %1</source>
         <translation>Subskrybujesz %1</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="201"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="202"/>
         <source>You have unsubscribed from %1</source>
         <translation>Anulowano subskrypcję %1</translation>
     </message>
@@ -566,27 +566,27 @@
         <translation>Sortuj</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="82"/>
+        <location filename="../qml/CommentPage.qml" line="83"/>
         <source>Add comment</source>
         <translation>Dodaj komentarz</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="92"/>
+        <location filename="../qml/CommentPage.qml" line="93"/>
         <source>Refresh</source>
         <translation>Odśwież</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="225"/>
+        <location filename="../qml/CommentPage.qml" line="226"/>
         <source>Viewing a single comment&apos;s thread</source>
         <translation>Wyświetlanie pojedynczego wątku komentarza</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="230"/>
+        <location filename="../qml/CommentPage.qml" line="231"/>
         <source>View All Comments</source>
         <translation>Wyświetl wszystkie komentarze</translation>
     </message>
     <message>
-        <location filename="../qml/CommentPage.qml" line="262"/>
+        <location filename="../qml/CommentPage.qml" line="263"/>
         <source>Deleting comment</source>
         <translation>Usuwanie komentarza</translation>
     </message>
@@ -669,31 +669,26 @@
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="54"/>
-        <source>View image</source>
-        <translation>Pokaż obraz</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="59"/>
         <source>Save</source>
         <translation>Zapisz</translation>
     </message>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="64"/>
+        <location filename="../qml/LinkMenu.qml" line="60"/>
         <source>Unsave</source>
         <translation>Usuń z zapisanych</translation>
     </message>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="69"/>
+        <location filename="../qml/LinkMenu.qml" line="66"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="73"/>
+        <location filename="../qml/LinkMenu.qml" line="70"/>
         <source>Delete</source>
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="78"/>
+        <location filename="../qml/LinkMenu.qml" line="76"/>
         <source>Hide</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1098,18 +1093,23 @@
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="46"/>
-        <location filename="../qml/SearchPage.qml" line="48"/>
+        <source>Search Again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/SearchPage.qml" line="53"/>
+        <location filename="../qml/SearchPage.qml" line="55"/>
         <source>Time Range</source>
         <translation>Zakres</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="57"/>
-        <location filename="../qml/SearchPage.qml" line="59"/>
+        <location filename="../qml/SearchPage.qml" line="64"/>
+        <location filename="../qml/SearchPage.qml" line="66"/>
         <source>Sort</source>
         <translation>Sortuj</translation>
     </message>
     <message>
-        <location filename="../qml/SearchPage.qml" line="67"/>
+        <location filename="../qml/SearchPage.qml" line="74"/>
         <source>Refresh</source>
         <translation>Odśwież</translation>
     </message>
@@ -1730,9 +1730,15 @@
         <translation>Błąd przy ładowaniu filmu</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="270"/>
+        <location filename="../qml/VideoViewPage.qml" line="201"/>
+        <location filename="../qml/VideoViewPage.qml" line="265"/>
         <source>Problem finding stream URL</source>
         <translation>Problem ze znalezieniem strumienia URL</translation>
+    </message>
+    <message>
+        <location filename="../qml/VideoViewPage.qml" line="270"/>
+        <source>youtube-dl error: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1771,43 +1777,43 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="308"/>
+        <location filename="../qml/main.qml" line="318"/>
         <source>Unsupported reddit url</source>
         <translation>Niewspierany URL reddita</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="359"/>
+        <location filename="../qml/main.qml" line="369"/>
         <source>Unsupported image url</source>
         <translation>Niewspierany URL obrazu</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="368"/>
+        <location filename="../qml/main.qml" line="378"/>
         <source>Unsupported video url</source>
         <translation>Niewspierany URL filmu</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="448"/>
+        <location filename="../qml/main.qml" line="458"/>
         <source>Please log in again</source>
         <translation>Proszę, zaloguj się ponownie</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="478"/>
+        <location filename="../qml/main.qml" line="488"/>
         <source> and %1 other</source>
         <translation>i %1 inny(ch)</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="487"/>
-        <location filename="../qml/main.qml" line="488"/>
+        <location filename="../qml/main.qml" line="497"/>
+        <location filename="../qml/main.qml" line="498"/>
         <source>Message from %1</source>
         <translation>Wiadomość od %1</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="498"/>
+        <location filename="../qml/main.qml" line="508"/>
         <source>New message from %1</source>
         <translation>Nowa wiadomość od %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="499"/>
+        <location filename="../qml/main.qml" line="509"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation>
