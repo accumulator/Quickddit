@@ -205,7 +205,7 @@ AbstractPage {
     Connections {
         target: quickdditManager
         onSignedInChanged: {
-            if (quickdditManager.signedIn) {
+            if (quickdditManager.isSignedIn) {
                 subredditModel.refresh(false)
                 multiredditModel.refresh(false)
             } else {
