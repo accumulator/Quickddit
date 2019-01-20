@@ -5,6 +5,14 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Jan 20 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.2-1
+- fix: subreddits list resetting on OAuth token refresh
+- fix: some menu options wrongly visible/enabled when not logged in
+- chg: remove view image option in link menu
+- chg: save pictures in gallery to Quickddit subfolder
+- chg: some minor white theme polish
+- new: add Search Again menu option
+
 * Thu Dec 13 2018 Sander van Grieken <sander@outrightsolutions.nl> 1.9.1-1
 - fix: issues with most v.redd.it streams, vimeo.com, gfycat.com
 - chg: upgrade youtube-dl to 2018-12-12
