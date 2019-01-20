@@ -43,6 +43,7 @@ AbstractPage {
 
             MenuItem {
                 text: qsTr("Message Moderators")
+                visible: quickdditManager.isSignedIn
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"), {recipient: aboutSubredditManager.url});
                 }

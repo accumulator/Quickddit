@@ -33,31 +33,33 @@ ContextMenu {
 
     MenuItem {
         id: upvoteButton
-        visible: link.likes !== 1
-        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
+        visible: quickdditManager.isSignedIn && link.likes !== 1
+        enabled: !linkVoteManager.busy && !link.isArchived
         text: qsTr("Upvote")
         onClicked: linkVoteManager.vote(link.fullname, VoteManager.Upvote)
     }
     MenuItem {
-        visible: link.likes !== -1
-        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
+        visible: quickdditManager.isSignedIn && link.likes !== -1
+        enabled: !linkVoteManager.busy && !link.isArchived
         text: qsTr("Downvote")
         onClicked: linkVoteManager.vote(link.fullname, VoteManager.Downvote)
     }
     MenuItem {
-        visible: link.likes !== 0
-        enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
+        visible: quickdditManager.isSignedIn && link.likes !== 0
+        enabled: !linkVoteManager.busy && !link.isArchived
         text: qsTr("Unvote")
         onClicked: linkVoteManager.vote(link.fullname, VoteManager.Unvote)
     }
     MenuItem {
         text: qsTr("Save")
-        visible: !link.saved
+        visible: quickdditManager.isSignedIn && !link.saved
+        enabled: !linkVoteManager.busy
         onClicked: linkSaveManager.save(link.fullname)
     }
     MenuItem {
         text: qsTr("Unsave")
-        visible: link.saved
+        visible: quickdditManager.isSignedIn && link.saved
+        enabled: !linkVoteManager.busy
         onClicked: linkSaveManager.unsave(link.fullname)
     }
     MenuItem {
@@ -66,12 +68,14 @@ ContextMenu {
     }
     MenuItem {
         text: qsTr("Delete")
-        visible: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived && link.author === appSettings.redditUsername
+        visible: quickdditManager.isSignedIn && !link.isArchived && link.author === appSettings.redditUsername
+        enabled: !linkVoteManager.busy
         onClicked: deleteLink()
     }
     MenuItem {
         text: qsTr("Hide")
-        visible: quickdditManager.isSignedIn && !linkVoteManager.busy
+        visible: quickdditManager.isSignedIn
+        enabled: !linkVoteManager.busy
         onClicked: hideLink()
     }
 

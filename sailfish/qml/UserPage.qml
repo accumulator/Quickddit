@@ -49,8 +49,8 @@ AbstractPage {
             }
             MenuItem {
                 text: qsTr("Send Message")
-                visible: !myself
-                enabled: !messageManager.busy && quickdditManager.isSignedIn
+                visible: quickdditManager.isSignedIn && !myself
+                enabled: !messageManager.busy
                 onClicked: {
                     var p = {messageManager: messageManager, recipient: username};
                     pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"), p);

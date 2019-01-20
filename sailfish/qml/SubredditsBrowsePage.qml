@@ -90,7 +90,7 @@ AbstractPage {
                     }
                     MenuItem {
                         text: qsTr("Subscribe")
-                        visible: !model.isSubscribed
+                        visible: quickdditManager.isSignedIn && !model.isSubscribed
                         onClicked: {
                             _menusub = model.displayName
                             _action = "subscribed"
@@ -99,7 +99,7 @@ AbstractPage {
                     }
                     MenuItem {
                         text: qsTr("Unsubscribe")
-                        visible: model.isSubscribed
+                        visible: quickdditManager.isSignedIn && model.isSubscribed
                         onClicked: {
                             _menusub = model.displayName
                             _action = "unsubscribed"

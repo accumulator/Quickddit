@@ -78,7 +78,8 @@ AbstractPage {
             }
 
             MenuItem {
-                enabled: quickdditManager.isSignedIn && !commentManager.busy && !link.isArchived && !link.isLocked
+                visible: quickdditManager.isSignedIn
+                enabled: !commentManager.busy && !link.isArchived && !link.isLocked
                 text: qsTr("Add comment")
                 onClicked: {
                     commentModel.showNewComment();
