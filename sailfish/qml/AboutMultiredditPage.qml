@@ -77,8 +77,8 @@ AbstractPage {
                     width: subredditsRepeater.width
                     menu: subredditMenuComponent
                     text: "/r/" + modelData
-                    onClicked: showMenu({subreddit: modelData});
-                    onPressAndHold: showMenu({subreddit: modelData});
+                    onClicked: openMenu({subreddit: modelData});
+                    onPressAndHold: openMenu({subreddit: modelData});
                 }
             }
         }

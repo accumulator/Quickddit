@@ -55,7 +55,7 @@ AbstractDialog {
             selected: selectionDialog.selectedIndex == index
             text: modelData
             showMenuOnPressAndHold: false
-            onPressAndHold: if (index == 3 || index == 4) showMenu({parentItemIndex: index}) // uglyy
+            onPressAndHold: if (index == 3 || index == 4) openMenu({parentItemIndex: index}) // uglyy
 
             onClicked: {
                 selectionDialog.selectedIndex = index;

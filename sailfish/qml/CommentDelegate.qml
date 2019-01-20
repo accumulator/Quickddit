@@ -28,7 +28,7 @@ Item {
     signal clicked
 
     function showMenu(properties) {
-        return mainItem.showMenu(properties);
+        return mainItem.openMenu(properties);
     }
 
     function highlight() {

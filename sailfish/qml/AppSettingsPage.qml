@@ -262,7 +262,7 @@ AbstractPage {
 
             showMenuOnPressAndHold: false
             onClicked: {
-                var dialog = showMenu({item: modelData});
+                var dialog = openMenu({item: modelData});
                 dialog.removeAccount.connect(function() {
                     listItem.remorseAction(qsTr("Remove %1 account").arg(modelData), function() {
                         appSettings.removeAccount(modelData);

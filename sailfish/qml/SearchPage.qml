@@ -86,7 +86,7 @@ AbstractPage {
                 var p = { link: model, linkVoteManager: linkVoteManager };
                 pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);
             }
-            onPressAndHold: showMenu({link: model, linkVoteManager: linkVoteManager});
+            onPressAndHold: openMenu({link: model, linkVoteManager: linkVoteManager});
         }
 
         footer: LoadingFooter { visible: searchModel.busy; listViewItem: searchListView }
