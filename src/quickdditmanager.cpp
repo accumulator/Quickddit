@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015-2018  Sander van Grieken
+    Copyright (C) 2015-2019  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@
 #define REDDIT_OAUTH_SCOPE "read,mysubreddits,subscribe,vote,submit,edit,identity,privatemessages,history,save,flair,report,wikiread"
 
 QuickdditManager::QuickdditManager(QObject *parent) :
-    QObject(parent), m_netManager(new QNetworkAccessManager(this)), m_settings(0),
+    QObject(parent), m_netManager(new QNetworkAccessManager(this)), m_settings(0), m_signedIn(false),
     m_accessTokenRequest(0), m_pendingRequest(0), m_userInfoReply(0)
 {
 }
@@ -64,7 +64,16 @@ void QuickdditManager::setBusy(const bool busy)
 
 bool QuickdditManager::isSignedIn() const
 {
-    return m_settings->hasRefreshToken() && !m_accessToken.isEmpty();
+    return m_signedIn;
+}
+
+void QuickdditManager::setSignedIn(const bool signedIn)
+{
+    if (m_signedIn == signedIn)
+        return;
+
+    m_signedIn = signedIn;
+    emit signedInChanged();
 }
 
 AppSettings *QuickdditManager::settings() const
@@ -217,7 +226,7 @@ void QuickdditManager::signOut()
     m_accessToken.clear();
     m_settings->setRefreshToken(QByteArray());
     m_settings->setRedditUsername(QString());
-    emit signedInChanged();
+    setSignedIn(false);
 }
 
 void QuickdditManager::onAccessTokenRequestFinished(QNetworkReply *reply)
@@ -238,8 +247,8 @@ void QuickdditManager::onAccessTokenRequestFinished(QNetworkReply *reply)
             m_accessTokenExpiry.start();
             if (!refreshToken.isEmpty())
                 m_settings->setRefreshToken(refreshToken.toLatin1());
+            setSignedIn(true);
             emit accessTokenSuccess();
-            emit signedInChanged();
         } else {
             emit accessTokenFailure(0, "Error: access token not found. Please sign in again.");
             qDebug("QuickdditManager::onAccessTokenRequestFinished(): "
@@ -249,9 +258,7 @@ void QuickdditManager::onAccessTokenRequestFinished(QNetworkReply *reply)
         if (reply->error() == QNetworkReply::UnknownContentError || reply->error() == QNetworkReply::ProtocolInvalidOperationError) {
             // something's wrong with the refresh token
             qDebug() << "Bad Request using our refresh token, resetting";
-            m_settings->setRefreshToken(QByteArray());
-            m_settings->setRedditUsername(QString());
-            emit signedInChanged();
+            signOut();
             emit accessTokenFailure(0, "OAuth token invalid, please log in again");
         } else if (reply->error() == QNetworkReply::AuthenticationRequiredError) {
             // missing OAuth app credentials
@@ -259,6 +266,7 @@ void QuickdditManager::onAccessTokenRequestFinished(QNetworkReply *reply)
             emit accessTokenFailure(0, "Application Error. Check the logs");
         } else {
             qDebug() << "onAccessTokenRequestFinished error" << reply->error() << ":" << reply->errorString();
+            signOut();
             emit accessTokenFailure(reply->error(), reply->errorString());
         }
     }

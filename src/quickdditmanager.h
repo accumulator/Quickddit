@@ -35,7 +35,7 @@ class QuickdditManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool isBusy READ isBusy NOTIFY busyChanged)
-    Q_PROPERTY(bool isSignedIn READ isSignedIn NOTIFY signedInChanged)
+    Q_PROPERTY(bool isSignedIn READ isSignedIn WRITE setSignedIn NOTIFY signedInChanged)
     Q_PROPERTY(AppSettings* settings READ settings WRITE setSettings)
 public:
     explicit QuickdditManager(QObject *parent = 0);
@@ -44,6 +44,7 @@ public:
     void setBusy(const bool busy);
 
     bool isSignedIn() const;
+    void setSignedIn(const bool signedIn);
 
     AppSettings *settings() const;
     void setSettings(AppSettings *settings);
@@ -98,6 +99,7 @@ private:
     AppSettings *m_settings;
 
     bool m_busy;
+    bool m_signedIn;
 
     QString m_state;
     APIRequest *m_accessTokenRequest;
