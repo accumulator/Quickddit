@@ -206,6 +206,9 @@ AbstractPage {
         target: quickdditManager
         onSignedInChanged: {
             if (quickdditManager.isSignedIn) {
+                // only load the list if there is an existing list (otherwise wait for page to activate, see above)
+                if (subredditModel.rowCount() === 0)
+                    return;
                 subredditModel.refresh(false)
                 multiredditModel.refresh(false)
             } else {
