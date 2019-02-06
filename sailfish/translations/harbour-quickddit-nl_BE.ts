@@ -1087,7 +1087,7 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="46"/>
         <source>Search Again</source>
-        <translation type="unfinished"></translation>
+        <translation>Terug zoeken</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="53"/>
@@ -1725,7 +1725,7 @@
     <message>
         <location filename="../qml/VideoViewPage.qml" line="270"/>
         <source>youtube-dl error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>youtube-dl-fout: %1</translation>
     </message>
 </context>
 <context>

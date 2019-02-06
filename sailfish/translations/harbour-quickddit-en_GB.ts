@@ -1087,7 +1087,7 @@
     <message>
         <location filename="../qml/SearchPage.qml" line="46"/>
         <source>Search Again</source>
-        <translation type="unfinished"></translation>
+        <translation>Search Again</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="53"/>
