@@ -92,11 +92,17 @@ AbstractDialog {
 
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
-                visible: kodiClient.canControl && /^https?:\/\/((www|m)\.)?youtube\.com\/watch\?v.+/.test(url)
+                visible: kodiClient.canControl &&
+                         (/^https?:\/\/((www|m)\.)?youtube\.com\/watch\?v.+/.test(url) ||
+                          /^https?:\/\/youtu\.be\/.+/.test(url))
                 width: itemRow.width + 2 * Theme.paddingMedium
 
                 onClicked: {
-                    kodiClient.openUrl(url);
+                    var kodiUrl = url
+                    var linkRe = /^https?:\/\/youtu\.be\/(.+)/.exec(url)
+                    if (linkRe !== null)
+                        kodiUrl = "https://www.youtube.com/watch?v=" + linkRe[1]
+                    kodiClient.openUrl(kodiUrl);
                     openLinkDialog.reject();
                 }
 
