@@ -281,13 +281,13 @@ ApplicationWindow {
                 return;
             }
 
+            var params = {}
+
             if (/^(\/r\/\w+)?\/comments\/\w+/.test(redditLink.path))
                 pushOrReplace(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: url});
             else if (/^\/r\/(\w+)/.test(redditLink.path)) {
                 var path = redditLink.path.split("/");
-                var params = {}
                 params["subreddit"] = path[2];
-
                 if (path[3] === "search") {
                     if (redditLink.queryMap["q"] !== undefined)
                         params["query"] = redditLink.queryMap["q"]
@@ -302,7 +302,6 @@ ApplicationWindow {
                 var username = redditLink.path.split("/")[2];
                 pushOrReplace(Qt.resolvedUrl("UserPage.qml"), {username: username});
             } else if (/^\/message\/compose/.test(redditLink.path)) {
-                var params = {}
                 params["recipient"] = redditLink.queryMap["to"]
                 if (redditLink.queryMap["message"] !== null)
                     params["message"] = redditLink.queryMap["message"]
@@ -310,7 +309,6 @@ ApplicationWindow {
                     params["subject"] = redditLink.queryMap["subject"]
                 pushOrReplace(Qt.resolvedUrl("SendMessagePage.qml"), params);
             } else if (/^\/search/.test(redditLink.path)) {
-                var params = {}
                 if (redditLink.queryMap["q"] !== undefined)
                     params["query"] = redditLink.queryMap["q"]
                 pushOrReplace(Qt.resolvedUrl("SearchDialog.qml"), params);
