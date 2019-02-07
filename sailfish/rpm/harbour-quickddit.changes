@@ -5,6 +5,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Tue Feb 06 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.3-1
+- chg: subreddits list only retrieved when needed
+- chg: upgrade youtube-dl to 2019-02-06
+- chg: update translations
+
 * Sun Jan 20 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.2-1
 - fix: subreddits list resetting on OAuth token refresh
 - fix: some menu options wrongly visible/enabled when not logged in
