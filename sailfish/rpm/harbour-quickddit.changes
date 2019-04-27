@@ -5,7 +5,7 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Tue Feb 06 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.3-1
+* Wed Feb 06 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.3-1
 - chg: subreddits list only retrieved when needed
 - chg: upgrade youtube-dl to 2019-02-06
 - chg: update translations
@@ -50,7 +50,7 @@
 - new: support multiple accounts
 - new: support setting post flair
 
-* Sun Jan 29 2018 Sander van Grieken <sander@outrightsolutions.nl> 1.7.1-1
+* Mon Jan 29 2018 Sander van Grieken <sander@outrightsolutions.nl> 1.7.1-1
 - new: Polish translation (thanks Maciej Wereski!)
 
 * Sat Jan 13 2018 Sander van Grieken <sander@outrightsolutions.nl> 1.7.0-1
@@ -68,7 +68,7 @@
 - new: French translations (thanks Jean-Luc and lutinotmalin!)
 - new: Italian translations (thanks David "zarel" Costa!)
 
-* Fri Dec 14 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.6.3-1
+* Thu Dec 14 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.6.3-1
 - fix: scale icons in user page to device dpi
 - new: add r/popular
 - new: monitor clipboard for reddit links
@@ -122,7 +122,7 @@
 - new: user flair in comments
 - new: disabled captcha, apparently not needed anymore, and API fails
 
-* Sat Apr 30 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.1-1
+* Sun Apr 30 2017 Sander van Grieken <sander@outrightsolutions.nl> 1.5.1-1
 - fix: properly handle large amounts of hidden comments
 - chg: update youtube-dl submodule to latest
 - chg: improve video format selection
