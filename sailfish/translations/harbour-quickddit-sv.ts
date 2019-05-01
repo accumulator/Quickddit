@@ -892,35 +892,35 @@
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="74"/>
-        <location filename="../qml/OpenLinkDialog.qml" line="147"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="153"/>
         <source>Open in browser</source>
         <translation>Öppna i webbläsare</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="78"/>
-        <location filename="../qml/OpenLinkDialog.qml" line="151"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="157"/>
         <source>Launching web browser...</source>
         <translation>Startar webbläsaren...</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="84"/>
-        <location filename="../qml/OpenLinkDialog.qml" line="157"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="163"/>
         <source>Copy URL</source>
         <translation>Kopiera länk</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="87"/>
-        <location filename="../qml/OpenLinkDialog.qml" line="161"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="167"/>
         <source>URL copied to clipboard</source>
         <translation>Länk kopierad till urklipp</translation>
     </message>
     <message>
-        <location filename="../qml/OpenLinkDialog.qml" line="117"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="123"/>
         <source>Open in Kodi</source>
         <translation>Öppna i Kodi</translation>
     </message>
     <message>
-        <location filename="../qml/OpenLinkDialog.qml" line="125"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="131"/>
         <source>Source</source>
         <translation>Källa</translation>
     </message>
@@ -1460,7 +1460,7 @@
         <translation>Avsluta prenumeration</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="223"/>
+        <location filename="../qml/SubredditsPage.qml" line="226"/>
         <source>You have unsubscribed from %1</source>
         <translation>Du har avslutat prenumerationen på %1</translation>
     </message>
@@ -1718,12 +1718,12 @@
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="201"/>
-        <location filename="../qml/VideoViewPage.qml" line="265"/>
+        <location filename="../qml/VideoViewPage.qml" line="269"/>
         <source>Problem finding stream URL</source>
         <translation>Kunde inte hitta strömningslänk</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="270"/>
+        <location filename="../qml/VideoViewPage.qml" line="274"/>
         <source>youtube-dl error: %1</source>
         <translation>youtube-dl-fel: %1</translation>
     </message>
@@ -1764,43 +1764,43 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="318"/>
+        <location filename="../qml/main.qml" line="316"/>
         <source>Unsupported reddit url</source>
         <translation>Reddit-länken stöds inte</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="369"/>
+        <location filename="../qml/main.qml" line="367"/>
         <source>Unsupported image url</source>
         <translation>Bildlänken stöds inte</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="378"/>
+        <location filename="../qml/main.qml" line="376"/>
         <source>Unsupported video url</source>
         <translation>Videolänken stöds inte</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="458"/>
+        <location filename="../qml/main.qml" line="456"/>
         <source>Please log in again</source>
         <translation>Logga in igen</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="488"/>
+        <location filename="../qml/main.qml" line="486"/>
         <source> and %1 other</source>
         <translation> och %1 andra</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="497"/>
-        <location filename="../qml/main.qml" line="498"/>
+        <location filename="../qml/main.qml" line="495"/>
+        <location filename="../qml/main.qml" line="496"/>
         <source>Message from %1</source>
         <translation>Meddelande från %1</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="508"/>
+        <location filename="../qml/main.qml" line="506"/>
         <source>New message from %1</source>
         <translation>Nytt meddelande från %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="509"/>
+        <location filename="../qml/main.qml" line="507"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation>

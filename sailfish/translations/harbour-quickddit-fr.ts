@@ -892,35 +892,35 @@
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="74"/>
-        <location filename="../qml/OpenLinkDialog.qml" line="147"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="153"/>
         <source>Open in browser</source>
         <translation>Ouvrir dans le navigateur</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="78"/>
-        <location filename="../qml/OpenLinkDialog.qml" line="151"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="157"/>
         <source>Launching web browser...</source>
         <translation>Ouverture du navigateur...</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="84"/>
-        <location filename="../qml/OpenLinkDialog.qml" line="157"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="163"/>
         <source>Copy URL</source>
         <translation>Copier l&apos;URL</translation>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="87"/>
-        <location filename="../qml/OpenLinkDialog.qml" line="161"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="167"/>
         <source>URL copied to clipboard</source>
         <translation>URL copiée dans le presse-papier</translation>
     </message>
     <message>
-        <location filename="../qml/OpenLinkDialog.qml" line="117"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="123"/>
         <source>Open in Kodi</source>
         <translation>Ouvrir dans Kodi</translation>
     </message>
     <message>
-        <location filename="../qml/OpenLinkDialog.qml" line="125"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="131"/>
         <source>Source</source>
         <translation>Source</translation>
     </message>
@@ -1460,7 +1460,7 @@
         <translation>Se désabonner</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="223"/>
+        <location filename="../qml/SubredditsPage.qml" line="226"/>
         <source>You have unsubscribed from %1</source>
         <translation>Vous vous êtes désabonné de %1</translation>
     </message>
@@ -1718,12 +1718,12 @@
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="201"/>
-        <location filename="../qml/VideoViewPage.qml" line="265"/>
+        <location filename="../qml/VideoViewPage.qml" line="269"/>
         <source>Problem finding stream URL</source>
         <translation>Problème pour trouver l&apos;URL de flux</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="270"/>
+        <location filename="../qml/VideoViewPage.qml" line="274"/>
         <source>youtube-dl error: %1</source>
         <translation>Erreur YouTube-DL : %1</translation>
     </message>
@@ -1764,43 +1764,43 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="318"/>
+        <location filename="../qml/main.qml" line="316"/>
         <source>Unsupported reddit url</source>
         <translation>URL Reddit non supportée</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="369"/>
+        <location filename="../qml/main.qml" line="367"/>
         <source>Unsupported image url</source>
         <translation>URL Image non supportée</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="378"/>
+        <location filename="../qml/main.qml" line="376"/>
         <source>Unsupported video url</source>
         <translation>URL Vidéo non supportée</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="458"/>
+        <location filename="../qml/main.qml" line="456"/>
         <source>Please log in again</source>
         <translation>Merci de vous connecter à nouveau</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="488"/>
+        <location filename="../qml/main.qml" line="486"/>
         <source> and %1 other</source>
         <translation>et %1 autres</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="497"/>
-        <location filename="../qml/main.qml" line="498"/>
+        <location filename="../qml/main.qml" line="495"/>
+        <location filename="../qml/main.qml" line="496"/>
         <source>Message from %1</source>
         <translation>Message de %1</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="508"/>
+        <location filename="../qml/main.qml" line="506"/>
         <source>New message from %1</source>
         <translation>Nouveau message de %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="509"/>
+        <location filename="../qml/main.qml" line="507"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation>

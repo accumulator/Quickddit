@@ -71,7 +71,7 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="113"/>
         <source>App icon by Andrew Zhilin</source>
-        <translation type="unfinished"/>
+        <translation>Icon aplikace od Andrew Zhilin</translation>
     </message>
     <message>
         <location filename="../qml/AboutPage.qml" line="115"/>
@@ -190,7 +190,7 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="147"/>
         <source>NSFW</source>
-        <translation type="unfinished"/>
+        <translation>NSFW</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="153"/>
