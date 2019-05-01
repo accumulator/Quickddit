@@ -215,6 +215,7 @@ AbstractPage {
             }
             for (i = 0; i < formats.length; i++) {
                 format = formats[i]
+                // selection by format_id
                 // mp4-mobile: 360p (streamable.com)
                 // 18: 360p,mp4,acodec mp4a.40.2,vcodec avc1.42001E (youtube)
                 // 22: 720p,mp4,acodec mp4a.40.2,vcodec avc1.64001F (youtube)
@@ -231,15 +232,13 @@ AbstractPage {
             }
             for (i = 0; i < formats.length; i++) {
                 format = formats[i]
-                // avc1.42001e: 320p/288p (v.redd.it)
-                // avc1.4d001e: 432p (v.redd.it)
-                // avc1.4d001f: 640p/768p (v.redd.it)
-                if (~["avc1.42001e","avc1.4d001e"].indexOf(format["vcodec"])) {
-                    console.log("format selected by vcodec " + format["vcodec"])
+                // selection by vcodec and height (v.redd.it)
+                if (~["avc1.4d401e","avc1.4d401f"].indexOf(format["vcodec"]) && format["height"] <= 480) {
+                    console.log("format selected by vcodec " + format["vcodec"] + " and height " + format["height"] + " <= 480")
                     urls["360"] = format["url"]
                 }
-                if (~["avc1.4d001f"].indexOf(format["format_id"])) {
-                    console.log("format selected by vcodec " + format["vcodec"])
+                if (~["avc1.4d401f"].indexOf(format["vcodec"]) && format["height"] > 480) {
+                    console.log("format selected by vcodec " + format["vcodec"] + " and height " + format["height"] + " > 480")
                     urls["720"] = format["url"]
                 }
             }
@@ -255,9 +254,14 @@ AbstractPage {
                 if (urls["other"] === undefined)
                     urls["other"] = formats[0]["url"]
             }
+
             if (appSettings.preferredVideoSize === AppSettings.VS360) {
+                if (urls["360"] === undefined)
+                    console.log("360p selected but fallback to 720p")
                 mediaPlayer.source = urls["360"] !== undefined ? urls["360"] : urls["720"] !== undefined ? urls["720"] : urls["other"]
             } else {
+                if (urls["720"] === undefined)
+                    console.log("720p selected but fallback to 360p")
                 mediaPlayer.source = urls["720"] !== undefined ? urls["720"] : urls["360"] !== undefined ? urls["360"] : urls["other"]
             }
 
