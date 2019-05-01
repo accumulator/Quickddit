@@ -99,7 +99,7 @@ AbstractPage {
                     color: Theme.highlightColor
                     wrapMode: Text.Wrap
                     text: qsTr("Quickddit - A free and open source Reddit client for mobile phones") +
-                          "\nv" + APP_VERSION
+                          "\nv" + APP_VERSION + "(" + BUILD_VARIANT + ")"
                 }
 
                 Text {

@@ -95,6 +95,7 @@ int main(int argc, char *argv[])
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     view->rootContext()->setContextProperty("APP_VERSION", APP_VERSION);
+    view->rootContext()->setContextProperty("BUILD_VARIANT", BUILD_VARIANT);
 
     QMLUtils qmlUtils;
     view->rootContext()->setContextProperty("QMLUtils", &qmlUtils);

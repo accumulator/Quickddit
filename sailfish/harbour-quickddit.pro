@@ -194,10 +194,12 @@ harbour {
     system(diff rpm/harbour-quickddit-harbour.yaml rpm/harbour-quickddit.yaml || touch main.cpp)
     system(ln -sf harbour-quickddit-harbour.yaml rpm/harbour-quickddit.yaml)
     DEFINES += HARBOUR_COMPLIANCE
+    DEFINES += BUILD_VARIANT=\\\"Harbour\\\"
 } else {
     message("build: Unrestricted")
     system(diff rpm/harbour-quickddit-nonharbour.yaml rpm/harbour-quickddit.yaml || touch main.cpp)
     system(ln -sf harbour-quickddit-nonharbour.yaml rpm/harbour-quickddit.yaml)
+    DEFINES += BUILD_VARIANT=\\\"Standard\\\"
 
     PKGCONFIG += keepalive
 
