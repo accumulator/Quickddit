@@ -5,6 +5,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Wed May 01 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.4-1
+- chg: upgrade youtube-dl to 2019-04-24
+- chg: update selection of v.redd.it streams, unfortunately returns the stream errors :(
+- chg: update translations
+
 * Tue Feb 06 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.3-1
 - chg: subreddits list only retrieved when needed
 - chg: upgrade youtube-dl to 2019-02-06
