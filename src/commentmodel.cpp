@@ -399,10 +399,20 @@ void CommentModel::collapse(int index)
     CommentObject first = m_commentList.at(index);
     int depth = first.depth();
 
+    if (!first.viewId().isEmpty()) {
+        // deny collapse if potential unsaved user input exists
+        // TODO: feedback to user
+        return;
+    }
+
     int itemIndex = index + 1;
     for (; itemIndex < m_commentList.count(); ++itemIndex) {
-        if (m_commentList.at(itemIndex).depth() <= depth) {
+        CommentObject item = m_commentList.at(itemIndex);
+        if (item.depth() <= depth) {
             break;
+        }
+        if (!item.viewId().isEmpty()) {
+            return;
         }
         subtree.append(m_commentList.at(itemIndex)); // reparents?
     }
