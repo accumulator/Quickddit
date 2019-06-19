@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2016  Sander van Grieken
+    Copyright (C) 2016,2019  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@ Row {
     property real itemWidth
 
     signal clicked
+    signal delayedClick
 
     // these get fed from ContextMenu
     property bool down
@@ -62,7 +63,11 @@ Row {
     // first xpos change event is received _after_ we receive the events from
     // the contextmenu, so this is for initialising xpos in those cases.
     function updateXPosFromMenu() {
-        xPos = _contentColumn.mapFromItem(contextMenu, contextMenu.mouseX, contextMenu.mouseY).x;
+        if (contextMenu.listItem) { // if listItem is set, events are produced relative listItem
+            xPos = _contentColumn.mapFromItem(contextMenu.listItem, contextMenu.listItem.mouseX, contextMenu.listItem.mouseY).x;
+        } else {
+            xPos = _contentColumn.mapFromItem(contextMenu, contextMenu.mouseX, contextMenu.mouseY).x;
+        }
     }
 
     onXPosChanged: {
@@ -95,6 +100,7 @@ Row {
 
     onClicked: {
         updateXPosFromMenu();
+        console.log("row clicked, xPos=" + xPos);
         var item = childAt(xPos, 0);
         if (item)
             if (item.enabled)

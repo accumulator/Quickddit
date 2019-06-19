@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2016  Sander van Grieken
+    Copyright (C) 2016,2019  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@ import Sailfish.Silica 1.0
 ContextMenu {
     id: contextMenu
 
+    property ListItem listItem
     property Item _highlightBar
 
     Component.onCompleted: {
@@ -37,10 +38,25 @@ ContextMenu {
             console.log("HighlightBar not found!");
     }
 
-    onPositionChanged: {
-        // propagate x-position since jolla's contextmenu doesn't remember it.
-        if (_highlightedItem && _highlightedItem.hasOwnProperty("xPos"))
-            _highlightedItem.xPos = _contentColumn.mapFromItem(contextMenu, mouse.x, mouse.y).x;
+    // handle positionChanged and released events from the listItem.
+    // this is needed when pressAndHold is used to open the menu, as then the listItem is consuming
+    // all events and we get no positionChanged or released events from the ContextMenu item.
+    Connections {
+        target: listItem ? listItem : null
+        onPositionChanged: {
+            // propagate x-position since jolla's contextmenu doesn't remember it.
+            if (_highlightedItem && _highlightedItem.hasOwnProperty("xPos")) {
+                _highlightedItem.xPos = _contentColumn.mapFromItem(listItem, mouse.x, mouse.y).x;
+            }
+        }
     }
 
+    onPositionChanged: {
+        // propagate x-position since jolla's contextmenu doesn't remember it.
+        if (_highlightedItem && _highlightedItem.hasOwnProperty("xPos")) {
+            _highlightedItem.xPos = _contentColumn.mapFromItem(contextMenu, mouse.x, mouse.y).x;
+        }
+    }
+
+    onPressed: listItem = null
 }

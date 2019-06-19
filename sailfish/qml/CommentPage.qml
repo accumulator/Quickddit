@@ -245,7 +245,7 @@ AbstractPage {
             menu: Component { CommentMenu {} }
 
             onMenuRequested: {
-                var p = {comment: model, post: link, commentVoteManager: commentVoteManager, commentSaveManager: commentSaveManager};
+                var p = {comment: model, post: link, commentVoteManager: commentVoteManager, commentSaveManager: commentSaveManager, listItem: commentDelegate.listItem};
                 var dialog = showMenu(p);
                 dialog.showParent.connect(function() {
                     var parentIndex = commentModel.getParentIndex(index);

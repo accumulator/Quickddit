@@ -25,6 +25,8 @@ Item {
     id: commentDelegate
 
     property alias menu: mainItem.menu
+    property alias listItem: mainItem
+
     signal menuRequested
 
     function showMenu(properties) {
