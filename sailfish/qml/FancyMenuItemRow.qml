@@ -100,7 +100,6 @@ Row {
 
     onClicked: {
         updateXPosFromMenu();
-        console.log("row clicked, xPos=" + xPos);
         var item = childAt(xPos, 0);
         if (item)
             if (item.enabled)
