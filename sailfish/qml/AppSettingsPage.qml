@@ -47,7 +47,7 @@ AbstractPage {
 
             QuickdditPageHeader { title: appSettingsPage.title }
 
-            SectionHeader { text: qsTr("Display") }
+            SectionHeader { text: qsTr("UX") }
 
             ComboBox {
                 label: qsTr("Font Size")
@@ -138,6 +138,14 @@ AbstractPage {
                 checked: appSettings.showLinkType;
                 onCheckedChanged: {
                     appSettings.showLinkType = checked;
+                }
+            }
+
+            TextSwitch {
+                text: qsTr("Comments Tap To Hide")
+                checked: appSettings.commentsTapToHide;
+                onCheckedChanged: {
+                    appSettings.commentsTapToHide = checked;
                 }
             }
 

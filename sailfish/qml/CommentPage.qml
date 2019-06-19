@@ -244,7 +244,7 @@ AbstractPage {
             width: ListView.view.width
             menu: Component { CommentMenu {} }
 
-            onClicked: {
+            onMenuRequested: {
                 var p = {comment: model, post: link, commentVoteManager: commentVoteManager, commentSaveManager: commentSaveManager};
                 var dialog = showMenu(p);
                 dialog.showParent.connect(function() {

@@ -25,7 +25,7 @@ Item {
     id: commentDelegate
 
     property alias menu: mainItem.menu
-    signal clicked
+    signal menuRequested
 
     function showMenu(properties) {
         return mainItem.openMenu(properties);
@@ -98,9 +98,16 @@ Item {
         showMenuOnPressAndHold: false
         visible: moreChildrenLoader.status == Loader.Null || model.view === "reply"
 
-        onPressAndHold: {
+        onPressAndHold: appSettings.commentsTapToHide ? requestMenu() : collapse(index)
+        onClicked: appSettings.commentsTapToHide ? collapse(index) : requestMenu()
+
+        function collapse(index) {
             commentPage.morechildren_animation = true;
             commentModel.collapse(index)
+        }
+
+        function requestMenu() {
+            commentDelegate.menuRequested()
         }
 
         Rectangle {
@@ -303,8 +310,6 @@ Item {
             }
             source: "image://theme/icon-s-favorite?" + Theme.highlightColor
         }
-
-        onClicked: commentDelegate.clicked();
     }
 
     Rectangle {

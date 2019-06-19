@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015-2018  Sander van Grieken
+    Copyright (C) 2015-2019  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 AppSettings::AppSettings(QObject *parent) :
     QObject(parent), m_settings(new QSettings(this))
 {
-    m_whiteTheme = m_settings->value("whiteTheme", false).toBool();
+    m_commentsTapToHide = m_settings->value("commentsTapToHide", false).toBool();
     m_fontSize = static_cast<FontSize>(m_settings->value("fontSize", AppSettings::SmallFontSize).toInt());
     m_redditUsername = m_settings->value("redditUsername").toString();
     m_refreshToken = m_settings->value("refreshToken").toByteArray();
@@ -65,19 +65,24 @@ AppSettings::AppSettings(QObject *parent) :
         initial_accounts.append(data);
         setAccounts(initial_accounts);
     }
+
+    // set default commentsTapToHide to true if we can determine the user is new to the app
+    if (m_settings->allKeys().isEmpty()) {
+        setCommentsTapToHide(true);
+    }
 }
 
-bool AppSettings::whiteTheme() const
+bool AppSettings::commentsTapToHide() const
 {
-    return m_whiteTheme;
+    return m_commentsTapToHide;
 }
 
-void AppSettings::setWhiteTheme(bool whiteTheme)
+void AppSettings::setCommentsTapToHide(bool commentsTapToHide)
 {
-    if (m_whiteTheme != whiteTheme) {
-        m_whiteTheme = whiteTheme;
-        m_settings->setValue("whiteTheme", m_whiteTheme);
-        emit whiteThemeChanged();
+    if (m_commentsTapToHide != commentsTapToHide) {
+        m_commentsTapToHide = commentsTapToHide;
+        m_settings->setValue("commentsTapToHide", m_commentsTapToHide);
+        emit commentsTapToHideChanged();
     }
 }
 

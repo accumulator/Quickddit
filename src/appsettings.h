@@ -32,7 +32,7 @@ class AppSettings : public QObject
     Q_ENUMS(OrientationProfile)
     Q_ENUMS(ThumbnailScale)
     Q_ENUMS(VideoSize)
-    Q_PROPERTY(bool whiteTheme READ whiteTheme WRITE setWhiteTheme NOTIFY whiteThemeChanged)
+    Q_PROPERTY(bool commentsTapToHide READ commentsTapToHide WRITE setCommentsTapToHide NOTIFY commentsTapToHideChanged)
     Q_PROPERTY(FontSize fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
     Q_PROPERTY(QString redditUsername READ redditUsername NOTIFY usernameChanged)
     Q_PROPERTY(OrientationProfile orientationProfile READ orientationProfile WRITE setOrientationProfile NOTIFY orientationProfileChanged)
@@ -84,8 +84,8 @@ public:
 
     explicit AppSettings(QObject *parent = 0);
 
-    bool whiteTheme() const;
-    void setWhiteTheme(bool whiteTheme);
+    bool commentsTapToHide() const;
+    void setCommentsTapToHide(bool commentsTapToHide);
 
     FontSize fontSize() const;
     void setFontSize(FontSize fontSize);
@@ -138,7 +138,7 @@ public:
     QStringList filteredSubreddits() const;
 
 signals:
-    void whiteThemeChanged();
+    void commentsTapToHideChanged();
     void fontSizeChanged();
     void usernameChanged();
     void orientationProfileChanged();
@@ -156,7 +156,7 @@ signals:
 private:
     QSettings *m_settings;
 
-    bool m_whiteTheme;
+    bool m_commentsTapToHide;
     FontSize m_fontSize;
     QString m_redditUsername;
     QByteArray m_refreshToken;
