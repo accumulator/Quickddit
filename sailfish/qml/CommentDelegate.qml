@@ -363,7 +363,8 @@ Item {
                         if (model.moreChildrenCount > 0) {
                             commentPage.loadMoreChildren(model.index, model.moreChildren);
                         } else {
-                            var clink = QMLUtils.toAbsoluteUrl("/r/" + link.subreddit + "/comments/" + link.fullname.substring(3) + "//" + model.fullname.substring(3))
+                            var clink = QMLUtils.toAbsoluteUrl("/r/" + link.subreddit + "/comments/" + link.fullname.substring(3) +
+                                                               "//" + model.fullname.substring(3) + "?context=0")
                             globalUtils.openLink(clink);
                         }
                     }

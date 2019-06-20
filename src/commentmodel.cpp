@@ -525,6 +525,11 @@ void CommentModel::refresh(bool refreshOlder)
         }
     }
 
+    // set default context query item if link to comment has no context set yet
+    if (m_commentPermalink && !parameters.keys().contains("context")) {
+        parameters.insert("context","5");
+    }
+
     QString relativeUrl = permalinkUrl.path();
     if (!m_commentPermalink && relativeUrl.contains(commentPermalinkRegExp))
         relativeUrl.remove(commentPermalinkRegExp.cap(2));
