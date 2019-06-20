@@ -29,21 +29,9 @@ AbstractPage {
         id: settingFlickable
         anchors.fill: parent
 
-        property bool _completed: false
-
-        Component.onCompleted: _completed = true
-        Binding {
-            // late-bind model as SilicaListView stubbornly positions view at first item otherwise.
-            when: settingFlickable._completed
-            target: settingFlickable
-            property: "model"
-            value: appSettings.accountNames
-        }
-
         header: Column {
             id: settingColumn
-            anchors { left: parent.left; right: parent.right }
-            height: childrenRect.height
+            width: parent.width
 
             QuickdditPageHeader { title: appSettingsPage.title }
 
@@ -60,10 +48,10 @@ AbstractPage {
                     }
                 }
                 menu: ContextMenu {
-                    MenuItem { text: qsTr("Tiny") }
-                    MenuItem { text: qsTr("Small") }
-                    MenuItem { text: qsTr("Medium") }
-                    MenuItem { text: qsTr("Large") }
+                    MenuItem { text: qsTr("Tiny"); font.pixelSize: constant.fontSizeXSmall }
+                    MenuItem { text: qsTr("Small"); font.pixelSize: constant.fontSizeSmall }
+                    MenuItem { text: qsTr("Medium"); font.pixelSize: constant.fontSizeMedium }
+                    MenuItem { text: qsTr("Large"); font.pixelSize: constant.fontSizeLarge }
                 }
                 onCurrentIndexChanged: {
                     switch (currentIndex) {
@@ -207,9 +195,8 @@ AbstractPage {
                 anchors { left: parent.left; right: parent.right }
                 font.pixelSize: constant.fontSizeMedium
                 color: constant.colorLight
-                visible: quickdditManager.isSignedIn
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("Signed in to Reddit as")
+                text: quickdditManager.isSignedIn ? qsTr("Signed in to Reddit as") : qsTr("Not signed in")
             }
 
             Text {
@@ -223,79 +210,36 @@ AbstractPage {
 
             Rectangle {
                 color: "transparent"
-                height: 10
+                height: 20
+                width: 1
             }
 
-            Button {
+            Row {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: quickdditManager.isSignedIn ? qsTr("Sign out") : qsTr("Sign in to Reddit")
-                onClicked: {
-                    if (quickdditManager.isSignedIn) {
-                        quickdditManager.signOut();
-                        infoBanner.alert(qsTr("You have signed out from Reddit"));
-                     } else {
-                        pageStack.push(Qt.resolvedUrl("SignInPage.qml"));
+                spacing: constant.paddingMedium
+
+                Button {
+                    text: quickdditManager.isSignedIn ? qsTr("Sign out") : qsTr("Sign in to Reddit")
+                    onClicked: {
+                        if (quickdditManager.isSignedIn) {
+                            quickdditManager.signOut();
+                            infoBanner.alert(qsTr("You have signed out from Reddit"));
+                         } else {
+                            pageStack.push(Qt.resolvedUrl("SignInPage.qml"));
+                        }
                     }
+                }
+
+                Button {
+                    text: qsTr("Accounts")
+                    onClicked: pageStack.push(Qt.resolvedUrl("AccountsPage.qml"));
                 }
             }
 
             Rectangle {
                 color: "transparent"
-                height: 10
-            }
-        }
-
-        delegate: ListItem {
-            id: listItem
-            enabled: modelData !== appSettings.redditUsername
-
-            Row {
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.leftMargin: constant.paddingMedium
-
-                IconButton {
-                    icon.source: "image://theme/icon-m-person"
-                    highlighted: listItem.highlighted || appSettings.redditUsername === modelData
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-
-                Text {
-                    color: listItem.highlighted || appSettings.redditUsername === modelData ? Theme.highlightColor : constant.colorLight
-                    font.pixelSize: constant.fontSizeLarger
-                    font.bold: true
-                    text: modelData
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-            }
-
-            showMenuOnPressAndHold: false
-            onClicked: {
-                var dialog = openMenu({item: modelData});
-                dialog.removeAccount.connect(function() {
-                    listItem.remorseAction(qsTr("Remove %1 account").arg(modelData), function() {
-                        appSettings.removeAccount(modelData);
-                    })
-                });
-                dialog.activateAccount.connect(function() {
-                    quickdditManager.selectAccount(modelData);
-                });
-            }
-
-            menu: Component {
-                ContextMenu {
-                    property string item
-                    signal removeAccount
-                    signal activateAccount
-
-                    MenuItem {
-                        text: qsTr("Activate")
-                        onClicked: activateAccount()
-                    }
-                    MenuItem {
-                        text: qsTr("Remove")
-                        onClicked: removeAccount()
-                    }
-                }
+                height: constant.paddingLarge
+                width: 1
             }
         }
     }
