@@ -60,11 +60,35 @@ AbstractPage {
 
         header: QuickdditPageHeader { title: multiredditsPage.title }
 
-        delegate: SimpleListItem {
-            text: "/m/" + model.name
+        delegate: ListItem {
+            id: multiredditDelegate
+
             onClicked: {
                 multiredditsPage.multiredditName = model.name;
                 multiredditsPage.accepted();
+            }
+
+            Column {
+                anchors {
+                    left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter
+                    margins: constant.paddingLarge
+                }
+                spacing: constant.paddingSmall
+
+                Row {
+                    Text {
+                        id: titleText
+                        font.pixelSize: constant.fontSizeSmall
+                        color: multiredditDelegate.highlighted ? Theme.highlightColor : constant.colorMid
+                        text: "/m/"
+                    }
+                    Text {
+                        anchors.baseline: titleText.baseline
+                        font.pixelSize: constant.fontSizeMedium
+                        color: multiredditDelegate.highlighted ? Theme.highlightColor : constant.colorLight
+                        text: model.name
+                    }
+                }
             }
         }
 
