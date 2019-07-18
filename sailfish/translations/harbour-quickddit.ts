@@ -102,8 +102,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="136"/>
+        <location filename="../qml/AboutPage.qml" line="139"/>
         <source>Translations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="144"/>
+        <source>Donate!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -613,6 +618,29 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/CommentPage.qml" line="263"/>
         <source>Deleting comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DonatePage</name>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="24"/>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="50"/>
+        <source>Donate via PayPal:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="77"/>
+        <source>Donate via Bitcoin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="95"/>
+        <source>Address copied to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
