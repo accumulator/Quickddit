@@ -5,6 +5,15 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Thu Jul 18 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.5-1
+- fix: don't collapse comment tree if user has active text edit
+- chg: comment nesting level color indicator now more distinct for adjacent levels
+- chg: account selection moved to separate page
+- chg: upgrade youtube-dl to 2019-07-16
+- chg: update translations
+- new: comment tap-to-hide option
+- new: donation info page
+
 * Wed May 01 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.4-1
 - chg: upgrade youtube-dl to 2019-04-24
 - chg: update selection of v.redd.it streams, unfortunately returns the stream errors :(
