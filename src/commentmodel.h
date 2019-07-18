@@ -56,7 +56,8 @@ public:
         IsStickiedRole,
         GildedRole,
         AuthorFlairTextRole,
-        DistinguishedRole
+        DistinguishedRole,
+        LocalDataRole
     };
 
     enum SortType {
@@ -105,7 +106,7 @@ public:
     void refresh(bool refreshOlder);
     Q_INVOKABLE void moreComments(int index, const QVariant &children);
     Q_INVOKABLE int getParentIndex(int index) const;
-    Q_INVOKABLE int getCommentIndex(const QString &comment);
+    Q_INVOKABLE int getCommentIndex(const QString &fullname);
     Q_INVOKABLE void changeLinkLikes(const QString &fullname, int likes);
     Q_INVOKABLE void changeLinkSaved(const QString &fullname, bool saved);
     Q_INVOKABLE void changeLikes(const QString &fullname, int likes);
@@ -114,6 +115,7 @@ public:
     Q_INVOKABLE void expand(const QString &fullname);
     Q_INVOKABLE void setView(const QString &fullname, const QString &view);
     Q_INVOKABLE void showNewComment();
+    Q_INVOKABLE void setLocalData(const QString &fullname, const QVariant &data);
 
 protected:
     QHash<int, QByteArray> customRoleNames() const;

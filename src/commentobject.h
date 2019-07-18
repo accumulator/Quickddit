@@ -22,6 +22,7 @@
 
 #include <QtCore/QExplicitlySharedDataPointer>
 #include <QtCore/QList>
+#include <QVariant>
 
 #include "thing.h"
 
@@ -109,6 +110,9 @@ public:
 
     QString authorFlairText() const;
     void setAuthorFlairText(const QString &authorFlairText);
+
+    QVariant localData() const;
+    void setLocalData(const QVariant &localData);
 
 private:
     QExplicitlySharedDataPointer<CommentObjectData> d;

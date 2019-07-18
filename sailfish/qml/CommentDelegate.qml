@@ -470,13 +470,25 @@ Item {
 
                 Connections {
                     target: commentManager
-                    onSuccess: if (fullname === model.fullname) { commentModel.setView(model.fullname, "") }
+                    onSuccess: if (fullname === model.fullname) {
+                                   commentModel.setView(model.fullname, "")
+                                   commentModel.setLocalData(model.fullname, undefined)
+                               }
                 }
 
-                Component.onCompleted: {
-                    if (model.view === "edit")
-                        editTextArea.text = model.rawBody
+                // save locally entered data when the delegate gets destroyed and restore when it returns in view
+                Component.onDestruction: {
+                    if (["reply","edit"].indexOf(model.view) >= 0) {
+                        commentModel.setLocalData(model.fullname, editTextArea.text)
+                    }
                 }
+                Component.onCompleted: {
+                    if (["reply","edit"].indexOf(model.view) >= 0) {
+                        editTextArea.text = (model.localData !== undefined) ? model.localData
+                                            : model.view === "edit" ? model.rawBody : ""
+                    }
+                }
+
             }
         }
 

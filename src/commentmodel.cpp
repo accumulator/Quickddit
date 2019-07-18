@@ -89,6 +89,7 @@ QHash<int, QByteArray> CommentModel::customRoleNames() const
     roles[IsSavedRole] = "saved";
     roles[AuthorFlairTextRole] = "authorFlairText";
     roles[DistinguishedRole] = "distinguished";
+    roles[LocalDataRole] = "localData";
     return roles;
 }
 
@@ -135,6 +136,7 @@ QVariant CommentModel::data(const QModelIndex &index, int role) const
         default: return NotDistinguished;
         }
     }
+    case LocalDataRole: return (comment.localData());
 
     default:
         qCritical("CommentModel::data(): Invalid role");
@@ -298,10 +300,10 @@ int CommentModel::getParentIndex(int index) const
     return index;
 }
 
-int CommentModel::getCommentIndex(const QString &comment)
+int CommentModel::getCommentIndex(const QString &fullname)
 {
     for (int i = 0; i < m_commentList.count(); ++i) {
-        if (m_commentList.at(i).fullname() == comment) {
+        if (m_commentList.at(i).fullname() == fullname) {
             return i;
         }
     }
@@ -383,6 +385,21 @@ void CommentModel::setView(const QString &fullname, const QString &viewId)
         if (comment.fullname() == fullname) {
             if (comment.viewId() != viewId) {
                 comment.setViewId(viewId);
+                emit dataChanged(index(i), index(i));
+            }
+            break;
+        }
+    }
+}
+
+void CommentModel::setLocalData(const QString &fullname, const QVariant &data)
+{
+    for (int i = 0; i < m_commentList.count(); ++i) {
+        CommentObject comment = m_commentList.at(i);
+
+        if (comment.fullname() == fullname) {
+            if (comment.localData() != data) {
+                comment.setLocalData(data);
                 emit dataChanged(index(i), index(i));
             }
             break;

@@ -50,6 +50,7 @@ public:
     bool stickied;
     int gilded;
     QString authorFlairText;
+    QVariant localData;
 
 private:
     Q_DISABLE_COPY(CommentObjectData)
@@ -307,5 +308,15 @@ QString CommentObject::authorFlairText() const
 void CommentObject::setAuthorFlairText(const QString &authorFlairText)
 {
     d->authorFlairText = authorFlairText;
+}
+
+QVariant CommentObject::localData() const
+{
+    return d->localData;
+}
+
+void CommentObject::setLocalData(const QVariant &localData)
+{
+    d->localData = localData;
 }
 
