@@ -102,9 +102,14 @@
         <translation>Άδεια χρήσης</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="136"/>
+        <location filename="../qml/AboutPage.qml" line="139"/>
         <source>Translations</source>
         <translation>Μεταφράσεις</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="144"/>
+        <source>Donate!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -232,6 +237,36 @@
     </message>
 </context>
 <context>
+    <name>AccountsPage</name>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="25"/>
+        <source>Accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="78"/>
+        <source>Remove %1 account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="95"/>
+        <source>Activate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="99"/>
+        <source>Remove</source>
+        <translation type="unfinished">Αφαίρεση</translation>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="108"/>
+        <source>No known accounts yet.
+
+To add accounts, simply log in. Quickddit will remember succesful logins and list the accounts here</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AppSettingsPage</name>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="26"/>
@@ -239,170 +274,170 @@
         <translation>Ρυθμίσεις εφαρμογής</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="50"/>
-        <source>Display</source>
-        <translation>Εμφάνιση</translation>
+        <location filename="../qml/AppSettingsPage.qml" line="38"/>
+        <source>UX</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="53"/>
+        <location filename="../qml/AppSettingsPage.qml" line="41"/>
         <source>Font Size</source>
         <translation>Μέγεθος γραμματοσειράς</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="63"/>
+        <location filename="../qml/AppSettingsPage.qml" line="51"/>
         <source>Tiny</source>
         <translation>Μικροσκοπική</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="64"/>
+        <location filename="../qml/AppSettingsPage.qml" line="52"/>
         <source>Small</source>
         <translation>Μικρή</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="65"/>
+        <location filename="../qml/AppSettingsPage.qml" line="53"/>
         <source>Medium</source>
         <translation>Μεσαία</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="66"/>
+        <location filename="../qml/AppSettingsPage.qml" line="54"/>
         <source>Large</source>
         <translation>Μεγάλη</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="79"/>
+        <location filename="../qml/AppSettingsPage.qml" line="67"/>
         <source>Device Orientation</source>
         <translation>Προσανατολισμός της συσκευής</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="88"/>
+        <location filename="../qml/AppSettingsPage.qml" line="76"/>
         <source>Automatic</source>
         <translation>Αυτόματο</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="89"/>
+        <location filename="../qml/AppSettingsPage.qml" line="77"/>
         <source>Portrait only</source>
         <translation>Μόνο πορτραίτο</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="90"/>
+        <location filename="../qml/AppSettingsPage.qml" line="78"/>
         <source>Landscape only</source>
         <translation>Μόνο τοπίο</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="102"/>
+        <location filename="../qml/AppSettingsPage.qml" line="90"/>
         <source>Thumbnail Size</source>
         <translation>Μέγεθος εικόνων επισκόπησης</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="115"/>
+        <location filename="../qml/AppSettingsPage.qml" line="103"/>
         <source>Auto</source>
         <translation>Αυτόματο</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="137"/>
+        <location filename="../qml/AppSettingsPage.qml" line="125"/>
         <source>Thumbnail Link Type Indicator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="144"/>
+        <location filename="../qml/AppSettingsPage.qml" line="133"/>
+        <source>Comments Tap To Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="140"/>
         <source>Notifications</source>
         <translation>Ειδοποιήσεις</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="147"/>
+        <location filename="../qml/AppSettingsPage.qml" line="143"/>
         <source>Check Messages</source>
         <translation>Έλεγχος μηνυμάτων</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="155"/>
+        <location filename="../qml/AppSettingsPage.qml" line="151"/>
         <source>Media</source>
         <translation>Πολυμέσα</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="158"/>
+        <location filename="../qml/AppSettingsPage.qml" line="154"/>
         <source>Preferred Video Size</source>
         <translation>Προτιμώμενο μέγεθος βίντεο</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="178"/>
+        <location filename="../qml/AppSettingsPage.qml" line="174"/>
         <source>Loop Videos</source>
         <translation>Αναπαραγωγή βίντεο σε βρόχο</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="185"/>
+        <location filename="../qml/AppSettingsPage.qml" line="181"/>
         <source>Connection</source>
         <translation>Σύνδεση</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="188"/>
+        <location filename="../qml/AppSettingsPage.qml" line="184"/>
         <source>Use Tor</source>
         <translation>Χρήση του Tor</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="189"/>
+        <location filename="../qml/AppSettingsPage.qml" line="185"/>
         <source>When enabled, please make sure Tor is installed and active.</source>
         <translation>Όντας ενεργοποιημένο, σιγουρευτείτε ότι το Tor είναι εγκατεστημένο και ενεργό.</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="196"/>
+        <location filename="../qml/AppSettingsPage.qml" line="192"/>
         <source>Account</source>
         <translation>Λογαριασμός</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="204"/>
+        <location filename="../qml/AppSettingsPage.qml" line="199"/>
         <source>Signed in to Reddit as</source>
         <translation>Έχετε συνδεθεί στο Reddit ως</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="223"/>
+        <location filename="../qml/AppSettingsPage.qml" line="199"/>
+        <source>Not signed in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="222"/>
         <source>Sign out</source>
         <translation>Αποσύνδεση</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="223"/>
+        <location filename="../qml/AppSettingsPage.qml" line="222"/>
         <source>Sign in to Reddit</source>
         <translation>Συνδεθείτε στο Reddit</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="227"/>
+        <location filename="../qml/AppSettingsPage.qml" line="226"/>
         <source>You have signed out from Reddit</source>
         <translation>Έχετε αποσυνδεθεί από το Reddit</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="283"/>
-        <source>Activate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="287"/>
-        <source>Remove</source>
-        <translation type="unfinished">Αφαίρεση</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="267"/>
-        <source>Remove %1 account</source>
+        <location filename="../qml/AppSettingsPage.qml" line="234"/>
+        <source>Accounts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CommentDelegate</name>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="145"/>
+        <location filename="../qml/CommentDelegate.qml" line="154"/>
         <source>Sticky</source>
         <translation>Κολλημένο</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="152"/>
+        <location filename="../qml/CommentDelegate.qml" line="161"/>
         <source>Gilded</source>
         <translation>Επιχρυσωμένο</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="244"/>
+        <location filename="../qml/CommentDelegate.qml" line="253"/>
         <source>[score hidden]</source>
         <translation>[κρυφή καταμέτρηση]</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="245"/>
+        <location filename="../qml/CommentDelegate.qml" line="254"/>
         <source>%n pts</source>
         <translation>
             <numerusform>%n βαθμοί</numerusform>
@@ -410,7 +445,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="353"/>
+        <location filename="../qml/CommentDelegate.qml" line="360"/>
         <source>Load %n hidden comments</source>
         <translation>
             <numerusform>Φόρτωση %n κρυφών σχολίων</numerusform>
@@ -418,12 +453,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="353"/>
+        <location filename="../qml/CommentDelegate.qml" line="360"/>
         <source>Continue this thread</source>
         <translation>Συνέχιση του νήματος</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="387"/>
+        <location filename="../qml/CommentDelegate.qml" line="395"/>
         <source>Show %n collapsed comments</source>
         <translation>
             <numerusform>Εμφάνιση %n συνεπτυγμένων σχολίων</numerusform>
@@ -431,37 +466,37 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="416"/>
+        <location filename="../qml/CommentDelegate.qml" line="424"/>
         <source>Editing Comment</source>
         <translation>Επεξεργασία σχολίου</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="417"/>
+        <location filename="../qml/CommentDelegate.qml" line="425"/>
         <source>Comment Reply</source>
         <translation>Σχόλιο απάντησης</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="418"/>
+        <location filename="../qml/CommentDelegate.qml" line="426"/>
         <source>New Comment</source>
         <translation>Νέο σχόλιο</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="430"/>
+        <location filename="../qml/CommentDelegate.qml" line="438"/>
         <source>Enter your reply here...</source>
         <translation>Εισαγάγετε την απάντησή σας εδώ...</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="430"/>
+        <location filename="../qml/CommentDelegate.qml" line="438"/>
         <source>Enter your new comment here...</source>
         <translation>Εισαγάγετε το νέο σας σχόλιο εδώ...</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="448"/>
+        <location filename="../qml/CommentDelegate.qml" line="456"/>
         <source>Save</source>
         <translation>Αποθήκευση</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="448"/>
+        <location filename="../qml/CommentDelegate.qml" line="456"/>
         <source>Add</source>
         <translation>Προσθήκη</translation>
     </message>
@@ -584,6 +619,29 @@
         <location filename="../qml/CommentPage.qml" line="263"/>
         <source>Deleting comment</source>
         <translation>Διαγραφή σχολίου</translation>
+    </message>
+</context>
+<context>
+    <name>DonatePage</name>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="24"/>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="50"/>
+        <source>Donate via PayPal:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="77"/>
+        <source>Donate via Bitcoin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="95"/>
+        <source>Address copied to clipboard</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -878,7 +936,7 @@
         <translation>Ανανέωση</translation>
     </message>
     <message>
-        <location filename="../qml/MultiredditsPage.qml" line="73"/>
+        <location filename="../qml/MultiredditsPage.qml" line="97"/>
         <source>Nothing here :(</source>
         <translation>Δεν υπάρχει τίποτα εδώ :(</translation>
     </message>

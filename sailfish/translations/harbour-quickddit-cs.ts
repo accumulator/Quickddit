@@ -100,9 +100,14 @@
         <translation>Licence</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="136"/>
+        <location filename="../qml/AboutPage.qml" line="139"/>
         <source>Translations</source>
         <translation>Překlady</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="144"/>
+        <source>Donate!</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -224,6 +229,36 @@
     </message>
 </context>
 <context>
+    <name>AccountsPage</name>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="25"/>
+        <source>Accounts</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="78"/>
+        <source>Remove %1 account</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="95"/>
+        <source>Activate</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="99"/>
+        <source>Remove</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="108"/>
+        <source>No known accounts yet.
+
+To add accounts, simply log in. Quickddit will remember succesful logins and list the accounts here</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>AppSettingsPage</name>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="26"/>
@@ -231,220 +266,220 @@
         <translation>Nastavení aplikace</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="50"/>
-        <source>Display</source>
-        <translation>Displej</translation>
+        <location filename="../qml/AppSettingsPage.qml" line="38"/>
+        <source>UX</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="53"/>
+        <location filename="../qml/AppSettingsPage.qml" line="41"/>
         <source>Font Size</source>
         <translation>Velikost písma</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="63"/>
+        <location filename="../qml/AppSettingsPage.qml" line="51"/>
         <source>Tiny</source>
         <translation>Drobný</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="64"/>
+        <location filename="../qml/AppSettingsPage.qml" line="52"/>
         <source>Small</source>
         <translation>Malý</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="65"/>
+        <location filename="../qml/AppSettingsPage.qml" line="53"/>
         <source>Medium</source>
         <translation>Střední</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="66"/>
+        <location filename="../qml/AppSettingsPage.qml" line="54"/>
         <source>Large</source>
         <translation>Velký</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="79"/>
+        <location filename="../qml/AppSettingsPage.qml" line="67"/>
         <source>Device Orientation</source>
         <translation>Orientace zařízení</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="88"/>
+        <location filename="../qml/AppSettingsPage.qml" line="76"/>
         <source>Automatic</source>
         <translation>Automatický</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="89"/>
+        <location filename="../qml/AppSettingsPage.qml" line="77"/>
         <source>Portrait only</source>
         <translation>Pouze portrét</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="90"/>
+        <location filename="../qml/AppSettingsPage.qml" line="78"/>
         <source>Landscape only</source>
         <translation>Pouze na šířku</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="102"/>
+        <location filename="../qml/AppSettingsPage.qml" line="90"/>
         <source>Thumbnail Size</source>
         <translation>Velikost miniatur</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="115"/>
+        <location filename="../qml/AppSettingsPage.qml" line="103"/>
         <source>Auto</source>
         <translation>Auto</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="137"/>
+        <location filename="../qml/AppSettingsPage.qml" line="125"/>
         <source>Thumbnail Link Type Indicator</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="144"/>
+        <location filename="../qml/AppSettingsPage.qml" line="133"/>
+        <source>Comments Tap To Hide</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="140"/>
         <source>Notifications</source>
         <translation>Oznámení</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="147"/>
+        <location filename="../qml/AppSettingsPage.qml" line="143"/>
         <source>Check Messages</source>
         <translation>Zkontrolujte zprávy</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="155"/>
+        <location filename="../qml/AppSettingsPage.qml" line="151"/>
         <source>Media</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="158"/>
+        <location filename="../qml/AppSettingsPage.qml" line="154"/>
         <source>Preferred Video Size</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="178"/>
+        <location filename="../qml/AppSettingsPage.qml" line="174"/>
         <source>Loop Videos</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="185"/>
+        <location filename="../qml/AppSettingsPage.qml" line="181"/>
         <source>Connection</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="188"/>
+        <location filename="../qml/AppSettingsPage.qml" line="184"/>
         <source>Use Tor</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="189"/>
+        <location filename="../qml/AppSettingsPage.qml" line="185"/>
         <source>When enabled, please make sure Tor is installed and active.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="196"/>
+        <location filename="../qml/AppSettingsPage.qml" line="192"/>
         <source>Account</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="204"/>
+        <location filename="../qml/AppSettingsPage.qml" line="199"/>
         <source>Signed in to Reddit as</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="223"/>
+        <location filename="../qml/AppSettingsPage.qml" line="199"/>
+        <source>Not signed in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="222"/>
         <source>Sign out</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="223"/>
+        <location filename="../qml/AppSettingsPage.qml" line="222"/>
         <source>Sign in to Reddit</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="227"/>
+        <location filename="../qml/AppSettingsPage.qml" line="226"/>
         <source>You have signed out from Reddit</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="283"/>
-        <source>Activate</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="287"/>
-        <source>Remove</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="267"/>
-        <source>Remove %1 account</source>
+        <location filename="../qml/AppSettingsPage.qml" line="234"/>
+        <source>Accounts</source>
         <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>CommentDelegate</name>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="145"/>
+        <location filename="../qml/CommentDelegate.qml" line="154"/>
         <source>Sticky</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="152"/>
+        <location filename="../qml/CommentDelegate.qml" line="161"/>
         <source>Gilded</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="244"/>
+        <location filename="../qml/CommentDelegate.qml" line="253"/>
         <source>[score hidden]</source>
         <translation type="unfinished"/>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="245"/>
+        <location filename="../qml/CommentDelegate.qml" line="254"/>
         <source>%n pts</source>
         <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="353"/>
+        <location filename="../qml/CommentDelegate.qml" line="360"/>
         <source>Load %n hidden comments</source>
         <translation><numerusform>Naplnit %n skrytý komentář</numerusform><numerusform>Naplnit %n skryté komentáře</numerusform><numerusform>Naplnit %n skrytých komentářů</numerusform><numerusform>Naplnit %n skrytých komentářů</numerusform></translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="353"/>
+        <location filename="../qml/CommentDelegate.qml" line="360"/>
         <source>Continue this thread</source>
         <translation type="unfinished"/>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="387"/>
+        <location filename="../qml/CommentDelegate.qml" line="395"/>
         <source>Show %n collapsed comments</source>
         <translation><numerusform>Zobrazit %n sbalený komentář</numerusform><numerusform>Zobrazit %n sbalené komentáře</numerusform><numerusform>Zobrazit %n sbalených komentářů</numerusform><numerusform>Zobrazit %n sbalených komentářů</numerusform></translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="416"/>
+        <location filename="../qml/CommentDelegate.qml" line="424"/>
         <source>Editing Comment</source>
         <translation>Odpověď na komentář</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="417"/>
+        <location filename="../qml/CommentDelegate.qml" line="425"/>
         <source>Comment Reply</source>
         <translation>Odpověd komentovat</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="418"/>
+        <location filename="../qml/CommentDelegate.qml" line="426"/>
         <source>New Comment</source>
         <translation>Nový komentář</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="430"/>
+        <location filename="../qml/CommentDelegate.qml" line="438"/>
         <source>Enter your reply here...</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="430"/>
+        <location filename="../qml/CommentDelegate.qml" line="438"/>
         <source>Enter your new comment here...</source>
         <translation>Zadejte svůj nový komentář...</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="448"/>
+        <location filename="../qml/CommentDelegate.qml" line="456"/>
         <source>Save</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="448"/>
+        <location filename="../qml/CommentDelegate.qml" line="456"/>
         <source>Add</source>
         <translation type="unfinished"/>
     </message>
@@ -567,6 +602,29 @@
         <location filename="../qml/CommentPage.qml" line="263"/>
         <source>Deleting comment</source>
         <translation>Smazani komentáře</translation>
+    </message>
+</context>
+<context>
+    <name>DonatePage</name>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="24"/>
+        <source>Donate</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="50"/>
+        <source>Donate via PayPal:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="77"/>
+        <source>Donate via Bitcoin:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="95"/>
+        <source>Address copied to clipboard</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -861,7 +919,7 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/MultiredditsPage.qml" line="73"/>
+        <location filename="../qml/MultiredditsPage.qml" line="97"/>
         <source>Nothing here :(</source>
         <translation type="unfinished"/>
     </message>
@@ -875,35 +933,35 @@
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="74"/>
-        <location filename="../qml/OpenLinkDialog.qml" line="147"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="153"/>
         <source>Open in browser</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="78"/>
-        <location filename="../qml/OpenLinkDialog.qml" line="151"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="157"/>
         <source>Launching web browser...</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="84"/>
-        <location filename="../qml/OpenLinkDialog.qml" line="157"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="163"/>
         <source>Copy URL</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/OpenLinkDialog.qml" line="87"/>
-        <location filename="../qml/OpenLinkDialog.qml" line="161"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="167"/>
         <source>URL copied to clipboard</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/OpenLinkDialog.qml" line="117"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="123"/>
         <source>Open in Kodi</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/OpenLinkDialog.qml" line="125"/>
+        <location filename="../qml/OpenLinkDialog.qml" line="131"/>
         <source>Source</source>
         <translation type="unfinished"/>
     </message>
@@ -1434,7 +1492,7 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SubredditsPage.qml" line="223"/>
+        <location filename="../qml/SubredditsPage.qml" line="226"/>
         <source>You have unsubscribed from %1</source>
         <translation>Vy jste se odhlásil od %1</translation>
     </message>
@@ -1677,12 +1735,12 @@
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="201"/>
-        <location filename="../qml/VideoViewPage.qml" line="265"/>
+        <location filename="../qml/VideoViewPage.qml" line="269"/>
         <source>Problem finding stream URL</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="270"/>
+        <location filename="../qml/VideoViewPage.qml" line="274"/>
         <source>youtube-dl error: %1</source>
         <translation type="unfinished"/>
     </message>
@@ -1723,43 +1781,43 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="318"/>
+        <location filename="../qml/main.qml" line="316"/>
         <source>Unsupported reddit url</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="369"/>
+        <location filename="../qml/main.qml" line="367"/>
         <source>Unsupported image url</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="378"/>
+        <location filename="../qml/main.qml" line="376"/>
         <source>Unsupported video url</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="458"/>
+        <location filename="../qml/main.qml" line="456"/>
         <source>Please log in again</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="488"/>
+        <location filename="../qml/main.qml" line="486"/>
         <source> and %1 other</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="497"/>
-        <location filename="../qml/main.qml" line="498"/>
+        <location filename="../qml/main.qml" line="495"/>
+        <location filename="../qml/main.qml" line="496"/>
         <source>Message from %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="508"/>
+        <location filename="../qml/main.qml" line="506"/>
         <source>New message from %1</source>
         <translation type="unfinished"/>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="509"/>
+        <location filename="../qml/main.qml" line="507"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>

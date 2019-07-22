@@ -102,9 +102,14 @@
         <translation>Licentie</translation>
     </message>
     <message>
-        <location filename="../qml/AboutPage.qml" line="136"/>
+        <location filename="../qml/AboutPage.qml" line="139"/>
         <source>Translations</source>
         <translation>Vertalingen</translation>
+    </message>
+    <message>
+        <location filename="../qml/AboutPage.qml" line="144"/>
+        <source>Donate!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -232,6 +237,36 @@
     </message>
 </context>
 <context>
+    <name>AccountsPage</name>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="25"/>
+        <source>Accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="78"/>
+        <source>Remove %1 account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="95"/>
+        <source>Activate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="99"/>
+        <source>Remove</source>
+        <translation type="unfinished">Verwijderen</translation>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="108"/>
+        <source>No known accounts yet.
+
+To add accounts, simply log in. Quickddit will remember succesful logins and list the accounts here</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AppSettingsPage</name>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="26"/>
@@ -239,170 +274,170 @@
         <translation>Instellingen</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="50"/>
-        <source>Display</source>
-        <translation>Weergave</translation>
+        <location filename="../qml/AppSettingsPage.qml" line="38"/>
+        <source>UX</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="53"/>
+        <location filename="../qml/AppSettingsPage.qml" line="41"/>
         <source>Font Size</source>
         <translation>Lettergrootte</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="63"/>
+        <location filename="../qml/AppSettingsPage.qml" line="51"/>
         <source>Tiny</source>
         <translation>Extra klein</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="64"/>
+        <location filename="../qml/AppSettingsPage.qml" line="52"/>
         <source>Small</source>
         <translation>Klein</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="65"/>
+        <location filename="../qml/AppSettingsPage.qml" line="53"/>
         <source>Medium</source>
         <translation>Gemiddeld</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="66"/>
+        <location filename="../qml/AppSettingsPage.qml" line="54"/>
         <source>Large</source>
         <translation>Groot</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="79"/>
+        <location filename="../qml/AppSettingsPage.qml" line="67"/>
         <source>Device Orientation</source>
         <translation>Schermoriëntatie</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="88"/>
+        <location filename="../qml/AppSettingsPage.qml" line="76"/>
         <source>Automatic</source>
         <translation>Automatisch</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="89"/>
+        <location filename="../qml/AppSettingsPage.qml" line="77"/>
         <source>Portrait only</source>
         <translation>Enkel portret</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="90"/>
+        <location filename="../qml/AppSettingsPage.qml" line="78"/>
         <source>Landscape only</source>
         <translation>Enkel landschap</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="102"/>
+        <location filename="../qml/AppSettingsPage.qml" line="90"/>
         <source>Thumbnail Size</source>
         <translation>Miniatuurgrootte</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="115"/>
+        <location filename="../qml/AppSettingsPage.qml" line="103"/>
         <source>Auto</source>
         <translation>Automatisch</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="137"/>
+        <location filename="../qml/AppSettingsPage.qml" line="125"/>
         <source>Thumbnail Link Type Indicator</source>
         <translation>Verwijzingstype-indicator voor miniaturen</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="144"/>
+        <location filename="../qml/AppSettingsPage.qml" line="133"/>
+        <source>Comments Tap To Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="140"/>
         <source>Notifications</source>
         <translation>Meldingen</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="147"/>
+        <location filename="../qml/AppSettingsPage.qml" line="143"/>
         <source>Check Messages</source>
         <translation>Bericht</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="155"/>
+        <location filename="../qml/AppSettingsPage.qml" line="151"/>
         <source>Media</source>
         <translation>Media</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="158"/>
+        <location filename="../qml/AppSettingsPage.qml" line="154"/>
         <source>Preferred Video Size</source>
         <translation>Voorkeursgrootte voor video’s</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="178"/>
+        <location filename="../qml/AppSettingsPage.qml" line="174"/>
         <source>Loop Videos</source>
         <translation>Video’s herhalend afspelen</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="185"/>
+        <location filename="../qml/AppSettingsPage.qml" line="181"/>
         <source>Connection</source>
         <translation>Verbinding</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="188"/>
+        <location filename="../qml/AppSettingsPage.qml" line="184"/>
         <source>Use Tor</source>
         <translation>Tor gebruiken</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="189"/>
+        <location filename="../qml/AppSettingsPage.qml" line="185"/>
         <source>When enabled, please make sure Tor is installed and active.</source>
         <translation>Hiervoor dient Tor geïnstalleerd en actief te zijn.</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="196"/>
+        <location filename="../qml/AppSettingsPage.qml" line="192"/>
         <source>Account</source>
         <translation>Account</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="204"/>
+        <location filename="../qml/AppSettingsPage.qml" line="199"/>
         <source>Signed in to Reddit as</source>
         <translation>Ingelogd bij Reddit als</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="223"/>
+        <location filename="../qml/AppSettingsPage.qml" line="199"/>
+        <source>Not signed in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/AppSettingsPage.qml" line="222"/>
         <source>Sign out</source>
         <translation>Uitloggen</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="223"/>
+        <location filename="../qml/AppSettingsPage.qml" line="222"/>
         <source>Sign in to Reddit</source>
         <translation>Inloggen bij Reddit</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="227"/>
+        <location filename="../qml/AppSettingsPage.qml" line="226"/>
         <source>You have signed out from Reddit</source>
         <translation>Je bent uitgelogd bij Reddit</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="283"/>
-        <source>Activate</source>
-        <translation>Activeren</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="287"/>
-        <source>Remove</source>
-        <translation>Verwijderen</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="267"/>
-        <source>Remove %1 account</source>
-        <translation>Account %1 verwijderen</translation>
+        <location filename="../qml/AppSettingsPage.qml" line="234"/>
+        <source>Accounts</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CommentDelegate</name>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="145"/>
+        <location filename="../qml/CommentDelegate.qml" line="154"/>
         <source>Sticky</source>
         <translation>Kleverig</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="152"/>
+        <location filename="../qml/CommentDelegate.qml" line="161"/>
         <source>Gilded</source>
         <translation>Verguld</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="244"/>
+        <location filename="../qml/CommentDelegate.qml" line="253"/>
         <source>[score hidden]</source>
         <translation>[score verborgen]</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="245"/>
+        <location filename="../qml/CommentDelegate.qml" line="254"/>
         <source>%n pts</source>
         <translation>
             <numerusform>%n pt</numerusform>
@@ -410,7 +445,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="353"/>
+        <location filename="../qml/CommentDelegate.qml" line="360"/>
         <source>Load %n hidden comments</source>
         <translation>
             <numerusform>%n verborgen reactie laden</numerusform>
@@ -418,12 +453,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="353"/>
+        <location filename="../qml/CommentDelegate.qml" line="360"/>
         <source>Continue this thread</source>
         <translation>Verderlezen</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/CommentDelegate.qml" line="387"/>
+        <location filename="../qml/CommentDelegate.qml" line="395"/>
         <source>Show %n collapsed comments</source>
         <translation>
             <numerusform>%n ingevouwen reactie tonen</numerusform>
@@ -431,37 +466,37 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="416"/>
+        <location filename="../qml/CommentDelegate.qml" line="424"/>
         <source>Editing Comment</source>
         <translation>Reactie bewerken</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="417"/>
+        <location filename="../qml/CommentDelegate.qml" line="425"/>
         <source>Comment Reply</source>
         <translation>Reactie op opmerking</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="418"/>
+        <location filename="../qml/CommentDelegate.qml" line="426"/>
         <source>New Comment</source>
         <translation>Nieuwe reactie</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="430"/>
+        <location filename="../qml/CommentDelegate.qml" line="438"/>
         <source>Enter your reply here...</source>
         <translation>Voer je reactie hier in...</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="430"/>
+        <location filename="../qml/CommentDelegate.qml" line="438"/>
         <source>Enter your new comment here...</source>
         <translation>Voer je nieuwe reactie hier in...</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="448"/>
+        <location filename="../qml/CommentDelegate.qml" line="456"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../qml/CommentDelegate.qml" line="448"/>
+        <location filename="../qml/CommentDelegate.qml" line="456"/>
         <source>Add</source>
         <translation>Toevoegen</translation>
     </message>
@@ -584,6 +619,29 @@
         <location filename="../qml/CommentPage.qml" line="263"/>
         <source>Deleting comment</source>
         <translation>Reactie wordt verwijderd</translation>
+    </message>
+</context>
+<context>
+    <name>DonatePage</name>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="24"/>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="50"/>
+        <source>Donate via PayPal:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="77"/>
+        <source>Donate via Bitcoin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/DonatePage.qml" line="95"/>
+        <source>Address copied to clipboard</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -878,7 +936,7 @@
         <translation>Vernieuwen</translation>
     </message>
     <message>
-        <location filename="../qml/MultiredditsPage.qml" line="73"/>
+        <location filename="../qml/MultiredditsPage.qml" line="97"/>
         <source>Nothing here :(</source>
         <translation>Niets te zien :(</translation>
     </message>
