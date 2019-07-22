@@ -5,6 +5,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Mon Jul 22 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.6-1
+- fix: avoid losing comment draft when scrolling (fixes #52)
+- chg: updated translations (swedish again updated superfast, thanks!)
+- new: keepalive now allowed in harbour
+
 * Thu Jul 18 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.5-1
 - fix: don't collapse comment tree if user has active text edit
 - chg: comment nesting level color indicator now more distinct for adjacent levels
