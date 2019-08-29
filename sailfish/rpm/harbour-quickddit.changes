@@ -5,6 +5,12 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Thu Aug 29 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.7-1
+- fix: stream selection for youtube, reddit; avoid adaptive streams.
+- chg: update youtube-dl to 2019-08-13
+- chg: disable vimeo videos for now
+- chg: update translations
+
 * Mon Jul 22 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.6-1
 - fix: avoid losing comment draft when scrolling (fixes #52)
 - chg: updated translations (swedish again updated superfast, thanks!)
