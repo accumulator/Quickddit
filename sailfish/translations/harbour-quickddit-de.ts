@@ -1776,12 +1776,12 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="201"/>
-        <location filename="../qml/VideoViewPage.qml" line="269"/>
+        <location filename="../qml/VideoViewPage.qml" line="271"/>
         <source>Problem finding stream URL</source>
         <translation>Stream URL wurde nicht gefunden</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="274"/>
+        <location filename="../qml/VideoViewPage.qml" line="276"/>
         <source>youtube-dl error: %1</source>
         <translation>Youtube-dll Fehler: %1</translation>
     </message>

@@ -109,7 +109,7 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="144"/>
         <source>Donate!</source>
-        <translation type="unfinished"></translation>
+        <translation>Doneert!</translation>
     </message>
 </context>
 <context>
@@ -142,7 +142,7 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="101"/>
         <source>This subreddit is Not Safe For Work</source>
-        <translation>Deze subreddit is niet geschikt voor op het werk</translation>
+        <translation>Deze subreddit is nie geschikt voor op ’t werk</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/AboutSubredditPage.qml" line="117"/>
@@ -168,7 +168,7 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="130"/>
         <source>Not Subscribed</source>
-        <translation>Niet geabonneerd</translation>
+        <translation>Nie geabonneerd</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="135"/>
@@ -233,7 +233,7 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="202"/>
         <source>You have unsubscribed from %1</source>
-        <translation>Ge zijt niet meer geabonneerd op %1</translation>
+        <translation>Ge zijt nie meer geabonneerd op %1</translation>
     </message>
 </context>
 <context>
@@ -241,29 +241,31 @@
     <message>
         <location filename="../qml/AccountsPage.qml" line="25"/>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Accounts</translation>
     </message>
     <message>
         <location filename="../qml/AccountsPage.qml" line="78"/>
         <source>Remove %1 account</source>
-        <translation type="unfinished"></translation>
+        <translation>Account %1 verwijderen</translation>
     </message>
     <message>
         <location filename="../qml/AccountsPage.qml" line="95"/>
         <source>Activate</source>
-        <translation type="unfinished"></translation>
+        <translation>Activeren</translation>
     </message>
     <message>
         <location filename="../qml/AccountsPage.qml" line="99"/>
         <source>Remove</source>
-        <translation type="unfinished">Verwijderen</translation>
+        <translation>Verwijderen</translation>
     </message>
     <message>
         <location filename="../qml/AccountsPage.qml" line="108"/>
         <source>No known accounts yet.
 
 To add accounts, simply log in. Quickddit will remember succesful logins and list the accounts here</source>
-        <translation type="unfinished"></translation>
+        <translation>Nog geen accounts gekend.
+
+Meld u aan voor accounts toe te voegen. Quickddit gaat uw succesvolle aanmeldingen onthouden en de accounts hier oplijsten</translation>
     </message>
 </context>
 <context>
@@ -276,7 +278,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="38"/>
         <source>UX</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikersinterface</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="41"/>
@@ -341,7 +343,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="133"/>
         <source>Comments Tap To Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Tikken voor commentaren te verbergen</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="140"/>
@@ -361,12 +363,12 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="154"/>
         <source>Preferred Video Size</source>
-        <translation>Voorkeursgrootte voor video’s</translation>
+        <translation>Voorkeursgrootte voor filmkes</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="174"/>
         <source>Loop Videos</source>
-        <translation>Video’s herhalend afspelen</translation>
+        <translation>Filmkes herhalend afspelen</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="181"/>
@@ -396,7 +398,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="199"/>
         <source>Not signed in</source>
-        <translation type="unfinished"></translation>
+        <translation>Nog nie ingelogd</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="222"/>
@@ -416,7 +418,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="234"/>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Accounts</translation>
     </message>
 </context>
 <context>
@@ -626,22 +628,22 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/DonatePage.qml" line="24"/>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>Doneren</translation>
     </message>
     <message>
         <location filename="../qml/DonatePage.qml" line="50"/>
         <source>Donate via PayPal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Doneren via PayPal:</translation>
     </message>
     <message>
         <location filename="../qml/DonatePage.qml" line="77"/>
         <source>Donate via Bitcoin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Doneren via Bitcoin:</translation>
     </message>
     <message>
         <location filename="../qml/DonatePage.qml" line="95"/>
         <source>Address copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Adres gekopieerd naar klembord</translation>
     </message>
 </context>
 <context>
@@ -682,12 +684,12 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../../src/imgurmanager.cpp" line="142"/>
         <source>Unable to get Imgur ID from the url: %1</source>
-        <translation>Kan Imgur-ID niet ophalen van URL: %1</translation>
+        <translation>Kost den Imgur-ID nie ophalen van URL: %1</translation>
     </message>
     <message>
         <location filename="../../src/imgurmanager.cpp" line="175"/>
         <source>Imgur API returns no image</source>
-        <translation>Imgur-API gaf geen afbeelding weer</translation>
+        <translation>Imgur-API heeft geen afbeelding weergegeven</translation>
     </message>
 </context>
 <context>
@@ -728,7 +730,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/LinkMenu.qml" line="60"/>
         <source>Unsave</source>
-        <translation>Niet meer opslaan</translation>
+        <translation>Nie meer opslaan</translation>
     </message>
     <message>
         <location filename="../qml/LinkMenu.qml" line="66"/>
@@ -1120,7 +1122,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/SearchPage.qml" line="32"/>
         <source>This hour</source>
-        <translation>Het voorbije uur</translation>
+        <translation>’t Voorbije uur</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="32"/>
@@ -1130,17 +1132,17 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/SearchPage.qml" line="32"/>
         <source>This week</source>
-        <translation>Deze week</translation>
+        <translation>Passeerde week</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="33"/>
         <source>This month</source>
-        <translation>Deze maand</translation>
+        <translation>Passeerde maand</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="33"/>
         <source>This year</source>
-        <translation>Dit jaar</translation>
+        <translation>Passeerde jaar</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="46"/>
@@ -1520,7 +1522,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/SubredditsPage.qml" line="226"/>
         <source>You have unsubscribed from %1</source>
-        <translation>Ge zijt niet meer geabonneerd op %1</translation>
+        <translation>Ge zijt nie meer geabonneerd op %1</translation>
     </message>
 </context>
 <context>
@@ -1762,7 +1764,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/VideoViewPage.qml" line="26"/>
         <source>Video</source>
-        <translation>Video</translation>
+        <translation>Filmke</translation>
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="39"/>
@@ -1772,16 +1774,16 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/VideoViewPage.qml" line="111"/>
         <source>Error loading video</source>
-        <translation>Fout bij laden van video</translation>
+        <translation>Fout bij laden van filmke</translation>
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="201"/>
-        <location filename="../qml/VideoViewPage.qml" line="269"/>
+        <location filename="../qml/VideoViewPage.qml" line="271"/>
         <source>Problem finding stream URL</source>
-        <translation>Kon stream-URL niet vinden</translation>
+        <translation>Kon stream-URL nie vinden</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="274"/>
+        <location filename="../qml/VideoViewPage.qml" line="276"/>
         <source>youtube-dl error: %1</source>
         <translation>youtube-dl-fout: %1</translation>
     </message>
@@ -1824,17 +1826,17 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/main.qml" line="316"/>
         <source>Unsupported reddit url</source>
-        <translation>Reddit-URL niet ondersteund</translation>
+        <translation>Reddit-URL nie ondersteund</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="367"/>
         <source>Unsupported image url</source>
-        <translation>Afbeeldings-URL niet ondersteund</translation>
+        <translation>Afbeeldings-URL nie ondersteund</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="376"/>
         <source>Unsupported video url</source>
-        <translation>Video-URL niet ondersteund</translation>
+        <translation>Video-URL nie ondersteund</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="456"/>

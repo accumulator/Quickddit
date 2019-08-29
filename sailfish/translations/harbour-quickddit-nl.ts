@@ -109,7 +109,7 @@
     <message>
         <location filename="../qml/AboutPage.qml" line="144"/>
         <source>Donate!</source>
-        <translation type="unfinished"></translation>
+        <translation>Doneer!</translation>
     </message>
 </context>
 <context>
@@ -241,29 +241,31 @@
     <message>
         <location filename="../qml/AccountsPage.qml" line="25"/>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Accounts</translation>
     </message>
     <message>
         <location filename="../qml/AccountsPage.qml" line="78"/>
         <source>Remove %1 account</source>
-        <translation type="unfinished"></translation>
+        <translation>Account %1 verwijderen</translation>
     </message>
     <message>
         <location filename="../qml/AccountsPage.qml" line="95"/>
         <source>Activate</source>
-        <translation type="unfinished"></translation>
+        <translation>Activeren</translation>
     </message>
     <message>
         <location filename="../qml/AccountsPage.qml" line="99"/>
         <source>Remove</source>
-        <translation type="unfinished">Verwijderen</translation>
+        <translation>Verwijderen</translation>
     </message>
     <message>
         <location filename="../qml/AccountsPage.qml" line="108"/>
         <source>No known accounts yet.
 
 To add accounts, simply log in. Quickddit will remember succesful logins and list the accounts here</source>
-        <translation type="unfinished"></translation>
+        <translation>Nog geen accounts bekend.
+
+Meld je aan om accounts toe te voegen. Quickddit zal je succesvolle aanmeldingen onthouden en de accounts hier oplijsten</translation>
     </message>
 </context>
 <context>
@@ -276,7 +278,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="38"/>
         <source>UX</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikersinterface</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="41"/>
@@ -341,7 +343,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="133"/>
         <source>Comments Tap To Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Tikken om reacties te verbergen</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="140"/>
@@ -396,7 +398,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="199"/>
         <source>Not signed in</source>
-        <translation type="unfinished"></translation>
+        <translation>Nog niet ingelogd</translation>
     </message>
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="222"/>
@@ -416,7 +418,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/AppSettingsPage.qml" line="234"/>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Accounts</translation>
     </message>
 </context>
 <context>
@@ -626,22 +628,22 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/DonatePage.qml" line="24"/>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>Doneren</translation>
     </message>
     <message>
         <location filename="../qml/DonatePage.qml" line="50"/>
         <source>Donate via PayPal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Doneren via PayPal:</translation>
     </message>
     <message>
         <location filename="../qml/DonatePage.qml" line="77"/>
         <source>Donate via Bitcoin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Doneren via Bitcoin:</translation>
     </message>
     <message>
         <location filename="../qml/DonatePage.qml" line="95"/>
         <source>Address copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Adres gekopieerd naar klembord</translation>
     </message>
 </context>
 <context>
@@ -1776,12 +1778,12 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="201"/>
-        <location filename="../qml/VideoViewPage.qml" line="269"/>
+        <location filename="../qml/VideoViewPage.qml" line="271"/>
         <source>Problem finding stream URL</source>
         <translation>Kon stream-URL niet vinden</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="274"/>
+        <location filename="../qml/VideoViewPage.qml" line="276"/>
         <source>youtube-dl error: %1</source>
         <translation>youtube-dl-fout: %1</translation>
     </message>
