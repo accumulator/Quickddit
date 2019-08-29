@@ -215,7 +215,7 @@ AbstractPage {
             }
             for (i = 0; i < formats.length; i++) {
                 format = formats[i]
-                // selection by format_id
+                // selection by format_id for youtube, vimeo, streamable
                 // mp4-mobile: 360p (streamable.com)
                 // 18: 360p,mp4,acodec mp4a.40.2,vcodec avc1.42001E (youtube)
                 // 22: 720p,mp4,acodec mp4a.40.2,vcodec avc1.64001F (youtube)
@@ -232,14 +232,16 @@ AbstractPage {
             }
             for (i = 0; i < formats.length; i++) {
                 format = formats[i]
-                // selection by vcodec and height (v.redd.it)
-                if (~["avc1.4d401e","avc1.4d401f"].indexOf(format["vcodec"]) && format["height"] <= 480) {
-                    console.log("format selected by vcodec " + format["vcodec"] + " and height " + format["height"] + " <= 480")
-                    urls["360"] = format["url"]
-                }
-                if (~["avc1.4d401f"].indexOf(format["vcodec"]) && format["height"] > 480) {
-                    console.log("format selected by vcodec " + format["vcodec"] + " and height " + format["height"] + " > 480")
-                    urls["720"] = format["url"]
+                // selection by height if format_id is like hls-*, for v.redd.it (with 'deref' HLS stream by string replace, so prob only works for v.redd.it)
+                if (format["format_id"].indexOf("hls-") !== 0)
+                    continue;
+                // acodec none,vcodec one of avc1.4d001f,avc1.4d001e,avc1.42001e
+                if (format["height"] <= 480) {
+                    console.log("format selected by id " + format["format_id"] + " and height <= 480")
+                    urls["360"] = format["url"].replace("_v4.m3u8",".ts")  // 'deref' by string replace
+                } else {
+                    console.log("format selected by id " + format["format_id"] + " and height > 480")
+                    urls["720"] = format["url"].replace("_v4.m3u8",".ts")  // 'deref' by string replace
                 }
             }
             if (urls["360"] === undefined && urls["720"] === undefined) {
