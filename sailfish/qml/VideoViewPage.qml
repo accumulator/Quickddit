@@ -230,20 +230,23 @@ AbstractPage {
                     urls["720"] = format["url"]
                 }
             }
-            for (i = 0; i < formats.length; i++) {
-                format = formats[i]
-                // selection by height if format_id is like hls-*, for v.redd.it (with 'deref' HLS stream by string replace, so prob only works for v.redd.it)
-                if (format["format_id"].indexOf("hls-") !== 0)
-                    continue;
-                // acodec none,vcodec one of avc1.4d001f,avc1.4d001e,avc1.42001e
-                if (format["height"] <= 480) {
-                    console.log("format selected by id " + format["format_id"] + " and height <= 480")
-                    urls["360"] = format["url"].replace("_v4.m3u8",".ts")  // 'deref' by string replace
-                } else {
-                    console.log("format selected by id " + format["format_id"] + " and height > 480")
-                    urls["720"] = format["url"].replace("_v4.m3u8",".ts")  // 'deref' by string replace
+            if (python.info["extractor"].indexOf("Reddit") === 0)
+                for (i = 0; i < formats.length; i++) {
+                    format = formats[i]
+                    // selection by height if format_id is like hls-*, for v.redd.it (with 'deref' HLS stream by string replace, so only works for v.redd.it)
+                    if (format["format_id"].indexOf("hls-") !== 0)
+                        continue
+                    if (format["height"] === undefined) // audio
+                        continue
+                    // acodec none,vcodec one of avc1.4d001f,avc1.4d001e,avc1.42001e
+                    if (format["height"] <= 480) {
+                        console.log("format selected by id " + format["format_id"] + " and height <= 480")
+                        urls["360"] = format["url"].replace("_v4.m3u8",".ts")  // 'deref' by string replace
+                    } else {
+                        console.log("format selected by id " + format["format_id"] + " and height > 480")
+                        urls["720"] = format["url"].replace("_v4.m3u8",".ts")  // 'deref' by string replace
+                    }
                 }
-            }
             if (urls["360"] === undefined && urls["720"] === undefined) {
                 console.log("fallback, checking on ext=mp4")
                 for (i = 0; i < formats.length; i++) {
