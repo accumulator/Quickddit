@@ -79,8 +79,8 @@ ApplicationWindow {
                 return true;
             } else if (/^https?:\/\/(.+\.)?twitch.tv\/.+/.test(url)) {
                 return true;
-            } else if (/^https?:\/\/((www)\.)?vimeo.com\/.+/.test(url)) {
-                return true;
+//            } else if (/^https?:\/\/((www)\.)?vimeo.com\/.+/.test(url)) {
+//                return true;
             } else if (/^https?:\/\/(www\.)?gfycat\.com\/.+/.test(url)) {
                 return true;
             } else if (/^https?:\/\/((i|m)\.)?imgur\.com\/.+\.gifv$/.test(url)) {
