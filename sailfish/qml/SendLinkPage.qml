@@ -127,7 +127,7 @@ AbstractPage {
                 text: editPost === "" ? qsTr("Submit") : qsTr("Save")
                 anchors.horizontalCenter: parent.horizontalCenter
                 enabled: (editPost != "" || linkTitle.text.length > 0) /* official limits? */
-                         && ((selfLinkSwitch.checked && linkDescription.text.length > 0) || (linkUrl.acceptableInput && flairManager.subredditFlairs.length > 0))
+                         && ((selfLinkSwitch.checked && linkDescription.text.length > 0) || (linkUrl.acceptableInput && flairManager.subredditFlairs.length > 0) || (linkUrl.acceptableInput && linkTitle.text.length > 0))
                 onClicked: submit()
             }
         }
