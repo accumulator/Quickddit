@@ -112,7 +112,7 @@ FancyContextMenu {
     }
     
      MenuItem {
-        visible: !comment.isValid && comment.rawBody === "[removed]"
+        visible: !comment.isValid && (comment.rawBody === "[removed]" || comment.rawBody === "[deleted]")
         text: "Uncensor"
         onClicked: {
                 var link = "https://www.removeddit.com" + post.permalink + comment.fullname.substring(3);
