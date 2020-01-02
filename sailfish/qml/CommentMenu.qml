@@ -110,6 +110,15 @@ FancyContextMenu {
             pageStack.push(Qt.resolvedUrl("UserPage.qml"), { username: comment.author.split(" ")[0] } );
         }
     }
+    
+     MenuItem {
+        visible: !comment.isValid && comment.rawBody === "[removed]"
+        text: "Uncensor"
+        onClicked: {
+                var link = "https://www.removeddit.com" + post.permalink + comment.fullname.substring(3);
+                globalUtils.createOpenLinkDialog(link);
+            }
+        }
 
     Component.onDestruction: {
         if (__showParentAtDestruction)
