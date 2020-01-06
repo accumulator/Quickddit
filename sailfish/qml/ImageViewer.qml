@@ -138,8 +138,8 @@ Item {
 
             // workaround CustomContext::HybrisTexture::bind:313 - Error after glEGLImageTargetTexture2DOES 501
             // animatedimage cannot restrict the source size, which can lead to the above error
-            sourceSize.width: 2048
-            sourceSize.height: 2048
+            sourceSize.width: 4096
+            sourceSize.height: 4096
 
             anchors.centerIn: parent
             asynchronous: true
