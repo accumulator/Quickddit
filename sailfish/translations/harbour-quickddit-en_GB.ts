@@ -708,42 +708,12 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>LinkMenu</name>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="38"/>
-        <source>Upvote</source>
-        <translation>Upvote</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="44"/>
-        <source>Downvote</source>
-        <translation>Downvote</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="50"/>
-        <source>Unvote</source>
-        <translation>Unvote</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="54"/>
-        <source>Save</source>
-        <translation>Save</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="60"/>
-        <source>Unsave</source>
-        <translation>Unsave</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="66"/>
-        <source>URL</source>
-        <translation>URL</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="70"/>
+        <location filename="../qml/LinkMenu.qml" line="79"/>
         <source>Delete</source>
         <translation>Delete</translation>
     </message>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="76"/>
+        <location filename="../qml/LinkMenu.qml" line="85"/>
         <source>Hide</source>
         <translation>Hide</translation>
     </message>
@@ -1238,37 +1208,37 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
         <translation>Edit Post</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="77"/>
+        <location filename="../qml/SendLinkPage.qml" line="79"/>
         <source>Post Title</source>
         <translation>Post Title</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="85"/>
+        <location filename="../qml/SendLinkPage.qml" line="87"/>
         <source>Self Post</source>
         <translation>Self Post</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="92"/>
+        <location filename="../qml/SendLinkPage.qml" line="94"/>
         <source>Post URL</source>
         <translation>Post URL</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="104"/>
+        <location filename="../qml/SendLinkPage.qml" line="106"/>
         <source>Post Text</source>
         <translation>Post Text</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="112"/>
+        <location filename="../qml/SendLinkPage.qml" line="114"/>
         <source>Flair</source>
         <translation>Flair</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="127"/>
+        <location filename="../qml/SendLinkPage.qml" line="129"/>
         <source>Submit</source>
         <translation>Submit</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="127"/>
+        <location filename="../qml/SendLinkPage.qml" line="129"/>
         <source>Save</source>
         <translation>Save</translation>
     </message>
@@ -1778,12 +1748,12 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="201"/>
-        <location filename="../qml/VideoViewPage.qml" line="271"/>
+        <location filename="../qml/VideoViewPage.qml" line="274"/>
         <source>Problem finding stream URL</source>
         <translation>Problem finding stream URL</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="276"/>
+        <location filename="../qml/VideoViewPage.qml" line="279"/>
         <source>youtube-dl error: %1</source>
         <translation>youtube-dl error: %1</translation>
     </message>

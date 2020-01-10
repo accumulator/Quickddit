@@ -708,42 +708,12 @@ Logga in för att lägga till konton. Quickddit kommer ihåg en lyckad inloggnin
 <context>
     <name>LinkMenu</name>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="38"/>
-        <source>Upvote</source>
-        <translation>Rösta upp</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="44"/>
-        <source>Downvote</source>
-        <translation>Rösta ner</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="50"/>
-        <source>Unvote</source>
-        <translation>Ta bort röstning</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="54"/>
-        <source>Save</source>
-        <translation>Spara</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="60"/>
-        <source>Unsave</source>
-        <translation>Ångra spara</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="66"/>
-        <source>URL</source>
-        <translation>Länk</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="70"/>
+        <location filename="../qml/LinkMenu.qml" line="79"/>
         <source>Delete</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="76"/>
+        <location filename="../qml/LinkMenu.qml" line="85"/>
         <source>Hide</source>
         <translation>Dölj</translation>
     </message>
@@ -1238,37 +1208,37 @@ Logga in för att lägga till konton. Quickddit kommer ihåg en lyckad inloggnin
         <translation>Redigera inlägg</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="77"/>
+        <location filename="../qml/SendLinkPage.qml" line="79"/>
         <source>Post Title</source>
         <translation>Inläggsrubrik</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="85"/>
+        <location filename="../qml/SendLinkPage.qml" line="87"/>
         <source>Self Post</source>
         <translation>Egeninlägg</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="92"/>
+        <location filename="../qml/SendLinkPage.qml" line="94"/>
         <source>Post URL</source>
         <translation>Inläggets URL</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="104"/>
+        <location filename="../qml/SendLinkPage.qml" line="106"/>
         <source>Post Text</source>
         <translation>Inläggstext</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="112"/>
+        <location filename="../qml/SendLinkPage.qml" line="114"/>
         <source>Flair</source>
         <translation>Stil</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="127"/>
+        <location filename="../qml/SendLinkPage.qml" line="129"/>
         <source>Submit</source>
         <translation>Skicka</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="127"/>
+        <location filename="../qml/SendLinkPage.qml" line="129"/>
         <source>Save</source>
         <translation>Spara</translation>
     </message>
@@ -1778,12 +1748,12 @@ Logga in för att lägga till konton. Quickddit kommer ihåg en lyckad inloggnin
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="201"/>
-        <location filename="../qml/VideoViewPage.qml" line="271"/>
+        <location filename="../qml/VideoViewPage.qml" line="274"/>
         <source>Problem finding stream URL</source>
         <translation>Kunde inte hitta strömningslänk</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="276"/>
+        <location filename="../qml/VideoViewPage.qml" line="279"/>
         <source>youtube-dl error: %1</source>
         <translation>youtube-dl-fel: %1</translation>
     </message>

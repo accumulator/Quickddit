@@ -711,42 +711,12 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>LinkMenu</name>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="38"/>
-        <source>Upvote</source>
-        <translation>Podbij</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="44"/>
-        <source>Downvote</source>
-        <translation>Obniż</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="50"/>
-        <source>Unvote</source>
-        <translation>Wycofaj głos</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="54"/>
-        <source>Save</source>
-        <translation>Zapisz</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="60"/>
-        <source>Unsave</source>
-        <translation>Usuń z zapisanych</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="66"/>
-        <source>URL</source>
-        <translation>URL</translation>
-    </message>
-    <message>
-        <location filename="../qml/LinkMenu.qml" line="70"/>
+        <location filename="../qml/LinkMenu.qml" line="79"/>
         <source>Delete</source>
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="../qml/LinkMenu.qml" line="76"/>
+        <location filename="../qml/LinkMenu.qml" line="85"/>
         <source>Hide</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1243,37 +1213,37 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
         <translation>Edytuj Post</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="77"/>
+        <location filename="../qml/SendLinkPage.qml" line="79"/>
         <source>Post Title</source>
         <translation>Tytuł Postu</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="85"/>
+        <location filename="../qml/SendLinkPage.qml" line="87"/>
         <source>Self Post</source>
         <translation>Post Tekstowy</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="92"/>
+        <location filename="../qml/SendLinkPage.qml" line="94"/>
         <source>Post URL</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="104"/>
+        <location filename="../qml/SendLinkPage.qml" line="106"/>
         <source>Post Text</source>
         <translation>Tekst Posta</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="112"/>
+        <location filename="../qml/SendLinkPage.qml" line="114"/>
         <source>Flair</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="127"/>
+        <location filename="../qml/SendLinkPage.qml" line="129"/>
         <source>Submit</source>
         <translation>Wyślij</translation>
     </message>
     <message>
-        <location filename="../qml/SendLinkPage.qml" line="127"/>
+        <location filename="../qml/SendLinkPage.qml" line="129"/>
         <source>Save</source>
         <translation>Zapisz</translation>
     </message>
@@ -1789,12 +1759,12 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     </message>
     <message>
         <location filename="../qml/VideoViewPage.qml" line="201"/>
-        <location filename="../qml/VideoViewPage.qml" line="271"/>
+        <location filename="../qml/VideoViewPage.qml" line="274"/>
         <source>Problem finding stream URL</source>
         <translation>Problem ze znalezieniem strumienia URL</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="276"/>
+        <location filename="../qml/VideoViewPage.qml" line="279"/>
         <source>youtube-dl error: %1</source>
         <translation type="unfinished"></translation>
     </message>
