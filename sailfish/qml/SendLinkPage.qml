@@ -46,8 +46,10 @@ AbstractPage {
             if (origText !== text) {
                 linkManager.editLinkText(editPost, text);
             }
-            if (origFlair !== flairManager.subredditFlairs[flairCombo.currentIndex - 1].text) {
-                flairManager.selectFlair(linkManager.commentModel.link.fullname, flairManager.subredditFlairs[flairCombo.currentIndex - 1].id)
+            var newFlair = flairCombo.currentIndex !== 0 ? flairManager.subredditFlairs[flairCombo.currentIndex - 1].text : ""
+            var newFlairId = flairCombo.currentIndex !== 0 ? flairManager.subredditFlairs[flairCombo.currentIndex - 1].id : ""
+            if (origFlair !== newFlair) {
+                flairManager.selectFlair(linkManager.commentModel.link.fullname, newFlairId)
             }
         }
     }
