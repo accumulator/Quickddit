@@ -194,7 +194,7 @@ QList<CommentObject> parseCommentListingJson(const QVariantMap &json, const QStr
 
         if (kind == QLatin1String("t1")) {
             commentFromMap(comment, commentMap);
-            comment.setSubmitter(comment.author() == linkAuthor);
+            comment.setSubmitter(comment.author() == linkAuthor && linkAuthor != "[deleted]");
         } else if (kind == QLatin1String("more")) {
             comment.setFullname(commentMap.value("name").toString());
             comment.setMoreChildrenCount(commentMap.value("count").toInt());
@@ -238,7 +238,7 @@ QList<CommentObject> Parser::parseMoreChildren(const QByteArray &json, const QSt
 
         if (kind == QLatin1String("t1")) {
             commentFromMap(comment, commentMap);
-            comment.setSubmitter(comment.author() == linkAuthor);
+            comment.setSubmitter(comment.author() == linkAuthor && linkAuthor != "[deleted]");
         } else if (kind == QLatin1String("more")) {
             comment.setFullname(commentMap.value("name").toString());
             comment.setMoreChildrenCount(commentMap.value("count").toInt());
