@@ -138,7 +138,7 @@ AbstractPage {
             }
 
             onPressAndHold: {
-                var dialog = openMenu({link: model, linkVoteManager: linkVoteManager, linkSaveManager: linkSaveManager});
+                var dialog = openMenu({link: model, linkVoteManager: linkVoteManager, linkSaveManager: linkSaveManager, listItem: linkDelegate});
                 dialog.deleteLink.connect(function() {
                     linkDelegate.remorseAction(qsTr("Delete link"), function() {
                         linkManager.deleteLink(model.fullname);

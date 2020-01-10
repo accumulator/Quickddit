@@ -21,7 +21,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.quickddit.Core 1.0
 
-ContextMenu {
+FancyContextMenu {
     id: linkMenu
 
     property variant link
@@ -31,41 +31,50 @@ ContextMenu {
     signal deleteLink
     signal hideLink
 
-    MenuItem {
-        id: upvoteButton
-        visible: quickdditManager.isSignedIn && link.likes !== 1
-        enabled: !linkVoteManager.busy && !link.isArchived
-        text: qsTr("Upvote")
-        onClicked: linkVoteManager.vote(link.fullname, VoteManager.Upvote)
+    FancyMenuItemRow {
+        FancyMenuImage {
+            enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
+            highlighted: link.likes === 1
+            icon: "image://theme/icon-m-up"
+            onClicked: linkVoteManager.vote(link.fullname,
+                            link.likes === 1 ? VoteManager.Unvote : VoteManager.Upvote)
+        }
+        FancyMenuImage {
+            enabled: quickdditManager.isSignedIn && !linkVoteManager.busy && !link.isArchived
+            highlighted: link.likes === -1
+            icon: "image://theme/icon-m-down"
+            onClicked: linkVoteManager.vote(link.fullname,
+                            link.likes === -1 ? VoteManager.Unvote : VoteManager.Downvote)
+        }
+        FancyMenuImage {
+            icon: globalUtils.previewableVideo(link.url) ? "image://theme/icon-m-video" :
+                  globalUtils.redditLink(link.url) ? "image://theme/icon-m-forward" :
+                  globalUtils.previewableImage(link.url) ? "image://theme/icon-m-image" :
+                  "image://theme/icon-m-website"
+            enabled: !globalUtils.redditLink(link.url) || link.permalink.indexOf(globalUtils.parseRedditLink(link.url).path) === -1 // self-post, but not this one
+            onClicked: {
+                if (globalUtils.previewableVideo(link.url)) {
+                    globalUtils.openVideoViewPage(link.url);
+                } else if (globalUtils.previewableImage(link.url)) {
+                    globalUtils.openImageViewPage(link.url);
+                } else if (globalUtils.redditLink(link.url)) {
+                    globalUtils.openRedditLink(link.url);
+                } else {
+                    pageStack.push(globalUtils.getWebViewPage(), {url: link.url});
+                }
+            }
+        }
+        FancyMenuImage {
+            icon: "image://theme/icon-m-link"
+            onClicked: globalUtils.openNonPreviewLink(link.url, link.permalink);
+        }
+        FancyMenuImage {
+            enabled: quickdditManager.isSignedIn && !linkSaveManager.busy
+            icon: link.saved ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
+            onClicked: linkSaveManager.save(link.fullname, !link.saved);
+        }
     }
-    MenuItem {
-        visible: quickdditManager.isSignedIn && link.likes !== -1
-        enabled: !linkVoteManager.busy && !link.isArchived
-        text: qsTr("Downvote")
-        onClicked: linkVoteManager.vote(link.fullname, VoteManager.Downvote)
-    }
-    MenuItem {
-        visible: quickdditManager.isSignedIn && link.likes !== 0
-        enabled: !linkVoteManager.busy && !link.isArchived
-        text: qsTr("Unvote")
-        onClicked: linkVoteManager.vote(link.fullname, VoteManager.Unvote)
-    }
-    MenuItem {
-        text: qsTr("Save")
-        visible: quickdditManager.isSignedIn && !link.saved
-        enabled: !linkVoteManager.busy
-        onClicked: linkSaveManager.save(link.fullname)
-    }
-    MenuItem {
-        text: qsTr("Unsave")
-        visible: quickdditManager.isSignedIn && link.saved
-        enabled: !linkVoteManager.busy
-        onClicked: linkSaveManager.unsave(link.fullname)
-    }
-    MenuItem {
-        text: qsTr("URL")
-        onClicked: globalUtils.createOpenLinkDialog(link.url);
-    }
+
     MenuItem {
         text: qsTr("Delete")
         visible: quickdditManager.isSignedIn && !link.isArchived && link.author === appSettings.redditUsername
