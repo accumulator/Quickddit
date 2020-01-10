@@ -5,6 +5,14 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Fri Jan 10 2020 Sander van Grieken <sander@outrightsolutions.nl> 1.9.8-1
+- fix: allow posting links again when a subreddit has no flairs (thanks szopin!)
+- fix: incorrect [S] tag on [deleted] post comments
+- chg: update youtube-dl to 2020-01-01
+- chg: update translations
+- new: use internal webviewer quick view action for previously unhandled URLs
+- new: new context menu in subreddit post list
+
 * Thu Aug 29 2019 Sander van Grieken <sander@outrightsolutions.nl> 1.9.7-1
 - fix: stream selection for youtube, reddit; avoid adaptive streams.
 - chg: update youtube-dl to 2019-08-13
