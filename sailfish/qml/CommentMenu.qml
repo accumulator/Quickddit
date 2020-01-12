@@ -39,14 +39,14 @@ FancyContextMenu {
 
     FancyMenuItemRow {
         FancyMenuImage {
-            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !comment.isArchived
+            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !comment.isArchived && comment.isValid
             highlighted: comment.likes === 1
             icon: "image://theme/icon-m-up"
             onClicked: commentVoteManager.vote(comment.fullname,
                             comment.likes === 1 ? VoteManager.Unvote : VoteManager.Upvote)
         }
         FancyMenuImage {
-            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !comment.isArchived
+            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !comment.isArchived && comment.isValid
             highlighted: comment.likes === -1
             icon: "image://theme/icon-m-down"
             onClicked: commentVoteManager.vote(comment.fullname,
@@ -72,6 +72,8 @@ FancyContextMenu {
     }
 
     FancyMenuItemRow {
+        visible: comment.isValid
+
         FancyMenuItem {
             text: qsTr("Copy Comment")
             onClicked: {
