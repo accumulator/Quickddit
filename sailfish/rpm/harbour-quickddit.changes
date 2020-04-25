@@ -5,6 +5,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Apr 25 2020 Sander van Grieken <sander@outrightsolutions.nl> 1.9.9-1
+- fix: disable voting buttons for deleted comments
+- fix: highlighting issue on context menu (thanks szopin!)
+- chg: update youtube-dl to 2020-04-23
+
 * Fri Jan 10 2020 Sander van Grieken <sander@outrightsolutions.nl> 1.9.8-1
 - fix: allow posting links again when a subreddit has no flairs (thanks szopin!)
 - fix: incorrect [S] tag on [deleted] post comments
