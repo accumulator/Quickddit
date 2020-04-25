@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015-2020  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,7 +27,7 @@ class LinkObjectData : public QSharedData
 {
 public:
     LinkObjectData() : score(0), likes(0), commentsCount(0), distinguished(LinkObject::NotDistinguished),
-        isSticky(false), isNSFW(false), isPromoted(false) {}
+        isSticky(false), isNSFW(false), isPromoted(false), crossposts(0) {}
 
     QString author;
     QDateTime created;
@@ -49,7 +50,7 @@ public:
     bool isArchived;
     int gilded;
     bool isLocked;
-    // int num_crossposts
+    int crossposts;
     // int num_reports
     // bool pinned
     // bool spoiler
@@ -300,6 +301,16 @@ bool LinkObject::isLocked() const
 void LinkObject::setLocked(bool locked)
 {
     d->isLocked = locked;
+}
+
+int LinkObject::crossposts() const
+{
+    return d->crossposts;
+}
+
+void LinkObject::setCrossposts(int crossposts)
+{
+    d->crossposts = crossposts;
 }
 
 bool LinkObject::isSelfPost() const

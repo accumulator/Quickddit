@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015-2018  Sander van Grieken
+    Copyright (C) 2015-2020  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -76,7 +76,10 @@ QString unescapeUrl(QString url)
     return url;
 }
 
-// Private
+//
+// field mappers
+//
+
 void commentFromMap(CommentObject &comment, const QVariantMap &commentMap)
 {
     comment.setFullname(commentMap.value("name").toString());
@@ -130,6 +133,112 @@ void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
     link.setGilded(linkMap.value("gilded").toBool());
     link.setSaved(linkMap.value("saved").toBool());
     link.setLocked(linkMap.value("locked").toBool());
+    link.setCrossposts(linkMap.value("num_crossposts").toInt());
+}
+
+void messageFromMap(MessageObject &message, const QVariantMap &messageMap)
+{
+    message.setFullname(messageMap.value("name").toString());
+    message.setAuthor(messageMap.value("author").toString());
+    message.setDestination(messageMap.value("dest").toString());
+    message.setBody(unescapeHtml(messageMap.value("body_html").toString()));
+    message.setRawBody(unescapeMarkdown(messageMap.value("body").toString()));
+    message.setCreated(QDateTime::fromTime_t(messageMap.value("created_utc").toInt()));
+    message.setSubject(unescapeHtml(messageMap.value("subject").toString()));
+    message.setLinkTitle(unescapeHtml(messageMap.value("link_title").toString()));
+    message.setSubreddit(messageMap.value("subreddit").toString());
+    message.setContext(messageMap.value("context").toString());
+    message.setComment(messageMap.value("was_comment").toBool());
+    message.setUnread(messageMap.value("new").toBool());
+    message.setDistinguished(messageMap.value("distinguished").toString());
+}
+
+void multiredditFromMap(MultiredditObject &multireddit, const QVariantMap &multiredditMap)
+{
+    multireddit.setName(multiredditMap.value("name").toString());
+    multireddit.setCreated(QDateTime::fromTime_t(multiredditMap.value("created_utc").toInt()));
+
+    QStringList subreddits;
+    foreach (const QVariant &subredditObj, multiredditMap.value("subreddits").toList()) {
+        subreddits.append(subredditObj.toMap().value("name").toString());
+    }
+    Utils::sortCaseInsensitively(&subreddits);
+
+    multireddit.setSubreddits(subreddits);
+    multireddit.setVisibility(multiredditMap.value("visibility").toString());
+    multireddit.setPath(multiredditMap.value("path").toString());
+    multireddit.setCanEdit(multiredditMap.value("can_edit").toBool());
+}
+
+SubredditObject parseSubredditThing(const QVariantMap &subredditThing)
+{
+    Q_ASSERT(subredditThing.value("kind").toString() == "t5");
+
+    const QVariantMap data = subredditThing.value("data").toMap();
+
+    SubredditObject subreddit;
+    subreddit.setFullname(data.value("name").toString());
+    subreddit.setDisplayName(data.value("display_name").toString());
+    subreddit.setUrl(data.value("url").toString());
+    subreddit.setHeaderImageUrl(QUrl(data.value("header_img").toString()));
+    subreddit.setShortDescription(unescapeHtml(data.value("public_description").toString()));
+    subreddit.setLongDescription(unescapeHtml(data.value("description_html").toString()));
+    subreddit.setSubscribers(data.value("subscribers").toInt());
+    subreddit.setActiveUsers(data.value("accounts_active").toInt());
+    subreddit.setNSFW(data.value("over18").toBool());
+    subreddit.setSubscribed(data.value("user_is_subscriber").toBool());
+    subreddit.setSubmissionType(data.value("submission_type").toString());
+    subreddit.setContributor(data.value("user_is_contributor").toBool());
+    subreddit.setBanned(data.value("user_is_banned").toBool());
+    subreddit.setModerator(data.value("user_is_moderator").toBool());
+    subreddit.setMuted(data.value("user_is_muted").toBool());
+    subreddit.setSubredditType(data.value("subreddit_type").toString());
+
+    return subreddit;
+}
+
+void userobjectFromMap(UserObject &userObject, const QVariantMap &userObjectMap)
+{
+    userObject.setName(userObjectMap.value("name").toString());
+    userObject.setLinkKarma(userObjectMap.value("link_karma").toInt());
+    userObject.setCommentKarma(userObjectMap.value("comment_karma").toInt());
+    QDateTime d;
+    d.setTime_t(userObjectMap.value("created").toInt());
+    userObject.setCreated(d);
+    userObject.setFriend(userObjectMap.value("is_friend").toBool());
+    userObject.setHideFromRobots(userObjectMap.value("hide_from_robots").toBool());
+    userObject.setMod(userObjectMap.value("is_mod").toBool());
+    userObject.setVerifiedEmail(userObjectMap.value("has_verified_email").toBool());
+    userObject.setId(userObjectMap.value("id").toString());
+    userObject.setGold(userObjectMap.value("is_gold").toBool());
+}
+
+//
+// JSON parsers and list(ing) wrappers
+//
+
+QVariantList Parser::parseList(const QByteArray &json)
+{
+    qDebug() << "list:" << json;
+
+    bool ok;
+    const QVariantList variantList = QtJson::parse(json, ok).toList();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    return variantList;
+}
+
+QVariantMap Parser::parseMap(const QByteArray &json)
+{
+    qDebug() << "map:" << json;
+
+    bool ok;
+    const QVariantMap variantMap = QtJson::parse(json, ok).toMap();
+
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+
+    return variantMap;
 }
 
 Listing<LinkObject> Parser::parseLinkList(const QByteArray &json)
@@ -141,14 +250,9 @@ Listing<LinkObject> Parser::parseLinkList(const QByteArray &json)
 
     const QVariantList linkListJson = data.value("children").toList();
 
-    bool logged = false;
     Listing<LinkObject> linkList;
     foreach (const QVariant &linkObjectJson, linkListJson) {
         QVariantMap linkMap = linkObjectJson.toMap().value("data").toMap();
-        if (!logged) {
-            //qDebug() << "link item =" << linkMap;
-            logged = true;
-        }
         LinkObject link;
         linkFromMap(link, linkMap);
         linkList.append(link);
@@ -297,34 +401,6 @@ QPair< LinkObject, QList<CommentObject> > Parser::parseCommentList(const QByteAr
     return qMakePair(link, parseCommentListingJson(root.last().toMap(), link.author(), 0));
 }
 
-// Private
-SubredditObject parseSubredditThing(const QVariantMap &subredditThing)
-{
-    Q_ASSERT(subredditThing.value("kind").toString() == "t5");
-
-    const QVariantMap data = subredditThing.value("data").toMap();
-
-    SubredditObject subreddit;
-    subreddit.setFullname(data.value("name").toString());
-    subreddit.setDisplayName(data.value("display_name").toString());
-    subreddit.setUrl(data.value("url").toString());
-    subreddit.setHeaderImageUrl(QUrl(data.value("header_img").toString()));
-    subreddit.setShortDescription(unescapeHtml(data.value("public_description").toString()));
-    subreddit.setLongDescription(unescapeHtml(data.value("description_html").toString()));
-    subreddit.setSubscribers(data.value("subscribers").toInt());
-    subreddit.setActiveUsers(data.value("accounts_active").toInt());
-    subreddit.setNSFW(data.value("over18").toBool());
-    subreddit.setSubscribed(data.value("user_is_subscriber").toBool());
-    subreddit.setSubmissionType(data.value("submission_type").toString());
-    subreddit.setContributor(data.value("user_is_contributor").toBool());
-    subreddit.setBanned(data.value("user_is_banned").toBool());
-    subreddit.setModerator(data.value("user_is_moderator").toBool());
-    subreddit.setMuted(data.value("user_is_muted").toBool());
-    subreddit.setSubredditType(data.value("subreddit_type").toString());
-
-    return subreddit;
-}
-
 SubredditObject Parser::parseSubreddit(const QByteArray &json)
 {
     bool ok;
@@ -367,20 +443,7 @@ QList<MultiredditObject> Parser::parseMultiredditList(const QByteArray &json)
         const QVariantMap multiredditMap = multiredditJson.toMap().value("data").toMap();
 
         MultiredditObject multireddit;
-        multireddit.setName(multiredditMap.value("name").toString());
-        multireddit.setCreated(QDateTime::fromTime_t(multiredditMap.value("created_utc").toInt()));
-
-        QStringList subreddits;
-        foreach (const QVariant &subredditObj, multiredditMap.value("subreddits").toList()) {
-            subreddits.append(subredditObj.toMap().value("name").toString());
-        }
-        Utils::sortCaseInsensitively(&subreddits);
-
-        multireddit.setSubreddits(subreddits);
-        multireddit.setVisibility(multiredditMap.value("visibility").toString());
-        multireddit.setPath(multiredditMap.value("path").toString());
-        multireddit.setCanEdit(multiredditMap.value("can_edit").toBool());
-
+        multiredditFromMap(multireddit, multiredditMap);
         multredditList.append(multireddit);
     }
 
@@ -407,24 +470,11 @@ Listing<MessageObject> Parser::parseMessageList(const QByteArray &json)
     const QVariantList messagesJson = data.value("children").toList();
 
     Listing<MessageObject> messageList;
-    foreach (const QVariant &messageObject, messagesJson) {
-        const QVariantMap messageMap = messageObject.toMap().value("data").toMap();
+    foreach (const QVariant &messageJson, messagesJson) {
+        const QVariantMap messageMap = messageJson.toMap().value("data").toMap();
 
         MessageObject message;
-        message.setFullname(messageMap.value("name").toString());
-        message.setAuthor(messageMap.value("author").toString());
-        message.setDestination(messageMap.value("dest").toString());
-        message.setBody(unescapeHtml(messageMap.value("body_html").toString()));
-        message.setRawBody(unescapeMarkdown(messageMap.value("body").toString()));
-        message.setCreated(QDateTime::fromTime_t(messageMap.value("created_utc").toInt()));
-        message.setSubject(unescapeHtml(messageMap.value("subject").toString()));
-        message.setLinkTitle(unescapeHtml(messageMap.value("link_title").toString()));
-        message.setSubreddit(messageMap.value("subreddit").toString());
-        message.setContext(messageMap.value("context").toString());
-        message.setComment(messageMap.value("was_comment").toBool());
-        message.setUnread(messageMap.value("new").toBool());
-        message.setDistinguished(messageMap.value("distinguished").toString());
-
+        messageFromMap(message, messageMap);
         messageList.append(message);
     }
     messageList.setHasMore(!data.value("after").isNull());
@@ -449,77 +499,15 @@ QList<QString> Parser::parseErrors(const QByteArray &json)
     return result;
 }
 
-// Private
-QPair<QString, QString> parseImgurImageMap(const QVariantMap &imageMap)
-{
-    const QString imageUrl = imageMap.value("link").toString();
-    int insertThumbIndex = imageUrl.lastIndexOf('.');
-
-    QString mainUrl;
-    if (imageMap.value("animated").toBool())
-        mainUrl = imageUrl;
-    else
-        mainUrl = QString(imageUrl).insert(insertThumbIndex, 'h');
-
-    QString thumbUrl = QString(imageUrl).insert(insertThumbIndex, 'b');
-
-    return qMakePair(mainUrl, thumbUrl);
-}
-
-QList< QPair<QString, QString> > Parser::parseImgurImages(const QByteArray &json)
-{
-    bool ok;
-    const QVariant root = QtJson::parse(json, ok);
-
-    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
-
-    QList< QPair<QString, QString> > imageAndThumbUrlList;
-
-    const QVariant data = root.toMap().value("data");
-
-    if (data.type() == QVariant::Map) {
-        const QVariantMap dataMap = data.toMap();
-        if (dataMap.contains("images")) {
-            foreach (const QVariant &imageJson, dataMap.value("images").toList()) {
-                imageAndThumbUrlList.append(parseImgurImageMap(imageJson.toMap()));
-            }
-        } else {
-            imageAndThumbUrlList.append(parseImgurImageMap(dataMap));
-        }
-    } else if (data.type() == QVariant::List) {
-        foreach (const QVariant &imageJson, data.toList()) {
-            imageAndThumbUrlList.append(parseImgurImageMap(imageJson.toMap()));
-        }
-    } else {
-        qCritical("Parser::parseImgurImages(): Invalid JSON");
-    }
-
-    return imageAndThumbUrlList;
-}
-
 UserObject Parser::parseUserAbout(const QByteArray &json)
 {
     bool ok;
-    const QVariant root = QtJson::parse(json, ok);
+    const QVariantMap userObjectMap = QtJson::parse(json, ok).toMap().value("data").toMap();
 
     Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
 
     UserObject userObject;
-
-    const QVariantMap data = root.toMap().value("data").toMap();
-
-    userObject.setName(data.value("name").toString());
-    userObject.setLinkKarma(data.value("link_karma").toInt());
-    userObject.setCommentKarma(data.value("comment_karma").toInt());
-    QDateTime d;
-    d.setTime_t(data.value("created").toInt());
-    userObject.setCreated(d);
-    userObject.setFriend(data.value("is_friend").toBool());
-    userObject.setHideFromRobots(data.value("hide_from_robots").toBool());
-    userObject.setMod(data.value("is_mod").toBool());
-    userObject.setVerifiedEmail(data.value("has_verified_email").toBool());
-    userObject.setId(data.value("id").toString());
-    userObject.setGold(data.value("is_gold").toBool());
+    userobjectFromMap(userObject, userObjectMap);
 
     return userObject;
 }
@@ -573,26 +561,78 @@ Listing<Thing*> Parser::parseUserThingList(const QByteArray &json)
     return thingList;
 }
 
-QVariantList Parser::parseList(const QByteArray &json)
+Listing<LinkObject> Parser::parseDuplicateList(const QByteArray &json)
 {
-    qDebug() << "list:" << json;
-
     bool ok;
-    const QVariantList variantList = QtJson::parse(json, ok).toList();
+    const QVariantList result = QtJson::parse(json, ok).toList();
 
     Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
+    Q_ASSERT_X(result.count() == 2, Q_FUNC_INFO, "Expecting size 2");
 
-    return variantList;
+    Listing<LinkObject> duplicatesList;
+
+    const QVariantMap linkListingJson = result.at(1).toMap().value("data").toMap();
+
+    foreach (const QVariant &linkJson, linkListingJson.value("children").toList()) {
+        const QVariantMap linkMap = linkJson.toMap();
+        LinkObject link;
+        linkFromMap(link, linkMap);
+        duplicatesList.append(link);
+    }
+
+    duplicatesList.setHasMore(!linkListingJson.value("after").isNull());
+
+    return duplicatesList;
 }
 
-QVariantMap Parser::parseMap(const QByteArray &json)
-{
-    qDebug() << "map:" << json;
+//
+// non-reddit. TODO: split off to separate source file
+//
 
+// Private
+QPair<QString, QString> parseImgurImageMap(const QVariantMap &imageMap)
+{
+    const QString imageUrl = imageMap.value("link").toString();
+    int insertThumbIndex = imageUrl.lastIndexOf('.');
+
+    QString mainUrl;
+    if (imageMap.value("animated").toBool())
+        mainUrl = imageUrl;
+    else
+        mainUrl = QString(imageUrl).insert(insertThumbIndex, 'h');
+
+    QString thumbUrl = QString(imageUrl).insert(insertThumbIndex, 'b');
+
+    return qMakePair(mainUrl, thumbUrl);
+}
+
+QList< QPair<QString, QString> > Parser::parseImgurImages(const QByteArray &json)
+{
     bool ok;
-    const QVariantMap variantMap = QtJson::parse(json, ok).toMap();
+    const QVariant root = QtJson::parse(json, ok);
 
     Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
 
-    return variantMap;
+    QList< QPair<QString, QString> > imageAndThumbUrlList;
+
+    const QVariant data = root.toMap().value("data");
+
+    if (data.type() == QVariant::Map) {
+        const QVariantMap dataMap = data.toMap();
+        if (dataMap.contains("images")) {
+            foreach (const QVariant &imageJson, dataMap.value("images").toList()) {
+                imageAndThumbUrlList.append(parseImgurImageMap(imageJson.toMap()));
+            }
+        } else {
+            imageAndThumbUrlList.append(parseImgurImageMap(dataMap));
+        }
+    } else if (data.type() == QVariant::List) {
+        foreach (const QVariant &imageJson, data.toList()) {
+            imageAndThumbUrlList.append(parseImgurImageMap(imageJson.toMap()));
+        }
+    } else {
+        qCritical("Parser::parseImgurImages(): Invalid JSON");
+    }
+
+    return imageAndThumbUrlList;
 }

@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015-2018  Sander van Grieken
+    Copyright (C) 2015-2020  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ template<typename T>
 class Listing : public QList<T>
 {
 public:
-    Listing() : m_hasMore(true) {}
+    Listing() : m_hasMore(false) {}
 
     bool hasMore() const { return m_hasMore; }
     void setHasMore(bool hasMore) { m_hasMore = hasMore; }
@@ -50,10 +50,19 @@ private:
 
 namespace Parser
 {
-Listing<LinkObject> parseLinkList(const QByteArray &json);
+// generic
+QVariantList parseList(const QByteArray &json);
+QVariantMap parseMap(const QByteArray &json);
 
-CommentObject parseNewComment(const QByteArray &json);
+QList<QString> parseErrors(const QByteArray &json);
+
+QStringList parseListOfNames(const QByteArray &json);
+
+Listing<LinkObject> parseLinkList(const QByteArray &json);
+LinkObject parseLinkEditResponse(const QByteArray &json);
+
 QPair< LinkObject, QList<CommentObject> > parseCommentList(const QByteArray &json);
+CommentObject parseNewComment(const QByteArray &json);
 QList<CommentObject> parseMoreChildren(const QByteArray &json, const QString &linkAuthor, int depth);
 
 SubredditObject parseSubreddit(const QByteArray &json);
@@ -64,17 +73,13 @@ QString parseMultiredditDescription(const QByteArray &json);
 
 Listing<MessageObject> parseMessageList(const QByteArray &json);
 
-QList<QString> parseErrors(const QByteArray &json);
-
-QList< QPair<QString, QString> > parseImgurImages(const QByteArray &json);
-
-LinkObject parseLinkEditResponse(const QByteArray &json);
 UserObject parseUserAbout(const QByteArray &json);
-QStringList parseListOfNames(const QByteArray &json);
 Listing<Thing*> parseUserThingList(const QByteArray &json);
 
-QVariantList parseList(const QByteArray &json);
-QVariantMap parseMap(const QByteArray &json);
+Listing<LinkObject> parseDuplicateList(const QByteArray &json);
+
+// non-reddit
+QList< QPair<QString, QString> > parseImgurImages(const QByteArray &json);
 }
 
 #endif // PARSER_H
