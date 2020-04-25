@@ -522,27 +522,27 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>CommentMenu</name>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="76"/>
+        <location filename="../qml/CommentMenu.qml" line="78"/>
         <source>Copy Comment</source>
         <translation>Copier le commentaire</translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="79"/>
+        <location filename="../qml/CommentMenu.qml" line="81"/>
         <source>Comment copied to clipboard</source>
         <translation>Commentaire copié dans le presse-papier</translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="85"/>
+        <location filename="../qml/CommentMenu.qml" line="87"/>
         <source>Reply</source>
         <translation>Répondre</translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="95"/>
+        <location filename="../qml/CommentMenu.qml" line="97"/>
         <source>Edit</source>
         <translation>Modifier</translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="100"/>
+        <location filename="../qml/CommentMenu.qml" line="102"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>

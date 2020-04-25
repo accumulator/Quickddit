@@ -524,27 +524,27 @@ Logga in för att lägga till konton. Quickddit kommer ihåg en lyckad inloggnin
 <context>
     <name>CommentMenu</name>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="76"/>
+        <location filename="../qml/CommentMenu.qml" line="78"/>
         <source>Copy Comment</source>
         <translation>Kopiera kommentar</translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="79"/>
+        <location filename="../qml/CommentMenu.qml" line="81"/>
         <source>Comment copied to clipboard</source>
         <translation>Kommentar kopierad till urklipp</translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="85"/>
+        <location filename="../qml/CommentMenu.qml" line="87"/>
         <source>Reply</source>
         <translation>Svara</translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="95"/>
+        <location filename="../qml/CommentMenu.qml" line="97"/>
         <source>Edit</source>
         <translation>Redigera</translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="100"/>
+        <location filename="../qml/CommentMenu.qml" line="102"/>
         <source>Delete</source>
         <translation>Ta bort</translation>
     </message>

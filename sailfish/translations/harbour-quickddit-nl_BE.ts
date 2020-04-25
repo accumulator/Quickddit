@@ -524,27 +524,27 @@ Meld u aan voor accounts toe te voegen. Quickddit gaat uw succesvolle aanmelding
 <context>
     <name>CommentMenu</name>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="76"/>
+        <location filename="../qml/CommentMenu.qml" line="78"/>
         <source>Copy Comment</source>
         <translation>Commentaar kopiëren</translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="79"/>
+        <location filename="../qml/CommentMenu.qml" line="81"/>
         <source>Comment copied to clipboard</source>
         <translation>Commentaar gekopieerd naar klembord</translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="85"/>
+        <location filename="../qml/CommentMenu.qml" line="87"/>
         <source>Reply</source>
         <translation>Reageren</translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="95"/>
+        <location filename="../qml/CommentMenu.qml" line="97"/>
         <source>Edit</source>
         <translation>Bewerken</translation>
     </message>
     <message>
-        <location filename="../qml/CommentMenu.qml" line="100"/>
+        <location filename="../qml/CommentMenu.qml" line="102"/>
         <source>Delete</source>
         <translation>Verwijderen</translation>
     </message>
