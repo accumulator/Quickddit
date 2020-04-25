@@ -24,7 +24,7 @@ AbstractPage {
     title: qsTr("Donate")
 
     property string _paypalLink: "https://paypal.me/sanderdonate"
-    property string _bitcoinAddr: "3MBeHsFA2NrXegBYPkR6D7JDRQnTkA2tZN"
+    property string _bitcoinAddr: "3NhheF8z8sTxpbsCVUpW6HWH8DpADoH46m"
 
     Flickable {
         anchors.fill: parent
