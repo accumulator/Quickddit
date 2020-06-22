@@ -38,6 +38,9 @@ public:
     QString title;
     QString domain;
     QUrl thumbnailUrl;
+    QUrl previewUrl;
+    int previewHeight;
+    int previewWidth;
     QString text;
     QString rawText;
     QString permalink;
@@ -169,6 +172,36 @@ QUrl LinkObject::thumbnailUrl() const
 void LinkObject::setThumbnailUrl(const QUrl &url)
 {
     d->thumbnailUrl = url;
+}
+
+QUrl LinkObject::previewUrl() const
+{
+    return d->previewUrl;
+}
+
+void LinkObject::setPreviewUrl(const QUrl &url)
+{
+    d->previewUrl = url;
+}
+
+int LinkObject::previewHeight() const
+{
+    return d->previewHeight;
+}
+
+void LinkObject::setPreviewHeight(const int url)
+{
+    d->previewHeight = url;
+}
+
+int LinkObject::previewWidth() const
+{
+    return d->previewWidth;
+}
+
+void LinkObject::setPreviewWidth(const int url)
+{
+    d->previewWidth = url;
 }
 
 QString LinkObject::text() const

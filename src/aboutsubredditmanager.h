@@ -44,6 +44,8 @@ class AboutSubredditManager : public AbstractManager, public QQmlParserStatus
     Q_PROPERTY(bool isValid READ isValid NOTIFY dataChanged)
     Q_PROPERTY(QString url READ url NOTIFY dataChanged)
     Q_PROPERTY(QUrl headerImageUrl READ headerImageUrl NOTIFY dataChanged)
+    Q_PROPERTY(QUrl iconUrl READ iconUrl NOTIFY dataChanged)
+    Q_PROPERTY(QUrl bannerBackgroundUrl READ bannerBackgroundUrl NOTIFY dataChanged)
     Q_PROPERTY(QString shortDescription READ shortDescription NOTIFY dataChanged)
     Q_PROPERTY(QString longDescription READ longDescription NOTIFY dataChanged)
     Q_PROPERTY(int subscribers READ subscribers NOTIFY dataChanged)
@@ -82,7 +84,10 @@ public:
 
     bool isValid() const;
     QString url() const;
+    QString title() const;
     QUrl headerImageUrl() const;
+    QUrl iconUrl() const;
+    QUrl bannerBackgroundUrl() const;
     QString shortDescription() const;
     QString longDescription() const;
     int subscribers() const;

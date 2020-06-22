@@ -134,6 +134,21 @@ void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
     link.setSaved(linkMap.value("saved").toBool());
     link.setLocked(linkMap.value("locked").toBool());
     link.setCrossposts(linkMap.value("num_crossposts").toInt());
+
+    QVariantList l = linkMap.value("preview").toMap().value("images").toList();
+    if(!l.isEmpty()){
+        QVariantList k=l[0].toMap().value("resolutions").toList();
+        if(!k.isEmpty()){
+            QVariantMap j=k.last().toMap();
+            link.setPreviewUrl(unescapeUrl(j.value("url").toString()));
+            link.setPreviewWidth(j.value("width").toInt());
+            link.setPreviewHeight(j.value("height").toInt());
+        }
+    }
+    else {
+        link.setPreviewWidth(0);
+        link.setPreviewHeight(0);
+    }
 }
 
 void messageFromMap(MessageObject &message, const QVariantMap &messageMap)
@@ -179,8 +194,14 @@ SubredditObject parseSubredditThing(const QVariantMap &subredditThing)
     SubredditObject subreddit;
     subreddit.setFullname(data.value("name").toString());
     subreddit.setDisplayName(data.value("display_name").toString());
+    subreddit.setTitle(data.value("title").toString());
     subreddit.setUrl(data.value("url").toString());
-    subreddit.setHeaderImageUrl(QUrl(data.value("header_img").toString()));
+    subreddit.setHeaderImageUrl(QUrl(unescapeUrl(data.value("header_img").toString())));
+    if(!data.value("icon_img").toString().isEmpty())
+        subreddit.setIconUrl(QUrl(unescapeUrl(data.value("icon_img").toString())));
+    else
+        subreddit.setIconUrl(QUrl(unescapeUrl(data.value("community_icon").toString())));
+    subreddit.setBannerBackgroundUrl(QUrl(unescapeUrl(data.value("banner_background_image").toString())));
     subreddit.setShortDescription(unescapeHtml(data.value("public_description").toString()));
     subreddit.setLongDescription(unescapeHtml(data.value("description_html").toString()));
     subreddit.setSubscribers(data.value("subscribers").toInt());
@@ -211,6 +232,7 @@ void userobjectFromMap(UserObject &userObject, const QVariantMap &userObjectMap)
     userObject.setVerifiedEmail(userObjectMap.value("has_verified_email").toBool());
     userObject.setId(userObjectMap.value("id").toString());
     userObject.setGold(userObjectMap.value("is_gold").toBool());
+    userObject.setIconImg(QUrl(unescapeUrl(userObjectMap.value("icon_img").toString())));
 }
 
 //
@@ -253,6 +275,7 @@ Listing<LinkObject> Parser::parseLinkList(const QByteArray &json)
     Listing<LinkObject> linkList;
     foreach (const QVariant &linkObjectJson, linkListJson) {
         QVariantMap linkMap = linkObjectJson.toMap().value("data").toMap();
+
         LinkObject link;
         linkFromMap(link, linkMap);
         linkList.append(link);

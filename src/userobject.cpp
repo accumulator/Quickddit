@@ -36,6 +36,7 @@ public:
     bool isHideFromRobots;
     int linkKarma;
     int commentKarma;
+    QUrl iconImg;
 
 private:
     Q_DISABLE_COPY(UserObjectData)
@@ -169,4 +170,14 @@ QDateTime UserObject::created() const
 void UserObject::setCreated(const QDateTime &created)
 {
     d->created = created;
+}
+
+QUrl UserObject::iconImg() const
+{
+    return d->iconImg;
+}
+
+void UserObject::setIconImg(const QUrl &iconImg)
+{
+    d->iconImg = iconImg;
 }

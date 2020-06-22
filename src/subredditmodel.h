@@ -33,8 +33,11 @@ public:
     enum Roles {
         FullnameRole = Qt::UserRole,
         DisplayNameRole,
+        TitleRole,
         UrlRole,
         HeaderImageUrlRole,
+        IconUrlRole,
+        BannerBackgroundUrlRole,
         ShortDescriptionRole,
         LongDescriptionRole,
         SubscribersRole,

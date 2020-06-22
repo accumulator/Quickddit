@@ -55,8 +55,11 @@ QVariant SubredditModel::data(const QModelIndex &index, int role) const
     switch (role) {
     case FullnameRole: return subreddit.fullname();
     case DisplayNameRole: return subreddit.displayName();
+    case TitleRole: return subreddit.title();
     case UrlRole: return subreddit.url();
     case HeaderImageUrlRole: return subreddit.headerImageUrl();
+    case IconUrlRole: return subreddit.iconUrl();
+    case BannerBackgroundUrlRole: return subreddit.bannerBackgroundUrl();
     case ShortDescriptionRole: return subreddit.shortDescription();
     case LongDescriptionRole: return subreddit.longDescription();
     case SubscribersRole: return subreddit.subscribers();
@@ -156,8 +159,11 @@ QHash<int, QByteArray> SubredditModel::customRoleNames() const
     QHash<int, QByteArray> roles;
     roles[FullnameRole] = "fullname";
     roles[DisplayNameRole] = "displayName";
+    roles[TitleRole] = "title";
     roles[UrlRole] = "url";
     roles[HeaderImageUrlRole] = "headerImageUrl";
+    roles[IconUrlRole] = "iconUrl";
+    roles[BannerBackgroundUrlRole] = "bannerBackgroundUrl";
     roles[ShortDescriptionRole] = "shortDescription";
     roles[LongDescriptionRole] = "longDescription";
     roles[SubscribersRole] = "subscribers";

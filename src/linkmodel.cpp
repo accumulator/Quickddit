@@ -45,6 +45,9 @@ QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
     map["title"] = link.title();
     map["domain"] = link.domain();
     map["thumbnailUrl"] = link.thumbnailUrl();
+    map["previewUrl"] = link.previewUrl();
+    map["previewHeight"] = link.previewHeight();
+    map["previewWidth"] = link.previewWidth();
     map["text"] = link.text();
     map["rawText"] = link.rawText();
     map["permalink"] = link.permalink();
@@ -111,6 +114,9 @@ QVariant LinkModel::data(const QModelIndex &index, int role) const
     case TitleRole: return link.title();
     case DomainRole: return link.domain();
     case ThumbnailUrlRole: return link.thumbnailUrl();
+    case PreviewUrlRole: return link.previewUrl();
+    case PreviewHeightRole: return link.previewHeight();
+    case PreviewWidthRole: return link.previewWidth();
     case TextRole: return link.text();
     case RawTextRole: return link.rawText();
     case PermalinkRole: return link.permalink();
@@ -388,6 +394,9 @@ QHash<int, QByteArray> LinkModel::customRoleNames() const
     roles[TitleRole] = "title";
     roles[DomainRole] = "domain";
     roles[ThumbnailUrlRole] = "thumbnailUrl";
+    roles[PreviewUrlRole] = "previewUrl";
+    roles[PreviewHeightRole] = "previewHeight";
+    roles[PreviewWidthRole] = "previewWidth";
     roles[TextRole] = "text";
     roles[RawTextRole] = "rawText";
     roles[PermalinkRole] = "permalink";

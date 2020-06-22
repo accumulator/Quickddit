@@ -52,11 +52,20 @@ public:
     QString displayName() const;
     void setDisplayName(const QString &displayName);
 
+    QString title() const;
+    void setTitle(const QString &title);
+
     QString url() const;
     void setUrl(const QString &url);
 
     QUrl headerImageUrl() const;
     void setHeaderImageUrl(const QUrl &url);
+
+    QUrl iconUrl() const;
+    void setIconUrl(const QUrl &url);
+
+    QUrl bannerBackgroundUrl() const;
+    void setBannerBackgroundUrl(const QUrl &url);
 
     QString shortDescription() const;
     void setShortDescription(const QString &description);
