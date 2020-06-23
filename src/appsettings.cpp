@@ -25,7 +25,7 @@
 AppSettings::AppSettings(QObject *parent) :
     QObject(parent), m_settings(new QSettings(this))
 {
-    m_commentsTapToHide = m_settings->value("commentsTapToHide", false).toBool();
+    m_commentsTapToHide = m_settings->value("commentsTapToHide", true).toBool();
     m_fontSize = static_cast<FontSize>(m_settings->value("fontSize", AppSettings::SmallFontSize).toInt());
     m_redditUsername = m_settings->value("redditUsername").toString();
     m_refreshToken = m_settings->value("refreshToken").toByteArray();
@@ -64,11 +64,6 @@ AppSettings::AppSettings(QObject *parent) :
         data.lastSeenMessage = m_lastSeenMessage;
         initial_accounts.append(data);
         setAccounts(initial_accounts);
-    }
-
-    // set default commentsTapToHide to true if we can determine the user is new to the app
-    if (m_settings->allKeys().isEmpty()) {
-        setCommentsTapToHide(true);
     }
 }
 
