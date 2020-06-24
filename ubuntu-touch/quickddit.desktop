@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Quickddit
+Keywords=quickddit;reddit;dkreddit;readit;ureadit;ureddit;
+Exec=./quickddit
+Icon=quickddit.svg
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true
+X-Ubuntu-Splash-Color=#000000
+Name[en_US]=Quickddit

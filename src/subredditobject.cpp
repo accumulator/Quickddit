@@ -28,8 +28,11 @@ public:
 
     QString fullname;
     QString displayName;
+    QString title;
     QString url;
     QUrl headerImageUrl;
+    QUrl iconUrl;
+    QUrl bannerBackgroundUrl;
     QString shortDescription;
     QString longDescription;
     int subscribers;
@@ -87,6 +90,16 @@ void SubredditObject::setDisplayName(const QString &displayName)
     d->displayName = displayName;
 }
 
+QString SubredditObject::title() const
+{
+    return d->title;
+}
+
+void SubredditObject::setTitle(const QString &title)
+{
+    d->title = title;
+}
+
 QString SubredditObject::url() const
 {
     return d->url;
@@ -105,6 +118,26 @@ QUrl SubredditObject::headerImageUrl() const
 void SubredditObject::setHeaderImageUrl(const QUrl &url)
 {
     d->headerImageUrl = url;
+}
+
+QUrl SubredditObject::iconUrl() const
+{
+    return d->iconUrl;
+}
+
+void SubredditObject::setIconUrl(const QUrl &url)
+{
+    d->iconUrl = url;
+}
+
+QUrl SubredditObject::bannerBackgroundUrl() const
+{
+    return d->bannerBackgroundUrl;
+}
+
+void SubredditObject::setBannerBackgroundUrl(const QUrl &url)
+{
+    d->bannerBackgroundUrl = url;
 }
 
 QString SubredditObject::shortDescription() const

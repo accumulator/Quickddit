@@ -108,6 +108,28 @@ public:
     void setThumbnailUrl(const QUrl &url);
 
     /**
+     * the full url of the thumbnail of this link
+     * equivalent to "thumbnail" in Reddit's JSON
+     */
+    QUrl previewUrl() const;
+    void setPreviewUrl(const QUrl &url);
+
+    /**
+     * the full url of the thumbnail of this link
+     * equivalent to "thumbnail_height" in Reddit's JSON
+     */
+    int previewHeight() const;
+    void setPreviewHeight(const int url);
+
+    /**
+     * the full url of the thumbnail of this link
+     * equivalent to "thumbnail_width" in Reddit's JSON
+     */
+    int previewWidth() const;
+    void setPreviewWidth(const int url);
+
+
+    /**
      * the html text of this link
      * equivalent to "selftext_html" in Reddit's JSON
      */

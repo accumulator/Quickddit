@@ -128,6 +128,9 @@ QVariantMap UserThingModel::linkData(const LinkObject* o) const
     result.insert("gilded", QVariant(o->gilded()));
     result.insert("domain", QVariant(o->domain()));
     result.insert("thumbnailUrl", QVariant(o->thumbnailUrl()));
+    result.insert("previewUrl", QVariant(o->previewUrl()));
+    result.insert("previewHeight", QVariant(o->previewHeight()));
+    result.insert("previewWidth", QVariant(o->previewWidth()));
     result.insert("url", QVariant(o->url()));
     result.insert("isLocked", QVariant(o->isLocked()));
     result.insert("isArchived", QVariant(o->isArchived()));

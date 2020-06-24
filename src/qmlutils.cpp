@@ -37,7 +37,7 @@
 #include <MNotification>
 #include <MRemoteAction>
 #include <maemo-meegotouch-interfaces/shareuiinterface.h>
-#else
+#elif Q_OS_SAILFISH
 #include <nemonotifications-qt5/notification.h>
 #endif
 
@@ -189,7 +189,7 @@ void QMLUtils::publishNotification(const QString &summary, const QString &body,
     MRemoteAction action("org.quickddit", "/", "org.quickddit.view", "showInbox");
     notification.setAction(action);
     notification.publish();
-#else
+#elif Q_OS_SAILFISH
     Notification notification;
     notification.setCategory("harbour-quickddit.inbox");
 
@@ -215,7 +215,7 @@ void QMLUtils::clearNotification()
         MNotification *notification = i.next();
         notification->remove();
     }
-#else
+#elif Q_OS_SAILFISH
     QList<QObject*> activeNotifications = Notification::notifications();
     QMutableListIterator<QObject*> i(activeNotifications);
     while (i.hasNext()) {

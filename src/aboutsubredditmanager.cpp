@@ -47,9 +47,24 @@ QString AboutSubredditManager::url() const
     return m_subredditObject.url();
 }
 
+QString AboutSubredditManager::title() const
+{
+    return m_subredditObject.title();
+}
+
 QUrl AboutSubredditManager::headerImageUrl() const
 {
     return m_subredditObject.headerImageUrl();
+}
+
+QUrl AboutSubredditManager::iconUrl() const
+{
+    return m_subredditObject.iconUrl();
+}
+
+QUrl AboutSubredditManager::bannerBackgroundUrl() const
+{
+    return m_subredditObject.bannerBackgroundUrl();
 }
 
 QString AboutSubredditManager::shortDescription() const

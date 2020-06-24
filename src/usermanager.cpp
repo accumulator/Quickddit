@@ -61,5 +61,6 @@ QVariantMap UserManager::toLinkVariantMap(const UserObject &user)
     map["isHideFromRobots"] = user.isHideFromRobots();
     map["hasVerifiedEmail"] = user.hasVerifiedEmail();
     map["isFriend"] = user.isFriend();
+    map["iconImg"] = user.iconImg();
     return map;
 }

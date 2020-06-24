@@ -22,6 +22,7 @@
 #include <QtCore/QExplicitlySharedDataPointer>
 #include <QtCore/QStringList>
 #include <QtCore/QDateTime>
+#include <QtCore/QUrl>
 
 class UserObjectData;
 
@@ -62,6 +63,9 @@ public:
 
     QDateTime created() const;
     void setCreated(const QDateTime &created);
+
+    QUrl iconImg() const;
+    void setIconImg(const QUrl &iconImg);
 
 private:
     QExplicitlySharedDataPointer<UserObjectData> d;
