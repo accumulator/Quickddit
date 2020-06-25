@@ -26,26 +26,26 @@ ContextMenu {
 
     property variant message
     property MessageManager messageManager
-    property bool enableMarkRead: (!message.isComment && message.author !== appSettings.redditUsername)
 
     signal replyClicked
     signal deleteClicked
 
     MenuItem {
         visible: !message.isComment
-        enabled: !messageManager.busy && message.author !== appSettings.redditUsername && !message.isComment
+        enabled: !messageManager.busy && message.author !== appSettings.redditUsername
         text: qsTr("Reply")
         onClicked: replyClicked()
     }
 
     MenuItem {
+        visible: !message.isComment
         enabled: !messageManager.busy
         text: qsTr("Delete")
         onClicked: deleteClicked()
     }
 
     MenuItem {
-        enabled: enableMarkRead && !messageManager.busy
+        enabled: !messageManager.busy
         text: message.isUnread ? qsTr("Mark As Read") : qsTr("Mark As Unread")
         onClicked: message.isUnread ? messageManager.markRead(message.fullname)
                                     : messageManager.markUnread(message.fullname);
