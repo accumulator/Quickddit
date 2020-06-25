@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
+    Copyright (C) 2015-2020  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -72,12 +73,37 @@ AbstractPage {
                 id: subredditsRepeater
                 anchors { left: parent.left; right: parent.right }
                 model: multiredditManager.subreddits
-                delegate: SimpleListItem {
-                    showMenuOnPressAndHold: false
+                delegate: ListItem {
+                    id: subredditDelegate
+
                     width: subredditsRepeater.width
+
+                    Column {
+                        anchors {
+                            left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter
+                            margins: constant.paddingLarge
+                        }
+                        spacing: constant.paddingSmall
+
+                        Row {
+                            Text {
+                                id: titleText
+                                font.pixelSize: constant.fontSizeSmall
+                                color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorMid
+                                text: "/r/"
+                            }
+                            Text {
+                                anchors.baseline: titleText.baseline
+                                font.pixelSize: constant.fontSizeMedium
+                                color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorLight
+                                text: modelData
+                            }
+                        }
+                    }
+
+                    onClicked: pageStack.push(Qt.resolvedUrl("MainPage.qml"), {subreddit: modelData} )
                     menu: subredditMenuComponent
-                    text: "/r/" + modelData
-                    onClicked: openMenu({subreddit: modelData});
+                    showMenuOnPressAndHold: false
                     onPressAndHold: openMenu({subreddit: modelData});
                 }
             }
