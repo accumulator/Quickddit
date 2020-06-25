@@ -11,27 +11,31 @@ The Harmattan port has been left at 1.0.0 feature level, and will not receive ne
 
 Features
 ========
-- Sign in with your Reddit account or browse anonymously
-- Multi Account
-- Very quick navigation through content
-- Threaded comments view
-- Browse your private messages, comment and post  replies, sent messages
-- Manage your subscribed subreddit list
-- Vote on comments and posts
-- Save comments and posts
-- Multireddit support
-- Integrated image viewer
-- Integrated imgur album viewer
-- Integrated video player
-- Integrated webviewer
-- Search for posts and subreddits
-- Add, reply, edit and delete comments
-- Submit new links and self-posts
-- Edit your posts and comments
-- Inbox Notifications to the event screen
-- Browse user's profile
-- Watches clipboard for reddit links
-- Option to use TOR
+| Feature                | SailfishOS | Ubuntu Touch | Nokia Harmattan (N9) |
+|------------------------|:----------:|:------------:|:--------------------:|
+| Browse anonymously     | Y | Y | Y |
+| Sign into Reddit       | Y | Y | Y |
+| Multi account          | Y | Y | Y |
+| Submit/edit new links and self-posts | Y |  | Y |
+| add, reply, edit, delete comments | Y | partial | Y |
+| Browse your messages   | Y | Y | Y |
+| Send messages          | Y | Y | Y |
+| Vote on comments and posts | Y | Y | Y |
+| Save comments and posts | Y | Y | Y |
+| Multireddit support    | partial | | partial |
+| integrated image viewer | Y | Y | Y |
+| integrated Imgur album viewer | Y | | Y |
+| integrated video player | Y | | |
+| integrated webviewer   | Y | |  |
+| search posts           | Y | | Y |
+| search subreddits      | Y | Y | Y |
+| inbox notifications    | Y | | Y |
+| watch clipboard for reddit links | Y | | Y |
+| TOR                    | Y | | Y |
+| Post flair             | partial | | |
+| User flair             | | | |
+| Friends                | | | |
+| Moderator features     | | | |
 
 Reddit API client id and secret
 ----------------------------------
