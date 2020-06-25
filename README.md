@@ -50,7 +50,6 @@ TODO
 - bookmark users, locally or using reddit 'friend' feature.
 - Add more filtering options, e.g. by flair
 - Reddit Live and/or a method of 'live' following a post
-- de-censor a-la ceddit
 
 Download
 --------
