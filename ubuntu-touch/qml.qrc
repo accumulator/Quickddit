@@ -59,5 +59,8 @@
         <file>Icons/mail-unread.svg</file>
         <file>Icons/mail-read.svg</file>
         <file>Qml/DonatePage.qml</file>
+        <file>Img/bitcoin.png</file>
+        <file>Img/btc-qr.png</file>
+        <file>Img/paypal.png</file>
     </qresource>
 </RCC>

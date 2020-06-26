@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
+
 Page {
     title: "About"
     ListView {
@@ -67,7 +68,6 @@ Page {
             { name: "Report issues",  url: "https://github.com/accumulator/Quickddit/issues" },
             { name: "Translations", url: QMLUtils.TRANSLATIONS_URL },
             { name: "Licence", url: QMLUtils.GPL3_LICENSE_URL },
-            { name: "Donate", url: "https://PayPal.Me/DanielKutka" }
         ]
 
         delegate: ItemDelegate {
@@ -75,6 +75,13 @@ Page {
             text: modelData.name
             contentItem.anchors.horizontalCenter: horizontalCenter
             onClicked: Qt.openUrlExternally(modelData.url)
+        }
+
+        footer: ItemDelegate {
+            width: parent.width
+            text: "Donate"
+            onClicked: pageStack.push(Qt.resolvedUrl("DonatePage.qml"))
+
         }
     }
 }
