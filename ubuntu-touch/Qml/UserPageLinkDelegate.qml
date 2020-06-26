@@ -48,7 +48,7 @@ ItemDelegate {
         anchors.top: titulok.bottom
         anchors.left: thumb.visible ? thumb.right : parent.left
         id:txt
-        text:model.rawText
+        text:model.text
         elide: Text.ElideRight
         maximumLineCount: 3
         font.pointSize: 10

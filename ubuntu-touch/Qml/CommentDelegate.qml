@@ -54,84 +54,56 @@ Item {
 
         leftPadding: 0
         topPadding: 0
-        swipe.left:ToolButton {
-            height: parent.height
-            hoverEnabled: false
-            width: 40
+        swipe.left: Row {
             anchors { top: parent.top;bottom: parent.bottom; left: parent.left }
-            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !model.isArchived && model.isValid
-            //down: model.likes===-1||pressed
-            Image {
-                anchors.centerIn: parent
-                source: model.likes===-1 ? "../Icons/down_b.svg" : "../Icons/down.svg"
-                width: 24
-                height: 24
-            }
-            onClicked: commentVoteManager.vote(model.fullname,model.likes===-1 ? VoteManager.Unvote : VoteManager.Downvote);
-        }
-        swipe.right: Row {
-            anchors { top: parent.top;bottom: parent.bottom; right: parent.right }
+            ActionButton {
+                enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !model.isArchived && model.isValid
+                ico: model.likes===-1 ? "../Icons/down_b.svg" : "../Icons/down.svg"
 
-            ToolButton {
-                height: parent.height
-                width: 40
-                hoverEnabled: false
-                visible: model.isAuthor && !model.isArchived
-                Image {
-                    anchors.centerIn: parent
-                    source: "../Icons/delete.svg"
-                    width: 24
-                    height: 24
+                onClicked: {
+                    commentVoteManager.vote(model.fullname,model.likes===-1 ? VoteManager.Unvote : VoteManager.Downvote);
+                    mainItem.swipe.close()
                 }
+            }
+
+            ActionButton {
+                visible: model.isAuthor && !model.isArchived
+                ico: "../Icons/delete.svg"
+
                 onClicked: {
                     mainItem.swipe.close()
                     commentManager.deleteComment(model.fullname);
                 }
             }
+        }
 
-            ToolButton {
-                height: parent.height
-                width: 40
-                hoverEnabled: false
+        swipe.right: Row {
+            anchors { top: parent.top;bottom: parent.bottom; right: parent.right }
+
+            ActionButton {
                 visible: model.isAuthor && !model.isArchived
-                Image {
-                    anchors.centerIn: parent
-                    source: "../Icons/edit.svg"
-                    width: 24
-                    height: 24
-                }
+                ico: "../Icons/edit.svg"
+
                 onClicked: {
                     mainItem.swipe.close()
                     commentModel.setView(model.fullname, "edit");
                 }
             }
 
-            ToolButton {
-                height: parent.height
-                width: 40
-                hoverEnabled: false
-                Image {
-                    anchors.centerIn: parent
-                    source: "../Icons/mail-reply.svg"
-                    width: 24
-                    height: 24
-                }
+            ActionButton {
+                enabled: quickdditManager.isSignedIn && !model.isArchived && model.isValid && !link.isLocked
+                ico: "../Icons/mail-reply.svg"
+
                 onClicked: {
                     mainItem.swipe.close()
                     commentModel.setView(model.fullname, "reply");
                 }
             }
 
-            ToolButton {
-                height: parent.height
-                width: 40
-                hoverEnabled: false
-                Image {
-                    anchors.centerIn: parent
-                    source: "../Icons/edit-copy.svg"
-                    width: 24
-                    height: 24
-                }
+            ActionButton {
+                enabled: true
+                ico: "../Icons/edit-copy.svg"
+
                 onClicked: {
                     mainItem.swipe.close()
                     QMLUtils.copyToClipboard(model.rawBody);
@@ -139,33 +111,24 @@ Item {
                 }
             }
 
-            ToolButton {
-                height: parent.height
-                width: 40
-                hoverEnabled: false
+            ActionButton {
                 enabled: quickdditManager.isSignedIn && !commentSaveManager.busy
-                Image {
-                    anchors.centerIn: parent
-                    source: model.saved ? "../Icons/starred.svg" : "../Icons/non-starred.svg"
-                    width: 24
-                    height: 24
+                ico: model.saved ? "../Icons/starred.svg" : "../Icons/non-starred.svg"
+
+                onClicked: {
+                    mainItem.swipe.close()
+                    commentSaveManager.save(model.fullname,!model.saved)
                 }
-                onClicked: commentSaveManager.save(model.fullname,!model.saved)
             }
 
-            ToolButton {
-                height: parent.height
-                width: 40
-                hoverEnabled: false
+            ActionButton {
                 enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !model.isArchived && model.isValid
-                Image {
-                    anchors.centerIn: parent
-                    source: model.likes===1? "../Icons/up_b.svg" : "../Icons/up.svg"
-                    width: 24
-                    height: 24
+                ico: model.likes===1? "../Icons/up_b.svg" : "../Icons/up.svg"
+
+                onClicked: {
+                    mainItem.swipe.close()
+                    commentVoteManager.vote(model.fullname,model.likes===1 ? VoteManager.Unvote : VoteManager.Upvote);
                 }
-                //down: model.likes===1||pressed
-                onClicked: commentVoteManager.vote(model.fullname,model.likes===1 ? VoteManager.Unvote : VoteManager.Upvote);
             }
         }
         contentItem:Item{
@@ -320,7 +283,6 @@ Item {
                                                                             : model.view === "edit" ? model.rawBody : ""
                     }
                 }
-
             }
         }
     }

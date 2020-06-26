@@ -14,40 +14,41 @@ SwipeDelegate {
         onMovementStarted: messageDelegate.swipe.close()
     }
 
-    swipe.left: ToolButton {
-        height: parent.height
-        width: 40
-        hoverEnabled: false
-        //visible: model.isAuthor && !model.isArchived
-        Image {
-            anchors.centerIn: parent
-            source: "../Icons/delete.svg"
-            width: 24
-            height: 24
-        }
+    swipe.left: ActionButton {
+        ico: "../Icons/delete.svg"
+        visible: !model.isComment
+        enabled: !messageManager.busy
+
         onClicked: {
-            messageDelegate.swipe.close()
             messageManager.del(model.fullname);
+            swipe.close()
         }
     }
 
     swipe.right: Row {
         anchors { top: parent.top;bottom: parent.bottom; right: parent.right }
-        ToolButton {
-            height: parent.height
-            width: 40
-            hoverEnabled: false
-            Image {
-                anchors.centerIn: parent
-                source: "../Icons/mail-reply.svg"
-                width: 24
-                height: 24
-            }
+
+        ActionButton {
+            ico: model.isUnread? "../Icons/mail-read.svg" :"../Icons/mail-unread.svg"
+            enabled: !messageManager.busy
+
             onClicked: {
-                messageDelegate.swipe.close()
+                model.isUnread ? messageManager.markRead(model.fullname)
+                               : messageManager.markUnread(model.fullname);
+                swipe.close();
+            }
+        }
+
+        ActionButton {
+            ico: "../Icons/mail-reply.svg"
+            visible: !model.isComment
+            enabled: !messageManager.busy && model.author !== appSettings.redditUsername
+
+            onClicked: {
                 if (model.author !== appSettings.redditUsername) {
                     messageDelegate.doReply()
                 }
+                swipe.close()
             }
         }
     }
@@ -97,7 +98,7 @@ SwipeDelegate {
         leftPadding: 5
         Rectangle {
             id:rect
-            width: 3
+            width: model.isUnread ? 5:2
             anchors.verticalCenter: parent.verticalCenter
             height: parent.height-6
             color: "#ef9928"

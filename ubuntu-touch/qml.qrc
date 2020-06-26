@@ -55,5 +55,9 @@
         <file>Qml/MessagePage.qml</file>
         <file>Qml/MessageDelegate.qml</file>
         <file>Qml/SendMessagePage.qml</file>
+        <file>Qml/ActionButton.qml</file>
+        <file>Icons/mail-unread.svg</file>
+        <file>Icons/mail-read.svg</file>
+        <file>Qml/DonatePage.qml</file>
     </qresource>
 </RCC>

@@ -110,6 +110,13 @@ ApplicationWindow {
                     }
 
                     MenuSeparator {topPadding: 0; bottomPadding: 0 }
+
+                    MenuItem {
+                        text:  "My profile"
+                        onTriggered: { pageStack.push(Qt.resolvedUrl("Qml/UserPage.qml"),{username: appSettings.redditUsername}) }
+                    }
+
+                    MenuSeparator {topPadding: 0; bottomPadding: 0 }
                     
                     MenuItem {
                         text: "Messages"
