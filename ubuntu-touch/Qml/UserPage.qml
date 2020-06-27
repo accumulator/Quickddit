@@ -3,7 +3,7 @@ import QtQuick.Controls 2.2
 import quickddit.Core 1.0
 
 Page {
-    title: username;
+    title: "/u/"+username;
 
     property string username;
     property bool myself: appSettings.redditUsername === username && username !== ""

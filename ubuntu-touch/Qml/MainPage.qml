@@ -8,18 +8,18 @@ Page {
 
     id:mainPage
     objectName: "mainPage"
-    title: subreddit
+    title: /r/+subreddit
 
-    property string subreddit: quickdditManager.isSignedIn ? "Subscribed" : "All"
+    property string subreddit: quickdditManager.isSignedIn ? "subscribed" : "all"
     property string section
 
     function refresh(sr) {
         if(sr===undefined|| sr===""){
             if(quickdditManager.isSignedIn){
-                sr="Subscribed"
+                sr="subscribed"
             }
             else
-                sr="All"
+                sr="all"
         }
 
         if ( String(sr).toLowerCase() === "subscribed") {
@@ -39,6 +39,7 @@ Page {
     function refreshMR(multireddit) {
         linkModel.location = LinkModel.Multireddit;
         linkModel.multireddit = multireddit
+        subreddit = "/m/"+multireddit
         linkModel.refresh(false);
     }
 

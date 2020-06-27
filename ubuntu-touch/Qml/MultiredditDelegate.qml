@@ -1,10 +1,9 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
 
 ItemDelegate {
-    id:subredditDelegate
+    id:multiredditDelegate
 
     width: parent.width
     height: Math.max(ico.height+10,titleText.height + fullText.height+20)
@@ -28,14 +27,15 @@ ItemDelegate {
         id:titleText
         anchors{left: ico.right;right: parent.right;top: parent.top;margins: 5}
         elide: "ElideRight"
-        text: "/r/"+model.displayName+" ("+model.title+")"
+        text: "/m/"+model.name//+" ("+model.title+")"
         font.bold: true
     }
 
     Label {
         id:fullText
-        anchors{top: titleText.bottom;left: ico.right;right: parent.right;margins: 5}
-        text: model.shortDescription
+        anchors {top: titleText.bottom;left: ico.right;right: parent.right;margins: 5}
+        text: model.description
+
         wrapMode: "Wrap"
         elide: "ElideRight"
         maximumLineCount: 3

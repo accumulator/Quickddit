@@ -62,5 +62,7 @@
         <file>Img/bitcoin.png</file>
         <file>Img/btc-qr.png</file>
         <file>Img/paypal.png</file>
+        <file>Qml/MultiredditDelegate.qml</file>
+        <file>Qml/MultiredditPage.qml</file>
     </qresource>
 </RCC>

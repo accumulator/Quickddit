@@ -10,7 +10,7 @@ Drawer {
     property bool signedIn: false
     function showSubreddit(subreddit) {
         var mainPage = globalUtils.getMainPage();
-        mainPage.refresh(subreddit);
+        mainPage.refresh(subreddit.slice(3));
     }
 
     ListView{
@@ -20,7 +20,7 @@ Drawer {
         header:Column{
             width: parent.width
             ItemDelegate{
-                text: "Subscribed"
+                text: "/r/subscribed"
                 width: parent.width
                 visible: quickdditManager.isSignedIn || subredditsDrawer.position<0.1
                 onClicked: {
@@ -29,7 +29,7 @@ Drawer {
                 }
             }
             ItemDelegate{
-                text: "All"
+                text: "/r/all"
                 width: parent.width
                 onClicked: {
                     showSubreddit(text);
@@ -37,7 +37,7 @@ Drawer {
                 }
             }
             ItemDelegate{
-                text: "Popular"
+                text: "/r/popular"
                 width: parent.width
                 onClicked: {
                     showSubreddit(text);
@@ -49,7 +49,7 @@ Drawer {
         delegate: ItemDelegate{
             id:subredditDelegate
             width: parent.width
-            text: model.displayName
+            text: "/r/"+model.displayName
             onClicked: {
                 showSubreddit(subredditDelegate.text);
                 subredditsDrawer.close();

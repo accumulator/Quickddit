@@ -5,7 +5,7 @@ import QtGraphicalEffects 1.0
 
 Page {
     id:subredditPage
-    title: subreddit
+    title: "/r/"+subreddit
     objectName: "subredditPage"
     property string subreddit
     ScrollView{
@@ -31,14 +31,14 @@ Page {
 
         Label {
             id:fullName
-            text: subreddit
+            text: "/r/"+subreddit
             font.pointSize: 18
             anchors{ left: logo.right;bottom: name.top;leftMargin: 20}
         }
 
         Label {
             id:name
-            text: "r/"+aboutSubredditManager.subreddit
+            text: aboutSubredditManager.title
             anchors{left: logo.right;bottom: logo.bottom;leftMargin: 20}
         }
 
@@ -80,6 +80,7 @@ Page {
         Label {
             id:wiki
             text: aboutSubredditManager.longDescription
+            textFormat: Text.RichText
             anchors{ left: parent.left;top:showButton.bottom;right: parent.right;margins: 10}
             wrapMode: "WordWrap"
             onLinkActivated: globalUtils.openLink(link)

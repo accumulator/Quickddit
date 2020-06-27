@@ -24,6 +24,11 @@ Page {
                 padding: 6
                 width: implicitWidth
             }
+            TabButton {
+                text: "Multireddits"
+                padding: 6
+                width: implicitWidth
+            }
             TabButton{
                 text: "Popular"
                 padding: 6
@@ -59,9 +64,15 @@ Page {
                     search.forceActiveFocus()
                     break;
                 }
+                if (currentIndex!=1) {
+                    subredditsView.parent=swipeView.currentItem
+                    subredditModel.refresh(false)
+                }
+                else {
+                    multiredditModel.refresh(false)
+                }
+
                 section=currentItem.text
-                subredditsView.parent=swipeView.currentItem
-                subredditModel.refresh(false)
             }
         }
 
@@ -89,9 +100,10 @@ Page {
                 anchors.fill: parent
                 id:subredditsView
                 model: subredditModel
+
                 delegate: SubredditDelegate{
                     id:subredditDelegate
-                    manager:subredditManager
+
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:model.displayName})
                     }
@@ -107,6 +119,29 @@ Page {
                 }
             }
         }
+        ListView {
+
+            id:multiredditVIew
+            model: multiredditModel
+
+            delegate: MultiredditDelegate {
+                id:multiredditDelegate
+
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("MultiredditPage.qml"),{multireddit:model.name,mrModel:multiredditModel})
+                }
+            }
+            onAtYEndChanged: {
+                if (atYEnd && count > 0 && !multiredditModel.busy && multiredditModel.canLoadMore)
+                    multiredditModel.refresh(true);
+            }
+
+            BusyIndicator {
+                anchors.centerIn: parent
+                running: multiredditVIew.count==0
+            }
+        }
+
         Item{}
         Item{}
         Item{}
