@@ -161,7 +161,7 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
     qDebug() << "getting access token from url:" << signedInUrl;
 
     if (m_accessTokenRequest != 0) {
-        qWarning("QuickdditManager::getAccessToken(): Aborting active network request (Try to avoid!)");
+        qWarning() << "Aborting active network request (Try to avoid!)";
         m_accessTokenRequest->disconnect();
         m_accessTokenRequest->deleteLater();
         m_accessTokenRequest = 0;
@@ -180,7 +180,7 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
 #endif
 
     if (m_state != state) {
-        qCritical("QuickdditManager::getAccessToken(): (OAuth2) state is not matched");
+        qCritical() << "(OAuth2) state is not matched";
         emit accessTokenFailure(0, "Error: state not match");
         return;
     }
@@ -200,7 +200,7 @@ void QuickdditManager::getAccessToken(const QUrl &signedInUrl)
 void QuickdditManager::refreshAccessToken()
 {
     if (m_accessTokenRequest != 0) {
-        qWarning("QuickdditManager::refreshAccessToken(): Aborting active network request (Try to avoid!)");
+        qWarning() << "Aborting active network request (Try to avoid!)";
         m_accessTokenRequest->disconnect();
         m_accessTokenRequest->deleteLater();
         m_accessTokenRequest = 0;
@@ -251,22 +251,20 @@ void QuickdditManager::onAccessTokenRequestFinished(QNetworkReply *reply)
             emit accessTokenSuccess();
         } else {
             emit accessTokenFailure(0, "Error: access token not found. Please sign in again.");
-            qDebug("QuickdditManager::onAccessTokenRequestFinished(): "
-                   "Unable to get access token from the following data:\n%s", qPrintable(replyString));
+            qDebug("Unable to get access token from the following data:\n%s", qPrintable(replyString));
         }
     } else {
         if (reply->error() == QNetworkReply::UnknownContentError || reply->error() == QNetworkReply::ProtocolInvalidOperationError) {
             // something's wrong with the refresh token
-            qDebug() << "Bad Request using our refresh token, resetting";
+            qInfo() << "Bad Request using our refresh token, resetting";
             signOut();
             emit accessTokenFailure(0, "OAuth token invalid, please log in again");
         } else if (reply->error() == QNetworkReply::AuthenticationRequiredError) {
             // missing OAuth app credentials
-            qWarning() << "Server requires app registration. Make sure you compiled Quickddit with REDDIT_CLIENT_ID defined.";
+            qCritical() << "Server requires app registration. Make sure you compiled Quickddit with REDDIT_CLIENT_ID defined.";
             emit accessTokenFailure(0, "Application Error. Check the logs");
         } else {
-            qDebug() << "onAccessTokenRequestFinished error" << reply->error() << ":" << reply->errorString();
-            signOut();
+            qDebug() << "temporary network error" << reply->error() << ":" << reply->errorString();
             emit accessTokenFailure(reply->error(), reply->errorString());
         }
     }
@@ -324,7 +322,7 @@ void QuickdditManager::onUserInfoFinished(QNetworkReply *reply)
         Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
         m_settings->setRedditUsername(userJson.value("name").toString());
     } else {
-        qDebug("QuickdditManager::onUserInfoFinished(): Network error: %s", qPrintable(reply->errorString()));
+        qDebug("Network error: %s", qPrintable(reply->errorString()));
     }
 
     saveOrAddAccountInfo();
