@@ -63,6 +63,17 @@ AbstractPage {
         delegate: ListItem {
             id: multiredditDelegate
 
+            menu: Component {
+                ContextMenu {
+                    MenuItem {
+                        text: qsTr("About")
+                        onClicked: {
+                            pageStack.push(Qt.resolvedUrl("AboutMultiredditPage.qml"), {multireddit: model.name} );
+                        }
+                    }
+                }
+            }
+
             onClicked: {
                 multiredditsPage.multiredditName = model.name;
                 multiredditsPage.accepted();
