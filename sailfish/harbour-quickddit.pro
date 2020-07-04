@@ -141,7 +141,6 @@ OTHER_FILES += \
     qml/AboutSubredditPage.qml \
     qml/AboutPage.qml \
     qml/AbstractPage.qml \
-    qml/TextAreaDialog.qml \
     qml/MultiredditsPage.qml \
     qml/MessagePage.qml \
     qml/MessageDelegate.qml \
