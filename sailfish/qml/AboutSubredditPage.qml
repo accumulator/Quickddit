@@ -19,6 +19,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtGraphicalEffects 1.0
 import harbour.quickddit.Core 1.0
 
 AbstractPage {
@@ -91,6 +92,15 @@ AbstractPage {
                     asynchronous: true
                     width: (status == Image.Error || status == Image.Null) ? 0 : Theme.itemSizeLarge
                     height: width
+                    fillMode: Image.PreserveAspectFit
+                    layer.enabled: true
+                    layer.effect: OpacityMask {
+                        maskSource: Rectangle {
+                            width: headerImage.width
+                            height: headerImage.height
+                            radius: headerImage.width/4
+                        }
+                    }
                 }
 
                 Text {
