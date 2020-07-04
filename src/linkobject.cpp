@@ -26,8 +26,8 @@
 class LinkObjectData : public QSharedData
 {
 public:
-    LinkObjectData() : score(0), likes(0), commentsCount(0), distinguished(LinkObject::NotDistinguished),
-        isSticky(false), isNSFW(false), isPromoted(false), crossposts(0) {}
+    LinkObjectData() : score(0), likes(0), commentsCount(0), previewHeight(0), previewWidth(0),
+        distinguished(LinkObject::NotDistinguished), crossposts(0), isSticky(false), isNSFW(false), isPromoted(false) {}
 
     QString author;
     QDateTime created;
@@ -46,14 +46,14 @@ public:
     QString permalink;
     QUrl url;
     LinkObject::DistinguishedType distinguished;
+    QString flairText;
+    int gilded;
+    int crossposts;
     bool isSticky;
     bool isNSFW;
     bool isPromoted;
-    QString flairText;
     bool isArchived;
-    int gilded;
     bool isLocked;
-    int crossposts;
     // int num_reports
     // bool pinned
     // bool spoiler

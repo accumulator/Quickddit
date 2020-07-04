@@ -89,9 +89,9 @@ void commentFromMap(CommentObject &comment, const QVariantMap &commentMap)
     comment.setScore(commentMap.value("score").toInt());
     if (!commentMap.value("likes").isNull())
         comment.setLikes(commentMap.value("likes").toBool() ? 1 : -1);
-    comment.setCreated(QDateTime::fromTime_t(commentMap.value("created_utc").toInt()));
+    comment.setCreated(QDateTime::fromTime_t(commentMap.value("created_utc").toUInt()));
     if (commentMap.value("edited").toBool() != false)
-        comment.setEdited(QDateTime::fromTime_t(commentMap.value("edited").toInt()));
+        comment.setEdited(QDateTime::fromTime_t(commentMap.value("edited").toUInt()));
     comment.setDistinguished(commentMap.value("distinguished").toString());
     comment.setScoreHidden(commentMap.value("score_hidden").toBool());
     comment.setSubreddit(commentMap.value("subreddit").toString());
@@ -108,7 +108,7 @@ void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
 {
     link.setFullname(linkMap.value("name").toString());
     link.setAuthor(linkMap.value("author").toString());
-    link.setCreated(QDateTime::fromTime_t(linkMap.value("created_utc").toInt()));
+    link.setCreated(QDateTime::fromTime_t(linkMap.value("created_utc").toUInt()));
     link.setSubreddit(linkMap.value("subreddit").toString());
     link.setScore(linkMap.value("score").toInt());
     if (!linkMap.value("likes").isNull())
@@ -145,10 +145,6 @@ void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
             link.setPreviewHeight(j.value("height").toInt());
         }
     }
-    else {
-        link.setPreviewWidth(0);
-        link.setPreviewHeight(0);
-    }
 }
 
 void messageFromMap(MessageObject &message, const QVariantMap &messageMap)
@@ -158,7 +154,7 @@ void messageFromMap(MessageObject &message, const QVariantMap &messageMap)
     message.setDestination(messageMap.value("dest").toString());
     message.setBody(unescapeHtml(messageMap.value("body_html").toString()));
     message.setRawBody(unescapeMarkdown(messageMap.value("body").toString()));
-    message.setCreated(QDateTime::fromTime_t(messageMap.value("created_utc").toInt()));
+    message.setCreated(QDateTime::fromTime_t(messageMap.value("created_utc").toUInt()));
     message.setSubject(unescapeHtml(messageMap.value("subject").toString()));
     message.setLinkTitle(unescapeHtml(messageMap.value("link_title").toString()));
     message.setSubreddit(messageMap.value("subreddit").toString());
@@ -171,7 +167,7 @@ void messageFromMap(MessageObject &message, const QVariantMap &messageMap)
 void multiredditFromMap(MultiredditObject &multireddit, const QVariantMap &multiredditMap)
 {
     multireddit.setName(multiredditMap.value("name").toString());
-    multireddit.setCreated(QDateTime::fromTime_t(multiredditMap.value("created_utc").toInt()));
+    multireddit.setCreated(QDateTime::fromTime_t(multiredditMap.value("created_utc").toUInt()));
 
     QStringList subreddits;
     foreach (const QVariant &subredditObj, multiredditMap.value("subreddits").toList()) {
@@ -194,7 +190,7 @@ SubredditObject parseSubredditThing(const QVariantMap &subredditThing)
     SubredditObject subreddit;
     subreddit.setFullname(data.value("name").toString());
     subreddit.setDisplayName(data.value("display_name").toString());
-    subreddit.setTitle(data.value("title").toString());
+    subreddit.setTitle(unescapeMarkdown(data.value("title").toString()));
     subreddit.setUrl(data.value("url").toString());
     subreddit.setHeaderImageUrl(QUrl(unescapeUrl(data.value("header_img").toString())));
     if(!data.value("icon_img").toString().isEmpty())
@@ -224,7 +220,7 @@ void userobjectFromMap(UserObject &userObject, const QVariantMap &userObjectMap)
     userObject.setLinkKarma(userObjectMap.value("link_karma").toInt());
     userObject.setCommentKarma(userObjectMap.value("comment_karma").toInt());
     QDateTime d;
-    d.setTime_t(userObjectMap.value("created").toInt());
+    d.setTime_t(userObjectMap.value("created").toUInt());
     userObject.setCreated(d);
     userObject.setFriend(userObjectMap.value("is_friend").toBool());
     userObject.setHideFromRobots(userObjectMap.value("hide_from_robots").toBool());
