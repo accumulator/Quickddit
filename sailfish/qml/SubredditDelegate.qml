@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2016  Sander van Grieken
+    Copyright (C) 2016-2020  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,10 +17,12 @@
 */
 
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 import Sailfish.Silica 1.0
 
 ListItem {
     id: subredditDelegate
+    contentHeight: mainColumn.height + constant.paddingSmall
 
     Column {
         id: mainColumn
@@ -31,26 +33,47 @@ ListItem {
         spacing: constant.paddingSmall
 
         Row {
-            Text {
-                id: titleText
-                font.pixelSize: constant.fontSizeSmall
-                color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorMid
-                text: "/r/"
-            }
-            Text {
-                anchors.baseline: titleText.baseline
-                font.pixelSize: constant.fontSizeMedium
-                color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorLight
-                text: model.displayName
+            spacing: constant.paddingMedium
+
+            Image {
+                id: subredditIcon
+                height: Theme.itemSizeSmall
+                width: height
+                anchors.verticalCenter: parent.verticalCenter
+                source: model.iconUrl
+                asynchronous: true
+                fillMode: Image.PreserveAspectFit
+                layer.enabled: true
+                layer.effect: OpacityMask {
+                    maskSource: Rectangle {
+                        width: subredditIcon.width
+                        height: subredditIcon.height
+                        radius: subredditIcon.width/4
+                    }
+                }
             }
 
-            Item {
-                height: 1
-                width: 20
+            Row {
+                id: textRow
+                spacing: 0
+                anchors.verticalCenter: parent.verticalCenter
+                Text {
+                    id: titleText
+                    font.pixelSize: constant.fontSizeSmall
+                    color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorMid
+                    text: "/r/"
+                }
+                Text {
+                    anchors.baseline: titleText.baseline
+                    font.pixelSize: constant.fontSizeMedium
+                    color: subredditDelegate.highlighted ? Theme.highlightColor : constant.colorLight
+                    text: model.displayName
+                }
             }
 
             Row {
                 spacing: constant.paddingMedium
+                anchors.verticalCenter: parent.verticalCenter
 
                 Bubble {
                     font.pixelSize: constant.fontSizeSmall
