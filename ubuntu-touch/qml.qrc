@@ -46,7 +46,6 @@
         <file>Qml/UserPageLinkDelegate.qml</file>
         <file>Qml/PostButtonRow.qml</file>
         <file>Qml/AccountsPage.qml</file>
-        <file>Icons/list-add.svg</file>
         <file>Icons/next.svg</file>
         <file>Icons/delete.svg</file>
         <file>Icons/quickddit.svg</file>
@@ -64,5 +63,8 @@
         <file>Img/paypal.png</file>
         <file>Qml/MultiredditDelegate.qml</file>
         <file>Qml/MultiredditPage.qml</file>
+        <file>Qml/SendLinkPage.qml</file>
+        <file>Icons/info.svg</file>
+        <file>Icons/add.svg</file>
     </qresource>
 </RCC>

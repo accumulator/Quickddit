@@ -61,6 +61,10 @@ Page {
         linkModel.refresh(false);
     }
 
+    function newLinkPost() {
+        var p = {linkManager: linkManager, subreddit: subreddit};
+        pageStack.push(Qt.resolvedUrl("SendLinkPage.qml"),p)
+    }
 
     header:
         TabBar{
