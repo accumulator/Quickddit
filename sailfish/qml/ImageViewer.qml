@@ -123,8 +123,6 @@ Item {
             DisplayBlanking {
                 preventBlanking: imageItem.playing
             }
-
-            Component.onCompleted: console.log("Normal Image viewer used")
         }
     }
 

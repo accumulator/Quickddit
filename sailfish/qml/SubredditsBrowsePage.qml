@@ -72,11 +72,7 @@ AbstractPage {
         header: PageHeader { title: subredditsBrowsePage.title }
 
         delegate: SubredditBrowseDelegate {
-            onClicked: {
-                var mainPage = globalUtils.getMainPage();
-                mainPage.refresh(model.displayName);
-                pageStack.pop(mainPage);
-            }
+            onClicked: pageStack.push(Qt.resolvedUrl("MainPage.qml"), {subreddit: model.displayName})
 
             showMenuOnPressAndHold: true
 

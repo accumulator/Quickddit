@@ -122,8 +122,8 @@ AbstractPage {
                         case 0: subredditsPage.showSubreddit(""); break;
                         case 1: subredditsPage.showSubreddit("popular"); break;
                         case 2: subredditsPage.showSubreddit("all"); break;
-                        case 3: pageStack.push(Qt.resolvedUrl("SubredditsBrowsePage.qml")); break;
-                        case 4: pageStack.push(Qt.resolvedUrl("MultiredditsPage.qml"), { _model: multiredditModel }); break;
+                        case 3: replacePage(Qt.resolvedUrl("SubredditsBrowsePage.qml")); break;
+                        case 4: replacePage(Qt.resolvedUrl("MultiredditsPage.qml"), { _model: multiredditModel }); break;
                         }
                     }
                 }

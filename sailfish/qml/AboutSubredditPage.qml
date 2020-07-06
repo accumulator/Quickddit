@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2017  Sander van Grieken
+    Copyright (C) 2017-2020  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,12 +19,14 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtGraphicalEffects 1.0
 import harbour.quickddit.Core 1.0
 
 AbstractPage {
     id: aboutSubredditPage
     title: qsTr("About %1").arg(aboutSubredditManager.url || "Subreddit")
     busy: aboutSubredditManager.busy
+    clip: true
 
     property alias subreddit: aboutSubredditManager.subreddit
 
@@ -56,6 +58,20 @@ AbstractPage {
             }
         }
 
+        Image {
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: flickableColumn.top
+            }
+            width: parent.width
+            height: shortDescriptionText.y - y
+            source: aboutSubredditManager.bannerBackgroundUrl
+            asynchronous: true
+            fillMode: Image.PreserveAspectCrop
+            opacity: 0.5
+            transformOrigin: Item.Top
+        }
+
         Column {
             id: flickableColumn
             anchors { left: parent.left; right: parent.right; top: parent.top }
@@ -72,8 +88,19 @@ AbstractPage {
                 Image {
                     id: headerImage
                     anchors { left: parent.left; verticalCenter: parent.verticalCenter }
-                    source: aboutSubredditManager.headerImageUrl
+                    source: aboutSubredditManager.iconUrl
                     asynchronous: true
+                    width: (status == Image.Error || status == Image.Null) ? 0 : Theme.itemSizeLarge
+                    height: width
+                    fillMode: Image.PreserveAspectFit
+                    layer.enabled: true
+                    layer.effect: OpacityMask {
+                        maskSource: Rectangle {
+                            width: headerImage.width
+                            height: headerImage.height
+                            radius: headerImage.width/4
+                        }
+                    }
                 }
 
                 Text {
@@ -84,8 +111,7 @@ AbstractPage {
                         right: parent.right
                         verticalCenter: parent.verticalCenter
                     }
-                    elide: Text.ElideRight
-                    font.pixelSize: constant.fontSizeLarge
+                    font.pixelSize: constant.fontSizeXLarge
                     color: constant.colorLight
                     font.bold: true
                     text: aboutSubredditManager.subreddit
