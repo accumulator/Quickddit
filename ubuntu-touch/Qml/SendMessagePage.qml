@@ -75,7 +75,7 @@ Page {
                 anchors { left: parent.left; right: parent.right }
                 placeholderText: qsTr("Message")
                 visible: enabled
-                //height: Math.max(implicitHeight, Theme.itemSizeLarge * 3)
+                height: Math.max(implicitHeight, 75)
             }
 
             Button {

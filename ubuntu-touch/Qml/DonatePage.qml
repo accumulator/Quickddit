@@ -25,11 +25,12 @@ Page {
     property string _paypalLink: "https://paypal.me/sanderdonate"
     property string _bitcoinAddr: "3NhheF8z8sTxpbsCVUpW6HWH8DpADoH46m"
     property string  _paypalLink_dk: "https://PayPal.Me/DanielKutka"
-    ScrollView {
+    Flickable {
         anchors.fill: parent
+        contentHeight: mainColumn.height
         Column {
+            id:mainColumn
             width: parent.parent.width
-            anchors.horizontalCenter: parent
             padding: 10
             spacing: 8
             Label {

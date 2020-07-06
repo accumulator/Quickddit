@@ -62,34 +62,16 @@ ApplicationWindow {
         RowLayout {
             anchors.fill: parent
 
-            ToolButton {
-                width: height
-                hoverEnabled: false
+            ActionButton {
                 visible: pageStack.depth>1
-                //icon.source: "Icons/back.svg"
-                onClicked: {
-                    pageStack.pop()
-                }
-                Image {
-                    anchors.centerIn: parent
-                    source: "Icons/back.svg"
-                    width: 24
-                    height: 24
-                }
+                ico: "Icons/back.svg"
+                onClicked: pageStack.pop()
             }
 
-            ToolButton {
-                width: height
-                hoverEnabled: false
+            ActionButton {
                 visible: pageStack.depth<=1
-                //icon.source: "Icons/navigation-menu.svg"
+                ico: "Icons/navigation-menu.svg"
                 onClicked: subredditsDrawer.open()
-                Image {
-                    anchors.centerIn: parent
-                    source: "Icons/navigation-menu.svg"
-                    width: 24
-                    height: 24
-                }
             }
 
             Label{
@@ -128,18 +110,18 @@ ApplicationWindow {
                     }
 
                     MenuSeparator {topPadding: 0; bottomPadding: 0 }
-
-                    MenuItem {
-                        text:  "My profile"
-                        onTriggered: { pageStack.push(Qt.resolvedUrl("Qml/UserPage.qml"),{username: appSettings.redditUsername}) }
-                    }
-
-                    MenuSeparator {topPadding: 0; bottomPadding: 0 }
                     
                     MenuItem {
                         text: "Messages"
                         onTriggered: {pageStack.push(Qt.resolvedUrl("Qml/MessagePage.qml"))
                         }
+                    }
+
+                    MenuSeparator {topPadding: 0; bottomPadding: 0 }
+
+                    MenuItem {
+                        text:  "My profile"
+                        onTriggered: { pageStack.push(Qt.resolvedUrl("Qml/UserPage.qml"),{username: appSettings.redditUsername}) }
                     }
 
                     MenuSeparator {topPadding: 0; bottomPadding: 0 }
