@@ -21,12 +21,13 @@ import QtQuick.Layouts 1.2
 import quickddit.Core 1.0
 import QtQuick.Controls 2.2
 import Qt.labs.settings 1.0
+import QtQuick.Controls.Suru 2.2
 
 Page {
 
     id:mainPage
     objectName: "mainPage"
-    title: /r/+subreddit
+    title: linkModel.location == LinkModel.Multireddit ? /m/+subreddit : /r/+subreddit
 
     property string subreddit: quickdditManager.isSignedIn ? "subscribed" : "all"
     property string section
@@ -57,7 +58,7 @@ Page {
     function refreshMR(multireddit) {
         linkModel.location = LinkModel.Multireddit;
         linkModel.multireddit = multireddit
-        subreddit = "/m/"+multireddit
+        subreddit = multireddit
         linkModel.refresh(false);
     }
 
@@ -71,34 +72,63 @@ Page {
         id: tabBar
         contentHeight: undefined
         leftPadding: 10
+        background: Rectangle {
+            color: Suru.color(Suru.Orange,1)
+        }
 
         TabButton {
             id:tb0
             text: "Hot"
+            contentItem: Label {
+                text: parent.text
+                font.weight: Font.Normal
+                color: tb0.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
+            }
             width: implicitWidth
             padding:6
+
         }
         TabButton{
             id:tb1
             text: "New"
+            contentItem: Label {
+                text: parent.text
+                font.weight: Font.Normal
+                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
+            }
             width: implicitWidth
             padding:6
         }
         TabButton{
             id:tb2
             text: "Top"
+            contentItem: Label {
+                text: parent.text
+                font.weight: Font.Normal
+                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
+            }
             width: implicitWidth
             padding:6
         }
         TabButton{
             id:tb3
             text: "Controversial"
+            contentItem: Label {
+                text: parent.text
+                font.weight: Font.Normal
+                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
+            }
             width: implicitWidth
             padding:6
         }
         TabButton{
             id:tb4
             text: "Rising"
+            contentItem: Label {
+                text: parent.text
+                font.weight: Font.Normal
+                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
+            }
             width: implicitWidth
             padding:6
         }
@@ -120,6 +150,7 @@ Page {
                 anchors.fill: parent
                 model: linkModel
                 cacheBuffer: height*3
+                highlightFollowsCurrentItem: false
 
                 Label {
                     anchors { bottom: linkListView.contentItem.top; horizontalCenter: parent.horizontalCenter; margins: 75 }
@@ -131,6 +162,7 @@ Page {
                     linkVoteManager: voteManager
                     id:linkDelegate
                     link:model
+                    highlighted: false
 
                     onClicked: {
                         var p = { link: model,linkVoteManager1: voteManager, linkSaveManager1:saveManager};

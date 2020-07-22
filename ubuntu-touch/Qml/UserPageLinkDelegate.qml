@@ -18,6 +18,7 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Suru 2.2
 
 ItemDelegate {
     id:linkDelegate
@@ -34,14 +35,18 @@ ItemDelegate {
     Label {
         id: info
         padding: 5
+
+        color: Suru.foregroundColor
+        linkColor: Suru.color(Suru.Orange,1)
+
         anchors {top: parent.top; left: parent.left; right: parent.right; }
         elide: Text.ElideRight
-        text: "<a href='r/"+model.subreddit+"'>"+"r/"+model.subreddit+"</a>"+" ~ <a href='u/"+model.author+"'>"+"u/"+model.author+"</a>"+" ~ "+model.created+" ~ "+model.domain
+        text: "<a href='/r/"+model.subreddit+"'>"+"/r/"+model.subreddit+"</a>"+" ~ <a href='/u/"+model.author+"'>"+"/u/"+model.author+"</a>"+" ~ "+model.created+" ~ "+model.domain
         onLinkActivated: {
-            if(link.charAt(0)=='r')
-                pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:link.slice(2)})
-            if(link.charAt(0)=='u'){
-                pageStack.push(Qt.resolvedUrl("UserPage.qml"),{username:link.slice(2).split(" ")[0]})
+            if(link.charAt(1)=='r')
+                pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:link.slice(3)})
+            if(link.charAt(1)=='u'){
+                pageStack.push(Qt.resolvedUrl("UserPage.qml"),{username:link.slice(3).split(" ")[0]})
             }
         }
     }

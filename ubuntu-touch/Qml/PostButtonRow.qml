@@ -20,6 +20,8 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.2
 import quickddit.Core 1.0
+import QtGraphicalEffects 1.0
+import QtQuick.Controls.Suru 2.2
 
 Row{
     id:bottomRow
@@ -28,13 +30,12 @@ Row{
     property VoteManager linkVoteManager
     property SaveManager linkSaveManager
 
-    ToolButton {
+    ActionButton {
         id:up
-        flat: true
-        hoverEnabled: false
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width/6
-        //icon.source: "Icons/up.svg"
+        ico: "../Icons/up.svg"
+        color: link.likes ===1 ? Suru.color(Suru.Green,1) : Suru.foregroundColor
 
         onClicked: {
             if (link.likes ===1)
@@ -42,44 +43,28 @@ Row{
             else
                 linkVoteManager.vote(link.fullname, VoteManager.Upvote)
         }
-
-        Image{
-            source: link.likes ===1 ? "../Icons/up_b.svg" : "../Icons/up.svg"
-            width: 28
-            height: 28
-            anchors.centerIn: parent
-            smooth: true
-        }
     }
+
     Label{
         id:score
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width/6
         text: link.score
         horizontalAlignment: "AlignHCenter"
-        color:  link.score>0 ? "green" : "red"
+        color:  link.score>0 ? Suru.color(Suru.Green,1) : link.score<0 ? Suru.color(Suru.Red,1) : Suru.foregroundColor
     }
-    ToolButton {
-        id:downn
+    ActionButton {
+        id:down
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width/6
-        flat: true
-        hoverEnabled: false
-        enabled: quickdditManager.isSignedIn
-        //icon.source: "Icons/down.svg"
+        ico: "../Icons/down.svg"
+        color: link.likes ===-1 ? Suru.color(Suru.Red,1) : Suru.foregroundColor
 
         onClicked: {
             if (link.likes ===-1)
                 linkVoteManager.vote(link.fullname, VoteManager.Unvote)
             else
                 linkVoteManager.vote(link.fullname, VoteManager.Downvote)
-        }
-        Image{
-            source: link.likes ===-1 ? "../Icons/down_b.svg" : "../Icons/down.svg"
-            width: 28
-            height: 28
-            anchors.centerIn: parent
-            smooth: true
         }
     }
 
@@ -105,46 +90,40 @@ Row{
                 source: "../Icons/message.svg"
                 width: 24
                 height: 24
+                layer.enabled: true
+                layer.effect: ColorOverlay {
+                    color: Suru.foregroundColor
+                }
             }
             Label{
                 anchors.verticalCenter: parent.verticalCenter
                 text: " "+link.commentsCount
+                color: Suru.foregroundColor
             }
         }
     }
 
-    ToolButton {
+    ActionButton {
         id:share
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width/6
-        flat: true
-        hoverEnabled: false
-        //icon.source: "Icons/share.svg"
-        Image{
-            source: "../Icons/edit-copy.svg"
-            width: 24
-            height: 24
-            anchors.centerIn: parent
-        }
+        ico: "../Icons/edit-copy.svg"
+        color: Suru.foregroundColor
+
         onClicked: {
             QMLUtils.copyToClipboard(link.url)
             infoBanner.alert("Link coppied to clipboard")
         }
     }
 
-    ToolButton {
+    ActionButton {
         id:save
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width/6
         enabled: quickdditManager.isSignedIn
-        flat:true
-        hoverEnabled: false
-        Image {
-            source: link.saved ? "../Icons/starred.svg" : "../Icons/non-starred.svg"
-            width: 24
-            height: 24
-            anchors.centerIn: parent
-        }
+        ico: link.saved ? "../Icons/starred.svg" : "../Icons/non-starred.svg"
+        color: link.saved ? Suru.color(Suru.Orange,1) : Suru.foregroundColor
+
         onClicked: {
             linkSaveManager.save(link.fullname,!link.saved)
         }

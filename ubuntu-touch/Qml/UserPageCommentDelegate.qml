@@ -18,6 +18,7 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Suru 2.2
 
 ItemDelegate {
     property variant model
@@ -28,9 +29,13 @@ ItemDelegate {
     Label {
         id:info
         padding: 5
-        text: "Comment in <a href='r/"+model.subreddit+"'>"+"r/"+model.subreddit+"</a>"+ " ~ " + (model.score < 0 ? "-" : "") +  qsTr("%n points", "", Math.abs(model.score)) + " ~ "+ model.created
+
+        color: Suru.foregroundColor
+        linkColor: Suru.color(Suru.Orange,1)
+
+        text: "Comment in <a href='/r/"+model.subreddit+"'>"+"/r/"+model.subreddit+"</a>"+ " ~ " + (model.score < 0 ? "-" : "") +  qsTr("%n points", "", Math.abs(model.score)) + " ~ "+ model.created
         onLinkActivated: {
-            pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:link.slice(2)})
+            pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:link.slice(3)})
         }
     }
 
@@ -43,7 +48,7 @@ ItemDelegate {
             width: 3
             anchors.verticalCenter: parent.verticalCenter
             height: parent.height-6
-            color: "#ef9928"
+            color: Suru.color(Suru.Orange,1)
         }
 
         Label {

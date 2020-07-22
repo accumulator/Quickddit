@@ -20,6 +20,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.2
 import quickddit.Core 1.0
+import QtQuick.Controls.Suru 2.2
 
 Page {
     title: "Subreddits"
@@ -27,38 +28,87 @@ Page {
     property string  section
     objectName: "subredditsPage"
 
-    header:Item {
+    header: Item {
         width: parent.width
         height: tabBar.height+(search.visible?search.height:0)
 
-        TabBar{
+        TabBar {
             id: tabBar
             width: parent.width
             currentIndex: swipeView.currentIndex
             contentHeight: undefined
             leftPadding: 10
-            TabButton{
+            background: Rectangle {
+                color: Suru.color(Suru.Orange,1)
+            }
+
+            TabButton {
+                id: subButton
                 text: "Subscribed"
+                contentItem: Label {
+                    text: parent.text
+                    font.weight: Font.Normal
+                    color: Suru.color(Suru.White,1)
+                }
+                width: visible ? implicitWidth : 0
+                visible: quickdditManager.isSignedIn
+                onVisibleChanged: {
+                    if (visible){
+                        tabBar.insertItem(0,subButton)
+                    }
+                    else
+                        parent = 0
+                }
+                padding: 6
+            }
+
+            TabButton {
+                id: multiButton
+                text: "Multireddits"
+                contentItem: Label {
+                    text: parent.text
+                    font.weight: Font.Normal
+                    color: Suru.color(Suru.White,1)
+                }
+                width: visible ? implicitWidth : 0
+                visible: quickdditManager.isSignedIn
+                onVisibleChanged: {
+                    if (visible){
+                        tabBar.insertItem(1,multiButton)
+                    }
+                    else
+                        parent = 0
+                }
+                padding: 6
+            }
+
+            TabButton {
+                text: "Popular"
+                contentItem: Label {
+                    text: parent.text
+                    font.weight: Font.Normal
+                    color: Suru.color(Suru.White,1)
+                }
                 padding: 6
                 width: implicitWidth
             }
             TabButton {
-                text: "Multireddits"
-                padding: 6
-                width: implicitWidth
-            }
-            TabButton{
-                text: "Popular"
-                padding: 6
-                width: implicitWidth
-            }
-            TabButton{
                 text: "New"
+                contentItem: Label {
+                    text: parent.text
+                    font.weight: Font.Normal
+                    color: Suru.color(Suru.White,1)
+                }
                 padding: 6
                 width: implicitWidth
             }
-            TabButton{
+            TabButton {
                 text: "Search"
+                contentItem: Label {
+                    text: parent.text
+                    font.weight: Font.Normal
+                    color: Suru.color(Suru.White,1)
+                }
                 padding: 6
                 width: implicitWidth
             }
@@ -85,6 +135,7 @@ Page {
                 if (currentIndex!=1) {
                     subredditsView.parent=swipeView.currentItem
                     subredditModel.refresh(false)
+                    console.log(subredditModel.section)
                 }
                 else {
                     multiredditModel.refresh(false)
@@ -138,7 +189,6 @@ Page {
             }
         }
         ListView {
-
             id:multiredditVIew
             model: multiredditModel
 
@@ -204,7 +254,7 @@ Page {
     }
     Component.onCompleted:
     {
-        subredditModel.section=SubredditModel.UserAsSubscriberSection
+        quickdditManager.isSignedIn ? tabBar.setCurrentIndex(0) : tabBar.setCurrentIndex(2)
         subredditModel.refresh(false)
     }
 
@@ -214,39 +264,7 @@ Page {
         pageStack.navigateBack();
     }
 
-    function replacePage(newpage, parms) {
-        var mainPage = globalUtils.getMainPage();
-        mainPage.__pushedAttached = false;
-        pageStack.replaceAbove(mainPage, newpage, parms);
-    }
-
     function getMultiredditModel() {
         return multiredditModel
-    }
-
-    function tabButtonClick(s) {
-        if(s!==section)
-            switch(s){
-            case "Subscribed":
-                subredditModel.section=SubredditModel.UserAsSubscriberSection;
-                break;
-            case "Popular":
-                subredditModel.section=SubredditModel.PopularSection
-                break;
-            case "Moderated":
-                subredditModel.section=SubredditModel.UserAsModeratorSection
-                break;
-            case "Contributed":
-                subredditModel.section=SubredditModel.UserAsContributorSection
-                break;
-            case "Search":
-                subredditModel.section=SubredditModel.SearchSection
-                subredditModel.query=" "
-                subredditModel.clear()
-                search.forceActiveFocus()
-                break;
-            }
-        section=s;
-        subredditModel.refresh(false)
     }
 }

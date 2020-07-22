@@ -23,7 +23,7 @@ import quickddit.Core 1.0
 Page {
     id: aboutMultiredditPage
     objectName: "multiredditPage"
-    title: multiredditManager.name
+    title: "/m/"+multiredditManager.name
 
     property alias multireddit: multiredditManager.name
     property alias  mrModel: multiredditManager.model

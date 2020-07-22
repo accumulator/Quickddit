@@ -40,7 +40,7 @@ Page {
         commentModel.moreComments(index, children);
     }
 
-    ListView{
+    ListView {
         id:commentsList
         anchors.fill: parent
         header: LinkDelegate {
@@ -55,6 +55,10 @@ Page {
         delegate: CommentDelegate {
             id:commentDelegate
             width: parent.width
+        }
+        footer: Item {
+            width: parent.width
+            height: 400
         }
 
     }

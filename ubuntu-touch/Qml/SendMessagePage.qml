@@ -74,8 +74,8 @@ Page {
                 id: messageField
                 anchors { left: parent.left; right: parent.right }
                 placeholderText: qsTr("Message")
+                wrapMode: TextEdit.WordWrap
                 visible: enabled
-                height: Math.max(implicitHeight, 75)
             }
 
             Button {

@@ -20,6 +20,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import quickddit.Core 1.0
 import QtGraphicalEffects 1.0
+import QtQuick.Controls.Suru 2.2
 
 Page {
     id:subredditPage
@@ -97,8 +98,12 @@ Page {
 
         Label {
             id:wiki
+
+            color: Suru.foregroundColor
+            linkColor: Suru.color(Suru.Orange,1)
+
             text: aboutSubredditManager.longDescription
-            textFormat: Text.RichText
+            textFormat: Text.StyledText
             anchors{ left: parent.left;top:showButton.bottom;right: parent.right;margins: 10}
             wrapMode: "WordWrap"
             onLinkActivated: globalUtils.openLink(link)

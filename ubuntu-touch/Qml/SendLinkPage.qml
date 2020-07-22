@@ -99,9 +99,9 @@ Page {
                 id: linkDescription
                 anchors { left: parent.left; right: parent.right }
                 placeholderText: qsTr("Post Text")
+                wrapMode: TextEdit.WordWrap
                 enabled: selfLinkSwitch.checked
                 visible: enabled
-                height: Math.max(implicitHeight, 75)
             }
 
             ComboBox {

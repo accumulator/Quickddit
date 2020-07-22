@@ -20,6 +20,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.2
 import quickddit.Core 1.0
+import QtQuick.Controls.Suru 2.2
 
 Item {
     id: commentDelegate
@@ -76,7 +77,8 @@ Item {
             anchors { top: parent.top;bottom: parent.bottom; left: parent.left }
             ActionButton {
                 enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !model.isArchived && model.isValid
-                ico: model.likes===-1 ? "../Icons/down_b.svg" : "../Icons/down.svg"
+                ico: "../Icons/down.svg"
+                color: model.likes===-1 ? Suru.color(Suru.Red,1) : Suru.foregroundColor
 
                 onClicked: {
                     commentVoteManager.vote(model.fullname,model.likes===-1 ? VoteManager.Unvote : VoteManager.Downvote);
@@ -87,6 +89,7 @@ Item {
             ActionButton {
                 visible: model.isAuthor && !model.isArchived
                 ico: "../Icons/delete.svg"
+                color: Suru.color(Suru.Red,1)
 
                 onClicked: {
                     mainItem.swipe.close()
@@ -101,6 +104,7 @@ Item {
             ActionButton {
                 visible: model.isAuthor && !model.isArchived
                 ico: "../Icons/edit.svg"
+                color: Suru.foregroundColor
 
                 onClicked: {
                     mainItem.swipe.close()
@@ -111,6 +115,7 @@ Item {
             ActionButton {
                 enabled: quickdditManager.isSignedIn && !model.isArchived && model.isValid && !link.isLocked
                 ico: "../Icons/mail-reply.svg"
+                color: Suru.foregroundColor
 
                 onClicked: {
                     mainItem.swipe.close()
@@ -121,6 +126,7 @@ Item {
             ActionButton {
                 enabled: true
                 ico: "../Icons/edit-copy.svg"
+                color: Suru.foregroundColor
 
                 onClicked: {
                     mainItem.swipe.close()
@@ -132,6 +138,7 @@ Item {
             ActionButton {
                 enabled: quickdditManager.isSignedIn && !commentSaveManager.busy
                 ico: model.saved ? "../Icons/starred.svg" : "../Icons/non-starred.svg"
+                color: Suru.foregroundColor
 
                 onClicked: {
                     mainItem.swipe.close()
@@ -141,7 +148,8 @@ Item {
 
             ActionButton {
                 enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !model.isArchived && model.isValid
-                ico: model.likes===1? "../Icons/up_b.svg" : "../Icons/up.svg"
+                ico: "../Icons/up.svg"
+                color: model.likes===1 ? Suru.color(Suru.Green,1) : Suru.foregroundColor
 
                 onClicked: {
                     mainItem.swipe.close()
@@ -156,6 +164,10 @@ Item {
             Label {
                 id:info
                 padding: 5
+
+                color: Suru.foregroundColor
+                linkColor: Suru.color(Suru.Orange,1)
+
                 text:"<a href='"+model.author+"'>"+"u/" +model.author+"</a>"+ " ~ " + (model.score < 0 ? "-" : "") +  qsTr("%n points", "", Math.abs(model.score)) + " ~ "+ model.created
 
                 onLinkActivated: {
@@ -166,6 +178,10 @@ Item {
             Label {
                 id:comment
                 padding: 5
+
+                color: Suru.foregroundColor
+                linkColor: Suru.color(Suru.Orange,1)
+
                 bottomPadding: 0
                 anchors {top: info.bottom;left: parent.left;right: parent.right}
                 text: model.body
@@ -247,6 +263,7 @@ Item {
                     id: editTextArea
                     anchors { left: parent.left; right: parent.right }
 
+                    wrapMode: TextEdit.WordWrap
                     placeholderText: model.view === "reply" ? qsTr("Enter your reply here...") : qsTr("Enter your new comment here...")
                     focus: true
                 }

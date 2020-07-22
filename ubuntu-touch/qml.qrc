@@ -66,5 +66,11 @@
         <file>Qml/SendLinkPage.qml</file>
         <file>Icons/info.svg</file>
         <file>Icons/add.svg</file>
+        <file>Qml/MenuItem.qml</file>
+        <file>Icons/settings.svg</file>
+        <file>Icons/system-log-out.svg</file>
+        <file>Icons/account.svg</file>
+        <file>Icons/view-list-symbolic.svg</file>
+        <file>Icons/contact-new.svg</file>
     </qresource>
 </RCC>
