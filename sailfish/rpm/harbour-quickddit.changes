@@ -5,6 +5,17 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Tue Jul 07 2020 Sander van Grieken <sander@outrightsolutions.nl> 1.9.10-1
+- fix: only DMs can be deleted from inbox
+- fix: don't log out on transient network errors (fixes #67)
+- chg: update styling on multireddit members
+- chg: navigation/stacking behaviour for subreddit Browse and multireddit members
+- chg: update youtube-dl to 2020-06-30
+- new: uncensor option on deleted comments (thanks szopin!)
+- new: context menu on multireddit members
+- new: subreddit icons in subreddit list and subreddit browse page
+- new: subreddit banner image in subreddit about page
+
 * Sat Apr 25 2020 Sander van Grieken <sander@outrightsolutions.nl> 1.9.9-1
 - fix: disable voting buttons for deleted comments
 - fix: highlighting issue on context menu (thanks szopin!)

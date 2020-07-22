@@ -313,7 +313,7 @@ int CommentModel::getCommentIndex(const QString &fullname)
 
 void CommentModel::changeLinkLikes(const QString &fullname, int likes)
 {
-    if (!m_link.type() == QVariant::Map) {
+    if (m_link.type() != QVariant::Map) {
         qWarning("CommentModel::changeLinkLikes(): link is not provided by CommentModel");
         return;
     }
@@ -333,7 +333,7 @@ void CommentModel::changeLinkLikes(const QString &fullname, int likes)
 
 void CommentModel::changeLinkSaved(const QString &fullname, bool saved)
 {
-    if (!m_link.type() == QVariant::Map) {
+    if (m_link.type() != QVariant::Map) {
         qWarning("CommentModel::changeLinkSaved(): link is not provided by CommentModel");
         return;
     }
@@ -560,7 +560,7 @@ void CommentModel::moreComments(int index, const QVariant &children)
 {
     Q_ASSERT(!m_permalink.isEmpty());
 
-    if (!m_link.type() == QVariant::Map) {
+    if (m_link.type() != QVariant::Map) {
         qWarning("CommentModel::moreComments(): link is not provided by CommentModel");
         return;
     }

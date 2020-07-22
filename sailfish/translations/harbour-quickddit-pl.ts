@@ -17,43 +17,43 @@
 <context>
     <name>AboutMultiredditPage</name>
     <message>
-        <location filename="../qml/AboutMultiredditPage.qml" line="25"/>
+        <location filename="../qml/AboutMultiredditPage.qml" line="26"/>
         <source>About %1</source>
         <translation>O %1</translation>
     </message>
     <message>
-        <location filename="../qml/AboutMultiredditPage.qml" line="37"/>
-        <location filename="../qml/AboutMultiredditPage.qml" line="127"/>
+        <location filename="../qml/AboutMultiredditPage.qml" line="38"/>
+        <location filename="../qml/AboutMultiredditPage.qml" line="153"/>
         <source>Add Subreddit</source>
         <translation>Dodaj Subreddit</translation>
     </message>
     <message>
-        <location filename="../qml/AboutMultiredditPage.qml" line="55"/>
+        <location filename="../qml/AboutMultiredditPage.qml" line="56"/>
         <source>Description</source>
         <translation>Opis</translation>
     </message>
     <message>
-        <location filename="../qml/AboutMultiredditPage.qml" line="65"/>
+        <location filename="../qml/AboutMultiredditPage.qml" line="66"/>
         <source>No description</source>
         <translation>Brak opisu</translation>
     </message>
     <message>
-        <location filename="../qml/AboutMultiredditPage.qml" line="69"/>
+        <location filename="../qml/AboutMultiredditPage.qml" line="70"/>
         <source>Subreddits</source>
         <translation>Subreddity</translation>
     </message>
     <message>
-        <location filename="../qml/AboutMultiredditPage.qml" line="96"/>
+        <location filename="../qml/AboutMultiredditPage.qml" line="122"/>
         <source>Go to %1</source>
         <translation>Idź do %1</translation>
     </message>
     <message>
-        <location filename="../qml/AboutMultiredditPage.qml" line="105"/>
+        <location filename="../qml/AboutMultiredditPage.qml" line="131"/>
         <source>Remove</source>
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="../qml/AboutMultiredditPage.qml" line="132"/>
+        <location filename="../qml/AboutMultiredditPage.qml" line="158"/>
         <source>Enter subreddit name</source>
         <translation>Wpisz nazwę subreddita</translation>
     </message>
@@ -115,37 +115,37 @@
 <context>
     <name>AboutSubredditPage</name>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="26"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="27"/>
         <source>About %1</source>
         <translation>O %1</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="38"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="40"/>
         <source>Moderators</source>
         <translation>Moderatorzy</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="45"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="47"/>
         <source>Message Moderators</source>
         <translation>Napisz do Moderatorów</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="53"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="55"/>
         <source>Unsubscribe</source>
         <translation>Wypisz</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="53"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="55"/>
         <source>Subscribe</source>
         <translation>Subskrybuj</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="101"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="127"/>
         <source>This subreddit is Not Safe For Work</source>
         <translation>Ten subreddit może być nieodpowiedni do przeglądania w pracy.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/AboutSubredditPage.qml" line="117"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="143"/>
         <source>%n subscribers</source>
         <translation>
             <numerusform>%n subskrybent</numerusform>
@@ -154,7 +154,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/AboutSubredditPage.qml" line="118"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="144"/>
         <source>%n active users</source>
         <translation>
             <numerusform>%n aktywny użytkownik</numerusform>
@@ -163,77 +163,77 @@
         </translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="130"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="156"/>
         <source>Subscribed</source>
         <translation>Subskrybujesz</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="130"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="156"/>
         <source>Not Subscribed</source>
         <translation>Nie Subskrybujesz</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="135"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="161"/>
         <source>Private</source>
         <translation>Prywatny</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="136"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="162"/>
         <source>Restricted</source>
         <translation>Zastrzeżony</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="137"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="163"/>
         <source>GoldRestricted</source>
         <translation>Zastrzeżony dla posiadaczy złota</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="137"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="163"/>
         <source>Archived</source>
         <translation>Zarchiwizowany</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="142"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="168"/>
         <source>Links only</source>
         <translation>Tylko linki</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="142"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="168"/>
         <source>Self posts only</source>
         <translation>Tylko posty tekstowe</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="147"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="173"/>
         <source>NSFW</source>
         <translation>NSFW</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="153"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="179"/>
         <source>Contributor</source>
         <translation>Kontrybutor</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="158"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="184"/>
         <source>Banned</source>
         <translation>Zbanowany</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="164"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="190"/>
         <source>Mod</source>
         <translation>Moderator</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="170"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="196"/>
         <source>Muted</source>
         <translation>Wyciszony</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="200"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="226"/>
         <source>You have subscribed to %1</source>
         <translation>Subskrybujesz %1</translation>
     </message>
     <message>
-        <location filename="../qml/AboutSubredditPage.qml" line="202"/>
+        <location filename="../qml/AboutSubredditPage.qml" line="228"/>
         <source>You have unsubscribed from %1</source>
         <translation>Anulowano subskrypcję %1</translation>
     </message>
@@ -799,7 +799,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>MessageMenu</name>
     <message>
-        <location filename="../qml/MessageMenu.qml" line="37"/>
+        <location filename="../qml/MessageMenu.qml" line="36"/>
         <source>Reply</source>
         <translation type="unfinished">Odpowiedz</translation>
     </message>
@@ -911,7 +911,12 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
         <translation>Odśwież</translation>
     </message>
     <message>
-        <location filename="../qml/MultiredditsPage.qml" line="97"/>
+        <location filename="../qml/MultiredditsPage.qml" line="69"/>
+        <source>About</source>
+        <translation type="unfinished">O</translation>
+    </message>
+    <message>
+        <location filename="../qml/MultiredditsPage.qml" line="108"/>
         <source>Nothing here :(</source>
         <translation>Nic tutaj nie ma :(</translation>
     </message>
@@ -1317,7 +1322,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>SubredditBrowseDelegate</name>
     <message numerus="yes">
-        <location filename="../qml/SubredditBrowseDelegate.qml" line="68"/>
+        <location filename="../qml/SubredditBrowseDelegate.qml" line="82"/>
         <source>%n subscribers</source>
         <translation>
             <numerusform>%n subskrybent</numerusform>
@@ -1329,27 +1334,27 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>SubredditDelegate</name>
     <message>
-        <location filename="../qml/SubredditDelegate.qml" line="58"/>
+        <location filename="../qml/SubredditDelegate.qml" line="81"/>
         <source>NSFW</source>
         <translation>NSFW</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditDelegate.qml" line="64"/>
+        <location filename="../qml/SubredditDelegate.qml" line="87"/>
         <source>Contributor</source>
         <translation>Kontrybutor</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditDelegate.qml" line="69"/>
+        <location filename="../qml/SubredditDelegate.qml" line="92"/>
         <source>Banned</source>
         <translation>Zbanowany</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditDelegate.qml" line="75"/>
+        <location filename="../qml/SubredditDelegate.qml" line="98"/>
         <source>Mod</source>
         <translation>Moderator</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditDelegate.qml" line="81"/>
+        <location filename="../qml/SubredditDelegate.qml" line="104"/>
         <source>Muted</source>
         <translation>Wyciszony</translation>
     </message>
@@ -1398,27 +1403,27 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
         <translation>Odśwież</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsBrowsePage.qml" line="86"/>
+        <location filename="../qml/SubredditsBrowsePage.qml" line="82"/>
         <source>About</source>
         <translation>O</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsBrowsePage.qml" line="92"/>
+        <location filename="../qml/SubredditsBrowsePage.qml" line="88"/>
         <source>Subscribe</source>
         <translation>Subskrybuj</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsBrowsePage.qml" line="101"/>
+        <location filename="../qml/SubredditsBrowsePage.qml" line="97"/>
         <source>Unsubscribe</source>
         <translation>Wypisz</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsBrowsePage.qml" line="122"/>
+        <location filename="../qml/SubredditsBrowsePage.qml" line="118"/>
         <source>Nothing here :(</source>
         <translation>Nic tutaj nie ma :(</translation>
     </message>
     <message>
-        <location filename="../qml/SubredditsBrowsePage.qml" line="139"/>
+        <location filename="../qml/SubredditsBrowsePage.qml" line="135"/>
         <source>You have %2 from %1</source>
         <translation>Masz %2 z %1</translation>
     </message>
@@ -1499,14 +1504,6 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
         <location filename="../qml/SubredditsPage.qml" line="226"/>
         <source>You have unsubscribed from %1</source>
         <translation>Anulowano subskrypcję %1</translation>
-    </message>
-</context>
-<context>
-    <name>TextAreaDialog</name>
-    <message>
-        <location filename="../qml/TextAreaDialog.qml" line="50"/>
-        <source>Enter your comment here...</source>
-        <translation>Wpisz komentarz tutaj...</translation>
     </message>
 </context>
 <context>
