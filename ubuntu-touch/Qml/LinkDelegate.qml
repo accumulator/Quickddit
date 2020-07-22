@@ -86,7 +86,7 @@ ItemDelegate {
         elide: Text.ElideRight
         maximumLineCount: compact ? 3:9999
         wrapMode: Text.WordWrap
-        textFormat: Text.StyledText
+        textFormat: compact ? Text.StyledText : Text.MarkdownText ? Text.MarkdownText : Text.StyledText
         onLinkActivated: globalUtils.openLink(link)
     }
     //preview

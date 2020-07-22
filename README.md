@@ -25,7 +25,7 @@ Features
 | Multireddit support    | partial | partial | partial |
 | integrated image viewer | Y | Y | Y |
 | integrated Imgur album viewer | Y | | Y |
-| integrated video player | Y | | |
+| integrated video player | Y | partial | |
 | integrated webviewer   | Y | Y | |
 | search posts           | Y | | Y |
 | search subreddits      | Y | Y | Y |

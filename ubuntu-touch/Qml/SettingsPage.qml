@@ -32,14 +32,14 @@ Page {
 
             SwitchDelegate {
                 width: parent.width
-                text: "Compact images in feed"
+                text: "Compact images in feed (saves data)"
                 checked: persistantSettings.compactImages
                 onCheckedChanged: persistantSettings.compactImages = checked
             }
 
             SwitchDelegate {
                 width: parent.width
-                text: "Full resolution images"
+                text: "Full resolution images (uses more data)"
                 checked: persistantSettings.fullResolutionImages
                 onCheckedChanged: persistantSettings.fullResolutionImages = checked
                 //enabled: false

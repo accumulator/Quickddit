@@ -168,7 +168,7 @@ Item {
                 color: Suru.foregroundColor
                 linkColor: Suru.color(Suru.Orange,1)
 
-                text:"<a href='"+model.author+"'>"+"u/" +model.author+"</a>"+ " ~ " + (model.score < 0 ? "-" : "") +  qsTr("%n points", "", Math.abs(model.score)) + " ~ "+ model.created
+                text:"<a href='"+model.author+"'>"+"u/" +model.author+(model.isSubmitter?" [submitter]":"")+"</a>"+ " ~ " + (model.score < 0 ? "-" : "") +  qsTr("%n points", "", Math.abs(model.score)) + " ~ "+ model.created
 
                 onLinkActivated: {
                     pageStack.push(Qt.resolvedUrl("UserPage.qml"),{username:link.split(" ")[0]})
@@ -182,9 +182,9 @@ Item {
                 color: Suru.foregroundColor
                 linkColor: Suru.color(Suru.Orange,1)
 
-                bottomPadding: 0
                 anchors {top: info.bottom;left: parent.left;right: parent.right}
-                text: model.body
+                text: model.rawBody
+                textFormat: Text.MarkdownText ? Text.MarkdownText : Text.StyledText
 
                 wrapMode: "Wrap"
                 onLinkActivated: globalUtils.openLink(link)
