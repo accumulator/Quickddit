@@ -1,3 +1,21 @@
+/*
+    Quickddit - Reddit client for mobile phones
+    Copyright (C) 2020  Daniel Kutka
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see [http://www.gnu.org/licenses/].
+*/
+
 import QtQuick 2.9
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.2
@@ -13,6 +31,8 @@ ApplicationWindow {
     id:window
     title: "Quickddit"
     visible: true
+    width: 400
+    height: 800
 
     SubredditsDrawer {
         id:subredditsDrawer
@@ -39,44 +59,30 @@ ApplicationWindow {
     ToolBar{
         id:tBar
         background: Rectangle {
-            color: Suru.secondaryBackgroundColor
+            color: Suru.color(Suru.Orange,1)
         }
         RowLayout {
             anchors.fill: parent
 
-            ToolButton {
-                width: height
-                hoverEnabled: false
+            ActionButton {
                 visible: pageStack.depth>1
-                //icon.source: "Icons/back.svg"
-                onClicked: {
-                    pageStack.pop()
-                }
-                Image {
-                    anchors.centerIn: parent
-                    source: "Icons/back.svg"
-                    width: 24
-                    height: 24
-                }
+                ico: "Icons/back.svg"
+                color: Suru.color(Suru.White,1)
+                onClicked: pageStack.pop()
             }
 
-            ToolButton {
-                width: height
-                hoverEnabled: false
+            ActionButton {
                 visible: pageStack.depth<=1
-                //icon.source: "Icons/navigation-menu.svg"
+                ico: "Icons/navigation-menu.svg"
+                color: Suru.color(Suru.White,1)
                 onClicked: subredditsDrawer.open()
-                Image {
-                    anchors.centerIn: parent
-                    source: "Icons/navigation-menu.svg"
-                    width: 24
-                    height: 24
-                }
             }
 
             Label{
                 id:titleLabel
                 font.pointSize: 14
+                font.weight: Font.Normal
+                color: Suru.color(Suru.White,1)
                 elide: "ElideRight"
                 Layout.fillWidth: true
                 horizontalAlignment: "AlignLeft"
@@ -84,18 +90,12 @@ ApplicationWindow {
                 text: pageStack.currentItem.title
             }
 
-            ToolButton {
-                width: height
-                hoverEnabled: false
+            ActionButton {
                 visible: pageStack.depth<=1
-                // icon.source: "Icons/contextual-menu.svg"
-                Image {
-                    anchors.centerIn: parent
-                    source: "Icons/contextual-menu.svg"
-                    width: 24
-                    height: 24
-                }
+                ico: "Icons/contextual-menu.svg"
+                color: Suru.color(Suru.White,1)
                 onClicked: optionsMenu.open()
+
                 Menu {
                     id: optionsMenu
                     x: parent.width - width
@@ -104,7 +104,8 @@ ApplicationWindow {
                     width: 200
 
                     MenuItem {
-                        text: "My Subreddits"
+                        txt: "My Subreddits"
+                        ico: "../Icons/view-list-symbolic.svg"
                         onTriggered: {pageStack.push(Qt.resolvedUrl("Qml/SubredditsPage.qml"))
                         }
                     }
@@ -112,14 +113,27 @@ ApplicationWindow {
                     MenuSeparator {topPadding: 0; bottomPadding: 0 }
                     
                     MenuItem {
-                        text: "Messages"
+                        txt: "Messages"
+                        ico: "../Icons/message.svg"
+                        enabled: quickdditManager.isSignedIn
                         onTriggered: {pageStack.push(Qt.resolvedUrl("Qml/MessagePage.qml"))
                         }
                     }
 
                     MenuSeparator {topPadding: 0; bottomPadding: 0 }
+
                     MenuItem {
-                        text: quickdditManager.isSignedIn ? "Log out ("+appSettings.redditUsername+")": "Log in"
+                        txt:  "My profile"
+                        ico: "../Icons/account.svg"
+                        enabled: quickdditManager.isSignedIn
+                        onTriggered: { pageStack.push(Qt.resolvedUrl("Qml/UserPage.qml"),{username: appSettings.redditUsername}) }
+                    }
+
+                    MenuSeparator {topPadding: 0; bottomPadding: 0 }
+
+                    MenuItem {
+                        txt: quickdditManager.isSignedIn ? "Log out ("+appSettings.redditUsername+")": "Log in"
+                        ico: quickdditManager.isSignedIn ? "../Icons/system-log-out.svg" : "../Icons/contact-new.svg"
                         onTriggered:{
                             !quickdditManager.isSignedIn ? pageStack.push(Qt.resolvedUrl("Qml/LoginPage.qml")) : logOutDialog.open();
                         }
@@ -142,14 +156,16 @@ ApplicationWindow {
                     MenuSeparator { topPadding: 0; bottomPadding: 0 }
 
                     MenuItem {
-                        text: "Settings"
+                        txt: "Settings"
+                        ico: "../Icons/settings.svg"
                         onTriggered: pageStack.push(Qt.resolvedUrl("Qml/SettingsPage.qml"))
                     }
 
                     MenuSeparator { topPadding: 0; bottomPadding: 0 }
 
                     MenuItem {
-                        text: "About"
+                        txt: "About"
+                        ico: "../Icons/info.svg"
                         onTriggered: pageStack.push(Qt.resolvedUrl("Qml/AboutPage.qml"))
                     }
                 }

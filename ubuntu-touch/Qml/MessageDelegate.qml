@@ -1,5 +1,24 @@
+/*
+    Quickddit - Reddit client for mobile phones
+    Copyright (C) 2020  Daniel Kutka
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see [http://www.gnu.org/licenses/].
+*/
+
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Suru 2.2
 
 SwipeDelegate {
     id: messageDelegate
@@ -14,40 +33,44 @@ SwipeDelegate {
         onMovementStarted: messageDelegate.swipe.close()
     }
 
-    swipe.left: ToolButton {
-        height: parent.height
-        width: 40
-        hoverEnabled: false
-        //visible: model.isAuthor && !model.isArchived
-        Image {
-            anchors.centerIn: parent
-            source: "../Icons/delete.svg"
-            width: 24
-            height: 24
-        }
+    swipe.left: ActionButton {
+        ico: "../Icons/delete.svg"
+        visible: !model.isComment
+        enabled: !messageManager.busy
+        color: Suru.color(Suru.Red,1)
+
         onClicked: {
-            messageDelegate.swipe.close()
             messageManager.del(model.fullname);
+            swipe.close()
         }
     }
 
     swipe.right: Row {
         anchors { top: parent.top;bottom: parent.bottom; right: parent.right }
-        ToolButton {
-            height: parent.height
-            width: 40
-            hoverEnabled: false
-            Image {
-                anchors.centerIn: parent
-                source: "../Icons/mail-reply.svg"
-                width: 24
-                height: 24
-            }
+
+        ActionButton {
+            ico: model.isUnread? "../Icons/mail-read.svg" :"../Icons/mail-unread.svg"
+            enabled: !messageManager.busy
+            color: Suru.foregroundColor
+
             onClicked: {
-                messageDelegate.swipe.close()
+                model.isUnread ? messageManager.markRead(model.fullname)
+                               : messageManager.markUnread(model.fullname);
+                swipe.close();
+            }
+        }
+
+        ActionButton {
+            ico: "../Icons/mail-reply.svg"
+            visible: !model.isComment
+            enabled: !messageManager.busy && model.author !== appSettings.redditUsername
+            color: Suru.foregroundColor
+
+            onClicked: {
                 if (model.author !== appSettings.redditUsername) {
                     messageDelegate.doReply()
                 }
+                swipe.close()
             }
         }
     }
@@ -59,13 +82,17 @@ SwipeDelegate {
         id:info
         anchors {left: parent.left;right: parent.right;top: parent.top }
         padding: 5
-        text: isComment ? "<a href='r/" + model.subreddit + "'>"+"r/"+model.subreddit + "</a> ~ " + model.created
+
+        color: Suru.foregroundColor
+        linkColor: Suru.color(Suru.Orange,1)
+
+        text: isComment ? "<a href='/r/" + model.subreddit + "'>"+"/r/"+model.subreddit + "</a> ~ " + model.created
                         : (model.author === appSettings.redditUsername)
                           ? model.destination
                           : (model.author !== "")
                             ? model.author + " ~ " + model.created
-                            : "r/" + model.subreddit + " ~ " + model.created
-        onLinkActivated: pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:link.slice(2)})
+                            : "/r/" + model.subreddit + " ~ " + model.created
+        onLinkActivated: pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:link.slice(3)})
     }
 
     Label {
@@ -97,16 +124,20 @@ SwipeDelegate {
         leftPadding: 5
         Rectangle {
             id:rect
-            width: 3
+            width: model.isUnread ? 5:2
             anchors.verticalCenter: parent.verticalCenter
             height: parent.height-6
-            color: "#ef9928"
+            color: Suru.color(Suru.Orange,1)
         }
 
         Label {
             id:body
             width: parent.width-rect.width
             padding: 5
+
+            color: Suru.foregroundColor
+            linkColor: Suru.color(Suru.Orange,1)
+
             text: model.body
             textFormat: Text.StyledText
             wrapMode: Text.WordWrap

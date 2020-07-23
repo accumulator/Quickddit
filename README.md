@@ -17,16 +17,16 @@ Features
 | Sign into Reddit       | Y | Y | Y |
 | Multi account          | Y | Y | Y |
 | Submit/edit new links and self-posts | Y |  | Y |
-| add, reply, edit, delete comments | Y | partial | Y |
+| add, reply, edit, delete comments | Y | Y | Y |
 | Browse your messages   | Y | Y | Y |
 | Send messages          | Y | Y | Y |
 | Vote on comments and posts | Y | Y | Y |
 | Save comments and posts | Y | Y | Y |
-| Multireddit support    | partial | | partial |
+| Multireddit support    | partial | partial | partial |
 | integrated image viewer | Y | Y | Y |
 | integrated Imgur album viewer | Y | | Y |
-| integrated video player | Y | | |
-| integrated webviewer   | Y | |  |
+| integrated video player | Y | partial | |
+| integrated webviewer   | Y | Y | |
 | search posts           | Y | | Y |
 | search subreddits      | Y | Y | Y |
 | inbox notifications    | Y | | Y |

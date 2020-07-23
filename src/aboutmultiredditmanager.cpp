@@ -35,7 +35,8 @@ void AboutMultiredditManager::classBegin()
 
 void AboutMultiredditManager::componentComplete()
 {
-    Q_ASSERT(!m_name.isEmpty() && m_model != 0);
+    Q_ASSERT(!m_name.isEmpty());
+    Q_ASSERT(m_model != 0);
 
     m_multiredditObject = m_model->getMultireddit(m_name);
     emit multiredditChanged();
@@ -60,6 +61,11 @@ void AboutMultiredditManager::setName(const QString &name)
 QString AboutMultiredditManager::description() const
 {
     return m_multiredditObject.description();
+}
+
+QString AboutMultiredditManager::iconUrl() const
+{
+    return m_multiredditObject.iconUrl();
 }
 
 QStringList AboutMultiredditManager::subreddits() const

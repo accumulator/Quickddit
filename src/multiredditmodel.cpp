@@ -52,6 +52,8 @@ QVariant MultiredditModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case NameRole: return multireddit.name();
+    case IconUrlRole: return multireddit.iconUrl();
+    case DescriptionRole: return  multireddit.description();
     default:
         qCritical("MultiredditModel::data(): Invalid role");
         return QVariant();
@@ -94,6 +96,8 @@ QHash<int, QByteArray> MultiredditModel::customRoleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[NameRole] = "name";
+    roles[IconUrlRole] = "iconUrl";
+    roles[DescriptionRole] = "description";
     return roles;
 }
 

@@ -28,6 +28,7 @@ public:
 
     QString name;
     QString description;
+    QString iconUrl;
     QDateTime created;
     QStringList subreddits;
     MultiredditObject::Visibility visibility;
@@ -76,6 +77,16 @@ QString MultiredditObject::description() const
 void MultiredditObject::setDescription(const QString &description)
 {
     d->description = description;
+}
+
+QString MultiredditObject::iconUrl() const
+{
+    return d->iconUrl;
+}
+
+void MultiredditObject::setIconUrl(const QString &iconUrl)
+{
+    d->iconUrl = iconUrl;
 }
 
 QDateTime MultiredditObject::created() const

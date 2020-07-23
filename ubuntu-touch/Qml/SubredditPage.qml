@@ -1,11 +1,30 @@
+/*
+    Quickddit - Reddit client for mobile phones
+    Copyright (C) 2020  Daniel Kutka
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see [http://www.gnu.org/licenses/].
+*/
+
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import quickddit.Core 1.0
 import QtGraphicalEffects 1.0
+import QtQuick.Controls.Suru 2.2
 
 Page {
     id:subredditPage
-    title: subreddit
+    title: "/r/"+subreddit
     objectName: "subredditPage"
     property string subreddit
     ScrollView{
@@ -31,14 +50,14 @@ Page {
 
         Label {
             id:fullName
-            text: subreddit
+            text: "/r/"+subreddit
             font.pointSize: 18
             anchors{ left: logo.right;bottom: name.top;leftMargin: 20}
         }
 
         Label {
             id:name
-            text: "r/"+aboutSubredditManager.subreddit
+            text: aboutSubredditManager.title
             anchors{left: logo.right;bottom: logo.bottom;leftMargin: 20}
         }
 
@@ -79,7 +98,12 @@ Page {
 
         Label {
             id:wiki
+
+            color: Suru.foregroundColor
+            linkColor: Suru.color(Suru.Orange,1)
+
             text: aboutSubredditManager.longDescription
+            textFormat: Text.StyledText
             anchors{ left: parent.left;top:showButton.bottom;right: parent.right;margins: 10}
             wrapMode: "WordWrap"
             onLinkActivated: globalUtils.openLink(link)

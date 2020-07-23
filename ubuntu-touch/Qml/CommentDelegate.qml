@@ -1,7 +1,26 @@
+/*
+    Quickddit - Reddit client for mobile phones
+    Copyright (C) 2020  Daniel Kutka
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see [http://www.gnu.org/licenses/].
+*/
+
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.2
 import quickddit.Core 1.0
+import QtQuick.Controls.Suru 2.2
 
 Item {
     id: commentDelegate
@@ -54,84 +73,61 @@ Item {
 
         leftPadding: 0
         topPadding: 0
-        swipe.left:ToolButton {
-            height: parent.height
-            hoverEnabled: false
-            width: 40
+        swipe.left: Row {
             anchors { top: parent.top;bottom: parent.bottom; left: parent.left }
-            enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !model.isArchived && model.isValid
-            //down: model.likes===-1||pressed
-            Image {
-                anchors.centerIn: parent
-                source: model.likes===-1 ? "../Icons/down_b.svg" : "../Icons/down.svg"
-                width: 24
-                height: 24
-            }
-            onClicked: commentVoteManager.vote(model.fullname,model.likes===-1 ? VoteManager.Unvote : VoteManager.Downvote);
-        }
-        swipe.right: Row {
-            anchors { top: parent.top;bottom: parent.bottom; right: parent.right }
+            ActionButton {
+                enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !model.isArchived && model.isValid
+                ico: "../Icons/down.svg"
+                color: model.likes===-1 ? Suru.color(Suru.Red,1) : Suru.foregroundColor
 
-            ToolButton {
-                height: parent.height
-                width: 40
-                hoverEnabled: false
-                visible: model.isAuthor && !model.isArchived
-                Image {
-                    anchors.centerIn: parent
-                    source: "../Icons/delete.svg"
-                    width: 24
-                    height: 24
+                onClicked: {
+                    commentVoteManager.vote(model.fullname,model.likes===-1 ? VoteManager.Unvote : VoteManager.Downvote);
+                    mainItem.swipe.close()
                 }
+            }
+
+            ActionButton {
+                visible: model.isAuthor && !model.isArchived
+                ico: "../Icons/delete.svg"
+                color: Suru.color(Suru.Red,1)
+
                 onClicked: {
                     mainItem.swipe.close()
                     commentManager.deleteComment(model.fullname);
                 }
             }
+        }
 
-            ToolButton {
-                height: parent.height
-                width: 40
-                hoverEnabled: false
+        swipe.right: Row {
+            anchors { top: parent.top;bottom: parent.bottom; right: parent.right }
+
+            ActionButton {
                 visible: model.isAuthor && !model.isArchived
-                Image {
-                    anchors.centerIn: parent
-                    source: "../Icons/edit.svg"
-                    width: 24
-                    height: 24
-                }
+                ico: "../Icons/edit.svg"
+                color: Suru.foregroundColor
+
                 onClicked: {
                     mainItem.swipe.close()
                     commentModel.setView(model.fullname, "edit");
                 }
             }
 
-            ToolButton {
-                height: parent.height
-                width: 40
-                hoverEnabled: false
-                Image {
-                    anchors.centerIn: parent
-                    source: "../Icons/mail-reply.svg"
-                    width: 24
-                    height: 24
-                }
+            ActionButton {
+                enabled: quickdditManager.isSignedIn && !model.isArchived && model.isValid && !link.isLocked
+                ico: "../Icons/mail-reply.svg"
+                color: Suru.foregroundColor
+
                 onClicked: {
                     mainItem.swipe.close()
                     commentModel.setView(model.fullname, "reply");
                 }
             }
 
-            ToolButton {
-                height: parent.height
-                width: 40
-                hoverEnabled: false
-                Image {
-                    anchors.centerIn: parent
-                    source: "../Icons/edit-copy.svg"
-                    width: 24
-                    height: 24
-                }
+            ActionButton {
+                enabled: true
+                ico: "../Icons/edit-copy.svg"
+                color: Suru.foregroundColor
+
                 onClicked: {
                     mainItem.swipe.close()
                     QMLUtils.copyToClipboard(model.rawBody);
@@ -139,33 +135,26 @@ Item {
                 }
             }
 
-            ToolButton {
-                height: parent.height
-                width: 40
-                hoverEnabled: false
+            ActionButton {
                 enabled: quickdditManager.isSignedIn && !commentSaveManager.busy
-                Image {
-                    anchors.centerIn: parent
-                    source: model.saved ? "../Icons/starred.svg" : "../Icons/non-starred.svg"
-                    width: 24
-                    height: 24
+                ico: model.saved ? "../Icons/starred.svg" : "../Icons/non-starred.svg"
+                color: Suru.foregroundColor
+
+                onClicked: {
+                    mainItem.swipe.close()
+                    commentSaveManager.save(model.fullname,!model.saved)
                 }
-                onClicked: commentSaveManager.save(model.fullname,!model.saved)
             }
 
-            ToolButton {
-                height: parent.height
-                width: 40
-                hoverEnabled: false
+            ActionButton {
                 enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !model.isArchived && model.isValid
-                Image {
-                    anchors.centerIn: parent
-                    source: model.likes===1? "../Icons/up_b.svg" : "../Icons/up.svg"
-                    width: 24
-                    height: 24
+                ico: "../Icons/up.svg"
+                color: model.likes===1 ? Suru.color(Suru.Green,1) : Suru.foregroundColor
+
+                onClicked: {
+                    mainItem.swipe.close()
+                    commentVoteManager.vote(model.fullname,model.likes===1 ? VoteManager.Unvote : VoteManager.Upvote);
                 }
-                //down: model.likes===1||pressed
-                onClicked: commentVoteManager.vote(model.fullname,model.likes===1 ? VoteManager.Unvote : VoteManager.Upvote);
             }
         }
         contentItem:Item{
@@ -175,7 +164,11 @@ Item {
             Label {
                 id:info
                 padding: 5
-                text:"<a href='"+model.author+"'>"+"u/" +model.author+"</a>"+ " ~ " + (model.score < 0 ? "-" : "") +  qsTr("%n points", "", Math.abs(model.score)) + " ~ "+ model.created
+
+                color: Suru.foregroundColor
+                linkColor: Suru.color(Suru.Orange,1)
+
+                text:"<a href='"+model.author+"'>"+"u/" +model.author+(model.isSubmitter?" [submitter]":"")+"</a>"+ " ~ " + (model.score < 0 ? "-" : "") +  qsTr("%n points", "", Math.abs(model.score)) + " ~ "+ model.created
 
                 onLinkActivated: {
                     pageStack.push(Qt.resolvedUrl("UserPage.qml"),{username:link.split(" ")[0]})
@@ -185,9 +178,13 @@ Item {
             Label {
                 id:comment
                 padding: 5
-                bottomPadding: 0
+
+                color: Suru.foregroundColor
+                linkColor: Suru.color(Suru.Orange,1)
+
                 anchors {top: info.bottom;left: parent.left;right: parent.right}
-                text: model.body
+                text: model.rawBody
+                textFormat: Text.MarkdownText ? Text.MarkdownText : Text.StyledText
 
                 wrapMode: "Wrap"
                 onLinkActivated: globalUtils.openLink(link)
@@ -266,6 +263,7 @@ Item {
                     id: editTextArea
                     anchors { left: parent.left; right: parent.right }
 
+                    wrapMode: TextEdit.WordWrap
                     placeholderText: model.view === "reply" ? qsTr("Enter your reply here...") : qsTr("Enter your new comment here...")
                     focus: true
                 }
@@ -320,7 +318,6 @@ Item {
                                                                             : model.view === "edit" ? model.rawBody : ""
                     }
                 }
-
             }
         }
     }

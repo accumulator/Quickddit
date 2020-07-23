@@ -44,6 +44,9 @@ public:
     QString description() const;
     void setDescription(const QString &description);
 
+    QString iconUrl() const;
+    void setIconUrl(const QString &iconUrl);
+
     QDateTime created() const;
     void setCreated(const QDateTime &created);
 

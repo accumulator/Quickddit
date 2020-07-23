@@ -3,13 +3,12 @@
         "accounts",
         "audio",
         "connectivity",
-        "content_exchange",
-        "content_exchange_source",
-        "location",
         "networking",
-        "push-notification-client",
         "video",
         "webview"
+    ],
+    "read_path": [
+        "/etc/mime.types"
     ],
     "policy_version": 16.04
 }

@@ -17,18 +17,26 @@
 */
 
 import QtQuick 2.9
-import QtWebEngine 1.7
 import QtQuick.Controls 2.2
-Page {
-    title: webView.title
-    property url url
+import QtGraphicalEffects 1.0
+import QtQuick.Controls.Suru 2.2
 
-    WebEngineView{
-        anchors.fill: parent
-        id:webView
-    }
-
-    Component.onCompleted: {
-        webView.url = url;
+ToolButton {
+    id: actionButton
+    height: parent.height
+    width: 40
+    hoverEnabled: false
+    //after QT update we can use icon property
+    property url ico
+    property color color
+    Image {
+        anchors.centerIn: parent
+        source: ico
+        width: 24
+        height: 24
+        layer.enabled: true
+        layer.effect: ColorOverlay {
+            color: actionButton.color
+        }
     }
 }

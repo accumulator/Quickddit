@@ -46,7 +46,6 @@
         <file>Qml/UserPageLinkDelegate.qml</file>
         <file>Qml/PostButtonRow.qml</file>
         <file>Qml/AccountsPage.qml</file>
-        <file>Icons/list-add.svg</file>
         <file>Icons/next.svg</file>
         <file>Icons/delete.svg</file>
         <file>Icons/quickddit.svg</file>
@@ -55,5 +54,23 @@
         <file>Qml/MessagePage.qml</file>
         <file>Qml/MessageDelegate.qml</file>
         <file>Qml/SendMessagePage.qml</file>
+        <file>Qml/ActionButton.qml</file>
+        <file>Icons/mail-unread.svg</file>
+        <file>Icons/mail-read.svg</file>
+        <file>Qml/DonatePage.qml</file>
+        <file>Img/bitcoin.png</file>
+        <file>Img/btc-qr.png</file>
+        <file>Img/paypal.png</file>
+        <file>Qml/MultiredditDelegate.qml</file>
+        <file>Qml/MultiredditPage.qml</file>
+        <file>Qml/SendLinkPage.qml</file>
+        <file>Icons/info.svg</file>
+        <file>Icons/add.svg</file>
+        <file>Qml/MenuItem.qml</file>
+        <file>Icons/settings.svg</file>
+        <file>Icons/system-log-out.svg</file>
+        <file>Icons/account.svg</file>
+        <file>Icons/view-list-symbolic.svg</file>
+        <file>Icons/contact-new.svg</file>
     </qresource>
 </RCC>

@@ -1,25 +1,44 @@
+/*
+    Quickddit - Reddit client for mobile phones
+    Copyright (C) 2020  Daniel Kutka
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see [http://www.gnu.org/licenses/].
+*/
+
 import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import quickddit.Core 1.0
 import QtQuick.Controls 2.2
 import Qt.labs.settings 1.0
+import QtQuick.Controls.Suru 2.2
 
 Page {
 
     id:mainPage
     objectName: "mainPage"
-    title: subreddit
+    title: linkModel.location == LinkModel.Multireddit ? /m/+subreddit : /r/+subreddit
 
-    property string subreddit: quickdditManager.isSignedIn ? "Subscribed" : "All"
+    property string subreddit: quickdditManager.isSignedIn ? "subscribed" : "all"
     property string section
 
     function refresh(sr) {
         if(sr===undefined|| sr===""){
             if(quickdditManager.isSignedIn){
-                sr="Subscribed"
+                sr="subscribed"
             }
             else
-                sr="All"
+                sr="all"
         }
 
         if ( String(sr).toLowerCase() === "subscribed") {
@@ -39,43 +58,77 @@ Page {
     function refreshMR(multireddit) {
         linkModel.location = LinkModel.Multireddit;
         linkModel.multireddit = multireddit
+        subreddit = multireddit
         linkModel.refresh(false);
     }
 
+    function newLinkPost() {
+        var p = {linkManager: linkManager, subreddit: subreddit};
+        pageStack.push(Qt.resolvedUrl("SendLinkPage.qml"),p)
+    }
 
     header:
         TabBar{
         id: tabBar
         contentHeight: undefined
         leftPadding: 10
+        background: Rectangle {
+            color: Suru.color(Suru.Orange,1)
+        }
 
         TabButton {
             id:tb0
             text: "Hot"
+            contentItem: Label {
+                text: parent.text
+                font.weight: Font.Normal
+                color: tb0.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
+            }
             width: implicitWidth
             padding:6
+
         }
         TabButton{
             id:tb1
             text: "New"
+            contentItem: Label {
+                text: parent.text
+                font.weight: Font.Normal
+                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
+            }
             width: implicitWidth
             padding:6
         }
         TabButton{
             id:tb2
             text: "Top"
+            contentItem: Label {
+                text: parent.text
+                font.weight: Font.Normal
+                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
+            }
             width: implicitWidth
             padding:6
         }
         TabButton{
             id:tb3
             text: "Controversial"
+            contentItem: Label {
+                text: parent.text
+                font.weight: Font.Normal
+                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
+            }
             width: implicitWidth
             padding:6
         }
         TabButton{
             id:tb4
             text: "Rising"
+            contentItem: Label {
+                text: parent.text
+                font.weight: Font.Normal
+                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
+            }
             width: implicitWidth
             padding:6
         }
@@ -97,6 +150,7 @@ Page {
                 anchors.fill: parent
                 model: linkModel
                 cacheBuffer: height*3
+                highlightFollowsCurrentItem: false
 
                 Label {
                     anchors { bottom: linkListView.contentItem.top; horizontalCenter: parent.horizontalCenter; margins: 75 }
@@ -108,6 +162,7 @@ Page {
                     linkVoteManager: voteManager
                     id:linkDelegate
                     link:model
+                    highlighted: false
 
                     onClicked: {
                         var p = { link: model,linkVoteManager1: voteManager, linkSaveManager1:saveManager};

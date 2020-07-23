@@ -1,3 +1,21 @@
+/*
+    Quickddit - Reddit client for mobile phones
+    Copyright (C) 2020  Daniel Kutka
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see [http://www.gnu.org/licenses/].
+*/
+
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import quickddit.Core 1.0
@@ -10,7 +28,7 @@ Drawer {
     property bool signedIn: false
     function showSubreddit(subreddit) {
         var mainPage = globalUtils.getMainPage();
-        mainPage.refresh(subreddit);
+        mainPage.refresh(subreddit.slice(3));
     }
 
     ListView{
@@ -20,7 +38,7 @@ Drawer {
         header:Column{
             width: parent.width
             ItemDelegate{
-                text: "Subscribed"
+                text: "/r/subscribed"
                 width: parent.width
                 visible: quickdditManager.isSignedIn || subredditsDrawer.position<0.1
                 onClicked: {
@@ -29,7 +47,7 @@ Drawer {
                 }
             }
             ItemDelegate{
-                text: "All"
+                text: "/r/all"
                 width: parent.width
                 onClicked: {
                     showSubreddit(text);
@@ -37,7 +55,7 @@ Drawer {
                 }
             }
             ItemDelegate{
-                text: "Popular"
+                text: "/r/popular"
                 width: parent.width
                 onClicked: {
                     showSubreddit(text);
@@ -49,7 +67,7 @@ Drawer {
         delegate: ItemDelegate{
             id:subredditDelegate
             width: parent.width
-            text: model.displayName
+            text: "/r/"+model.displayName
             onClicked: {
                 showSubreddit(subredditDelegate.text);
                 subredditsDrawer.close();

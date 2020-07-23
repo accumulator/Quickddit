@@ -176,6 +176,8 @@ void multiredditFromMap(MultiredditObject &multireddit, const QVariantMap &multi
     Utils::sortCaseInsensitively(&subreddits);
 
     multireddit.setSubreddits(subreddits);
+    multireddit.setDescription(unescapeHtml(multiredditMap.value("description_html").toString()));
+    multireddit.setIconUrl(multiredditMap.value("icon_url").toString());
     multireddit.setVisibility(multiredditMap.value("visibility").toString());
     multireddit.setPath(multiredditMap.value("path").toString());
     multireddit.setCanEdit(multiredditMap.value("can_edit").toBool());
