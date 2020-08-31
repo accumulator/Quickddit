@@ -27,7 +27,9 @@ class MultiredditModel : public AbstractListModelManager
     Q_OBJECT
 public:
     enum Roles {
-        NameRole = Qt::UserRole
+        NameRole = Qt::UserRole,
+        IconUrlRole,
+        DescriptionRole
     };
 
     explicit MultiredditModel(QObject *parent = 0);

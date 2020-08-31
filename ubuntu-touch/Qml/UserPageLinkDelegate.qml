@@ -1,5 +1,24 @@
+/*
+    Quickddit - Reddit client for mobile phones
+    Copyright (C) 2020  Daniel Kutka
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see [http://www.gnu.org/licenses/].
+*/
+
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Suru 2.2
 
 ItemDelegate {
     id:linkDelegate
@@ -16,14 +35,18 @@ ItemDelegate {
     Label {
         id: info
         padding: 5
+
+        color: Suru.foregroundColor
+        linkColor: Suru.color(Suru.Orange,1)
+
         anchors {top: parent.top; left: parent.left; right: parent.right; }
         elide: Text.ElideRight
-        text: "<a href='r/"+model.subreddit+"'>"+"r/"+model.subreddit+"</a>"+" ~ <a href='u/"+model.author+"'>"+"u/"+model.author+"</a>"+" ~ "+model.created+" ~ "+model.domain
+        text: "<a href='/r/"+model.subreddit+"'>"+"/r/"+model.subreddit+"</a>"+" ~ <a href='/u/"+model.author+"'>"+"/u/"+model.author+"</a>"+" ~ "+model.created+" ~ "+model.domain
         onLinkActivated: {
-            if(link.charAt(0)=='r')
-                pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:link.slice(2)})
-            if(link.charAt(0)=='u'){
-                pageStack.push(Qt.resolvedUrl("UserPage.qml"),{username:link.slice(2).split(" ")[0]})
+            if(link.charAt(1)=='r')
+                pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:link.slice(3)})
+            if(link.charAt(1)=='u'){
+                pageStack.push(Qt.resolvedUrl("UserPage.qml"),{username:link.slice(3).split(" ")[0]})
             }
         }
     }
@@ -48,7 +71,7 @@ ItemDelegate {
         anchors.top: titulok.bottom
         anchors.left: thumb.visible ? thumb.right : parent.left
         id:txt
-        text:model.rawText
+        text:model.text
         elide: Text.ElideRight
         maximumLineCount: 3
         font.pointSize: 10

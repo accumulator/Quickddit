@@ -39,6 +39,7 @@ class AboutMultiredditManager : public AbstractManager, public QQmlParserStatus
     DECL_QMLPARSERSTATUS_INTERFACE
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QString description READ description NOTIFY multiredditChanged)
+    Q_PROPERTY(QString iconUrl READ iconUrl NOTIFY multiredditChanged)
     Q_PROPERTY(QStringList subreddits READ subreddits NOTIFY multiredditChanged)
     Q_PROPERTY(bool canEdit READ canEdit NOTIFY multiredditChanged)
     Q_PROPERTY(MultiredditModel* model READ model WRITE setModel)
@@ -52,6 +53,7 @@ public:
     void setName(const QString &name);
 
     QString description() const;
+    QString iconUrl() const;
     QStringList subreddits() const;
     bool canEdit() const;
 
