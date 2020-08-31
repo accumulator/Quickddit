@@ -82,6 +82,11 @@ public:
         QString lastSeenMessage;
     };
 
+    struct SubredditPrefs {
+        QString relPath;
+        int section;
+    };
+
     explicit AppSettings(QObject *parent = 0);
 
     bool commentsTapToHide() const;
@@ -130,6 +135,9 @@ public:
     VideoSize preferredVideoSize() const;
     void setPreferredVideoSize(const VideoSize preferredVideoSize);
 
+    QList<SubredditPrefs> subredditPrefs() const;
+    void setSubredditPrefs(const QList<SubredditPrefs> subredditPrefs);
+
     QList<AccountData> accounts() const;
     QStringList accountNames() const;
     void setAccounts(const QList<AccountData> accounts);
@@ -151,6 +159,7 @@ signals:
     void commentSortChanged();
     void useTorChanged();
     void preferredVideoSizeChanged();
+    void subredditPrefsChanged();
     void accountsChanged();
 
 private:
@@ -172,6 +181,7 @@ private:
     int m_commentSort;
     bool m_useTor;
     VideoSize m_preferredVideoSize;
+    QList<SubredditPrefs> m_subredditPrefs;
     QList<AccountData> m_accounts;
 };
 

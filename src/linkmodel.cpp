@@ -246,47 +246,69 @@ void LinkModel::setSearchTimeRange(LinkModel::SearchTimeRange timeRange)
     }
 }
 
-void LinkModel::refresh(bool refreshOlder)
+QString LinkModel::getRelativeUrl()
 {
     QString relativeUrl;
+    switch (m_location) {
+    case FrontPage:
+        relativeUrl += "";
+        break;
+    case All:
+        relativeUrl += "/r/all";
+        break;
+    case Popular:
+        relativeUrl += "/r/popular";
+        break;
+    case Subreddit:
+        if (m_subreddit.isEmpty() || m_subreddit.compare("all", Qt::CaseInsensitive) == 0 || m_subreddit.compare("popular", Qt::CaseInsensitive) == 0)
+            qWarning("LinkModel::refresh(): Set location to FrontPage, Popular or All instead");
+        relativeUrl += "/r/" + m_subreddit;
+        break;
+    case Multireddit:
+        relativeUrl += "/me/m/" + m_multireddit;
+        break;
+    case Search:
+        if (!m_subreddit.isEmpty()) {
+            relativeUrl += "/r/" + m_subreddit;
+        }
+        relativeUrl += "/search";
+    }
+
+    return relativeUrl;
+}
+
+void LinkModel::refresh(bool refreshOlder)
+{
     QHash<QString,QString> parameters;
     parameters["limit"] = "50";
     if (m_sectionPeriod != "") {
         parameters["t"] = m_sectionPeriod;
     }
 
-    if (m_section == UndefinedSection) {
-        setSection((Section)manager()->settings()->subredditSection());
-    }
-    QString sectionString = getSectionString(m_section);
+    QString relativeUrl = getRelativeUrl();
 
-    switch (m_location) {
-    case FrontPage:
-        relativeUrl += "/" + sectionString;
-        break;
-    case All:
-        relativeUrl += "/r/all/" + sectionString;
-        break;
-    case Popular:
-        relativeUrl += "/r/popular/" + sectionString;
-        break;
-    case Subreddit:
-        if (m_subreddit.isEmpty() || m_subreddit.compare("all", Qt::CaseInsensitive) == 0 || m_subreddit.compare("popular", Qt::CaseInsensitive) == 0)
-            qWarning("LinkModel::refresh(): Set location to FrontPage, Popular or All instead");
-        relativeUrl += "/r/" + m_subreddit + "/" + sectionString;
-        break;
-    case Multireddit:
-        relativeUrl += "/me/m/" + m_multireddit + "/" + sectionString;
-        break;
-    case Search:
+    if (m_section == UndefinedSection) {
+        // set a default
+        setSection(HotSection);
+
+        QList<AppSettings::SubredditPrefs> srpl = manager()->settings()->subredditPrefs();
+        for (int i = 0; i < srpl.count(); i++) {
+            if (relativeUrl == srpl.at(i).relPath) {
+                setSection((Section)srpl.at(i).section);
+                break;
+            }
+        }
+    }
+
+    if (m_location == Search) {
         parameters["q"] = m_searchQuery;
         parameters["sort"] = getSearchSortString(m_searchSort);
         parameters["t"] = getSearchTimeRangeString(m_searchTimeRange);
         if (!m_subreddit.isEmpty()) {
-            relativeUrl += "/r/" + m_subreddit;
             parameters["restrict_sr"] = "true";
         }
-        relativeUrl += "/search";
+    } else {
+        relativeUrl += "/" + getSectionString(m_section);
     }
 
     if (!m_linkList.isEmpty()) {
@@ -308,6 +330,25 @@ void LinkModel::refresh(bool refreshOlder)
         m_title += " (" + m_sectionPeriod.left(1) + ")";
 
     emit titleChanged();
+}
+
+void LinkModel::saveSectionAsPref()
+{
+    QString relativeUrl = getRelativeUrl();
+    QList<AppSettings::SubredditPrefs> subredditPrefsList = manager()->settings()->subredditPrefs();
+    for (int i = 0; i < subredditPrefsList.count(); i++) {
+        if (relativeUrl == subredditPrefsList.at(i).relPath) {
+            subredditPrefsList[i].section = m_section;
+            manager()->settings()->setSubredditPrefs(subredditPrefsList);
+            return;
+        }
+    }
+    // not found
+    AppSettings::SubredditPrefs newprefs;
+    newprefs.relPath = relativeUrl;
+    newprefs.section = m_section;
+    subredditPrefsList.append(newprefs);
+    manager()->settings()->setSubredditPrefs(subredditPrefsList);
 }
 
 void LinkModel::changeLikes(const QString &fullname, int likes)
@@ -454,12 +495,13 @@ void LinkModel::onFinished(QNetworkReply *reply)
 QString LinkModel::getSectionString(Section section)
 {
     switch (section) {
+    case BestSection: return "best";
     case HotSection: return "hot";
     case NewSection: return "new";
     case RisingSection: return "rising";
     case ControversialSection: return "controversial";
     case TopSection: return "top";
-    case PromotedSection: return "ads";
+    case GildedSection: return "gilded";
     case UndefinedSection: return "";
     default:
         qWarning("LinkModel::getSectionString(): Invalid section");

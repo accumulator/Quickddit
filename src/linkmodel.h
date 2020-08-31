@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015  Sander van Grieken
+    Copyright (C) 2015-2020  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -84,12 +84,13 @@ public:
     };
 
     enum Section {
+        BestSection,
         HotSection,
         NewSection,
         RisingSection,
         ControversialSection,
         TopSection,
-        PromotedSection,
+        GildedSection,
         UndefinedSection = 100 // internal only
     };
 
@@ -149,6 +150,7 @@ public:
     void refresh(bool refreshOlder);
     Q_INVOKABLE void changeLikes(const QString &fullname, int likes);
     Q_INVOKABLE void changeSaved(const QString &fullname, bool saved);
+    Q_INVOKABLE void saveSectionAsPref();
 
     void editLink(const LinkObject &link);
     void deleteLink(const QString &fullname);
@@ -183,6 +185,7 @@ private:
 
     QList<LinkObject> m_linkList;
 
+    QString getRelativeUrl();
     static QString getSectionString(Section section);
     static QString getSearchSortString(SearchSortType sort);
     static QString getSearchTimeRangeString(SearchTimeRange timeRange);

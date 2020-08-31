@@ -1,6 +1,6 @@
 /*
     Quickddit - Reddit client for mobile phones
-    Copyright (C) 2016  Sander van Grieken
+    Copyright (C) 2016-2020  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,12 +24,19 @@ AbstractDialog {
 
     property alias title: header.title
     property alias model: listView.model
-    property int selectedIndex: -1
+    property int section
     property string periodQuery: ""
+    property bool frontpage: false
+    property int base: frontpage ? 0 : 1
 
     canAccept: false
 
-    readonly property variant sectionModel: [qsTr("Hot"), qsTr("New"), qsTr("Rising"), qsTr("Controversial"), qsTr("Top")]
+    readonly property variant sectionModel: [
+        qsTr("Hot"), qsTr("New"), qsTr("Rising"), qsTr("Controversial"), qsTr("Top")
+    ]
+    readonly property variant sectionModelFrontpage: [
+         qsTr("Best"), qsTr("Hot"), qsTr("New"), qsTr("Rising"), qsTr("Controversial"), qsTr("Top")
+    ]
 
     ListModel {
         id: periodModel
@@ -48,17 +55,17 @@ AbstractDialog {
 
     ListView {
         id: listView
-        model: sectionModel
+        model: frontpage ? sectionModelFrontpage : sectionModel
         anchors { top: header.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
         delegate: SimpleListItem {
             menu: sectionMenuComponent
-            selected: selectionDialog.selectedIndex == index
+            selected: selectionDialog.section === index + base
             text: modelData
             showMenuOnPressAndHold: false
-            onPressAndHold: if (index == 3 || index == 4) openMenu({parentItemIndex: index}) // uglyy
+            onPressAndHold: if (index+base == 4 || index+base == 5) openMenu({parentItemIndex: index})
 
             onClicked: {
-                selectionDialog.selectedIndex = index;
+                selectionDialog.section = index + base;
                 canAccept = true;
                 selectionDialog.accept();
             }
@@ -77,7 +84,7 @@ AbstractDialog {
                     text: label
                     onClicked: {
                         selectionDialog.periodQuery = qry
-                        selectionDialog.selectedIndex = parentItemIndex
+                        selectionDialog.section = parentItemIndex + base
                         canAccept = true;
                         selectionDialog.accept()
                     }

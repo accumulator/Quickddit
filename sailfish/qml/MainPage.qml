@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015-2017  Sander van Grieken
+    Copyright (C) 2015-2020  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,8 +30,13 @@ AbstractPage {
     property string subreddit
     property string section
 
-    function refresh(sr) {
+    function refresh(sr, keepsection) {
         if (sr !== undefined) {
+            // getting messy here :(
+            // initialize section to undefined unless explicitly kept,
+            // so the subreddit's default section is retrieved in the linkmodel
+            if (keepsection === undefined || keepsection === false)
+                linkModel.section = LinkModel.UndefinedSection
             linkModel.subreddit = "";
             if (sr === "") {
                 linkModel.location = LinkModel.FrontPage;
@@ -50,6 +55,7 @@ AbstractPage {
     function refreshMR(multireddit) {
         linkModel.location = LinkModel.Multireddit;
         linkModel.multireddit = multireddit
+        linkModel.section = LinkModel.UndefinedSection
         linkModel.refresh(false);
     }
 
@@ -58,11 +64,11 @@ AbstractPage {
         pageStack.push(Qt.resolvedUrl("SendLinkPage.qml"), p);
     }
 
-    function pushSectionDialog(title, selectedIndex, onAccepted) {
-        var p = {title: title, selectedIndex: selectedIndex}
+    function pushSectionDialog(title, section, onAccepted) {
+        var p = {title: title, section: section, frontpage: linkModel.location === LinkModel.FrontPage}
         var dialog = pageStack.push(Qt.resolvedUrl("SectionSelectionDialog.qml"), p);
         dialog.accepted.connect(function() {
-            onAccepted(dialog.selectedIndex, dialog.periodQuery);
+            onAccepted(dialog.section, dialog.periodQuery);
         })
 
     }
@@ -105,10 +111,10 @@ AbstractPage {
                 text: qsTr("Section")
                 onClicked: {
                     pushSectionDialog(qsTr("Section"), linkModel.section,
-                        function(selectedIndex, periodQuery) {
-                            linkModel.section = selectedIndex;
+                        function(section, periodQuery) {
+                            linkModel.section = section;
                             linkModel.sectionPeriod = periodQuery;
-                            appSettings.subredditSection = selectedIndex;
+                            linkModel.saveSectionAsPref();
                             linkModel.refresh(false);
                         });
                 }
@@ -205,10 +211,10 @@ AbstractPage {
         if (subreddit == undefined)
             return;
         if (section !== undefined) {
-            var si = ["hot", "new", "rising", "controversial", "top", "ads"].indexOf(section);
+            var si = ["best", "hot", "new", "rising", "controversial", "top", "gilded"].indexOf(section);
             if (si !== -1)
                 linkModel.section = si;
         }
-        refresh(subreddit);
+        refresh(subreddit, true);
     }
 }

@@ -42,9 +42,23 @@ AppSettings::AppSettings(QObject *parent) :
     m_preferredVideoSize = static_cast<VideoSize>(m_settings->value("preferredVideoSize", AppSettings::VS360).toInt());
     m_filteredSubreddits = m_settings->value("filteredSubreddits").toStringList();
 
+    int size;
+
+    // read subreddit prefs
+    m_subredditPrefs = QList<SubredditPrefs>();
+    size = m_settings->beginReadArray("subredditPrefs");
+    for (int i = 0; i < size; ++i) {
+        m_settings->setArrayIndex(i);
+        SubredditPrefs prefs;
+        prefs.relPath = m_settings->value("relPath").toString();
+        prefs.section = m_settings->value("section").toInt();
+        m_subredditPrefs.append(prefs);
+    }
+    m_settings->endArray();
+
     // read accounts
     m_accounts = QList<AccountData>();
-    int size = m_settings->beginReadArray("accounts");
+    size = m_settings->beginReadArray("accounts");
     for (int i = 0; i < size; ++i) {
         m_settings->setArrayIndex(i);
         AccountData data;
@@ -283,6 +297,25 @@ void AppSettings::setPreferredVideoSize(const AppSettings::VideoSize preferredVi
         m_settings->setValue("preferredVideoSize", m_preferredVideoSize);
         emit preferredVideoSizeChanged();
     }
+}
+
+QList<AppSettings::SubredditPrefs> AppSettings::subredditPrefs() const
+{
+    return m_subredditPrefs;
+}
+
+void AppSettings::setSubredditPrefs(const QList<SubredditPrefs> subredditPrefs)
+{
+    m_subredditPrefs = subredditPrefs;
+
+    m_settings->beginWriteArray("subredditPrefs", m_subredditPrefs.size());
+    for (int i = 0; i < m_subredditPrefs.size(); ++i) {
+        m_settings->setArrayIndex(i);
+        m_settings->setValue("relPath", m_subredditPrefs.at(i).relPath);
+        m_settings->setValue("section", m_subredditPrefs.at(i).section);
+    }
+    m_settings->endArray();
+    emit subredditPrefsChanged();
 }
 
 QList<AppSettings::AccountData> AppSettings::accounts() const
