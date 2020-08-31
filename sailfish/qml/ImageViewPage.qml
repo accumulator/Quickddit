@@ -1,7 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015-2016  Sander van Grieken
+    Copyright (C) 2015-2020  Sander van Grieken
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,9 +36,10 @@ AbstractPage {
         anchors { top: parent.top; left: parent.left; right: parent.right; bottom: thumbnailListView.top }
         contentWidth: viewer.width; contentHeight: viewer.height
 
-        // height changed event seems to always come after width changed event, we only trigger on height.
+        // When orientation changes, both height and width properties receive changed events
+        // in random order. Fire a short timer to wait out the updates, then fit to screen
         onHeightChanged: {
-            viewer._fitToScreen();
+            resizeTimer.start()
         }
 
         PullDownMenu {
@@ -169,5 +170,13 @@ AbstractPage {
         target: QMLUtils
         onSaveImageSucceeded: infoBanner.alert(qsTr("Image saved to gallery"));
         onSaveImageFailed: infoBanner.warning(qsTr("Image save failed!"));
+    }
+
+    Timer {
+        id: resizeTimer
+        interval: 1
+        repeat: false
+
+        onTriggered: viewer._fitToScreen()
     }
 }
