@@ -33,7 +33,11 @@ AbstractPage {
 
     SilicaFlickable {
         id: imageFlickable
-        anchors { top: parent.top; left: parent.left; right: parent.right; bottom: thumbnailListView.top }
+        anchors {
+            top: parent.top; left: parent.left;
+            right: isPortrait ? parent.right : thumbnailListView.left;
+            bottom: isPortrait ? thumbnailListView.top : parent.bottom
+        }
         contentWidth: viewer.width; contentHeight: viewer.height
 
         // When orientation changes, both height and width properties receive changed events
@@ -106,14 +110,24 @@ AbstractPage {
 
     ListView {
         id: thumbnailListView
-        anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
-        height: visible ? 150 : 0
+        anchors {
+            left: isPortrait ? parent.left : undefined;
+            right: parent.right;
+            top: isPortrait ? undefined : parent.top;
+            bottom: parent.bottom
+        }
+        height: isPortrait
+                ? visible ? 150 : 0
+                : undefined
+        width: isPortrait
+               ? undefined
+               : visible ? 150 : 0
         visible: count > 0
         model: imgurManager.thumbnailUrls
-        orientation: Qt.Horizontal
+        orientation: isPortrait ? Qt.Horizontal : Qt.Vertical
         delegate: Item {
             id: thumbnailDelegate
-            height: ListView.view.height
+            height: isPortrait ? ListView.view.height : ListView.view.width
             width: height
 
             Image {
@@ -147,7 +161,8 @@ AbstractPage {
             }
         }
 
-        onModelChanged: positionViewAtIndex(imgurManager.selectedIndex, ListView.Center);
+        onModelChanged: positionViewAtIndex(imgurManager.selectedIndex, ListView.Center)
+        onOrientationChanged: positionViewAtIndex(imgurManager.selectedIndex, ListView.Center)
     }
 
     ImgurManager {
