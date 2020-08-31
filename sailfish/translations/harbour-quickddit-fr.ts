@@ -652,27 +652,27 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
         <translation>Image</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="46"/>
+        <location filename="../qml/ImageViewPage.qml" line="51"/>
         <source>Save Image</source>
         <translation>Enregistrer l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="50"/>
+        <location filename="../qml/ImageViewPage.qml" line="55"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="103"/>
+        <location filename="../qml/ImageViewPage.qml" line="108"/>
         <source>Error loading image</source>
         <translation>Erreur lors du chargement de l&apos;image</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="170"/>
+        <location filename="../qml/ImageViewPage.qml" line="186"/>
         <source>Image saved to gallery</source>
         <translation>Image enregistrée dans la galerie</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="171"/>
+        <location filename="../qml/ImageViewPage.qml" line="187"/>
         <source>Image save failed!</source>
         <translation>Échec lors de l&apos;enregistrement de l&apos;image !</translation>
     </message>
@@ -727,43 +727,43 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/MainPage.qml" line="87"/>
+        <location filename="../qml/MainPage.qml" line="93"/>
         <source>About %1</source>
         <translation>À propos de %1</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="99"/>
+        <location filename="../qml/MainPage.qml" line="105"/>
         <source>New Post</source>
         <translation>Nouveau post</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="105"/>
-        <location filename="../qml/MainPage.qml" line="107"/>
+        <location filename="../qml/MainPage.qml" line="111"/>
+        <location filename="../qml/MainPage.qml" line="113"/>
         <source>Section</source>
         <translation>Section</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="117"/>
+        <location filename="../qml/MainPage.qml" line="123"/>
         <source>Search</source>
         <translation>Rechercher</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="121"/>
+        <location filename="../qml/MainPage.qml" line="127"/>
         <source>Refresh</source>
         <translation>Rafraîchir</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="143"/>
+        <location filename="../qml/MainPage.qml" line="149"/>
         <source>Delete link</source>
         <translation>Supprimer le lien</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="148"/>
+        <location filename="../qml/MainPage.qml" line="154"/>
         <source>Hide link</source>
         <translation>Masquer le lien</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="168"/>
+        <location filename="../qml/MainPage.qml" line="174"/>
         <source>Nothing here :(</source>
         <translation>Il n&apos;y a rien ici :(</translation>
     </message>
@@ -908,7 +908,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message>
         <location filename="../qml/MultiredditsPage.qml" line="69"/>
         <source>About</source>
-        <translation type="unfinished">À propos</translation>
+        <translation>À propos</translation>
     </message>
     <message>
         <location filename="../qml/MultiredditsPage.qml" line="108"/>
@@ -1143,57 +1143,67 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>SectionSelectionDialog</name>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Hot</source>
         <translation>Populaire</translation>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>New</source>
         <translation>Nouveau</translation>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Rising</source>
         <translation>En progression</translation>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Controversial</source>
         <translation>Controversé</translation>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Top</source>
         <translation>Top</translation>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
+        <source>Best</source>
+        <translation type="unfinished">Meilleur</translation>
+    </message>
+    <message>
+        <location filename="../qml/SectionSelectionDialog.qml" line="44"/>
         <source>Hour</source>
         <translation>Heure</translation>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="37"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="45"/>
         <source>Day</source>
         <translation>Jour</translation>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="38"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="46"/>
         <source>Week</source>
         <translation>Semaine</translation>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="47"/>
         <source>Month</source>
         <translation>Mois</translation>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="40"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="48"/>
         <source>Year</source>
         <translation>Année</translation>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="41"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="49"/>
         <source>All time</source>
         <translation>Depuis le début</translation>
     </message>
