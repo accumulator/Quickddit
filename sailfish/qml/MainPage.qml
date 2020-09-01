@@ -29,6 +29,7 @@ AbstractPage {
 
     property string subreddit
     property string section
+    property string sectionTimeRange
 
     function refresh(sr, keepsection) {
         if (sr !== undefined) {
@@ -68,7 +69,7 @@ AbstractPage {
         var p = {title: title, section: section, frontpage: linkModel.location === LinkModel.FrontPage}
         var dialog = pageStack.push(Qt.resolvedUrl("SectionSelectionDialog.qml"), p);
         dialog.accepted.connect(function() {
-            onAccepted(dialog.section, dialog.periodQuery);
+            onAccepted(dialog.section, dialog.sectionTimeRange);
         })
 
     }
@@ -111,10 +112,10 @@ AbstractPage {
                 text: qsTr("Section")
                 onClicked: {
                     pushSectionDialog(qsTr("Section"), linkModel.section,
-                        function(section, periodQuery) {
+                        function(section, sectionTimeRange) {
                             linkModel.section = section;
-                            linkModel.sectionPeriod = periodQuery;
-                            linkModel.saveSectionAsPref();
+                            linkModel.sectionTimeRange = sectionTimeRange;
+                            linkModel.saveSubredditPrefs();
                             linkModel.refresh(false);
                         });
                 }
@@ -208,12 +209,17 @@ AbstractPage {
     }
 
     Component.onCompleted: {
-        if (subreddit == undefined)
+        if (subreddit === undefined)
             return;
         if (section !== undefined) {
             var si = ["best", "hot", "new", "rising", "controversial", "top", "gilded"].indexOf(section);
             if (si !== -1)
                 linkModel.section = si;
+            if (sectionTimeRange !== undefined && (si === 4 || si === 5)) {
+                var ri = ["hour", "day", "week", "month", "year", "all"].indexOf(sectionTimeRange);
+                if (ri !== -1)
+                    linkModel.sectionTimeRange = ri
+            }
         }
         refresh(subreddit, true);
     }

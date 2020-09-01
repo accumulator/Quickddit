@@ -52,6 +52,7 @@ AppSettings::AppSettings(QObject *parent) :
         SubredditPrefs prefs;
         prefs.relPath = m_settings->value("relPath").toString();
         prefs.section = m_settings->value("section").toInt();
+        prefs.sectionTimeRange = m_settings->value("sectionTimeRange").toInt();
         m_subredditPrefs.append(prefs);
     }
     m_settings->endArray();
@@ -313,6 +314,7 @@ void AppSettings::setSubredditPrefs(const QList<SubredditPrefs> subredditPrefs)
         m_settings->setArrayIndex(i);
         m_settings->setValue("relPath", m_subredditPrefs.at(i).relPath);
         m_settings->setValue("section", m_subredditPrefs.at(i).section);
+        m_settings->setValue("sectionTimeRange", m_subredditPrefs.at(i).sectionTimeRange);
     }
     m_settings->endArray();
     emit subredditPrefsChanged();

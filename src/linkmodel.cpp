@@ -65,8 +65,8 @@ QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
 }
 
 LinkModel::LinkModel(QObject *parent) :
-    AbstractListModelManager(parent), m_location(FrontPage), m_section(UndefinedSection), m_searchSort(RelevanceSort),
-    m_searchTimeRange(AllTime)
+    AbstractListModelManager(parent), m_location(FrontPage), m_section(UndefinedSection), m_sectionTimeRange(AllTime),
+    m_searchSort(RelevanceSort), m_searchTimeRange(AllTime)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
     setRoleNames(customRoleNames());
@@ -79,10 +79,6 @@ void LinkModel::classBegin()
 
 void LinkModel::componentComplete()
 {
-    if (m_location == Search && m_searchQuery.isEmpty())
-        return;
-
-    refresh(false);
 }
 
 int LinkModel::rowCount(const QModelIndex &parent) const
@@ -168,16 +164,16 @@ void LinkModel::setSection(LinkModel::Section section)
     }
 }
 
-QString LinkModel::sectionPeriod() const
+LinkModel::TimeRange LinkModel::sectionTimeRange() const
 {
-    return m_sectionPeriod;
+    return m_sectionTimeRange;
 }
 
-void LinkModel::setSectionPeriod(const QString & sectionPeriod)
+void LinkModel::setSectionTimeRange(LinkModel::TimeRange sectionTimeRange)
 {
-    if (m_sectionPeriod != sectionPeriod) {
-        m_sectionPeriod = sectionPeriod;
-        emit sectionPeriodChanged();
+    if (m_sectionTimeRange != sectionTimeRange) {
+        m_sectionTimeRange = sectionTimeRange;
+        emit sectionTimeRangeChanged();
     }
 }
 
@@ -233,12 +229,12 @@ void LinkModel::setSearchSort(LinkModel::SearchSortType sort)
     }
 }
 
-LinkModel::SearchTimeRange LinkModel::searchTimeRange() const
+LinkModel::TimeRange LinkModel::searchTimeRange() const
 {
     return m_searchTimeRange;
 }
 
-void LinkModel::setSearchTimeRange(LinkModel::SearchTimeRange timeRange)
+void LinkModel::setSearchTimeRange(LinkModel::TimeRange timeRange)
 {
     if (m_searchTimeRange != timeRange) {
         m_searchTimeRange = timeRange;
@@ -281,8 +277,8 @@ void LinkModel::refresh(bool refreshOlder)
 {
     QHash<QString,QString> parameters;
     parameters["limit"] = "50";
-    if (m_sectionPeriod != "") {
-        parameters["t"] = m_sectionPeriod;
+    if (m_sectionTimeRange != AllTime) {
+        parameters["t"] = getTimeRangeString(m_sectionTimeRange);
     }
 
     QString relativeUrl = getRelativeUrl();
@@ -295,6 +291,7 @@ void LinkModel::refresh(bool refreshOlder)
         for (int i = 0; i < srpl.count(); i++) {
             if (relativeUrl == srpl.at(i).relPath) {
                 setSection((Section)srpl.at(i).section);
+                setSectionTimeRange((TimeRange)srpl.at(i).sectionTimeRange);
                 break;
             }
         }
@@ -303,7 +300,7 @@ void LinkModel::refresh(bool refreshOlder)
     if (m_location == Search) {
         parameters["q"] = m_searchQuery;
         parameters["sort"] = getSearchSortString(m_searchSort);
-        parameters["t"] = getSearchTimeRangeString(m_searchTimeRange);
+        parameters["t"] = getTimeRangeString(m_searchTimeRange);
         if (!m_subreddit.isEmpty()) {
             parameters["restrict_sr"] = "true";
         }
@@ -326,19 +323,20 @@ void LinkModel::refresh(bool refreshOlder)
 
     m_title = relativeUrl;
     if ( (m_section == LinkModel::TopSection || m_section == LinkModel::ControversialSection)
-         && m_sectionPeriod != "" )
-        m_title += " (" + m_sectionPeriod.left(1) + ")";
+         && m_sectionTimeRange != AllTime )
+        m_title += " (" + getTimeRangeString(m_sectionTimeRange).left(1) + ")";
 
     emit titleChanged();
 }
 
-void LinkModel::saveSectionAsPref()
+void LinkModel::saveSubredditPrefs()
 {
     QString relativeUrl = getRelativeUrl();
     QList<AppSettings::SubredditPrefs> subredditPrefsList = manager()->settings()->subredditPrefs();
     for (int i = 0; i < subredditPrefsList.count(); i++) {
         if (relativeUrl == subredditPrefsList.at(i).relPath) {
             subredditPrefsList[i].section = m_section;
+            subredditPrefsList[i].sectionTimeRange = m_sectionTimeRange;
             manager()->settings()->setSubredditPrefs(subredditPrefsList);
             return;
         }
@@ -347,6 +345,7 @@ void LinkModel::saveSectionAsPref()
     AppSettings::SubredditPrefs newprefs;
     newprefs.relPath = relativeUrl;
     newprefs.section = m_section;
+    newprefs.sectionTimeRange = m_sectionTimeRange;
     subredditPrefsList.append(newprefs);
     manager()->settings()->setSubredditPrefs(subredditPrefsList);
 }
@@ -523,7 +522,7 @@ QString LinkModel::getSearchSortString(SearchSortType sort)
     }
 }
 
-QString LinkModel::getSearchTimeRangeString(SearchTimeRange timeRange)
+QString LinkModel::getTimeRangeString(TimeRange timeRange)
 {
     switch (timeRange) {
     case AllTime: return "all";
@@ -533,7 +532,7 @@ QString LinkModel::getSearchTimeRangeString(SearchTimeRange timeRange)
     case Month: return "month";
     case Year: return "year";
     default:
-        qWarning("LinkModel::getSearchTimeRangeString(): Invalid time range");
+        qWarning("LinkModel::getTimeRangeString(): Invalid time range");
         return "";
     }
 }

@@ -18,6 +18,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import harbour.quickddit.Core 1.0
 
 AbstractDialog {
     id: selectionDialog
@@ -25,7 +26,7 @@ AbstractDialog {
     property alias title: header.title
     property alias model: listView.model
     property int section
-    property string periodQuery: ""
+    property int sectionTimeRange: LinkModel.AllTime
     property bool frontpage: false
     property int base: frontpage ? 0 : 1
 
@@ -39,13 +40,13 @@ AbstractDialog {
     ]
 
     ListModel {
-        id: periodModel
-        ListElement { label: qsTr("Hour"); qry: "hour" }
-        ListElement { label: qsTr("Day"); qry: "day" }
-        ListElement { label: qsTr("Week"); qry: "week" }
-        ListElement { label: qsTr("Month"); qry: "month" }
-        ListElement { label: qsTr("Year"); qry: "year" }
-        ListElement { label: qsTr("All time"); qry: "all" }
+        id: timeRangeModel
+        ListElement { label: qsTr("Hour"); tr: LinkModel.Hour }
+        ListElement { label: qsTr("Day"); tr: LinkModel.Day }
+        ListElement { label: qsTr("Week"); tr: LinkModel.Week }
+        ListElement { label: qsTr("Month"); tr: LinkModel.Month }
+        ListElement { label: qsTr("Year"); tr: LinkModel.Year }
+        ListElement { label: qsTr("All time"); tr: LinkModel.AllTime }
     }
 
     DialogHeader {
@@ -79,11 +80,11 @@ AbstractDialog {
             property int parentItemIndex
 
             Repeater {
-                model: periodModel
+                model: timeRangeModel
                 delegate: MenuItem {
                     text: label
                     onClicked: {
-                        selectionDialog.periodQuery = qry
+                        selectionDialog.sectionTimeRange = tr
                         selectionDialog.section = parentItemIndex + base
                         canAccept = true;
                         selectionDialog.accept()

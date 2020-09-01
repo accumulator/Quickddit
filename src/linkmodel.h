@@ -29,21 +29,20 @@ class LinkModel : public AbstractListModelManager
     Q_ENUMS(Location)
     Q_ENUMS(Section)
     Q_ENUMS(SearchSortType)
-    Q_ENUMS(SearchTimeRange)
+    Q_ENUMS(TimeRange)
 
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
     Q_PROPERTY(Location location READ location WRITE setLocation NOTIFY locationChanged)
     Q_PROPERTY(Section section READ section WRITE setSection NOTIFY sectionChanged)
     Q_PROPERTY(QString subreddit READ subreddit WRITE setSubreddit NOTIFY subredditChanged)
     Q_PROPERTY(QString multireddit READ multireddit WRITE setMultireddit NOTIFY multiredditChanged)
-
-    Q_PROPERTY(QString sectionPeriod READ sectionPeriod WRITE setSectionPeriod NOTIFY sectionPeriodChanged)
+    Q_PROPERTY(TimeRange sectionTimeRange READ sectionTimeRange WRITE setSectionTimeRange NOTIFY sectionTimeRangeChanged)
 
     // Only for Search
     Q_PROPERTY(QString searchQuery READ searchQuery WRITE setSearchQuery NOTIFY searchQueryChanged)
     Q_PROPERTY(SearchSortType searchSort READ searchSort WRITE setSearchSort NOTIFY searchSortChanged)
-    Q_PROPERTY(SearchTimeRange searchTimeRange READ searchTimeRange WRITE setSearchTimeRange
-               NOTIFY searchTimeRangeChanged)
+    Q_PROPERTY(TimeRange searchTimeRange READ searchTimeRange WRITE setSearchTimeRange NOTIFY searchTimeRangeChanged)
+
 public:
     enum Roles {
         FullnameRole = Qt::UserRole,
@@ -102,7 +101,7 @@ public:
         CommentsSort
     };
 
-    enum SearchTimeRange {
+    enum TimeRange {
         AllTime,
         Hour,
         Day,
@@ -129,8 +128,8 @@ public:
     Section section() const;
     void setSection(Section section);
 
-    QString sectionPeriod() const;
-    void setSectionPeriod(const QString & sectionPeriod);
+    TimeRange sectionTimeRange() const;
+    void setSectionTimeRange(TimeRange sectionTimeRange);
 
     QString subreddit() const;
     void setSubreddit(const QString &subreddit);
@@ -144,13 +143,13 @@ public:
     SearchSortType searchSort() const;
     void setSearchSort(SearchSortType sort);
 
-    SearchTimeRange searchTimeRange() const;
-    void setSearchTimeRange(SearchTimeRange timeRange);
+    TimeRange searchTimeRange() const;
+    void setSearchTimeRange(TimeRange timeRange);
 
     void refresh(bool refreshOlder);
     Q_INVOKABLE void changeLikes(const QString &fullname, int likes);
     Q_INVOKABLE void changeSaved(const QString &fullname, bool saved);
-    Q_INVOKABLE void saveSectionAsPref();
+    Q_INVOKABLE void saveSubredditPrefs();
 
     void editLink(const LinkObject &link);
     void deleteLink(const QString &fullname);
@@ -162,7 +161,7 @@ signals:
     void titleChanged();
     void locationChanged();
     void sectionChanged();
-    void sectionPeriodChanged();
+    void sectionTimeRangeChanged();
     void subredditChanged();
     void multiredditChanged();
     void searchQueryChanged();
@@ -176,19 +175,19 @@ private:
     QString m_title;
     Location m_location;
     Section m_section;
-    QString m_sectionPeriod;
+    TimeRange m_sectionTimeRange;
     QString m_subreddit;
     QString m_multireddit;
     QString m_searchQuery;
     SearchSortType m_searchSort;
-    SearchTimeRange m_searchTimeRange;
+    TimeRange m_searchTimeRange;
 
     QList<LinkObject> m_linkList;
 
     QString getRelativeUrl();
     static QString getSectionString(Section section);
     static QString getSearchSortString(SearchSortType sort);
-    static QString getSearchTimeRangeString(SearchTimeRange timeRange);
+    static QString getTimeRangeString(TimeRange timeRange);
 };
 
 #endif // LINKMODEL_H

@@ -85,6 +85,7 @@ public:
     struct SubredditPrefs {
         QString relPath;
         int section;
+        int sectionTimeRange;
     };
 
     explicit AppSettings(QObject *parent = 0);
