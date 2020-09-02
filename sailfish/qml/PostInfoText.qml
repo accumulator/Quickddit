@@ -100,12 +100,20 @@ Column {
         maximumLineCount: compact ? 2 : 9999 /* TODO : maxint */
         font.pixelSize: constant.fontSizeDefault
         color: highlighted ? Theme.secondaryHighlightColor : constant.colorMid
-        onLinkActivated: globalUtils.openLink(link)
-        text: constant.richtextStyle + qsTr("submitted %1 by %2").arg(link.created).arg(
+        onLinkActivated: {
+            if (link.indexOf("cross:") == 0) {
+                console.log("fetching crossposts for " + link.substring(9))
+                pageStack.push(Qt.resolvedUrl("MainPage.qml"), { duplicatesOf: link.substring(9) });
+            } else
+                globalUtils.openLink(link)
+        }
+        text: constant.richtextStyle +
+              qsTr("submitted %1 by %2").arg(link.created).arg(
                 (compact ? link.author : "<a href=\"https://reddit.com/u/" + link.author.split(" ")[0] + "\">" + link.author + "</a>") +
                 (showSubreddit ?
                      " " + qsTr("to %1").arg((compact ? link.subreddit : "<a href=\"https://reddit.com/r/" + link.subreddit + "\">" + link.subreddit + "</a>"))
-                     : ""))
+                     : "")) +
+              ((!compact && link.crossposts > 0) ? ". <a href=\"cross:" + link.fullname + "\">" + qsTr("%n crossposts", "", link.crossposts) + "</a>" : "")
     }
 
     // viewhack to render richtext wide again after orientation goes horizontal (?)

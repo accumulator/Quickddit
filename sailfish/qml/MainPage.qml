@@ -28,6 +28,7 @@ AbstractPage {
     busy: linkVoteManager.busy
 
     property string subreddit
+    property string duplicatesOf
     property string section
     property string sectionTimeRange
 
@@ -58,6 +59,13 @@ AbstractPage {
         linkModel.multireddit = multireddit
         linkModel.section = LinkModel.UndefinedSection
         linkModel.refresh(false);
+    }
+
+    function refreshDuplicates() {
+        linkModel.location = LinkModel.Duplicates
+        linkModel.section = LinkModel.UndefinedSection
+        linkModel.subreddit = duplicatesOf
+        linkModel.refresh(false)
     }
 
     function newLink() {
@@ -209,8 +217,6 @@ AbstractPage {
     }
 
     Component.onCompleted: {
-        if (subreddit === undefined)
-            return;
         if (section !== undefined) {
             var si = ["best", "hot", "new", "rising", "controversial", "top", "gilded"].indexOf(section);
             if (si !== -1)
@@ -221,6 +227,11 @@ AbstractPage {
                     linkModel.sectionTimeRange = ri
             }
         }
+        if (duplicatesOf && duplicatesOf !== "") {
+            refreshDuplicates()
+            return
+        }
+
         refresh(subreddit, true);
     }
 }
