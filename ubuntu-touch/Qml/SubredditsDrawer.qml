@@ -25,7 +25,6 @@ Drawer {
     height: window.height
     width: 250
     dragMargin: 0
-    property bool signedIn: false
     function showSubreddit(subreddit) {
         var mainPage = globalUtils.getMainPage();
         mainPage.refresh(subreddit.slice(3));
@@ -99,7 +98,6 @@ Drawer {
                 subredditModel.clear();
                 //multiredditModel.clear();
             }
-            signedIn=quickdditManager.isSignedIn;
         }
     }
 }

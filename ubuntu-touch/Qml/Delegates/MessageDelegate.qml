@@ -19,6 +19,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Suru 2.2
+import "../"
 
 SwipeDelegate {
     id: messageDelegate
@@ -34,7 +35,7 @@ SwipeDelegate {
     }
 
     swipe.left: ActionButton {
-        ico: "../Icons/delete.svg"
+        ico: "qrc:/Icons/delete.svg"
         visible: !model.isComment
         enabled: !messageManager.busy
         color: Suru.color(Suru.Red,1)
@@ -49,7 +50,7 @@ SwipeDelegate {
         anchors { top: parent.top;bottom: parent.bottom; right: parent.right }
 
         ActionButton {
-            ico: model.isUnread? "../Icons/mail-read.svg" :"../Icons/mail-unread.svg"
+            ico: model.isUnread? "qrc:/Icons/mail-read.svg" :"qrc:/Icons/mail-unread.svg"
             enabled: !messageManager.busy
             color: Suru.foregroundColor
 
@@ -61,7 +62,7 @@ SwipeDelegate {
         }
 
         ActionButton {
-            ico: "../Icons/mail-reply.svg"
+            ico: "qrc:/Icons/mail-reply.svg"
             visible: !model.isComment
             enabled: !messageManager.busy && model.author !== appSettings.redditUsername
             color: Suru.foregroundColor
@@ -92,7 +93,7 @@ SwipeDelegate {
                           : (model.author !== "")
                             ? model.author + " ~ " + model.created
                             : "/r/" + model.subreddit + " ~ " + model.created
-        onLinkActivated: pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:link.slice(3)})
+        onLinkActivated: pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SubredditPage.qml"),{subreddit:link.slice(3)})
     }
 
     Label {

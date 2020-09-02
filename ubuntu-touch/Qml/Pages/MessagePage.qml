@@ -19,9 +19,33 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import quickddit.Core 1.0
+import QtQuick.Controls.Suru 2.2
+import "../"
+import "../Delegates"
 
 Page {
     title: "Messages"
+
+    function getButtons(){
+        return toolButtons
+    }
+
+    Component {
+        id: toolButtons
+        Row {
+            ActionButton {
+                id:newPost
+                ico: "qrc:/Icons/message-new.svg"
+                size: 20
+                color: Suru.color(Suru.White,1)
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SendMessagePage.qml"), {messageManager: messageManager});
+                }
+
+            }
+        }
+    }
+
     ListView {
         id: messageListView
         anchors.fill: parent
@@ -42,14 +66,14 @@ Page {
                 if (model.isUnread) {
                     messageManager.markRead(model.fullname)
                 }
-                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {linkPermalink: model.context})
+                pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/CommentPage.qml"), {linkPermalink: model.context})
             }
 
             function doReply() {
                 if (model.isUnread) {
                     messageManager.markRead(model.fullname)
                 }
-                pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"),
+                pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SendMessagePage.qml"),
                                {messageManager: messageManager, replyTo: model.fullname, recipient: model.author !== "" ? model.author : "/r/" + model.subreddit, subject: "re: " + model.subject});
             }
         }

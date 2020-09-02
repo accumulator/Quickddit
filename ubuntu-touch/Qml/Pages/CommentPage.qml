@@ -20,6 +20,9 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.2
 import quickddit.Core 1.0
+import QtQuick.Controls.Suru 2.2
+import "../"
+import "../Delegates"
 
 Page {
     id:commentPage
@@ -40,6 +43,48 @@ Page {
         commentModel.moreComments(index, children);
     }
 
+    function getButtons(){
+        return toolButtons
+    }
+
+    Component {
+        id: toolButtons
+        Row {
+            ActionButton {
+                id:edit
+                ico: "qrc:/Icons/edit.svg"
+                size: 20
+                color: Suru.color(Suru.White,1)
+                visible: link.author === appSettings.redditUsername
+                enabled: !link.isArchived
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SendLinkPage.qml"),
+                                   { linkManager: linkManager,
+                                     text: link.rawText || "",
+                                     editPost: link.fullname,
+                                     subreddit: link.subreddit,
+                                     postTitle: link.title,
+                                     postUrl: link.isSelfPost ? "" : link.url
+                                   });
+                }
+            }
+
+            ActionButton {
+                id:newPost
+                ico: "qrc:/Icons/add.svg"
+                size: 20
+                color: Suru.color(Suru.White,1)
+                visible: quickdditManager.isSignedIn
+                enabled: !commentManager.busy && !link.isArchived && !link.isLocked
+                onClicked: {
+                    commentModel.showNewComment();
+                    commentsList.currentIndex = 0;
+                    commentsList.positionViewAtIndex(0, ListView.Beginning);
+                }
+            }
+        }
+    }
+
     ListView {
         id:commentsList
         anchors.fill: parent
@@ -50,6 +95,7 @@ Page {
             linkVoteManager: linkVoteManager1
             linkSaveManager: linkSaveManager1
         }
+        cacheBuffer: 10000
 
         model: commentModel
         delegate: CommentDelegate {
@@ -77,11 +123,6 @@ Page {
                 commentListView.positionViewAtIndex(postIndex, ListView.Contain);
                 commentListView.currentIndex = postIndex;
                 commentListView.currentItem.highlight();
-            }
-        }
-        onBusyChanged: {
-            if(!busy){
-                commentModel.showNewComment();
             }
         }
     }

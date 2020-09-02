@@ -22,6 +22,7 @@ import QtQuick.Layouts 1.2
 import quickddit.Core 1.0
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Suru 2.2
+import "../"
 
 ItemDelegate {
     id:linkDelegate
@@ -53,9 +54,9 @@ ItemDelegate {
         text: "<a href='/r/"+link.subreddit+"'>"+"/r/"+link.subreddit+"</a>"+" ~ <a href='/u/"+link.author+"'>"+"/u/"+link.author+"</a>"+" ~ "+link.created+" ~ "+link.domain
         onLinkActivated: {
             if(link.charAt(1)=='r')
-                pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:link.slice(3)})
+                pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SubredditPage.qml"),{subreddit:link.slice(3)})
             if(link.charAt(1)=='u'){
-                pageStack.push(Qt.resolvedUrl("UserPage.qml"),{username:link.slice(3).split(" ")[0]})
+                pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/UserPage.qml"),{username:link.slice(3).split(" ")[0]})
             }
         }
     }
@@ -105,7 +106,7 @@ ItemDelegate {
         anchors.top: titulok.bottom
         width: parent.width
         visible: previewableImage && !(persistantSettings.compactImages && compact)
-        url: previewableImage&&!(compact &&persistantSettings.compactImages) ? (persistantSettings.fullResolutionImages &&!imgur ? link.url : link.previewUrl) : ""
+        url: previewableImage&&!(compact &&persistantSettings.compactImages) ? (persistantSettings.fullResolutionImages &&!imgur || String(link.previewUrl).length<2 ? link.url : link.previewUrl) : ""
     }
 
     PostButtonRow {

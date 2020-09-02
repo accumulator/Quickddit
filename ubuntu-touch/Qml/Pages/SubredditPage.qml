@@ -21,12 +21,15 @@ import QtQuick.Controls 2.2
 import quickddit.Core 1.0
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Suru 2.2
+import "../"
+import "../Delegates"
 
 Page {
     id:subredditPage
     title: "/r/"+subreddit
     objectName: "subredditPage"
     property string subreddit
+
     ScrollView{
         anchors.fill: parent
         contentWidth: parent.width

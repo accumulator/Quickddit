@@ -19,6 +19,8 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import quickddit.Core 1.0
+import "../"
+import "../Delegates"
 
 Page {
     title: "/u/"+username;
@@ -55,7 +57,7 @@ Page {
                 Button {
                     text: "Send message"
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("SendMessagePage.qml"),
+                        pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SendMessagePage.qml"),
                                        {messageManager: messageManager, recipient: username});
                     }
 
@@ -88,7 +90,7 @@ Page {
                 markSaved: userThingModel.section !== UserThingModel.SavedSection
                 onClicked: {
                     // context needs the double slash '//' in the path
-                    pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {
+                    pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/CommentPage.qml"), {
                                        linkPermalink: "/r/" + model.subreddit + "/comments/" + model.linkId + "//" + model.fullname.substring(3) + "?context=8",
                                        linkSaveManager: linkSaveManager
                                    });
@@ -105,7 +107,7 @@ Page {
                 model: !!item ? item.link : undefined
                 markSaved: userThingModel.section !== UserThingModel.SavedSection
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("CommentPage.qml"), {
+                    pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/CommentPage.qml"), {
                                        linkPermalink: "/r/" + model.subreddit + "/comments/" + model.fullname.substring(3),
                                        linkSaveManager: linkSaveManager
                                    });

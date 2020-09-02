@@ -99,14 +99,14 @@ Page {
             ItemDelegate {
                 width: parent.width
                 text: "Accounts "
-                onClicked: pageStack.push(Qt.resolvedUrl("AccountsPage.qml"));
+                onClicked: pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/AccountsPage.qml"));
                 Image {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
                     anchors.rightMargin: 12
                     width: 24
                     height: 24
-                    source: "../Icons/next.svg"
+                    source: "qrc:/Icons/next.svg"
                 }
             }
         }

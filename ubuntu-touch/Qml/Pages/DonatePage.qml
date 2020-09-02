@@ -49,7 +49,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: 48
                 height: width
-                source: "../Img/paypal.png"
+                source: "qrc:/Img/paypal.png"
             }
 
             Label {
@@ -67,7 +67,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: 48
                 height: width
-                source: "../Img/bitcoin.png"
+                source: "qrc:/Img/bitcoin.png"
             }
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -99,7 +99,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: 48
                 height: width
-                source: "../Img/paypal.png"
+                source: "qrc:/Img/paypal.png"
             }
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter

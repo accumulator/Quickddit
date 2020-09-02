@@ -19,6 +19,8 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import quickddit.Core 1.0
+import "../"
+import "../Delegates"
 
 Page {
     title: "Accounts"
@@ -44,7 +46,7 @@ Page {
                     height: 24
                     width: 24
                     anchors.centerIn: parent
-                    source: "../Icons/delete.svg"
+                    source: "qrc:/Icons/delete.svg"
                 }
                 onClicked: {
                     if(modelData === appSettings.redditUsername )
@@ -63,7 +65,7 @@ Page {
             text: "Add new account"
 
             onClicked: {
-                pageStack.push(Qt.resolvedUrl("LoginPage.qml"));
+                pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/LoginPage.qml"));
             }
         }
     }

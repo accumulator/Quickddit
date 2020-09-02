@@ -1,14 +1,10 @@
 {
     "policy_groups": [
-        "accounts",
         "audio",
         "connectivity",
         "networking",
         "video",
         "webview"
-    ],
-    "read_path": [
-        "/etc/mime.types"
     ],
     "policy_version": 16.04
 }

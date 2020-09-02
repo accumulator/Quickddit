@@ -27,7 +27,7 @@ Image {
 
     Image {
         id: busy
-        source: "../Icons/spinner.svg"
+        source: "qrc:/Icons/spinner.svg"
         anchors.centerIn: parent
         visible: parent.status===Image.Loading
         width: 48

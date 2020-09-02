@@ -20,6 +20,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import quickddit.Core 1.0
 import QtMultimedia 5.9
+import QtWebEngine 1.9
 
 Page {
     id: videoViewPage
@@ -27,20 +28,18 @@ Page {
 
     property string videoUrl
     property string origUrl
+    property string playerUrl : "qrc:/videoPlayer.html?videoSrc="
 
     property bool error: false
 
-    VideoOutput {
+    WebEngineView{
         anchors.fill: parent
-        source: MediaPlayer {
-            id:mediaPlayer
-            autoPlay: true
-
-            onSourceChanged: {
-                console.warn(source)
-            }
-        }
+        id:webView
+        settings.localContentCanAccessFileUrls: true
+        settings.localContentCanAccessRemoteUrls: true
+        settings.allowRunningInsecureContent: true
     }
+
 
     Component.onCompleted: {
         if (videoUrl === "") {
@@ -48,7 +47,7 @@ Page {
             console.log("only origUrl set, resolving with youtube-dl...")
             python.requestVideoUrlFor(origUrl)
         } else {
-            mediaPlayer.source = videoUrl
+            webView.url = videoUrl
         }
     }
 
@@ -103,10 +102,10 @@ Page {
                     // acodec none,vcodec one of avc1.4d001f,avc1.4d001e,avc1.42001e
                     if (format["height"] <= 480) {
                         console.log("format selected by id " + format["format_id"] + " and height <= 480")
-                        urls["360"] = format["url"].replace("_v4.m3u8",".ts")  // 'deref' by string replace
+                        urls["360"] = format["url"].replace("dsasda.m3u8",".ts")  // 'deref' by string replace
                     } else {
                         console.log("format selected by id " + format["format_id"] + " and height > 480")
-                        urls["720"] = format["url"].replace("_v4.m3u8",".ts")  // 'deref' by string replace
+                        urls["720"] = format["url"].replace("sadsda.m3u8",".ts")  // 'deref' by string replace
                     }
                 }
             if (urls["360"] === undefined && urls["720"] === undefined) {
@@ -125,25 +124,27 @@ Page {
             if (appSettings.preferredVideoSize === AppSettings.VS360) {
                 if (urls["360"] === undefined)
                     console.log("360p selected but fallback to 720p")
-                mediaPlayer.source = urls["360"] !== undefined ? urls["360"] : urls["720"] !== undefined ? urls["720"] : urls["other"]
+                webView.url = urls["360"] !== undefined ? urls["360"] : urls["720"] !== undefined ? urls["720"] : urls["other"]
             } else {
                 if (urls["720"] === undefined)
                     console.log("720p selected but fallback to 360p")
-                mediaPlayer.source = urls["720"] !== undefined ? urls["720"] : urls["360"] !== undefined ? urls["360"] : urls["other"]
+                webView.url = urls["720"] !== undefined ? urls["720"] : urls["360"] !== undefined ? urls["360"] : urls["other"]
             }
 
-            if (mediaPlayer.source === undefined)
+            if (webView.url === undefined)
                 fail(qsTr("Problem finding stream URL"))
         }
 
         onError: {
             error = true
-            console.warn(qsTr("youtube-dl error: %1").arg(traceback));
+            console.log(reason);
+            infoBanner.warning(qsTr("youtube-dl error: %1").arg(traceback));
         }
 
         onFail: {
             error = true
-            console.warn(reason);
+            console.log(reason);
+            infoBanner.warning(reason);
         }
 
     }

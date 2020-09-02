@@ -20,6 +20,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import quickddit.Core 1.0
 import QtGraphicalEffects 1.0
+import QtQuick.Controls.Suru 2.2
 
 Image {
     property bool video
@@ -32,7 +33,20 @@ Image {
 
 
     fillMode: Image.PreserveAspectFit
-    source: String(link.thumbnailUrl).length>1 ? link.thumbnailUrl : "https://www.google.com/s2/favicons?sz=64&domain_url=" + link.domain
+    source: getUrl() //String(link.thumbnailUrl).length>1 ? link.thumbnailUrl : image ? link.url : "https://api.faviconkit.com/" + link.domain+"/144"
+
+    function getUrl() {
+        if(String(link.thumbnailUrl).length>1)
+            return link.thumbnailUrl
+        if (image) {
+            return Qt.resolvedUrl("qrc:/Icons/image.svg")
+        }
+        if (video) {
+            return Qt.resolvedUrl("qrc:/Icons/video.svg")
+        }
+
+        return "https://api.faviconkit.com/" + link.domain+"/144"
+    }
 
     MouseArea {
         anchors.fill: parent
@@ -68,8 +82,12 @@ Image {
 
     Image {
         anchors.centerIn: parent
-        source: Qt.resolvedUrl("../Icons/media-playback-start.svg")
+        source: Qt.resolvedUrl("qrc:/Icons/media-playback-start.svg")
         visible: video
-        opacity: 0.7
+        opacity: 1
+        layer.enabled: true
+        layer.effect: ColorOverlay {
+            color: Suru.color(Suru.Orange,1)
+        }
     }
 }

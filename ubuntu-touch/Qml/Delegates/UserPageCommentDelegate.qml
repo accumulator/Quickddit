@@ -35,7 +35,7 @@ ItemDelegate {
 
         text: "Comment in <a href='/r/"+model.subreddit+"'>"+"/r/"+model.subreddit+"</a>"+ " ~ " + (model.score < 0 ? "-" : "") +  qsTr("%n points", "", Math.abs(model.score)) + " ~ "+ model.created
         onLinkActivated: {
-            pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:link.slice(3)})
+            pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SubredditPage.qml"),{subreddit:link.slice(3)})
         }
     }
 

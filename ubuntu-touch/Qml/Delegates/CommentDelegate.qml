@@ -21,6 +21,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.2
 import quickddit.Core 1.0
 import QtQuick.Controls.Suru 2.2
+import "../"
 
 Item {
     id: commentDelegate
@@ -77,7 +78,7 @@ Item {
             anchors { top: parent.top;bottom: parent.bottom; left: parent.left }
             ActionButton {
                 enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !model.isArchived && model.isValid
-                ico: "../Icons/down.svg"
+                ico: "qrc:/Icons/down.svg"
                 color: model.likes===-1 ? Suru.color(Suru.Red,1) : Suru.foregroundColor
 
                 onClicked: {
@@ -88,7 +89,7 @@ Item {
 
             ActionButton {
                 visible: model.isAuthor && !model.isArchived
-                ico: "../Icons/delete.svg"
+                ico: "qrc:/Icons/delete.svg"
                 color: Suru.color(Suru.Red,1)
 
                 onClicked: {
@@ -103,7 +104,7 @@ Item {
 
             ActionButton {
                 visible: model.isAuthor && !model.isArchived
-                ico: "../Icons/edit.svg"
+                ico: "qrc:/Icons/edit.svg"
                 color: Suru.foregroundColor
 
                 onClicked: {
@@ -114,7 +115,7 @@ Item {
 
             ActionButton {
                 enabled: quickdditManager.isSignedIn && !model.isArchived && model.isValid && !link.isLocked
-                ico: "../Icons/mail-reply.svg"
+                ico: "qrc:/Icons/mail-reply.svg"
                 color: Suru.foregroundColor
 
                 onClicked: {
@@ -125,7 +126,7 @@ Item {
 
             ActionButton {
                 enabled: true
-                ico: "../Icons/edit-copy.svg"
+                ico: "qrc:/Icons/edit-copy.svg"
                 color: Suru.foregroundColor
 
                 onClicked: {
@@ -137,7 +138,7 @@ Item {
 
             ActionButton {
                 enabled: quickdditManager.isSignedIn && !commentSaveManager.busy
-                ico: model.saved ? "../Icons/starred.svg" : "../Icons/non-starred.svg"
+                ico: model.saved ? "qrc:/Icons/starred.svg" : "qrc:/Icons/non-starred.svg"
                 color: Suru.foregroundColor
 
                 onClicked: {
@@ -148,7 +149,7 @@ Item {
 
             ActionButton {
                 enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !model.isArchived && model.isValid
-                ico: "../Icons/up.svg"
+                ico: "qrc:/Icons/up.svg"
                 color: model.likes===1 ? Suru.color(Suru.Green,1) : Suru.foregroundColor
 
                 onClicked: {
@@ -159,7 +160,7 @@ Item {
         }
         contentItem:Item{
             width: parent.width
-            height: parent.height
+            height: info.height +comment.height
 
             Label {
                 id:info
@@ -171,7 +172,7 @@ Item {
                 text:"<a href='"+model.author+"'>"+"u/" +model.author+(model.isSubmitter?" [submitter]":"")+"</a>"+ " ~ " + (model.score < 0 ? "-" : "") +  qsTr("%n points", "", Math.abs(model.score)) + " ~ "+ model.created
 
                 onLinkActivated: {
-                    pageStack.push(Qt.resolvedUrl("UserPage.qml"),{username:link.split(" ")[0]})
+                    pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/UserPage.qml"),{username:link.split(" ")[0]})
                 }
             }
 
@@ -183,7 +184,7 @@ Item {
                 linkColor: Suru.color(Suru.Orange,1)
 
                 anchors {top: info.bottom;left: parent.left;right: parent.right}
-                text: model.rawBody
+                text: model.body
                 textFormat: Text.MarkdownText ? Text.MarkdownText : Text.StyledText
 
                 wrapMode: "Wrap"

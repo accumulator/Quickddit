@@ -24,8 +24,8 @@ import quickddit.Core 1.0
 import Qt.labs.settings 1.0
 import QtQuick.Controls.Suru 2.2
 import io.thp.pyotherside 1.5
-
 import "Qml"
+import "Qml/Pages"
 
 ApplicationWindow {
     id:window
@@ -66,19 +66,19 @@ ApplicationWindow {
 
             ActionButton {
                 visible: pageStack.depth>1
-                ico: "Icons/back.svg"
+                ico: "qrc:/Icons/back.svg"
                 color: Suru.color(Suru.White,1)
                 onClicked: pageStack.pop()
             }
 
             ActionButton {
                 visible: pageStack.depth<=1
-                ico: "Icons/navigation-menu.svg"
+                ico: "qrc:/Icons/navigation-menu.svg"
                 color: Suru.color(Suru.White,1)
                 onClicked: subredditsDrawer.open()
             }
 
-            Label{
+            Label {
                 id:titleLabel
                 font.pointSize: 14
                 font.weight: Font.Normal
@@ -90,9 +90,16 @@ ApplicationWindow {
                 text: pageStack.currentItem.title
             }
 
+            Loader {
+                id:headerIcons
+                height: parent.height
+            }
+
             ActionButton {
+                id:menu
+                Layout.alignment: Qt.AlignRight
                 visible: pageStack.depth<=1
-                ico: "Icons/contextual-menu.svg"
+                ico: "qrc:/Icons/contextual-menu.svg"
                 color: Suru.color(Suru.White,1)
                 onClicked: optionsMenu.open()
 
@@ -105,8 +112,8 @@ ApplicationWindow {
 
                     MenuItem {
                         txt: "My Subreddits"
-                        ico: "../Icons/view-list-symbolic.svg"
-                        onTriggered: {pageStack.push(Qt.resolvedUrl("Qml/SubredditsPage.qml"))
+                        ico: "qrc:/Icons/view-list-symbolic.svg"
+                        onTriggered: {pageStack.push(Qt.resolvedUrl("Qml/Pages/SubredditsPage.qml"))
                         }
                     }
 
@@ -114,9 +121,9 @@ ApplicationWindow {
                     
                     MenuItem {
                         txt: "Messages"
-                        ico: "../Icons/message.svg"
+                        ico: "qrc:/Icons/message.svg"
                         enabled: quickdditManager.isSignedIn
-                        onTriggered: {pageStack.push(Qt.resolvedUrl("Qml/MessagePage.qml"))
+                        onTriggered: {pageStack.push(Qt.resolvedUrl("Qml/Pages/MessagePage.qml"))
                         }
                     }
 
@@ -124,18 +131,18 @@ ApplicationWindow {
 
                     MenuItem {
                         txt:  "My profile"
-                        ico: "../Icons/account.svg"
+                        ico: "qrc:/Icons/account.svg"
                         enabled: quickdditManager.isSignedIn
-                        onTriggered: { pageStack.push(Qt.resolvedUrl("Qml/UserPage.qml"),{username: appSettings.redditUsername}) }
+                        onTriggered: { pageStack.push(Qt.resolvedUrl("Qml/Pages/UserPage.qml"),{username: appSettings.redditUsername}) }
                     }
 
                     MenuSeparator {topPadding: 0; bottomPadding: 0 }
 
                     MenuItem {
                         txt: quickdditManager.isSignedIn ? "Log out ("+appSettings.redditUsername+")": "Log in"
-                        ico: quickdditManager.isSignedIn ? "../Icons/system-log-out.svg" : "../Icons/contact-new.svg"
+                        ico: quickdditManager.isSignedIn ? "qrc:/Icons/system-log-out.svg" : "qrc:/Icons/contact-new.svg"
                         onTriggered:{
-                            !quickdditManager.isSignedIn ? pageStack.push(Qt.resolvedUrl("Qml/LoginPage.qml")) : logOutDialog.open();
+                            !quickdditManager.isSignedIn ? pageStack.push(Qt.resolvedUrl("Qml/Pages/LoginPage.qml")) : logOutDialog.open();
                         }
                         Dialog{
                             id:logOutDialog
@@ -157,16 +164,16 @@ ApplicationWindow {
 
                     MenuItem {
                         txt: "Settings"
-                        ico: "../Icons/settings.svg"
-                        onTriggered: pageStack.push(Qt.resolvedUrl("Qml/SettingsPage.qml"))
+                        ico: "qrc:/Icons/settings.svg"
+                        onTriggered: pageStack.push(Qt.resolvedUrl("Qml/Pages/SettingsPage.qml"))
                     }
 
                     MenuSeparator { topPadding: 0; bottomPadding: 0 }
 
                     MenuItem {
                         txt: "About"
-                        ico: "../Icons/info.svg"
-                        onTriggered: pageStack.push(Qt.resolvedUrl("Qml/AboutPage.qml"))
+                        ico: "qrc:/Icons/info.svg"
+                        onTriggered: pageStack.push(Qt.resolvedUrl("Qml/Pages/AboutPage.qml"))
                     }
                 }
             }
@@ -180,6 +187,9 @@ ApplicationWindow {
         id:pageStack
         anchors.fill: parent
         initialItem: Component{MainPage{}}
+        onCurrentItemChanged: {
+            headerIcons.sourceComponent = pageStack.currentItem.getButtons ? pageStack.currentItem.getButtons() : null
+        }
     }
 
     AppSettings { id: appSettings }
@@ -204,7 +214,7 @@ ApplicationWindow {
         onAccessTokenFailure: {
             if (code == 299 /* QNetworkReply::UnknownContentError */) {
                 infoBanner.warning(qsTr("Please log in again"));
-                pageStack.push(Qt.resolvedUrl("Qml/AppSettingsPage.qml"));
+                pageStack.push(Qt.resolvedUrl("Qml/Pages/AppSettingsPage.qml"));
             } else {
                 infoBanner.warning(errorString);
             }
@@ -303,7 +313,7 @@ ApplicationWindow {
             var params = {}
 
             if (/^(\/r\/\w+)?\/comments\/\w+/.test(redditLink.path))
-                pushOrReplace(Qt.resolvedUrl("Qml/CommentPage.qml"), {linkPermalink: url});
+                pushOrReplace(Qt.resolvedUrl("Qml/Pages/CommentPage.qml"), {linkPermalink: url});
             else if (/^\/r\/(\w+)/.test(redditLink.path)) {
                 var path = redditLink.path.split("/");
                 params["subreddit"] = path[2];
@@ -321,14 +331,14 @@ ApplicationWindow {
             } else if (/^\/u(ser)?\/([A-Za-z0-9_-]+)/.test(redditLink.path)) {
                 var username = redditLink.path.split("/")[2];
                 //test
-                pushOrReplace(Qt.resolvedUrl("Qml/UserPage.qml"), {username: username});
+                pushOrReplace(Qt.resolvedUrl("Qml/Pages/UserPage.qml"), {username: username});
             } else if (/^\/message\/compose/.test(redditLink.path)) {
                 params["recipient"] = redditLink.queryMap["to"]
                 if (redditLink.queryMap["message"] !== null)
                     params["message"] = redditLink.queryMap["message"]
                 if (redditLink.queryMap["subject"] !== null)
                     params["subject"] = redditLink.queryMap["subject"]
-                pushOrReplace(Qt.resolvedUrl("Qml/SendMessagePage.qml"), params);
+                pushOrReplace(Qt.resolvedUrl("Qml/Pages/SendMessagePage.qml"), params);
             } else if (/^\/search/.test(redditLink.path)) {
                 if (redditLink.queryMap["q"] !== undefined)
                     params["query"] = redditLink.queryMap["q"]
@@ -381,20 +391,20 @@ ApplicationWindow {
 
         function openImageViewPage(url) {
             if (/^https?:\/\/((i|m|www)\.)?imgur\.com/.test(url))
-                pageStack.push(Qt.resolvedUrl("Qml/ImageViewPage.qml"), {imgurUrl: url});
+                pageStack.push(Qt.resolvedUrl("Qml/Pages/ImageViewPage.qml"), {imgurUrl: url});
             else if (/^https?:\/\/\S+\.(jpe?g|png|gif)/i.test(url))
-                pageStack.push(Qt.resolvedUrl("Qml/ImageViewPage.qml"), {imageUrl: url});
+                pageStack.push(Qt.resolvedUrl("Qml/Pages/ImageViewPage.qml"), {imageUrl: url});
             else if (/^https?:\/\/i.reddituploads.com\//.test(url))
-                pageStack.push(Qt.resolvedUrl("Qml/ImageViewPage.qml"), {imageUrl: url});
+                pageStack.push(Qt.resolvedUrl("Qml/Pages/ImageViewPage.qml"), {imageUrl: url});
             else
                 infoBanner.alert(qsTr("Unsupported image url"));
         }
 
         function openVideoViewPage(url) {
             if (python.isUrlSupported(url)) {
-                pageStack.push(Qt.resolvedUrl("Qml/VideoViewPage.qml"), { origUrl: url });
+                pageStack.push(Qt.resolvedUrl("Qml/Pages/VideoViewPage.qml"), { origUrl: url });
             } else if ((/^https?:\/\/\S+\.(mp4|avi|mkv|webm)/i.test(url))) {
-                pageStack.push(Qt.resolvedUrl("Qml/VideoViewPage.qml"), { videoUrl: url });
+                pageStack.push(Qt.resolvedUrl("Qml/Pages/VideoViewPage.qml"), { videoUrl: url });
             } else
                 infoBanner.alert(qsTr("Unsupported video url"));
         }
@@ -428,7 +438,7 @@ ApplicationWindow {
 
         function createOpenLinkDialog(url, source) {
             if(persistantSettings.linksInternaly)
-                pageStack.push(Qt.resolvedUrl("Qml/WebViewer.qml"), {url: url, source: source});
+                pageStack.push(Qt.resolvedUrl("Qml/Pages/WebViewer.qml"), {url: url, source: source});
             else
                 Qt.openUrlExternally(url)
         }
@@ -490,7 +500,6 @@ ApplicationWindow {
                 console.log('fail signal: ' + msg)
                 fail(msg)
             })
-
             importModule('ytdl_wrapper', function() {})
         }
 

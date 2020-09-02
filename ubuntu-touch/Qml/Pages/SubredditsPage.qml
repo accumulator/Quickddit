@@ -21,6 +21,8 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.2
 import quickddit.Core 1.0
 import QtQuick.Controls.Suru 2.2
+import "../"
+import "../Delegates"
 
 Page {
     title: "Subreddits"
@@ -174,7 +176,7 @@ Page {
                     id:subredditDelegate
 
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:model.displayName})
+                        pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SubredditPage.qml"),{subreddit:model.displayName})
                     }
                 }
                 onAtYEndChanged: {
@@ -196,7 +198,7 @@ Page {
                 id:multiredditDelegate
 
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("MultiredditPage.qml"),{multireddit:model.name,mrModel:multiredditModel})
+                    pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/MultiredditPage.qml"),{multireddit:model.name,mrModel:multiredditModel})
                 }
             }
             onAtYEndChanged: {

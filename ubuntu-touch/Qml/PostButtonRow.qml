@@ -34,7 +34,7 @@ Row{
         id:up
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width/6
-        ico: "../Icons/up.svg"
+        ico: "qrc:/Icons/up.svg"
         color: link.likes ===1 ? Suru.color(Suru.Green,1) : Suru.foregroundColor
 
         onClicked: {
@@ -50,6 +50,7 @@ Row{
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width/6
         text: link.score
+        font.weight: Font.Normal
         horizontalAlignment: "AlignHCenter"
         color:  link.score>0 ? Suru.color(Suru.Green,1) : link.score<0 ? Suru.color(Suru.Red,1) : Suru.foregroundColor
     }
@@ -57,7 +58,7 @@ Row{
         id:down
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width/6
-        ico: "../Icons/down.svg"
+        ico: "qrc:/Icons/down.svg"
         color: link.likes ===-1 ? Suru.color(Suru.Red,1) : Suru.foregroundColor
 
         onClicked: {
@@ -74,11 +75,10 @@ Row{
         anchors.verticalCenter: parent.verticalCenter
         flat: true
         hoverEnabled: false
-        //icon.source: "../Icons/message.svg"
         onClicked: {
             if (compact){
                 var p = { link: link };
-                pageStack.push(Qt.resolvedUrl("CommentPage.qml"), p);
+                pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/CommentPage.qml"), p);
             }
         }
         Row {
@@ -87,7 +87,7 @@ Row{
 
             Image{
                 anchors.verticalCenter: parent.verticalCenter
-                source: "../Icons/message.svg"
+                source: "qrc:/Icons/message.svg"
                 width: 24
                 height: 24
                 layer.enabled: true
@@ -107,7 +107,7 @@ Row{
         id:share
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width/6
-        ico: "../Icons/edit-copy.svg"
+        ico: "qrc:/Icons/edit-copy.svg"
         color: Suru.foregroundColor
 
         onClicked: {
@@ -121,7 +121,7 @@ Row{
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width/6
         enabled: quickdditManager.isSignedIn
-        ico: link.saved ? "../Icons/starred.svg" : "../Icons/non-starred.svg"
+        ico: link.saved ? "qrc:/Icons/starred.svg" : "qrc:/Icons/non-starred.svg"
         color: link.saved ? Suru.color(Suru.Orange,1) : Suru.foregroundColor
 
         onClicked: {

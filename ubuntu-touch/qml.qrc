@@ -1,16 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Qml/MainPage.qml</file>
-        <file>Qml/LinkDelegate.qml</file>
-        <file>Qml/WebViewer.qml</file>
-        <file>Qml/SettingsPage.qml</file>
-        <file>Qml/SubredditsPage.qml</file>
-        <file>Qml/AboutPage.qml</file>
-        <file>Qml/SubredditDelegate.qml</file>
         <file>Qml/SubredditsDrawer.qml</file>
-        <file>Qml/CommentPage.qml</file>
-        <file>Qml/CommentDelegate.qml</file>
         <file>Icons/message.svg</file>
         <file>Icons/share.svg</file>
         <file>Icons/up.svg</file>
@@ -22,18 +13,13 @@
         <file>Icons/toolkit_chevron-up_1gu.svg</file>
         <file>Icons/toolkit_chevron-down_1gu.svg</file>
         <file>Icons/back.svg</file>
-        <file>Qml/ImageViewPage.qml</file>
         <file>Qml/ImageViewer.qml</file>
-        <file>Qml/SubredditPage.qml</file>
-        <file>Qml/LoginPage.qml</file>
         <file>Icons/non-starred.svg</file>
         <file>Icons/starred.svg</file>
         <file>Icons/edit-copy.svg</file>
         <file>Icons/webbrowser-app-symbolic.svg</file>
         <file>Icons/mail-reply.svg</file>
         <file>Icons/spinner.svg</file>
-        <file>Qml/UserPage.qml</file>
-        <file>Qml/VideoViewPage.qml</file>
         <file>Qml/ytdl_wrapper.py</file>
         <file>Icons/down_b.svg</file>
         <file>Icons/up_b.svg</file>
@@ -42,28 +28,18 @@
         <file>Qml/Thumbnail.qml</file>
         <file>Icons/media-playback-start.svg</file>
         <file>Qml/CircleImage.qml</file>
-        <file>Qml/UserPageCommentDelegate.qml</file>
-        <file>Qml/UserPageLinkDelegate.qml</file>
         <file>Qml/PostButtonRow.qml</file>
-        <file>Qml/AccountsPage.qml</file>
         <file>Icons/next.svg</file>
         <file>Icons/delete.svg</file>
         <file>Icons/quickddit.svg</file>
         <file>Icons/quickddit80.png</file>
         <file>Icons/edit.svg</file>
-        <file>Qml/MessagePage.qml</file>
-        <file>Qml/MessageDelegate.qml</file>
-        <file>Qml/SendMessagePage.qml</file>
         <file>Qml/ActionButton.qml</file>
         <file>Icons/mail-unread.svg</file>
         <file>Icons/mail-read.svg</file>
-        <file>Qml/DonatePage.qml</file>
         <file>Img/bitcoin.png</file>
         <file>Img/btc-qr.png</file>
         <file>Img/paypal.png</file>
-        <file>Qml/MultiredditDelegate.qml</file>
-        <file>Qml/MultiredditPage.qml</file>
-        <file>Qml/SendLinkPage.qml</file>
         <file>Icons/info.svg</file>
         <file>Icons/add.svg</file>
         <file>Qml/MenuItem.qml</file>
@@ -72,5 +48,34 @@
         <file>Icons/account.svg</file>
         <file>Icons/view-list-symbolic.svg</file>
         <file>Icons/contact-new.svg</file>
+        <file>Qml/Delegates/CommentDelegate.qml</file>
+        <file>Qml/Delegates/LinkDelegate.qml</file>
+        <file>Qml/Delegates/MessageDelegate.qml</file>
+        <file>Qml/Delegates/MultiredditDelegate.qml</file>
+        <file>Qml/Delegates/SubredditDelegate.qml</file>
+        <file>Qml/Delegates/UserPageCommentDelegate.qml</file>
+        <file>Qml/Delegates/UserPageLinkDelegate.qml</file>
+        <file>Qml/Pages/AboutPage.qml</file>
+        <file>Qml/Pages/AccountsPage.qml</file>
+        <file>Qml/Pages/CommentPage.qml</file>
+        <file>Qml/Pages/DonatePage.qml</file>
+        <file>Qml/Pages/ImageViewPage.qml</file>
+        <file>Qml/Pages/LoginPage.qml</file>
+        <file>Qml/Pages/MainPage.qml</file>
+        <file>Qml/Pages/MessagePage.qml</file>
+        <file>Qml/Pages/MultiredditPage.qml</file>
+        <file>Qml/Pages/SendLinkPage.qml</file>
+        <file>Qml/Pages/SendMessagePage.qml</file>
+        <file>Qml/Pages/SettingsPage.qml</file>
+        <file>Qml/Pages/SubredditPage.qml</file>
+        <file>Qml/Pages/SubredditsPage.qml</file>
+        <file>Qml/Pages/UserPage.qml</file>
+        <file>Qml/Pages/VideoViewPage.qml</file>
+        <file>Qml/Pages/WebViewer.qml</file>
+        <file>Icons/message-new.svg</file>
+        <file>Icons/note-new.svg</file>
+        <file>Icons/image.svg</file>
+        <file>Icons/video.svg</file>
+        <file>Icons/filters.svg</file>
     </qresource>
 </RCC>

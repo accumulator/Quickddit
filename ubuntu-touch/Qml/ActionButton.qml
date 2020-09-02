@@ -24,16 +24,17 @@ import QtQuick.Controls.Suru 2.2
 ToolButton {
     id: actionButton
     height: parent.height
-    width: 40
+    width: 36
     hoverEnabled: false
     //after QT update we can use icon property
     property url ico
     property color color
+    property int size: 24
     Image {
         anchors.centerIn: parent
         source: ico
-        width: 24
-        height: 24
+        width: size
+        height: size
         layer.enabled: true
         layer.effect: ColorOverlay {
             color: actionButton.color

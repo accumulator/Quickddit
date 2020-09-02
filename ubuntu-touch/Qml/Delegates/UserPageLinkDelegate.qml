@@ -19,6 +19,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Suru 2.2
+import "../"
 
 ItemDelegate {
     id:linkDelegate
@@ -44,9 +45,9 @@ ItemDelegate {
         text: "<a href='/r/"+model.subreddit+"'>"+"/r/"+model.subreddit+"</a>"+" ~ <a href='/u/"+model.author+"'>"+"/u/"+model.author+"</a>"+" ~ "+model.created+" ~ "+model.domain
         onLinkActivated: {
             if(link.charAt(1)=='r')
-                pageStack.push(Qt.resolvedUrl("SubredditPage.qml"),{subreddit:link.slice(3)})
+                pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SubredditPage.qml"),{subreddit:link.slice(3)})
             if(link.charAt(1)=='u'){
-                pageStack.push(Qt.resolvedUrl("UserPage.qml"),{username:link.slice(3).split(" ")[0]})
+                pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/UserPage.qml"),{username:link.slice(3).split(" ")[0]})
             }
         }
     }

@@ -33,7 +33,7 @@ Page {
             Image {
                 id: logo
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "../Icons/quickddit.svg"
+                source: "qrc:/Icons/quickddit.svg"
                 layer.enabled: true
                 width: 120
                 height: 120
@@ -98,7 +98,7 @@ Page {
         footer: ItemDelegate {
             width: parent.width
             text: "Donate"
-            onClicked: pageStack.push(Qt.resolvedUrl("DonatePage.qml"))
+            onClicked: pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/DonatePage.qml"))
 
         }
     }
