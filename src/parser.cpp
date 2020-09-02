@@ -233,6 +233,26 @@ void userobjectFromMap(UserObject &userObject, const QVariantMap &userObjectMap)
     userObject.setIconImg(QUrl(unescapeUrl(userObjectMap.value("icon_img").toString())));
 }
 
+Listing<LinkObject> linkListingFromMap(const QVariantMap &data)
+{
+    Listing<LinkObject> linkList;
+
+    const QVariantList linkListJson = data.value("children").toList();
+
+    foreach (const QVariant &linkObjectJson, linkListJson) {
+        QVariantMap linkMap = linkObjectJson.toMap().value("data").toMap();
+
+        LinkObject link;
+        linkFromMap(link, linkMap);
+        linkList.append(link);
+    }
+    linkList.setHasMore(!data.value("after").isNull());
+
+    qDebug() << "got" << linkList.count() << "items";
+
+    return linkList;
+}
+
 //
 // JSON parsers and list(ing) wrappers
 //
@@ -268,19 +288,17 @@ Listing<LinkObject> Parser::parseLinkList(const QByteArray &json)
 
     Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
 
-    const QVariantList linkListJson = data.value("children").toList();
+    return linkListingFromMap(data);
+}
 
-    Listing<LinkObject> linkList;
-    foreach (const QVariant &linkObjectJson, linkListJson) {
-        QVariantMap linkMap = linkObjectJson.toMap().value("data").toMap();
+Listing<LinkObject> Parser::parseDuplicates(const QByteArray &json)
+{
+    bool ok;
+    const QVariantMap data = QtJson::parse(QString::fromUtf8(json), ok).toList()[1].toMap().value("data").toMap();
 
-        LinkObject link;
-        linkFromMap(link, linkMap);
-        linkList.append(link);
-    }
-    linkList.setHasMore(!data.value("after").isNull());
+    Q_ASSERT_X(ok, Q_FUNC_INFO, "Error parsing JSON");
 
-    return linkList;
+    return linkListingFromMap(data);
 }
 
 LinkObject Parser::parseLinkEditResponse(const QByteArray &json)

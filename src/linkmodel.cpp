@@ -60,6 +60,7 @@ QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
     map["gilded"] = link.gilded();
     map["saved"] = link.saved();
     map["isLocked"] = link.isLocked();
+    map["crossposts"] = link.crossposts();
 
     return map;
 }
@@ -126,6 +127,7 @@ QVariant LinkModel::data(const QModelIndex &index, int role) const
     case GildedRole: return link.gilded();
     case IsSavedRole: return link.saved();
     case IsLockedRole: return link.isLocked();
+    case CrosspostsRole: return link.crossposts();
 
     default:
         qCritical("LinkModel::data(): Invalid role");
@@ -268,6 +270,10 @@ QString LinkModel::getRelativeUrl()
             relativeUrl += "/r/" + m_subreddit;
         }
         relativeUrl += "/search";
+        break;
+    case Duplicates:
+        relativeUrl += "/duplicates/" + m_subreddit;
+        break;
     }
 
     return relativeUrl;
@@ -450,6 +456,7 @@ QHash<int, QByteArray> LinkModel::customRoleNames() const
     roles[GildedRole] = "gilded";
     roles[IsSavedRole] = "saved";
     roles[IsLockedRole] = "isLocked";
+    roles[CrosspostsRole] = "crossposts";
     return roles;
 }
 
@@ -457,7 +464,9 @@ void LinkModel::onFinished(QNetworkReply *reply)
 {
     if (reply != 0) {
         if (reply->error() == QNetworkReply::NoError) {
-            Listing<LinkObject> links = Parser::parseLinkList(reply->readAll());
+            Listing<LinkObject> links = m_location == Duplicates
+                                        ? Parser::parseDuplicates(reply->readAll())
+                                        : Parser::parseLinkList(reply->readAll());
             if (!links.isEmpty()) {
                 // remove duplicate
                 if (!m_linkList.isEmpty()) {

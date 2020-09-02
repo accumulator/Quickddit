@@ -59,6 +59,7 @@ QList<QString> parseErrors(const QByteArray &json);
 QStringList parseListOfNames(const QByteArray &json);
 
 Listing<LinkObject> parseLinkList(const QByteArray &json);
+Listing<LinkObject> parseDuplicates(const QByteArray &json);
 LinkObject parseLinkEditResponse(const QByteArray &json);
 
 QPair< LinkObject, QList<CommentObject> > parseCommentList(const QByteArray &json);

@@ -70,7 +70,8 @@ public:
         IsSavedRole,
         IsArchivedRole,
         GildedRole,
-        IsLockedRole
+        IsLockedRole,
+        CrosspostsRole
     };
 
     enum Location {
@@ -79,7 +80,8 @@ public:
         Popular,
         Subreddit,
         Multireddit,
-        Search
+        Search,
+        Duplicates
     };
 
     enum Section {
