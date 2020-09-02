@@ -78,6 +78,8 @@ void AbstractListModelManager::doRequest(APIRequest::HttpMethod method, const QS
         m_request = 0;
     }
 
+    qDebug() << "requesting" << relativeUrl;
+
     m_request = manager()->createRedditRequest(this, method, relativeUrl, parameters);
     if (finishedHandler)
         connect(m_request, SIGNAL(finished(QNetworkReply*)), finishedHandler);
