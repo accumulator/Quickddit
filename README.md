@@ -16,7 +16,7 @@ Features
 | Browse anonymously     | Y | Y | Y |
 | Sign into Reddit       | Y | Y | Y |
 | Multi account          | Y | Y | Y |
-| Submit/edit new links and self-posts | Y |  | Y |
+| Submit/edit new links and self-posts | Y | Y | Y |
 | add, reply, edit, delete comments | Y | Y | Y |
 | Browse your messages   | Y | Y | Y |
 | Send messages          | Y | Y | Y |
@@ -59,7 +59,7 @@ Download
 --------
 - MeeGo Harmattan (Nokia N9/N950): [OpenRepos](https://openrepos.net/content/accumulator/quickddit)
 - SailfishOS (Jolla): [OpenRepos](https://openrepos.net/content/accumulator/quickddit-0)
-- Ubuntu-touch: Build with `clickable -c ubuntu-touch/clickable.json`
+- Ubuntu-touch: [OpenStore](https://open-store.io/app/quickddit) or build with `clickable -c ubuntu-touch/clickable.json`
 
 License
 -------
