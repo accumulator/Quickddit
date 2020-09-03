@@ -114,6 +114,8 @@ AbstractPage {
 
     ListView {
         id: thumbnailListView
+        property int _itemSize: 150
+
         anchors {
             left: isPortrait ? parent.left : undefined;
             right: parent.right;
@@ -121,18 +123,18 @@ AbstractPage {
             bottom: parent.bottom
         }
         height: isPortrait
-                ? visible ? 150 : 0
+                ? visible ? _itemSize : 0
                 : undefined
         width: isPortrait
                ? undefined
-               : visible ? 150 : 0
+               : visible ? _itemSize : 0
         visible: count > 0
         model: activeManager.thumbnailUrls
         orientation: isPortrait ? Qt.Horizontal : Qt.Vertical
         delegate: Item {
             id: thumbnailDelegate
-            height: isPortrait ? ListView.view.height : ListView.view.width
-            width: height
+            height: thumbnailListView._itemSize
+            width: thumbnailListView._itemSize
 
             Image {
                 id: thumbnailImage
@@ -166,7 +168,13 @@ AbstractPage {
         }
 
         onModelChanged: positionViewAtIndex(activeManager.selectedIndex, ListView.Center)
-        onOrientationChanged: positionViewAtIndex(activeManager.selectedIndex, ListView.Center)
+        onOrientationChanged: latePositioning.start()
+
+        Timer {
+            id: latePositioning
+            interval: 0; repeat: false
+            onTriggered: thumbnailListView.positionViewAtIndex(activeManager.selectedIndex, ListView.Center)
+        }
     }
 
     ImgurManager {
