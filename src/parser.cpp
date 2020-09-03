@@ -145,6 +145,10 @@ void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
             link.setPreviewHeight(j.value("height").toInt());
         }
     }
+
+    if (linkMap.value("is_gallery", false).toBool()) {
+        link.setGalleryData(QPair<QVariant,QVariant>(linkMap.value("gallery_data"),linkMap.value("media_metadata")));
+    }
 }
 
 void messageFromMap(MessageObject &message, const QVariantMap &messageMap)

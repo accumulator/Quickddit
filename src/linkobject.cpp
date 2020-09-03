@@ -22,6 +22,7 @@
 #include <QtCore/QSharedData>
 #include <QtCore/QDateTime>
 #include <QtCore/QUrl>
+#include <QVariant>
 
 class LinkObjectData : public QSharedData
 {
@@ -49,6 +50,7 @@ public:
     QString flairText;
     int gilded;
     int crossposts;
+    QPair<QVariant,QVariant> galleryData;
     bool isSticky;
     bool isNSFW;
     bool isPromoted;
@@ -344,6 +346,16 @@ int LinkObject::crossposts() const
 void LinkObject::setCrossposts(int crossposts)
 {
     d->crossposts = crossposts;
+}
+
+QPair<QVariant,QVariant> LinkObject::galleryData() const
+{
+    return d->galleryData;
+}
+
+void LinkObject::setGalleryData(const QPair<QVariant,QVariant>& galleryData)
+{
+    d->galleryData = galleryData;
 }
 
 bool LinkObject::isSelfPost() const

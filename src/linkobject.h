@@ -22,6 +22,7 @@
 
 #include <QtCore/QExplicitlySharedDataPointer>
 #include <QtCore/QString>
+#include <QVariant>
 
 #include "thing.h"
 
@@ -204,6 +205,9 @@ public:
 
     int crossposts() const;
     void setCrossposts(int crossposts);
+
+    QPair<QVariant,QVariant> galleryData() const;
+    void setGalleryData(const QPair<QVariant,QVariant>& galleryData);
 
 
     bool isSelfPost() const;
