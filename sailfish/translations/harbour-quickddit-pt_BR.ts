@@ -4,12 +4,12 @@
 <context>
     <name>AboutMultiredditManager</name>
     <message>
-        <location filename="../../src/aboutmultiredditmanager.cpp" line="128"/>
+        <location filename="../../src/aboutmultiredditmanager.cpp" line="134"/>
         <source>%1 has been added to %2</source>
         <translation>%1 adicionado ao %2</translation>
     </message>
     <message>
-        <location filename="../../src/aboutmultiredditmanager.cpp" line="149"/>
+        <location filename="../../src/aboutmultiredditmanager.cpp" line="155"/>
         <source>%1 has been removed from %2</source>
         <translation>%1 removido do %2</translation>
     </message>
@@ -442,7 +442,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
         <location filename="../qml/CommentDelegate.qml" line="254"/>
         <source>%n pts</source>
         <translation>
-            <numerusform>%n ponto</numerusform>
+            <numerusform>%n pontos</numerusform>
             <numerusform>%n pontos</numerusform>
         </translation>
     </message>
@@ -654,27 +654,27 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
         <translation>Imagem</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="51"/>
+        <location filename="../qml/ImageViewPage.qml" line="53"/>
         <source>Save Image</source>
         <translation>Salvar Imagem</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="55"/>
+        <location filename="../qml/ImageViewPage.qml" line="58"/>
         <source>URL</source>
         <translation>Endereço</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="108"/>
+        <location filename="../qml/ImageViewPage.qml" line="112"/>
         <source>Error loading image</source>
         <translation>Erro ao carregar imagem</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="186"/>
+        <location filename="../qml/ImageViewPage.qml" line="214"/>
         <source>Image saved to gallery</source>
         <translation>Imagem salva na galeria</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="187"/>
+        <location filename="../qml/ImageViewPage.qml" line="215"/>
         <source>Image save failed!</source>
         <translation>Erro ao salvar imagem!</translation>
     </message>
@@ -729,43 +729,43 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/MainPage.qml" line="93"/>
+        <location filename="../qml/MainPage.qml" line="104"/>
         <source>About %1</source>
         <translation>Sobre %1</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="105"/>
+        <location filename="../qml/MainPage.qml" line="116"/>
         <source>New Post</source>
         <translation>Novo Postagem</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="111"/>
-        <location filename="../qml/MainPage.qml" line="113"/>
+        <location filename="../qml/MainPage.qml" line="122"/>
+        <location filename="../qml/MainPage.qml" line="124"/>
         <source>Section</source>
         <translation>Seção</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="123"/>
+        <location filename="../qml/MainPage.qml" line="134"/>
         <source>Search</source>
         <translation>Buscar</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="127"/>
+        <location filename="../qml/MainPage.qml" line="138"/>
         <source>Refresh</source>
         <translation>Atualizar</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="149"/>
+        <location filename="../qml/MainPage.qml" line="160"/>
         <source>Delete link</source>
         <translation>Apagar link</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="154"/>
+        <location filename="../qml/MainPage.qml" line="165"/>
         <source>Hide link</source>
         <translation>Esconder link</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="174"/>
+        <location filename="../qml/MainPage.qml" line="185"/>
         <source>Nothing here :(</source>
         <translation>Nada aqui :(</translation>
     </message>
@@ -993,17 +993,25 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
         <translation>Bloqueado</translation>
     </message>
     <message>
-        <location filename="../qml/PostInfoText.qml" line="104"/>
+        <location filename="../qml/PostInfoText.qml" line="111"/>
         <source>submitted %1 by %2</source>
         <translation>postado por %2 %1</translation>
     </message>
     <message>
-        <location filename="../qml/PostInfoText.qml" line="107"/>
+        <location filename="../qml/PostInfoText.qml" line="114"/>
         <source>to %1</source>
         <translation>no %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/PostInfoText.qml" line="135"/>
+        <location filename="../qml/PostInfoText.qml" line="116"/>
+        <source>%n crossposts</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/PostInfoText.qml" line="143"/>
         <source>%n points</source>
         <translation>
             <numerusform>%n ponto</numerusform>
@@ -1011,10 +1019,10 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/PostInfoText.qml" line="147"/>
+        <location filename="../qml/PostInfoText.qml" line="155"/>
         <source>%n comments</source>
         <translation>
-            <numerusform>%n comentário</numerusform>
+            <numerusform>%n comentários</numerusform>
             <numerusform>%n comentários</numerusform>
         </translation>
     </message>
@@ -1177,7 +1185,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Best</source>
-        <translation type="unfinished">Melhores</translation>
+        <translation>Melhores</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="44"/>
@@ -1801,43 +1809,43 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="316"/>
+        <location filename="../qml/main.qml" line="318"/>
         <source>Unsupported reddit url</source>
         <translation>Endereço de reddit não suportado</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="367"/>
+        <location filename="../qml/main.qml" line="371"/>
         <source>Unsupported image url</source>
         <translation>Endereço de imagem não suportado</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="376"/>
+        <location filename="../qml/main.qml" line="380"/>
         <source>Unsupported video url</source>
         <translation>Endereço de vídeo não suportado</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="456"/>
+        <location filename="../qml/main.qml" line="460"/>
         <source>Please log in again</source>
         <translation>Favor fazer login novamente</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="486"/>
+        <location filename="../qml/main.qml" line="490"/>
         <source> and %1 other</source>
         <translation>e %1 outros</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="495"/>
-        <location filename="../qml/main.qml" line="496"/>
+        <location filename="../qml/main.qml" line="499"/>
+        <location filename="../qml/main.qml" line="500"/>
         <source>Message from %1</source>
         <translation>Mensagem de %1</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="506"/>
+        <location filename="../qml/main.qml" line="510"/>
         <source>New message from %1</source>
         <translation>Nova mensagem de %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="507"/>
+        <location filename="../qml/main.qml" line="511"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation>

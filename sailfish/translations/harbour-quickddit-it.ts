@@ -4,12 +4,12 @@
 <context>
     <name>AboutMultiredditManager</name>
     <message>
-        <location filename="../../src/aboutmultiredditmanager.cpp" line="128"/>
+        <location filename="../../src/aboutmultiredditmanager.cpp" line="134"/>
         <source>%1 has been added to %2</source>
         <translation>%1 è stato aggiunto a %2</translation>
     </message>
     <message>
-        <location filename="../../src/aboutmultiredditmanager.cpp" line="149"/>
+        <location filename="../../src/aboutmultiredditmanager.cpp" line="155"/>
         <source>%1 has been removed from %2</source>
         <translation>%1 è stato rimosso da %2</translation>
     </message>
@@ -147,17 +147,17 @@
     <message numerus="yes">
         <location filename="../qml/AboutSubredditPage.qml" line="143"/>
         <source>%n subscribers</source>
-        <translation>
-            <numerusform>%n iscritto</numerusform>
-            <numerusform>%n iscritti</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/AboutSubredditPage.qml" line="144"/>
         <source>%n active users</source>
-        <translation>
-            <numerusform>%n utente attivo</numerusform>
-            <numerusform>%n utenti attivi</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -439,9 +439,9 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message numerus="yes">
         <location filename="../qml/CommentDelegate.qml" line="254"/>
         <source>%n pts</source>
-        <translation>
-            <numerusform>%n punto</numerusform>
-            <numerusform>%n punti</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -652,27 +652,27 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
         <translation>Immagine</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="51"/>
+        <location filename="../qml/ImageViewPage.qml" line="53"/>
         <source>Save Image</source>
         <translation>Salva immagine</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="55"/>
+        <location filename="../qml/ImageViewPage.qml" line="58"/>
         <source>URL</source>
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="108"/>
+        <location filename="../qml/ImageViewPage.qml" line="112"/>
         <source>Error loading image</source>
         <translation>Errore nel caricamento dell&apos;immagine</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="186"/>
+        <location filename="../qml/ImageViewPage.qml" line="214"/>
         <source>Image saved to gallery</source>
         <translation>Immagine salvata nella galleria</translation>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="187"/>
+        <location filename="../qml/ImageViewPage.qml" line="215"/>
         <source>Image save failed!</source>
         <translation>Salvataggio dell&apos;immagine fallito!</translation>
     </message>
@@ -727,43 +727,43 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/MainPage.qml" line="93"/>
+        <location filename="../qml/MainPage.qml" line="104"/>
         <source>About %1</source>
         <translation>Informazioni su %1</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="105"/>
+        <location filename="../qml/MainPage.qml" line="116"/>
         <source>New Post</source>
         <translation>Nuovo Post</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="111"/>
-        <location filename="../qml/MainPage.qml" line="113"/>
+        <location filename="../qml/MainPage.qml" line="122"/>
+        <location filename="../qml/MainPage.qml" line="124"/>
         <source>Section</source>
         <translation>Sezione</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="123"/>
+        <location filename="../qml/MainPage.qml" line="134"/>
         <source>Search</source>
         <translation>Ricerca</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="127"/>
+        <location filename="../qml/MainPage.qml" line="138"/>
         <source>Refresh</source>
         <translation>Aggiorna</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="149"/>
+        <location filename="../qml/MainPage.qml" line="160"/>
         <source>Delete link</source>
         <translation>Elimina collegamento</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="154"/>
+        <location filename="../qml/MainPage.qml" line="165"/>
         <source>Hide link</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="174"/>
+        <location filename="../qml/MainPage.qml" line="185"/>
         <source>Nothing here :(</source>
         <translation>Qui non c&apos;è nulla :(</translation>
     </message>
@@ -991,29 +991,37 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
         <translation>Bloccato</translation>
     </message>
     <message>
-        <location filename="../qml/PostInfoText.qml" line="104"/>
+        <location filename="../qml/PostInfoText.qml" line="111"/>
         <source>submitted %1 by %2</source>
         <translation> inviato %1 da %2</translation>
     </message>
     <message>
-        <location filename="../qml/PostInfoText.qml" line="107"/>
+        <location filename="../qml/PostInfoText.qml" line="114"/>
         <source>to %1</source>
         <translation>in %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/PostInfoText.qml" line="135"/>
-        <source>%n points</source>
-        <translation>
-            <numerusform>%n punto</numerusform>
-            <numerusform>%n punti</numerusform>
+        <location filename="../qml/PostInfoText.qml" line="116"/>
+        <source>%n crossposts</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/PostInfoText.qml" line="147"/>
+        <location filename="../qml/PostInfoText.qml" line="143"/>
+        <source>%n points</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/PostInfoText.qml" line="155"/>
         <source>%n comments</source>
-        <translation>
-            <numerusform>%n commento</numerusform>
-            <numerusform>%n commenti</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
 </context>
@@ -1327,9 +1335,9 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message numerus="yes">
         <location filename="../qml/SubredditBrowseDelegate.qml" line="82"/>
         <source>%n subscribers</source>
-        <translation>
-            <numerusform>%n iscritto</numerusform>
-            <numerusform>%n iscritti</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
 </context>
@@ -1696,41 +1704,41 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="43"/>
         <source>%n mins ago</source>
-        <translation>
-            <numerusform>%n minuto fa</numerusform>
-            <numerusform>%n minuti fa</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="48"/>
         <source>%n hours ago</source>
-        <translation>
-            <numerusform>%n ora fa</numerusform>
-            <numerusform>%n ore fa</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="53"/>
         <source>%n days ago</source>
-        <translation>
-            <numerusform>%n giorno fa</numerusform>
-            <numerusform>%n giorni fa</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="58"/>
         <source>%n months ago</source>
-        <translation>
-            <numerusform>%n mese fa</numerusform>
-            <numerusform>%n mesi fa</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/utils.cpp" line="61"/>
         <source>%n years ago</source>
-        <translation>
-            <numerusform>%n anno fa</numerusform>
-            <numerusform>%n anni fa</numerusform>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
 </context>
@@ -1799,43 +1807,43 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="316"/>
+        <location filename="../qml/main.qml" line="318"/>
         <source>Unsupported reddit url</source>
         <translation>URL di Reddit non supportato</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="367"/>
+        <location filename="../qml/main.qml" line="371"/>
         <source>Unsupported image url</source>
         <translation>URL immagine non supportato</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="376"/>
+        <location filename="../qml/main.qml" line="380"/>
         <source>Unsupported video url</source>
         <translation>URL video non supportato</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="456"/>
+        <location filename="../qml/main.qml" line="460"/>
         <source>Please log in again</source>
         <translation>Per favore accedi di nuovo</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="486"/>
+        <location filename="../qml/main.qml" line="490"/>
         <source> and %1 other</source>
         <translation>e %1 altri</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="495"/>
-        <location filename="../qml/main.qml" line="496"/>
+        <location filename="../qml/main.qml" line="499"/>
+        <location filename="../qml/main.qml" line="500"/>
         <source>Message from %1</source>
         <translation>Messaggio da %1</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="506"/>
+        <location filename="../qml/main.qml" line="510"/>
         <source>New message from %1</source>
         <translation>Nuovo messaggio da %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/main.qml" line="507"/>
+        <location filename="../qml/main.qml" line="511"/>
         <source>%n new messages</source>
         <comment>0</comment>
         <translation>
