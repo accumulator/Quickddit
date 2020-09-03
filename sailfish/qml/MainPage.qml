@@ -32,6 +32,8 @@ AbstractPage {
     property string section
     property string sectionTimeRange
 
+    property bool _isComplete: false
+
     function refresh(sr, keepsection) {
         if (sr !== undefined) {
             // getting messy here :(
@@ -180,7 +182,7 @@ AbstractPage {
                 linkModel.refresh(true);
         }
 
-        ViewPlaceholder { enabled: linkListView.count == 0 && !linkModel.busy; text: qsTr("Nothing here :(") }
+        ViewPlaceholder { enabled: linkListView.count == 0 && !linkModel.busy && _isComplete; text: qsTr("Nothing here :(") }
 
         VerticalScrollDecorator {}
     }
@@ -217,6 +219,7 @@ AbstractPage {
     }
 
     Component.onCompleted: {
+        _isComplete = true
         if (section !== undefined) {
             var si = ["best", "hot", "new", "rising", "controversial", "top", "gilded"].indexOf(section);
             if (si !== -1)
