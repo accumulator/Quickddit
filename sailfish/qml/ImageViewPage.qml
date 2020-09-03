@@ -27,6 +27,8 @@ AbstractPage {
 
     property alias imageUrl: viewer.source
     property alias imgurUrl: imgurManager.imgurUrl
+    property alias galleryUrl: galleryManager.galleryUrl
+    property QtObject activeManager: imgurManager.imgurUrl ? imgurManager : galleryManager
 
     // to make the image outside of the page not visible during page transitions
     clip: true
@@ -49,11 +51,12 @@ AbstractPage {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Save Image")
+                enabled: imageUrl.toString() !== ""
                 onClicked: QMLUtils.saveImage(imageUrl.toString());
             }
             MenuItem {
                 text: qsTr("URL")
-                onClicked: globalUtils.createOpenLinkDialog(imgurUrl || imageUrl.toString());
+                onClicked: globalUtils.createOpenLinkDialog(imgurUrl || galleryUrl || imageUrl.toString());
             }
         }
 
@@ -62,6 +65,7 @@ AbstractPage {
             flickable: imageFlickable
             // pause the animation when app is in background
             paused: imageViewPage.status !== PageStatus.Active || !Qt.application.active
+            onSourceChanged: console.log("source changed: " + source);
         }
 
         ScrollDecorator {}
@@ -71,7 +75,7 @@ AbstractPage {
         id: busyIndicatorLoader
         anchors.centerIn: parent
         sourceComponent: {
-            if (imgurManager.busy)
+            if (activeManager.busy)
                 return busyIndicatorComponent;
 
             switch (viewer.status) {
@@ -98,7 +102,7 @@ AbstractPage {
 
                 Label {
                     anchors.centerIn: parent
-                    visible: !imgurManager.busy
+                    visible: !activeManager.busy
                     font.pixelSize: constant.fontSizeSmall
                     text: Math.round(viewer.progress * 100) + "%"
                 }
@@ -123,7 +127,7 @@ AbstractPage {
                ? undefined
                : visible ? 150 : 0
         visible: count > 0
-        model: imgurManager.thumbnailUrls
+        model: activeManager.thumbnailUrls
         orientation: isPortrait ? Qt.Horizontal : Qt.Vertical
         delegate: Item {
             id: thumbnailDelegate
@@ -151,22 +155,31 @@ AbstractPage {
                 id: selectedIndicator
                 anchors.fill: parent
                 color: "transparent"
-                border.color: index == imgurManager.selectedIndex ? "steelblue" : "black"
+                border.color: index === activeManager.selectedIndex ? "steelblue" : "black"
                 border.width: 4
             }
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: imgurManager.selectedIndex = index;
+                onClicked: activeManager.selectedIndex = index;
             }
         }
 
-        onModelChanged: positionViewAtIndex(imgurManager.selectedIndex, ListView.Center)
-        onOrientationChanged: positionViewAtIndex(imgurManager.selectedIndex, ListView.Center)
+        onModelChanged: positionViewAtIndex(activeManager.selectedIndex, ListView.Center)
+        onOrientationChanged: positionViewAtIndex(activeManager.selectedIndex, ListView.Center)
     }
 
     ImgurManager {
         id: imgurManager
+        manager: quickdditManager
+        onError: {
+            infoBanner.warning(errorString);
+            console.log(errorString);
+        }
+    }
+
+    GalleryManager {
+        id: galleryManager
         manager: quickdditManager
         onError: {
             infoBanner.warning(errorString);
@@ -179,6 +192,13 @@ AbstractPage {
         property: "source"
         value: imgurManager.imageUrl
         when: imageViewPage.imgurUrl
+    }
+
+    Binding {
+        target: viewer
+        property: "source"
+        value: galleryManager.imageUrl
+        when: imageViewPage.galleryUrl.toString() !== ""
     }
 
     Connections {

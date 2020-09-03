@@ -243,6 +243,8 @@ ApplicationWindow {
             // reddituploads
             else if (/^https?:\/\/i.reddituploads.com\//.test(url))
                 return true;
+            if (/^(https?:\/\/(\w+\.)?reddit.com)?\/gallery\//.test(url))
+                return true;
             // direct image url with image format extension
             else if (/^https?:\/\/\S+\.(jpe?g|png|gif)/i.test(url))
                 return true;
@@ -363,6 +365,8 @@ ApplicationWindow {
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
             else if (/^https?:\/\/i.reddituploads.com\//.test(url))
                 pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {imageUrl: url});
+            else if (/^(https?:\/\/(\w+\.)?reddit.com)?\/gallery\//.test(url))
+                pageStack.push(Qt.resolvedUrl("ImageViewPage.qml"), {galleryUrl: url});
             else
                 infoBanner.alert(qsTr("Unsupported image url"));
         }
