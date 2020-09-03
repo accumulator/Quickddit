@@ -41,6 +41,7 @@
 #include "src/messagemodel.h"
 #include "src/messagemanager.h"
 #include "src/imgurmanager.h"
+#include "src/gallerymanager.h"
 #include "src/votemanager.h"
 #include "src/commentmanager.h"
 #include "src/linkmanager.h"
@@ -72,6 +73,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<MessageModel>("harbour.quickddit.Core", 1, 0, "MessageModel");
     qmlRegisterType<MessageManager>("harbour.quickddit.Core", 1, 0, "MessageManager");
     qmlRegisterType<ImgurManager>("harbour.quickddit.Core", 1, 0, "ImgurManager");
+    qmlRegisterType<GalleryManager>("harbour.quickddit.Core", 1, 0, "GalleryManager");
     qmlRegisterType<VoteManager>("harbour.quickddit.Core", 1, 0, "VoteManager");
     qmlRegisterType<CommentManager>("harbour.quickddit.Core", 1, 0, "CommentManager");
     qmlRegisterType<LinkManager>("harbour.quickddit.Core", 1, 0, "LinkManager");

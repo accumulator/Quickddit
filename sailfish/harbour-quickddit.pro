@@ -49,6 +49,7 @@ HEADERS += \
     ../src/subredditmodel.h \
     ../src/qmlutils.h \
     ../src/imgurmanager.h \
+    ../src/gallerymanager.h \
     ../src/votemanager.h \
     ../src/commentmanager.h \
     ../src/multiredditobject.h \
@@ -87,6 +88,7 @@ SOURCES += main.cpp \
     ../src/subredditmodel.cpp \
     ../src/qmlutils.cpp \
     ../src/imgurmanager.cpp \
+    ../src/gallerymanager.cpp \
     ../src/votemanager.cpp \
     ../src/commentmanager.cpp \
     ../src/multiredditmodel.cpp \
