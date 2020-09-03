@@ -28,7 +28,6 @@ Page {
 
     property string videoUrl
     property string origUrl
-    property string playerUrl : "qrc:/videoPlayer.html?videoSrc="
 
     property bool error: false
 
@@ -38,6 +37,11 @@ Page {
         settings.localContentCanAccessFileUrls: true
         settings.localContentCanAccessRemoteUrls: true
         settings.allowRunningInsecureContent: true
+        settings.fullScreenSupportEnabled: true
+
+        onFullScreenRequested: {
+            request.accept()
+        }
     }
 
 
@@ -95,17 +99,17 @@ Page {
                 for (i = 0; i < formats.length; i++) {
                     format = formats[i]
                     // selection by height if format_id is like hls-*, for v.redd.it (with 'deref' HLS stream by string replace, so only works for v.redd.it)
-                    if (format["format_id"].indexOf("hls-") !== 0)
+                    if (format["format_id"].indexOf("dash-") !== 0)
                         continue
                     if (format["height"] === undefined) // audio
                         continue
                     // acodec none,vcodec one of avc1.4d001f,avc1.4d001e,avc1.42001e
                     if (format["height"] <= 480) {
                         console.log("format selected by id " + format["format_id"] + " and height <= 480")
-                        urls["360"] = format["url"].replace("dsasda.m3u8",".ts")  // 'deref' by string replace
+                        urls["360"] = format["url"]
                     } else {
                         console.log("format selected by id " + format["format_id"] + " and height > 480")
-                        urls["720"] = format["url"].replace("sadsda.m3u8",".ts")  // 'deref' by string replace
+                        urls["720"] = format["url"]
                     }
                 }
             if (urls["360"] === undefined && urls["720"] === undefined) {
@@ -130,6 +134,7 @@ Page {
                     console.log("720p selected but fallback to 360p")
                 webView.url = urls["720"] !== undefined ? urls["720"] : urls["360"] !== undefined ? urls["360"] : urls["other"]
             }
+            console.log(webView.url)
 
             if (webView.url === undefined)
                 fail(qsTr("Problem finding stream URL"))
