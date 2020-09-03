@@ -120,6 +120,15 @@ void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
     QString thumbnail = linkMap.value("thumbnail").toString();
     if (thumbnail.startsWith("http"))
         link.setThumbnailUrl(QUrl(thumbnail));
+    else {
+        QVariantMap media = linkMap.value("secure_media").toMap().value("oembed").toMap();
+        if (!media.empty()) {
+            thumbnail = media.value("thumbnail_url").toString();
+            if (thumbnail.startsWith("http"))
+                link.setThumbnailUrl(QUrl(thumbnail));
+        }
+    }
+
     link.setText(unescapeHtml(linkMap.value("selftext_html").toString()));
     link.setRawText(unescapeMarkdown(linkMap.value("selftext").toString()));
     link.setPermalink(linkMap.value("permalink").toString());
@@ -136,13 +145,15 @@ void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
     link.setCrossposts(linkMap.value("num_crossposts").toInt());
 
     QVariantList l = linkMap.value("preview").toMap().value("images").toList();
-    if(!l.isEmpty()){
+    if(!l.isEmpty()) {
         QVariantList k=l[0].toMap().value("resolutions").toList();
-        if(!k.isEmpty()){
+        if(!k.isEmpty()) {
             QVariantMap j=k.last().toMap();
             link.setPreviewUrl(unescapeUrl(j.value("url").toString()));
             link.setPreviewWidth(j.value("width").toInt());
             link.setPreviewHeight(j.value("height").toInt());
+            if (link.thumbnailUrl().isEmpty())
+                link.setThumbnailUrl(unescapeUrl(k.first().toMap().value("url").toString()));
         }
     }
 
