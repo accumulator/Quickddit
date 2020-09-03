@@ -74,7 +74,14 @@ Page {
 
     function onItemClicked(i) {
         var period = ["hour","day","week","month","year","all"]
-        linkModel.sectionPeriod = period[i]
+        switch (period[i]) {
+        case "hour": linkModel.sectionTimeRange = LinkModel.Hour; break;
+        case "day": linkModel.sectionTimeRange = LinkModel.Day; break;
+        case "week": linkModel.sectionTimeRange = LinkModel.Week; break;
+        case "month": linkModel.sectionTimeRange = LinkModel.Month; break;
+        case "year": linkModel.sectionTimeRange = LinkModel.Year; break;
+        case "all": linkModel.sectionTimeRange = LinkModel.AllTime; break;
+        }
         linkModel.refresh(false)
     }
 
@@ -299,39 +306,39 @@ Page {
         }
     }
 
-LinkModel {
-    id: linkModel
-    manager: quickdditManager
-    onError: infoBanner.warning(errorString)
-}
-
-LinkManager {
-    id: linkManager
-    manager: quickdditManager
-    linkModel: linkModel
-    onSuccess: {
-        infoBanner.alert(message);
-        pageStack.pop();
+    LinkModel {
+        id: linkModel
+        manager: quickdditManager
+        onError: infoBanner.warning(errorString)
     }
-    onError: infoBanner.warning(errorString);
-}
 
-VoteManager {
-    id: voteManager
-    manager: quickdditManager
-    onVoteSuccess: linkModel.changeLikes(fullname, likes);
-    onError: infoBanner.warning(errorString);
-}
+    LinkManager {
+        id: linkManager
+        manager: quickdditManager
+        linkModel: linkModel
+        onSuccess: {
+            infoBanner.alert(message);
+            pageStack.pop();
+        }
+        onError: infoBanner.warning(errorString);
+    }
 
-SaveManager {
-    id: saveManager
-    manager: quickdditManager
-    onSuccess: linkModel.changeSaved(fullname, saved);
-    onError: infoBanner.warning(errorString);
-}
+    VoteManager {
+        id: voteManager
+        manager: quickdditManager
+        onVoteSuccess: linkModel.changeLikes(fullname, likes);
+        onError: infoBanner.warning(errorString);
+    }
 
-Component.onCompleted: {
-    linkModel.section=0
-    linkModel.sectionPeriod= "day"
-}
+    SaveManager {
+        id: saveManager
+        manager: quickdditManager
+        onSuccess: linkModel.changeSaved(fullname, saved);
+        onError: infoBanner.warning(errorString);
+    }
+
+    Component.onCompleted: {
+        linkModel.section=0
+        linkModel.refresh(false)
+    }
 }
