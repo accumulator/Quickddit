@@ -2,12 +2,12 @@
 <context>
     <name>AboutMultiredditManager</name>
     <message>
-        <location filename="../../src/aboutmultiredditmanager.cpp" line="128"/>
+        <location filename="../../src/aboutmultiredditmanager.cpp" line="134"/>
         <source>%1 has been added to %2</source>
         <translation>%1 byl přidán do %2</translation>
     </message>
     <message>
-        <location filename="../../src/aboutmultiredditmanager.cpp" line="149"/>
+        <location filename="../../src/aboutmultiredditmanager.cpp" line="155"/>
         <source>%1 has been removed from %2</source>
         <translation>%1 byl odstraněn z %2</translation>
     </message>
@@ -145,7 +145,7 @@
     <message numerus="yes">
         <location filename="../qml/AboutSubredditPage.qml" line="143"/>
         <source>%n subscribers</source>
-        <translation><numerusform>%n abonent</numerusform><numerusform>%n abonenty</numerusform><numerusform>%n abonentů</numerusform><numerusform>%n abonentů</numerusform></translation>
+        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/AboutSubredditPage.qml" line="144"/>
@@ -635,27 +635,27 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="46"/>
+        <location filename="../qml/ImageViewPage.qml" line="51"/>
         <source>Save Image</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="50"/>
+        <location filename="../qml/ImageViewPage.qml" line="55"/>
         <source>URL</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="103"/>
+        <location filename="../qml/ImageViewPage.qml" line="108"/>
         <source>Error loading image</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="170"/>
+        <location filename="../qml/ImageViewPage.qml" line="186"/>
         <source>Image saved to gallery</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/ImageViewPage.qml" line="171"/>
+        <location filename="../qml/ImageViewPage.qml" line="187"/>
         <source>Image save failed!</source>
         <translation type="unfinished"/>
     </message>
@@ -710,43 +710,43 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/MainPage.qml" line="87"/>
+        <location filename="../qml/MainPage.qml" line="94"/>
         <source>About %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="99"/>
+        <location filename="../qml/MainPage.qml" line="106"/>
         <source>New Post</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="105"/>
-        <location filename="../qml/MainPage.qml" line="107"/>
+        <location filename="../qml/MainPage.qml" line="112"/>
+        <location filename="../qml/MainPage.qml" line="114"/>
         <source>Section</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="117"/>
+        <location filename="../qml/MainPage.qml" line="124"/>
         <source>Search</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="121"/>
+        <location filename="../qml/MainPage.qml" line="128"/>
         <source>Refresh</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="143"/>
+        <location filename="../qml/MainPage.qml" line="150"/>
         <source>Delete link</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="148"/>
+        <location filename="../qml/MainPage.qml" line="155"/>
         <source>Hide link</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="168"/>
+        <location filename="../qml/MainPage.qml" line="175"/>
         <source>Nothing here :(</source>
         <translation type="unfinished"/>
     </message>
@@ -974,24 +974,29 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/PostInfoText.qml" line="104"/>
+        <location filename="../qml/PostInfoText.qml" line="110"/>
         <source>submitted %1 by %2</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/PostInfoText.qml" line="107"/>
+        <location filename="../qml/PostInfoText.qml" line="113"/>
         <source>to %1</source>
         <translation type="unfinished"/>
     </message>
     <message numerus="yes">
-        <location filename="../qml/PostInfoText.qml" line="135"/>
+        <location filename="../qml/PostInfoText.qml" line="115"/>
+        <source>%n crossposts</source>
+        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/PostInfoText.qml" line="142"/>
         <source>%n points</source>
         <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/PostInfoText.qml" line="147"/>
+        <location filename="../qml/PostInfoText.qml" line="154"/>
         <source>%n comments</source>
-        <translation><numerusform>%n komentář</numerusform><numerusform>%n komentáře</numerusform><numerusform>%n komentářů</numerusform><numerusform>%n komentářů</numerusform></translation>
+        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
     </message>
 </context>
 <context>
@@ -1120,57 +1125,67 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>SectionSelectionDialog</name>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Hot</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>New</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Rising</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Controversial</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="32"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Top</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
+        <source>Best</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../qml/SectionSelectionDialog.qml" line="44"/>
         <source>Hour</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="37"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="45"/>
         <source>Day</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="38"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="46"/>
         <source>Week</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="47"/>
         <source>Month</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="40"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="48"/>
         <source>Year</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/SectionSelectionDialog.qml" line="41"/>
+        <location filename="../qml/SectionSelectionDialog.qml" line="49"/>
         <source>All time</source>
         <translation type="unfinished"/>
     </message>

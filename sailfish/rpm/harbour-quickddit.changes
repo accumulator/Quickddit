@@ -5,6 +5,17 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Thu Sep 03 2020 Sander van Grieken <sander@outrightsolutions.nl> 1.10.0-1
+- fix: image fit to screen after orientation change
+- fix: source translation (english) should now have correct plurals
+- fix: image gallery active thumbnail now kept in view
+- chg: update youtube-dl to 2020-08-27
+- chg: thumbnail list now vertical on horizontal orientation
+- new: subreddit section (and time range) is now remembered per-subreddit
+- new: /best section available for front page
+- new: duplicates/crossposts now available from commentpage
+- new: reddit gallery support
+
 * Tue Jul 07 2020 Sander van Grieken <sander@outrightsolutions.nl> 1.9.10-1
 - fix: only DMs can be deleted from inbox
 - fix: don't log out on transient network errors (fixes #67)
