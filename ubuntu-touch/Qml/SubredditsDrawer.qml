@@ -27,6 +27,7 @@ Drawer {
     dragMargin: 0
     function showSubreddit(subreddit) {
         var mainPage = globalUtils.getMainPage();
+        console.log(subreddit)
         mainPage.refresh(subreddit.slice(3));
     }
 
@@ -41,7 +42,7 @@ Drawer {
                 width: parent.width
                 visible: quickdditManager.isSignedIn || subredditsDrawer.position<0.1
                 onClicked: {
-                    showSubreddit(text);
+                    showSubreddit("");
                     subredditsDrawer.close();
                 }
             }

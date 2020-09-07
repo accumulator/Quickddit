@@ -30,38 +30,47 @@ Page {
 
     id:mainPage
     objectName: "mainPage"
-    title: linkModel.location == LinkModel.Multireddit ? /m/+subreddit : /r/+subreddit
+    title: linkModel.title
 
-    property string subreddit: quickdditManager.isSignedIn ? "subscribed" : "all"
+    property string subreddit
+    property string duplicatesOf
+    property string section
+    property string sectionTimeRange
 
-    function refresh(sr) {
-        if(sr===undefined|| sr===""){
-            if(quickdditManager.isSignedIn){
-                sr="subscribed"
+    function refresh(sr, keepsection) {
+        if (sr !== undefined) {
+            // getting messy here :(
+            // initialize section to undefined unless explicitly kept,
+            // so the subreddit's default section is retrieved in the linkmodel
+            if (keepsection === undefined || keepsection === false)
+                linkModel.section = LinkModel.UndefinedSection
+            linkModel.subreddit = "";
+            if (sr === "") {
+                linkModel.location = LinkModel.FrontPage;
+            } else if (String(sr).toLowerCase() === "all") {
+                linkModel.location = LinkModel.All;
+            } else if (String(sr).toLowerCase() === "popular") {
+                linkModel.location = LinkModel.Popular;
+            } else {
+                linkModel.location = LinkModel.Subreddit;
+                linkModel.subreddit = sr;
             }
-            else
-                sr="all"
         }
-
-        if ( String(sr).toLowerCase() === "subscribed") {
-            linkModel.location = LinkModel.FrontPage;
-        } else if (String(sr).toLowerCase() === "all") {
-            linkModel.location = LinkModel.All;
-        } else if (String(sr).toLowerCase() === "popular") {
-            linkModel.location = LinkModel.Popular;
-        } else {
-            linkModel.location = LinkModel.Subreddit;
-            linkModel.subreddit = sr;
-        }
-        subreddit=sr;
         linkModel.refresh(false);
     }
 
     function refreshMR(multireddit) {
         linkModel.location = LinkModel.Multireddit;
         linkModel.multireddit = multireddit
-        subreddit = multireddit
+        linkModel.section = LinkModel.UndefinedSection
         linkModel.refresh(false);
+    }
+
+    function refreshDuplicates() {
+        linkModel.location = LinkModel.Duplicates
+        linkModel.section = LinkModel.UndefinedSection
+        linkModel.subreddit = duplicatesOf
+        linkModel.refresh(false)
     }
 
     function getButtons(){
@@ -82,6 +91,8 @@ Page {
         case "year": linkModel.sectionTimeRange = LinkModel.Year; break;
         case "all": linkModel.sectionTimeRange = LinkModel.AllTime; break;
         }
+        sectionTimeRange = period[i]
+        linkModel.saveSubredditPrefs();
         linkModel.refresh(false)
     }
 
@@ -134,7 +145,7 @@ Page {
                 color: Suru.color(Suru.White,1)
                 width: enabled ? 40 : 0
                 clip: true
-                onClicked: {pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SubredditPage.qml"),{subreddit:subreddit})}
+                onClicked: {pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SubredditPage.qml"),{subreddit:linkModel.subreddit})}
             }
             ActionButton {
                 id:newPost
@@ -194,17 +205,6 @@ Page {
         }
         TabButton {
             id:tb3
-            text: "Top"
-            contentItem: Label {
-                text: parent.text
-                font.weight: Font.Normal
-                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
-            }
-            width: implicitWidth
-            padding:6
-        }
-        TabButton {
-            id:tb4
             text: "Rising"
             contentItem: Label {
                 text: parent.text
@@ -215,8 +215,19 @@ Page {
             padding:6
         }
         TabButton {
-            id:tb5
+            id:tb4
             text: "Controversial"
+            contentItem: Label {
+                text: parent.text
+                font.weight: Font.Normal
+                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
+            }
+            width: implicitWidth
+            padding:6
+        }
+        TabButton {
+            id:tb5
+            text: "Top"
             contentItem: Label {
                 text: parent.text
                 font.weight: Font.Normal
@@ -229,17 +240,11 @@ Page {
 
         onCurrentIndexChanged: {
             console.log(currentIndex)
-            tabBar.setCurrentIndex(currentIndex)
-            switch(currentIndex){
-            case 0: linkModel.section = LinkModel.BestSection; break
-            case 1: linkModel.section = LinkModel.HotSection; break
-            case 2: linkModel.section = LinkModel.NewSection; break
-            case 3: linkModel.section = LinkModel.TopSection; break
-            case 4: linkModel.section = LinkModel.RisingSection; break
-            case 5: linkModel.section = LinkModel.ControversialSection; break
-            }
-
-            refresh(subreddit)
+            linkModel.section = currentIndex
+            var si = ["best", "hot", "new", "rising", "controversial", "top"][currentIndex];
+            section = si
+            linkModel.saveSubredditPrefs()
+            linkModel.refresh(false)
         }
     }
 
@@ -310,6 +315,11 @@ Page {
         id: linkModel
         manager: quickdditManager
         onError: infoBanner.warning(errorString)
+
+        onSectionChanged: {
+            if (linkModel.section != LinkModel.UndefinedSection && linkModel.section !=LinkModel.GildedSection)
+                tabBar.setCurrentIndex(linkModel.section)
+        }
     }
 
     LinkManager {
@@ -338,7 +348,21 @@ Page {
     }
 
     Component.onCompleted: {
-        linkModel.section=0
-        linkModel.refresh(false)
+        if (section !== undefined) {
+            var si = ["best", "hot", "new", "rising", "controversial", "top"].indexOf(section);
+            if (si !== -1)
+                linkModel.section = si;
+            if (sectionTimeRange !== undefined && (si === 4 || si === 5)) {
+                var ri = ["hour", "day", "week", "month", "year", "all"].indexOf(sectionTimeRange);
+                if (ri !== -1)
+                    linkModel.sectionTimeRange = ri
+            }
+        }
+        if (duplicatesOf && duplicatesOf !== "") {
+            refreshDuplicates()
+            return
+        }
+
+        refresh(subreddit, true);
     }
 }
