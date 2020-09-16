@@ -122,7 +122,16 @@ void GalleryManager::onFinished(QNetworkReply *reply)
                 QVariantMap item = itemv.toMap();
                 QVariantMap item_meta = meta.value(item.value("media_id").toString()).toMap();
                 m_galleryItemList.append(QPair<QVariantMap,QVariantMap>(item,item_meta));
-                m_thumbnailUrls.append(GalleryManager::unescapeUrl(item_meta.value("p").toList().at(0).toMap().value("u").toString()));
+
+                // (p)review images could be empty, if (s)ource image is small
+                QString thumbnailUrl = "";
+                QVariantList pList = item_meta.value("p").toList();
+                if (pList.count() != 0)
+                    thumbnailUrl = pList.at(0).toMap().value("u").toString();
+                else
+                    thumbnailUrl = item_meta.value("s").toMap().value("u").toString();
+
+                m_thumbnailUrls.append(GalleryManager::unescapeUrl(thumbnailUrl));
             }
             if (m_galleryItemList.count() > 0) {
                 emit thumbnailUrlsChanged();
