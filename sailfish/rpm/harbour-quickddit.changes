@@ -5,6 +5,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Tue Oct 06 2020 Sander van Grieken <sander@outrightsolutions.nl> 1.10.1-1
+- fix: overly large thumbnails
+- fix: segfault when viewing certain reddit image galleries
+- chg: update youtube-dl to 2020-09-20
+
 * Thu Sep 03 2020 Sander van Grieken <sander@outrightsolutions.nl> 1.10.0-1
 - fix: image fit to screen after orientation change
 - fix: source translation (english) should now have correct plurals
