@@ -120,14 +120,6 @@ void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
     QString thumbnail = linkMap.value("thumbnail").toString();
     if (thumbnail.startsWith("http"))
         link.setThumbnailUrl(QUrl(thumbnail));
-    else {
-        QVariantMap media = linkMap.value("secure_media").toMap().value("oembed").toMap();
-        if (!media.empty()) {
-            thumbnail = media.value("thumbnail_url").toString();
-            if (thumbnail.startsWith("http"))
-                link.setThumbnailUrl(QUrl(thumbnail));
-        }
-    }
 
     link.setText(unescapeHtml(linkMap.value("selftext_html").toString()));
     link.setRawText(unescapeMarkdown(linkMap.value("selftext").toString()));
