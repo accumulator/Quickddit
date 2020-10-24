@@ -58,6 +58,7 @@ ApplicationWindow {
 
     ToolBar{
         id:tBar
+        visible: window.visibility !==Window.FullScreen
         background: Rectangle {
             color: Suru.color(Suru.Orange,1)
         }
@@ -264,12 +265,15 @@ ApplicationWindow {
             }
         }
 
+
         function previewableImage(url) {
             // imgur url
             if (/^https?:\/\/((i|m|www)\.)?imgur\.com\//.test(url))
                 return !(/^.*\.gifv$/.test(url));
             // reddituploads
             else if (/^https?:\/\/i.reddituploads.com\//.test(url))
+                return true;
+            else if (/^(https?:\/\/(\w+\.)?reddit.com)?\/gallery\//.test(url))
                 return true;
             // direct image url with image format extension
             else if (/^https?:\/\/\S+\.(jpe?g|png|gif)/i.test(url))

@@ -56,7 +56,8 @@ Page {
             }
             onClicked: {
                 quickdditManager.selectAccount(modelData);
-                pageStack.pop(globalUtils.getMainPage(),StackView.ReplaceTransition)
+                globalUtils.getMainPage().refresh();
+                pageStack.pop(globalUtils.getMainPage(),StackView.ReplaceTransition);
             }
         }
 

@@ -40,8 +40,8 @@ Item {
                 Rectangle {
                     anchors { top: parent.top; bottom: parent.bottom; horizontalCenter: parent.horizontalCenter }
                     width: 2
-                    color:{
-                        var dk = ["#ed3146", "#ef9928", "#3eb34f", "#19b6ee", "#762572", "#e95420", "#cdcdcd", "#f99b0f", "#111111" ]
+                    color: {
+                        var dk = ["#ed3146", "#ef9928", "#3eb34f", "#19b6ee", "#762572", "#e95420", "#cdcdcd", "#f99b0f", "#111111", "000000" ]
                         switch (index) {
                         case 0: case 1: case 2: case 3: case 4:
                                                         case 5: case 6: case 7: case 8:
@@ -54,7 +54,7 @@ Item {
         }
     }
 
-    SwipeDelegate{
+    SwipeDelegate {
         id:mainItem
         height: visible ? info.height+comment.height : 0
         anchors {left: lineRow.right; right: parent.right}
@@ -69,7 +69,10 @@ Item {
         Connections {
             target: commentsList
 
-            onMovementStarted: mainItem.swipe.close()
+            function onMovementStarted() {
+                mainItem.swipe.close();
+            }
+            onMovementStarted: onMovementStarted()
         }
 
         leftPadding: 0

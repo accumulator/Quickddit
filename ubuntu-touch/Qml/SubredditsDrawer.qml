@@ -66,7 +66,7 @@ Drawer {
 
         delegate: ItemDelegate{
             id:subredditDelegate
-            width: parent.width
+            width: subredditsView.width
             text: "/r/"+model.displayName
             onClicked: {
                 showSubreddit(subredditDelegate.text);
@@ -91,7 +91,7 @@ Drawer {
     Connections {
         target: quickdditManager
 
-        onSignedInChanged: {
+        function onSignedInChanged() {
             if (quickdditManager.isSignedIn) {
                 subredditModel.refresh(false)
                 //multiredditModel.refresh(false)
@@ -100,5 +100,6 @@ Drawer {
                 //multiredditModel.clear();
             }
         }
+        onSignedInChanged: onSignedInChanged();
     }
 }

@@ -8,10 +8,6 @@
         <file>Icons/down.svg</file>
         <file>Icons/contextual-menu.svg</file>
         <file>Icons/navigation-menu.svg</file>
-        <file>Icons/toolkit_arrow-up.svg</file>
-        <file>Icons/toolkit_arrow-down.svg</file>
-        <file>Icons/toolkit_chevron-up_1gu.svg</file>
-        <file>Icons/toolkit_chevron-down_1gu.svg</file>
         <file>Icons/back.svg</file>
         <file>Qml/ImageViewer.qml</file>
         <file>Icons/non-starred.svg</file>
@@ -21,8 +17,6 @@
         <file>Icons/mail-reply.svg</file>
         <file>Icons/spinner.svg</file>
         <file>Qml/ytdl_wrapper.py</file>
-        <file>Icons/down_b.svg</file>
-        <file>Icons/up_b.svg</file>
         <file>Qml/ZoomableImage.qml</file>
         <file>Qml/AlbumView.qml</file>
         <file>Qml/Thumbnail.qml</file>
@@ -32,7 +26,6 @@
         <file>Icons/next.svg</file>
         <file>Icons/delete.svg</file>
         <file>Icons/quickddit.svg</file>
-        <file>Icons/quickddit80.png</file>
         <file>Icons/edit.svg</file>
         <file>Qml/ActionButton.qml</file>
         <file>Icons/mail-unread.svg</file>
@@ -77,5 +70,7 @@
         <file>Icons/image.svg</file>
         <file>Icons/video.svg</file>
         <file>Icons/filters.svg</file>
+        <file>Icons/reload.svg</file>
+        <file>Icons/quickddit-splash-image.svg</file>
     </qresource>
 </RCC>

@@ -31,9 +31,12 @@ Image {
     width: 140*persistantSettings.scale
     height: visible ? width : 0
 
-
     fillMode: Image.PreserveAspectFit
-    source: getUrl() //String(link.thumbnailUrl).length>1 ? link.thumbnailUrl : image ? link.url : "https://api.faviconkit.com/" + link.domain+"/144"
+
+    //Workaround, because CommentModel was changing this
+    Component.onCompleted: {
+        source = getUrl()
+    }
 
     function getUrl() {
         if(String(link.thumbnailUrl).length>1)

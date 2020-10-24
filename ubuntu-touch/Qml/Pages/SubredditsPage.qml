@@ -174,6 +174,7 @@ Page {
 
                 delegate: SubredditDelegate{
                     id:subredditDelegate
+                    width: subredditsView.width
 
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SubredditPage.qml"),{subreddit:model.displayName})

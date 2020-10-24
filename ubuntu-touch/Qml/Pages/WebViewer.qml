@@ -19,13 +19,55 @@
 import QtQuick 2.9
 import QtWebEngine 1.7
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Suru 2.2
+import "../"
+
 Page {
     title: webView.title
     property url url
 
+    function getButtons(){
+        return toolButtons
+    }
+
+    Component {
+        id: toolButtons
+        Row {
+            ActionButton {
+                id:del
+                ico: "qrc:/Icons/reload.svg"
+                size: 20
+                color: Suru.color(Suru.White,1)
+                onClicked: {
+                    webView.reload();
+                }
+            }
+
+            ActionButton {
+                id:edit
+                ico: "qrc:/Icons/webbrowser-app-symbolic.svg"
+                size: 20
+                color: Suru.color(Suru.White,1)
+                onClicked: {
+                    Qt.openUrlExternally(url);
+                }
+            }
+        }
+    }
+
     WebEngineView{
         anchors.fill: parent
         id:webView
+        settings.fullScreenSupportEnabled: true
+
+        onFullScreenRequested: {
+            if(request.toggleOn) {
+                window.showFullScreen()
+            }
+            else
+                window.showNormal()
+            request.accept()
+        }
     }
 
     Component.onCompleted: {

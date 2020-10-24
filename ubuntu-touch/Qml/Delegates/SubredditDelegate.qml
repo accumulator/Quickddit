@@ -24,7 +24,6 @@ import QtGraphicalEffects 1.0
 ItemDelegate {
     id:subredditDelegate
 
-    width: parent.width
     height: Math.max(ico.height+10,titleText.height + fullText.height+20)
     Image {
         id:ico

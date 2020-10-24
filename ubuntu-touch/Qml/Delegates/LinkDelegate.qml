@@ -33,14 +33,17 @@ ItemDelegate {
     property SaveManager linkSaveManager
     property bool previewableImage: globalUtils.previewableImage(link.url)
     property bool previewableVideo: globalUtils.previewableVideo(link.url)
-    property bool imgur: /^https?:\/\/((i|m|www)\.)?imgur\.com\//.test(link.url)
+    property alias activeManager: pic.activeManager
 
-    width: parent.width
     height: Math.max(titulok.height+pic.height,txt.height+titulok.height,thumb.height)+info.height+bottomRow.height
 
     onClicked: {
-        if(!compact&&!globalUtils.redditLink(link.url))
-            globalUtils.openLink(link.url)
+        if(!compact&&link.domain.slice(5)!==link.subreddit)
+            if(previewableImage) {
+                globalUtils.openLink(pic.imageUrl)
+            }
+            else
+                globalUtils.openLink(link.url)
     }
 
     //info
@@ -51,13 +54,16 @@ ItemDelegate {
         padding: 5
         anchors {top: parent.top; left: parent.left; right: parent.right; }
         elide: Text.ElideRight
-        text: "<a href='/r/"+link.subreddit+"'>"+"/r/"+link.subreddit+"</a>"+" ~ <a href='/u/"+link.author+"'>"+"/u/"+link.author+"</a>"+" ~ "+link.created+" ~ "+link.domain
+        text: "<a href='/r/"+link.subreddit+"'>"+"/r/"+link.subreddit+"</a>"+" ~ <a href='/u/"+link.author+"'>"+"/u/"+link.author+"</a>"+" ~ "+link.created+" ~ "+link.domain+((!compact && link.crossposts > 0) ? ". <a href=\"cross:" + link.fullname + "\">" + qsTr("%n crossposts", "", link.crossposts) + "</a>" : "")
         onLinkActivated: {
-            if(link.charAt(1)=='r')
-                pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SubredditPage.qml"),{subreddit:link.slice(3)})
-            if(link.charAt(1)=='u'){
-                pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/UserPage.qml"),{username:link.slice(3).split(" ")[0]})
+            if (link.indexOf("cross:") == 0) {
+                console.log("fetching crossposts for " + link.substring(9))
+                pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/MainPage.qml"), { duplicatesOf: link.substring(9) });
             }
+            else if(link.charAt(1)=='r')
+                pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SubredditPage.qml"),{subreddit:link.slice(3)})
+            else if(link.charAt(1)=='u')
+                pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/UserPage.qml"),{username:link.slice(3).split(" ")[0]})
         }
     }
     //title
@@ -67,7 +73,8 @@ ItemDelegate {
         id: titulok
         text: link.title
         elide: Text.ElideRight
-        maximumLineCount: compact ? 3 : 9999
+        maximumLineCount: compact && !thumb.visible ? 3 : 9999
+        height: thumb.visible && compact ? thumb.height : implicitHeight
         font.pointSize: 12
         font.weight: Font.DemiBold
         wrapMode: Text.Wrap
@@ -82,7 +89,8 @@ ItemDelegate {
 
         anchors.right: parent.right
         anchors.top: titulok.bottom
-        anchors.left: thumb.visible ? thumb.right : parent.left
+        anchors.left: parent.left
+        height: text ? implicitHeight : 0
         text:(compact? link.rawText : link.text)
         elide: Text.ElideRight
         maximumLineCount: compact ? 3:9999
@@ -100,13 +108,15 @@ ItemDelegate {
         link: linkDelegate.link
         visible: urlPost || (image && persistantSettings.compactImages && compact) || (video && persistantSettings.compactVideos)
     }
+
     //image
     AlbumView {
         id: pic
         anchors.top: titulok.bottom
         width: parent.width
         visible: previewableImage && !(persistantSettings.compactImages && compact)
-        url: previewableImage&&!(compact &&persistantSettings.compactImages) ? (persistantSettings.fullResolutionImages &&!imgur || String(link.previewUrl).length<2 ? link.url : link.previewUrl) : ""
+        url: previewableImage&&!(compact &&persistantSettings.compactImages) ? link.url : ""
+        previewUrl: link.previewUrl
     }
 
     PostButtonRow {

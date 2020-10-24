@@ -14,7 +14,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-DEFINES += Q_OS_UBUNTU APP_VERSION=\\\"1.0_rc1\\\"
+DEFINES += Q_OS_UBUNTU APP_VERSION=\\\"1.0\\\"
 INCLUDEPATH += ../
 
 SOURCES += \
@@ -30,6 +30,7 @@ SOURCES += \
         ../src/commentobject.cpp \
         ../src/flairmanager.cpp \
         ../src/imgurmanager.cpp \
+        ../src/gallerymanager.cpp \
         ../src/inboxmanager.cpp \
         ../src/linkmanager.cpp \
         ../src/linkmodel.cpp \
@@ -66,6 +67,7 @@ HEADERS += \
     ../src/commentobject.h \
     ../src/flairmanager.h \
     ../src/imgurmanager.h \
+    ../src/gallerymanager.h \
     ../src/inboxmanager.h \
     ../src/linkmanager.h \
     ../src/linkmodel.h \
@@ -96,6 +98,7 @@ SOURCES += ../qt-json/json.cpp
 RESOURCES += qml.qrc
 CONF_FILES += \
     Icons/quickddit.svg \
+    Icons/quickddit-splash-image.svg \
     clickable.json \
     manifest.json \
     quickddit.desktop \
@@ -125,6 +128,7 @@ else: unix:!android: target.path = /
 
 DISTFILES += \
     Icons/quickddit.svg \
+    Icons/quickddit-splash-image.svg \
     clickable.json \
     manifest.json \
     quickddit.desktop \

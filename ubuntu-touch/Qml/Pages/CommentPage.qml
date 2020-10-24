@@ -26,18 +26,10 @@ import "../Delegates"
 
 Page {
     id:commentPage
-    title:commentModel.link.title
+    title:link.title
 
     property alias link: commentModel.link
     property alias linkPermalink: commentModel.permalink
-    property VoteManager linkVoteManager1
-    property SaveManager linkSaveManager1
-
-    function refresh(refreshOlder) {
-        commentModel.refresh(refreshOlder);
-    }
-
-    readonly property variant commentSortModel: [qsTr("Best"), qsTr("Top"), qsTr("New"), qsTr("Hot"), qsTr("Controversial"), qsTr("Old")]
 
     function loadMoreChildren(index, children) {
         commentModel.moreComments(index, children);
@@ -46,10 +38,71 @@ Page {
     function getButtons(){
         return toolButtons
     }
+    function onItemClicked(i) {
+        switch(i) {
+        case 0: commentModel.sort = CommentModel.UndefinedSort; break;
+        case 1: commentModel.sort = CommentModel.TopSort; break;
+        case 2: commentModel.sort = CommentModel.NewSort; break;
+        case 3: commentModel.sort = CommentModel.HotSort; break;
+        case 4: commentModel.sort = CommentModel.ControversialSort; break;
+        case 5: commentModel.sort = CommentModel.OldSort; break;
+        }
+        appSettings.commentSort = commentModel.sort
+        commentModel.refresh(false)
+    }
 
     Component {
         id: toolButtons
         Row {
+            ActionButton {
+                id:sort
+                ico: "qrc:/Icons/filters.svg"
+                size: 20
+                color: Suru.color(Suru.White,1)
+                onClicked: sortMenu.open()
+                Menu {
+                    id: sortMenu
+                    y:parent.y+parent.height
+                    MenuItem {
+                        text: "Best"
+                        onClicked: onItemClicked(0)
+                    }
+                    MenuItem {
+                        text: "Top"
+                        onClicked: onItemClicked(1)
+                    }
+                    MenuItem {
+                        text: "New"
+                        onClicked: onItemClicked(2)
+                    }
+                    MenuItem {
+                        text: "Hot"
+                        onClicked: onItemClicked(3)
+                    }
+                    MenuItem {
+                        text: "Controversial"
+                        onClicked: onItemClicked(4)
+                    }
+                    MenuItem {
+                        text: "Old"
+                        onClicked: onItemClicked(5)
+                    }
+                }
+            }
+            ActionButton {
+                id:del
+                ico: "qrc:/Icons/delete.svg"
+                size: 20
+                color: Suru.color(Suru.White,1)
+                visible: link.author === appSettings.redditUsername
+                enabled: !link.isArchived
+                onClicked: {
+                    //TODO: make confirmation dialog
+                    linkManager.deleteLink(link.fullname);
+                    pageStack.pop();
+                }
+            }
+
             ActionButton {
                 id:edit
                 ico: "qrc:/Icons/edit.svg"
@@ -60,11 +113,11 @@ Page {
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SendLinkPage.qml"),
                                    { linkManager: linkManager,
-                                     text: link.rawText || "",
-                                     editPost: link.fullname,
-                                     subreddit: link.subreddit,
-                                     postTitle: link.title,
-                                     postUrl: link.isSelfPost ? "" : link.url
+                                       text: link.rawText || "",
+                                       editPost: link.fullname,
+                                       subreddit: link.subreddit,
+                                       postTitle: link.title,
+                                       postUrl: link.isSelfPost ? "" : link.url
                                    });
                 }
             }
@@ -85,28 +138,45 @@ Page {
         }
     }
 
+    Component {
+        id:linkDelegateComponent
+        LinkDelegate {
+            id:linkDelegate
+            width: commentsList.width
+            link: commentPage.link
+            compact: false
+            linkVoteManager: commentVoteManager
+            linkSaveManager: commentSaveManager
+        }
+    }
+
+
+    BusyIndicator {
+        anchors.centerIn: parent
+        running: !link
+    }
+
     ListView {
         id:commentsList
         anchors.fill: parent
-        header: LinkDelegate {
-            width: parent.width
-            link: commentModel.link
-            compact: false
-            linkVoteManager: linkVoteManager1
-            linkSaveManager: linkSaveManager1
+
+        header: Loader {
+            sourceComponent: commentModel.link && !commentModel.busy ? linkDelegateComponent : null
+            onLoaded: {
+                commentsList.contentY = commentsList.originY
+                sourceComponent = sourceComponent
+            }
         }
-        cacheBuffer: 10000
 
         model: commentModel
         delegate: CommentDelegate {
             id:commentDelegate
-            width: parent.width
+            width: commentsList.width
         }
         footer: Item {
             width: parent.width
             height: 400
         }
-
     }
 
     CommentModel {
@@ -114,6 +184,7 @@ Page {
         manager: quickdditManager
         permalink: link.permalink
         onError: infoBanner.alert(errorString)
+
         onCommentLoaded: {
             var rlink = globalUtils.parseRedditLink(permalink)
             var post = rlink.path.split("/").pop()
@@ -169,24 +240,5 @@ Page {
                 commentModel.changeLinkSaved(fullname, saved);
         }
         onError: infoBanner.warning(errorString);
-    }
-
-    Connections {
-        target: linkVoteManager1
-        onVoteSuccess: if (linkVoteManager1 != commentVoteManager) { commentModel.changeLinkLikes(fullname, likes); }
-    }
-
-    Connections {
-        target: linkSaveManager1
-        onSuccess: if (linkSaveManager1 != commentSaveManager) { commentModel.changeLinkSaved(fullname, saved); }
-    }
-
-    Component.onCompleted: {
-        // if we didn't get vote and save managers passed (for updating models in the calling page),
-        // we use the local managers
-        if (!linkVoteManager1)
-            linkVoteManager1 = commentVoteManager;
-        if (!linkSaveManager1)
-            linkSaveManager1 = commentSaveManager;
     }
 }

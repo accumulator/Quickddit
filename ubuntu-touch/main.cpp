@@ -16,6 +16,7 @@
 #include "src/messagemodel.h"
 #include "src/messagemanager.h"
 #include "src/imgurmanager.h"
+#include "src/gallerymanager.h"
 #include "src/votemanager.h"
 #include "src/commentmanager.h"
 #include "src/linkmanager.h"
@@ -31,6 +32,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+
     qmlRegisterType<AppSettings>("quickddit.Core", 1, 0, "AppSettings");
     qmlRegisterType<QuickdditManager>("quickddit.Core", 1, 0, "QuickdditManager");
     qmlRegisterType<LinkModel>("quickddit.Core", 1, 0, "LinkModel");
@@ -42,6 +44,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<MessageModel>("quickddit.Core", 1, 0, "MessageModel");
     qmlRegisterType<MessageManager>("quickddit.Core", 1, 0, "MessageManager");
     qmlRegisterType<ImgurManager>("quickddit.Core", 1, 0, "ImgurManager");
+    qmlRegisterType<GalleryManager>("quickddit.Core", 1, 0, "GalleryManager");
     qmlRegisterType<VoteManager>("quickddit.Core", 1, 0, "VoteManager");
     qmlRegisterType<CommentManager>("quickddit.Core", 1, 0, "CommentManager");
     qmlRegisterType<LinkManager>("quickddit.Core", 1, 0, "LinkManager");
@@ -74,7 +77,6 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     QMLUtils qmlUtils;
     qDebug().nospace() <<QString(qVersion());
-    engine.rootContext()->setContextProperty("qtversion", QString(qVersion()));
     engine.rootContext()->setContextProperty("QMLUtils", &qmlUtils);
     engine.rootContext()->setContextProperty("APP_VERSION", APP_VERSION);
     engine.load(url);

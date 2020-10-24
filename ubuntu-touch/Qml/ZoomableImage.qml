@@ -21,9 +21,12 @@ import QtQuick.Controls 2.2
 import quickddit.Core 1.0
 
 //TODO: make it zoomable
-Image {
+AnimatedImage {
 
     fillMode: Image.PreserveAspectFit
+    asynchronous: true
+    property double ratio
+    height: ratio*width
 
     Image {
         id: busy

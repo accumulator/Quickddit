@@ -47,7 +47,7 @@ Page {
             infoBanner.alert("Sign in successful! Welcome! :)");
             //inboxManager.resetTimer();
             var mainPage = globalUtils.getMainPage();
-            mainPage.refresh("Subscribed");
+            mainPage.refresh();
             pageStack.pop(mainPage);
         }
         onAccessTokenFailure: {

@@ -24,9 +24,9 @@ Features
 | Save comments and posts | Y | Y | Y |
 | Multireddit support    | partial | partial | partial |
 | integrated image viewer | Y | Y | Y |
-| integrated reddit gallery viewer | Y | | |
-| integrated Imgur album viewer | Y | | Y |
-| integrated video player | Y | partial | |
+| integrated reddit gallery viewer | Y | Y | |
+| integrated Imgur album viewer | Y | Y | Y |
+| integrated video player | Y | Y | |
 | integrated webviewer   | Y | Y | |
 | search posts           | Y | | Y |
 | search subreddits      | Y | Y | Y |

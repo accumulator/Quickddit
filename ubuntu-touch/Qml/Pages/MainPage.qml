@@ -251,7 +251,7 @@ Page {
     Component {
         id:linkListComponent
 
-        ListView{
+        ListView {
             id: linkListView
             anchors.fill: parent
             model: linkModel
@@ -263,16 +263,16 @@ Page {
                 text: "Pull to refresh..."
             }
 
-            delegate: LinkDelegate{
+
+            delegate: LinkDelegate {
                 linkSaveManager: saveManager
                 linkVoteManager: voteManager
-                id:linkDelegate
-                link:model
-                highlighted: false
+                id: linkDelegate
+                link: model
+                width: linkListView.width
 
                 onClicked: {
-                    var p = { link: model,linkVoteManager1: voteManager, linkSaveManager1:saveManager};
-                    pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/CommentPage.qml"), p);
+                    pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/CommentPage.qml"), {linkPermalink: model.permalink});
                 }
             }
 

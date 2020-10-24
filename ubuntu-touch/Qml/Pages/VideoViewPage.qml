@@ -34,12 +34,14 @@ Page {
     WebEngineView{
         anchors.fill: parent
         id:webView
-        settings.localContentCanAccessFileUrls: true
-        settings.localContentCanAccessRemoteUrls: true
-        settings.allowRunningInsecureContent: true
         settings.fullScreenSupportEnabled: true
 
         onFullScreenRequested: {
+            if(request.toggleOn) {
+                window.showFullScreen()
+            }
+            else
+                window.showNormal()
             request.accept()
         }
     }
