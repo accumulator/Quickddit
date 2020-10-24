@@ -57,6 +57,7 @@ class ImgurManager : public AbstractManager, public QQmlParserStatus
      * Must be set before calling refresh()
      */
     Q_PROPERTY(QString imgurUrl READ imgurUrl WRITE setImgurUrl NOTIFY imgurUrlChanged)
+    Q_PROPERTY(QStringList imageUrls READ imageUrls NOTIFY imageUrlsChanged)
 public:
     explicit ImgurManager(QObject *parent = 0);
 
@@ -65,6 +66,7 @@ public:
 
     QUrl imageUrl() const;
     QStringList thumbnailUrls() const;
+    QStringList imageUrls() const;
 
     int selectedIndex() const;
     void setSelectedIndex(int index);
@@ -79,6 +81,7 @@ signals:
     void thumbnailUrlsChanged();
     void selectedIndexChanged();
     void imgurUrlChanged();
+    void imageUrlsChanged();
     void error(const QString &errorString);
 
 private slots:
@@ -89,6 +92,7 @@ private:
     QStringList m_thumbnailUrls;
     int m_selectedIndex;
     QString m_imgurUrl;
+    QStringList m_imageUrls;
 
     APIRequest *m_request;
     QList< QPair<QString,QString> > m_imageAndThumbUrlList;

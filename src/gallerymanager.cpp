@@ -67,6 +67,16 @@ QStringList GalleryManager::thumbnailUrls() const
     return m_thumbnailUrls;
 }
 
+QStringList GalleryManager::imageUrls() const
+{
+    return m_imageUrls;
+}
+
+QStringList GalleryManager::previewUrls() const
+{
+    return m_previewUrls;
+}
+
 int GalleryManager::selectedIndex() const
 {
     return m_selectedIndex;
@@ -100,6 +110,8 @@ void GalleryManager::refresh()
 
     m_galleryItemList.clear();
     m_thumbnailUrls.clear();
+    m_imageUrls.clear();
+    m_previewUrls.clear();
     setSelectedIndex(-1);
 
     QStringList pathElements = m_galleryUrl.path().split("/");
@@ -122,21 +134,33 @@ void GalleryManager::onFinished(QNetworkReply *reply)
                 QVariantMap item = itemv.toMap();
                 QVariantMap item_meta = meta.value(item.value("media_id").toString()).toMap();
                 m_galleryItemList.append(QPair<QVariantMap,QVariantMap>(item,item_meta));
-
+                QString iurl = item_meta.value("s").toMap().value("u").toString();
+                if (iurl.isEmpty())
+                    iurl = item_meta.value("s").toMap().value("gif").toString();
+                m_imageUrls.append(GalleryManager::unescapeUrl(iurl));
                 // (p)review images could be empty, if (s)ource image is small
                 QString thumbnailUrl = "";
+                QString previewUrl = "";
                 QVariantList pList = item_meta.value("p").toList();
-                if (pList.count() != 0)
+                if (pList.count() != 0) {
                     thumbnailUrl = pList.at(0).toMap().value("u").toString();
-                else
+                    previewUrl = pList.last().toMap().value("u").toString();
+                }
+                else {
                     thumbnailUrl = item_meta.value("s").toMap().value("u").toString();
-
+                    previewUrl = item_meta.value("s").toMap().value("u").toString();
+                }
                 m_thumbnailUrls.append(GalleryManager::unescapeUrl(thumbnailUrl));
+                m_previewUrls.append(GalleryManager::unescapeUrl(previewUrl));
             }
             if (m_galleryItemList.count() > 0) {
                 emit thumbnailUrlsChanged();
                 setSelectedIndex(0);
             }
+            if (m_imageUrls.count() > 0)
+                emit imageUrlsChanged();
+            if (m_previewUrls.count() > 0)
+                emit imageUrlsChanged();
         } else {
             emit error(reply->errorString());
         }
