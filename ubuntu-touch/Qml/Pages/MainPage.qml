@@ -36,6 +36,7 @@ Page {
     property string duplicatesOf
     property string section
     property string sectionTimeRange
+    property bool busy : linkModel.busy
 
     function refresh(sr, keepsection) {
         if (sr !== undefined) {

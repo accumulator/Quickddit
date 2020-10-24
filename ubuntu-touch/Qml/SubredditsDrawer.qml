@@ -93,13 +93,23 @@ Drawer {
 
         function onSignedInChanged() {
             if (quickdditManager.isSignedIn) {
-                subredditModel.refresh(false)
-                //multiredditModel.refresh(false)
+                refreshTimer.start()
             } else {
                 subredditModel.clear();
-                //multiredditModel.clear();
             }
         }
+
         onSignedInChanged: onSignedInChanged();
+    }
+
+    Timer {
+        id: refreshTimer
+        interval: 500
+        onTriggered: {
+            if (globalUtils.getMainPage().busy)
+                refreshTimer.restart()
+            else
+                subredditModel.refresh(false)
+        }
     }
 }

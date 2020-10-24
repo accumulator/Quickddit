@@ -7,5 +7,5 @@ Terminal=false
 Type=Application
 X-Ubuntu-Touch=true
 X-Ubuntu-Splash-Color=#e95420
-X-Ubuntu-Splash-Image=cover.svg
+X-Ubuntu-Splash-Image=quickddit-splash-image.svg
 Name[en_US]=Quickddit

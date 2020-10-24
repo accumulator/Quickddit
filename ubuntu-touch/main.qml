@@ -223,8 +223,6 @@ ApplicationWindow {
         onAccessTokenSuccess: {
             infoBanner.alert("Logged in succesfully");
         }
-        onSignedInChanged: {
-        }
     }
 
     // A collections of global utility functions

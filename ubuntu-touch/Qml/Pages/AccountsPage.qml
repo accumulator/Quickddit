@@ -66,6 +66,7 @@ Page {
             text: "Add new account"
 
             onClicked: {
+                quickdditManager.signOut();
                 pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/LoginPage.qml"));
             }
         }
