@@ -8,12 +8,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="204"
-   height="186"
+   width="1024"
+   height="1024"
    id="svg2"
    version="1.1"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="cover.svg"
+   sodipodi:docname="quickddit-splash-image.svg"
    inkscape:export-filename="/home/sander/projects/quickddit/Quickddit/sailfish/qml/cover/background.png"
    inkscape:export-xdpi="144.7"
    inkscape:export-ydpi="144.7">
@@ -72,9 +72,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.3456177"
-     inkscape:cx="119.52479"
-     inkscape:cy="90.689937"
+     inkscape:zoom="0.20732527"
+     inkscape:cx="1.8128062"
+     inkscape:cy="-236.93501"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -133,15 +133,15 @@
        style="display:inline;opacity:0.99"
        transform="matrix(1.2898543,0,0,1.3017542,50.405828,-75.898235)">
       <g
-         transform="matrix(0.13010819,0,0,0.13010819,6.1189645,22.482908)"
+         transform="matrix(0.78064914,0,0,0.78064914,154.57915,176.77081)"
          id="Layer_3">
         <polygon
            style="fill:#ababab;fill-opacity:1"
-           points="412.828,410.54 256.645,213.307 448.191,389.3 "
+           points="448.191,389.3 412.828,410.54 256.645,213.307 "
            id="polygon24" />
         <polygon
            style="fill:#ffffff;fill-opacity:1"
-           points="421.371,410.54 256.645,213.307 449.191,381.8 "
+           points="449.191,381.8 421.371,410.54 256.645,213.307 "
            id="polygon26" />
         <circle
            style="fill:#ababab;fill-opacity:1"
