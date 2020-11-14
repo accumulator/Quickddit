@@ -112,27 +112,27 @@ Page {
                     id: periodMenu
                     y:parent.y+parent.height
                     MenuItem {
-                        text: "Hour"
+                        text: qsTr("Hour")
                         onClicked: onItemClicked(0)
                     }
                     MenuItem {
-                        text: "Day"
+                        text: qsTr("Day")
                         onClicked: onItemClicked(1)
                     }
                     MenuItem {
-                        text: "Week"
+                        text: qsTr("Week")
                         onClicked: onItemClicked(2)
                     }
                     MenuItem {
-                        text: "Month"
+                        text: qsTr("Month")
                         onClicked: onItemClicked(3)
                     }
                     MenuItem {
-                        text: "Year"
+                        text: qsTr("Year")
                         onClicked: onItemClicked(4)
                     }
                     MenuItem {
-                        text: "All time"
+                        text: qsTr("All time")
                         onClicked: onItemClicked(5)
                     }
                 }
@@ -172,7 +172,7 @@ Page {
 
         TabButton {
             id:tb0
-            text: "Best"
+            text: qsTr("Best")
             contentItem: Label {
                 text: parent.text
                 font.weight: Font.Normal
@@ -184,7 +184,7 @@ Page {
         }
         TabButton {
             id:tb1
-            text: "Hot"
+            text: qsTr("Hot")
             contentItem: Label {
                 text: parent.text
                 font.weight: Font.Normal
@@ -195,7 +195,7 @@ Page {
         }
         TabButton {
             id:tb2
-            text: "New"
+            text: qsTr("New")
             contentItem: Label {
                 text: parent.text
                 font.weight: Font.Normal
@@ -206,7 +206,7 @@ Page {
         }
         TabButton {
             id:tb3
-            text: "Rising"
+            text: qsTr("Rising")
             contentItem: Label {
                 text: parent.text
                 font.weight: Font.Normal
@@ -217,7 +217,7 @@ Page {
         }
         TabButton {
             id:tb4
-            text: "Controversial"
+            text: qsTr("Controversial")
             contentItem: Label {
                 text: parent.text
                 font.weight: Font.Normal
@@ -228,7 +228,7 @@ Page {
         }
         TabButton {
             id:tb5
-            text: "Top"
+            text: qsTr("Top")
             contentItem: Label {
                 text: parent.text
                 font.weight: Font.Normal
@@ -261,7 +261,7 @@ Page {
 
             Label {
                 anchors { bottom: linkListView.contentItem.top; horizontalCenter: parent.horizontalCenter; margins: 75 }
-                text: "Pull to refresh..."
+                text: qsTr("Pull to refresh...")
             }
 
 

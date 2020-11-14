@@ -21,7 +21,7 @@ import QtQuick.Controls 2.2
 import quickddit.Core 1.0
 
 Page {
-    title: "Settings"
+    title: qsTr("Settings")
 
     ScrollView {
         contentWidth: width
@@ -32,17 +32,16 @@ Page {
 
             SwitchDelegate {
                 width: parent.width
-                text: "Compact images in feed (saves data)"
+                text: qsTr("Compact images in feed (saves data)")
                 checked: persistantSettings.compactImages
                 onCheckedChanged: persistantSettings.compactImages = checked
             }
 
             SwitchDelegate {
                 width: parent.width
-                text: "Full resolution images (uses more data)"
+                text: qsTr("Full resolution images (uses more data)")
                 checked: persistantSettings.fullResolutionImages
                 onCheckedChanged: persistantSettings.fullResolutionImages = checked
-                //enabled: false
             }
 
             ItemDelegate {
@@ -50,7 +49,7 @@ Page {
                 Label {
                     id:sliderLabel
                     anchors {left: parent.left;verticalCenter: parent.verticalCenter; margins: 10}
-                    text: "Thumbnail scale: ["+Math.floor(slider.value*100)+"%]"
+                    text: qsTr("Thumbnail scale:")+" ["+Math.floor(slider.value*100)+"%]"
                 }
                 Slider {
                     id:slider
@@ -83,22 +82,21 @@ Page {
 
             SwitchDelegate {
                 width: parent.width
-                text: "Open links internaly"
+                text: qsTr("Open links internaly")
                 checked: persistantSettings.linksInternaly
                 onCheckedChanged: persistantSettings.linksInternaly = checked
-                //enabled: false
             }
 
             SwitchDelegate {
                 width: parent.width
-                text: "ToolBar on bottom"
+                text: qsTr("ToolBar on bottom")
                 checked: persistantSettings.toolbarOnBottom
                 onCheckedChanged: persistantSettings.toolbarOnBottom = checked
             }
 
             ItemDelegate {
                 width: parent.width
-                text: "Accounts "
+                text: qsTr("Accounts ")
                 onClicked: pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/AccountsPage.qml"));
                 Image {
                     anchors.verticalCenter: parent.verticalCenter

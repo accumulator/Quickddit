@@ -36,13 +36,13 @@ Page {
 
     function submit() {
         if (editPost === "") {
-            console.log("submitting post...");
+            console.log(qsTr("submitting post..."));
             var flairId = ""
             if (flairCombo.currentIndex >= 0)
                 flairId = flairManager.subredditFlairs[flairCombo.currentIndex].id
             linkManager.submit(subreddit, linkTitle.text, selfLinkSwitch.checked ? "" : linkUrl.text, linkDescription.text, flairId);
         } else {
-            console.log("saving post...");
+            console.log(qsTr("saving post..."));
             if (origText !== text) {
                 linkManager.editLinkText(editPost, text);
             }

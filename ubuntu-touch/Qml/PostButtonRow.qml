@@ -112,7 +112,7 @@ Row{
 
         onClicked: {
             QMLUtils.copyToClipboard(link.url)
-            infoBanner.alert("Link coppied to clipboard")
+            infoBanner.alert(qsTr("Link coppied to clipboard"))
         }
     }
 

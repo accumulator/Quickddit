@@ -112,7 +112,7 @@ ApplicationWindow {
                     width: 200
 
                     MenuItem {
-                        txt: "My Subreddits"
+                        txt: qsTr("My Subreddits")
                         ico: "qrc:/Icons/view-list-symbolic.svg"
                         onTriggered: {pageStack.push(Qt.resolvedUrl("Qml/Pages/SubredditsPage.qml"))
                         }
@@ -121,7 +121,7 @@ ApplicationWindow {
                     MenuSeparator {topPadding: 0; bottomPadding: 0 }
                     
                     MenuItem {
-                        txt: "Messages"
+                        txt: qsTr("Messages")
                         ico: "qrc:/Icons/message.svg"
                         enabled: quickdditManager.isSignedIn
                         onTriggered: {pageStack.push(Qt.resolvedUrl("Qml/Pages/MessagePage.qml"))
@@ -131,7 +131,7 @@ ApplicationWindow {
                     MenuSeparator {topPadding: 0; bottomPadding: 0 }
 
                     MenuItem {
-                        txt:  "My profile"
+                        txt:  qsTr("My profile")
                         ico: "qrc:/Icons/account.svg"
                         enabled: quickdditManager.isSignedIn
                         onTriggered: { pageStack.push(Qt.resolvedUrl("Qml/Pages/UserPage.qml"),{username: appSettings.redditUsername}) }
@@ -140,19 +140,19 @@ ApplicationWindow {
                     MenuSeparator {topPadding: 0; bottomPadding: 0 }
 
                     MenuItem {
-                        txt: quickdditManager.isSignedIn ? "Log out ("+appSettings.redditUsername+")": "Log in"
+                        txt: quickdditManager.isSignedIn ? qsTr("Log out")+" ("+appSettings.redditUsername+")": qsTr("Log in")
                         ico: quickdditManager.isSignedIn ? "qrc:/Icons/system-log-out.svg" : "qrc:/Icons/contact-new.svg"
                         onTriggered:{
                             !quickdditManager.isSignedIn ? pageStack.push(Qt.resolvedUrl("Qml/Pages/LoginPage.qml")) : logOutDialog.open();
                         }
                         Dialog{
                             id:logOutDialog
-                            title: "Log out"
+                            title: qsTr("Log out")
                             modal: true
                             standardButtons: Dialog.Yes | Dialog.No
 
                             Label {
-                                text: "Do you want to log out?"
+                                text: qsTr("Do you want to log out?")
                             }
                             onAccepted: {
                                 quickdditManager.signOut();
@@ -164,7 +164,7 @@ ApplicationWindow {
                     MenuSeparator { topPadding: 0; bottomPadding: 0 }
 
                     MenuItem {
-                        txt: "Settings"
+                        txt: qsTr("Settings")
                         ico: "qrc:/Icons/settings.svg"
                         onTriggered: pageStack.push(Qt.resolvedUrl("Qml/Pages/SettingsPage.qml"))
                     }
@@ -172,7 +172,7 @@ ApplicationWindow {
                     MenuSeparator { topPadding: 0; bottomPadding: 0 }
 
                     MenuItem {
-                        txt: "About"
+                        txt: qsTr("About")
                         ico: "qrc:/Icons/info.svg"
                         onTriggered: pageStack.push(Qt.resolvedUrl("Qml/Pages/AboutPage.qml"))
                     }
@@ -221,7 +221,7 @@ ApplicationWindow {
             }
         }
         onAccessTokenSuccess: {
-            infoBanner.alert("Logged in succesfully");
+            infoBanner.alert(qsTr("Logged in succesfully"));
         }
     }
 

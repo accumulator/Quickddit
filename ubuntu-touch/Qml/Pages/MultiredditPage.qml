@@ -67,7 +67,7 @@ Page {
 
         Button {
             id:showButton
-            text: "Show posts in m/"+multireddit
+            text: qsTr("Show posts in m/")+multireddit
             anchors { horizontalCenter: parent.horizontalCenter; top: about.bottom; margins: 10}
             onClicked: {
                 globalUtils.getMainPage().refreshMR(multireddit)

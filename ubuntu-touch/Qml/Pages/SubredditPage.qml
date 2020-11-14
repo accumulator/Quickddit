@@ -67,7 +67,7 @@ Page {
         Button {
             anchors{top: logo.bottom;right: parent.right;margins: 5}
             id:subButton
-            text: aboutSubredditManager.isSubscribed?"Unsubscribe":"Subscribe"
+            text: aboutSubredditManager.isSubscribed?qsTr("Unsubscribe"):qsTr("Subscribe")
             onClicked: {
                 if(aboutSubredditManager.isSubscribed)
                     aboutSubredditManager.subscribeOrUnsubscribe()
@@ -79,7 +79,7 @@ Page {
         Label {
             id:subCount
             anchors{right: subButton.left;verticalCenter:  subButton.verticalCenter; margins: 5}
-            text: aboutSubredditManager.activeUsers + " active / " + aboutSubredditManager.subscribers + " subs"
+            text: aboutSubredditManager.activeUsers + " "+qsTr("active")+" / " + aboutSubredditManager.subscribers + " "+qsTr("subs")
         }
 
         Label {
@@ -91,7 +91,7 @@ Page {
 
         Button {
             id:showButton
-            text: "Show posts in r/"+subreddit
+            text: qsTr("Show posts in")+" r/"+subreddit
             anchors { horizontalCenter: parent.horizontalCenter; top: about.bottom; margins: 10}
             onClicked: {
                 globalUtils.getMainPage().refresh(subreddit)

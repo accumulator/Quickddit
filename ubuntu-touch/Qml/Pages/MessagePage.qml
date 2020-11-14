@@ -24,7 +24,7 @@ import "../"
 import "../Delegates"
 
 Page {
-    title: "Messages"
+    title: qsTr("Messages")
 
     function getButtons(){
         return toolButtons
@@ -104,9 +104,5 @@ Page {
         onMarkReadStatusSuccess: messageModel.changeIsUnread(fullname, isUnread);
         onDelSuccess: messageModel.del(fullname);
         onError: infoBanner.warning(errorString);
-    }
-
-    Component.onCompleted: {
-        //inboxManager.dismiss();
     }
 }

@@ -64,27 +64,27 @@ Page {
                     id: sortMenu
                     y:parent.y+parent.height
                     MenuItem {
-                        text: "Best"
+                        text: qsTr("Best")
                         onClicked: onItemClicked(0)
                     }
                     MenuItem {
-                        text: "Top"
+                        text: qsTr("Top")
                         onClicked: onItemClicked(1)
                     }
                     MenuItem {
-                        text: "New"
+                        text: qsTr("New")
                         onClicked: onItemClicked(2)
                     }
                     MenuItem {
-                        text: "Hot"
+                        text: qsTr("Hot")
                         onClicked: onItemClicked(3)
                     }
                     MenuItem {
-                        text: "Controversial"
+                        text: qsTr("Controversial")
                         onClicked: onItemClicked(4)
                     }
                     MenuItem {
-                        text: "Old"
+                        text: qsTr("Old")
                         onClicked: onItemClicked(5)
                     }
                 }

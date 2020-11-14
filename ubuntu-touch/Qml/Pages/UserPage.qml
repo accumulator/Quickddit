@@ -55,7 +55,7 @@ Page {
                     text: userManager.user.linkKarma+" link / " +userManager.user.commentKarma+" comment karma"
                 }
                 Button {
-                    text: "Send message"
+                    text: qsTr("Send message")
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SendMessagePage.qml"),
                                        {messageManager: messageManager, recipient: username});

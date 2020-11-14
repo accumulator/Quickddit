@@ -25,7 +25,7 @@ import "../"
 import "../Delegates"
 
 Page {
-    title: "Subreddits"
+    title: qsTr("Subreddits")
 
     property string  section
     objectName: "subredditsPage"
@@ -46,7 +46,7 @@ Page {
 
             TabButton {
                 id: subButton
-                text: "Subscribed"
+                text: qsTr("Subscribed")
                 contentItem: Label {
                     text: parent.text
                     font.weight: Font.Normal
@@ -66,7 +66,7 @@ Page {
 
             TabButton {
                 id: multiButton
-                text: "Multireddits"
+                text: qsTr("Multireddits")
                 contentItem: Label {
                     text: parent.text
                     font.weight: Font.Normal
@@ -85,7 +85,7 @@ Page {
             }
 
             TabButton {
-                text: "Popular"
+                text: qsTr("Popular")
                 contentItem: Label {
                     text: parent.text
                     font.weight: Font.Normal
@@ -95,7 +95,7 @@ Page {
                 width: implicitWidth
             }
             TabButton {
-                text: "New"
+                text: qsTr("New")
                 contentItem: Label {
                     text: parent.text
                     font.weight: Font.Normal
@@ -105,7 +105,7 @@ Page {
                 width: implicitWidth
             }
             TabButton {
-                text: "Search"
+                text: qsTr("Search")
                 contentItem: Label {
                     text: parent.text
                     font.weight: Font.Normal

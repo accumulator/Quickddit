@@ -22,7 +22,7 @@ import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
 
 Page {
-    title: "About"
+    title: qsTr("About")
     ListView {
         anchors.fill: parent
         header:Column {
@@ -65,7 +65,7 @@ Page {
             }
 
             Label {
-                text: "A free and open source Reddit client for mobile phones" +
+                text: qsTr("A free and open source Reddit client for mobile phones") +
                       "\nv" + APP_VERSION + "\n"+
                       "Copyright (c) 2015-2020 Sander van Grieken\n" +
                       "Copyright (c) 2013-2014 Dickson Leong\n\n" +
@@ -82,10 +82,10 @@ Page {
         }
 
         model: [
-            { name: "Get the source", url: QMLUtils.SOURCE_REPO_URL },
-            { name: "Report issues",  url: "https://github.com/accumulator/Quickddit/issues" },
-            { name: "Translations", url: QMLUtils.TRANSLATIONS_URL },
-            { name: "Licence", url: QMLUtils.GPL3_LICENSE_URL },
+            { name: qsTr("Get the source"), url: QMLUtils.SOURCE_REPO_URL },
+            { name: qsTr("Report issues"),  url: "https://github.com/accumulator/Quickddit/issues" },
+            { name: qsTr("Translations"), url: QMLUtils.TRANSLATIONS_URL },
+            { name: qsTr("Licence"), url: QMLUtils.GPL3_LICENSE_URL },
         ]
 
         delegate: ItemDelegate {
@@ -97,7 +97,7 @@ Page {
 
         footer: ItemDelegate {
             width: parent.width
-            text: "Donate"
+            text: qsTr("Donate")
             onClicked: pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/DonatePage.qml"))
 
         }

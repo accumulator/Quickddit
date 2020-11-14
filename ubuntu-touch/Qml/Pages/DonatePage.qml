@@ -42,7 +42,7 @@ Page {
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 12
-                text: "(maintainer)"
+                text: qsTr("(maintainer)")
             }
 
             Image {
@@ -72,7 +72,7 @@ Page {
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 12
-                text: "Donate via Bitcoin:"
+                text: qsTr("Donate via Bitcoin:")
             }
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -80,7 +80,7 @@ Page {
                 text: "<a href=\"" + _bitcoinAddr + "\">" + _bitcoinAddr + "</a>"
                 onLinkActivated: {
                     QMLUtils.copyToClipboard(_bitcoinAddr)
-                    infoBanner.alert("Address copied to clipboard")
+                    infoBanner.alert(qsTr("Address copied to clipboard"))
                 }
             }
             Label {
@@ -92,7 +92,7 @@ Page {
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 12
-                text: "(ubuntu-touch port)"
+                text: qsTr("(ubuntu-touch port)")
             }
 
             Image {
@@ -104,7 +104,7 @@ Page {
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 12
-                text: "Donate via PayPal:"
+                text: qsTr("Donate via PayPal:")
             }
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter

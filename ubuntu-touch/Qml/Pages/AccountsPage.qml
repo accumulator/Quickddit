@@ -23,7 +23,7 @@ import "../"
 import "../Delegates"
 
 Page {
-    title: "Accounts"
+    title: qsTr("Accounts")
 
     ListView {
         id:accountsView
@@ -63,7 +63,7 @@ Page {
 
         footer: ItemDelegate {
             width: parent.width
-            text: "Add new account"
+            text: qsTr("Add new account")
 
             onClicked: {
                 quickdditManager.signOut();

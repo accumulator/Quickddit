@@ -44,14 +44,14 @@ Page {
     Connections {
         target: quickdditManager
         onAccessTokenSuccess: {
-            infoBanner.alert("Sign in successful! Welcome! :)");
+            infoBanner.alert(qsTr("Sign in successful! Welcome! :)"));
             //inboxManager.resetTimer();
             var mainPage = globalUtils.getMainPage();
             mainPage.refresh();
             pageStack.pop(mainPage);
         }
         onAccessTokenFailure: {
-            infoBanner.warning("error");
+            infoBanner.warning(qsTr("error"));
         }
     }
     Component.onCompleted: loginPage.url = quickdditManager.generateAuthorizationUrl();
