@@ -34,6 +34,8 @@ ApplicationWindow {
     width: 400
     height: 800
 
+    Suru.theme: persistantSettings.theme
+
     SubredditsDrawer {
         id:subredditsDrawer
     }
@@ -197,7 +199,9 @@ ApplicationWindow {
 
     Settings {
         id: persistantSettings
+        property string style: "Suru"
         property real scale: 1.0
+
         property bool linksInternaly: true
         property bool compactImages: false
         property bool compactVideos: true
@@ -207,6 +211,7 @@ ApplicationWindow {
             toolbarOnBottom? header = null : footer = null
             toolbarOnBottom? footer = tBar : header = tBar
         }
+        property var theme: Suru.Default
     }
 
     QuickdditManager {

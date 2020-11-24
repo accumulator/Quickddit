@@ -64,10 +64,6 @@ int main(int argc, char *argv[])
     if (settings.contains("style")) {
         QQuickStyle::setStyle(settings.value("style").toString());
     }
-    else {
-        settings.setValue("style", "Suru");
-        QQuickStyle::setStyle("Suru");
-    }
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

@@ -96,6 +96,22 @@ Page {
 
             ItemDelegate {
                 width: parent.width
+                Label {
+                    anchors {left: parent.left;verticalCenter: parent.verticalCenter; margins: 10}
+                    text: "Theme"
+                }
+                ComboBox {
+                    anchors { right: parent.right;  verticalCenter: parent.verticalCenter; margins:10 }
+                    model: ["Light","Dark","System"]
+                    currentIndex: persistantSettings.theme
+                    onCurrentIndexChanged: {
+                        persistantSettings.theme = currentIndex
+                    }
+                }
+            }
+
+            ItemDelegate {
+                width: parent.width
                 text: qsTr("Accounts ")
                 onClicked: pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/AccountsPage.qml"));
                 Image {
