@@ -131,7 +131,7 @@ void linkFromMap(LinkObject &link, const QVariantMap &linkMap)
     link.setPromoted(linkMap.value("promoted").toBool());
     link.setFlairText(unescapeHtml(linkMap.value("link_flair_text").toString()));
     link.setArchived(linkMap.value("archived").toBool());
-    link.setGilded(linkMap.value("gilded").toBool());
+    link.setGilded(linkMap.value("gilded").toInt());
     link.setSaved(linkMap.value("saved").toBool());
     link.setLocked(linkMap.value("locked").toBool());
     link.setCrossposts(linkMap.value("num_crossposts").toInt());
