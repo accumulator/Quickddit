@@ -68,6 +68,10 @@ Page {
                 window.showNormal()
             request.accept()
         }
+
+        onNewViewRequested: {
+            Qt.openUrlExternally(request.requestedUrl);
+        }
     }
 
     Component.onCompleted: {
