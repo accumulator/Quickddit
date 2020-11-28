@@ -211,7 +211,7 @@ ApplicationWindow {
             toolbarOnBottom? header = null : footer = null
             toolbarOnBottom? footer = tBar : header = tBar
         }
-        property var theme: Suru.Default
+        property int theme: 2
     }
 
     QuickdditManager {

@@ -4,7 +4,8 @@
         "connectivity",
         "networking",
         "video",
-        "webview"
+        "webview",
+        "picture_files"
     ],
     "policy_version": 16.04
 }

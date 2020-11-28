@@ -72,5 +72,7 @@
         <file>Icons/filters.svg</file>
         <file>Icons/reload.svg</file>
         <file>Icons/quickddit-splash-image.svg</file>
+        <file>Qml/Flair.qml</file>
+        <file>Icons/save.svg</file>
     </qresource>
 </RCC>

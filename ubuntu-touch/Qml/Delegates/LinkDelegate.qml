@@ -34,8 +34,9 @@ ItemDelegate {
     property bool previewableImage: globalUtils.previewableImage(link.url)
     property bool previewableVideo: globalUtils.previewableVideo(link.url)
     property alias activeManager: pic.activeManager
+    property alias imageUrl: pic.imageUrl
 
-    height: Math.max(titulok.height+pic.height,txt.height+titulok.height,thumb.height)+info.height+bottomRow.height
+    height: Math.max(titulok.height+pic.height+flairs.height,txt.height+titulok.height+flairs.height,thumb.height)+info.height+bottomRow.height
 
     onClicked: {
         if(!compact&&link.domain.slice(5)!==link.subreddit)
@@ -66,15 +67,41 @@ ItemDelegate {
                 pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/UserPage.qml"),{username:link.slice(3).split(" ")[0]})
         }
     }
+    ListView {
+        id: flairs
+        anchors {top: info.bottom; left:thumb.visible ? thumb.right : parent.left; leftMargin: 5 }
+        height: count ? currentItem.height : 0
+        width: contentWidth
+        orientation: ListView.Horizontal
+        clip: true
+        spacing: 5
+        delegate: Loader {
+            active: modelData != ""
+            sourceComponent: Flair { text: modelData }
+
+        }
+        model: [link.flairText,
+            !!link.isSticky ? qsTr("Sticky") : "",
+            !!link.isNSFW ? qsTr("NSFW") : "",
+            !!link.isPromoted ? qsTr("Promoted") : "",
+            !!link.gilded ? qsTr("Gilded") + (link.gilded > 1 ? " " + link.gilded + "x": "") : "",
+            !!link.isArchived ? qsTr("Archived") : "",
+            !!link.isLocked ? qsTr("Locked") : ""].filter(removeEmpty)
+
+        function removeEmpty(value) {
+            return value !== ""
+        }
+    }
+
     //title
     Label {
         padding: 5
-        anchors {top: info.bottom; right: parent.right; left:thumb.visible ? thumb.right : parent.left;}
+        anchors {top: flairs.bottom; right: parent.right; left:thumb.visible ? thumb.right : parent.left }
         id: titulok
         text: link.title
         elide: Text.ElideRight
         maximumLineCount: compact && !thumb.visible ? 3 : 9999
-        height: thumb.visible && compact ? thumb.height : implicitHeight
+        height: thumb.visible && compact ? thumb.height - flairs.height : implicitHeight
         font.pointSize: 12
         font.weight: Font.DemiBold
         wrapMode: Text.Wrap

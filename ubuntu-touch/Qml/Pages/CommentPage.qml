@@ -30,6 +30,8 @@ Page {
 
     property alias link: commentModel.link
     property alias linkPermalink: commentModel.permalink
+    signal downloadImage
+    property bool previeableImage: false
 
     function loadMoreChildren(index, children) {
         commentModel.moreComments(index, children);
@@ -38,6 +40,7 @@ Page {
     function getButtons(){
         return toolButtons
     }
+
     function onItemClicked(i) {
         switch(i) {
         case 0: commentModel.sort = CommentModel.UndefinedSort; break;
@@ -54,6 +57,15 @@ Page {
     Component {
         id: toolButtons
         Row {
+            ActionButton {
+                id:downloadBtn
+                ico: "qrc:/Icons/save.svg"
+                size: 20
+                color: Suru.color(Suru.White,1)
+                visible: previeableImage
+                onClicked: downloadImage()
+            }
+
             ActionButton {
                 id:sort
                 ico: "qrc:/Icons/filters.svg"
@@ -102,7 +114,6 @@ Page {
                     pageStack.pop();
                 }
             }
-
             ActionButton {
                 id:edit
                 ico: "qrc:/Icons/edit.svg"
@@ -147,9 +158,20 @@ Page {
             compact: false
             linkVoteManager: commentVoteManager
             linkSaveManager: commentSaveManager
+
+            Connections {
+                target: commentPage
+                onDownloadImage: {
+                    QMLUtils.saveImage(linkDelegate.imageUrl)
+                }
+            }
+            Binding {
+                target: commentPage
+                property: "previeableImage"
+                value: linkDelegate.previewableImage
+            }
         }
     }
-
 
     BusyIndicator {
         anchors.centerIn: parent
@@ -195,6 +217,17 @@ Page {
                 commentListView.currentIndex = postIndex;
                 commentListView.currentItem.highlight();
             }
+        }
+    }
+
+    Connections {
+        target: QMLUtils
+        onSaveImageSucceeded: {
+            infoBanner.alert("Image saved to Images");
+        }
+
+        onSaveImageFailed: {
+            infoBanner.alert("Image already saved");
         }
     }
 

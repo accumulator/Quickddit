@@ -294,7 +294,7 @@ Item {
 
                     Button {
                         id: cancelButton
-                        text: "Cancel"
+                        text: qsTr("Cancel")
                         visible: model.view !== "new"
                         onClicked: {
                             commentModel.setView(model.fullname, "");

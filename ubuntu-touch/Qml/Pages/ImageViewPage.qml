@@ -18,6 +18,7 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Suru 2.2
 import quickddit.Core 1.0
 import "../"
 import "../Delegates"
@@ -25,6 +26,25 @@ import "../Delegates"
 Page {
     property alias imageUrl: viewer.source
     property alias imgurUrl: imgurManager.imgurUrl
+    signal downloadImage
+
+    function getButtons(){
+        return toolButtons
+    }
+
+    Component {
+        id: toolButtons
+        Row {
+            ActionButton {
+                id:downloadBtn
+                ico: "qrc:/Icons/save.svg"
+                size: 20
+                color: Suru.color(Suru.White,1)
+                visible: true
+                onClicked: QMLUtils.saveImage(imageUrl)
+            }
+        }
+    }
 
     Flickable{
         id:f

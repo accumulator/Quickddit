@@ -28,6 +28,7 @@ Item {
     property alias imgurUrl: imgurManager.imgurUrl
     property alias galleryUrl: galleryManager.galleryUrl
     property QtObject activeManager: imgurUrl ? imgurManager : galleryManager
+    signal download
 
     height: persistantSettings.compactImages && compact ? 0 : listView.height
 
