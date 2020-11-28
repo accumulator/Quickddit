@@ -114,6 +114,11 @@ Row{
             QMLUtils.copyToClipboard(link.url)
             infoBanner.alert(qsTr("Link coppied to clipboard"))
         }
+
+        onPressAndHold: {
+            QMLUtils.copyToClipboard("https://reddit.com"+link.permalink)
+            infoBanner.alert(qsTr("Permalink coppied to clipboard"))
+        }
     }
 
     ActionButton {
