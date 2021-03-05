@@ -22,6 +22,7 @@ logger = MyLogger()
 ytdl_info_opts = {
     'dump_single_json': 'true',
     'simulate': 'true',
+    'noplaylist': 'true',
     'logger': logger
 }
 

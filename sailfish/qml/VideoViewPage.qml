@@ -81,6 +81,10 @@ AbstractPage {
                 }
 
                 onSourceChanged: console.log("media player source url: " + source)
+                onStatusChanged: {
+                    if (status === MediaPlayer.Loaded)
+                        play()
+                }
             }
 
             Item {
@@ -89,7 +93,7 @@ AbstractPage {
 
                 width: busyIndicator.width
                 height: busyIndicator.height
-                visible: mediaPlayer.bufferProgress < 1 && mediaPlayer.error === MediaPlayer.NoError && !error
+                visible: mediaPlayer.bufferProgress < 1 && mediaPlayer.status !== MediaPlayer.Loaded && mediaPlayer.error === MediaPlayer.NoError && !error
 
                 BusyIndicator {
                     id: busyIndicator
