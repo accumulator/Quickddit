@@ -680,12 +680,12 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>ImgurManager</name>
     <message>
-        <location filename="../../src/imgurmanager.cpp" line="142"/>
+        <location filename="../../src/imgurmanager.cpp" line="147"/>
         <source>Unable to get Imgur ID from the url: %1</source>
         <translation>Impossibile trovare l&apos;ID Imgur dall&apos;url: %1</translation>
     </message>
     <message>
-        <location filename="../../src/imgurmanager.cpp" line="175"/>
+        <location filename="../../src/imgurmanager.cpp" line="183"/>
         <source>Imgur API returns no image</source>
         <translation>L&apos;API di Imgur non ha ritornato nessuna immagine</translation>
     </message>
@@ -1755,18 +1755,18 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="111"/>
+        <location filename="../qml/VideoViewPage.qml" line="115"/>
         <source>Error loading video</source>
         <translation>Errore nel caricamento del video</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="201"/>
-        <location filename="../qml/VideoViewPage.qml" line="274"/>
+        <location filename="../qml/VideoViewPage.qml" line="205"/>
+        <location filename="../qml/VideoViewPage.qml" line="278"/>
         <source>Problem finding stream URL</source>
         <translation>Problema nel trovare l&apos;URL dello stream</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="279"/>
+        <location filename="../qml/VideoViewPage.qml" line="283"/>
         <source>youtube-dl error: %1</source>
         <translation type="unfinished"></translation>
     </message>

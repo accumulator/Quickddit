@@ -5,6 +5,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Fri Mar 05 2021 Sander van Grieken <sander@outrightsolutions.nl> 1.10.2-1
+- fix: video player not always starts playing
+- chg: update youtube-dl to 2021-03-03
+
 * Tue Oct 06 2020 Sander van Grieken <sander@outrightsolutions.nl> 1.10.1-1
 - fix: overly large thumbnails
 - fix: segfault when viewing certain reddit image galleries

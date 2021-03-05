@@ -682,12 +682,12 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
 <context>
     <name>ImgurManager</name>
     <message>
-        <location filename="../../src/imgurmanager.cpp" line="142"/>
+        <location filename="../../src/imgurmanager.cpp" line="147"/>
         <source>Unable to get Imgur ID from the url: %1</source>
         <translation>Impossível obter Imgur ID do endereço: %1</translation>
     </message>
     <message>
-        <location filename="../../src/imgurmanager.cpp" line="175"/>
+        <location filename="../../src/imgurmanager.cpp" line="183"/>
         <source>Imgur API returns no image</source>
         <translation>Não foi possível encontra imagem através da API do Imgur</translation>
     </message>
@@ -1005,9 +1005,9 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message numerus="yes">
         <location filename="../qml/PostInfoText.qml" line="116"/>
         <source>%n crossposts</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n crosspostagens</numerusform>
+            <numerusform>%n crosspostagens</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1757,18 +1757,18 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
         <translation>Endereço</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="111"/>
+        <location filename="../qml/VideoViewPage.qml" line="115"/>
         <source>Error loading video</source>
         <translation>Erro ao carregar vídeo</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="201"/>
-        <location filename="../qml/VideoViewPage.qml" line="274"/>
+        <location filename="../qml/VideoViewPage.qml" line="205"/>
+        <location filename="../qml/VideoViewPage.qml" line="278"/>
         <source>Problem finding stream URL</source>
         <translation>Erro ao encontrar endereço para stream</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="279"/>
+        <location filename="../qml/VideoViewPage.qml" line="283"/>
         <source>youtube-dl error: %1</source>
         <translation>Ocorreu um erro de youtube-dl: %1</translation>
     </message>

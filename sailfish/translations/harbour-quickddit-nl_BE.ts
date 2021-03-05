@@ -682,12 +682,12 @@ Meld u aan voor accounts toe te voegen. Quickddit gaat uw succesvolle aanmelding
 <context>
     <name>ImgurManager</name>
     <message>
-        <location filename="../../src/imgurmanager.cpp" line="142"/>
+        <location filename="../../src/imgurmanager.cpp" line="147"/>
         <source>Unable to get Imgur ID from the url: %1</source>
         <translation>Kost den Imgur-ID nie ophalen van URL: %1</translation>
     </message>
     <message>
-        <location filename="../../src/imgurmanager.cpp" line="175"/>
+        <location filename="../../src/imgurmanager.cpp" line="183"/>
         <source>Imgur API returns no image</source>
         <translation>Imgur-API heeft geen afbeelding weergegeven</translation>
     </message>
@@ -1757,18 +1757,18 @@ Meld u aan voor accounts toe te voegen. Quickddit gaat uw succesvolle aanmelding
         <translation>URL</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="111"/>
+        <location filename="../qml/VideoViewPage.qml" line="115"/>
         <source>Error loading video</source>
         <translation>Fout bij laden van filmke</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="201"/>
-        <location filename="../qml/VideoViewPage.qml" line="274"/>
+        <location filename="../qml/VideoViewPage.qml" line="205"/>
+        <location filename="../qml/VideoViewPage.qml" line="278"/>
         <source>Problem finding stream URL</source>
         <translation>Kon stream-URL nie vinden</translation>
     </message>
     <message>
-        <location filename="../qml/VideoViewPage.qml" line="279"/>
+        <location filename="../qml/VideoViewPage.qml" line="283"/>
         <source>youtube-dl error: %1</source>
         <translation>youtube-dl-fout: %1</translation>
     </message>
