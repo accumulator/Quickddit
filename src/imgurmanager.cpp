@@ -84,6 +84,11 @@ void ImgurManager::setImgurUrl(const QString &imgurUrl)
     }
 }
 
+QStringList ImgurManager::imageUrls() const
+{
+    return m_imageUrls;
+}
+
 void ImgurManager::refresh()
 {
     Q_ASSERT(!m_imgurUrl.isEmpty());
@@ -164,19 +169,23 @@ void ImgurManager::onFinished(QNetworkReply *reply)
             if (m_imageAndThumbUrlList.count() > 1) {
                 QListIterator< QPair<QString,QString> > i(m_imageAndThumbUrlList);
                 while (i.hasNext()) {
-                    m_thumbnailUrls.append(i.next().second);
+                    qDebug()<<i.peekNext();
+                    m_thumbnailUrls.append(i.peekNext().second);
+                    m_imageUrls.append(i.next().first);
                 }
                 if (m_selectedIndex >= m_imageAndThumbUrlList.count())
                     m_selectedIndex = 0;
                 m_imageUrl = m_imageAndThumbUrlList.at(m_selectedIndex).first;
             } else if (m_imageAndThumbUrlList.count() == 1) {
                 m_imageUrl = m_imageAndThumbUrlList.first().first;
+                m_imageUrls.append(m_imageAndThumbUrlList.first().first);
             } else {
                 emit error(tr("Imgur API returns no image"));
             }
 
             emit imageUrlChanged();
             emit thumbnailUrlsChanged();
+            emit imageUrlsChanged();
         } else {
             emit error(reply->errorString());
         }

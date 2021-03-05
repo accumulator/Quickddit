@@ -37,6 +37,8 @@ class GalleryManager : public AbstractManager, public QQmlParserStatus
     Q_PROPERTY(QUrl galleryUrl READ galleryUrl WRITE setGalleryUrl NOTIFY galleryUrlChanged)
     Q_PROPERTY(QStringList thumbnailUrls READ thumbnailUrls NOTIFY thumbnailUrlsChanged)
     Q_PROPERTY(QUrl imageUrl READ imageUrl NOTIFY imageUrlChanged)
+    Q_PROPERTY(QStringList imageUrls READ imageUrls NOTIFY imageUrlsChanged)
+    Q_PROPERTY(QStringList previewUrls READ previewUrls NOTIFY previewUrlsChanged)
     Q_PROPERTY(int selectedIndex READ selectedIndex WRITE setSelectedIndex NOTIFY selectedIndexChanged)
 
 public:
@@ -47,6 +49,8 @@ public:
 
     QUrl imageUrl() const;
     QStringList thumbnailUrls() const;
+    QStringList imageUrls() const;
+    QStringList previewUrls() const;
 
     int selectedIndex() const;
     void setSelectedIndex(int index);
@@ -59,6 +63,8 @@ public:
 signals:
     void imageUrlChanged();
     void thumbnailUrlsChanged();
+    void imageUrlsChanged();
+    void previewUrlsChanged();
     void selectedIndexChanged();
     void galleryUrlChanged();
     void error(const QString &errorString);
@@ -69,6 +75,8 @@ private slots:
 private:
     QUrl m_imageUrl;
     QStringList m_thumbnailUrls;
+    QStringList m_imageUrls;
+    QStringList m_previewUrls;
     int m_selectedIndex;
     QUrl m_galleryUrl;
 
