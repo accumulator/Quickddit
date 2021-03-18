@@ -135,14 +135,19 @@ Item {
                 onClicked: {
                     mainItem.swipe.close()
                     QMLUtils.copyToClipboard(model.rawBody);
-                    infoBanner.alert("Comment coppied to clipboard")
+                    infoBanner.alert(qsTr("Comment coppied to clipboard"))
+                }
+
+                onPressAndHold: {
+                    QMLUtils.copyToClipboard("https://reddit.com"+model.fullname)
+                    infoBanner.alert(qsTr("Permalink of comment coppied to clipboard"))
                 }
             }
 
             ActionButton {
                 enabled: quickdditManager.isSignedIn && !commentSaveManager.busy
                 ico: model.saved ? "qrc:/Icons/starred.svg" : "qrc:/Icons/non-starred.svg"
-                color: Suru.foregroundColor
+                color: model.saved ? Suru.color(Suru.Orange,1) : Suru.foregroundColor
 
                 onClicked: {
                     mainItem.swipe.close()
@@ -172,7 +177,7 @@ Item {
                 color: Suru.foregroundColor
                 linkColor: Suru.color(Suru.Orange,1)
 
-                text:"<a href='"+model.author+"'>"+"u/" +model.author+(model.isSubmitter?" [submitter]":"")+"</a>"+ " ~ " + (model.score < 0 ? "-" : "") +  qsTr("%n points", "", Math.abs(model.score)) + " ~ "+ model.created
+                text:"<a href='"+model.author+"'>"+"u/" +model.author+(model.isSubmitter?" [s]":"")+"</a>"+ " ~ " + (model.score < 0 ? "-" : "") +  qsTr("%n points", "", Math.abs(model.score)) + " ~ "+ model.created
 
                 onLinkActivated: {
                     pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/UserPage.qml"),{username:link.split(" ")[0]})
@@ -187,8 +192,8 @@ Item {
                 linkColor: Suru.color(Suru.Orange,1)
 
                 anchors {top: info.bottom;left: parent.left;right: parent.right}
-                text: model.body
-                textFormat: Text.MarkdownText ? Text.MarkdownText : Text.StyledText
+                text: "<style>a {color:  #e95420 }</style>\n" + model.body
+                textFormat: Text.RichText
 
                 wrapMode: "Wrap"
                 onLinkActivated: globalUtils.openLink(link)

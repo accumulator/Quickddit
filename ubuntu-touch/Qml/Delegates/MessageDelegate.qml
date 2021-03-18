@@ -139,8 +139,8 @@ SwipeDelegate {
             color: Suru.foregroundColor
             linkColor: Suru.color(Suru.Orange,1)
 
-            text: model.body
-            textFormat: Text.StyledText
+            text: "<style>a {color: #e95420 }</style>\n" + model.body
+            textFormat: Text.RichText
             wrapMode: Text.WordWrap
             elide: Text.ElideRight
             onLinkActivated: {

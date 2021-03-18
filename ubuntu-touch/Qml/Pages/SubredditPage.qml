@@ -105,8 +105,8 @@ Page {
             color: Suru.foregroundColor
             linkColor: Suru.color(Suru.Orange,1)
 
-            text: aboutSubredditManager.longDescription
-            textFormat: Text.StyledText
+            text: "<style>a {color: #e95420 }</style>\n" + aboutSubredditManager.longDescription
+            textFormat: Text.RichText
             anchors{ left: parent.left;top:showButton.bottom;right: parent.right;margins: 10}
             wrapMode: "WordWrap"
             onLinkActivated: globalUtils.openLink(link)

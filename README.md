@@ -33,7 +33,7 @@ Features
 | inbox notifications    | Y | | Y |
 | watch clipboard for reddit links | Y | | Y |
 | TOR                    | Y | | Y |
-| Post flair             | partial | | |
+| Post flair             | partial | partial | |
 | User flair             | | | |
 | Friends                | | | |
 | Moderator features     | | | |

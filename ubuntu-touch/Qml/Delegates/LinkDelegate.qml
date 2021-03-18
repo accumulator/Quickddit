@@ -118,11 +118,11 @@ ItemDelegate {
         anchors.top: titulok.bottom
         anchors.left: parent.left
         height: text ? implicitHeight : 0
-        text:(compact? link.rawText : link.text)
+        text: compact ? link.text : "<style>a {color:  #e95420 }</style>\n"+link.text
         elide: Text.ElideRight
         maximumLineCount: compact ? 3:9999
         wrapMode: Text.WordWrap
-        textFormat: compact ? Text.StyledText : Text.MarkdownText ? Text.MarkdownText : Text.StyledText
+        textFormat: compact ? Text.StyledText : Text.RichText
         onLinkActivated: globalUtils.openLink(link)
     }
     //preview
