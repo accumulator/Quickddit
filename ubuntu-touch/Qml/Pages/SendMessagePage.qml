@@ -18,6 +18,7 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import "../"
 
 Page {
     title: replyTo === "" ? qsTr("New Message") : qsTr("Reply Message")
@@ -39,7 +40,7 @@ Page {
 
     Flickable {
         id: flickable
-        anchors.fill: parent
+        anchors { fill: parent; margins: 10 }
         contentHeight: mainContentColumn.height
 
         Column {
@@ -70,20 +71,28 @@ Page {
                 enabled: replyTo === ""
             }
 
-            TextArea {
+            RichTextEditor {
                 id: messageField
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: qsTr("Message")
-                wrapMode: TextEdit.WordWrap
                 visible: enabled
             }
 
-            Button {
-                text: qsTr("Send")
+            Row {
                 anchors.horizontalCenter: parent.horizontalCenter
-                enabled: messageField.text.length > 0 && (subjectField.text.length > 0 || replyTo != "")
-                         && (recipient !== "" || recipientField.text.length > 0)
-                onClicked: send(recipient === "" ? recipientField.text : recipient)
+                spacing: 10
+
+                Button {
+                    text: qsTr("Send")
+                    enabled: messageField.text.length > 0 && (subjectField.text.length > 0 || replyTo != "")
+                             && (recipient !== "" || recipientField.text.length > 0)
+                    onClicked: send(recipient === "" ? recipientField.text : recipient)
+                }
+
+                Button {
+                    id: cancelBtn
+                    text: qsTr("Cancel")
+                    onClicked: pageStack.pop()
+                }
             }
         }
     }

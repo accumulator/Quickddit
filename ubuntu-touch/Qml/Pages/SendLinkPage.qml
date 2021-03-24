@@ -19,6 +19,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import quickddit.Core 1.0
+import "../"
 
 Page {
     id: newLinkPage
@@ -56,7 +57,7 @@ Page {
 
     Flickable {
         id: scrollView
-        anchors.fill: parent
+        anchors { fill: parent; margins: 10 }
         contentHeight: mainContentColumn.height
         contentWidth: width
 
@@ -95,11 +96,9 @@ Page {
                 //errorHighlight: activeFocus && !acceptableInput
             }
 
-            TextArea {
+            RichTextEditor {
                 id: linkDescription
                 anchors { left: parent.left; right: parent.right }
-                placeholderText: qsTr("Post Text")
-                wrapMode: TextEdit.WordWrap
                 enabled: selfLinkSwitch.checked
                 visible: enabled
             }
@@ -115,13 +114,20 @@ Page {
                     currentIndex = -1
                 }
             }
-
-            Button {
-                text: editPost === "" ? qsTr("Submit") : qsTr("Save")
+            Row {
                 anchors.horizontalCenter: parent.horizontalCenter
-                enabled: (editPost != "" || linkTitle.text.length > 0) /* official limits? */
-                         && ((selfLinkSwitch.checked && linkDescription.text.length > 0) || (!selfLinkSwitch.checked && linkUrl.acceptableInput))
-                onClicked: submit()
+                spacing: 10
+                Button {
+                    text: editPost === "" ? qsTr("Submit") : qsTr("Save")
+                    enabled: (editPost != "" || linkTitle.text.length > 0) /* official limits? */
+                             && ((selfLinkSwitch.checked && linkDescription.text.length > 0) || (!selfLinkSwitch.checked && linkUrl.acceptableInput))
+                    onClicked: submit()
+                }
+                Button {
+                    id: cancelBtn
+                    text: qsTr("Cancel")
+                    onClicked: pageStack.pop()
+                }
             }
         }
     }

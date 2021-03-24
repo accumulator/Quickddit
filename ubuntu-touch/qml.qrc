@@ -74,5 +74,6 @@
         <file>Icons/quickddit-splash-image.svg</file>
         <file>Qml/Flair.qml</file>
         <file>Icons/save.svg</file>
+        <file>Qml/RichTextEditor.qml</file>
     </qresource>
 </RCC>
