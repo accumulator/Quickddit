@@ -92,6 +92,9 @@ AbstractPage {
             pageStack.pushAttached(globalUtils.getNavPage());
             __pushedAttached = true;
         }
+        if (mainPage.status === PageStatus.Inactive && __pushedAttached) {
+            __pushedAttached = false
+        }
     }
 
     SilicaListView {
