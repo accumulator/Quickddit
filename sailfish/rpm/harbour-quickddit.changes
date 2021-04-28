@@ -5,6 +5,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Wed Apr 28 2021 Sander van Grieken <sander@outrightsolutions.nl> 1.10.3-1
+- fix: navigation attached page regression, was left empty after attaching it deeper in the page stack
+- chg: update youtube-dl to 2021-04-26
+
 * Fri Mar 05 2021 Sander van Grieken <sander@outrightsolutions.nl> 1.10.2-1
 - fix: video player not always starts playing
 - chg: update youtube-dl to 2021-03-03
