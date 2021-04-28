@@ -729,43 +729,43 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/MainPage.qml" line="104"/>
+        <location filename="../qml/MainPage.qml" line="107"/>
         <source>About %1</source>
         <translation>About %1</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="116"/>
+        <location filename="../qml/MainPage.qml" line="119"/>
         <source>New Post</source>
         <translation>New Post</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="122"/>
-        <location filename="../qml/MainPage.qml" line="124"/>
+        <location filename="../qml/MainPage.qml" line="125"/>
+        <location filename="../qml/MainPage.qml" line="127"/>
         <source>Section</source>
         <translation>Section</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="134"/>
+        <location filename="../qml/MainPage.qml" line="137"/>
         <source>Search</source>
         <translation>Search</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="138"/>
+        <location filename="../qml/MainPage.qml" line="141"/>
         <source>Refresh</source>
         <translation>Refresh</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="160"/>
+        <location filename="../qml/MainPage.qml" line="163"/>
         <source>Delete link</source>
         <translation>Delete link</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="165"/>
+        <location filename="../qml/MainPage.qml" line="168"/>
         <source>Hide link</source>
         <translation>Hide link</translation>
     </message>
     <message>
-        <location filename="../qml/MainPage.qml" line="185"/>
+        <location filename="../qml/MainPage.qml" line="188"/>
         <source>Nothing here :(</source>
         <translation>Nothing here :(</translation>
     </message>
