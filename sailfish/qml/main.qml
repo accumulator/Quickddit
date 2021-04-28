@@ -297,7 +297,7 @@ ApplicationWindow {
                     return;
                 }
 
-                if (path[3] !== "")
+                if (path[3] !== undefined && path[3] !== "")
                     params["section"] = path[3];
                 pushOrReplace(Qt.resolvedUrl("MainPage.qml"), params);
             } else if (/^\/u(ser)?\/([A-Za-z0-9_-]+)/.test(redditLink.path)) {
