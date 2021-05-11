@@ -16,8 +16,8 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 import quickddit.Core 1.0
 import "../"
 import "../Delegates"
@@ -41,13 +41,9 @@ Page {
                 anchors.rightMargin: 12
                 height: parent.height
                 hoverEnabled: false
+                icon.name: "edit-delete-symbolic"
+                icon.color: persistantSettings.redColor
 
-                Image {
-                    height: 24
-                    width: 24
-                    anchors.centerIn: parent
-                    source: "qrc:/Icons/delete.svg"
-                }
                 onClicked: {
                     if(modelData === appSettings.redditUsername )
                         quickdditManager.signOut();

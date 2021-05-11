@@ -16,11 +16,11 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.2
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 import quickddit.Core 1.0
-import QtQuick.Controls.Suru 2.2
+
 import "../"
 import "../Delegates"
 
@@ -38,22 +38,14 @@ Page {
             id: tabBar
             width: parent.width
             currentIndex: swipeView.currentIndex
-            contentHeight: undefined
             leftPadding: 10
-            background: Rectangle {
-                color: Suru.color(Suru.Orange,1)
-            }
 
             TabButton {
                 id: subButton
                 text: qsTr("Subscribed")
-                contentItem: Label {
-                    text: parent.text
-                    font.weight: Font.Normal
-                    color: Suru.color(Suru.White,1)
-                }
                 width: visible ? implicitWidth : 0
                 visible: quickdditManager.isSignedIn
+
                 onVisibleChanged: {
                     if (visible){
                         tabBar.insertItem(0,subButton)
@@ -67,13 +59,9 @@ Page {
             TabButton {
                 id: multiButton
                 text: qsTr("Multireddits")
-                contentItem: Label {
-                    text: parent.text
-                    font.weight: Font.Normal
-                    color: Suru.color(Suru.White,1)
-                }
                 width: visible ? implicitWidth : 0
                 visible: quickdditManager.isSignedIn
+
                 onVisibleChanged: {
                     if (visible){
                         tabBar.insertItem(1,multiButton)
@@ -86,31 +74,17 @@ Page {
 
             TabButton {
                 text: qsTr("Popular")
-                contentItem: Label {
-                    text: parent.text
-                    font.weight: Font.Normal
-                    color: Suru.color(Suru.White,1)
-                }
                 padding: 6
                 width: implicitWidth
             }
             TabButton {
                 text: qsTr("New")
-                contentItem: Label {
-                    text: parent.text
-                    font.weight: Font.Normal
-                    color: Suru.color(Suru.White,1)
-                }
                 padding: 6
                 width: implicitWidth
+
             }
             TabButton {
                 text: qsTr("Search")
-                contentItem: Label {
-                    text: parent.text
-                    font.weight: Font.Normal
-                    color: Suru.color(Suru.White,1)
-                }
                 padding: 6
                 width: implicitWidth
             }

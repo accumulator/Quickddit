@@ -16,8 +16,8 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 import quickddit.Core 1.0
 
 Page {
@@ -46,6 +46,7 @@ Page {
 
             ItemDelegate {
                 width: parent.width
+                height: slider.height+20
                 Label {
                     id:sliderLabel
                     anchors {left: parent.left;verticalCenter: parent.verticalCenter; margins: 10}
@@ -53,7 +54,7 @@ Page {
                 }
                 Slider {
                     id:slider
-                    anchors { right: parent.right; left:sliderLabel.right;  verticalCenter: parent.verticalCenter; margins:10 }
+                    anchors { right: parent.right; left:sliderLabel.right; verticalCenter: parent.verticalCenter; margins:10 }
                     from: 0.5
                     to: 1.5
                     stepSize: 0.1
@@ -66,12 +67,12 @@ Page {
 
             ItemDelegate {
                 width: parent.width
-                Label {
-                    anchors {left: parent.left;verticalCenter: parent.verticalCenter; margins: 10}
-                    text: "Preferred Video Size"
-                }
+                height: quality.height+20
+                text: "Preferred Video Size"
+
                 ComboBox {
-                    anchors { right: parent.right;  verticalCenter: parent.verticalCenter; margins:10 }
+                    id:quality
+                    anchors { right: parent.right;verticalCenter: parent.verticalCenter; margins:10 }
                     model: ["360p","720p"]
                     currentIndex: appSettings.preferredVideoSize
                     onCurrentIndexChanged: {
@@ -96,31 +97,55 @@ Page {
 
             ItemDelegate {
                 width: parent.width
-                Label {
-                    anchors {left: parent.left;verticalCenter: parent.verticalCenter; margins: 10}
-                    text: "Theme"
-                }
+                height: themeBox.height+20
+                enabled: persistantSettings.style === "Suru" || persistantSettings.style === "Material" || persistantSettings.style === "Universal"
+                text: "Theme"
+
                 ComboBox {
-                    anchors { right: parent.right;  verticalCenter: parent.verticalCenter; margins:10 }
+                    id: themeBox
+                    anchors { right: parent.right;verticalCenter: parent.verticalCenter; margins:10 }
                     model: ["Light","Dark","System"]
-                    currentIndex: persistantSettings.theme
-                    onCurrentIndexChanged: {
-                        persistantSettings.theme = currentIndex
+                    currentIndex: model.indexOf(persistantSettings.theme)
+                    onCurrentTextChanged: {
+                        persistantSettings.theme = currentText
                     }
                 }
             }
 
             ItemDelegate {
                 width: parent.width
-                text: qsTr("Accounts ")
+                height: styleBox.height+20
+                Label {
+                    id:styleLabel
+                    anchors {left: parent.left;verticalCenter: parent.verticalCenter; margins: 10}
+                    text: qsTr("Style")
+                }
+
+                ComboBox {
+                    id: styleBox
+                    anchors { right: parent.right;verticalCenter: parent.verticalCenter; margins:10 }
+                    model:  builtInStyles
+
+                    currentIndex: model.indexOf(persistantSettings.style);
+                    onCurrentTextChanged: {
+                        if (persistantSettings.style !== currentText) {
+                            persistantSettings.style = currentText
+                            styleLabel.text = qsTr("Restart app to apply style!")
+                            styleLabel.color = persistantSettings.redColor
+                        }
+                    }
+                }
+            }
+            ItemDelegate {
+                width: parent.width
+                text: qsTr("Accounts")
                 onClicked: pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/AccountsPage.qml"));
-                Image {
+                ToolButton  {
+                    enabled: false
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
                     anchors.rightMargin: 12
-                    width: 24
-                    height: 24
-                    source: "qrc:/Icons/next.svg"
+                    icon.name: "go-next-symbolic"
                 }
             }
         }

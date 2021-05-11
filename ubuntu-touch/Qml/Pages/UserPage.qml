@@ -16,8 +16,8 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 import quickddit.Core 1.0
 import "../"
 import "../Delegates"
@@ -54,7 +54,7 @@ Page {
                     padding: 5
                     text: userManager.user.linkKarma+" link / " +userManager.user.commentKarma+" comment karma"
                 }
-                Button {
+                ToolButton {
                     text: qsTr("Send message")
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SendMessagePage.qml"),

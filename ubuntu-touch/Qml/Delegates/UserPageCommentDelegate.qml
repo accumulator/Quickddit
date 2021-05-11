@@ -16,9 +16,8 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Controls.Suru 2.2
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 
 ItemDelegate {
     property variant model
@@ -29,9 +28,7 @@ ItemDelegate {
     Label {
         id:info
         padding: 5
-
-        color: Suru.foregroundColor
-        linkColor: Suru.color(Suru.Orange,1)
+        linkColor: persistantSettings.primaryColor
 
         text: "Comment in <a href='/r/"+model.subreddit+"'>"+"/r/"+model.subreddit+"</a>"+ " ~ " + (model.score < 0 ? "-" : "") +  qsTr("%n points", "", Math.abs(model.score)) + " ~ "+ model.created
         onLinkActivated: {
@@ -48,7 +45,6 @@ ItemDelegate {
             width: 3
             anchors.verticalCenter: parent.verticalCenter
             height: parent.height-6
-            color: Suru.color(Suru.Orange,1)
         }
 
         Label {

@@ -2,19 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Qml/SubredditsDrawer.qml</file>
-        <file>Icons/message.svg</file>
-        <file>Icons/share.svg</file>
-        <file>Icons/up.svg</file>
-        <file>Icons/down.svg</file>
-        <file>Icons/contextual-menu.svg</file>
-        <file>Icons/navigation-menu.svg</file>
-        <file>Icons/back.svg</file>
         <file>Qml/ImageViewer.qml</file>
-        <file>Icons/non-starred.svg</file>
-        <file>Icons/starred.svg</file>
-        <file>Icons/edit-copy.svg</file>
-        <file>Icons/webbrowser-app-symbolic.svg</file>
-        <file>Icons/mail-reply.svg</file>
         <file>Icons/spinner.svg</file>
         <file>Qml/ytdl_wrapper.py</file>
         <file>Qml/ZoomableImage.qml</file>
@@ -23,24 +11,10 @@
         <file>Icons/media-playback-start.svg</file>
         <file>Qml/CircleImage.qml</file>
         <file>Qml/PostButtonRow.qml</file>
-        <file>Icons/next.svg</file>
-        <file>Icons/delete.svg</file>
         <file>Icons/quickddit.svg</file>
-        <file>Icons/edit.svg</file>
-        <file>Qml/ActionButton.qml</file>
-        <file>Icons/mail-unread.svg</file>
-        <file>Icons/mail-read.svg</file>
         <file>Img/bitcoin.png</file>
         <file>Img/btc-qr.png</file>
         <file>Img/paypal.png</file>
-        <file>Icons/info.svg</file>
-        <file>Icons/add.svg</file>
-        <file>Qml/MenuItem.qml</file>
-        <file>Icons/settings.svg</file>
-        <file>Icons/system-log-out.svg</file>
-        <file>Icons/account.svg</file>
-        <file>Icons/view-list-symbolic.svg</file>
-        <file>Icons/contact-new.svg</file>
         <file>Qml/Delegates/CommentDelegate.qml</file>
         <file>Qml/Delegates/LinkDelegate.qml</file>
         <file>Qml/Delegates/MessageDelegate.qml</file>
@@ -65,15 +39,10 @@
         <file>Qml/Pages/UserPage.qml</file>
         <file>Qml/Pages/VideoViewPage.qml</file>
         <file>Qml/Pages/WebViewer.qml</file>
-        <file>Icons/message-new.svg</file>
-        <file>Icons/note-new.svg</file>
         <file>Icons/image.svg</file>
         <file>Icons/video.svg</file>
-        <file>Icons/filters.svg</file>
-        <file>Icons/reload.svg</file>
         <file>Icons/quickddit-splash-image.svg</file>
         <file>Qml/Flair.qml</file>
-        <file>Icons/save.svg</file>
         <file>Qml/RichTextEditor.qml</file>
     </qresource>
 </RCC>

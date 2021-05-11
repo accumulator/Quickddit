@@ -16,11 +16,11 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.2
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 import quickddit.Core 1.0
-import QtQuick.Controls.Suru 2.2
+
 import "../"
 import "../Delegates"
 
@@ -57,20 +57,16 @@ Page {
     Component {
         id: toolButtons
         Row {
-            ActionButton {
+            ToolButton {
                 id:downloadBtn
-                ico: "qrc:/Icons/save.svg"
-                size: 20
-                color: Suru.color(Suru.White,1)
+                icon.name: "document-save-symbolic"
                 visible: previeableImage
                 onClicked: downloadImage()
             }
 
-            ActionButton {
+            ToolButton {
                 id:sort
-                ico: "qrc:/Icons/filters.svg"
-                size: 20
-                color: Suru.color(Suru.White,1)
+                icon.name: "filter-symbolic"
                 onClicked: sortMenu.open()
                 Menu {
                     id: sortMenu
@@ -101,11 +97,10 @@ Page {
                     }
                 }
             }
-            ActionButton {
+            ToolButton {
                 id:del
-                ico: "qrc:/Icons/delete.svg"
-                size: 20
-                color: Suru.color(Suru.White,1)
+                icon.name: "edit-delete-symbolic"
+                icon.color: persistantSettings.redColor
                 visible: link.author === appSettings.redditUsername
                 enabled: !link.isArchived
                 onClicked: {
@@ -114,11 +109,9 @@ Page {
                     pageStack.pop();
                 }
             }
-            ActionButton {
+            ToolButton {
                 id:edit
-                ico: "qrc:/Icons/edit.svg"
-                size: 20
-                color: Suru.color(Suru.White,1)
+                icon.name: "document-edit-symbolic"
                 visible: link.author === appSettings.redditUsername
                 enabled: !link.isArchived
                 onClicked: {
@@ -133,11 +126,9 @@ Page {
                 }
             }
 
-            ActionButton {
+            ToolButton {
                 id:newPost
-                ico: "qrc:/Icons/add.svg"
-                size: 20
-                color: Suru.color(Suru.White,1)
+                icon.name: "list-add-symbolic"
                 visible: quickdditManager.isSignedIn
                 enabled: !commentManager.busy && !link.isArchived && !link.isLocked
                 onClicked: {

@@ -16,11 +16,11 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 import quickddit.Core 1.0
 import QtGraphicalEffects 1.0
-import QtQuick.Controls.Suru 2.2
+
 import "../"
 import "../Delegates"
 
@@ -102,10 +102,7 @@ Page {
         Label {
             id:wiki
 
-            color: Suru.foregroundColor
-            linkColor: Suru.color(Suru.Orange,1)
-
-            text: "<style>a {color: #e95420 }</style>\n" + aboutSubredditManager.longDescription
+            text: "<style>a {color: " + persistantSettings.primaryColor + " }</style>\n" + aboutSubredditManager.longDescription
             textFormat: Text.RichText
             anchors{ left: parent.left;top:showButton.bottom;right: parent.right;margins: 10}
             wrapMode: "WordWrap"

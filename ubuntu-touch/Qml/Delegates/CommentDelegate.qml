@@ -16,11 +16,10 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.2
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 import quickddit.Core 1.0
-import QtQuick.Controls.Suru 2.2
 import "../"
 
 Item {
@@ -78,11 +77,11 @@ Item {
         leftPadding: 0
         topPadding: 0
         swipe.left: Row {
-            anchors { top: parent.top;bottom: parent.bottom; left: parent.left }
-            ActionButton {
+            anchors { verticalCenter: parent.verticalCenter; left: parent.left }
+            ToolButton {
                 enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !model.isArchived && model.isValid
-                ico: "qrc:/Icons/down.svg"
-                color: model.likes===-1 ? Suru.color(Suru.Red,1) : Suru.foregroundColor
+                icon.name: "go-down-symbolic"
+                icon.color: model.likes===-1 ? persistantSettings.redColor : persistantSettings.textColor
 
                 onClicked: {
                     commentVoteManager.vote(model.fullname,model.likes===-1 ? VoteManager.Unvote : VoteManager.Downvote);
@@ -90,10 +89,10 @@ Item {
                 }
             }
 
-            ActionButton {
+            ToolButton {
                 visible: model.isAuthor && !model.isArchived
-                ico: "qrc:/Icons/delete.svg"
-                color: Suru.color(Suru.Red,1)
+                icon.name: "edit-delete-symbolic"
+                icon.color: persistantSettings.redColor
 
                 onClicked: {
                     mainItem.swipe.close()
@@ -103,12 +102,11 @@ Item {
         }
 
         swipe.right: Row {
-            anchors { top: parent.top;bottom: parent.bottom; right: parent.right }
+            anchors { verticalCenter: parent.verticalCenter; right: parent.right }
 
-            ActionButton {
+            ToolButton {
                 visible: model.isAuthor && !model.isArchived
-                ico: "qrc:/Icons/edit.svg"
-                color: Suru.foregroundColor
+                icon.name: "edit-symbolic"
 
                 onClicked: {
                     mainItem.swipe.close()
@@ -116,10 +114,9 @@ Item {
                 }
             }
 
-            ActionButton {
+            ToolButton {
                 enabled: quickdditManager.isSignedIn && !model.isArchived && model.isValid && !link.isLocked
-                ico: "qrc:/Icons/mail-reply.svg"
-                color: Suru.foregroundColor
+                icon.name: "mail-reply-sender-symbolic"
 
                 onClicked: {
                     mainItem.swipe.close()
@@ -127,10 +124,9 @@ Item {
                 }
             }
 
-            ActionButton {
+            ToolButton {
                 enabled: true
-                ico: "qrc:/Icons/edit-copy.svg"
-                color: Suru.foregroundColor
+                icon.name: "edit-copy-symbolic"
 
                 onClicked: {
                     mainItem.swipe.close()
@@ -144,10 +140,10 @@ Item {
                 }
             }
 
-            ActionButton {
+            ToolButton {
                 enabled: quickdditManager.isSignedIn && !commentSaveManager.busy
-                ico: model.saved ? "qrc:/Icons/starred.svg" : "qrc:/Icons/non-starred.svg"
-                color: model.saved ? Suru.color(Suru.Orange,1) : Suru.foregroundColor
+                icon.name: model.saved ? "starred-symbolic" : "non-starred-symbolic"
+                icon.color: model.saved ? persistantSettings.primaryColor : persistantSettings.textColor
 
                 onClicked: {
                     mainItem.swipe.close()
@@ -155,10 +151,10 @@ Item {
                 }
             }
 
-            ActionButton {
+            ToolButton {
                 enabled: quickdditManager.isSignedIn && !commentVoteManager.busy && !model.isArchived && model.isValid
-                ico: "qrc:/Icons/up.svg"
-                color: model.likes===1 ? Suru.color(Suru.Green,1) : Suru.foregroundColor
+                icon.name: "go-up-symbolic"
+                icon.color: model.likes===1 ? persistantSettings.greenColor : persistantSettings.textColor
 
                 onClicked: {
                     mainItem.swipe.close()
@@ -173,9 +169,7 @@ Item {
             Label {
                 id:info
                 padding: 5
-
-                color: Suru.foregroundColor
-                linkColor: Suru.color(Suru.Orange,1)
+                linkColor: persistantSettings.primaryColor
 
                 text:"<a href='"+model.author+"'>"+"u/" +model.author+(model.isSubmitter?" [s]":"")+"</a>"+ " ~ " + (model.score < 0 ? "-" : "") +  qsTr("%n points", "", Math.abs(model.score)) + " ~ "+ model.created
 
@@ -188,11 +182,8 @@ Item {
                 id:comment
                 padding: 5
 
-                color: Suru.foregroundColor
-                linkColor: Suru.color(Suru.Orange,1)
-
                 anchors {top: info.bottom;left: parent.left;right: parent.right}
-                text: "<style>a {color:  #e95420 }</style>\n" + model.body
+                text: "<style>a {color:  "+persistantSettings.primaryColor+" }</style>\n" + model.body
                 textFormat: Text.RichText
 
                 wrapMode: "Wrap"

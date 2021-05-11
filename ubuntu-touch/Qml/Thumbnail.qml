@@ -16,11 +16,11 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 import quickddit.Core 1.0
 import QtGraphicalEffects 1.0
-import QtQuick.Controls.Suru 2.2
+//
 
 Image {
     property bool video
@@ -83,14 +83,14 @@ Image {
         }
     }
 
-    Image {
+    ToolButton {
         anchors.centerIn: parent
-        source: Qt.resolvedUrl("qrc:/Icons/media-playback-start.svg")
+        icon.name: "media-playback-start-symbolic"
+        icon.height: parent.height - 70
+        icon.width: parent.width - 70
+        icon.color: "#BB808080"
         visible: video
-        opacity: 1
-        layer.enabled: true
-        layer.effect: ColorOverlay {
-            color: Suru.color(Suru.Orange,1)
-        }
+        //opacity: 0
+        enabled: false
     }
 }

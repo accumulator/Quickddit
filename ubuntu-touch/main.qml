@@ -16,14 +16,17 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
-import QtQuick.Window 2.2
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.2
+import QtQuick 2.12
+import QtQuick.Window 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 import quickddit.Core 1.0
 import Qt.labs.settings 1.0
+import QtQuick.Controls.Material 2.12
+import QtQuick.Controls.Universal 2.12
 import QtQuick.Controls.Suru 2.2
 import io.thp.pyotherside 1.5
+
 import "Qml"
 import "Qml/Pages"
 
@@ -33,8 +36,6 @@ ApplicationWindow {
     visible: true
     width: 400
     height: 800
-
-    Suru.theme: persistantSettings.theme
 
     SubredditsDrawer {
         id:subredditsDrawer
@@ -61,23 +62,20 @@ ApplicationWindow {
     ToolBar{
         id:tBar
         visible: window.visibility !==Window.FullScreen
-        background: Rectangle {
-            color: Suru.color(Suru.Orange,1)
-        }
+        height: 52
+        background: Rectangle { color: persistantSettings.primaryColor }
         RowLayout {
             anchors.fill: parent
 
-            ActionButton {
+            ToolButton {
                 visible: pageStack.depth>1
-                ico: "qrc:/Icons/back.svg"
-                color: Suru.color(Suru.White,1)
+                icon.name: "go-previous-symbolic"
                 onClicked: pageStack.pop()
             }
 
-            ActionButton {
+            ToolButton {
                 visible: pageStack.depth<=1
-                ico: "qrc:/Icons/navigation-menu.svg"
-                color: Suru.color(Suru.White,1)
+                icon.name: "open-menu-symbolic"
                 onClicked: subredditsDrawer.open()
             }
 
@@ -85,7 +83,6 @@ ApplicationWindow {
                 id:titleLabel
                 font.pointSize: 14
                 font.weight: Font.Normal
-                color: Suru.color(Suru.White,1)
                 elide: "ElideRight"
                 Layout.fillWidth: true
                 horizontalAlignment: "AlignLeft"
@@ -98,12 +95,11 @@ ApplicationWindow {
                 height: parent.height
             }
 
-            ActionButton {
+            ToolButton {
                 id:menu
                 Layout.alignment: Qt.AlignRight
                 visible: pageStack.depth<=1
-                ico: "qrc:/Icons/contextual-menu.svg"
-                color: Suru.color(Suru.White,1)
+                icon.name: "view-more-symbolic"
                 onClicked: optionsMenu.open()
 
                 Menu {
@@ -111,11 +107,10 @@ ApplicationWindow {
                     x: parent.width - width
                     y:parent.y+parent.height
                     transformOrigin: Menu.TopRight
-                    width: 200
 
                     MenuItem {
-                        txt: qsTr("My Subreddits")
-                        ico: "qrc:/Icons/view-list-symbolic.svg"
+                        text: qsTr("My Subreddits")
+                        icon.name: "view-list-symbolic"
                         onTriggered: {pageStack.push(Qt.resolvedUrl("Qml/Pages/SubredditsPage.qml"))
                         }
                     }
@@ -123,8 +118,8 @@ ApplicationWindow {
                     MenuSeparator {topPadding: 0; bottomPadding: 0 }
                     
                     MenuItem {
-                        txt: qsTr("Messages")
-                        ico: "qrc:/Icons/message.svg"
+                        text: qsTr("Messages")
+                        icon.name: "mail-unread-symbolic" // TODO: icon.name: "mail-read-symbolic"
                         enabled: quickdditManager.isSignedIn
                         onTriggered: {pageStack.push(Qt.resolvedUrl("Qml/Pages/MessagePage.qml"))
                         }
@@ -133,8 +128,8 @@ ApplicationWindow {
                     MenuSeparator {topPadding: 0; bottomPadding: 0 }
 
                     MenuItem {
-                        txt:  qsTr("My profile")
-                        ico: "qrc:/Icons/account.svg"
+                        text:  qsTr("My profile")
+                        icon.name: "avatar-default-symbolic"
                         enabled: quickdditManager.isSignedIn
                         onTriggered: { pageStack.push(Qt.resolvedUrl("Qml/Pages/UserPage.qml"),{username: appSettings.redditUsername}) }
                     }
@@ -142,8 +137,8 @@ ApplicationWindow {
                     MenuSeparator {topPadding: 0; bottomPadding: 0 }
 
                     MenuItem {
-                        txt: quickdditManager.isSignedIn ? qsTr("Log out")+" ("+appSettings.redditUsername+")": qsTr("Log in")
-                        ico: quickdditManager.isSignedIn ? "qrc:/Icons/system-log-out.svg" : "qrc:/Icons/contact-new.svg"
+                        text: quickdditManager.isSignedIn ? qsTr("Log out")+" "+appSettings.redditUsername: qsTr("Log in")
+                        icon.name: quickdditManager.isSignedIn ? "system-shutdown-symbolic" : "contact-new-symbolic"
                         onTriggered:{
                             !quickdditManager.isSignedIn ? pageStack.push(Qt.resolvedUrl("Qml/Pages/LoginPage.qml")) : logOutDialog.open();
                         }
@@ -166,16 +161,16 @@ ApplicationWindow {
                     MenuSeparator { topPadding: 0; bottomPadding: 0 }
 
                     MenuItem {
-                        txt: qsTr("Settings")
-                        ico: "qrc:/Icons/settings.svg"
+                        text: qsTr("Settings")
+                        icon.name: "document-properties-symbolic"
                         onTriggered: pageStack.push(Qt.resolvedUrl("Qml/Pages/SettingsPage.qml"))
                     }
 
                     MenuSeparator { topPadding: 0; bottomPadding: 0 }
 
                     MenuItem {
-                        txt: qsTr("About")
-                        ico: "qrc:/Icons/info.svg"
+                        text: qsTr("About")
+                        icon.name: "help-about-symbolic"
                         onTriggered: pageStack.push(Qt.resolvedUrl("Qml/Pages/AboutPage.qml"))
                     }
                 }
@@ -199,7 +194,6 @@ ApplicationWindow {
 
     Settings {
         id: persistantSettings
-        property string style: "Suru"
         property real scale: 1.0
 
         property bool linksInternaly: true
@@ -211,7 +205,37 @@ ApplicationWindow {
             toolbarOnBottom? header = null : footer = null
             toolbarOnBottom? footer = tBar : header = tBar
         }
-        property int theme: 2
+        property string style: "System"
+        property string theme
+        onThemeChanged: loadTheme()
+
+        onStyleChanged: loadTheme()
+
+        property color redColor: style==="Material" ? Material.color(Material.Red) : style==="Universal" ? Universal.color(Universal.Red): "#FFc7162b"
+        property color greenColor: style==="Material" ? Material.color(Material.Green) : style==="Universal" ? Universal.color(Universal.Green) : "#FF0e8420"
+        property color primaryColor
+        property color textColor: titleLabel.color
+    }
+
+    Component.onCompleted: loadTheme()
+
+    function loadTheme() {
+        if (persistantSettings.theme === "Dark") {
+            Material.theme = Material.Dark
+            Universal.theme = Universal.Dark
+            Suru.theme = Suru.Dark
+        }
+        else if (persistantSettings.theme === "Light") {
+            Material.theme = Material.Light
+            Universal.theme = Universal.Light
+            Suru.theme = Suru.Light
+        }
+        else if (persistantSettings.theme === "System") {
+            Material.theme = Material.System
+            Universal.theme = Universal.System
+            Suru.theme = Suru.System
+        }
+        persistantSettings.primaryColor = persistantSettings.style == "Suru" ? "#e95420" : titleLabel.linkColor
     }
 
     QuickdditManager {

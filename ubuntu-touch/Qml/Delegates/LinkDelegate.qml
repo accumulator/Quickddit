@@ -16,12 +16,12 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.2
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 import quickddit.Core 1.0
 import QtGraphicalEffects 1.0
-import QtQuick.Controls.Suru 2.2
+
 import "../"
 
 ItemDelegate {
@@ -50,11 +50,10 @@ ItemDelegate {
     //info
     Label {
         id: info
-        color: Suru.foregroundColor
-        linkColor: Suru.color(Suru.Orange,1)
         padding: 5
         anchors {top: parent.top; left: parent.left; right: parent.right; }
         elide: Text.ElideRight
+        linkColor: persistantSettings.primaryColor
         text: "<a href='/r/"+link.subreddit+"'>"+"/r/"+link.subreddit+"</a>"+" ~ <a href='/u/"+link.author+"'>"+"/u/"+link.author+"</a>"+" ~ "+link.created+" ~ "+link.domain+((!compact && link.crossposts > 0) ? ". <a href=\"cross:" + link.fullname + "\">" + qsTr("%n crossposts", "", link.crossposts) + "</a>" : "")
         onLinkActivated: {
             if (link.indexOf("cross:") == 0) {
@@ -111,14 +110,12 @@ ItemDelegate {
         id:txt
         padding: 5
 
-        color: Suru.foregroundColor
-        linkColor: Suru.color(Suru.Orange,1)
-
         anchors.right: parent.right
         anchors.top: titulok.bottom
         anchors.left: parent.left
         height: text ? implicitHeight : 0
-        text: compact ? link.text : "<style>a {color:  #e95420 }</style>\n"+link.text
+        text: compact ? link.text : "<style>a {color:  " + persistantSettings.primaryColor + " }</style>\n"+link.text
+        linkColor: persistantSettings.primaryColor
         elide: Text.ElideRight
         maximumLineCount: compact ? 3:9999
         wrapMode: Text.WordWrap

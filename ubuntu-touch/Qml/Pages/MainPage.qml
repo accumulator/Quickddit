@@ -16,12 +16,12 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.2
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
 import quickddit.Core 1.0
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.12
 import Qt.labs.settings 1.0
-import QtQuick.Controls.Suru 2.2
+
 import "../"
 import "../Delegates"
 
@@ -100,10 +100,9 @@ Page {
     Component {
         id: toolButtons
         Row {
-            ActionButton {
+            ToolButton {
                 id:period
-                ico: "qrc:/Icons/filters.svg"
-                color: Suru.color(Suru.White,1)
+                icon.name: "filter-symbolic"
                 onClicked: {periodMenu.open()}
                 enabled: (linkModel.section == LinkModel.TopSection || linkModel.section == LinkModel.ControversialSection)
                 clip: true
@@ -138,22 +137,18 @@ Page {
                 }
             }
 
-            ActionButton {
+            ToolButton {
                 id:info
-                ico: "qrc:/Icons/info.svg"
-                size: 20
+                icon.name: "help-about-symbolic"
                 enabled: linkModel.location == LinkModel.Subreddit
-                color: Suru.color(Suru.White,1)
                 width: enabled ? 40 : 0
                 clip: true
                 onClicked: {pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SubredditPage.qml"),{subreddit:linkModel.subreddit})}
             }
-            ActionButton {
+            ToolButton {
                 id:newPost
-                ico: "qrc:/Icons/add.svg"
-                size: 20
+                icon.name: "list-add-symbolic"
                 enabled: quickdditManager.isSignedIn
-                color: Suru.color(Suru.White,1)
                 width: linkModel.location == LinkModel.Subreddit ? 40 : 0
                 clip: true
                 onClicked: {pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SendLinkPage.qml"), {linkManager: linkManager, subreddit: linkModel.subreddit})}
@@ -164,78 +159,39 @@ Page {
     header:
         TabBar{
         id: tabBar
-        contentHeight: undefined
         leftPadding: 10
-        background: Rectangle {
-            color: Suru.color(Suru.Orange,1)
-        }
+        rightPadding: 10
+        contentWidth: tb0.width+tb1.width+tb2.width+tb3.width+tb4.width+tb5.width
 
         TabButton {
             id:tb0
             text: qsTr("Best")
-            contentItem: Label {
-                text: parent.text
-                font.weight: Font.Normal
-                color: tb0.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
-            }
             width: implicitWidth
-            padding:6
-
         }
         TabButton {
             id:tb1
             text: qsTr("Hot")
-            contentItem: Label {
-                text: parent.text
-                font.weight: Font.Normal
-                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
-            }
             width: implicitWidth
-            padding:6
         }
         TabButton {
             id:tb2
             text: qsTr("New")
-            contentItem: Label {
-                text: parent.text
-                font.weight: Font.Normal
-                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
-            }
             width: implicitWidth
-            padding:6
         }
         TabButton {
             id:tb3
             text: qsTr("Rising")
-            contentItem: Label {
-                text: parent.text
-                font.weight: Font.Normal
-                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
-            }
             width: implicitWidth
-            padding:6
         }
         TabButton {
             id:tb4
             text: qsTr("Controversial")
-            contentItem: Label {
-                text: parent.text
-                font.weight: Font.Normal
-                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
-            }
             width: implicitWidth
-            padding:6
         }
         TabButton {
             id:tb5
             text: qsTr("Top")
-            contentItem: Label {
-                text: parent.text
-                font.weight: Font.Normal
-                color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
-            }
             width: implicitWidth
-            padding:6
         }
 
 

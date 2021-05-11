@@ -3,6 +3,7 @@
 #include <QQuickStyle>
 #include <QQmlContext>
 #include <QSettings>
+#include <QIcon>
 
 #include "src/appsettings.h"
 #include "src/qmlutils.h"
@@ -60,10 +61,20 @@ int main(int argc, char *argv[])
     app.setOrganizationName("quickddit");
     app.setOrganizationDomain("dkland");
     QSettings settings;
+
     QString style = QQuickStyle::name();
-    if (settings.contains("style")) {
+    if (settings.contains("style"))
         QQuickStyle::setStyle(settings.value("style").toString());
-    }
+    else
+        settings.setValue("style",style);
+    if (QQuickStyle::name()=="Suru")
+        QIcon::setThemeName("Yaru");
+
+    if (QQuickStyle::name()=="org.kde.breeze")
+        QIcon::setThemeName("breeze");
+
+    QStringList builtInStyles = QQuickStyle::availableStyles();
+    engine.rootContext()->setContextProperty("builtInStyles", builtInStyles);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

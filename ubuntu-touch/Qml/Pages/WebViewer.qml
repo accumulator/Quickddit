@@ -16,10 +16,10 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 import QtWebEngine 1.7
-import QtQuick.Controls 2.2
-import QtQuick.Controls.Suru 2.2
+
 import "../"
 
 Page {
@@ -33,24 +33,34 @@ Page {
     Component {
         id: toolButtons
         Row {
-            ActionButton {
-                id:del
-                ico: "qrc:/Icons/reload.svg"
-                size: 20
-                color: Suru.color(Suru.White,1)
+            ToolButton {
+                enabled: webView.canGoBack
+                icon.name: "edit-undo-symbolic"
+                onClicked: webView.goBack()
+            }
+
+            ToolButton {
+                enabled: webView.canGoForward
+                icon.name: "edit-redo-symbolic"
+                onClicked: webView.goForward()
+            }
+
+            ToolButton {
+                icon.name: "view-refresh-symbolic"
+                onClicked: webView.reload();
+            }
+
+            ToolButton {
+                icon.name: "emblem-shared-symbolic"
                 onClicked: {
-                    webView.reload();
+                    QMLUtils.copyToClipboard(webView.url)
+                    infoBanner.alert(qsTr("Link coppied to clipboard"))
                 }
             }
 
-            ActionButton {
-                id:edit
-                ico: "qrc:/Icons/webbrowser-app-symbolic.svg"
-                size: 20
-                color: Suru.color(Suru.White,1)
-                onClicked: {
-                    Qt.openUrlExternally(url);
-                }
+            ToolButton {
+                icon.name: "applications-internet"
+                onClicked: Qt.openUrlExternally(webView.url);
             }
         }
     }

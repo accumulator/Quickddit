@@ -16,26 +16,25 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.2
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 import quickddit.Core 1.0
 import QtGraphicalEffects 1.0
-import QtQuick.Controls.Suru 2.2
 
-Row{
+Row {
     id:bottomRow
 
     property variant link
     property VoteManager linkVoteManager
     property SaveManager linkSaveManager
 
-    ActionButton {
+    ToolButton {
         id:up
         anchors.verticalCenter: parent.verticalCenter
-        width: parent.width/6
-        ico: "qrc:/Icons/up.svg"
-        color: link.likes ===1 ? Suru.color(Suru.Green,1) : Suru.foregroundColor
+        width: parent.width/10
+        icon.name: "go-up-symbolic"
+        icon.color: link.likes ===1 ? persistantSettings.greenColor : persistantSettings.textColor
 
         onClicked: {
             if (link.likes ===1)
@@ -45,21 +44,22 @@ Row{
         }
     }
 
-    Label{
+    Label {
         id:score
-        anchors.verticalCenter: parent.verticalCenter
-        width: parent.width/6
+        height: parent.height
+        width: parent.width/5
+        horizontalAlignment: "AlignHCenter"
+        verticalAlignment: "AlignVCenter"
         text: link.score
         font.weight: Font.Normal
-        horizontalAlignment: "AlignHCenter"
-        color:  link.score>0 ? Suru.color(Suru.Green,1) : link.score<0 ? Suru.color(Suru.Red,1) : Suru.foregroundColor
+        color: link.score>0 ? persistantSettings.greenColor : link.score<0 ? persistantSettings.redColor : persistantSettings.textColor
     }
-    ActionButton {
+    ToolButton {
         id:down
         anchors.verticalCenter: parent.verticalCenter
-        width: parent.width/6
-        ico: "qrc:/Icons/down.svg"
-        color: link.likes ===-1 ? Suru.color(Suru.Red,1) : Suru.foregroundColor
+        width: parent.width/10
+        icon.name: "go-down-symbolic"
+        icon.color: link.likes ===-1 ? persistantSettings.redColor : persistantSettings.textColor
 
         onClicked: {
             if (link.likes ===-1)
@@ -70,64 +70,46 @@ Row{
     }
 
     ToolButton {
-        id:comment
-        width: parent.width/6
+        id: comment
         anchors.verticalCenter: parent.verticalCenter
-        flat: true
-        hoverEnabled: false
+        width: parent.width/5
+        icon.name: "comment-symbolic"
+        text: link.commentsCount
+
         onClicked: {
             if (compact){
                 var p = { link: link };
                 pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/CommentPage.qml"), p);
             }
         }
-        Row {
-            id:row
-            anchors.centerIn: parent
-
-            Image{
-                anchors.verticalCenter: parent.verticalCenter
-                source: "qrc:/Icons/message.svg"
-                width: 24
-                height: 24
-                layer.enabled: true
-                layer.effect: ColorOverlay {
-                    color: Suru.foregroundColor
-                }
-            }
-            Label{
-                anchors.verticalCenter: parent.verticalCenter
-                text: " "+link.commentsCount
-                color: Suru.foregroundColor
-            }
-        }
     }
 
-    ActionButton {
+    ToolButton {
         id:share
         anchors.verticalCenter: parent.verticalCenter
-        width: parent.width/6
-        ico: "qrc:/Icons/edit-copy.svg"
-        color: Suru.foregroundColor
+        width: parent.width/5
+        icon.name: "emblem-shared-symbolic"
 
         onClicked: {
             QMLUtils.copyToClipboard(link.url)
             infoBanner.alert(qsTr("Link coppied to clipboard"))
+            icon.color = persistantSettings.primaryColor
         }
 
         onPressAndHold: {
             QMLUtils.copyToClipboard("https://reddit.com"+link.permalink)
             infoBanner.alert(qsTr("Permalink coppied to clipboard"))
+            icon.color = persistantSettings.primaryColor
         }
     }
 
-    ActionButton {
+    ToolButton {
         id:save
         anchors.verticalCenter: parent.verticalCenter
-        width: parent.width/6
+        width: parent.width/5
         enabled: quickdditManager.isSignedIn
-        ico: link.saved ? "qrc:/Icons/starred.svg" : "qrc:/Icons/non-starred.svg"
-        color: link.saved ? Suru.color(Suru.Orange,1) : Suru.foregroundColor
+        icon.name: link.saved ? "starred-symbolic" : "non-starred-symbolic"
+        icon.color: link.saved ? persistantSettings.primaryColor : persistantSettings.textColor
 
         onClicked: {
             linkSaveManager.save(link.fullname,!link.saved)
