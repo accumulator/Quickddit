@@ -27,6 +27,7 @@ import "../"
 ItemDelegate {
     id:linkDelegate
 
+    visible: !(!persistantSettings.enableNSFW && link.isNSFW)
     property bool compact: true
     property variant link
     property VoteManager linkVoteManager
@@ -36,7 +37,7 @@ ItemDelegate {
     property alias activeManager: pic.activeManager
     property alias imageUrl: pic.imageUrl
 
-    height: Math.max(titulok.height+pic.height+flairs.height,txt.height+titulok.height+flairs.height,thumb.height)+info.height+bottomRow.height
+    height: visible ? Math.max(titulok.height+pic.height+flairs.height,txt.height+titulok.height+flairs.height,thumb.height)+info.height+bottomRow.height : 0
 
     onClicked: {
         if(!compact&&link.domain.slice(5)!==link.subreddit)

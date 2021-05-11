@@ -44,6 +44,13 @@ Page {
                 onCheckedChanged: persistantSettings.fullResolutionImages = checked
             }
 
+            SwitchDelegate {
+                width: parent.width
+                text: qsTr("Show NSFW")
+                checked: persistantSettings.enableNSFW
+                onCheckedChanged: persistantSettings.enableNSFW = checked
+            }
+
             ItemDelegate {
                 width: parent.width
                 Label {
@@ -98,7 +105,7 @@ Page {
                 width: parent.width
                 Label {
                     anchors {left: parent.left;verticalCenter: parent.verticalCenter; margins: 10}
-                    text: "Theme"
+                    text: qsTr("Theme")
                 }
                 ComboBox {
                     anchors { right: parent.right;  verticalCenter: parent.verticalCenter; margins:10 }
