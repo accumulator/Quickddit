@@ -27,7 +27,6 @@ Drawer {
     dragMargin: 0
     function showSubreddit(subreddit) {
         var mainPage = globalUtils.getMainPage();
-        console.log(subreddit)
         mainPage.refresh(subreddit.slice(3));
     }
 

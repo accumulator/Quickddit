@@ -44,6 +44,13 @@ Page {
                 onCheckedChanged: persistantSettings.fullResolutionImages = checked
             }
 
+            SwitchDelegate {
+                width: parent.width
+                text: qsTr("Show NSFW")
+                checked: persistantSettings.enableNSFW
+                onCheckedChanged: persistantSettings.enableNSFW = checked
+            }
+
             ItemDelegate {
                 width: parent.width
                 height: slider.height+20

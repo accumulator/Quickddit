@@ -197,6 +197,7 @@ ApplicationWindow {
         property real scale: 1.0
 
         property bool linksInternaly: true
+        property bool enableNSFW: false
         property bool compactImages: false
         property bool compactVideos: true
         property bool fullResolutionImages: false

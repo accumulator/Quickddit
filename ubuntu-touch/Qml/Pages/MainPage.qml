@@ -195,13 +195,13 @@ Page {
         }
 
 
+
         onCurrentIndexChanged: {
-            console.log(currentIndex)
-            linkModel.section = currentIndex
-            var si = ["best", "hot", "new", "rising", "controversial", "top"][currentIndex];
-            section = si
-            linkModel.saveSubredditPrefs()
-            linkModel.refresh(false)
+            if(linkModel.section !== currentIndex) {
+                linkModel.section = currentIndex
+                linkModel.saveSubredditPrefs()
+                linkModel.refresh(false)
+            }
         }
     }
 
