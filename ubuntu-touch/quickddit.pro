@@ -10,6 +10,12 @@ AppID= quickddit
 # deprecated API to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
+equals(FLAVOR, "uuitk") {
+    CONFIG += flavor_uuitk
+} else {
+    CONFIG += flavor_qtcontrols
+}
+
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
@@ -96,7 +102,8 @@ HEADERS += ../qt-json/json.h
 SOURCES += ../qt-json/json.cpp
 
 RESOURCES += qml.qrc
-CONF_FILES += \
+
+CLICK_FILES += \
     Icons/quickddit.svg \
     Icons/quickddit-splash-image.svg \
     clickable.json \
@@ -104,32 +111,42 @@ CONF_FILES += \
     quickddit.desktop \
     quickddit.apparmor
 
+isEmpty(PREFIX) {
+    flavor_uuitk {
+        PREFIX = /
+    } else {
+        PREFIX = /usr/local
+    }
+}
 
-config_files.path = /
-config_files.files += $${CONF_FILES}
-INSTALLS += config_files
+flavor_uuitk {
+    click_files.path = $${PREFIX}
+    click_files.files += $${CLICK_FILES}
+    INSTALLS += click_files
 
-youtube-dl.files = ../youtube-dl/youtube_dl
-youtube-dl.path = /
+    youtube-dl.files = ../youtube-dl/youtube_dl
+    youtube-dl.path = $$PREFIX
+    INSTALLS += youtube-dl
+}
 
-INSTALLS += youtube-dl
+flavor_qtcontrols {
+    desktop_file.path = $${PREFIX}/share/applications
+    desktop_file.files += quickddit.desktop
+    icon_file.path = $${PREFIX}/share/icons/hicolor/scalable/apps/
+    icon_file.files += Icons/quickddit.svg
+
+    INSTALLS += desktop_file icon_file
+}
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
-
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
 
 # Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /
-!isEmpty(target.path): INSTALLS += target
+target.path = $${PREFIX}/bin
+INSTALLS += target
 
-DISTFILES += \
-    Icons/quickddit.svg \
-    Icons/quickddit-splash-image.svg \
-    clickable.json \
-    manifest.json \
-    quickddit.desktop \
-    quickddit.apparmor
+
+DISTFILES += $${CLICK_FILES}
