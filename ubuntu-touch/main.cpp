@@ -63,10 +63,15 @@ int main(int argc, char *argv[])
     QSettings settings;
 
     QString style = QQuickStyle::name();
-    if (settings.contains("style"))
-        QQuickStyle::setStyle(settings.value("style").toString());
-    else
-        settings.setValue("style",style);
+    if (!settings.contains("style")) {
+        if (!style.isEmpty()) {
+            settings.setValue("style",style);
+        }
+        else {
+            settings.setValue("style","Suru");
+        }
+    }
+    QQuickStyle::setStyle(settings.value("style").toString());
     if (QQuickStyle::name()=="Suru")
         QIcon::setThemeName("Yaru");
 

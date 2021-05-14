@@ -24,7 +24,6 @@ import quickddit.Core 1.0
 import Qt.labs.settings 1.0
 import QtQuick.Controls.Material 2.12
 import QtQuick.Controls.Universal 2.12
-import QtQuick.Controls.Suru 2.2
 import io.thp.pyotherside 1.5
 
 import "Qml"
@@ -206,8 +205,8 @@ ApplicationWindow {
             toolbarOnBottom? header = null : footer = null
             toolbarOnBottom? footer = tBar : header = tBar
         }
-        property string style: "System"
-        property string theme
+        property string style
+        property string theme: "System"
         onThemeChanged: loadTheme()
 
         onStyleChanged: loadTheme()
@@ -224,17 +223,14 @@ ApplicationWindow {
         if (persistantSettings.theme === "Dark") {
             Material.theme = Material.Dark
             Universal.theme = Universal.Dark
-            Suru.theme = Suru.Dark
         }
         else if (persistantSettings.theme === "Light") {
             Material.theme = Material.Light
             Universal.theme = Universal.Light
-            Suru.theme = Suru.Light
         }
         else if (persistantSettings.theme === "System") {
             Material.theme = Material.System
             Universal.theme = Universal.System
-            Suru.theme = Suru.System
         }
         persistantSettings.primaryColor = persistantSettings.style == "Suru" ? "#e95420" : titleLabel.linkColor
     }
