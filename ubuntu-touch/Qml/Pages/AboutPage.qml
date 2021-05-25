@@ -20,6 +20,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
+import QtQuick.Controls.Suru 2.2
 
 Page {
     title: qsTr("About")
@@ -27,7 +28,7 @@ Page {
         anchors.fill: parent
         header:Column {
             id:aboutColumn
-            topPadding: 10
+            topPadding: Suru.units.gu(2)
             width: parent.width
 
             Image {
@@ -35,10 +36,10 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 source: "qrc:/Icons/quickddit.svg"
                 layer.enabled: true
-                width: 120
-                height: 120
-                sourceSize.height:120
-                sourceSize.width:120
+                width: Suru.units.gu(15)
+                height: Suru.units.gu(15)
+                sourceSize.height: Suru.units.gu(15)
+                sourceSize.width: Suru.units.gu(15)
 
                 layer.effect:
                     OpacityMask {
@@ -59,9 +60,9 @@ Page {
 
             Label {
                 text: "Quickddit"
-                padding: 10
+                padding: Suru.units.gu(2)
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 18
+                font.pixelSize: Suru.units.rem(1.5)
             }
 
             Label {

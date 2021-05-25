@@ -18,6 +18,7 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Suru 2.2
 import quickddit.Core 1.0
 
 Page {
@@ -55,12 +56,12 @@ Page {
                 width: parent.width
                 Label {
                     id:sliderLabel
-                    anchors {left: parent.left;verticalCenter: parent.verticalCenter; margins: 10}
+                    anchors {left: parent.left;verticalCenter: parent.verticalCenter; margins: Suru.units.gu(2)}
                     text: qsTr("Thumbnail scale:")+" ["+Math.floor(slider.value*100)+"%]"
                 }
                 Slider {
                     id:slider
-                    anchors { right: parent.right; left:sliderLabel.right;  verticalCenter: parent.verticalCenter; margins:10 }
+                    anchors { right: parent.right; left:sliderLabel.right;  verticalCenter: parent.verticalCenter; margins:Suru.units.gu(2) }
                     from: 0.5
                     to: 1.5
                     stepSize: 0.1
@@ -74,11 +75,11 @@ Page {
             ItemDelegate {
                 width: parent.width
                 Label {
-                    anchors {left: parent.left;verticalCenter: parent.verticalCenter; margins: 10}
+                    anchors {left: parent.left;verticalCenter: parent.verticalCenter; margins: Suru.units.gu(2)}
                     text: "Preferred Video Size"
                 }
                 ComboBox {
-                    anchors { right: parent.right;  verticalCenter: parent.verticalCenter; margins:10 }
+                    anchors { right: parent.right;  verticalCenter: parent.verticalCenter; margins: Suru.units.gu(2) }
                     model: ["360p","720p"]
                     currentIndex: appSettings.preferredVideoSize
                     onCurrentIndexChanged: {
@@ -104,11 +105,11 @@ Page {
             ItemDelegate {
                 width: parent.width
                 Label {
-                    anchors {left: parent.left;verticalCenter: parent.verticalCenter; margins: 10}
+                    anchors {left: parent.left;verticalCenter: parent.verticalCenter; margins: Suru.units.gu(2)}
                     text: qsTr("Theme")
                 }
                 ComboBox {
-                    anchors { right: parent.right;  verticalCenter: parent.verticalCenter; margins:10 }
+                    anchors { right: parent.right;  verticalCenter: parent.verticalCenter; margins: Suru.units.gu(2) }
                     model: ["Light","Dark","System"]
                     currentIndex: persistantSettings.theme
                     onCurrentIndexChanged: {
@@ -124,9 +125,9 @@ Page {
                 Image {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
-                    anchors.rightMargin: 12
-                    width: 24
-                    height: 24
+                    anchors.rightMargin: Suru.units.gu(2)
+                    width: Suru.units.gu(3)
+                    height: Suru.units.gu(3)
                     source: "qrc:/Icons/next.svg"
                 }
             }

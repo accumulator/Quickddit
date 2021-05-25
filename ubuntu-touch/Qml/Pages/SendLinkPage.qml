@@ -18,6 +18,7 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Suru 2.2
 import quickddit.Core 1.0
 import "../"
 
@@ -57,14 +58,14 @@ Page {
 
     Flickable {
         id: scrollView
-        anchors { fill: parent; margins: 10 }
+        anchors { fill: parent; margins: Suru.units.gu(2) }
         contentHeight: mainContentColumn.height
         contentWidth: width
 
         Column {
             id: mainContentColumn
             width: parent.width
-            spacing: 10
+            spacing: Suru.units.gu(2)
 
             Label {
                 anchors {right: parent.right; }
@@ -116,7 +117,7 @@ Page {
             }
             Row {
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 10
+                spacing: Suru.units.gu(2)
                 Button {
                     text: editPost === "" ? qsTr("Submit") : qsTr("Save")
                     enabled: (editPost != "" || linkTitle.text.length > 0) /* official limits? */

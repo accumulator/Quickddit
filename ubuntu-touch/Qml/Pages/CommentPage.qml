@@ -60,7 +60,7 @@ Page {
             ActionButton {
                 id:downloadBtn
                 ico: "qrc:/Icons/save.svg"
-                size: 20
+                size: Suru.units.gu(3)
                 color: Suru.color(Suru.White,1)
                 visible: previeableImage
                 onClicked: downloadImage()
@@ -69,7 +69,7 @@ Page {
             ActionButton {
                 id:sort
                 ico: "qrc:/Icons/filters.svg"
-                size: 20
+                size: Suru.units.gu(3)
                 color: Suru.color(Suru.White,1)
                 onClicked: sortMenu.open()
                 Menu {
@@ -104,7 +104,7 @@ Page {
             ActionButton {
                 id:del
                 ico: "qrc:/Icons/delete.svg"
-                size: 20
+                size: Suru.units.gu(3)
                 color: Suru.color(Suru.White,1)
                 visible: link.author === appSettings.redditUsername
                 enabled: !link.isArchived
@@ -117,7 +117,7 @@ Page {
             ActionButton {
                 id:edit
                 ico: "qrc:/Icons/edit.svg"
-                size: 20
+                size: Suru.units.gu(3)
                 color: Suru.color(Suru.White,1)
                 visible: link.author === appSettings.redditUsername
                 enabled: !link.isArchived
@@ -136,7 +136,7 @@ Page {
             ActionButton {
                 id:newPost
                 ico: "qrc:/Icons/add.svg"
-                size: 20
+                size: Suru.units.gu(3)
                 color: Suru.color(Suru.White,1)
                 visible: quickdditManager.isSignedIn
                 enabled: !commentManager.busy && !link.isArchived && !link.isLocked

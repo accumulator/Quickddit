@@ -88,8 +88,8 @@ Row{
             Image{
                 anchors.verticalCenter: parent.verticalCenter
                 source: "qrc:/Icons/message.svg"
-                width: 24
-                height: 24
+                width: Suru.units.gu(3)
+                height: Suru.units.gu(3)
                 layer.enabled: true
                 layer.effect: ColorOverlay {
                     color: Suru.foregroundColor

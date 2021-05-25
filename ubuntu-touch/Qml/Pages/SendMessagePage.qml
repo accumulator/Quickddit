@@ -18,6 +18,7 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Suru 2.2
 import "../"
 
 Page {
@@ -40,13 +41,13 @@ Page {
 
     Flickable {
         id: flickable
-        anchors { fill: parent; margins: 10 }
+        anchors { fill: parent; margins: Suru.units.gu(2) }
         contentHeight: mainContentColumn.height
 
         Column {
             id: mainContentColumn
             width: parent.width
-            spacing: 5
+            spacing: Suru.units.gu(1)
 
             TextField {
                 id: recipientField
@@ -59,7 +60,7 @@ Page {
             Label {
                 anchors {right: parent.right; rightMargin: 5 }
                 text: (recipient.indexOf("/r") == 0 ? qsTr("to moderators of") : qsTr("to")) + " " + recipient
-                font.pointSize: 10
+                font.pixelSize: Suru.units.rem(0.8)
                 visible : recipient !== ""
             }
 
@@ -79,7 +80,7 @@ Page {
 
             Row {
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 10
+                spacing: Suru.units.gu(2)
 
                 Button {
                     text: qsTr("Send")

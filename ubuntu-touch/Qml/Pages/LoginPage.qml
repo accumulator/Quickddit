@@ -19,6 +19,7 @@
 import QtQuick 2.9
 import QtWebEngine 1.7
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Suru 2.2
 import quickddit.Core 1.0
 import Qt.labs.platform 1.0
 
@@ -28,6 +29,7 @@ Page {
         id:loginPage
         settings.localContentCanAccessFileUrls: true
         settings.localContentCanAccessRemoteUrls: true
+        zoomFactor: Suru.units.dp(1.0)
         profile: WebEngineProfile{
             persistentStoragePath: StandardPaths.writableLocation(StandardPaths.DataLocation).toString().substring(7)
         }

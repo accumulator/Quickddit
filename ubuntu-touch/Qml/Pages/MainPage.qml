@@ -165,7 +165,7 @@ Page {
         TabBar{
         id: tabBar
         contentHeight: undefined
-        leftPadding: 10
+        leftPadding: Suru.units.gu(2)
         background: Rectangle {
             color: Suru.color(Suru.Orange,1)
         }
@@ -179,7 +179,7 @@ Page {
                 color: tb0.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
             }
             width: implicitWidth
-            padding:6
+            padding: Suru.units.gu(1)
 
         }
         TabButton {
@@ -191,7 +191,7 @@ Page {
                 color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
             }
             width: implicitWidth
-            padding:6
+            padding: Suru.units.gu(1)
         }
         TabButton {
             id:tb2
@@ -202,7 +202,7 @@ Page {
                 color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
             }
             width: implicitWidth
-            padding:6
+            padding: Suru.units.gu(1)
         }
         TabButton {
             id:tb3
@@ -213,7 +213,7 @@ Page {
                 color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
             }
             width: implicitWidth
-            padding:6
+            padding: Suru.units.gu(1)
         }
         TabButton {
             id:tb4
@@ -224,7 +224,7 @@ Page {
                 color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
             }
             width: implicitWidth
-            padding:6
+            padding: Suru.units.gu(1)
         }
         TabButton {
             id:tb5
@@ -235,7 +235,7 @@ Page {
                 color: parent.checked ? Suru.color(Suru.White,1) : Suru.color(Suru.Porcelain,1)
             }
             width: implicitWidth
-            padding:6
+            padding: Suru.units.gu(1)
         }
 
 
@@ -260,7 +260,7 @@ Page {
             highlightFollowsCurrentItem: false
 
             Label {
-                anchors { bottom: linkListView.contentItem.top; horizontalCenter: parent.horizontalCenter; margins: 75 }
+                anchors { bottom: linkListView.contentItem.top; horizontalCenter: parent.horizontalCenter; margins: Suru.units.gu(10) }
                 text: qsTr("Pull to refresh...")
             }
 
@@ -278,7 +278,7 @@ Page {
             }
 
             onContentYChanged: {
-                if(contentY<=-150 && !linkModel.busy)
+                if(contentY<=-Suru.units.gu(18) && !linkModel.busy)
                     linkModel.refresh(false)
             }
 

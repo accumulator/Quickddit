@@ -9,7 +9,7 @@ Item {
 
     Row {
         id: formatRow
-        height: 36
+        height: Suru.units.gu(4.5)
 
         anchors { top: parent.top; left: parent.left }
         ActionButton {

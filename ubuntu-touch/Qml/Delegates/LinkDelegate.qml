@@ -53,7 +53,7 @@ ItemDelegate {
         id: info
         color: Suru.foregroundColor
         linkColor: Suru.color(Suru.Orange,1)
-        padding: 5
+        padding: Suru.units.gu(1)
         anchors {top: parent.top; left: parent.left; right: parent.right; }
         elide: Text.ElideRight
         text: "<a href='/r/"+link.subreddit+"'>"+"/r/"+link.subreddit+"</a>"+" ~ <a href='/u/"+link.author+"'>"+"/u/"+link.author+"</a>"+" ~ "+link.created+" ~ "+link.domain+((!compact && link.crossposts > 0) ? ". <a href=\"cross:" + link.fullname + "\">" + qsTr("%n crossposts", "", link.crossposts) + "</a>" : "")
@@ -75,7 +75,7 @@ ItemDelegate {
         width: contentWidth
         orientation: ListView.Horizontal
         clip: true
-        spacing: 5
+        spacing: Suru.units.gu(1)
         delegate: Loader {
             active: modelData != ""
             sourceComponent: Flair { text: modelData }
@@ -96,21 +96,21 @@ ItemDelegate {
 
     //title
     Label {
-        padding: 5
+        padding: Suru.units.gu(1)
         anchors {top: flairs.bottom; right: parent.right; left:thumb.visible ? thumb.right : parent.left }
         id: titulok
         text: link.title
         elide: Text.ElideRight
         maximumLineCount: compact && !thumb.visible ? 3 : 9999
         height: thumb.visible && compact ? thumb.height - flairs.height : implicitHeight
-        font.pointSize: 12
+        font.pixelSize: Suru.units.rem(1)
         font.weight: Font.DemiBold
         wrapMode: Text.Wrap
     }
     //text
     Label {
         id:txt
-        padding: 5
+        padding: Suru.units.gu(1)
 
         color: Suru.foregroundColor
         linkColor: Suru.color(Suru.Orange,1)
@@ -125,6 +125,7 @@ ItemDelegate {
         wrapMode: Text.WordWrap
         textFormat: compact ? Text.StyledText : Text.RichText
         onLinkActivated: globalUtils.openLink(link)
+        font: Suru.units.fontParagraph
     }
     //preview
     Thumbnail {

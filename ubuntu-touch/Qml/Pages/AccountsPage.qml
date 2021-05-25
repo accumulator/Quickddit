@@ -38,13 +38,13 @@ Page {
 
             ToolButton {
                 anchors.right: parent.right
-                anchors.rightMargin: 12
+                anchors.rightMargin: Suru.units.gu(2)
                 height: parent.height
                 hoverEnabled: false
 
                 Image {
-                    height: 24
-                    width: 24
+                    height: Suru.units.gu(3)
+                    width: Suru.units.gu(3)
                     anchors.centerIn: parent
                     source: "qrc:/Icons/delete.svg"
                 }
