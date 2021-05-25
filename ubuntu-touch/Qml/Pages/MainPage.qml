@@ -141,20 +141,20 @@ Page {
             ActionButton {
                 id:info
                 ico: "qrc:/Icons/info.svg"
-                size: 20
+                size: Suru.units.gu(3)
                 enabled: linkModel.location == LinkModel.Subreddit
                 color: Suru.color(Suru.White,1)
-                width: enabled ? 40 : 0
+                width: enabled ? Suru.units.gu(4.5) : 0
                 clip: true
                 onClicked: {pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SubredditPage.qml"),{subreddit:linkModel.subreddit})}
             }
             ActionButton {
                 id:newPost
                 ico: "qrc:/Icons/add.svg"
-                size: 20
+                size: Suru.units.gu(3)
                 enabled: quickdditManager.isSignedIn
                 color: Suru.color(Suru.White,1)
-                width: linkModel.location == LinkModel.Subreddit ? 40 : 0
+                width: linkModel.location == LinkModel.Subreddit ? Suru.units.gu(4.5) : 0
                 clip: true
                 onClicked: {pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SendLinkPage.qml"), {linkManager: linkManager, subreddit: linkModel.subreddit})}
             }
