@@ -36,7 +36,7 @@ Page {
             ActionButton {
                 id:del
                 ico: "qrc:/Icons/reload.svg"
-                size: 20
+                size: Suru.units.gu(3)
                 color: Suru.color(Suru.White,1)
                 onClicked: {
                     webView.reload();
@@ -46,7 +46,7 @@ Page {
             ActionButton {
                 id:edit
                 ico: "qrc:/Icons/webbrowser-app-symbolic.svg"
-                size: 20
+                size: Suru.units.gu(3)
                 color: Suru.color(Suru.White,1)
                 onClicked: {
                     Qt.openUrlExternally(url);
@@ -59,6 +59,7 @@ Page {
         anchors.fill: parent
         id:webView
         settings.fullScreenSupportEnabled: true
+        zoomFactor: Suru.units.dp(1.0)
 
         onFullScreenRequested: {
             if(request.toggleOn) {

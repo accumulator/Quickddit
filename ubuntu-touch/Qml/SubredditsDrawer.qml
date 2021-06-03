@@ -18,12 +18,13 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Suru 2.2
 import quickddit.Core 1.0
 
 Drawer {
     id:subredditsDrawer
     height: window.height
-    width: 250
+    width: Suru.units.gu(31)
     dragMargin: 0
     function showSubreddit(subreddit) {
         var mainPage = globalUtils.getMainPage();

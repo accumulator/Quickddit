@@ -18,6 +18,7 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Suru 2.2
 import quickddit.Core 1.0
 import "../"
 import "../Delegates"
@@ -36,22 +37,22 @@ Page {
                 width: parent.width
                 CircleImage {
                     source: userManager.user.iconImg
-                    width: Math.min(150,parent.width/4)
+                    width: Math.min(Suru.units.gu(18),parent.width/4)
                     height: width
                 }
 
                 Label {
                     anchors.bottom: parent.bottom
-                    padding: 10
+                    padding: Suru.units.gu(2)
                     text: "/u/"+username
-                    font.pointSize: 18
+                    font.pixelSize: Suru.units.rem(1.5)
                 }
             }
             Row {
                 anchors.right: parent.right
                 Label {
                     anchors.verticalCenter: parent.verticalCenter
-                    padding: 5
+                    padding: Suru.units.gu(1)
                     text: userManager.user.linkKarma+" link / " +userManager.user.commentKarma+" comment karma"
                 }
                 Button {

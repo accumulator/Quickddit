@@ -39,7 +39,7 @@ Page {
             width: parent.width
             currentIndex: swipeView.currentIndex
             contentHeight: undefined
-            leftPadding: 10
+            leftPadding: Suru.units.gu(2)
             background: Rectangle {
                 color: Suru.color(Suru.Orange,1)
             }
@@ -61,7 +61,7 @@ Page {
                     else
                         parent = 0
                 }
-                padding: 6
+                padding: Suru.units.gu(1)
             }
 
             TabButton {
@@ -81,7 +81,7 @@ Page {
                     else
                         parent = 0
                 }
-                padding: 6
+                padding: Suru.units.gu(1)
             }
 
             TabButton {
@@ -91,7 +91,7 @@ Page {
                     font.weight: Font.Normal
                     color: Suru.color(Suru.White,1)
                 }
-                padding: 6
+                padding: Suru.units.gu(1)
                 width: implicitWidth
             }
             TabButton {
@@ -101,7 +101,7 @@ Page {
                     font.weight: Font.Normal
                     color: Suru.color(Suru.White,1)
                 }
-                padding: 6
+                padding: Suru.units.gu(1)
                 width: implicitWidth
             }
             TabButton {
@@ -111,7 +111,7 @@ Page {
                     font.weight: Font.Normal
                     color: Suru.color(Suru.White,1)
                 }
-                padding: 6
+                padding: Suru.units.gu(1)
                 width: implicitWidth
             }
             onCurrentIndexChanged: {

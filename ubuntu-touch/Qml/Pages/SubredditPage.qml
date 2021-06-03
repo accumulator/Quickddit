@@ -33,7 +33,7 @@ Page {
     ScrollView{
         anchors.fill: parent
         contentWidth: parent.width
-        contentHeight: logo.height + Math.max(headerImage.height,30) + subButton.height + showButton.height + about.height + wiki.height
+        contentHeight: logo.height + Math.max(headerImage.height,Suru.units.gu(4)) + subButton.height + showButton.height + about.height + wiki.height
         ScrollBar.vertical.interactive: false
 
         Image {
@@ -46,26 +46,26 @@ Page {
         CircleImage {
             id:logo
             source: aboutSubredditManager.iconUrl
-            anchors{left: parent.left;top:headerImage.bottom; leftMargin: 20; topMargin: -Math.min(50,headerImage.height)}
-            width: Math.min(150,parent.width/4)
+            anchors{left: parent.left;top:headerImage.bottom; leftMargin: Suru.units.gu(3); topMargin: -Math.min(Suru.units.gu(6),headerImage.height)}
+            width: Math.min(Suru.units.gu(18),parent.width/4)
             height: width
         }
 
         Label {
             id:fullName
             text: "/r/"+subreddit
-            font.pointSize: 18
-            anchors{ left: logo.right;bottom: name.top;leftMargin: 20}
+            font.pixelSize: Suru.units.rem(1)
+            anchors{ left: logo.right;bottom: name.top;leftMargin: Suru.units.gu(3)}
         }
 
         Label {
             id:name
             text: aboutSubredditManager.title
-            anchors{left: logo.right;bottom: logo.bottom;leftMargin: 20}
+            anchors{left: logo.right;bottom: logo.bottom;leftMargin: Suru.units.gu(3)}
         }
 
         Button {
-            anchors{top: logo.bottom;right: parent.right;margins: 5}
+            anchors{top: logo.bottom;right: parent.right;margins: Suru.units.gu(1)}
             id:subButton
             text: aboutSubredditManager.isSubscribed?qsTr("Unsubscribe"):qsTr("Subscribe")
             onClicked: {
@@ -78,13 +78,13 @@ Page {
 
         Label {
             id:subCount
-            anchors{right: subButton.left;verticalCenter:  subButton.verticalCenter; margins: 5}
+            anchors{right: subButton.left;verticalCenter:  subButton.verticalCenter; margins: Suru.units.gu(1)}
             text: aboutSubredditManager.activeUsers + " "+qsTr("active")+" / " + aboutSubredditManager.subscribers + " "+qsTr("subs")
         }
 
         Label {
             id:about
-            anchors {left: parent.left;right: parent.right;top: subButton.bottom; margins:10}
+            anchors {left: parent.left;right: parent.right;top: subButton.bottom; margins:Suru.units.gu(2) }
             text: aboutSubredditManager.shortDescription
             wrapMode: "WordWrap"
         }
@@ -92,7 +92,7 @@ Page {
         Button {
             id:showButton
             text: qsTr("Show posts in")+" r/"+subreddit
-            anchors { horizontalCenter: parent.horizontalCenter; top: about.bottom; margins: 10}
+            anchors { horizontalCenter: parent.horizontalCenter; top: about.bottom; margins: Suru.units.gu(2)}
             onClicked: {
                 globalUtils.getMainPage().refresh(subreddit)
                 pageStack.pop(globalUtils.getMainPage(),StackView.ReplaceTransition)
@@ -107,7 +107,7 @@ Page {
 
             text: "<style>a {color: #e95420 }</style>\n" + aboutSubredditManager.longDescription
             textFormat: Text.RichText
-            anchors{ left: parent.left;top:showButton.bottom;right: parent.right;margins: 10}
+            anchors{ left: parent.left;top:showButton.bottom;right: parent.right;margins: Suru.units.gu(2)}
             wrapMode: "WordWrap"
             onLinkActivated: globalUtils.openLink(link)
         }

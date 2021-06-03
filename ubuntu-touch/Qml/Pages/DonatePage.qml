@@ -18,6 +18,7 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Suru 2.2
 
 Page {
     title: "Donate"
@@ -31,52 +32,52 @@ Page {
         Column {
             id:mainColumn
             width: parent.parent.width
-            padding: 10
-            spacing: 8
+            padding: Suru.units.gu(2)
+            spacing: Suru.units.gu(1)
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 16
+                font.pixelSize: Suru.units.rem(1.5)
                 text: "Sander van Grieken "
             }
 
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 12
+                font.pixelSize: Suru.units.rem(1)
                 text: qsTr("(maintainer)")
             }
 
             Image {
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: 48
+                width: Suru.units.gu(6)
                 height: width
                 source: "qrc:/Img/paypal.png"
             }
 
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 12
+                font.pixelSize: Suru.units.rem(1)
                 text: "Donate via PayPal:"
             }
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 12
+                font.pixelSize: Suru.units.rem(1)
                 text: "<a href=\"" + _paypalLink + "\">" + _paypalLink + "</a>"
                 onLinkActivated: Qt.openUrlExternally(_paypalLink);
             }
             Image {
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: 48
+                width: Suru.units.gu(6)
                 height: width
                 source: "qrc:/Img/bitcoin.png"
             }
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 12
+                font.pixelSize: Suru.units.rem(1)
                 text: qsTr("Donate via Bitcoin:")
             }
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 12
+                font.pixelSize: Suru.units.rem(1)
                 text: "<a href=\"" + _bitcoinAddr + "\">" + _bitcoinAddr + "</a>"
                 onLinkActivated: {
                     QMLUtils.copyToClipboard(_bitcoinAddr)
@@ -85,30 +86,30 @@ Page {
             }
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 16
+                font.pixelSize: Suru.units.rem(1.5)
                 text: "Daniel Kutka"
             }
 
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 12
+                font.pixelSize: Suru.units.rem(1)
                 text: qsTr("(ubuntu-touch port)")
             }
 
             Image {
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: 48
+                width: Suru.units.gu(6)
                 height: width
                 source: "qrc:/Img/paypal.png"
             }
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 12
+                font.pixelSize: Suru.units.rem(1)
                 text: qsTr("Donate via PayPal:")
             }
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 12
+                font.pixelSize: Suru.units.rem(1)
                 text: "<a href=\"" + _paypalLink_dk + "\">" + _paypalLink_dk + "</a>"
                 onLinkActivated: Qt.openUrlExternally(_paypalLink_dk);
             }

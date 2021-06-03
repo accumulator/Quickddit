@@ -36,7 +36,7 @@ Page {
             ActionButton {
                 id:newPost
                 ico: "qrc:/Icons/message-new.svg"
-                size: 20
+                size: Suru.units.gu(3)
                 color: Suru.color(Suru.White,1)
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("qrc:/Qml/Pages/SendMessagePage.qml"), {messageManager: messageManager});

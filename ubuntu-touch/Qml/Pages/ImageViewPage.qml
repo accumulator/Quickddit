@@ -38,7 +38,7 @@ Page {
             ActionButton {
                 id:downloadBtn
                 ico: "qrc:/Icons/save.svg"
-                size: 20
+                size: Suru.units.gu(3)
                 color: Suru.color(Suru.White,1)
                 visible: true
                 onClicked: QMLUtils.saveImage(imageUrl)

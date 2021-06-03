@@ -39,7 +39,7 @@ Page {
         CircleImage {
             id:logo
             source: multiredditManager.iconUrl
-            anchors{left: parent.left;top:parent.top; leftMargin: 20}
+            anchors{left: parent.left;top:parent.top; leftMargin: Suru.units.gu(3)}
             width: Math.min(150,parent.width/4)
             height: width
             Component.onCompleted: console.log(source)
@@ -49,18 +49,18 @@ Page {
             id:fullName
             text: multireddit
             font.pointSize: 18
-            anchors{ left: logo.right;bottom: name.top;leftMargin: 20}
+            anchors{ left: logo.right;bottom: name.top;leftMargin: Suru.units.gu(3)}
         }
 
         Label {
             id:name
             text: "m/"+multireddit
-            anchors{left: logo.right;bottom: logo.bottom;leftMargin: 20}
+            anchors{left: logo.right;bottom: logo.bottom;leftMargin: Suru.units.gu(3)}
         }
 
         Label {
             id:about
-            anchors {left: parent.left;right: parent.right;top: name.bottom; margins:10}
+            anchors {left: parent.left;right: parent.right;top: name.bottom; margins:Suru.units.gu(2)}
             text: multiredditManager.description
             wrapMode: "WordWrap"
         }
@@ -68,7 +68,7 @@ Page {
         Button {
             id:showButton
             text: qsTr("Show posts in m/")+multireddit
-            anchors { horizontalCenter: parent.horizontalCenter; top: about.bottom; margins: 10}
+            anchors { horizontalCenter: parent.horizontalCenter; top: about.bottom; margins: Suru.units.gu(2)}
             onClicked: {
                 globalUtils.getMainPage().refreshMR(multireddit)
                 pageStack.pop(globalUtils.getMainPage(),StackView.ReplaceTransition)

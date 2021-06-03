@@ -83,7 +83,7 @@ ApplicationWindow {
 
             Label {
                 id:titleLabel
-                font.pointSize: 14
+                font.pixelSize: Suru.units.rem(1)
                 font.weight: Font.Normal
                 color: Suru.color(Suru.White,1)
                 elide: "ElideRight"
@@ -111,7 +111,7 @@ ApplicationWindow {
                     x: parent.width - width
                     y:parent.y+parent.height
                     transformOrigin: Menu.TopRight
-                    width: 200
+                    width: Suru.units.gu(25)
 
                     MenuItem {
                         txt: qsTr("My Subreddits")
