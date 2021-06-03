@@ -20,9 +20,8 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.quickddit.Core 1.0
 
-AbstractPage {
+Dialog {
     id: newLinkPage
-    title: editPost === "" ? qsTr("New Post") : qsTr("Edit Post")
 
     property string subreddit
     property string editPost: ""
@@ -52,6 +51,11 @@ AbstractPage {
                 flairManager.selectFlair(linkManager.commentModel.link.fullname, newFlairId)
             }
         }
+    }
+
+    DialogHeader {
+        title: editPost === "" ? qsTr("New Post") : qsTr("Edit Post")
+        acceptText: editPost === "" ? qsTr("Submit") : qsTr("Save")
     }
 
     Flickable {
@@ -124,16 +128,12 @@ AbstractPage {
                     }
                 }
             }
-
-            Button {
-                text: editPost === "" ? qsTr("Submit") : qsTr("Save")
-                anchors.horizontalCenter: parent.horizontalCenter
-                enabled: (editPost != "" || linkTitle.text.length > 0) /* official limits? */
-                         && ((selfLinkSwitch.checked && linkDescription.text.length > 0) || (!selfLinkSwitch.checked && linkUrl.acceptableInput))
-                onClicked: submit()
-            }
         }
     }
+
+    canAccept: (editPost != "" || linkTitle.text.length > 0) /* official limits? */
+        && ((selfLinkSwitch.checked && linkDescription.text.length > 0) || (!selfLinkSwitch.checked && linkUrl.acceptableInput))
+    onAccepted: submit()
 
     AboutSubredditManager {
         id: aboutSubredditManager
