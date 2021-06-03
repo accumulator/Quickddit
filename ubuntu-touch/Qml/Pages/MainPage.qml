@@ -289,6 +289,7 @@ Page {
             BusyIndicator {
                 anchors.centerIn: parent
                 running: linkListView.count==0
+                visible: running
             }
         }
     }

@@ -47,9 +47,9 @@ Page {
 
             SwitchDelegate {
                 width: parent.width
-                text: qsTr("Show NSFW")
-                checked: persistantSettings.enableNSFW
-                onCheckedChanged: persistantSettings.enableNSFW = checked
+                text: qsTr("Blur NSFW")
+                checked: !persistantSettings.enableNSFW
+                onCheckedChanged: persistantSettings.enableNSFW = !checked
             }
 
             ItemDelegate {

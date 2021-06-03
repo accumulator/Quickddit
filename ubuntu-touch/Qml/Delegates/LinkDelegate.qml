@@ -27,7 +27,6 @@ import "../"
 ItemDelegate {
     id:linkDelegate
 
-    visible: !(!persistantSettings.enableNSFW && link.isNSFW)
     property bool compact: true
     property variant link
     property VoteManager linkVoteManager
@@ -37,7 +36,7 @@ ItemDelegate {
     property alias activeManager: pic.activeManager
     property alias imageUrl: pic.imageUrl
 
-    height: visible ? Math.max(titulok.height+pic.height+flairs.height,txt.height+titulok.height+flairs.height,thumb.height)+info.height+bottomRow.height : 0
+    height: Math.max(titulok.height+pic.height+flairs.height,txt.height+titulok.height+flairs.height,thumb.height)+info.height+bottomRow.height
 
     onClicked: {
         if(!compact&&link.domain.slice(5)!==link.subreddit)
@@ -102,7 +101,6 @@ ItemDelegate {
         text: link.title
         elide: Text.ElideRight
         maximumLineCount: compact && !thumb.visible ? 3 : 9999
-        height: thumb.visible && compact ? thumb.height - flairs.height : implicitHeight
         font.pixelSize: Suru.units.rem(1)
         font.weight: Font.DemiBold
         wrapMode: Text.Wrap
@@ -136,6 +134,8 @@ ItemDelegate {
         urlPost: !globalUtils.redditLink(link.url)&&!video&&!image
         link: linkDelegate.link
         visible: urlPost || (image && persistantSettings.compactImages && compact) || (video && persistantSettings.compactVideos)
+        layer.enabled: !persistantSettings.enableNSFW && link.isNSFW
+        layer.effect: FastBlur { radius: 64 }
     }
 
     //image
@@ -146,6 +146,8 @@ ItemDelegate {
         visible: previewableImage && !(persistantSettings.compactImages && compact)
         url: previewableImage&&!(compact &&persistantSettings.compactImages) ? link.url : ""
         previewUrl: link.previewUrl
+        layer.enabled: !persistantSettings.enableNSFW && link.isNSFW
+        layer.effect: FastBlur { radius: 64 }
     }
 
     PostButtonRow {

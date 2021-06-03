@@ -83,7 +83,7 @@ ApplicationWindow {
 
             Label {
                 id:titleLabel
-                font.pixelSize: Suru.units.rem(1)
+                font.pixelSize: Suru.units.rem(1.5)
                 font.weight: Font.Normal
                 color: Suru.color(Suru.White,1)
                 elide: "ElideRight"

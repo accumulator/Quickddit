@@ -176,6 +176,7 @@ Page {
     BusyIndicator {
         anchors.centerIn: parent
         running: !link
+        visible: running
     }
 
     ListView {
@@ -223,7 +224,7 @@ Page {
     Connections {
         target: QMLUtils
         onSaveImageSucceeded: {
-            infoBanner.alert("Image saved to Images");
+            infoBanner.alert("Image saved to " + name);
         }
 
         onSaveImageFailed: {
