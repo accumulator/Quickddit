@@ -25,7 +25,7 @@
         <location filename="../qml/AboutMultiredditPage.qml" line="38"/>
         <location filename="../qml/AboutMultiredditPage.qml" line="153"/>
         <source>Add Subreddit</source>
-        <translation>Adicionar Subreddit</translation>
+        <translation>Adicionar Comunidade</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="56"/>
@@ -40,7 +40,7 @@
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="70"/>
         <source>Subreddits</source>
-        <translation>Subreddits</translation>
+        <translation>Comunidades</translation>
     </message>
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="122"/>
@@ -55,7 +55,7 @@
     <message>
         <location filename="../qml/AboutMultiredditPage.qml" line="158"/>
         <source>Enter subreddit name</source>
-        <translation>Insira o nome do Subreddit</translation>
+        <translation>Insira o nome da Comunidade</translation>
     </message>
 </context>
 <context>
@@ -132,24 +132,24 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="55"/>
         <source>Unsubscribe</source>
-        <translation>Desinscrever</translation>
+        <translation>Sair</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="55"/>
         <source>Subscribe</source>
-        <translation>Inscrever</translation>
+        <translation>Unir-se</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="127"/>
         <source>This subreddit is Not Safe For Work</source>
-        <translation>Este subreddit Não é Seguro para o Trabalho</translation>
+        <translation>Esta Comunidade Não é Segura para o Trabalho</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/AboutSubredditPage.qml" line="143"/>
         <source>%n subscribers</source>
         <translation>
             <numerusform>%n inscrito</numerusform>
-            <numerusform>%n inscritos</numerusform>
+            <numerusform>%n membros</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -163,12 +163,12 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="156"/>
         <source>Subscribed</source>
-        <translation>Inscrito</translation>
+        <translation>Membro</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="156"/>
         <source>Not Subscribed</source>
-        <translation>Não inscrito</translation>
+        <translation>Não membro</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="161"/>
@@ -183,7 +183,7 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="163"/>
         <source>GoldRestricted</source>
-        <translation>Restrito a Gold</translation>
+        <translation>Somente Premiados</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="163"/>
@@ -228,12 +228,12 @@
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="226"/>
         <source>You have subscribed to %1</source>
-        <translation>Inscrito no %1</translation>
+        <translation>Você se uniu ao %1</translation>
     </message>
     <message>
         <location filename="../qml/AboutSubredditPage.qml" line="228"/>
         <source>You have unsubscribed from %1</source>
-        <translation>Desinscrito do %1</translation>
+        <translation>Você saiu do %1</translation>
     </message>
 </context>
 <context>
@@ -431,7 +431,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/CommentDelegate.qml" line="161"/>
         <source>Gilded</source>
-        <translation>Dourado</translation>
+        <translation>Premiado</translation>
     </message>
     <message>
         <location filename="../qml/CommentDelegate.qml" line="253"/>
@@ -564,7 +564,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>Top</source>
-        <translation>No topo</translation>
+        <translation>Top</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
@@ -574,7 +574,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
         <source>Hot</source>
-        <translation>Populares</translation>
+        <translation>Quentes</translation>
     </message>
     <message>
         <location filename="../qml/CommentPage.qml" line="41"/>
@@ -980,7 +980,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/PostInfoText.qml" line="63"/>
         <source>Gilded</source>
-        <translation>Dourado</translation>
+        <translation>Premiado</translation>
     </message>
     <message>
         <location filename="../qml/PostInfoText.qml" line="71"/>
@@ -1052,17 +1052,17 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/SearchDialog.qml" line="67"/>
         <source>Subreddits</source>
-        <translation>Subreddits</translation>
+        <translation>Comunidades</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="84"/>
         <source>Search within this subreddit:</source>
-        <translation>Buscar neste subreddit:</translation>
+        <translation>Buscar nesta Comunidade:</translation>
     </message>
     <message>
         <location filename="../qml/SearchDialog.qml" line="93"/>
         <source>Enter subreddit name</source>
-        <translation>Insira o nome do subreddit</translation>
+        <translation>Insira o nome da Comunidade</translation>
     </message>
 </context>
 <context>
@@ -1080,17 +1080,17 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>New</source>
-        <translation>Novo</translation>
+        <translation>Novos</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>Hot</source>
-        <translation>Popular</translation>
+        <translation>Quentes</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
         <source>Top</source>
-        <translation>No topo</translation>
+        <translation>Top</translation>
     </message>
     <message>
         <location filename="../qml/SearchPage.qml" line="31"/>
@@ -1156,19 +1156,19 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
         <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
         <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Hot</source>
-        <translation>Popular</translation>
+        <translation>Quentes</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
         <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>New</source>
-        <translation>Novo</translation>
+        <translation>Novos</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
         <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Rising</source>
-        <translation>Subindo</translation>
+        <translation>Em ascensão</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
@@ -1180,7 +1180,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
         <location filename="../qml/SectionSelectionDialog.qml" line="36"/>
         <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
         <source>Top</source>
-        <translation>No topo</translation>
+        <translation>Top</translation>
     </message>
     <message>
         <location filename="../qml/SectionSelectionDialog.qml" line="39"/>
@@ -1338,8 +1338,8 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
         <location filename="../qml/SubredditBrowseDelegate.qml" line="82"/>
         <source>%n subscribers</source>
         <translation>
-            <numerusform>%n inscrito</numerusform>
-            <numerusform>%n inscritos</numerusform>
+            <numerusform>%n membros</numerusform>
+            <numerusform>%n membros</numerusform>
         </translation>
     </message>
 </context>
@@ -1376,32 +1376,32 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="27"/>
         <source>Subreddits Search: %1</source>
-        <translation>Subreddits encontrados: %1</translation>
+        <translation>Comunidades encontradas: %1</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="36"/>
         <source>Popular Subreddits</source>
-        <translation>Subreddits Populares</translation>
+        <translation>Comunidades Populares</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="36"/>
         <source>New Subreddits</source>
-        <translation>Novos Subreddits</translation>
+        <translation>Novas Comunidades</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="37"/>
         <source>My Subreddits - Subscriber</source>
-        <translation>Meus Subreddits - Inscrever</translation>
+        <translation>Minhas Comunidades - Membro</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="37"/>
         <source>My Subreddits - Approved Submitter</source>
-        <translation>Meus Subreddits - Editor aprovado</translation>
+        <translation>Minhas Comunidades - Editor aprovado</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="37"/>
         <source>My Subreddits - Moderator</source>
-        <translation>Meus Subreddits - Moderador</translation>
+        <translation>Minhas Comunidades - Moderador</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="57"/>
@@ -1422,12 +1422,12 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="88"/>
         <source>Subscribe</source>
-        <translation>Inscrever-se</translation>
+        <translation>Unir-se</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="97"/>
         <source>Unsubscribe</source>
-        <translation>Desinscrever-se</translation>
+        <translation>Sair</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsBrowsePage.qml" line="118"/>
@@ -1445,7 +1445,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/SubredditsPage.qml" line="28"/>
         <source>Subreddits</source>
-        <translation>Subreddits</translation>
+        <translation>Comunidades</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="65"/>
@@ -1470,7 +1470,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/SubredditsPage.qml" line="100"/>
         <source>Go to a specific subreddit</source>
-        <translation>Insira o subreddit aqui</translation>
+        <translation>Insira a Comunidade aqui</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
@@ -1490,7 +1490,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
         <source>Browse for Subreddits...</source>
-        <translation>Listar Subreddits...</translation>
+        <translation>Listar Comunidades...</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="114"/>
@@ -1500,7 +1500,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/SubredditsPage.qml" line="135"/>
         <source>Subscribed Subreddits</source>
-        <translation>Subreddits inscritos</translation>
+        <translation>Membro das Comunidades</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="154"/>
@@ -1510,12 +1510,12 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/SubredditsPage.qml" line="160"/>
         <source>Unsubscribe</source>
-        <translation>Desinscrever-se</translation>
+        <translation>Sair</translation>
     </message>
     <message>
         <location filename="../qml/SubredditsPage.qml" line="226"/>
         <source>You have unsubscribed from %1</source>
-        <translation>Desinscrito do %1</translation>
+        <translation>Você saiu do %1</translation>
     </message>
 </context>
 <context>
@@ -1592,7 +1592,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/UserPage.qml" line="108"/>
         <source>Gold</source>
-        <translation>Dourado</translation>
+        <translation>Premiado</translation>
     </message>
     <message>
         <location filename="../qml/UserPage.qml" line="112"/>
@@ -1655,7 +1655,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/UserPageCommentDelegate.qml" line="61"/>
         <source>Gilded</source>
-        <translation>Dourado</translation>
+        <translation>Premiado</translation>
     </message>
     <message>
         <location filename="../qml/UserPageCommentDelegate.qml" line="85"/>
@@ -1683,7 +1683,7 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="87"/>
         <source>Gilded</source>
-        <translation>Dourado</translation>
+        <translation>Premiado</translation>
     </message>
     <message>
         <location filename="../qml/UserPageLinkDelegate.qml" line="96"/>
