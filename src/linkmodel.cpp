@@ -283,10 +283,6 @@ void LinkModel::refresh(bool refreshOlder)
 {
     QHash<QString,QString> parameters;
     parameters["limit"] = "50";
-    if (m_sectionTimeRange != AllTime) {
-        parameters["t"] = getTimeRangeString(m_sectionTimeRange);
-    }
-
     QString relativeUrl = getRelativeUrl();
 
     if (m_section == UndefinedSection) {
@@ -301,6 +297,10 @@ void LinkModel::refresh(bool refreshOlder)
                 break;
             }
         }
+    }
+
+    if (m_sectionTimeRange != AllTime) {
+        parameters["t"] = getTimeRangeString(m_sectionTimeRange);
     }
 
     if (m_location == Search) {
