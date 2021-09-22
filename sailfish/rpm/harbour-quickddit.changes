@@ -5,6 +5,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Wed Sep 22 2021 Sander van Grieken <sander@outrightsolutions.nl> 1.10.4-1
+- fix: time range from subreddit prefs shown but not applied
+- chg: update youtube-dl to 2021-06-06
+- chg: update translations (de and pt_BR)
+
 * Wed Apr 28 2021 Sander van Grieken <sander@outrightsolutions.nl> 1.10.3-1
 - fix: navigation attached page regression, was left empty after attaching it deeper in the page stack
 - chg: update youtube-dl to 2021-04-26
