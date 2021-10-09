@@ -1,3 +1,13 @@
+defined(REDDIT_CLIENT_ID, var) {
+       DEFINES += REDDIT_CLIENT_ID=\\\"$${REDDIT_CLIENT_ID}\\\"
+}
+defined(REDDIT_CLIENT_SECRET, var) {
+       DEFINES += REDDIT_CLIENT_SECRET=\\\"$${REDDIT_CLIENT_SECRET}\\\"
+}
+defined(REDDIT_REDIRECT_URL, var) {
+       DEFINES += REDDIT_REDIRECT_URL=\\\"$${REDDIT_REDIRECT_URL}\\\"
+}
+
 SOURCES += \
         $$PWD/aboutmultiredditmanager.cpp \
         $$PWD/aboutsubredditmanager.cpp \

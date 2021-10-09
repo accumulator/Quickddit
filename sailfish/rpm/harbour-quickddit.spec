@@ -34,7 +34,10 @@ Quickddit is a free and open source Reddit client for mobile phones.
 %build
 
 %qtc_qmake5  \
-    VERSION='%{version}'
+    VERSION='%{version}' \
+    %{?quickddit_reddit_client_id: REDDIT_CLIENT_ID=%{quickddit_reddit_client_id}} \
+    %{?quickddit_reddit_client_secret: REDDIT_CLIENT_SECRET=%{quickddit_reddit_client_secret}} \
+    %{?quickddit_reddit_redirect_url: REDDIT_REDIRECT_URL=%{quickddit_reddit_redirect_url}}
 
 %qtc_make %{?_smp_mflags}
 
