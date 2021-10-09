@@ -113,7 +113,6 @@ SOURCES += ../qt-json/json.cpp
 
 OTHER_FILES += \
     rpm/$${TARGET}.spec \
-    rpm/$${TARGET}.yaml \
     rpm/$${TARGET}.changes \
     $${TARGET}.desktop \
     $${TARGET}.png \
