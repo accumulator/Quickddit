@@ -18,6 +18,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import Sailfish.WebView 1.0 as SailfishWebview
 import harbour.quickddit.Core 1.0
 
 AbstractPage {
@@ -62,15 +63,9 @@ AbstractPage {
     Component {
         id: webViewComponent
 
-        SilicaWebView {
+        SailfishWebview.WebView {
             id: webView
 
-            experimental.overview: true
-            experimental.customLayoutWidth: webViewPage.width / (0.5 + QMLUtils.pScale)
-
-            onLoadingChanged: {
-                busy = loading
-            }
 
             PullDownMenu {
                 MenuItem {
@@ -99,20 +94,4 @@ AbstractPage {
             }
         }
     }
-
-    Rectangle {
-        id: overlay
-        visible: busy
-        anchors.fill: pageLoader
-        color: "black"
-        opacity: 0.5
-    }
-
-    BusyIndicator {
-        anchors.centerIn: overlay
-        running: overlay.visible
-        size: BusyIndicatorSize.Large
-    }
-
 }
-
