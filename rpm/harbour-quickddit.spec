@@ -23,6 +23,7 @@ BuildRequires:  pkgconfig(Qt5Network)
 BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  pkgconfig(nemonotifications-qt5)
 BuildRequires:  pkgconfig(keepalive)
+BuildRequires:  pkgconfig(qt5embedwidget)
 BuildRequires:  qt5-qttools-linguist
 
 %description

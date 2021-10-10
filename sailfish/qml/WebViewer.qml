@@ -1,6 +1,7 @@
 /*
     Quickddit - Reddit client for mobile phones
     Copyright (C) 2016  Sander van Grieken
+    Copyright (C) 2022  Björn Bidar
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,6 +19,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import Sailfish.WebView 1.0 as SailfishWebview
 import harbour.quickddit.Core 1.0
 
 AbstractPage {
@@ -47,7 +49,7 @@ AbstractPage {
         onStatusChanged: {
             if (pageLoader.status == Loader.Ready) {
                 if (sourceComponent === webViewComponent)
-                    item.url = url
+                    item.webView.url = url
             }
         }
     }
@@ -62,14 +64,22 @@ AbstractPage {
     Component {
         id: webViewComponent
 
-        SilicaWebView {
-            id: webView
+        SilicaFlickable {
+            id: webViewFlickable
+            anchors.fill: parent
+            property alias webView: webView
 
-            experimental.overview: true
-            experimental.customLayoutWidth: webViewPage.width / (0.5 + QMLUtils.pScale)
+            SailfishWebview.WebView {
+                id: webView
 
-            onLoadingChanged: {
-                busy = loading
+                visible: true
+
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                }
             }
 
             PullDownMenu {
@@ -99,20 +109,4 @@ AbstractPage {
             }
         }
     }
-
-    Rectangle {
-        id: overlay
-        visible: busy
-        anchors.fill: pageLoader
-        color: "black"
-        opacity: 0.5
-    }
-
-    BusyIndicator {
-        anchors.centerIn: overlay
-        running: overlay.visible
-        size: BusyIndicatorSize.Large
-    }
-
 }
-
