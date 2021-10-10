@@ -23,6 +23,7 @@ BuildRequires:  pkgconfig(Qt5Network)
 BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  pkgconfig(nemonotifications-qt5)
 BuildRequires:  pkgconfig(keepalive)
+BuildRequires:  qt5-qttools-linguist
 
 %description
 Quickddit is a free and open source Reddit client for mobile phones.
