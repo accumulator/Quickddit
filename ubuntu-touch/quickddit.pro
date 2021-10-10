@@ -24,8 +24,7 @@ SOURCES += \
         main.cpp
 
 # Qt-Json
-HEADERS += ../qt-json/json.h
-SOURCES += ../qt-json/json.cpp
+include(../qt-json/qt-json.pri)
 
 RESOURCES += qml.qrc
 CONF_FILES += \

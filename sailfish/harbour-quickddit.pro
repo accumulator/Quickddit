@@ -42,8 +42,7 @@ SOURCES += main.cpp \
     app_interface.cpp \
 
 # Qt-Json
-HEADERS += ../qt-json/json.h
-SOURCES += ../qt-json/json.cpp
+include(../qt-json/qt-json.pri)
 
 OTHER_FILES += \
     rpm/$${TARGET}.spec \
