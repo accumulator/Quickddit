@@ -39,6 +39,15 @@ def retrieveVideoInfo(url):
     except youtube_dl.utils.DownloadError as e:
         pyotherside.send('fail', ','.join(e.args))
 
+def isVideoUrlSupported(url):
+    for ie in youtube_dl.list_extractors(False):
+        if ie.suitable(url):
+            if not ie.working():
+                logger.debug('extractor ' + ie + " currently broken")
+                continue
+            return True
+    return False
+
 def downloadVideo(url):
     logger.debug('downloadVideo ' + str(url))
     # not implemented yet
