@@ -109,7 +109,7 @@ config_files.path = /
 config_files.files += $${CONF_FILES}
 INSTALLS += config_files
 
-youtube-dl.files = ../youtube-dl/youtube_dl
+youtube-dl.files = ../yt-dlp/yt_dlp
 youtube-dl.path = /
 
 INSTALLS += youtube-dl
