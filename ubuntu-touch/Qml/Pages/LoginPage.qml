@@ -21,16 +21,36 @@ import QtWebEngine 1.7
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Suru 2.2
 import quickddit.Core 1.0
-import Qt.labs.platform 1.0
+import "../"
 
 Page {
-    WebEngineView{
+
+    function getButtons(){
+        return toolButtons
+    }
+
+    Component {
+        id: toolButtons
+        Row {
+            ActionButton {
+                id:del
+                ico: "qrc:/Icons/reload.svg"
+                size: Suru.units.gu(3)
+                color: Suru.color(Suru.White,1)
+                onClicked: {
+                    loginPage.reload();
+                }
+            }
+        }
+    }
+
+    WebEngineView {
         anchors.fill: parent
         id:loginPage
-        settings.localContentCanAccessFileUrls: true
-        settings.localContentCanAccessRemoteUrls: true
         zoomFactor: Suru.units.dp(1.0)
-        profile: WebEngineProfile{
+        profile: WebEngineProfile {
+            offTheRecord: false
+            storageName: "Default"
             persistentStoragePath: StandardPaths.writableLocation(StandardPaths.DataLocation).toString().substring(7)
         }
 
@@ -42,6 +62,23 @@ Page {
         }
     }
 
+    Dialog {
+        id:loginDialog
+        title: qsTr("Login issue")
+        standardButtons: Dialog.Close
+
+        anchors.centerIn: parent
+
+        Label {
+            width: parent.width
+            text: qsTr("If you are unable to login, \nplease click reload button at the top right corner")
+        }
+    }
+
+    Component.onCompleted: {
+        loginPage.url = quickdditManager.generateAuthorizationUrl();
+        loginDialog.open();
+    }
 
     Connections {
         target: quickdditManager
@@ -56,5 +93,4 @@ Page {
             infoBanner.warning(qsTr("error"));
         }
     }
-    Component.onCompleted: loginPage.url = quickdditManager.generateAuthorizationUrl();
 }

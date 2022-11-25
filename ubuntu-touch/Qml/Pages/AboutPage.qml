@@ -68,7 +68,7 @@ Page {
             Label {
                 text: qsTr("A free and open source Reddit client for mobile phones") +
                       "\nv" + APP_VERSION + "\n"+
-                      "Copyright (c) 2015-2020 Sander van Grieken\n" +
+                      "Copyright (c) 2015-2022 Sander van Grieken\n" +
                       "Copyright (c) 2013-2014 Dickson Leong\n\n" +
                       "Ubuntu touch port by Daniel Kutka \n\n" +
                       qsTr("App icon by Andrew Zhilin") + "\n\n" +

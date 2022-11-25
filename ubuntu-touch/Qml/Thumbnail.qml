@@ -47,8 +47,11 @@ Image {
         if (video) {
             return Qt.resolvedUrl("qrc:/Icons/video.svg")
         }
+        if(String(link.domain).startsWith("self."))
+            return ""
+        else
+            return "https://api.faviconkit.com/" + link.domain+"/144"
 
-        return "https://api.faviconkit.com/" + link.domain+"/144"
     }
 
     MouseArea {
