@@ -18,7 +18,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Sailfish.WebView 1.0 as SailfishWebview
+import Sailfish.WebView 1.0
 import harbour.quickddit.Core 1.0
 
 AbstractPage {
@@ -47,8 +47,9 @@ AbstractPage {
         sourceComponent: placeholderComponent
         onStatusChanged: {
             if (pageLoader.status == Loader.Ready) {
-                if (sourceComponent === webViewComponent)
-                    item.url = url
+                if (sourceComponent === webViewComponent) {
+                    item.webView.url = url;
+                }
             }
         }
     }
@@ -63,9 +64,21 @@ AbstractPage {
     Component {
         id: webViewComponent
 
-        SailfishWebview.WebView {
-            id: webView
+        SilicaFlickable {
+            id: webViewFlickable
+            anchors.fill: parent
+            property alias webView: webView
 
+            WebView {
+                id: webView
+                visible: true
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                }
+            }
 
             PullDownMenu {
                 MenuItem {
