@@ -1,2 +1,9 @@
+# packaging leftovers
+*.list
+
+# qdbusxml2cpp generated files
 app_adaptor*
 app_interface*
+
+# application binary
+harbour-quickddit

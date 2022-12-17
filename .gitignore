@@ -21,6 +21,9 @@ Makefile*
 *build-*
 build
 
+# Qt translations binary format
+*.qm
+
 # QtCreator
 
 *.autosave
