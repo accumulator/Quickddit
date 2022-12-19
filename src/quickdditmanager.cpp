@@ -138,7 +138,7 @@ APIRequest *QuickdditManager::createRedditRequest(QObject *parent, APIRequest::H
 
 QUrl QuickdditManager::generateAuthorizationUrl()
 {
-    QUrl url("https://ssl.reddit.com/api/v1/authorize.compact");
+    QUrl url("https://www.reddit.com/api/v1/authorize");
 
     QHash<QString, QString> parameters;
     parameters.insert("response_type", "code");
