@@ -30,6 +30,21 @@ AbstractPage {
 
         property bool _completed: false
 
+
+        PullDownMenu {
+            MenuItem {
+                text: quickdditManager.isSignedIn ? qsTr("Sign out") : qsTr("Sign in to Reddit")
+                onClicked: {
+                    if (quickdditManager.isSignedIn) {
+                        quickdditManager.signOut();
+                        infoBanner.alert(qsTr("You have signed out from Reddit"));
+                    } else {
+                        pageStack.push(Qt.resolvedUrl("SignInPage.qml"));
+                    }
+                }
+            }
+        }
+
         Component.onCompleted: _completed = true
         Binding {
             // late-bind model as SilicaListView stubbornly positions view at first item otherwise.

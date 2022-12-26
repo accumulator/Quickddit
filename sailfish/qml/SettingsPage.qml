@@ -1,20 +1,10 @@
 /*
-    Quickddit - Reddit client for mobile phones
-    Copyright (C) 2014  Dickson Leong
-    Copyright (C) 2015-2018  Sander van Grieken
+  Quickddit - Reddit client for mobile phones
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+  SPDX-FileCopyrightText:  Copyright (C) 2014  Dickson Leong
+  SPDX-FileCopyrightText:  Copyright (C) 2015-2018  Sander van Grieken
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see [http://www.gnu.org/licenses/].
+  SPDX-License-Identifier: GPL-3.0-or-later
 */
 
 import QtQuick 2.0
@@ -28,6 +18,13 @@ AbstractPage {
     SilicaListView {
         id: settingFlickable
         anchors.fill: parent
+
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Accounts")
+                onClicked: pageStack.push(Qt.resolvedUrl("AccountsPage.qml"));
+            }
+        }
 
         header: Column {
             id: settingColumn
@@ -187,59 +184,6 @@ AbstractPage {
                 onCheckedChanged: {
                     settings.useTor = checked;
                 }
-            }
-
-            SectionHeader { text: qsTr("Account") }
-
-            Text {
-                anchors { left: parent.left; right: parent.right }
-                font.pixelSize: constant.fontSizeMedium
-                color: constant.colorLight
-                horizontalAlignment: Text.AlignHCenter
-                text: quickdditManager.isSignedIn ? qsTr("Signed in to Reddit as") : qsTr("Not signed in")
-            }
-
-            Text {
-                anchors { left: parent.left; right: parent.right }
-                font.pixelSize: constant.fontSizeLarge
-                color: Theme.secondaryHighlightColor
-                visible: quickdditManager.isSignedIn
-                horizontalAlignment: Text.AlignHCenter
-                text: appSettings.redditUsername
-            }
-
-            Rectangle {
-                color: "transparent"
-                height: 20
-                width: 1
-            }
-
-            Row {
-                anchors.horizontalCenter: parent.horizontalCenter
-                spacing: constant.paddingMedium
-
-                Button {
-                    text: quickdditManager.isSignedIn ? qsTr("Sign out") : qsTr("Sign in to Reddit")
-                    onClicked: {
-                        if (quickdditManager.isSignedIn) {
-                            quickdditManager.signOut();
-                            infoBanner.alert(qsTr("You have signed out from Reddit"));
-                         } else {
-                            pageStack.push(Qt.resolvedUrl("SignInPage.qml"));
-                        }
-                    }
-                }
-
-                Button {
-                    text: qsTr("Accounts")
-                    onClicked: pageStack.push(Qt.resolvedUrl("AccountsPage.qml"));
-                }
-            }
-
-            Rectangle {
-                color: "transparent"
-                height: constant.paddingLarge
-                width: 1
             }
         }
     }
