@@ -20,7 +20,7 @@
 
 #include <QtNetwork/QNetworkReply>
 
-#include "appsettings.h"
+#include "settings.h"
 #include "commentmodel.h"
 #include "parser.h"
 

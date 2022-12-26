@@ -14,7 +14,7 @@ SOURCES += \
         $$PWD/abstractlistmodelmanager.cpp \
         $$PWD/abstractmanager.cpp \
         $$PWD/apirequest.cpp \
-        $$PWD/appsettings.cpp \
+        $$PWD/settings.cpp \
         $$PWD/commentmanager.cpp \
         $$PWD/commentmodel.cpp \
         $$PWD/commentobject.cpp \
@@ -52,7 +52,7 @@ HEADERS += \
     $$PWD/abstractlistmodelmanager.h \
     $$PWD/abstractmanager.h \
     $$PWD/apirequest.h \
-    $$PWD/appsettings.h \
+    $$PWD/settings.h \
     $$PWD/commentmanager.h \
     $$PWD/commentmodel.h \
     $$PWD/commentobject.h \

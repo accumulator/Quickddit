@@ -24,7 +24,7 @@
 
 #include "utils.h"
 #include "parser.h"
-#include "appsettings.h"
+#include "settings.h"
 
 QVariantMap MessageModel::toMessageVariantMap(const MessageObject &m)
 {

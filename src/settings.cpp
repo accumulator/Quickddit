@@ -17,29 +17,29 @@
     along with this program.  If not, see [http://www.gnu.org/licenses/].
 */
 
-#include "appsettings.h"
+#include "settings.h"
 
 #include <QtCore/QSettings>
 #include <QDebug>
 
-AppSettings::AppSettings(QObject *parent) :
+Settings::Settings(QObject *parent) :
     QObject(parent), m_settings(new QSettings(this))
 {
     m_commentsTapToHide = m_settings->value("commentsTapToHide", true).toBool();
-    m_fontSize = static_cast<FontSize>(m_settings->value("fontSize", AppSettings::SmallFontSize).toInt());
+    m_fontSize = static_cast<FontSize>(m_settings->value("fontSize", Settings::SmallFontSize).toInt());
     m_redditUsername = m_settings->value("redditUsername").toString();
     m_refreshToken = m_settings->value("refreshToken").toByteArray();
-    m_orientationProfile = static_cast<OrientationProfile>(m_settings->value("orientationProfile", AppSettings::DynamicProfile).toInt());
+    m_orientationProfile = static_cast<OrientationProfile>(m_settings->value("orientationProfile", Settings::DynamicProfile).toInt());
     m_lastSeenMessage = m_settings->value("lastSeenMessage").toString();
     m_pollUnread = m_settings->value("pollUnread", true).toBool();
-    m_thumbnailScale = static_cast<ThumbnailScale>(m_settings->value("thumbnailScale", AppSettings::ScaleAuto).toInt());
+    m_thumbnailScale = static_cast<ThumbnailScale>(m_settings->value("thumbnailScale", Settings::ScaleAuto).toInt());
     m_showLinkType = m_settings->value("showLinkType", false).toBool();
     m_loopVideos = m_settings->value("loopVideos", false).toBool();
     m_subredditSection = m_settings->value("subredditSection", 0).toInt();
     m_messageSection = m_settings->value("messageSection", 0).toInt();
     m_commentSort = m_settings->value("commentSort", 0).toInt();
     m_useTor = m_settings->value("useTor", false).toBool();
-    m_preferredVideoSize = static_cast<VideoSize>(m_settings->value("preferredVideoSize", AppSettings::VS360).toInt());
+    m_preferredVideoSize = static_cast<VideoSize>(m_settings->value("preferredVideoSize", Settings::VS360).toInt());
     m_filteredSubreddits = m_settings->value("filteredSubreddits").toStringList();
 
     int size;
@@ -82,12 +82,12 @@ AppSettings::AppSettings(QObject *parent) :
     }
 }
 
-bool AppSettings::commentsTapToHide() const
+bool Settings::commentsTapToHide() const
 {
     return m_commentsTapToHide;
 }
 
-void AppSettings::setCommentsTapToHide(bool commentsTapToHide)
+void Settings::setCommentsTapToHide(bool commentsTapToHide)
 {
     if (m_commentsTapToHide != commentsTapToHide) {
         m_commentsTapToHide = commentsTapToHide;
@@ -96,12 +96,12 @@ void AppSettings::setCommentsTapToHide(bool commentsTapToHide)
     }
 }
 
-AppSettings::FontSize AppSettings::fontSize() const
+Settings::FontSize Settings::fontSize() const
 {
     return m_fontSize;
 }
 
-void AppSettings::setFontSize(AppSettings::FontSize fontSize)
+void Settings::setFontSize(Settings::FontSize fontSize)
 {
     if (m_fontSize != fontSize) {
         m_fontSize = fontSize;
@@ -110,12 +110,12 @@ void AppSettings::setFontSize(AppSettings::FontSize fontSize)
     }
 }
 
-QString AppSettings::redditUsername() const
+QString Settings::redditUsername() const
 {
     return m_redditUsername;
 }
 
-void AppSettings::setRedditUsername(const QString &username)
+void Settings::setRedditUsername(const QString &username)
 {
     if (m_redditUsername != username) {
         m_redditUsername = username;
@@ -127,12 +127,12 @@ void AppSettings::setRedditUsername(const QString &username)
     }
 }
 
-QByteArray AppSettings::refreshToken() const
+QByteArray Settings::refreshToken() const
 {
     return m_refreshToken;
 }
 
-void AppSettings::setRefreshToken(const QByteArray &token)
+void Settings::setRefreshToken(const QByteArray &token)
 {
     m_refreshToken = token;
 
@@ -142,17 +142,17 @@ void AppSettings::setRefreshToken(const QByteArray &token)
         m_settings->remove("refreshToken");
 }
 
-bool AppSettings::hasRefreshToken() const
+bool Settings::hasRefreshToken() const
 {
     return !m_refreshToken.isEmpty();
 }
 
-AppSettings::OrientationProfile AppSettings::orientationProfile() const
+Settings::OrientationProfile Settings::orientationProfile() const
 {
     return m_orientationProfile;
 }
 
-void AppSettings::setOrientationProfile(const AppSettings::OrientationProfile profile)
+void Settings::setOrientationProfile(const Settings::OrientationProfile profile)
 {
     if (m_orientationProfile != profile) {
         m_orientationProfile = profile;
@@ -161,12 +161,12 @@ void AppSettings::setOrientationProfile(const AppSettings::OrientationProfile pr
     }
 }
 
-QString AppSettings::lastSeenMessage() const
+QString Settings::lastSeenMessage() const
 {
     return m_lastSeenMessage;
 }
 
-void AppSettings::setLastSeenMessage(const QString &lastSeenMessage)
+void Settings::setLastSeenMessage(const QString &lastSeenMessage)
 {
     if (m_lastSeenMessage != lastSeenMessage) {
         m_lastSeenMessage = lastSeenMessage;
@@ -174,12 +174,12 @@ void AppSettings::setLastSeenMessage(const QString &lastSeenMessage)
     }
 }
 
-bool AppSettings::pollUnread() const
+bool Settings::pollUnread() const
 {
     return m_pollUnread;
 }
 
-void AppSettings::setPollUnread(const bool pollUnread)
+void Settings::setPollUnread(const bool pollUnread)
 {
     if (m_pollUnread != pollUnread) {
         m_pollUnread = pollUnread;
@@ -188,12 +188,12 @@ void AppSettings::setPollUnread(const bool pollUnread)
     }
 }
 
-AppSettings::ThumbnailScale AppSettings::thumbnailScale() const
+Settings::ThumbnailScale Settings::thumbnailScale() const
 {
     return m_thumbnailScale;
 }
 
-void AppSettings::setThumbnailScale(const AppSettings::ThumbnailScale scale)
+void Settings::setThumbnailScale(const Settings::ThumbnailScale scale)
 {
     if (m_thumbnailScale != scale) {
         m_thumbnailScale = scale;
@@ -202,12 +202,12 @@ void AppSettings::setThumbnailScale(const AppSettings::ThumbnailScale scale)
     }
 }
 
-bool AppSettings::showLinkType() const
+bool Settings::showLinkType() const
 {
     return m_showLinkType;
 }
 
-void AppSettings::setShowLinkType(const bool showLinkType)
+void Settings::setShowLinkType(const bool showLinkType)
 {
     if (m_showLinkType != showLinkType) {
         m_showLinkType = showLinkType;
@@ -216,12 +216,12 @@ void AppSettings::setShowLinkType(const bool showLinkType)
     }
 }
 
-bool AppSettings::loopVideos() const
+bool Settings::loopVideos() const
 {
     return m_loopVideos;
 }
 
-void AppSettings::setLoopVideos(const bool loopVideos)
+void Settings::setLoopVideos(const bool loopVideos)
 {
     if (m_loopVideos != loopVideos) {
         m_loopVideos = loopVideos;
@@ -230,12 +230,12 @@ void AppSettings::setLoopVideos(const bool loopVideos)
     }
 }
 
-int AppSettings::subredditSection() const
+int Settings::subredditSection() const
 {
     return m_subredditSection;
 }
 
-void AppSettings::setSubredditSection(const int subredditSection)
+void Settings::setSubredditSection(const int subredditSection)
 {
     if (m_subredditSection != subredditSection) {
         m_subredditSection = subredditSection;
@@ -244,12 +244,12 @@ void AppSettings::setSubredditSection(const int subredditSection)
     }
 }
 
-int AppSettings::messageSection() const
+int Settings::messageSection() const
 {
     return m_messageSection;
 }
 
-void AppSettings::setMessageSection(const int messageSection)
+void Settings::setMessageSection(const int messageSection)
 {
     if (m_messageSection != messageSection) {
         m_messageSection = messageSection;
@@ -258,12 +258,12 @@ void AppSettings::setMessageSection(const int messageSection)
     }
 }
 
-int AppSettings::commentSort() const
+int Settings::commentSort() const
 {
     return m_commentSort;
 }
 
-void AppSettings::setCommentSort(const int commentSort)
+void Settings::setCommentSort(const int commentSort)
 {
     if (m_commentSort != commentSort) {
         m_commentSort = commentSort;
@@ -272,12 +272,12 @@ void AppSettings::setCommentSort(const int commentSort)
     }
 }
 
-bool AppSettings::useTor() const
+bool Settings::useTor() const
 {
     return m_useTor;
 }
 
-void AppSettings::setUseTor(const bool useTor)
+void Settings::setUseTor(const bool useTor)
 {
     if (m_useTor != useTor) {
         m_useTor = useTor;
@@ -286,12 +286,12 @@ void AppSettings::setUseTor(const bool useTor)
     }
 }
 
-AppSettings::VideoSize AppSettings::preferredVideoSize() const
+Settings::VideoSize Settings::preferredVideoSize() const
 {
     return m_preferredVideoSize;
 }
 
-void AppSettings::setPreferredVideoSize(const AppSettings::VideoSize preferredVideoSize)
+void Settings::setPreferredVideoSize(const Settings::VideoSize preferredVideoSize)
 {
     if (m_preferredVideoSize != preferredVideoSize) {
         m_preferredVideoSize = preferredVideoSize;
@@ -300,12 +300,12 @@ void AppSettings::setPreferredVideoSize(const AppSettings::VideoSize preferredVi
     }
 }
 
-QList<AppSettings::SubredditPrefs> AppSettings::subredditPrefs() const
+QList<Settings::SubredditPrefs> Settings::subredditPrefs() const
 {
     return m_subredditPrefs;
 }
 
-void AppSettings::setSubredditPrefs(const QList<SubredditPrefs> subredditPrefs)
+void Settings::setSubredditPrefs(const QList<SubredditPrefs> subredditPrefs)
 {
     m_subredditPrefs = subredditPrefs;
 
@@ -320,12 +320,12 @@ void AppSettings::setSubredditPrefs(const QList<SubredditPrefs> subredditPrefs)
     emit subredditPrefsChanged();
 }
 
-QList<AppSettings::AccountData> AppSettings::accounts() const
+QList<Settings::AccountData> Settings::accounts() const
 {
     return m_accounts;
 }
 
-QStringList AppSettings::accountNames() const
+QStringList Settings::accountNames() const
 {
     QStringList result;
     for (int i = 0; i < m_accounts.size(); ++i) {
@@ -334,7 +334,7 @@ QStringList AppSettings::accountNames() const
     return result;
 }
 
-void AppSettings::setAccounts(const QList<AppSettings::AccountData> accounts)
+void Settings::setAccounts(const QList<Settings::AccountData> accounts)
 {
     m_accounts = accounts;
 
@@ -349,7 +349,7 @@ void AppSettings::setAccounts(const QList<AppSettings::AccountData> accounts)
     emit accountsChanged();
 }
 
-void AppSettings::removeAccount(const QString& accountName)
+void Settings::removeAccount(const QString& accountName)
 {
     QList<AccountData> accountlist = accounts();
     for (int i = 0; i < accountlist.size(); ++i) {
@@ -361,7 +361,7 @@ void AppSettings::removeAccount(const QString& accountName)
     }
 }
 
-QStringList AppSettings::filteredSubreddits() const
+QStringList Settings::filteredSubreddits() const
 {
     return m_filteredSubreddits;
 }

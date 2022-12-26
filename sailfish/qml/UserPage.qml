@@ -26,7 +26,7 @@ AbstractPage {
 
     property string username;
 
-    property bool myself: appSettings.redditUsername === username && username !== ""
+    property bool myself: settings.redditUsername === username && username !== ""
 
     readonly property variant sectionModel: [qsTr("Overview"), qsTr("Comments"), qsTr("Submitted")]
     readonly property variant sectionModelMy: [qsTr("Overview"), qsTr("Comments"), qsTr("Submitted"), qsTr("Upvoted"), qsTr("Downvoted"), qsTr("Saved Things")]
@@ -205,7 +205,7 @@ AbstractPage {
                         onLinkChanged: console.log(link.author);
                         signal deleteLink
                         MenuItem {
-                            enabled: quickdditManager.isSignedIn && !userThingModel.busy && !link.isArchived && link.author === appSettings.redditUsername
+                            enabled: quickdditManager.isSignedIn && !userThingModel.busy && !link.isArchived && link.author === settings.redditUsername
                             text: qsTr("Delete")
                             onClicked: deleteLink()
                         }

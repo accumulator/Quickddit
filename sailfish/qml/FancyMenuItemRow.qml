@@ -63,7 +63,7 @@ Row {
     // first xpos change event is received _after_ we receive the events from
     // the contextmenu, so this is for initialising xpos in those cases.
     function updateXPosFromMenu() {
-        if (contextMenu.listItem && appSettings.commentsTapToHide) { // if listItem is set, events are produced relative listItem
+        if (contextMenu.listItem && settings.commentsTapToHide) { // if listItem is set, events are produced relative listItem
             xPos = _contentColumn.mapFromItem(contextMenu.listItem, contextMenu.listItem.mouseX, contextMenu.listItem.mouseY).x;
         } else {
             xPos = _contentColumn.mapFromItem(contextMenu, contextMenu.mouseX, contextMenu.mouseY).x;

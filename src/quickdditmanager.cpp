@@ -30,7 +30,7 @@
 #include <QtCore/QUrlQuery>
 #endif
 
-#include "appsettings.h"
+#include "settings.h"
 #include "utils.h"
 
 #if !defined(REDDIT_CLIENT_ID) || !defined(REDDIT_CLIENT_SECRET) || !defined(REDDIT_REDIRECT_URL)
@@ -76,12 +76,12 @@ void QuickdditManager::setSignedIn(const bool signedIn)
     emit signedInChanged();
 }
 
-AppSettings *QuickdditManager::settings() const
+Settings *QuickdditManager::settings() const
 {
     return m_settings;
 }
 
-void QuickdditManager::setSettings(AppSettings *settings)
+void QuickdditManager::setSettings(Settings *settings)
 {
     m_settings = settings;
     connect(m_settings, SIGNAL(useTorChanged()), SLOT(onUseTorChanged()));
@@ -349,13 +349,13 @@ void QuickdditManager::saveOrAddAccountInfo()
 {
     qDebug() << "saveRefreshToken" << m_settings->refreshToken() << m_settings->redditUsername();
 
-    AppSettings::AccountData data;
+    Settings::AccountData data;
     data.accountName = m_settings->redditUsername();
     data.refreshToken = m_settings->refreshToken();
     data.lastSeenMessage = m_settings->lastSeenMessage();
 
     bool found = false;
-    QList<AppSettings::AccountData> accountlist = m_settings->accounts();
+    QList<Settings::AccountData> accountlist = m_settings->accounts();
     for (int i=0; i < accountlist.size(); ++i) {
         if (accountlist.at(i).accountName == m_settings->redditUsername()) {
             found = true;
@@ -373,7 +373,7 @@ void QuickdditManager::saveOrAddAccountInfo()
 
 void QuickdditManager::selectAccount(QString accountName)
 {
-    QList<AppSettings::AccountData> accountlist = m_settings->accounts();
+    QList<Settings::AccountData> accountlist = m_settings->accounts();
     for (int i=0; i < accountlist.size(); ++i) {
         if (accountlist.at(i).accountName == accountName) {
             signOut();

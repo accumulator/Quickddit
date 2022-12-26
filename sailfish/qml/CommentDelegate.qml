@@ -100,8 +100,8 @@ Item {
         showMenuOnPressAndHold: false
         visible: moreChildrenLoader.status == Loader.Null || model.view === "reply"
 
-        onPressAndHold: appSettings.commentsTapToHide ? requestMenu() : collapse(index)
-        onClicked: appSettings.commentsTapToHide ? collapse(index) : requestMenu()
+        onPressAndHold: settings.commentsTapToHide ? requestMenu() : collapse(index)
+        onClicked: settings.commentsTapToHide ? collapse(index) : requestMenu()
 
         function collapse(index) {
             commentPage.morechildren_animation = true;
@@ -347,9 +347,9 @@ Item {
                 property real buttonScale: __buttonScale()
 
                 function __buttonScale() {
-                    switch (appSettings.fontSize) {
-                    case AppSettings.TinyFontSize: return 0.75;
-                    case AppSettings.SmallFontSize: return 0.90;
+                    switch (settings.fontSize) {
+                    case Settings.TinyFontSize: return 0.75;
+                    case Settings.SmallFontSize: return 0.90;
                     default: return 1;
                     }
                 }
@@ -382,9 +382,9 @@ Item {
                 property real buttonScale: __buttonScale()
 
                 function __buttonScale() {
-                    switch (appSettings.fontSize) {
-                    case AppSettings.TinyFontSize: return 0.75;
-                    case AppSettings.SmallFontSize: return 0.90;
+                    switch (settings.fontSize) {
+                    case Settings.TinyFontSize: return 0.75;
+                    case Settings.SmallFontSize: return 0.90;
                     default: return 1;
                     }
                 }
@@ -413,9 +413,9 @@ Item {
                 property real buttonScale: __buttonScale()
 
                 function __buttonScale() {
-                    switch (appSettings.fontSize) {
-                    case AppSettings.TinyFontSize: return 0.75;
-                    case AppSettings.SmallFontSize: return 0.90;
+                    switch (settings.fontSize) {
+                    case Settings.TinyFontSize: return 0.75;
+                    case Settings.SmallFontSize: return 0.90;
                     default: return 1;
                     }
                 }

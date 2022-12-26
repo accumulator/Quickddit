@@ -21,7 +21,7 @@
 
 #include "userthingmodel.h"
 #include "utils.h"
-#include "appsettings.h"
+#include "settings.h"
 
 UserThingModel::UserThingModel(QObject *parent) :
   AbstractListModelManager(parent), m_section(OverviewSection)

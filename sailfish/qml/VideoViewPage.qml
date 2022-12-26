@@ -60,7 +60,7 @@ AbstractPage {
                     // clamp number of loops so we loop for 1 minute max (holy holy battery)
                     if (duration < 0)
                         return
-                    if (!appSettings.loopVideos)
+                    if (!settings.loopVideos)
                         return
                     if (duration == 0)
                         loops = 1
@@ -264,7 +264,7 @@ AbstractPage {
                     urls["other"] = formats[0]["url"]
             }
 
-            if (appSettings.preferredVideoSize === AppSettings.VS360) {
+            if (settings.preferredVideoSize === Settings.VS360) {
                 if (urls["360"] === undefined)
                     console.log("360p selected but fallback to 720p")
                 mediaPlayer.source = urls["360"] !== undefined ? urls["360"] : urls["720"] !== undefined ? urls["720"] : urls["other"]

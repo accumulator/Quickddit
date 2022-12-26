@@ -68,13 +68,13 @@ AbstractPage {
 
             MenuItem {
                 text: qsTr("Settings")
-                onClicked: replacePage(Qt.resolvedUrl("AppSettingsPage.qml"))
+                onClicked: replacePage(Qt.resolvedUrl("SettingsPage.qml"))
             }
 
             MenuItem {
                 enabled: quickdditManager.isSignedIn
                 text: qsTr("My Profile")
-                onClicked: replacePage(Qt.resolvedUrl("UserPage.qml"), {username: appSettings.redditUsername});
+                onClicked: replacePage(Qt.resolvedUrl("UserPage.qml"), {username: settings.redditUsername});
             }
 
             MenuItem {

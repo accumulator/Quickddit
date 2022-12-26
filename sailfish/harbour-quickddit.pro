@@ -71,7 +71,7 @@ OTHER_FILES += \
     qml/CommentPage.qml \
     qml/CommentMenu.qml \
     qml/CommentDelegate.qml \
-    qml/AppSettingsPage.qml \
+    qml/SettingsPage.qml \
     qml/AboutSubredditPage.qml \
     qml/AboutPage.qml \
     qml/AbstractPage.qml \

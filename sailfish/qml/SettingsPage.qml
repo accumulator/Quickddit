@@ -22,8 +22,8 @@ import Sailfish.Silica 1.0
 import harbour.quickddit.Core 1.0
 
 AbstractPage {
-    id: appSettingsPage
-    title: qsTr("App Settings")
+    id: settingsPage
+    title: qsTr("Settings")
 
     SilicaListView {
         id: settingFlickable
@@ -33,18 +33,18 @@ AbstractPage {
             id: settingColumn
             width: parent.width
 
-            QuickdditPageHeader { title: appSettingsPage.title }
+            QuickdditPageHeader { title: settingsPage.title }
 
             SectionHeader { text: qsTr("UX") }
 
             ComboBox {
                 label: qsTr("Font Size")
                 currentIndex:  {
-                    switch (appSettings.fontSize) {
-                    case AppSettings.TinyFontSize: return 0;
-                    case AppSettings.SmallFontSize: return 1;
-                    case AppSettings.MediumFontSize: return 2;
-                    case AppSettings.LargeFontSize: return 3;
+                    switch (settings.fontSize) {
+                    case Settings.TinyFontSize: return 0;
+                    case Settings.SmallFontSize: return 1;
+                    case Settings.MediumFontSize: return 2;
+                    case Settings.LargeFontSize: return 3;
                     }
                 }
                 menu: ContextMenu {
@@ -55,10 +55,10 @@ AbstractPage {
                 }
                 onCurrentIndexChanged: {
                     switch (currentIndex) {
-                    case 0: appSettings.fontSize = AppSettings.TinyFontSize; break;
-                    case 1: appSettings.fontSize = AppSettings.SmallFontSize; break;
-                    case 2: appSettings.fontSize = AppSettings.MediumFontSize; break;
-                    case 3: appSettings.fontSize = AppSettings.LargeFontSize; break;
+                    case 0: settings.fontSize = Settings.TinyFontSize; break;
+                    case 1: settings.fontSize = Settings.SmallFontSize; break;
+                    case 2: settings.fontSize = Settings.MediumFontSize; break;
+                    case 3: settings.fontSize = Settings.LargeFontSize; break;
                     }
                 }
             }
@@ -66,10 +66,10 @@ AbstractPage {
             ComboBox {
                 label: qsTr("Device Orientation")
                 currentIndex:  {
-                    switch (appSettings.orientationProfile) {
-                    case AppSettings.DynamicProfile: return 0;
-                    case AppSettings.PortraitOnlyProfile: return 1;
-                    case AppSettings.LandscapeOnlyProfile: return 2;
+                    switch (settings.orientationProfile) {
+                    case Settings.DynamicProfile: return 0;
+                    case Settings.PortraitOnlyProfile: return 1;
+                    case Settings.LandscapeOnlyProfile: return 2;
                     }
                 }
                 menu: ContextMenu {
@@ -79,9 +79,9 @@ AbstractPage {
                 }
                 onCurrentIndexChanged: {
                     switch (currentIndex) {
-                    case 0: appSettings.orientationProfile = AppSettings.DynamicProfile; break;
-                    case 1: appSettings.orientationProfile = AppSettings.PortraitOnlyProfile; break;
-                    case 2: appSettings.orientationProfile = AppSettings.LandscapeOnlyProfile; break;
+                    case 0: settings.orientationProfile = Settings.DynamicProfile; break;
+                    case 1: settings.orientationProfile = Settings.PortraitOnlyProfile; break;
+                    case 2: settings.orientationProfile = Settings.LandscapeOnlyProfile; break;
                     }
                 }
             }
@@ -89,14 +89,14 @@ AbstractPage {
             ComboBox {
                 label: qsTr("Thumbnail Size")
                 currentIndex:  {
-                    switch (appSettings.thumbnailScale) {
-                    case AppSettings.ScaleAuto: return 0;
-                    case AppSettings.Scale100: return 1;
-                    case AppSettings.Scale125: return 2;
-                    case AppSettings.Scale150: return 3;
-                    case AppSettings.Scale175: return 4;
-                    case AppSettings.Scale200: return 5;
-                    case AppSettings.Scale250: return 6;
+                    switch (settings.thumbnailScale) {
+                    case Settings.ScaleAuto: return 0;
+                    case Settings.Scale100: return 1;
+                    case Settings.Scale125: return 2;
+                    case Settings.Scale150: return 3;
+                    case Settings.Scale175: return 4;
+                    case Settings.Scale200: return 5;
+                    case Settings.Scale250: return 6;
                     }
                 }
                 menu: ContextMenu {
@@ -110,30 +110,30 @@ AbstractPage {
                 }
                 onCurrentIndexChanged: {
                     switch (currentIndex) {
-                    case 0: appSettings.thumbnailScale = AppSettings.ScaleAuto; break;
-                    case 1: appSettings.thumbnailScale = AppSettings.Scale100; break;
-                    case 2: appSettings.thumbnailScale = AppSettings.Scale125; break;
-                    case 3: appSettings.thumbnailScale = AppSettings.Scale150; break;
-                    case 4: appSettings.thumbnailScale = AppSettings.Scale175; break;
-                    case 5: appSettings.thumbnailScale = AppSettings.Scale200; break;
-                    case 6: appSettings.thumbnailScale = AppSettings.Scale250; break;
+                    case 0: settings.thumbnailScale = Settings.ScaleAuto; break;
+                    case 1: settings.thumbnailScale = Settings.Scale100; break;
+                    case 2: settings.thumbnailScale = Settings.Scale125; break;
+                    case 3: settings.thumbnailScale = Settings.Scale150; break;
+                    case 4: settings.thumbnailScale = Settings.Scale175; break;
+                    case 5: settings.thumbnailScale = Settings.Scale200; break;
+                    case 6: settings.thumbnailScale = Settings.Scale250; break;
                     }
                 }
             }
 
             TextSwitch {
                 text: qsTr("Thumbnail Link Type Indicator")
-                checked: appSettings.showLinkType;
+                checked: settings.showLinkType;
                 onCheckedChanged: {
-                    appSettings.showLinkType = checked;
+                    settings.showLinkType = checked;
                 }
             }
 
             TextSwitch {
                 text: qsTr("Comments Tap To Hide")
-                checked: appSettings.commentsTapToHide;
+                checked: settings.commentsTapToHide;
                 onCheckedChanged: {
-                    appSettings.commentsTapToHide = checked;
+                    settings.commentsTapToHide = checked;
                 }
             }
 
@@ -141,10 +141,10 @@ AbstractPage {
 
             TextSwitch {
                 text: qsTr("Check Messages")
-                checked: appSettings.pollUnread;
+                checked: settings.pollUnread;
                 enabled: quickdditManager.isSignedIn
                 onCheckedChanged: {
-                    appSettings.pollUnread = checked;
+                    settings.pollUnread = checked;
                 }
             }
 
@@ -153,9 +153,9 @@ AbstractPage {
             ComboBox {
                 label: qsTr("Preferred Video Size")
                 currentIndex:  {
-                    switch (appSettings.preferredVideoSize) {
-                    case AppSettings.VS360: return 0;
-                    case AppSettings.VS720: return 1;
+                    switch (settings.preferredVideoSize) {
+                    case Settings.VS360: return 0;
+                    case Settings.VS720: return 1;
                     }
                 }
                 menu: ContextMenu {
@@ -164,17 +164,17 @@ AbstractPage {
                 }
                 onCurrentIndexChanged: {
                     switch (currentIndex) {
-                    case 0: appSettings.preferredVideoSize = AppSettings.VS360; break;
-                    case 1: appSettings.preferredVideoSize = AppSettings.VS720; break;
+                    case 0: settings.preferredVideoSize = Settings.VS360; break;
+                    case 1: settings.preferredVideoSize = Settings.VS720; break;
                     }
                 }
             }
 
             TextSwitch {
                 text: qsTr("Loop Videos")
-                checked: appSettings.loopVideos;
+                checked: settings.loopVideos;
                 onCheckedChanged: {
-                    appSettings.loopVideos = checked;
+                    settings.loopVideos = checked;
                 }
             }
 
@@ -183,9 +183,9 @@ AbstractPage {
             TextSwitch {
                 text: qsTr("Use Tor")
                 description: qsTr("When enabled, please make sure Tor is installed and active.")
-                checked: appSettings.useTor;
+                checked: settings.useTor;
                 onCheckedChanged: {
-                    appSettings.useTor = checked;
+                    settings.useTor = checked;
                 }
             }
 

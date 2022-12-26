@@ -195,7 +195,7 @@ ApplicationWindow {
         }
     }
 
-    AppSettings { id: appSettings }
+    Settings { id: appSettings }
 
     Settings {
         id: persistantSettings
@@ -221,7 +221,7 @@ ApplicationWindow {
         onAccessTokenFailure: {
             if (code == 299 /* QNetworkReply::UnknownContentError */) {
                 infoBanner.warning(qsTr("Please log in again"));
-                pageStack.push(Qt.resolvedUrl("Qml/Pages/AppSettingsPage.qml"));
+                pageStack.push(Qt.resolvedUrl("Qml/Pages/SettingsPage.qml"));
             } else {
                 infoBanner.warning(errorString);
             }

@@ -52,7 +52,7 @@ AbstractPage {
 
         PullDownMenu {
             MenuItem {
-                visible: link.author === appSettings.redditUsername
+                visible: link.author === settings.redditUsername
                 enabled: !link.isArchived
                 text: qsTr("Edit Post")
                 onClicked: {
@@ -72,7 +72,7 @@ AbstractPage {
                 onClicked: globalUtils.createSelectionDialog(qsTr("Sort"), commentSortModel, commentModel.sort,
                 function (selectedIndex) {
                     commentModel.sort = selectedIndex;
-                    appSettings.commentSort = selectedIndex;
+                    settings.commentSort = selectedIndex;
                     refresh(false);
                 });
             }

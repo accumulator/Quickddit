@@ -127,7 +127,7 @@ Page {
                     urls["other"] = formats[0]["url"]
             }
 
-            if (appSettings.preferredVideoSize === AppSettings.VS360) {
+            if (appSettings.preferredVideoSize === Settings.VS360) {
                 if (urls["360"] === undefined)
                     console.log("360p selected but fallback to 720p")
                 webView.url = urls["360"] !== undefined ? urls["360"] : urls["720"] !== undefined ? urls["720"] : urls["other"]

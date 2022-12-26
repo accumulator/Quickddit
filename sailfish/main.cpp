@@ -29,7 +29,7 @@
 #include <dbusapp.h>
 #include <keepalive/displayblanking.h>
 
-#include "src/appsettings.h"
+#include "src/settings.h"
 #include "src/qmlutils.h"
 #include "src/quickdditmanager.h"
 #include "src/linkmodel.h"
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
     app->setOrganizationDomain("harbour-quickddit");
     app->setApplicationVersion(APP_VERSION);
 
-    qmlRegisterType<AppSettings>("harbour.quickddit.Core", 1, 0, "AppSettings");
+    qmlRegisterType<Settings>("harbour.quickddit.Core", 1, 0, "Settings");
     qmlRegisterType<QuickdditManager>("harbour.quickddit.Core", 1, 0, "QuickdditManager");
     qmlRegisterType<LinkModel>("harbour.quickddit.Core", 1, 0, "LinkModel");
     qmlRegisterType<CommentModel>("harbour.quickddit.Core", 1, 0, "CommentModel");

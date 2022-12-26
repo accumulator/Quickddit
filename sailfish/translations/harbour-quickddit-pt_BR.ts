@@ -244,181 +244,43 @@
         <translation>Contas</translation>
     </message>
     <message>
-        <location filename="../qml/AccountsPage.qml" line="78"/>
+        <location filename="../qml/AccountsPage.qml" line="36"/>
+        <source>Sign out</source>
+        <translation type="unfinished">Fazer logout</translation>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="36"/>
+        <source>Sign in to Reddit</source>
+        <translation type="unfinished">Fazer login no Reddit</translation>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="40"/>
+        <source>You have signed out from Reddit</source>
+        <translation type="unfinished">Logout do Reddit feito</translation>
+    </message>
+    <message>
+        <location filename="../qml/AccountsPage.qml" line="93"/>
         <source>Remove %1 account</source>
         <translation>Remover conta %1</translation>
     </message>
     <message>
-        <location filename="../qml/AccountsPage.qml" line="95"/>
+        <location filename="../qml/AccountsPage.qml" line="110"/>
         <source>Activate</source>
         <translation>Ativar</translation>
     </message>
     <message>
-        <location filename="../qml/AccountsPage.qml" line="99"/>
+        <location filename="../qml/AccountsPage.qml" line="114"/>
         <source>Remove</source>
         <translation>Remover</translation>
     </message>
     <message>
-        <location filename="../qml/AccountsPage.qml" line="108"/>
+        <location filename="../qml/AccountsPage.qml" line="123"/>
         <source>No known accounts yet.
 
 To add accounts, simply log in. Quickddit will remember succesful logins and list the accounts here</source>
         <translation>Não há nenhuma conta configurada.
 
 Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas já usadas no Quickddit.</translation>
-    </message>
-</context>
-<context>
-    <name>AppSettingsPage</name>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="26"/>
-        <source>App Settings</source>
-        <translation>Configurações do Aplicativo</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="38"/>
-        <source>UX</source>
-        <translation>Interface</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="41"/>
-        <source>Font Size</source>
-        <translation>Tamanho da fonte</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="51"/>
-        <source>Tiny</source>
-        <translation>Minúsculo</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="52"/>
-        <source>Small</source>
-        <translation>Pequeno</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="53"/>
-        <source>Medium</source>
-        <translation>Médio</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="54"/>
-        <source>Large</source>
-        <translation>Grande</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="67"/>
-        <source>Device Orientation</source>
-        <translation>Orientação</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="76"/>
-        <source>Automatic</source>
-        <translation>Dinâmica</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="77"/>
-        <source>Portrait only</source>
-        <translation>Retrato</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="78"/>
-        <source>Landscape only</source>
-        <translation>Paisagem</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="90"/>
-        <source>Thumbnail Size</source>
-        <translation>Tamanho da miniatura</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="103"/>
-        <source>Auto</source>
-        <translation>Automático</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="125"/>
-        <source>Thumbnail Link Type Indicator</source>
-        <translation>Ícone para links</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="133"/>
-        <source>Comments Tap To Hide</source>
-        <translation>Tocar para esconder comentário</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="140"/>
-        <source>Notifications</source>
-        <translation>Notificações</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="143"/>
-        <source>Check Messages</source>
-        <translation>Verificar mensagens</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="151"/>
-        <source>Media</source>
-        <translation>Mídia</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="154"/>
-        <source>Preferred Video Size</source>
-        <translation>Resolução de vídeo</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="174"/>
-        <source>Loop Videos</source>
-        <translation>Repetir vídeo</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="181"/>
-        <source>Connection</source>
-        <translation>Conexão</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="184"/>
-        <source>Use Tor</source>
-        <translation>Usar Tor</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="185"/>
-        <source>When enabled, please make sure Tor is installed and active.</source>
-        <translation>Quando habilitado verificar se Tor está instalado e ativo.</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="192"/>
-        <source>Account</source>
-        <translation>Conta</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="199"/>
-        <source>Signed in to Reddit as</source>
-        <translation>Logado no Reddit como</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="199"/>
-        <source>Not signed in</source>
-        <translation>Nenhuma conta ativada</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="222"/>
-        <source>Sign out</source>
-        <translation>Fazer logout</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="222"/>
-        <source>Sign in to Reddit</source>
-        <translation>Fazer login no Reddit</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="226"/>
-        <source>You have signed out from Reddit</source>
-        <translation>Logout do Reddit feito</translation>
-    </message>
-    <message>
-        <location filename="../qml/AppSettingsPage.qml" line="234"/>
-        <source>Accounts</source>
-        <translation>Contas</translation>
     </message>
 </context>
 <context>
@@ -1310,26 +1172,145 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
     </message>
 </context>
 <context>
+    <name>Settings</name>
+    <message>
+        <location filename="../qml/Settings.qml" line="16"/>
+        <source>Settings</source>
+        <translation type="unfinished">Configurações</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="24"/>
+        <source>Accounts</source>
+        <translation type="unfinished">Contas</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="36"/>
+        <source>UX</source>
+        <translation type="unfinished">Interface</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="39"/>
+        <source>Font Size</source>
+        <translation type="unfinished">Tamanho da fonte</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="49"/>
+        <source>Tiny</source>
+        <translation type="unfinished">Minúsculo</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="50"/>
+        <source>Small</source>
+        <translation type="unfinished">Pequeno</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="51"/>
+        <source>Medium</source>
+        <translation type="unfinished">Médio</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="52"/>
+        <source>Large</source>
+        <translation type="unfinished">Grande</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="65"/>
+        <source>Device Orientation</source>
+        <translation type="unfinished">Orientação</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="74"/>
+        <source>Automatic</source>
+        <translation type="unfinished">Dinâmica</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="75"/>
+        <source>Portrait only</source>
+        <translation type="unfinished">Retrato</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="76"/>
+        <source>Landscape only</source>
+        <translation type="unfinished">Paisagem</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="88"/>
+        <source>Thumbnail Size</source>
+        <translation type="unfinished">Tamanho da miniatura</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="101"/>
+        <source>Auto</source>
+        <translation type="unfinished">Automático</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="123"/>
+        <source>Thumbnail Link Type Indicator</source>
+        <translation type="unfinished">Ícone para links</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="131"/>
+        <source>Comments Tap To Hide</source>
+        <translation type="unfinished">Tocar para esconder comentário</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="138"/>
+        <source>Notifications</source>
+        <translation type="unfinished">Notificações</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="141"/>
+        <source>Check Messages</source>
+        <translation type="unfinished">Verificar mensagens</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="149"/>
+        <source>Media</source>
+        <translation type="unfinished">Mídia</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="152"/>
+        <source>Preferred Video Size</source>
+        <translation type="unfinished">Resolução de vídeo</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="172"/>
+        <source>Loop Videos</source>
+        <translation type="unfinished">Repetir vídeo</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="179"/>
+        <source>Connection</source>
+        <translation type="unfinished">Conexão</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="182"/>
+        <source>Use Tor</source>
+        <translation type="unfinished">Usar Tor</translation>
+    </message>
+    <message>
+        <location filename="../qml/Settings.qml" line="183"/>
+        <source>When enabled, please make sure Tor is installed and active.</source>
+        <translation type="unfinished">Quando habilitado verificar se Tor está instalado e ativo.</translation>
+    </message>
+</context>
+<context>
     <name>SignInPage</name>
     <message>
-        <location filename="../qml/SignInPage.qml" line="24"/>
+        <location filename="../qml/SignInPage.qml" line="19"/>
+        <location filename="../qml/SignInPage.qml" line="32"/>
         <source>Sign in to Reddit</source>
-        <translation>Fazer login no Reddit</translation>
+        <translation type="unfinished">Fazer login no Reddit</translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="47"/>
+        <location filename="../qml/SignInPage.qml" line="37"/>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="54"/>
-        <source>Reload</source>
-        <translation>Atualizar</translation>
-    </message>
-    <message>
-        <location filename="../qml/SignInPage.qml" line="66"/>
+        <location filename="../qml/SignInPage.qml" line="91"/>
         <source>Sign in successful! Welcome! :)</source>
-        <translation>Login realizado com sucesso! Bem-vindo! :)</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1776,32 +1757,32 @@ Para adicionar uma conta faça um Login. Aqui estarão listadas todas as contas 
 <context>
     <name>WebViewer</name>
     <message>
-        <location filename="../qml/WebViewer.qml" line="25"/>
+        <location filename="../qml/WebViewer.qml" line="27"/>
         <source>WebViewer</source>
         <translation>WebViewer</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="77"/>
+        <location filename="../qml/WebViewer.qml" line="87"/>
         <source>Copy URL</source>
         <translation>Copiar endereço</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="80"/>
+        <location filename="../qml/WebViewer.qml" line="90"/>
         <source>URL copied to clipboard</source>
         <translation>Endereço copiado para a área de transferência</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="84"/>
+        <location filename="../qml/WebViewer.qml" line="94"/>
         <source>Open in browser</source>
         <translation>Abrir no navegador</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="90"/>
+        <location filename="../qml/WebViewer.qml" line="100"/>
         <source>Back</source>
         <translation>Voltar</translation>
     </message>
     <message>
-        <location filename="../qml/WebViewer.qml" line="95"/>
+        <location filename="../qml/WebViewer.qml" line="105"/>
         <source>Forward</source>
         <translation>Avançar</translation>
     </message>

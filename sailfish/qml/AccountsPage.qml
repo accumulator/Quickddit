@@ -37,7 +37,7 @@ AbstractPage {
             when: accountsFlickable._completed
             target: accountsFlickable
             property: "model"
-            value: appSettings.accountNames
+            value: settings.accountNames
         }
 
         header: Column {
@@ -48,7 +48,7 @@ AbstractPage {
 
         delegate: ListItem {
             id: listItem
-            enabled: modelData !== appSettings.redditUsername
+            enabled: modelData !== settings.redditUsername
 
             Row {
                 anchors.verticalCenter: parent.verticalCenter
@@ -56,12 +56,12 @@ AbstractPage {
 
                 IconButton {
                     icon.source: "image://theme/icon-m-person"
-                    highlighted: listItem.highlighted || appSettings.redditUsername === modelData
+                    highlighted: listItem.highlighted || settings.redditUsername === modelData
                     anchors.verticalCenter: parent.verticalCenter
                 }
 
                 Text {
-                    color: listItem.highlighted || appSettings.redditUsername === modelData ? Theme.highlightColor : constant.colorLight
+                    color: listItem.highlighted || settings.redditUsername === modelData ? Theme.highlightColor : constant.colorLight
                     font.pixelSize: constant.fontSizeLarger
                     font.bold: true
                     text: modelData
@@ -76,7 +76,7 @@ AbstractPage {
                 var dialog = openMenu({item: modelData});
                 dialog.removeAccount.connect(function() {
                     listItem.remorseAction(qsTr("Remove %1 account").arg(modelData), function() {
-                        appSettings.removeAccount(modelData);
+                        settings.removeAccount(modelData);
                     })
                 });
                 dialog.activateAccount.connect(function() {
@@ -104,7 +104,7 @@ AbstractPage {
         }
 
         ViewPlaceholder {
-            enabled: appSettings.accountNames.length === 0;
+            enabled: settings.accountNames.length === 0;
             text: qsTr("No known accounts yet.\n\nTo add accounts, simply log in. Quickddit will remember succesful logins and list the accounts here")
         }
         VerticalScrollDecorator {}

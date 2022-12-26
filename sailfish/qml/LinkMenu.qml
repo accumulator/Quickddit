@@ -77,7 +77,7 @@ FancyContextMenu {
 
     MenuItem {
         text: qsTr("Delete")
-        visible: quickdditManager.isSignedIn && !link.isArchived && link.author === appSettings.redditUsername
+        visible: quickdditManager.isSignedIn && !link.isArchived && link.author === settings.redditUsername
         enabled: !linkVoteManager.busy
         onClicked: deleteLink()
     }
