@@ -5,3 +5,7 @@ Name=Quickddit
 Icon=harbour-quickddit
 Exec=harbour-quickddit
 
+[X-SailJail]
+Permissions=Internet;Audio;Pictures;WebView
+OrganizationName=nl.outrightsolutions
+ApplicationName=Quickddit
