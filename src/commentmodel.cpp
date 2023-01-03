@@ -31,7 +31,7 @@
 
 #include "utils.h"
 #include "parser.h"
-#include "appsettings.h"
+#include "settings.h"
 #include "linkmodel.h"
 
 static QRegExp commentPermalinkRegExp("(/r/\\w+)?/comments/\\w+/\\w*/(\\w+/?)");

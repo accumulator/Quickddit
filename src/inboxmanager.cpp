@@ -19,7 +19,7 @@
 #include <QDebug>
 
 #include "inboxmanager.h"
-#include "appsettings.h"
+#include "settings.h"
 #include "messageobject.h"
 #include "messagemodel.h"
 

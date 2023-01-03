@@ -259,154 +259,154 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     </message>
 </context>
 <context>
-    <name>AppSettingsPage</name>
+    <name>SettingsPage</name>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="26"/>
+        <location filename="../qml/SettingsPage.qml" line="26"/>
         <source>App Settings</source>
         <translation>Alkalmazásbeállítások</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="38"/>
+        <location filename="../qml/SettingsPage.qml" line="38"/>
         <source>UX</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="41"/>
+        <location filename="../qml/SettingsPage.qml" line="41"/>
         <source>Font Size</source>
         <translation>Betűméret</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="51"/>
+        <location filename="../qml/SettingsPage.qml" line="51"/>
         <source>Tiny</source>
         <translation>Icipici</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="52"/>
+        <location filename="../qml/SettingsPage.qml" line="52"/>
         <source>Small</source>
         <translation>Kicsi</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="53"/>
+        <location filename="../qml/SettingsPage.qml" line="53"/>
         <source>Medium</source>
         <translation>Közepes</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="54"/>
+        <location filename="../qml/SettingsPage.qml" line="54"/>
         <source>Large</source>
         <translation>Nagy</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="67"/>
+        <location filename="../qml/SettingsPage.qml" line="67"/>
         <source>Device Orientation</source>
         <translation>Készülékorientáció</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="76"/>
+        <location filename="../qml/SettingsPage.qml" line="76"/>
         <source>Automatic</source>
         <translation>Automatikus</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="77"/>
+        <location filename="../qml/SettingsPage.qml" line="77"/>
         <source>Portrait only</source>
         <translation>Csak függőleges</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="78"/>
+        <location filename="../qml/SettingsPage.qml" line="78"/>
         <source>Landscape only</source>
         <translation>Csak vízszintes</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="90"/>
+        <location filename="../qml/SettingsPage.qml" line="90"/>
         <source>Thumbnail Size</source>
         <translation>Miniatűrök mérete</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="103"/>
+        <location filename="../qml/SettingsPage.qml" line="103"/>
         <source>Auto</source>
         <translation>Automatikus</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="125"/>
+        <location filename="../qml/SettingsPage.qml" line="125"/>
         <source>Thumbnail Link Type Indicator</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="133"/>
+        <location filename="../qml/SettingsPage.qml" line="133"/>
         <source>Comments Tap To Hide</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="140"/>
+        <location filename="../qml/SettingsPage.qml" line="140"/>
         <source>Notifications</source>
         <translation>Értesítések</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="143"/>
+        <location filename="../qml/SettingsPage.qml" line="143"/>
         <source>Check Messages</source>
         <translation>Üzenetek ellenőrzése</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="151"/>
+        <location filename="../qml/SettingsPage.qml" line="151"/>
         <source>Media</source>
         <translation>Média</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="154"/>
+        <location filename="../qml/SettingsPage.qml" line="154"/>
         <source>Preferred Video Size</source>
         <translation>Preferált videóméret</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="174"/>
+        <location filename="../qml/SettingsPage.qml" line="174"/>
         <source>Loop Videos</source>
         <translation>Videók végtelelnítése</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="181"/>
+        <location filename="../qml/SettingsPage.qml" line="181"/>
         <source>Connection</source>
         <translation>Kapcsolat</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="184"/>
+        <location filename="../qml/SettingsPage.qml" line="184"/>
         <source>Use Tor</source>
         <translation>Tor használata</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="185"/>
+        <location filename="../qml/SettingsPage.qml" line="185"/>
         <source>When enabled, please make sure Tor is installed and active.</source>
         <translation>Ha engedélyezve van, bizonyosodj meg, hogy a Tor telepítve van és aktív.</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="192"/>
+        <location filename="../qml/SettingsPage.qml" line="192"/>
         <source>Account</source>
         <translation>Fiók</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="199"/>
+        <location filename="../qml/SettingsPage.qml" line="199"/>
         <source>Signed in to Reddit as</source>
         <translation>Bejelentkeztél a Reddit-be mint</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="199"/>
+        <location filename="../qml/SettingsPage.qml" line="199"/>
         <source>Not signed in</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="222"/>
+        <location filename="../qml/SettingsPage.qml" line="222"/>
         <source>Sign out</source>
         <translation>Kijelentkezés</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="222"/>
+        <location filename="../qml/SettingsPage.qml" line="222"/>
         <source>Sign in to Reddit</source>
         <translation>Bejelentkezés a Reddit-be</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="226"/>
+        <location filename="../qml/SettingsPage.qml" line="226"/>
         <source>You have signed out from Reddit</source>
         <translation>Kijelentkeztél a Reddit-ből</translation>
     </message>
     <message>
-        <location filename="../qml/AppSettingsPage.qml" line="234"/>
+        <location filename="../qml/SettingsPage.qml" line="234"/>
         <source>Accounts</source>
         <translation type="unfinished"/>
     </message>

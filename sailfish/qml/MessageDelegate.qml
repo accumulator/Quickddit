@@ -92,7 +92,7 @@ Item {
                 maximumLineCount: 2
                 elide: Text.ElideRight
                 text: isComment ? qsTr("in %1").arg("/r/" + model.subreddit) + " · " + model.created
-                                : (model.author === appSettings.redditUsername)
+                                : (model.author === settings.redditUsername)
                                   ? qsTr("to %1").arg(model.destination)
                                   : (model.author !== "")
                                     ? qsTr("from %1").arg(model.author) + " · " + model.created

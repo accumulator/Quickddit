@@ -4,7 +4,7 @@
 #include <QQmlContext>
 #include <QSettings>
 
-#include "src/appsettings.h"
+#include "src/settings.h"
 #include "src/qmlutils.h"
 #include "src/quickdditmanager.h"
 #include "src/linkmodel.h"
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<AppSettings>("quickddit.Core", 1, 0, "AppSettings");
+    qmlRegisterType<Settings>("quickddit.Core", 1, 0, "Settings");
     qmlRegisterType<QuickdditManager>("quickddit.Core", 1, 0, "QuickdditManager");
     qmlRegisterType<LinkModel>("quickddit.Core", 1, 0, "LinkModel");
     qmlRegisterType<CommentModel>("quickddit.Core", 1, 0, "CommentModel");

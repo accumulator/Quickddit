@@ -25,95 +25,27 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 # to force harbour compatibility.
 #CONFIG += harbour
 
-PKGCONFIG += sailfishapp nemonotifications-qt5 keepalive
+PKGCONFIG += sailfishapp nemonotifications-qt5 keepalive qt5embedwidget
 
 INCLUDEPATH += ..
+
+include(../src/src.pri)
 
 HEADERS += \
     dbusapp.h \
     app_adaptor.h \
     app_interface.h \
-    ../src/linkmanager.h \
-    ../src/linkobject.h \
-    ../src/linkmodel.h \
-    ../src/utils.h \
-    ../src/quickdditmanager.h \
-    ../src/abstractmanager.h \
-    ../src/abstractlistmodelmanager.h \
-    ../src/parser.h \
-    ../src/aboutsubredditmanager.h \
-    ../src/appsettings.h \
-    ../src/commentobject.h \
-    ../src/commentmodel.h \
-    ../src/subredditobject.h \
-    ../src/subredditmodel.h \
-    ../src/qmlutils.h \
-    ../src/imgurmanager.h \
-    ../src/gallerymanager.h \
-    ../src/votemanager.h \
-    ../src/commentmanager.h \
-    ../src/multiredditobject.h \
-    ../src/multiredditmodel.h \
-    ../src/messageobject.h \
-    ../src/messagemodel.h \
-    ../src/messagemanager.h \
-    ../src/apirequest.h \
-    ../src/aboutmultiredditmanager.h \
-    ../src/inboxmanager.h \
-    ../src/usermanager.h \
-    ../src/userobject.h \
-    ../src/userthingmodel.h \
-    ../src/thing.h \
-    ../src/savemanager.h \
-    ../src/subredditmanager.h \
-    ../src/flairmanager.h
 
 SOURCES += main.cpp \
     dbusapp.cpp \
     app_adaptor.cpp \
     app_interface.cpp \
-    ../src/linkmanager.cpp \
-    ../src/linkobject.cpp \
-    ../src/linkmodel.cpp \
-    ../src/utils.cpp \
-    ../src/quickdditmanager.cpp \
-    ../src/abstractmanager.cpp \
-    ../src/abstractlistmodelmanager.cpp \
-    ../src/parser.cpp \
-    ../src/aboutsubredditmanager.cpp \
-    ../src/appsettings.cpp \
-    ../src/commentobject.cpp \
-    ../src/commentmodel.cpp \
-    ../src/subredditobject.cpp \
-    ../src/subredditmodel.cpp \
-    ../src/qmlutils.cpp \
-    ../src/imgurmanager.cpp \
-    ../src/gallerymanager.cpp \
-    ../src/votemanager.cpp \
-    ../src/commentmanager.cpp \
-    ../src/multiredditmodel.cpp \
-    ../src/multiredditobject.cpp \
-    ../src/messageobject.cpp \
-    ../src/messagemodel.cpp \
-    ../src/messagemanager.cpp \
-    ../src/apirequest.cpp \
-    ../src/aboutmultiredditmanager.cpp \
-    ../src/inboxmanager.cpp \
-    ../src/usermanager.cpp \
-    ../src/userobject.cpp \
-    ../src/userthingmodel.cpp \
-    ../src/thing.cpp \
-    ../src/savemanager.cpp \
-    ../src/subredditmanager.cpp \
-    ../src/flairmanager.cpp
 
 # Qt-Json
-HEADERS += ../qt-json/json.h
-SOURCES += ../qt-json/json.cpp
+include(../qt-json/qt-json.pri)
 
 OTHER_FILES += \
     rpm/$${TARGET}.spec \
-    rpm/$${TARGET}.yaml \
     rpm/$${TARGET}.changes \
     $${TARGET}.desktop \
     $${TARGET}.png \
@@ -139,7 +71,7 @@ OTHER_FILES += \
     qml/CommentPage.qml \
     qml/CommentMenu.qml \
     qml/CommentDelegate.qml \
-    qml/AppSettingsPage.qml \
+    qml/SettingsPage.qml \
     qml/AboutSubredditPage.qml \
     qml/AboutPage.qml \
     qml/AbstractPage.qml \

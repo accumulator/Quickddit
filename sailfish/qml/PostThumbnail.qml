@@ -42,19 +42,19 @@ Image {
     }
 
     Connections {
-        target: appSettings
+        target: settings
         onThumbnailScaleChanged: applyScale()
     }
 
     function applyScale() {
         var scale = QMLUtils.pScale // ScaleAuto
-        switch (appSettings.thumbnailScale) {
-        case AppSettings.Scale100: scale = 1; break;
-        case AppSettings.Scale125: scale = 1.25; break;
-        case AppSettings.Scale150: scale = 1.5; break;
-        case AppSettings.Scale175: scale = 1.75; break;
-        case AppSettings.Scale200: scale = 2; break;
-        case AppSettings.Scale250: scale = 2.5; break;
+        switch (settings.thumbnailScale) {
+        case Settings.Scale100: scale = 1; break;
+        case Settings.Scale125: scale = 1.25; break;
+        case Settings.Scale150: scale = 1.5; break;
+        case Settings.Scale175: scale = 1.75; break;
+        case Settings.Scale200: scale = 2; break;
+        case Settings.Scale250: scale = 2.5; break;
         }
 
         width = sourceSize.width * scale
@@ -76,7 +76,7 @@ Image {
     Image {
         id: linkTypeIndicator
         opacity: 0.8
-        visible: appSettings.showLinkType && showLinkTypeIndicator && thumbnail.status === Image.Ready
+        visible: settings.showLinkType && showLinkTypeIndicator && thumbnail.status === Image.Ready
         width: 24 * QMLUtils.pScale
         height: 24 * QMLUtils.pScale
         source: globalUtils.previewableImage(link.url) ? "image://theme/icon-m-image?" + Theme.primaryColor

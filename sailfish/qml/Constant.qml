@@ -60,37 +60,37 @@ QtObject {
     }
 
     function __fontSizeDefaultF() {
-        switch (appSettings.fontSize) {
-        case AppSettings.TinyFontSize: return constant.fontSizeXSmall;
-        case AppSettings.SmallFontSize: return constant.fontSizeSmall;
-        case AppSettings.MediumFontSize: return constant.fontSizeMedium;
-        case AppSettings.LargeFontSize: return constant.fontSizeLarge;
+        switch (settings.fontSize) {
+        case Settings.TinyFontSize: return constant.fontSizeXSmall;
+        case Settings.SmallFontSize: return constant.fontSizeSmall;
+        case Settings.MediumFontSize: return constant.fontSizeMedium;
+        case Settings.LargeFontSize: return constant.fontSizeLarge;
         }
     }
 
     function __fontSizeSmallerF() {
-        switch (appSettings.fontSize) {
-        case AppSettings.TinyFontSize: return constant.fontSizeXSmall - 1;
-        case AppSettings.SmallFontSize: return constant.fontSizeXSmall;
-        case AppSettings.MediumFontSize: return constant.fontSizeSmall;
-        case AppSettings.LargeFontSize: return constant.fontSizeMedium;
+        switch (settings.fontSize) {
+        case Settings.TinyFontSize: return constant.fontSizeXSmall - 1;
+        case Settings.SmallFontSize: return constant.fontSizeXSmall;
+        case Settings.MediumFontSize: return constant.fontSizeSmall;
+        case Settings.LargeFontSize: return constant.fontSizeMedium;
         }
     }
 
     function __fontSizeLargerF() {
-        switch (appSettings.fontSize) {
-        case AppSettings.TinyFontSize: return constant.fontSizeSmall;
-        case AppSettings.SmallFontSize: return constant.fontSizeMedium;
-        case AppSettings.MediumFontSize: return constant.fontSizeLarge;
-        case AppSettings.LargeFontSize: return constant.fontSizeXLarge;
+        switch (settings.fontSize) {
+        case Settings.TinyFontSize: return constant.fontSizeSmall;
+        case Settings.SmallFontSize: return constant.fontSizeMedium;
+        case Settings.MediumFontSize: return constant.fontSizeLarge;
+        case Settings.LargeFontSize: return constant.fontSizeXLarge;
         }
     }
 
     function __orientationSettingF() {
-        switch (appSettings.orientationProfile) {
-        case AppSettings.DynamicProfile: return Orientation.All;
-        case AppSettings.PortraitOnlyProfile: return Orientation.Portrait;
-        case AppSettings.LandscapeOnlyProfile: return Orientation.Landscape;
+        switch (settings.orientationProfile) {
+        case Settings.DynamicProfile: return Orientation.All;
+        case Settings.PortraitOnlyProfile: return Orientation.Portrait;
+        case Settings.LandscapeOnlyProfile: return Orientation.Landscape;
         }
     }
 

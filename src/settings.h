@@ -25,7 +25,7 @@
 
 class QSettings;
 
-class AppSettings : public QObject
+class Settings : public QObject
 {
     Q_OBJECT
     Q_ENUMS(FontSize)
@@ -88,7 +88,7 @@ public:
         int sectionTimeRange;
     };
 
-    explicit AppSettings(QObject *parent = 0);
+    explicit Settings(QObject *parent = 0);
 
     bool commentsTapToHide() const;
     void setCommentsTapToHide(bool commentsTapToHide);

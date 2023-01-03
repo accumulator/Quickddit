@@ -17,83 +17,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += Q_OS_UBUNTU APP_VERSION=\\\"1.3.1\\\"
 INCLUDEPATH += ../
 
+
+include(../src/src.pri)
+
 SOURCES += \
-        main.cpp \
-        ../src/aboutmultiredditmanager.cpp \
-        ../src/aboutsubredditmanager.cpp \
-        ../src/abstractlistmodelmanager.cpp \
-        ../src/abstractmanager.cpp \
-        ../src/apirequest.cpp \
-        ../src/appsettings.cpp \
-        ../src/commentmanager.cpp \
-        ../src/commentmodel.cpp \
-        ../src/commentobject.cpp \
-        ../src/flairmanager.cpp \
-        ../src/imgurmanager.cpp \
-        ../src/gallerymanager.cpp \
-        ../src/inboxmanager.cpp \
-        ../src/linkmanager.cpp \
-        ../src/linkmodel.cpp \
-        ../src/linkobject.cpp \
-        ../src/messagemanager.cpp \
-        ../src/messagemodel.cpp \
-        ../src/messageobject.cpp \
-        ../src/multiredditmodel.cpp \
-        ../src/multiredditobject.cpp \
-        ../src/parser.cpp \
-        ../src/qmlutils.cpp \
-        ../src/quickdditmanager.cpp \
-        ../src/savemanager.cpp \
-        ../src/subredditmanager.cpp \
-        ../src/subredditmodel.cpp \
-        ../src/subredditobject.cpp \
-        ../src/thing.cpp \
-        ../src/usermanager.cpp \
-        ../src/userobject.cpp \
-        ../src/userthingmodel.cpp \
-        ../src/utils.cpp \
-        ../src/votemanager.cpp
+        main.cpp
 
-
-HEADERS += \
-    ../src/aboutmultiredditmanager.h \
-    ../src/aboutsubredditmanager.h \
-    ../src/abstractlistmodelmanager.h \
-    ../src/abstractmanager.h \
-    ../src/apirequest.h \
-    ../src/appsettings.h \
-    ../src/commentmanager.h \
-    ../src/commentmodel.h \
-    ../src/commentobject.h \
-    ../src/flairmanager.h \
-    ../src/imgurmanager.h \
-    ../src/gallerymanager.h \
-    ../src/inboxmanager.h \
-    ../src/linkmanager.h \
-    ../src/linkmodel.h \
-    ../src/linkobject.h \
-    ../src/messagemanager.h \
-    ../src/messagemodel.h \
-    ../src/messageobject.h \
-    ../src/multiredditmodel.h \
-    ../src/multiredditobject.h \
-    ../src/parser.h \
-    ../src/qmlutils.h \
-    ../src/quickdditmanager.h \
-    ../src/savemanager.h \
-    ../src/subredditmanager.h \
-    ../src/subredditmodel.h \
-    ../src/subredditobject.h \
-    ../src/thing.h \
-    ../src/usermanager.h \
-    ../src/userobject.h \
-    ../src/userthingmodel.h \
-    ../src/utils.h \
-    ../src/votemanager.h
-    
 # Qt-Json
-HEADERS += ../qt-json/json.h
-SOURCES += ../qt-json/json.cpp
+include(../qt-json/qt-json.pri)
 
 RESOURCES += qml.qrc
 CONF_FILES += \

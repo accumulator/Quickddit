@@ -55,7 +55,7 @@ AbstractPage {
                     globalUtils.createSelectionDialog(qsTr("Section"), sectionModel, messageModel.section,
                     function(selectedIndex) {
                         messageModel.section = selectedIndex;
-                        appSettings.messageSection = selectedIndex;
+                        settings.messageSection = selectedIndex;
                         messagePage.refresh();
                     });
                 }
@@ -79,7 +79,7 @@ AbstractPage {
             listItem.onPressAndHold: {
                 var dialog = showMenu({message: model, messageManager: messageManager})
                 dialog.replyClicked.connect(function() {
-                    if (model.author !== appSettings.redditUsername) {
+                    if (model.author !== settings.redditUsername) {
                         messageDelegate.doReply()
                     }
                 });
@@ -94,7 +94,7 @@ AbstractPage {
             onClicked: {
                 if (model.isComment) {
                     doOpenComment()
-                } else if (model.author !== appSettings.redditUsername) {
+                } else if (model.author !== settings.redditUsername) {
                     doReply()
                 }
             }

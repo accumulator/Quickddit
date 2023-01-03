@@ -82,9 +82,9 @@ Page {
                 ComboBox {
                     anchors { right: parent.right;  verticalCenter: parent.verticalCenter; margins: Suru.units.gu(2) }
                     model: ["360p","720p"]
-                    currentIndex: appSettings.preferredVideoSize
+                    currentIndex: settings.preferredVideoSize
                     onCurrentIndexChanged: {
-                        appSettings.preferredVideoSize = currentIndex
+                        settings.preferredVideoSize = currentIndex
                     }
                 }
             }

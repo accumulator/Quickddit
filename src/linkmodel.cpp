@@ -24,7 +24,7 @@
 #include <QtNetwork/QNetworkReply>
 #include <QDebug>
 
-#include "appsettings.h"
+#include "settings.h"
 #include "utils.h"
 #include "parser.h"
 
@@ -289,7 +289,7 @@ void LinkModel::refresh(bool refreshOlder)
         // set a default
         setSection(HotSection);
 
-        QList<AppSettings::SubredditPrefs> srpl = manager()->settings()->subredditPrefs();
+        QList<Settings::SubredditPrefs> srpl = manager()->settings()->subredditPrefs();
         for (int i = 0; i < srpl.count(); i++) {
             if (relativeUrl == srpl.at(i).relPath) {
                 setSection((Section)srpl.at(i).section);
@@ -338,7 +338,7 @@ void LinkModel::refresh(bool refreshOlder)
 void LinkModel::saveSubredditPrefs()
 {
     QString relativeUrl = getRelativeUrl();
-    QList<AppSettings::SubredditPrefs> subredditPrefsList = manager()->settings()->subredditPrefs();
+    QList<Settings::SubredditPrefs> subredditPrefsList = manager()->settings()->subredditPrefs();
     for (int i = 0; i < subredditPrefsList.count(); i++) {
         if (relativeUrl == subredditPrefsList.at(i).relPath) {
             subredditPrefsList[i].section = m_section;
@@ -348,7 +348,7 @@ void LinkModel::saveSubredditPrefs()
         }
     }
     // not found
-    AppSettings::SubredditPrefs newprefs;
+    Settings::SubredditPrefs newprefs;
     newprefs.relPath = relativeUrl;
     newprefs.section = m_section;
     newprefs.sectionTimeRange = m_sectionTimeRange;

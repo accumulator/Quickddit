@@ -29,14 +29,14 @@
 // TODO: rewrite this whole class
 
 class QNetworkAccessManager;
-class AppSettings;
+class Settings;
 
 class QuickdditManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool isBusy READ isBusy NOTIFY busyChanged)
     Q_PROPERTY(bool isSignedIn READ isSignedIn WRITE setSignedIn NOTIFY signedInChanged)
-    Q_PROPERTY(AppSettings* settings READ settings WRITE setSettings)
+    Q_PROPERTY(Settings* settings READ settings WRITE setSettings)
 public:
     explicit QuickdditManager(QObject *parent = 0);
 
@@ -46,8 +46,8 @@ public:
     bool isSignedIn() const;
     void setSignedIn(const bool signedIn);
 
-    AppSettings *settings() const;
-    void setSettings(AppSettings *settings);
+    Settings *settings() const;
+    void setSettings(Settings *settings);
 
     /**
      * Create a GET request to non-Reddit API
@@ -96,7 +96,7 @@ private slots:
 
 private:
     QNetworkAccessManager *m_netManager;
-    AppSettings *m_settings;
+    Settings *m_settings;
 
     bool m_busy;
     bool m_signedIn;

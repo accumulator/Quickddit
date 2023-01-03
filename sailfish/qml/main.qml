@@ -450,15 +450,15 @@ ApplicationWindow {
     }
 
     Constant { id: constant }
-    AppSettings { id: appSettings }
+    Settings { id: settings }
 
     QuickdditManager {
         id: quickdditManager
-        settings: appSettings
+        settings: settings
         onAccessTokenFailure: {
             if (code == 299 /* QNetworkReply::UnknownContentError */) {
                 infoBanner.warning(qsTr("Please log in again"));
-                pageStack.push(Qt.resolvedUrl("AppSettingsPage.qml"));
+                pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
             } else {
                 infoBanner.warning(errorString);
             }
@@ -468,7 +468,7 @@ ApplicationWindow {
     InboxManager {
         id: inboxManager
         manager: quickdditManager
-        enabled: appSettings.pollUnread
+        enabled: settings.pollUnread
 
         property bool hasUnseenUnread: false
 

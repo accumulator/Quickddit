@@ -25,7 +25,6 @@ import QtQuick.Controls.Suru 2.2
 import "../"
 import "../Delegates"
 
-
 Page {
 
     id:mainPage

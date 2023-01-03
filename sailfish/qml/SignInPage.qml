@@ -1,68 +1,78 @@
 /*
-    Quickddit - Reddit client for mobile phones
-    Copyright (C) 2014  Dickson Leong
+  Quickddit - Reddit client for mobile phones
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+  SPDX-FileCopyrightText:  Copyright (C) 2014  Dickson Leong
+  SPDX-FileCopyrightText:  Copyright (C) 2022  Sander van Grieken
+  SPDX-FileCopyrightText:  Copyright (C) 2022  Björn Bidar
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see [http://www.gnu.org/licenses/].
+  SPDX-License-Identifier: GPL-3.0-or-later
 */
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import Sailfish.WebView 1.0 as SailfishWebView
+import Sailfish.WebView.Popups 1.0 as SailfishWebViewPopups
 
-AbstractPage {
-    id: signInPage
-    title: qsTr("Sign in to Reddit")
-    busy: webView.loading
+Dialog {
+    id: signInDialog
+
+    // For CoverPage
+    property string title: qsTr("Sign in to Reddit")
+
     backNavigation: webView.atXBeginning && webView.atXEnd && !webView.moving && !webView.pulleyMenuActive
+    canAccept: false
 
-    SilicaWebView {
-        id: webView
-        anchors.fill: parent
-        header: PageHeader { title: signInPage.title }
-        overridePageStackNavigation: true
+    DialogHeader {
+        id: dialogHeader
 
-        experimental.overview: true
-        experimental.customLayoutWidth: signInPage.width / (0.5 + QMLUtils.pScale)
+        width: parent.width
+        anchors.horizontalCenter: parent.horizontalCenter
 
-        onUrlChanged: {
-            if (url.toString().indexOf("code=") > 0) {
-                stop();
-                quickdditManager.getAccessToken(url);
-                signInPage.busy = true;
+        //% "Sign in to Reddit with Quickddit"
+        title: qsTr("Sign in to Reddit")
+        /* Accept text is empty since the dialog will be accepted automatically
+         *  when quickdditManager.getAccessToken(url) finds the token.
+         */
+        acceptText: ""
+        cancelText: qsTr("Cancel")
+    }
+
+
+    SilicaFlickable  {
+        id: webViewFlickable
+
+        property alias webView: webView
+
+        y: dialogHeader.height + Theme.paddingSmall
+        x: parent.x +Theme.paddingSmall
+        width: parent.width  - 2*Theme.paddingSmall
+        height: parent.height - dialogHeader.height - 2*Theme.paddingSmall
+
+
+        SailfishWebView.WebView {
+            id: webView
+
+            anchors.fill: parent
+
+            url: quickdditManager.generateAuthorizationUrl();
+            privateMode: true
+
+            popupProvider: SailfishWebViewPopups.PopupProvider {
+                // Disable the Save Password dialog
+                passwordManagerPopup: null
             }
-        }
 
-        PullDownMenu {
-            MenuItem {
-                text: qsTr("Cancel")
-                onClicked: {
-                    backNavigation = true;
-                    pageStack.pop();
+            onUrlChanged: {
+                if (url.toString().indexOf("code=") > 0) {
+                    quickdditManager.getAccessToken(url);
                 }
             }
-            MenuItem {
-                text: qsTr("Reload")
-                onClicked: webView.reload();
-            }
         }
-
-        ScrollDecorator {}
     }
 
     Connections {
         target: quickdditManager
         onAccessTokenSuccess: {
-            signInPage.busy = false;
             infoBanner.alert(qsTr("Sign in successful! Welcome! :)"));
             inboxManager.resetTimer();
             var mainPage = globalUtils.getMainPage();
@@ -70,10 +80,5 @@ AbstractPage {
             backNavigation = true;
             pageStack.pop(mainPage);
         }
-        onAccessTokenFailure: {
-            signInPage.busy = false;
-        }
     }
-
-    Component.onCompleted: webView.url = quickdditManager.generateAuthorizationUrl();
 }

@@ -32,7 +32,7 @@ ContextMenu {
 
     MenuItem {
         visible: !message.isComment
-        enabled: !messageManager.busy && message.author !== appSettings.redditUsername
+        enabled: !messageManager.busy && message.author !== settings.redditUsername
         text: qsTr("Reply")
         onClicked: replyClicked()
     }
