@@ -2,6 +2,7 @@
   Quickddit - Reddit client for mobile phones
 
   SPDX-FileCopyrightText:  Copyright (C) 2014  Dickson Leong
+  SPDX-FileCopyrightText:  Copyright (C) 2022  Sander van Grieken
   SPDX-FileCopyrightText:  Copyright (C) 2022  Björn Bidar
 
   SPDX-License-Identifier: GPL-3.0-or-later
@@ -20,7 +21,6 @@ Dialog {
 
     backNavigation: webView.atXBeginning && webView.atXEnd && !webView.moving && !webView.pulleyMenuActive
     canAccept: false
-
 
     DialogHeader {
         id: dialogHeader
@@ -54,15 +54,7 @@ Dialog {
 
             anchors.fill: parent
 
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-
             url: quickdditManager.generateAuthorizationUrl();
-
             privateMode: true
 
             popupProvider: SailfishWebViewPopups.PopupProvider {
@@ -72,31 +64,21 @@ Dialog {
 
             onUrlChanged: {
                 if (url.toString().indexOf("code=") > 0) {
-                    stop();
                     quickdditManager.getAccessToken(url);
-                    signInDialog.busy = true;
                 }
             }
         }
-
-
     }
-
-
 
     Connections {
         target: quickdditManager
         onAccessTokenSuccess: {
-            signInDialog.busy = false;
             infoBanner.alert(qsTr("Sign in successful! Welcome! :)"));
             inboxManager.resetTimer();
             var mainPage = globalUtils.getMainPage();
             mainPage.refresh("");
             backNavigation = true;
             pageStack.pop(mainPage);
-        }
-        onAccessTokenFailure: {
-            signInDialog.busy = false;
         }
     }
 }
