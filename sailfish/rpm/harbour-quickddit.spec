@@ -31,7 +31,7 @@ Quickddit is a free and open source Reddit client for mobile phones.
 
 
 %prep
-%setup -q -n %{name}-%{version}/sailfish
+%setup -q -n %{name}-%{version}
 
 %build
 
