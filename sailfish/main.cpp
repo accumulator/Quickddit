@@ -57,9 +57,9 @@ int main(int argc, char *argv[])
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 
     app->setApplicationDisplayName("Quickddit");
-    app->setApplicationName("harbour-quickddit");
-    app->setOrganizationName("harbour-quickddit");
-    app->setOrganizationDomain("harbour-quickddit");
+    app->setApplicationName("Quickddit");
+    app->setOrganizationName("nl.outrightsolutions");
+    app->setOrganizationDomain("outrightsolutions.nl");
     app->setApplicationVersion(APP_VERSION);
 
     qmlRegisterType<Settings>("harbour.quickddit.Core", 1, 0, "Settings");
