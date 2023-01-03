@@ -3,7 +3,7 @@
 
 from __future__ import unicode_literals
 import pyotherside
-import yt_dlp as youtube_dl
+import youtube_dl
 
 downloaddir = '/tmp'
 

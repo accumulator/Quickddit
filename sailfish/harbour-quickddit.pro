@@ -136,9 +136,9 @@ harbour {
 }
 
 # kludge needed as qmake cannot control INSTALL permissions
-system(chmod 0644 ../yt-dlp/yt_dlp/__main__.py ../yt-dlp/yt_dlp/YoutubeDL.py)
+system(chmod 0644 ../youtube-dl/youtube_dl/__main__.py ../youtube-dl/youtube_dl/YoutubeDL.py)
 
-youtube-dl.files = ../yt-dlp/yt_dlp
+youtube-dl.files = ../youtube-dl/youtube_dl
 youtube-dl.path = /usr/share/$${TARGET}
 
 INSTALLS += youtube-dl
