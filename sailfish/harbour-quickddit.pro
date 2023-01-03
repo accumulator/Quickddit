@@ -25,7 +25,7 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 # to force harbour compatibility.
 #CONFIG += harbour
 
-PKGCONFIG += sailfishapp nemonotifications-qt5 keepalive qt5embedwidget
+PKGCONFIG += sailfishapp nemonotifications-qt5 keepalive
 
 INCLUDEPATH += ..
 
