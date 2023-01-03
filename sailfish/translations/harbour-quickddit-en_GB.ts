@@ -1172,124 +1172,124 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
     </message>
 </context>
 <context>
-    <name>Settings</name>
+    <name>SettingsPage</name>
     <message>
-        <location filename="../qml/Settings.qml" line="16"/>
+        <location filename="../qml/SettingsPage.qml" line="16"/>
         <source>Settings</source>
         <translation type="unfinished">Settings</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="24"/>
+        <location filename="../qml/SettingsPage.qml" line="24"/>
         <source>Accounts</source>
         <translation type="unfinished">Accounts</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="36"/>
+        <location filename="../qml/SettingsPage.qml" line="35"/>
         <source>UX</source>
         <translation type="unfinished">UX</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="39"/>
+        <location filename="../qml/SettingsPage.qml" line="38"/>
         <source>Font Size</source>
         <translation type="unfinished">Font Size</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="49"/>
+        <location filename="../qml/SettingsPage.qml" line="48"/>
         <source>Tiny</source>
         <translation type="unfinished">Tiny</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="50"/>
+        <location filename="../qml/SettingsPage.qml" line="49"/>
         <source>Small</source>
         <translation type="unfinished">Small</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="51"/>
+        <location filename="../qml/SettingsPage.qml" line="50"/>
         <source>Medium</source>
         <translation type="unfinished">Medium</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="52"/>
+        <location filename="../qml/SettingsPage.qml" line="51"/>
         <source>Large</source>
         <translation type="unfinished">Large</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="65"/>
+        <location filename="../qml/SettingsPage.qml" line="64"/>
         <source>Device Orientation</source>
         <translation type="unfinished">Device Orientation</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="74"/>
+        <location filename="../qml/SettingsPage.qml" line="73"/>
         <source>Automatic</source>
         <translation type="unfinished">Automatic</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="75"/>
+        <location filename="../qml/SettingsPage.qml" line="74"/>
         <source>Portrait only</source>
         <translation type="unfinished">Portrait only</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="76"/>
+        <location filename="../qml/SettingsPage.qml" line="75"/>
         <source>Landscape only</source>
         <translation type="unfinished">Landscape only</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="88"/>
+        <location filename="../qml/SettingsPage.qml" line="87"/>
         <source>Thumbnail Size</source>
         <translation type="unfinished">Thumbnail Size</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="101"/>
+        <location filename="../qml/SettingsPage.qml" line="100"/>
         <source>Auto</source>
         <translation type="unfinished">Auto</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="123"/>
+        <location filename="../qml/SettingsPage.qml" line="122"/>
         <source>Thumbnail Link Type Indicator</source>
         <translation type="unfinished">Thumbnail Link Type Indicator</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="131"/>
+        <location filename="../qml/SettingsPage.qml" line="130"/>
         <source>Comments Tap To Hide</source>
         <translation type="unfinished">Comments Tap To Hide</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="138"/>
+        <location filename="../qml/SettingsPage.qml" line="137"/>
         <source>Notifications</source>
         <translation type="unfinished">Notifications</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="141"/>
+        <location filename="../qml/SettingsPage.qml" line="140"/>
         <source>Check Messages</source>
         <translation type="unfinished">Check Messages</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="149"/>
+        <location filename="../qml/SettingsPage.qml" line="148"/>
         <source>Media</source>
         <translation type="unfinished">Media</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="152"/>
+        <location filename="../qml/SettingsPage.qml" line="151"/>
         <source>Preferred Video Size</source>
         <translation type="unfinished">Preferred Video Size</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="172"/>
+        <location filename="../qml/SettingsPage.qml" line="171"/>
         <source>Loop Videos</source>
         <translation type="unfinished">Loop Videos</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="179"/>
+        <location filename="../qml/SettingsPage.qml" line="178"/>
         <source>Connection</source>
         <translation type="unfinished">Connection</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="182"/>
+        <location filename="../qml/SettingsPage.qml" line="181"/>
         <source>Use Tor</source>
         <translation type="unfinished">Use Tor</translation>
     </message>
     <message>
-        <location filename="../qml/Settings.qml" line="183"/>
+        <location filename="../qml/SettingsPage.qml" line="182"/>
         <source>When enabled, please make sure Tor is installed and active.</source>
         <translation type="unfinished">When enabled, please make sure Tor is installed and active.</translation>
     </message>
@@ -1297,7 +1297,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
 <context>
     <name>SignInPage</name>
     <message>
-        <location filename="../qml/SignInPage.qml" line="19"/>
+        <location filename="../qml/SignInPage.qml" line="20"/>
         <location filename="../qml/SignInPage.qml" line="32"/>
         <source>Sign in to Reddit</source>
         <translation type="unfinished">Sign in to Reddit</translation>
@@ -1308,7 +1308,7 @@ To add accounts, simply log in. Quickddit will remember succesful logins and lis
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/SignInPage.qml" line="91"/>
+        <location filename="../qml/SignInPage.qml" line="76"/>
         <source>Sign in successful! Welcome! :)</source>
         <translation type="unfinished"></translation>
     </message>
