@@ -65,39 +65,8 @@ ApplicationWindow {
         }
 
         function isUrlSupported(url) {
-            // TODO: now simply matches url against our own simple list. We should query YTDL itself.
             //console.log("testing ytdl support for url " + url)
-            if (/^https?:\/\/((www|m)\.)?youtube\.com\/.+/.test(url)) {
-                return true;
-            } else if (/^https?:\/\/((www|m)\.)?youtu\.be\/.+/.test(url)) {
-                return true;
-            } else if (/^https?:\/\/((www)\.)?streamable\.com\/.+/.test(url)) {
-                return true;
-            } else if (/^https?:\/\/((www)\.)?livestream\.com\/.+/.test(url)) {
-                return true;
-            } else if (/^https?:\/\/my\.mixtape\.moe\/.+/.test(url)) {
-                return true;
-            } else if (/^https?:\/\/(.+\.)?twitch.tv\/.+/.test(url)) {
-                return true;
-//            } else if (/^https?:\/\/((www)\.)?vimeo.com\/.+/.test(url)) {
-//                return true;
-            } else if (/^https?:\/\/(www\.)?gfycat\.com\/.+/.test(url)) {
-                return true;
-            } else if (/^https?:\/\/((i|m)\.)?imgur\.com\/.+\.gifv$/.test(url)) {
-                return true;
-            } else if (/^https?:\/\/v\.redd\.it\/.+/.test(url)) {
-                return true;
-            } else if (/^https?:\/\/(www\.)?pornhub\.com\/view_video\.php.+/.test(url)) {
-                return true;
-            } else if (/^https?:\/\/(www\.)?hooktube\.com\/.+/.test(url)) {
-                return true;
-            } else if (/^https?:\/\/(www\.)?dailymotion\.com\/.+/.test(url)) {
-                return true;
-            } else if (/^https?:\/\/(www\.)?bitchute\.com\/.+/.test(url)) {
-                return true;
-            } else {
-                return false;
-            }
+            return call_sync('ytdl_wrapper.isVideoUrlSupported', [url.toString()] )
         }
 
         onError: {
