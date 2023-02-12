@@ -555,6 +555,8 @@ ApplicationWindow {
                 return true;
             } else if (/^https?:\/\/(www\.)?bitchute\.com\/.+/.test(url)) {
                 return true;
+            } else if (/^https?:\/\/(www\.)?redgifs\.com\/.+/.test(url)) {
+                return true;
             } else {
                 return false;
             }
