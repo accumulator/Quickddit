@@ -48,4 +48,9 @@ Quickddit is a free and open source Reddit client for mobile phones.
 %files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
-%{_datadir}/*
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/icons/hicolor/86x86/apps/%{name}.png
+%{_datadir}/icons/hicolor/108x108/apps/%{name}.png
+%{_datadir}/icons/hicolor/128x128/apps/%{name}.png
+%{_datadir}/icons/hicolor/256x256/apps/%{name}.png
+%{_datadir}/%{name}/*
