@@ -191,7 +191,9 @@ void QMLUtils::publishNotification(const QString &summary, const QString &body,
     notification.publish();
 #elif Q_OS_SAILFISH
     Notification notification;
-    notification.setCategory("harbour-quickddit.inbox");
+    notification.setHintValue("x-nemo-priority", 100);
+    notification.setHintValue("x-nemo-feedback", "social");
+    notification.setAppIcon("harbour-quickddit");
 
     notification.setSummary(summary);
     notification.setBody(body);

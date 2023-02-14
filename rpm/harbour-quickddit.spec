@@ -23,7 +23,6 @@ BuildRequires:  pkgconfig(Qt5Network)
 BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  pkgconfig(nemonotifications-qt5)
 BuildRequires:  pkgconfig(keepalive)
-BuildRequires:  pkgconfig(qt5embedwidget)
 BuildRequires:  qt5-qttools-linguist
 
 %description
@@ -31,7 +30,7 @@ Quickddit is a free and open source Reddit client for mobile phones.
 
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}-%{version}/sailfish
 
 %build
 
@@ -49,4 +48,9 @@ Quickddit is a free and open source Reddit client for mobile phones.
 %files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
-%{_datadir}/*
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/icons/hicolor/86x86/apps/%{name}.png
+%{_datadir}/icons/hicolor/108x108/apps/%{name}.png
+%{_datadir}/icons/hicolor/128x128/apps/%{name}.png
+%{_datadir}/icons/hicolor/256x256/apps/%{name}.png
+%{_datadir}/%{name}/*
