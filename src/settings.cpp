@@ -20,11 +20,34 @@
 #include "settings.h"
 
 #include <QtCore/QSettings>
-#include <QDebug>
+#include <QStandardPaths>
+#include <QCoreApplication>
+#include <QFile>
+#include <QDir>
 
 Settings::Settings(QObject *parent) :
-    QObject(parent), m_settings(new QSettings(this))
+    QObject(parent)
 {
+    const QString settings_path =
+        QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation)
+        + "/" + QCoreApplication::applicationName() + ".conf";
+    QFile settings_file(settings_path);
+
+    // Migrate old settings and delete them
+    const QString old_settings_path =
+            QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) +
+            "/harbour-quickddit/harbour-quickddit.conf";
+    QFile old_settings_file(old_settings_path);
+
+    if(old_settings_file.exists() && !settings_file.exists()) {
+        QDir().mkpath(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
+        if(old_settings_file.copy(settings_path)) {
+            old_settings_file.remove();
+            QDir().rmdir(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/harbour-quickddit");
+        }
+    }
+
+    m_settings = new QSettings(settings_path, QSettings::NativeFormat, this);
     m_commentsTapToHide = m_settings->value("commentsTapToHide", true).toBool();
     m_fontSize = static_cast<FontSize>(m_settings->value("fontSize", Settings::SmallFontSize).toInt());
     m_redditUsername = m_settings->value("redditUsername").toString();
