@@ -66,7 +66,7 @@ QVariantMap LinkModel::toLinkVariantMap(const LinkObject &link)
 }
 
 LinkModel::LinkModel(QObject *parent) :
-    AbstractListModelManager(parent), m_location(FrontPage), m_section(UndefinedSection), m_sectionTimeRange(AllTime),
+    AbstractListModelManager(parent), m_location(FrontPage), m_section(UndefinedSection), m_sectionTimeRange(Day),
     m_searchSort(RelevanceSort), m_searchTimeRange(AllTime)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
@@ -299,7 +299,7 @@ void LinkModel::refresh(bool refreshOlder)
         }
     }
 
-    if (m_sectionTimeRange != AllTime) {
+    if (m_sectionTimeRange != Day) {
         parameters["t"] = getTimeRangeString(m_sectionTimeRange);
     }
 
@@ -329,7 +329,7 @@ void LinkModel::refresh(bool refreshOlder)
 
     m_title = relativeUrl;
     if ( (m_section == LinkModel::TopSection || m_section == LinkModel::ControversialSection)
-         && m_sectionTimeRange != AllTime )
+         && m_sectionTimeRange != Day )
         m_title += " (" + getTimeRangeString(m_sectionTimeRange).left(1) + ")";
 
     emit titleChanged();
