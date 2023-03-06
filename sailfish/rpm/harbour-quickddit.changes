@@ -5,6 +5,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Mon Mar 06 2023 Sander van Grieken <sander@outrightsolutions.nl> 1.11.1-1
+- fix: remember settings (thanks DeathByDenim)
+- new: redgifs videos (thanks Thaodan)
+
 * Tue Jan 03 2023 Sander van Grieken <sander@outrightsolutions.nl> 1.11.0-1
 - fix: sign in
 - chg: use SailfishWebView in favor of deprecated SilicaWebView (thanks Thaodan)
